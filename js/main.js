@@ -7,15 +7,9 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  /* ---------- Header: scrolled state + hide on scroll down ---------- */
-  var lastY = window.scrollY;
+  /* ---------- Header: light bar once past the hero ---------- */
   function onScroll() {
-    var y = window.scrollY;
-    header.classList.toggle("scrolled", y > 40);
-    if (!document.body.classList.contains("nav-open")) {
-      header.classList.toggle("tucked", y > 320 && y > lastY);
-    }
-    lastY = y;
+    header.classList.toggle("scrolled", window.scrollY > 40);
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
@@ -24,7 +18,6 @@
   if (toggle) {
     toggle.addEventListener("click", function () {
       var open = document.body.classList.toggle("nav-open");
-      header.classList.remove("tucked");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
     document.querySelectorAll(".nav-links a").forEach(function (a) {

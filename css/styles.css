@@ -176,11 +176,9 @@ section { padding: var(--section) 0; }
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  transition: background 0.35s, box-shadow 0.35s, border-color 0.35s,
-    transform 0.5s var(--ease-out);
+  transition: background 0.35s, box-shadow 0.35s, border-color 0.35s;
   border-bottom: 1px solid transparent;
 }
-.site-header.tucked { transform: translateY(-100%); }
 .site-header .wrap {
   max-width: none;
   display: flex;

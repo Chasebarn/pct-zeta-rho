@@ -25,6 +25,7 @@ assets/             Photos + crest
 | **Placement companies** | The two `.placerow` lines in `index.html` |
 | **Apparel products/prices** | `apparel.html`, product cards |
 | **Photos** | Drop new images in `assets/`, update the `<img src>` paths |
+| **Custom domain** | If the site moves off `pct-zeta-rho.github.io`, update the `og:image`/`og:url` meta tags in all four HTML heads |
 
 ## After ANY edit to styles.css or main.js
 

@@ -37,6 +37,22 @@ html { scroll-behavior: smooth; }
 
 [id] { scroll-margin-top: 96px; }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 600;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 3px;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
 body {
   font-family: var(--font-text);
   font-size: 1.0625rem;
@@ -766,8 +782,26 @@ section { padding: var(--section) 0; }
 
 /* ---------- FAQ accordion ---------- */
 
+:root { interpolate-size: allow-keywords; }
+
 .faq { border-top: 1px solid var(--line); max-width: 860px; }
 .faq details { border-bottom: 1px solid var(--line); }
+/* animate open/close height (supported browsers; instant elsewhere) */
+.faq details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 0.5s var(--ease-out), content-visibility 0.5s allow-discrete;
+}
+.faq details[open]::details-content { block-size: auto; }
+.faq details p {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.4s 0.12s, transform 0.4s 0.12s var(--ease-out);
+}
+.faq details[open] p {
+  opacity: 1;
+  transform: none;
+}
 .faq summary {
   display: flex;
   align-items: center;

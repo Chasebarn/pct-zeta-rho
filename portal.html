@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter Portal · Phi Chi Theta — Zeta Rho</title>
+  <title>Officer Portal · Phi Chi Theta — Zeta Rho</title>
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="assets/crest.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=17">
   <style>
-    /* ---------- portal-only styles ---------- */
+    /* ---------- gate ---------- */
     .gate {
       position: fixed; inset: 0; z-index: 300;
       display: flex; align-items: center; justify-content: center;
@@ -23,137 +23,170 @@
     .gate-card {
       width: min(400px, 100%);
       background: var(--paper);
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 2.6rem 2.4rem 2.4rem;
       text-align: center;
     }
     .gate-card img { width: 64px; margin: 0 auto 1.1rem; }
     .gate-card h1 { font-size: 1.9rem; margin-bottom: 0.3rem; }
-    .gate-card p { font-size: 0.88rem; color: var(--ink-mute); margin-bottom: 1.6rem; }
+    .gate-card p { font-size: 0.9rem; color: var(--ink-mute); margin-bottom: 1.6rem; }
     .gate-card input {
-      width: 100%;
-      font: inherit;
-      font-size: 1.05rem;
-      text-align: center;
-      letter-spacing: 0.3em;
-      padding: 0.85rem 1rem;
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      background: var(--white);
+      width: 100%; font: inherit; font-size: 1.1rem; text-align: center;
+      letter-spacing: 0.3em; padding: 0.85rem 1rem;
+      border: 1px solid var(--line); border-radius: 4px; background: var(--white);
       margin-bottom: 0.9rem;
     }
     .gate-card input:focus { outline: 2px solid var(--purple); outline-offset: 1px; }
     .gate-card .btn { width: 100%; justify-content: center; }
-    .gate-err { color: #a03030; font-size: 0.85rem; margin-top: 0.9rem; min-height: 1.2em; }
+    .gate-err { color: #a03030; font-size: 0.88rem; margin-top: 0.9rem; min-height: 1.2em; }
     .gate-card.shake { animation: shake 0.4s; }
     @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
-    /* dashboard chrome */
-    .dash { display: none; }
+    /* ---------- dashboard ---------- */
+    .dash { display: none; background: #f4f1ea; min-height: 100vh; }
     body.authed .dash { display: block; }
     body.authed .gate { display: none; }
+
     .dash-top {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(250, 248, 243, 0.92);
-      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
+      background: var(--purple-deep); color: var(--paper);
     }
     .dash-top .wrap {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; padding-top: 0.85rem; padding-bottom: 0.85rem;
+      gap: 1rem; padding-top: 0.9rem; padding-bottom: 0.9rem;
     }
-    .dash-title { display: flex; align-items: center; gap: 0.7rem; }
-    .dash-title img { height: 36px; }
-    .dash-title b { font-size: 1rem; letter-spacing: -0.01em; }
-    .dash-title span { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-ink); }
-    .dash-actions { display: flex; align-items: center; gap: 0.6rem; }
-    .semtabs { display: inline-flex; border: 1px solid var(--line); border-radius: 100px; padding: 3px; background: var(--white); }
+    .dash-title { display: flex; align-items: center; gap: 0.75rem; }
+    .dash-title img { height: 38px; }
+    .dash-title b { font-size: 1.02rem; }
+    .dash-title span { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-soft); }
+    .dash-actions { display: flex; align-items: center; gap: 1rem; }
+    .semtabs { display: inline-flex; border: 1px solid rgba(250,248,243,0.25); border-radius: 100px; padding: 3px; }
     .semtabs button {
-      border: 0; background: none; font: inherit; font-size: 0.8rem; font-weight: 600;
-      padding: 0.4rem 0.95rem; border-radius: 100px; cursor: pointer; color: var(--ink-mute);
+      border: 0; background: none; font: inherit; font-size: 0.82rem; font-weight: 600;
+      padding: 0.42rem 1rem; border-radius: 100px; cursor: pointer; color: rgba(250,248,243,0.7);
     }
-    .semtabs button.on { background: var(--purple); color: var(--paper); }
-    .logout { font-size: 0.8rem; font-weight: 600; color: var(--ink-mute); background: none; border: 0; cursor: pointer; text-decoration: underline; }
+    .semtabs button.on { background: var(--gold); color: var(--ink); }
+    .dash-actions a, .logout {
+      font-size: 0.82rem; font-weight: 600; color: rgba(250,248,243,0.7);
+      background: none; border: 0; cursor: pointer; text-decoration: none;
+    }
+    .dash-actions a:hover, .logout:hover { color: var(--paper); }
 
-    .dash main { padding: 2.2rem 0 4rem; }
-    .dash h2 {
-      font-size: 1.05rem; font-family: var(--font-text); font-weight: 700;
-      letter-spacing: 0.01em; margin-bottom: 1rem;
-      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-    }
-    .dash h2 small { font-size: 0.72rem; font-weight: 600; color: var(--ink-mute); letter-spacing: 0.08em; text-transform: uppercase; }
+    .dash main { padding: 1.8rem 0 3.5rem; }
 
-    .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.9rem; margin-bottom: 1.4rem; }
-    .kpi {
-      background: var(--white); border: 1px solid var(--line); border-radius: 5px;
-      padding: 1.1rem 1.2rem;
-    }
+    /* KPI strip */
+    .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.2rem; }
+    .kpi { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem 1.3rem 1.1rem; }
+    .kpi span { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.4rem; }
     .kpi b {
       display: block; font-family: var(--font-display); font-weight: 400;
-      font-size: 2rem; line-height: 1.05; color: var(--purple);
+      font-size: clamp(2.1rem, 2.6vw, 2.7rem); line-height: 1; color: var(--ink);
       font-variant-numeric: tabular-nums;
     }
-    .kpi span { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
-    .kpi .delta { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0; text-transform: none; margin-top: 0.35rem; }
-    .delta.up { color: #2e7d43; } .delta.down { color: #a03030; } .delta.flat { color: var(--ink-mute); }
+    .kpi .delta { display: inline-block; font-size: 0.78rem; font-weight: 650; margin-top: 0.5rem; padding: 0.15rem 0.55rem; border-radius: 100px; }
+    .delta.up { background: #e4efe6; color: #256b39; }
+    .delta.down { background: #f6dede; color: #a03030; }
+    .delta.flat { background: var(--paper-deep); color: var(--ink-mute); }
 
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; align-items: start; }
-    .card {
-      background: var(--white); border: 1px solid var(--line); border-radius: 6px;
-      padding: 1.5rem 1.5rem 1.4rem; margin-bottom: 1.4rem;
+    /* cards */
+    .grid { display: grid; gap: 1.2rem; }
+    .grid.c3 { grid-template-columns: 1fr 1fr 1fr; }
+    .grid.c2 { grid-template-columns: 1fr 1fr; margin-top: 1.2rem; }
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.5rem 1.5rem; }
+    .card h2 { font-family: var(--font-text); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.2rem; }
+    .card .who { font-size: 0.82rem; color: var(--ink-mute); margin-bottom: 1.1rem; }
+    .card .who b { color: var(--purple); font-weight: 650; }
+
+    /* donut */
+    .donut-wrap { display: flex; align-items: center; gap: 1.4rem; }
+    .donut { width: 148px; height: 148px; flex: none; }
+    .donut .track { fill: none; stroke: var(--paper-deep); stroke-width: 14; }
+    .donut .val { fill: none; stroke: var(--purple); stroke-width: 14; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.8s var(--ease-out); }
+    .donut text { font-family: "Instrument Serif", Georgia, serif; font-size: 30px; fill: var(--ink); }
+    .donut .sub { font-family: Inter, sans-serif; font-size: 9.5px; fill: var(--ink-mute); letter-spacing: 0.08em; }
+    .legend { display: grid; gap: 0.7rem; font-size: 0.92rem; }
+    .legend b { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+    .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.5rem; }
+    .dot.p { background: var(--purple); } .dot.t { background: var(--paper-deep); border: 1px solid var(--line); } .dot.g { background: var(--gold); }
+
+    /* line chart */
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart .grid-line { stroke: var(--line); stroke-width: 1; }
+    .chart .series { fill: none; stroke: var(--purple); stroke-width: 3; stroke-linecap: round; }
+    .chart .area { fill: rgba(75, 46, 131, 0.08); stroke: none; }
+    .chart .pt { fill: var(--white); stroke: var(--purple); stroke-width: 3; }
+    .chart .pt.on { fill: var(--gold); stroke: var(--gold-ink); }
+    .chart .xlab { font: 600 11px Inter, sans-serif; fill: var(--ink-mute); text-anchor: middle; letter-spacing: 0.06em; }
+    .chart .vlab { font: 650 13px Inter, sans-serif; fill: var(--ink); text-anchor: middle; }
+
+    /* gauge */
+    .gauge-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--ink); margin-bottom: 0.2rem; }
+    .gauge-sub { font-size: 0.88rem; color: var(--ink-mute); margin-bottom: 1rem; }
+    .fatbar { height: 18px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
+    .fatbar i { display: block; height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.8s var(--ease-out); }
+    .fatbar + .row { margin-top: 0.55rem; }
+    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.88rem; color: var(--ink-mute); }
+    .row b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    /* h-bars (budgets, gpa) */
+    .hbars { display: grid; gap: 0.9rem; }
+    .hbar .row { margin-bottom: 0.3rem; font-size: 0.92rem; color: var(--ink); }
+    .hbar .track { height: 16px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
+    .hbar .track i { display: block; height: 100%; border-radius: 100px; background: var(--purple); transition: width 0.8s var(--ease-out); }
+    .hbar .track i.gold { background: var(--gold); }
+
+    /* funnel */
+    .funnel { display: grid; gap: 0.5rem; }
+    .fstep { display: grid; grid-template-columns: 1fr; justify-items: center; }
+    .fstep .fbar {
+      height: 40px; border-radius: 6px; background: var(--purple);
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      color: var(--paper); font-weight: 650; font-size: 0.95rem; min-width: 130px;
+      transition: width 0.8s var(--ease-out);
     }
-    .card .foot { font-size: 0.75rem; color: var(--ink-mute); margin-top: 0.9rem; }
+    .fstep:nth-child(even) .fbar { background: #5d3d9e; }
+    .fstep small { font-size: 0.75rem; font-weight: 600; color: var(--ink-mute); margin-top: 0.25rem; letter-spacing: 0.04em; }
 
-    .bar { height: 10px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; margin: 0.5rem 0 0.3rem; }
-    .bar i { display: block; height: 100%; background: var(--purple); border-radius: 100px; }
-    .bar i.gold { background: var(--gold); }
-    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.86rem; }
-    .row b { font-variant-numeric: tabular-nums; }
-    .muted { color: var(--ink-mute); }
+    /* mini stat tiles */
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+    .tile { background: #faf8f3; border: 1px solid var(--line); border-radius: 8px; padding: 0.95rem 1rem; }
+    .tile b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .tile span { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); }
 
-    .minitable { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
-    .minitable th {
-      text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-mute);
-      padding: 0.45rem 0.6rem 0.45rem 0; border-bottom: 1px solid var(--line);
-    }
-    .minitable td { padding: 0.62rem 0.6rem 0.62rem 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    /* table */
+    .minitable { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .minitable th { text-align: left; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); padding: 0.5rem 0.6rem 0.5rem 0; border-bottom: 1px solid var(--line); }
+    .minitable td { padding: 0.75rem 0.6rem 0.75rem 0; border-bottom: 1px solid var(--line); }
     .minitable tr:last-child td { border-bottom: 0; }
-    .chip {
-      display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
-      padding: 0.22rem 0.6rem; border-radius: 100px; white-space: nowrap;
-    }
-    .chip.ok { background: #e4efe6; color: #2e7d43; }
+    .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 100px; white-space: nowrap; }
+    .chip.ok { background: #e4efe6; color: #256b39; }
     .chip.warn { background: #f6ecd7; color: #8a6d14; }
     .chip.bad { background: #f6dede; color: #a03030; }
-    .chip.role { background: var(--paper-deep); color: var(--purple); }
+    .chip.role { background: #efe9f7; color: var(--purple); }
 
-    .fun-row { margin-bottom: 0.7rem; }
-    .fun-row .row { margin-bottom: 0.2rem; }
-
-    /* updates feed + composer */
-    .composer { display: grid; grid-template-columns: 200px 1fr auto; gap: 0.6rem; margin-bottom: 1.2rem; }
+    /* feed + composer + todo */
+    .composer { display: grid; grid-template-columns: 210px 1fr auto; gap: 0.7rem; margin-bottom: 1.1rem; }
     .composer select, .composer input {
-      font: inherit; font-size: 0.88rem; padding: 0.6rem 0.7rem;
-      border: 1px solid var(--line); border-radius: 3px; background: var(--paper);
+      font: inherit; font-size: 0.92rem; padding: 0.65rem 0.75rem;
+      border: 1px solid var(--line); border-radius: 6px; background: var(--paper);
     }
-    .composer .btn { padding: 0.6rem 1.2rem; font-size: 0.82rem; }
+    .composer .btn { padding: 0.65rem 1.3rem; font-size: 0.85rem; border-radius: 6px; }
     .feed { list-style: none; margin: 0; padding: 0; }
-    .feed li { display: flex; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); font-size: 0.88rem; align-items: baseline; }
+    .feed li { display: flex; gap: 0.9rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; align-items: baseline; }
     .feed li:last-child { border-bottom: 0; }
-    .feed .when { flex: none; width: 4.2rem; font-size: 0.72rem; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
-
+    .feed .when { flex: none; width: 3.4rem; font-size: 0.75rem; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
     .todo { list-style: none; margin: 0; padding: 0; }
-    .todo li { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.55rem 0; font-size: 0.9rem; }
-    .todo input { margin-top: 0.25rem; accent-color: var(--purple); }
+    .todo li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0; font-size: 0.95rem; }
+    .todo input { margin-top: 0.3rem; accent-color: var(--purple); width: 16px; height: 16px; }
     .todo li.done label { text-decoration: line-through; color: var(--ink-mute); }
     .todo label { cursor: pointer; }
-    .todo .muted { font-size: 0.78rem; display: block; }
+    .todo .muted { font-size: 0.78rem; display: block; color: var(--ink-mute); }
 
-    .demo-note { text-align: center; font-size: 0.72rem; color: var(--ink-mute); padding: 1.5rem 0 2.5rem; }
+    .demo-note { text-align: center; font-size: 0.75rem; color: var(--ink-mute); padding: 1.6rem 0 0; }
 
-    @media (max-width: 980px) { .kpis { grid-template-columns: repeat(2, 1fr); } .grid2 { grid-template-columns: 1fr; } }
-    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } }
+    @media (max-width: 1080px) { .grid.c3 { grid-template-columns: 1fr; } .kpis { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 860px) { .grid.c2 { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } .tiles { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -162,7 +195,7 @@
   <div class="gate">
     <form class="gate-card" id="gateForm">
       <img src="assets/crest.png" alt="Phi Chi Theta crest">
-      <h1>Chapter Portal</h1>
+      <h1>Officer Portal</h1>
       <p>Officers &amp; chairs only. Enter the chapter passcode.</p>
       <input type="password" id="gatePass" inputmode="numeric" autocomplete="off" placeholder="••••" aria-label="Passcode">
       <button class="btn btn-gold" type="submit">Enter Portal</button>
@@ -184,6 +217,7 @@
             <button data-sem="s26">Spring 2026</button>
             <button data-sem="f25">Fall 2025</button>
           </div>
+          <a href="index.html">← Site</a>
           <button class="logout" id="logout">Log out</button>
         </div>
       </div>
@@ -194,112 +228,158 @@
 
         <!-- KPIs -->
         <div class="kpis">
-          <div class="kpi"><b data-f="members">–</b><span>Active Members</span><em class="delta" data-f="membersD"></em></div>
-          <div class="kpi"><b data-f="pledges">–</b><span>Pledges in Process</span><em class="delta" data-f="pledgesD"></em></div>
-          <div class="kpi"><b data-f="collected">–</b><span>Dues Collected</span><em class="delta" data-f="collectedD"></em></div>
-          <div class="kpi"><b data-f="outstanding">–</b><span>Dues Outstanding</span><em class="delta" data-f="outstandingD"></em></div>
-          <div class="kpi"><b data-f="gpa">–</b><span>Chapter GPA</span><em class="delta" data-f="gpaD"></em></div>
+          <div class="kpi"><span>Active Members</span><b data-f="members">–</b><em class="delta" data-f="membersD"></em></div>
+          <div class="kpi"><span>Pledges</span><b data-f="pledges">–</b><em class="delta" data-f="pledgesD"></em></div>
+          <div class="kpi"><span>Dues Collected</span><b data-f="collected">–</b><em class="delta" data-f="collectedD"></em></div>
+          <div class="kpi"><span>Outstanding</span><b data-f="outstanding">–</b><em class="delta" data-f="outstandingD"></em></div>
+          <div class="kpi"><span>Chapter GPA</span><b data-f="gpa">–</b><em class="delta" data-f="gpaD"></em></div>
         </div>
 
-        <div class="grid2">
-          <div>
+        <!-- Row: donut / trend / goal -->
+        <div class="grid c3">
 
-            <!-- Finance -->
-            <div class="card">
-              <h2>Dues — VP Finance <small data-f="semName">Fall 2026</small></h2>
-              <div class="row"><span class="muted">$235 per member / semester</span><b><span data-f="paidCount">–</span> of <span data-f="members2">–</span> paid</b></div>
-              <div class="bar"><i data-f="duesBar" style="width:0%"></i></div>
-              <div class="row"><span class="muted">Collected <b data-f="collected2">–</b></span><span class="muted">Expected <b data-f="expected">–</b></span></div>
-              <div class="foot">Outstanding <b data-f="outstanding2">–</b> across <span data-f="unpaidCount">–</span> members — reminders scheduled weekly.</div>
+          <div class="card">
+            <h2>Dues Collection</h2>
+            <p class="who">Owner: <b>VP Finance</b> · $235 per member</p>
+            <div class="donut-wrap">
+              <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="Dues collected percentage">
+                <circle class="track" r="46" cx="60" cy="60"/>
+                <circle class="val" id="duesRing" r="46" cx="60" cy="60" stroke-dasharray="0 289"/>
+                <text x="60" y="60" text-anchor="middle" dominant-baseline="central" id="duesPct">–</text>
+                <text class="sub" x="60" y="78" text-anchor="middle">COLLECTED</text>
+              </svg>
+              <div class="legend">
+                <div><i class="dot p"></i><span data-f="paidCount">–</span> paid · <b data-f="collected2">–</b></div>
+                <div><i class="dot t"></i><span data-f="unpaidCount">–</span> owe · <b data-f="outstanding2">–</b></div>
+                <div class="row" style="font-size:0.8rem">Expected <b data-f="expected">–</b></div>
+              </div>
             </div>
-
-            <!-- Budget -->
-            <div class="card">
-              <h2>Committee Budgets <small>Fall 2026 · spent vs allocated</small></h2>
-              <div class="fun-row"><div class="row"><span>Social</span><b>$1,240 / $2,000</b></div><div class="bar"><i style="width:62%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Recruitment</span><b>$860 / $1,200</b></div><div class="bar"><i style="width:72%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Professional</span><b>$410 / $900</b></div><div class="bar"><i style="width:46%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Philanthropy</span><b>$275 / $600</b></div><div class="bar"><i style="width:46%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Apparel</span><b>$390 / $500</b></div><div class="bar"><i style="width:78%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Marketing</span><b>$120 / $350</b></div><div class="bar"><i style="width:34%"></i></div></div>
-              <div class="foot">Total spent $3,295 of $5,550 allocated (59%).</div>
-            </div>
-
-            <!-- Recruitment -->
-            <div class="card">
-              <h2>Recruitment Funnel — VP Recruitment <small>Fall Rush 2026</small></h2>
-              <div class="fun-row"><div class="row"><span>Interest form signups</span><b>127</b></div><div class="bar"><i class="gold" style="width:100%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Attended 1+ events</span><b>96</b></div><div class="bar"><i class="gold" style="width:76%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Attended 3+ events</span><b>54</b></div><div class="bar"><i class="gold" style="width:43%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Bids extended</span><b>24</b></div><div class="bar"><i class="gold" style="width:19%"></i></div></div>
-              <div class="fun-row"><div class="row"><span>Bids accepted</span><b>18</b></div><div class="bar"><i class="gold" style="width:14%"></i></div></div>
-              <div class="foot">Class target: 20 · QR flyers drove 40% of signups · 53 days to Event 1.</div>
-            </div>
-
-            <!-- Scholarship -->
-            <div class="card">
-              <h2>Academics — Scholarship Chair <small data-f="semName2">Fall 2026</small></h2>
-              <table class="minitable">
-                <thead><tr><th>Class</th><th>Avg GPA</th><th>Status</th></tr></thead>
-                <tbody>
-                  <tr><td>Seniors</td><td><b>3.72</b></td><td><span class="chip ok">On track</span></td></tr>
-                  <tr><td>Juniors</td><td><b>3.61</b></td><td><span class="chip ok">On track</span></td></tr>
-                  <tr><td>Sophomores</td><td><b>3.58</b></td><td><span class="chip ok">On track</span></td></tr>
-                  <tr><td>Freshmen</td><td><b>3.49</b></td><td><span class="chip warn">Watch</span></td></tr>
-                </tbody>
-              </table>
-              <div class="foot">Midterm reports: 41/62 collected · 3 members on study-hall plan (&lt;3.0).</div>
-            </div>
-
           </div>
-          <div>
 
-            <!-- Events -->
-            <div class="card">
-              <h2>Event Pipeline <small>all committees</small></h2>
-              <table class="minitable">
-                <thead><tr><th>Event</th><th>Owner</th><th>Date</th><th>Status</th></tr></thead>
-                <tbody>
-                  <tr><td>Pie a Phi Chi</td><td class="muted">Philanthropy</td><td>Sep 24</td><td><span class="chip ok">Confirmed</span></td></tr>
-                  <tr><td>Fall Summit</td><td class="muted">Professional</td><td>Oct 3</td><td><span class="chip warn">Planning</span></td></tr>
-                  <tr><td>Alumni Panel</td><td class="muted">Alumni</td><td>Oct 17</td><td><span class="chip ok">Confirmed</span></td></tr>
-                  <tr><td>Halloween Social</td><td class="muted">Social</td><td>Oct 30</td><td><span class="chip warn">Planning</span></td></tr>
-                  <tr><td>Fall Formal</td><td class="muted">Social</td><td>Nov 14</td><td><span class="chip bad">Needs venue</span></td></tr>
-                  <tr><td>Finals Study Nights</td><td class="muted">Scholarship</td><td>Dec 1</td><td><span class="chip warn">Planning</span></td></tr>
-                </tbody>
-              </table>
-              <div class="foot">Fall Formal venue decision due at next e-board meeting.</div>
-            </div>
-
-            <!-- Philanthropy / Apparel / Marketing snapshot -->
-            <div class="card">
-              <h2>Committee Snapshot <small data-f="semName3">Fall 2026</small></h2>
-              <div class="fun-row"><div class="row"><span>Philanthropy raised</span><b><span data-f="raised">–</span> / <span data-f="raiseGoal">–</span> goal</b></div><div class="bar"><i class="gold" data-f="raiseBar" style="width:0%"></i></div></div>
-              <div class="row" style="padding:0.45rem 0"><span>Service hours logged</span><b data-f="hours">–</b></div>
-              <div class="row" style="padding:0.45rem 0; border-top:1px solid var(--line)"><span>Apparel revenue (Printful)</span><b>$640 · 31 orders</b></div>
-              <div class="row" style="padding:0.45rem 0; border-top:1px solid var(--line)"><span>Instagram followers</span><b>1,240 <span class="chip ok">+85</span></b></div>
-              <div class="row" style="padding:0.45rem 0; border-top:1px solid var(--line)"><span>Flyer QR scans → site</span><b>312</b></div>
-              <div class="row" style="padding:0.45rem 0; border-top:1px solid var(--line)"><span>Alumni engaged this semester</span><b>34</b></div>
-            </div>
-
-            <!-- Action items -->
-            <div class="card">
-              <h2>Action Items — Secretary <small>from Sep 8 minutes</small></h2>
-              <ul class="todo" id="todo">
-                <li data-id="a1"><input type="checkbox" id="a1"><label for="a1">Book Fall Formal venue<span class="muted">VP Internal · due Sep 26</span></label></li>
-                <li data-id="a2"><input type="checkbox" id="a2"><label for="a2">Submit national chapter report<span class="muted">President · due Sep 30</span></label></li>
-                <li data-id="a3"><input type="checkbox" id="a3"><label for="a3">Order rush polos<span class="muted">Apparel Chair · due Sep 1</span></label></li>
-                <li data-id="a4"><input type="checkbox" id="a4"><label for="a4">Finalize Fall Summit speaker list<span class="muted">Professional Chair · due Sep 20</span></label></li>
-                <li data-id="a5"><input type="checkbox" id="a5"><label for="a5">Follow up on 15 outstanding dues<span class="muted">VP Finance · weekly</span></label></li>
-              </ul>
-            </div>
-
+          <div class="card chart">
+            <h2>Chapter Growth</h2>
+            <p class="who">Active members by semester</p>
+            <svg viewBox="0 0 320 150" role="img" aria-label="Members trend across semesters">
+              <line class="grid-line" x1="10" y1="120" x2="310" y2="120"/>
+              <line class="grid-line" x1="10" y1="75" x2="310" y2="75"/>
+              <line class="grid-line" x1="10" y1="30" x2="310" y2="30"/>
+              <path class="area" id="trendArea" d=""/>
+              <polyline class="series" id="trendLine" points=""/>
+              <circle class="pt" id="pt0" r="6"/><circle class="pt" id="pt1" r="6"/><circle class="pt" id="pt2" r="6"/>
+              <text class="vlab" id="vl0"></text><text class="vlab" id="vl1"></text><text class="vlab" id="vl2"></text>
+              <text class="xlab" x="55" y="143">FALL ’25</text>
+              <text class="xlab" x="160" y="143">SPRING ’26</text>
+              <text class="xlab" x="265" y="143">FALL ’26</text>
+            </svg>
           </div>
+
+          <div class="card">
+            <h2>Philanthropy Goal</h2>
+            <p class="who">Owner: <b>Philanthropy Chair</b></p>
+            <div class="gauge-num" data-f="raised">–</div>
+            <div class="gauge-sub">raised of <b data-f="raiseGoal">–</b> goal</div>
+            <div class="fatbar"><i data-f="raiseBar" style="width:0%"></i></div>
+            <div class="row"><span>Service hours logged</span><b data-f="hours">–</b></div>
+          </div>
+
+        </div>
+
+        <!-- Row: budgets / funnel -->
+        <div class="grid c2">
+
+          <div class="card">
+            <h2>Committee Budgets</h2>
+            <p class="who">Fall 2026 · spent vs allocated · <b>$3,295 / $5,550</b> total</p>
+            <div class="hbars">
+              <div class="hbar"><div class="row"><span>Social</span><b>$1,240 / $2,000</b></div><div class="track"><i style="width:62%"></i></div></div>
+              <div class="hbar"><div class="row"><span>Recruitment</span><b>$860 / $1,200</b></div><div class="track"><i style="width:72%"></i></div></div>
+              <div class="hbar"><div class="row"><span>Professional</span><b>$410 / $900</b></div><div class="track"><i style="width:46%"></i></div></div>
+              <div class="hbar"><div class="row"><span>Philanthropy</span><b>$275 / $600</b></div><div class="track"><i style="width:46%"></i></div></div>
+              <div class="hbar"><div class="row"><span>Apparel</span><b>$390 / $500</b></div><div class="track"><i style="width:78%"></i></div></div>
+              <div class="hbar"><div class="row"><span>Marketing</span><b>$120 / $350</b></div><div class="track"><i style="width:34%"></i></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Recruitment Funnel</h2>
+            <p class="who">Owner: <b>VP Recruitment</b> · Fall Rush 2026 · class target 20</p>
+            <div class="funnel">
+              <div class="fstep"><div class="fbar" style="width:100%">127 · Interest signups</div></div>
+              <div class="fstep"><div class="fbar" style="width:78%">96 · Attended an event</div><small>76% of signups</small></div>
+              <div class="fstep"><div class="fbar" style="width:48%">54 · Attended 3+</div><small>43%</small></div>
+              <div class="fstep"><div class="fbar" style="width:30%">24 · Bids</div><small>19%</small></div>
+              <div class="fstep"><div class="fbar" style="width:24%">18 · Accepted</div><small>14% · 90% bid acceptance</small></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row: GPA / events -->
+        <div class="grid c2">
+
+          <div class="card">
+            <h2>Academics by Class</h2>
+            <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">41/62</b> in · <b>3</b> on study plan</p>
+            <div class="hbars">
+              <div class="hbar"><div class="row"><span>Seniors</span><b data-g="0">–</b></div><div class="track"><i class="gold" data-gb="0"></i></div></div>
+              <div class="hbar"><div class="row"><span>Juniors</span><b data-g="1">–</b></div><div class="track"><i class="gold" data-gb="1"></i></div></div>
+              <div class="hbar"><div class="row"><span>Sophomores</span><b data-g="2">–</b></div><div class="track"><i class="gold" data-gb="2"></i></div></div>
+              <div class="hbar"><div class="row"><span>Freshmen</span><b data-g="3">–</b></div><div class="track"><i class="gold" data-gb="3"></i></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Event Pipeline</h2>
+            <p class="who">All committees · Fall 2026</p>
+            <table class="minitable">
+              <thead><tr><th>Event</th><th>Owner</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><b>Pie a Phi Chi</b></td><td>Philanthropy</td><td>Sep 24</td><td><span class="chip ok">Confirmed</span></td></tr>
+                <tr><td><b>Fall Summit</b></td><td>Professional</td><td>Oct 3</td><td><span class="chip warn">Planning</span></td></tr>
+                <tr><td><b>Alumni Panel</b></td><td>Alumni</td><td>Oct 17</td><td><span class="chip ok">Confirmed</span></td></tr>
+                <tr><td><b>Halloween Social</b></td><td>Social</td><td>Oct 30</td><td><span class="chip warn">Planning</span></td></tr>
+                <tr><td><b>Fall Formal</b></td><td>Social</td><td>Nov 14</td><td><span class="chip bad">Needs venue</span></td></tr>
+                <tr><td><b>Finals Study Nights</b></td><td>Scholarship</td><td>Dec 1</td><td><span class="chip warn">Planning</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- Row: tiles / action items -->
+        <div class="grid c2">
+
+          <div class="card">
+            <h2>Committee Pulse</h2>
+            <p class="who">Apparel · Marketing · Alumni</p>
+            <div class="tiles">
+              <div class="tile"><b>$640</b><span>Apparel revenue</span></div>
+              <div class="tile"><b>31</b><span>Merch orders</span></div>
+              <div class="tile"><b>1,240</b><span>IG followers <em style="color:#256b39;font-style:normal">+85</em></span></div>
+              <div class="tile"><b>312</b><span>Flyer QR scans</span></div>
+              <div class="tile"><b>34</b><span>Alumni engaged</span></div>
+              <div class="tile"><b>6</b><span>Events planned</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Action Items</h2>
+            <p class="who">Owner: <b>Secretary</b> · from Sep 8 minutes</p>
+            <ul class="todo" id="todo">
+              <li data-id="a1"><input type="checkbox" id="a1"><label for="a1">Book Fall Formal venue<span class="muted">VP Internal · due Sep 26</span></label></li>
+              <li data-id="a2"><input type="checkbox" id="a2"><label for="a2">Submit national chapter report<span class="muted">President · due Sep 30</span></label></li>
+              <li data-id="a3"><input type="checkbox" id="a3"><label for="a3">Order rush polos<span class="muted">Apparel Chair · due Sep 1</span></label></li>
+              <li data-id="a4"><input type="checkbox" id="a4"><label for="a4">Finalize Fall Summit speakers<span class="muted">Professional Chair · due Sep 20</span></label></li>
+              <li data-id="a5"><input type="checkbox" id="a5"><label for="a5">Follow up on outstanding dues<span class="muted">VP Finance · weekly</span></label></li>
+            </ul>
+          </div>
+
         </div>
 
         <!-- Chair updates -->
-        <div class="card">
-          <h2>Chair Updates <small>post before the meeting — the board reads this first</small></h2>
+        <div class="card" style="margin-top:1.2rem">
+          <h2>Chair Updates</h2>
+          <p class="who">Post before the meeting — the board reads this first</p>
           <form class="composer" id="composer">
             <select id="cRole" aria-label="Your position">
               <option>President</option><option>VP Internal</option><option>VP External</option>
@@ -320,12 +400,11 @@
             <li><span class="when">2d</span><span class="chip role">Scholarship Chair</span><span>Midterm grade reports: 41/62 submitted. 3 members moved to study-hall plan.</span></li>
             <li><span class="when">3d</span><span class="chip role">Apparel Chair</span><span>Heritage Hoodie restock live — 12 orders this week.</span></li>
             <li><span class="when">4d</span><span class="chip role">IT Chair</span><span>New website deployed. Portal dashboard beta is live.</span></li>
-            <li><span class="when">5d</span><span class="chip role">Secretary</span><span>Sep 8 meeting minutes uploaded to the shared drive.</span></li>
           </ul>
         </div>
 
         <p class="demo-note">Demo data for e-board review — posting works in your browser only.
-          A real rollout would connect this to a shared backend with per-officer logins.</p>
+          A real rollout connects this to a shared backend with per-officer logins.</p>
 
       </div>
     </main>
@@ -343,16 +422,15 @@
     if (sessionStorage.getItem(KEY) === "1") document.body.classList.add("authed");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var v = document.getElementById("gatePass").value.trim();
-      if (v === PASS) {
+      if (document.getElementById("gatePass").value.trim() === PASS) {
         sessionStorage.setItem(KEY, "1");
         document.body.classList.add("authed");
+        render(current);
       } else {
         err.textContent = "Wrong passcode — ask the IT chair.";
-        var card = form;
-        card.classList.remove("shake");
-        void card.offsetWidth;
-        card.classList.add("shake");
+        form.classList.remove("shake");
+        void form.offsetWidth;
+        form.classList.add("shake");
       }
     });
     document.getElementById("logout").addEventListener("click", function () {
@@ -361,17 +439,21 @@
       document.getElementById("gatePass").value = "";
     });
 
-    /* ---------- semester data ---------- */
-    var money = function (n) { return "$" + n.toLocaleString("en-US"); };
+    /* ---------- data ---------- */
+    var DUES = 235;
+    var ORDER = ["f25", "s26", "f26"];
     var SEM = {
-      f26: { name: "Fall 2026", live: true, members: 62, pledges: 18, paid: 47, gpa: "3.60",
+      f26: { name: "Fall 2026", live: true,  members: 62, pledges: 18, paid: 47, gpa: 3.60,
+             classGpa: [3.72, 3.61, 3.58, 3.49], reports: "41/62",
              raised: 1820, raiseGoal: 2500, hours: 312, prev: "s26" },
-      s26: { name: "Spring 2026", live: false, members: 55, pledges: 14, paid: 53, gpa: "3.56",
+      s26: { name: "Spring 2026", live: false, members: 55, pledges: 14, paid: 53, gpa: 3.56,
+             classGpa: [3.68, 3.58, 3.55, 3.44], reports: "55/55",
              raised: 2340, raiseGoal: 2200, hours: 428, prev: "f25" },
-      f25: { name: "Fall 2025", live: false, members: 48, pledges: 16, paid: 46, gpa: "3.52",
+      f25: { name: "Fall 2025", live: false, members: 48, pledges: 16, paid: 46, gpa: 3.52,
+             classGpa: [3.63, 3.55, 3.50, 3.41], reports: "48/48",
              raised: 1980, raiseGoal: 2000, hours: 355, prev: null }
     };
-    var DUES = 235;
+    var money = function (n) { return "$" + n.toLocaleString("en-US"); };
 
     function setF(name, val) {
       document.querySelectorAll('[data-f="' + name + '"]').forEach(function (el) {
@@ -379,41 +461,78 @@
       });
     }
     function delta(el, cur, prevVal, fmt, invert) {
-      var target = document.querySelector('[data-f="' + el + '"]');
-      if (!target) return;
-      if (prevVal == null) { target.textContent = "first tracked semester"; target.className = "delta flat"; return; }
+      var t = document.querySelector('[data-f="' + el + '"]');
+      if (!t) return;
+      if (prevVal == null) { t.textContent = "first tracked"; t.className = "delta flat"; return; }
       var d = cur - prevVal;
       var good = invert ? d < 0 : d > 0;
-      target.className = "delta " + (d === 0 ? "flat" : good ? "up" : "down");
-      var sign = d > 0 ? "+" : d < 0 ? "−" : "±";
-      target.textContent = sign + fmt(Math.abs(d)) + " vs last semester";
+      t.className = "delta " + (d === 0 ? "flat" : good ? "up" : "down");
+      t.textContent = (d > 0 ? "▲ " : d < 0 ? "▼ " : "· ") + fmt(Math.abs(d));
     }
 
+    /* trend chart geometry */
+    var X = [55, 160, 265], Y0 = 120, Y1 = 30;
+    function yFor(v, min, max) { return Y0 - (v - min) / (max - min) * (Y0 - Y1); }
+    function drawTrend(activeKey) {
+      var vals = ORDER.map(function (k) { return SEM[k].members; });
+      var min = Math.min.apply(null, vals) - 4, max = Math.max.apply(null, vals) + 4;
+      var pts = vals.map(function (v, i) { return [X[i], yFor(v, min, max)]; });
+      document.getElementById("trendLine").setAttribute("points", pts.map(function (p) { return p.join(","); }).join(" "));
+      document.getElementById("trendArea").setAttribute("d",
+        "M" + pts[0][0] + "," + Y0 + " L" + pts.map(function (p) { return p.join(","); }).join(" L") + " L" + pts[2][0] + "," + Y0 + " Z");
+      pts.forEach(function (p, i) {
+        var c = document.getElementById("pt" + i);
+        c.setAttribute("cx", p[0]); c.setAttribute("cy", p[1]);
+        c.classList.toggle("on", ORDER[i] === activeKey);
+        var t = document.getElementById("vl" + i);
+        t.setAttribute("x", p[0]); t.setAttribute("y", p[1] - 12);
+        t.textContent = vals[i];
+      });
+    }
+
+    var current = "f26";
     function render(key) {
+      current = key;
       var s = SEM[key];
       var p = s.prev ? SEM[s.prev] : null;
       var expected = s.members * DUES;
       var collected = s.paid * DUES;
       var outstanding = expected - collected;
+      var pct = Math.round(collected / expected * 100);
+
       document.getElementById("semLabel").textContent = s.name + (s.live ? " · Live" : " · Archive");
-      setF("members", s.members); setF("members2", s.members);
+      setF("members", s.members);
       setF("pledges", s.pledges);
       setF("collected", money(collected)); setF("collected2", money(collected));
       setF("outstanding", money(outstanding)); setF("outstanding2", money(outstanding));
       setF("expected", money(expected));
-      setF("paidCount", s.paid);
-      setF("unpaidCount", s.members - s.paid);
-      setF("gpa", s.gpa);
-      setF("duesBar", Math.round(collected / expected * 100) + "%");
-      setF("semName", s.name); setF("semName2", s.name); setF("semName3", s.name);
+      setF("paidCount", s.paid); setF("unpaidCount", s.members - s.paid);
+      setF("gpa", s.gpa.toFixed(2));
       setF("raised", money(s.raised)); setF("raiseGoal", money(s.raiseGoal));
       setF("raiseBar", Math.min(100, Math.round(s.raised / s.raiseGoal * 100)) + "%");
       setF("hours", s.hours);
+      setF("reports", s.reports);
+
+      /* donut */
+      var C = 2 * Math.PI * 46;
+      document.getElementById("duesRing").setAttribute("stroke-dasharray", (pct / 100 * C).toFixed(1) + " " + C.toFixed(1));
+      document.getElementById("duesPct").textContent = pct + "%";
+
+      /* gpa bars: scale 3.3–3.8 for visible spread */
+      s.classGpa.forEach(function (g, i) {
+        var el = document.querySelector('[data-g="' + i + '"]');
+        var bar = document.querySelector('[data-gb="' + i + '"]');
+        if (el) el.textContent = g.toFixed(2);
+        if (bar) bar.style.width = Math.round((g - 3.3) / 0.5 * 100) + "%";
+      });
+
+      drawTrend(key);
+
       delta("membersD", s.members, p && p.members, function (n) { return n + " members"; });
       delta("pledgesD", s.pledges, p && p.pledges, function (n) { return n + " pledges"; });
-      delta("collectedD", s.paid * DUES, p && p.paid * DUES, money);
+      delta("collectedD", collected, p && p.paid * DUES, money);
       delta("outstandingD", outstanding, p && (p.members * DUES - p.paid * DUES), money, true);
-      delta("gpaD", parseFloat(s.gpa), p && parseFloat(p.gpa), function (n) { return n.toFixed(2) + " GPA"; });
+      delta("gpaD", s.gpa, p && p.gpa, function (n) { return n.toFixed(2) + " GPA"; });
     }
 
     var tabs = document.getElementById("semtabs");

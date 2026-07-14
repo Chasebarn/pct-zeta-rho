@@ -38,6 +38,16 @@ sed -i '' 's/?v=14/?v=15/g' index.html rush.html philanthropy.html apparel.html
 
 (Editing HTML only? No bump needed.)
 
+## Chapter portal (portal.html)
+
+A **mock** officers' dashboard linked subtly from the footer ("Portal").
+Passcode is `1234`, set in the `PASS` variable inside `portal.html`. This is a
+client-side curtain, NOT security — anyone reading the page source can see it.
+Never put real member data, finances, or grades behind it. The dashboard data
+is demo data hardcoded in the same file (`SEM` object); a real version needs a
+backend with real logins (talk to the next IT chair / use Google Sheets embeds
+as a stopgap).
+
 ## Preview locally
 
 ```bash

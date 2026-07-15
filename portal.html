@@ -43,11 +43,9 @@
     @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
     /* ---------- dashboard ---------- */
-    .dash { display: none; background: #f4f1ea; min-height: 100vh;
-      font-size: 15px; }
+    .dash { display: none; background: #f4f1ea; min-height: 100vh; font-size: 15px; }
     body.authed .dash { display: block; }
     body.authed .gate { display: none; }
-    .dash * { letter-spacing: normal; }
     .dash b, .dash strong { font-variant-numeric: tabular-nums; }
 
     .dash-top {
@@ -78,13 +76,10 @@
     .dash main { padding: 1.8rem 0 3.5rem; }
 
     /* KPI strip */
-    .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.2rem; }
+    .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
     .kpi { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.15rem 1.25rem 1.05rem; }
     .kpi span { display: block; font-size: 0.74rem; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.45rem; }
-    .kpi b {
-      display: block; font-weight: 700; font-size: 1.9rem; line-height: 1;
-      color: var(--ink); letter-spacing: -0.02em;
-    }
+    .kpi b { display: block; font-weight: 700; font-size: 1.9rem; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
     .kpi .delta {
       display: inline-block; font-size: 0.78rem; font-weight: 650; font-style: normal;
       margin-top: 0.55rem; padding: 0.18rem 0.6rem; border-radius: 100px;
@@ -93,51 +88,64 @@
     .delta.down { background: #f7dede; color: #9c2c2c; }
     .delta.flat { background: var(--paper-deep); color: var(--ink-mute); }
 
-    /* cards */
+    /* cards + grids */
     .grid { display: grid; gap: 1.2rem; margin-top: 1.2rem; }
-    .grid.c3 { grid-template-columns: 1fr 1fr 1fr; margin-top: 0; }
     .grid.c2 { grid-template-columns: 1fr 1fr; }
-    .card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.35rem 1.5rem 1.45rem; }
-    .card h2 { font-family: var(--font-text); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); margin-bottom: 0.15rem; }
-    .card .who { font-size: 0.82rem; color: var(--ink-mute); margin-bottom: 1.05rem; }
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.6rem 1.5rem; }
+    .card h2 { font-family: var(--font-text); font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.15rem; }
+    .card .who { font-size: 0.83rem; color: var(--ink-mute); margin-bottom: 1.05rem; }
     .card .who b { color: var(--purple); font-weight: 650; }
-    .stack > .card + .card { margin-top: 1.2rem; }
 
     /* donut */
-    .donut-wrap { display: flex; align-items: center; gap: 1.5rem; }
-    .donut { width: 142px; height: 142px; flex: none; }
+    .donut-wrap { display: flex; align-items: center; gap: 1.6rem; }
+    .donut { width: 146px; height: 146px; flex: none; }
     .donut .track { fill: none; stroke: var(--paper-deep); stroke-width: 14; }
     .donut .val { fill: none; stroke: var(--purple); stroke-width: 14; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.8s var(--ease-out); }
     .donut text { font: 700 24px Inter, sans-serif; fill: var(--ink); }
     .donut .sub { font: 600 9px Inter, sans-serif; fill: var(--ink-mute); letter-spacing: 0.1em; }
-    .legend { display: grid; gap: 0.65rem; font-size: 0.92rem; color: var(--ink); }
+    .legend { display: grid; gap: 0.65rem; font-size: 0.93rem; color: var(--ink); }
     .legend b { font-weight: 700; }
     .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.5rem; }
     .dot.p { background: var(--purple); } .dot.t { background: var(--paper-deep); border: 1px solid var(--line); }
-    .legend .exp { font-size: 0.82rem; color: var(--ink-mute); }
+    .legend .exp { font-size: 0.83rem; color: var(--ink-mute); }
 
     /* line chart */
     .chart svg { width: 100%; height: auto; display: block; }
     .chart .grid-line { stroke: var(--line); stroke-width: 1; }
-    .chart .series { fill: none; stroke: var(--purple); stroke-width: 3; stroke-linecap: round; }
+    .chart .series { fill: none; stroke: var(--purple); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
     .chart .area { fill: rgba(75, 46, 131, 0.08); stroke: none; }
-    .chart .pt { fill: var(--white); stroke: var(--purple); stroke-width: 3; }
+    .chart .pt { fill: var(--white); stroke: var(--purple); stroke-width: 2.5; }
     .chart .pt.on { fill: var(--gold); stroke: var(--gold-ink); }
-    .chart .xlab { font: 600 11px Inter, sans-serif; fill: var(--ink-mute); text-anchor: middle; letter-spacing: 0.05em; }
-    .chart .vlab { font: 700 14px Inter, sans-serif; fill: var(--ink); text-anchor: middle; }
+    .chart .xlab { font: 600 10px Inter, sans-serif; fill: var(--ink-mute); text-anchor: middle; }
+    .chart .vlab { font: 700 12px Inter, sans-serif; fill: var(--ink); text-anchor: middle; }
 
-    /* gauge */
-    .gauge-num { font-weight: 700; font-size: 1.9rem; letter-spacing: -0.02em; line-height: 1; color: var(--ink); margin-bottom: 0.25rem; }
-    .gauge-sub { font-size: 0.88rem; color: var(--ink-mute); margin-bottom: 1rem; }
-    .fatbar { height: 16px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
-    .fatbar i { display: block; height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.8s var(--ease-out); }
-    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.9rem; color: var(--ink-mute); }
-    .fatbar + .row { margin-top: 0.6rem; }
-    .row b { color: var(--ink); font-weight: 650; }
+    /* full-width goal sections */
+    .gs-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+    .gs-num { text-align: right; white-space: nowrap; }
+    .gs-num b { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+    .gs-num span { font-size: 0.95rem; color: var(--ink-mute); }
+    .gs-num em { font-style: normal; font-weight: 700; color: var(--ink); }
+    .gs-bar { position: relative; height: 24px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; margin: 1rem 0 0.5rem; }
+    .gs-bar i { display: block; height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.8s var(--ease-out); }
+    .gs-bar.purple i { background: var(--purple); }
+    .gs-sub { display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--ink-mute); margin-bottom: 1.2rem; }
+    .gs-sub b { color: var(--ink); }
+    .gs-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+    .gs-item {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      background: #faf8f3; border: 1px solid var(--line); border-radius: 8px;
+      padding: 0.85rem 1.05rem;
+    }
+    .gs-item .n { font-size: 0.93rem; font-weight: 650; color: var(--ink); }
+    .gs-item .s { display: block; font-size: 0.78rem; font-weight: 400; color: var(--ink-mute); margin-top: 0.1rem; }
+    .gs-item .amt { font-size: 1.02rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+    .gs-item .amt.zero { color: var(--ink-mute); font-weight: 600; }
 
-    /* h-bars */
+    /* fat bars (budgets, gpa) */
     .hbars { display: grid; gap: 0.85rem; }
     .hbar .row { margin-bottom: 0.3rem; font-size: 0.92rem; color: var(--ink); }
+    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .row b { color: var(--ink); font-weight: 650; }
     .hbar .track { height: 15px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
     .hbar .track i { display: block; height: 100%; border-radius: 100px; background: var(--purple); transition: width 0.8s var(--ease-out); }
     .hbar .track i.gold { background: var(--gold); }
@@ -153,34 +161,22 @@
     .fstep:nth-child(even) .fbar { background: #5d3d9e; }
     .fstep small { font-size: 0.78rem; font-weight: 600; color: var(--ink-mute); margin-top: 0.3rem; }
 
-    /* timeline */
-    .timeline { list-style: none; margin: 0; padding: 0 0 0 1.5rem; position: relative; }
-    .timeline::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
-    .timeline li { position: relative; padding: 0.5rem 0 0.5rem 0.4rem; display: flex; gap: 0.9rem; align-items: baseline; flex-wrap: wrap; }
+    /* timelines — airy two-line rows */
+    .timeline { list-style: none; margin: 0; padding: 0 0 0 1.6rem; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 5px; top: 12px; bottom: 12px; width: 2px; background: var(--line); }
+    .timeline li { position: relative; padding: 0.75rem 0; }
     .timeline li::before {
-      content: ""; position: absolute; left: -1.5rem; top: 0.95rem;
+      content: ""; position: absolute; left: -1.6rem; top: 1.1rem;
       width: 12px; height: 12px; border-radius: 50%;
       background: var(--white); border: 3px solid var(--line);
     }
     .timeline li.done::before { background: var(--purple); border-color: var(--purple); }
     .timeline li.next::before { background: var(--gold); border-color: var(--gold-ink); }
-    .timeline .tdate { flex: none; width: 3.6rem; font-size: 0.8rem; font-weight: 650; color: var(--ink-mute); }
-    .timeline .tname { font-size: 0.94rem; font-weight: 650; color: var(--ink); }
-    .timeline .tmeta { font-size: 0.82rem; color: var(--ink-mute); }
-
-    /* table */
-    .minitable { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-    .minitable th { text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); padding: 0.5rem 0.7rem 0.5rem 0; border-bottom: 1px solid var(--line); }
-    .minitable td { padding: 0.72rem 0.7rem 0.72rem 0; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
-    .minitable td.money { text-align: right; font-weight: 700; white-space: nowrap; }
-    .minitable th.money { text-align: right; }
-    .minitable .sub { display: block; font-size: 0.78rem; color: var(--ink-mute); font-weight: 400; }
-    .minitable tfoot td { border-bottom: 0; font-weight: 700; padding-top: 0.8rem; }
-    .minitable tbody tr:last-child td { border-bottom: 1px solid var(--line); }
-    .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.22rem 0.62rem; border-radius: 100px; white-space: nowrap; }
+    .timeline .tname { display: flex; align-items: center; gap: 0.6rem; font-size: 0.98rem; font-weight: 650; color: var(--ink); }
+    .timeline .tmeta { display: block; font-size: 0.84rem; color: var(--ink-mute); margin-top: 0.25rem; }
+    .chip { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; white-space: nowrap; }
     .chip.ok { background: #e2efe5; color: #1f6234; }
     .chip.warn { background: #f6ecd7; color: #7c6410; }
-    .chip.bad { background: #f7dede; color: #9c2c2c; }
     .chip.role { background: #efe9f7; color: var(--purple); }
 
     /* feed + composer + todo */
@@ -203,9 +199,9 @@
 
     .demo-note { text-align: center; font-size: 0.78rem; color: var(--ink-mute); padding: 1.6rem 0 0; }
 
-    @media (max-width: 1080px) { .grid.c3 { grid-template-columns: 1fr; } .kpis { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1080px) { .kpis { grid-template-columns: repeat(2, 1fr); } .gs-items { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 860px) { .grid.c2 { grid-template-columns: 1fr; } }
-    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } }
+    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } .gs-items { grid-template-columns: 1fr; } .gs-head { align-items: flex-start; } .gs-num { text-align: left; } }
   </style>
 </head>
 <body>
@@ -254,9 +250,8 @@
           <div class="kpi"><span>Chapter GPA</span><b data-f="gpa">–</b><span class="delta" data-f="gpaD"></span></div>
         </div>
 
-        <!-- Row: donut / trend / goal -->
-        <div class="grid c3">
-
+        <!-- Row: dues donut / growth -->
+        <div class="grid c2">
           <div class="card">
             <h2>Dues Collection</h2>
             <p class="who">Owner: <b>VP Finance</b> · $235 per member</p>
@@ -277,45 +272,79 @@
 
           <div class="card chart">
             <h2>Chapter Growth</h2>
-            <p class="who">Active members by semester</p>
-            <svg viewBox="0 0 320 150" role="img" aria-label="Members trend across semesters">
-              <line class="grid-line" x1="10" y1="120" x2="310" y2="120"/>
-              <line class="grid-line" x1="10" y1="75" x2="310" y2="75"/>
-              <line class="grid-line" x1="10" y1="30" x2="310" y2="30"/>
+            <p class="who">Active members — last seven semesters</p>
+            <svg viewBox="0 0 340 150" role="img" aria-label="Members trend across semesters" id="trendSvg">
+              <line class="grid-line" x1="10" y1="120" x2="330" y2="120"/>
+              <line class="grid-line" x1="10" y1="75" x2="330" y2="75"/>
+              <line class="grid-line" x1="10" y1="30" x2="330" y2="30"/>
               <path class="area" id="trendArea" d=""/>
               <polyline class="series" id="trendLine" points=""/>
-              <circle class="pt" id="pt0" r="6"/><circle class="pt" id="pt1" r="6"/><circle class="pt" id="pt2" r="6"/>
-              <text class="vlab" id="vl0"></text><text class="vlab" id="vl1"></text><text class="vlab" id="vl2"></text>
-              <text class="xlab" x="55" y="143">FALL ’25</text>
-              <text class="xlab" x="160" y="143">SPRING ’26</text>
-              <text class="xlab" x="265" y="143">FALL ’26</text>
+              <g id="trendPts"></g>
+              <g id="trendLabs"></g>
             </svg>
           </div>
+        </div>
 
+        <!-- Philanthropy: full width -->
+        <div class="grid">
           <div class="card">
-            <h2>Philanthropy Goal</h2>
-            <p class="who">Owner: <b>Philanthropy Chair</b> · to charity this semester</p>
-            <div class="gauge-num" data-f="raised">–</div>
-            <div class="gauge-sub">raised of <b data-f="raiseGoal">–</b> goal</div>
-            <div class="fatbar"><i data-f="raiseBar" style="width:0%"></i></div>
-            <div class="row"><span>Service hours logged</span><b data-f="hours">–</b></div>
+            <div class="gs-head">
+              <div>
+                <h2>Philanthropy — Money to Charity</h2>
+                <p class="who" style="margin-bottom:0">Owner: <b>Philanthropy Chair</b> · service events count even at $0</p>
+              </div>
+              <div class="gs-num"><b data-gs="philoRaised">–</b><span> of <em data-gs="philoGoal">–</em> goal</span></div>
+            </div>
+            <div class="gs-bar"><i data-gs="philoBar"></i></div>
+            <div class="gs-sub"><span><b data-gs="philoPct">–</b> of goal</span><span><b data-gs="philoCount">–</b> events logged</span></div>
+            <div class="gs-items" data-gs="philoItems"></div>
           </div>
+        </div>
 
+        <!-- Fundraising: full width -->
+        <div class="grid">
+          <div class="card">
+            <div class="gs-head">
+              <div>
+                <h2>Fundraising — Money to Chapter</h2>
+                <p class="who" style="margin-bottom:0">Owner: <b>Fundraising Chair</b></p>
+              </div>
+              <div class="gs-num"><b data-gs="fundRaised">–</b><span> of <em data-gs="fundGoal">–</em> goal</span></div>
+            </div>
+            <div class="gs-bar purple"><i data-gs="fundBar"></i></div>
+            <div class="gs-sub"><span><b data-gs="fundPct">–</b> of goal</span><span><b data-gs="fundCount">–</b> events logged</span></div>
+            <div class="gs-items" data-gs="fundItems"></div>
+          </div>
+        </div>
+
+        <!-- Apparel: full width -->
+        <div class="grid">
+          <div class="card">
+            <div class="gs-head">
+              <div>
+                <h2>Apparel — Merch Revenue</h2>
+                <p class="who" style="margin-bottom:0">Owner: <b>Apparel Chair</b> · chairs update orders &amp; net as they go</p>
+              </div>
+              <div class="gs-num"><b data-gs="appRaised">–</b><span> of <em data-gs="appGoal">–</em> projected</span></div>
+            </div>
+            <div class="gs-bar"><i data-gs="appBar"></i></div>
+            <div class="gs-sub"><span><b data-gs="appPct">–</b> of projection</span><span><b data-gs="appOrders">–</b> total orders</span></div>
+            <div class="gs-items" data-gs="appItems"></div>
+          </div>
         </div>
 
         <!-- Row: rush timeline / pledge timeline -->
         <div class="grid c2">
-
           <div class="card">
             <h2>Rush Timeline — Fall 2026</h2>
-            <p class="who">Owner: <b>VP Recruitment</b> · six-event process · attendance per event</p>
+            <p class="who">Owner: <b>VP Recruitment</b> · six-event process</p>
             <ul class="timeline">
-              <li class="done"><span class="tdate">Sep 5</span><span class="tname">Event 1 · Info Night</span><span class="tmeta">96 attended</span></li>
-              <li class="done"><span class="tdate">Sep 9</span><span class="tname">Event 2 · Networking Night</span><span class="tmeta">78 attended</span></li>
-              <li class="done"><span class="tdate">Sep 12</span><span class="tname">Event 3 · Business Workshop</span><span class="tmeta">64 attended</span></li>
-              <li class="done"><span class="tdate">Sep 16</span><span class="tname">Event 4 · Speed Networking</span><span class="tmeta">59 attended</span></li>
-              <li class="next"><span class="tdate">Sep 19</span><span class="tname">Event 5 · Field Day</span><span class="tmeta">51 RSVPs · <span class="chip warn">Up next</span></span></li>
-              <li><span class="tdate">Sep 23</span><span class="tname">Event 6 · Preference Night</span><span class="tmeta">invite-only · <span class="chip warn">Scheduled</span></span></li>
+              <li class="done"><span class="tname">Event 1 · Info Night</span><span class="tmeta">Sep 5 · 96 attended</span></li>
+              <li class="done"><span class="tname">Event 2 · Networking Night</span><span class="tmeta">Sep 9 · 78 attended</span></li>
+              <li class="done"><span class="tname">Event 3 · Business Workshop</span><span class="tmeta">Sep 12 · 64 attended</span></li>
+              <li class="done"><span class="tname">Event 4 · Speed Networking</span><span class="tmeta">Sep 16 · 59 attended</span></li>
+              <li class="next"><span class="tname">Event 5 · Field Day <span class="chip warn">Up next</span></span><span class="tmeta">Sep 19 · 51 RSVPs</span></li>
+              <li><span class="tname">Event 6 · Preference Night</span><span class="tmeta">Sep 23 · invite-only</span></li>
             </ul>
           </div>
 
@@ -323,71 +352,18 @@
             <h2>Pledge Process — Fall 2026 Class</h2>
             <p class="who">Owner: <b>VP Membership</b> · 18 pledges in process</p>
             <ul class="timeline">
-              <li class="done"><span class="tdate">Sep 26</span><span class="tname">Bid Day</span><span class="tmeta">18 of 24 bids accepted</span></li>
-              <li class="done"><span class="tdate">Oct 8</span><span class="tname">Big / Little Reveal</span><span class="tmeta">18 pairs matched</span></li>
-              <li class="next"><span class="tdate">Ongoing</span><span class="tname">Member Interviews</span><span class="tmeta">avg 12 of 18 complete · <span class="chip warn">In progress</span></span></li>
-              <li class="next"><span class="tdate">Ongoing</span><span class="tname">Service Hours</span><span class="tmeta">avg 6 of 10 hours · <span class="chip warn">In progress</span></span></li>
-              <li><span class="tdate">Nov 18</span><span class="tname">National Exam</span><span class="tmeta"><span class="chip warn">Scheduled</span></span></li>
-              <li><span class="tdate">Dec 5</span><span class="tname">Initiation</span><span class="tmeta"><span class="chip warn">Scheduled</span></span></li>
+              <li class="done"><span class="tname">Bid Day</span><span class="tmeta">Sep 26 · 18 of 24 bids accepted</span></li>
+              <li class="done"><span class="tname">Big / Little Reveal</span><span class="tmeta">Oct 8 · 18 pairs matched</span></li>
+              <li class="next"><span class="tname">Member Interviews <span class="chip warn">In progress</span></span><span class="tmeta">avg 12 of 18 complete</span></li>
+              <li class="next"><span class="tname">Pledge Exam Prep <span class="chip warn">In progress</span></span><span class="tmeta">study sessions weekly</span></li>
+              <li><span class="tname">National Exam</span><span class="tmeta">Nov 18</span></li>
+              <li><span class="tname">Initiation</span><span class="tmeta">Dec 5</span></li>
             </ul>
           </div>
-
-        </div>
-
-        <!-- Row: philanthropy events / fundraising + apparel -->
-        <div class="grid c2">
-
-          <div class="card">
-            <h2>Philanthropy Events — Money to Charity</h2>
-            <p class="who">Owner: <b>Philanthropy Chair</b> · not every event raises money — service counts</p>
-            <table class="minitable">
-              <thead><tr><th>Event</th><th>Beneficiary</th><th class="money">To charity</th></tr></thead>
-              <tbody>
-                <tr><td><b>Pie a Phi Chi</b><span class="sub">Sep 24 · campus fundraiser</span></td><td>Moffitt Cancer Center</td><td class="money">$480</td></tr>
-                <tr><td><b>Bulls Market Bake Sale</b><span class="sub">Oct 2</span></td><td>Hillsborough Ed. Foundation</td><td class="money">$340</td></tr>
-                <tr><td><b>JA Finance Park Day</b><span class="sub">Oct 10 · 45 volunteer hours</span></td><td>JA Finance Park</td><td class="money">—</td></tr>
-                <tr><td><b>Letter-Writing Drive</b><span class="sub">Oct 21</span></td><td>Parkland Cares</td><td class="money">$250</td></tr>
-                <tr><td><b>Charity Raffle</b><span class="sub">Nov 1</span></td><td>Hillsborough Ed. Foundation</td><td class="money">$750</td></tr>
-              </tbody>
-              <tfoot><tr><td>Semester total</td><td></td><td class="money">$1,820</td></tr></tfoot>
-            </table>
-          </div>
-
-          <div class="stack">
-            <div class="card">
-              <h2>Fundraising Events — Money to Chapter</h2>
-              <p class="who">Owner: <b>Fundraising Chair</b></p>
-              <table class="minitable">
-                <thead><tr><th>Event</th><th class="money">Net to chapter</th></tr></thead>
-                <tbody>
-                  <tr><td><b>Car Wash</b><span class="sub">Sep 13</span></td><td class="money">$410</td></tr>
-                  <tr><td><b>Chipotle % Night</b><span class="sub">Oct 7</span></td><td class="money">$265</td></tr>
-                  <tr><td><b>Tailgate Concessions</b><span class="sub">Oct 25 · homecoming</span></td><td class="money">$580</td></tr>
-                </tbody>
-                <tfoot><tr><td>Semester total</td><td class="money">$1,255</td></tr></tfoot>
-              </table>
-            </div>
-
-            <div class="card">
-              <h2>Apparel Drops — Merch Revenue</h2>
-              <p class="who">Owner: <b>Apparel Chair</b> · via Printful store</p>
-              <table class="minitable">
-                <thead><tr><th>Drop</th><th>Orders</th><th class="money">Net</th></tr></thead>
-                <tbody>
-                  <tr><td><b>Rush Polo Pre-Order</b><span class="sub">Aug 28</span></td><td>8</td><td class="money">$180</td></tr>
-                  <tr><td><b>Champion Tee Drop</b><span class="sub">Sep 20</span></td><td>11</td><td class="money">$210</td></tr>
-                  <tr><td><b>Heritage Hoodie Restock</b><span class="sub">Oct 14</span></td><td>12</td><td class="money">$250</td></tr>
-                </tbody>
-                <tfoot><tr><td>Semester total</td><td>31</td><td class="money">$640</td></tr></tfoot>
-              </table>
-            </div>
-          </div>
-
         </div>
 
         <!-- Row: budgets / funnel -->
         <div class="grid c2">
-
           <div class="card">
             <h2>Committee Budgets</h2>
             <p class="who">Fall 2026 · spent vs allocated · <b>$3,295 / $5,550</b> total</p>
@@ -412,15 +388,13 @@
               <div class="fstep"><div class="fbar" style="width:24%">18 · Accepted</div><small>90% bid acceptance</small></div>
             </div>
           </div>
-
         </div>
 
         <!-- Row: GPA / action items -->
         <div class="grid c2">
-
           <div class="card">
             <h2>Academics by Class</h2>
-            <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">41/62</b> in · 3 on study plan</p>
+            <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">–</b> in · 3 on study plan</p>
             <div class="hbars">
               <div class="hbar"><div class="row"><span>Seniors</span><b data-g="0">–</b></div><div class="track"><i class="gold" data-gb="0"></i></div></div>
               <div class="hbar"><div class="row"><span>Juniors</span><b data-g="1">–</b></div><div class="track"><i class="gold" data-gb="1"></i></div></div>
@@ -440,7 +414,6 @@
               <li data-id="a5"><input type="checkbox" id="a5"><label for="a5">Follow up on outstanding dues<span class="muted">VP Finance · weekly</span></label></li>
             </ul>
           </div>
-
         </div>
 
         <!-- Chair updates -->
@@ -510,23 +483,87 @@
 
     /* ---------- data ---------- */
     var DUES = 235;
-    var ORDER = ["f25", "s26", "f26"];
-    var SEM = {
-      f26: { name: "Fall 2026", live: true,  members: 62, pledges: 18, paid: 47, gpa: 3.60,
-             classGpa: [3.72, 3.61, 3.58, 3.49], reports: "41/62",
-             raised: 1820, raiseGoal: 2500, hours: 312, prev: "s26" },
-      s26: { name: "Spring 2026", live: false, members: 55, pledges: 14, paid: 53, gpa: 3.56,
-             classGpa: [3.68, 3.58, 3.55, 3.44], reports: "55/55",
-             raised: 2340, raiseGoal: 2200, hours: 428, prev: "f25" },
-      f25: { name: "Fall 2025", live: false, members: 48, pledges: 16, paid: 46, gpa: 3.52,
-             classGpa: [3.63, 3.55, 3.50, 3.41], reports: "48/48",
-             raised: 1980, raiseGoal: 2000, hours: 355, prev: null }
-    };
     var money = function (n) { return "$" + n.toLocaleString("en-US"); };
 
+    /* long-run growth history (made-up early semesters, consistent recent ones) */
+    var HISTORY = [
+      ["F ’23", 31], ["S ’24", 36], ["F ’24", 41], ["S ’25", 44],
+      ["F ’25", 48], ["S ’26", 55], ["F ’26", 62]
+    ];
+    var HIST_INDEX = { f25: 4, s26: 5, f26: 6 };
+
+    var SEM = {
+      f26: {
+        name: "Fall 2026", live: true, members: 62, pledges: 18, paid: 47, gpa: 3.60,
+        classGpa: [3.72, 3.61, 3.58, 3.49], reports: "41/62", prev: "s26",
+        philoGoal: 2500, philo: [
+          ["Pie a Phi Chi", "Sep 24 · campus fundraiser", "Moffitt Cancer Center", 480],
+          ["Bulls Market Bake Sale", "Oct 2", "Hillsborough Ed. Foundation", 340],
+          ["JA Finance Park Day", "Oct 10 · community service", "JA Finance Park", 0],
+          ["Letter-Writing Drive", "Oct 21", "Parkland Cares", 250],
+          ["Charity Raffle", "Nov 1", "Hillsborough Ed. Foundation", 750]
+        ],
+        fundGoal: 2000, fund: [
+          ["Car Wash", "Sep 13", 410],
+          ["Chipotle % Night", "Oct 7", 265],
+          ["Tailgate Concessions", "Oct 25 · homecoming", 580]
+        ],
+        appGoal: 1000, app: [
+          ["Rush Polo Pre-Order", "Aug 28", 8, 180],
+          ["Champion Tee Drop", "Sep 20", 11, 210],
+          ["Heritage Hoodie Restock", "Oct 14", 12, 250]
+        ]
+      },
+      s26: {
+        name: "Spring 2026", live: false, members: 55, pledges: 14, paid: 53, gpa: 3.56,
+        classGpa: [3.68, 3.58, 3.55, 3.44], reports: "55/55", prev: "f25",
+        philoGoal: 2200, philo: [
+          ["Spring 5K", "Feb 21", "Hillsborough Ed. Foundation", 920],
+          ["JA Finance Park Day", "Mar 6 · community service", "JA Finance Park", 0],
+          ["Pie a Phi Chi", "Mar 25", "Moffitt Cancer Center", 540],
+          ["Casino Night Raffle", "Apr 10", "Parkland Cares", 880]
+        ],
+        fundGoal: 1800, fund: [
+          ["Valentine Candygrams", "Feb 12", 240],
+          ["Chipotle % Night", "Mar 3", 310],
+          ["Spring Tailgate", "Apr 18", 505]
+        ],
+        appGoal: 800, app: [
+          ["Spring Tee Drop", "Feb 5", 14, 300],
+          ["Crewneck Restock", "Mar 20", 9, 205]
+        ]
+      },
+      f25: {
+        name: "Fall 2025", live: false, members: 48, pledges: 16, paid: 46, gpa: 3.52,
+        classGpa: [3.63, 3.55, 3.50, 3.41], reports: "48/48", prev: null,
+        philoGoal: 2000, philo: [
+          ["Pie a Phi Chi", "Sep 25", "Moffitt Cancer Center", 430],
+          ["Bake Sale", "Oct 8", "Hillsborough Ed. Foundation", 290],
+          ["Letter-Writing Drive", "Oct 20", "Parkland Cares", 180],
+          ["Charity Raffle", "Nov 2", "Hillsborough Ed. Foundation", 830],
+          ["Holiday Gift Drive", "Dec 1", "Hillsborough Ed. Foundation", 250],
+          ["JA Finance Park Day", "Nov 8 · community service", "JA Finance Park", 0]
+        ],
+        fundGoal: 1500, fund: [
+          ["Car Wash", "Sep 14", 375],
+          ["Krispy Kreme Sale", "Oct 12", 320],
+          ["Tailgate Concessions", "Oct 26", 410]
+        ],
+        appGoal: 600, app: [
+          ["Fall Tee Drop", "Sep 18", 10, 215],
+          ["Hoodie Pre-Order", "Nov 3", 9, 230]
+        ]
+      }
+    };
+
     function setF(name, val) {
-      document.querySelectorAll('[data-f="' + name + '"]').forEach(function (el) {
-        if (name.indexOf("Bar") !== -1) el.style.width = val; else el.textContent = val;
+      document.querySelectorAll('[data-f="' + name + '"]').forEach(function (el) { el.textContent = val; });
+    }
+    function setGS(name, val) {
+      document.querySelectorAll('[data-gs="' + name + '"]').forEach(function (el) {
+        if (name.indexOf("Bar") !== -1) el.style.width = val;
+        else if (name.indexOf("Items") !== -1) { /* handled separately */ }
+        else el.textContent = val;
       });
     }
     function delta(el, cur, prevVal, fmt, invert) {
@@ -539,22 +576,70 @@
       t.textContent = (d > 0 ? "▲ " : d < 0 ? "▼ " : "· ") + fmt(Math.abs(d));
     }
 
-    var X = [55, 160, 265], Y0 = 120, Y1 = 30;
-    function yFor(v, min, max) { return Y0 - (v - min) / (max - min) * (Y0 - Y1); }
+    /* goal section renderer: bar + event items under it */
+    function goalSection(prefix, items, goal, ordersIdx) {
+      var raised = 0, orders = 0;
+      items.forEach(function (it) { raised += it[it.length - 1]; if (ordersIdx != null) orders += it[ordersIdx]; });
+      setGS(prefix + "Raised", money(raised));
+      setGS(prefix + "Goal", money(goal));
+      setGS(prefix + "Pct", Math.round(raised / goal * 100) + "%");
+      setGS(prefix + "Count", items.length);
+      if (ordersIdx != null) setGS(prefix + "Orders", orders);
+      document.querySelectorAll('[data-gs="' + prefix + 'Bar"]').forEach(function (el) {
+        el.style.width = Math.min(100, Math.round(raised / goal * 100)) + "%";
+      });
+      var wrap = document.querySelector('[data-gs="' + prefix + 'Items"]');
+      wrap.innerHTML = "";
+      items.forEach(function (it) {
+        var div = document.createElement("div");
+        div.className = "gs-item";
+        var left = document.createElement("div");
+        var n = document.createElement("span"); n.className = "n"; n.textContent = it[0];
+        var s = document.createElement("span"); s.className = "s";
+        s.textContent = ordersIdx != null ? it[1] + " · " + it[2] + " orders"
+          : it.length === 4 ? it[1] + " · " + it[2]
+          : it[1];
+        left.appendChild(n); left.appendChild(s);
+        var amt = document.createElement("b");
+        var v = it[it.length - 1];
+        amt.className = "amt" + (v === 0 ? " zero" : "");
+        amt.textContent = v === 0 ? "service" : money(v);
+        div.appendChild(left); div.appendChild(amt);
+        wrap.appendChild(div);
+      });
+    }
+
+    /* growth chart: 7 points */
+    var X0 = 30, X1 = 320, Y0 = 120, Y1 = 30;
     function drawTrend(activeKey) {
-      var vals = ORDER.map(function (k) { return SEM[k].members; });
-      var min = Math.min.apply(null, vals) - 4, max = Math.max.apply(null, vals) + 4;
-      var pts = vals.map(function (v, i) { return [X[i], yFor(v, min, max)]; });
+      var vals = HISTORY.map(function (h) { return h[1]; });
+      var min = Math.min.apply(null, vals) - 5, max = Math.max.apply(null, vals) + 5;
+      var pts = vals.map(function (v, i) {
+        var x = X0 + (X1 - X0) * i / (vals.length - 1);
+        var y = Y0 - (v - min) / (max - min) * (Y0 - Y1);
+        return [x, y];
+      });
       document.getElementById("trendLine").setAttribute("points", pts.map(function (p) { return p.join(","); }).join(" "));
       document.getElementById("trendArea").setAttribute("d",
-        "M" + pts[0][0] + "," + Y0 + " L" + pts.map(function (p) { return p.join(","); }).join(" L") + " L" + pts[2][0] + "," + Y0 + " Z");
+        "M" + pts[0][0] + "," + Y0 + " L" + pts.map(function (p) { return p.join(","); }).join(" L") + " L" + pts[pts.length - 1][0] + "," + Y0 + " Z");
+      var ptsG = document.getElementById("trendPts");
+      var labsG = document.getElementById("trendLabs");
+      ptsG.innerHTML = ""; labsG.innerHTML = "";
+      var activeIdx = HIST_INDEX[activeKey];
       pts.forEach(function (p, i) {
-        var c = document.getElementById("pt" + i);
+        var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("class", "pt" + (i === activeIdx ? " on" : ""));
+        c.setAttribute("r", i === activeIdx ? 6 : 4.5);
         c.setAttribute("cx", p[0]); c.setAttribute("cy", p[1]);
-        c.classList.toggle("on", ORDER[i] === activeKey);
-        var t = document.getElementById("vl" + i);
-        t.setAttribute("x", p[0]); t.setAttribute("y", p[1] - 12);
-        t.textContent = vals[i];
+        ptsG.appendChild(c);
+        var v = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        v.setAttribute("class", "vlab"); v.setAttribute("x", p[0]); v.setAttribute("y", p[1] - 11);
+        v.textContent = HISTORY[i][1];
+        labsG.appendChild(v);
+        var x = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        x.setAttribute("class", "xlab"); x.setAttribute("x", p[0]); x.setAttribute("y", 143);
+        x.textContent = HISTORY[i][0];
+        labsG.appendChild(x);
       });
     }
 
@@ -576,9 +661,6 @@
       setF("expected", money(expected));
       setF("paidCount", s.paid); setF("unpaidCount", s.members - s.paid);
       setF("gpa", s.gpa.toFixed(2));
-      setF("raised", money(s.raised)); setF("raiseGoal", money(s.raiseGoal));
-      setF("raiseBar", Math.min(100, Math.round(s.raised / s.raiseGoal * 100)) + "%");
-      setF("hours", s.hours);
       setF("reports", s.reports);
 
       var C = 2 * Math.PI * 46;
@@ -591,6 +673,10 @@
         if (el) el.textContent = g.toFixed(2);
         if (bar) bar.style.width = Math.round((g - 3.3) / 0.5 * 100) + "%";
       });
+
+      goalSection("philo", s.philo, s.philoGoal);
+      goalSection("fund", s.fund, s.fundGoal);
+      goalSection("app", s.app, s.appGoal, 2);
 
       drawTrend(key);
 

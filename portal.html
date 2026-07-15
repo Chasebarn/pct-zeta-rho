@@ -43,9 +43,12 @@
     @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
     /* ---------- dashboard ---------- */
-    .dash { display: none; background: #f4f1ea; min-height: 100vh; }
+    .dash { display: none; background: #f4f1ea; min-height: 100vh;
+      font-size: 15px; }
     body.authed .dash { display: block; }
     body.authed .gate { display: none; }
+    .dash * { letter-spacing: normal; }
+    .dash b, .dash strong { font-variant-numeric: tabular-nums; }
 
     .dash-top {
       position: sticky; top: 0; z-index: 50;
@@ -57,17 +60,17 @@
     }
     .dash-title { display: flex; align-items: center; gap: 0.75rem; }
     .dash-title img { height: 38px; }
-    .dash-title b { font-size: 1.02rem; }
-    .dash-title span { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-soft); }
-    .dash-actions { display: flex; align-items: center; gap: 1rem; }
+    .dash-title b { font-size: 1.05rem; font-weight: 650; }
+    .dash-title span { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-soft); }
+    .dash-actions { display: flex; align-items: center; gap: 1.1rem; }
     .semtabs { display: inline-flex; border: 1px solid rgba(250,248,243,0.25); border-radius: 100px; padding: 3px; }
     .semtabs button {
-      border: 0; background: none; font: inherit; font-size: 0.82rem; font-weight: 600;
-      padding: 0.42rem 1rem; border-radius: 100px; cursor: pointer; color: rgba(250,248,243,0.7);
+      border: 0; background: none; font: inherit; font-size: 0.85rem; font-weight: 600;
+      padding: 0.45rem 1.05rem; border-radius: 100px; cursor: pointer; color: rgba(250,248,243,0.75);
     }
     .semtabs button.on { background: var(--gold); color: var(--ink); }
     .dash-actions a, .logout {
-      font-size: 0.82rem; font-weight: 600; color: rgba(250,248,243,0.7);
+      font-size: 0.85rem; font-weight: 600; color: rgba(250,248,243,0.75);
       background: none; border: 0; cursor: pointer; text-decoration: none;
     }
     .dash-actions a:hover, .logout:hover { color: var(--paper); }
@@ -76,38 +79,42 @@
 
     /* KPI strip */
     .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.2rem; }
-    .kpi { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem 1.3rem 1.1rem; }
-    .kpi span { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.4rem; }
+    .kpi { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.15rem 1.25rem 1.05rem; }
+    .kpi span { display: block; font-size: 0.74rem; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.45rem; }
     .kpi b {
-      display: block; font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(2.1rem, 2.6vw, 2.7rem); line-height: 1; color: var(--ink);
-      font-variant-numeric: tabular-nums;
+      display: block; font-weight: 700; font-size: 1.9rem; line-height: 1;
+      color: var(--ink); letter-spacing: -0.02em;
     }
-    .kpi .delta { display: inline-block; font-size: 0.78rem; font-weight: 650; margin-top: 0.5rem; padding: 0.15rem 0.55rem; border-radius: 100px; }
-    .delta.up { background: #e4efe6; color: #256b39; }
-    .delta.down { background: #f6dede; color: #a03030; }
+    .kpi .delta {
+      display: inline-block; font-size: 0.78rem; font-weight: 650; font-style: normal;
+      margin-top: 0.55rem; padding: 0.18rem 0.6rem; border-radius: 100px;
+    }
+    .delta.up { background: #e2efe5; color: #1f6234; }
+    .delta.down { background: #f7dede; color: #9c2c2c; }
     .delta.flat { background: var(--paper-deep); color: var(--ink-mute); }
 
     /* cards */
-    .grid { display: grid; gap: 1.2rem; }
-    .grid.c3 { grid-template-columns: 1fr 1fr 1fr; }
-    .grid.c2 { grid-template-columns: 1fr 1fr; margin-top: 1.2rem; }
-    .card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.5rem 1.5rem; }
-    .card h2 { font-family: var(--font-text); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.2rem; }
-    .card .who { font-size: 0.82rem; color: var(--ink-mute); margin-bottom: 1.1rem; }
+    .grid { display: grid; gap: 1.2rem; margin-top: 1.2rem; }
+    .grid.c3 { grid-template-columns: 1fr 1fr 1fr; margin-top: 0; }
+    .grid.c2 { grid-template-columns: 1fr 1fr; }
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.35rem 1.5rem 1.45rem; }
+    .card h2 { font-family: var(--font-text); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+    .card .who { font-size: 0.82rem; color: var(--ink-mute); margin-bottom: 1.05rem; }
     .card .who b { color: var(--purple); font-weight: 650; }
+    .stack > .card + .card { margin-top: 1.2rem; }
 
     /* donut */
-    .donut-wrap { display: flex; align-items: center; gap: 1.4rem; }
-    .donut { width: 148px; height: 148px; flex: none; }
+    .donut-wrap { display: flex; align-items: center; gap: 1.5rem; }
+    .donut { width: 142px; height: 142px; flex: none; }
     .donut .track { fill: none; stroke: var(--paper-deep); stroke-width: 14; }
     .donut .val { fill: none; stroke: var(--purple); stroke-width: 14; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.8s var(--ease-out); }
-    .donut text { font-family: "Instrument Serif", Georgia, serif; font-size: 30px; fill: var(--ink); }
-    .donut .sub { font-family: Inter, sans-serif; font-size: 9.5px; fill: var(--ink-mute); letter-spacing: 0.08em; }
-    .legend { display: grid; gap: 0.7rem; font-size: 0.92rem; }
-    .legend b { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+    .donut text { font: 700 24px Inter, sans-serif; fill: var(--ink); }
+    .donut .sub { font: 600 9px Inter, sans-serif; fill: var(--ink-mute); letter-spacing: 0.1em; }
+    .legend { display: grid; gap: 0.65rem; font-size: 0.92rem; color: var(--ink); }
+    .legend b { font-weight: 700; }
     .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.5rem; }
-    .dot.p { background: var(--purple); } .dot.t { background: var(--paper-deep); border: 1px solid var(--line); } .dot.g { background: var(--gold); }
+    .dot.p { background: var(--purple); } .dot.t { background: var(--paper-deep); border: 1px solid var(--line); }
+    .legend .exp { font-size: 0.82rem; color: var(--ink-mute); }
 
     /* line chart */
     .chart svg { width: 100%; height: auto; display: block; }
@@ -116,52 +123,64 @@
     .chart .area { fill: rgba(75, 46, 131, 0.08); stroke: none; }
     .chart .pt { fill: var(--white); stroke: var(--purple); stroke-width: 3; }
     .chart .pt.on { fill: var(--gold); stroke: var(--gold-ink); }
-    .chart .xlab { font: 600 11px Inter, sans-serif; fill: var(--ink-mute); text-anchor: middle; letter-spacing: 0.06em; }
-    .chart .vlab { font: 650 13px Inter, sans-serif; fill: var(--ink); text-anchor: middle; }
+    .chart .xlab { font: 600 11px Inter, sans-serif; fill: var(--ink-mute); text-anchor: middle; letter-spacing: 0.05em; }
+    .chart .vlab { font: 700 14px Inter, sans-serif; fill: var(--ink); text-anchor: middle; }
 
     /* gauge */
-    .gauge-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--ink); margin-bottom: 0.2rem; }
+    .gauge-num { font-weight: 700; font-size: 1.9rem; letter-spacing: -0.02em; line-height: 1; color: var(--ink); margin-bottom: 0.25rem; }
     .gauge-sub { font-size: 0.88rem; color: var(--ink-mute); margin-bottom: 1rem; }
-    .fatbar { height: 18px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
+    .fatbar { height: 16px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
     .fatbar i { display: block; height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.8s var(--ease-out); }
-    .fatbar + .row { margin-top: 0.55rem; }
-    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.88rem; color: var(--ink-mute); }
-    .row b { color: var(--ink); font-variant-numeric: tabular-nums; }
+    .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.9rem; color: var(--ink-mute); }
+    .fatbar + .row { margin-top: 0.6rem; }
+    .row b { color: var(--ink); font-weight: 650; }
 
-    /* h-bars (budgets, gpa) */
-    .hbars { display: grid; gap: 0.9rem; }
+    /* h-bars */
+    .hbars { display: grid; gap: 0.85rem; }
     .hbar .row { margin-bottom: 0.3rem; font-size: 0.92rem; color: var(--ink); }
-    .hbar .track { height: 16px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
+    .hbar .track { height: 15px; background: var(--paper-deep); border-radius: 100px; overflow: hidden; }
     .hbar .track i { display: block; height: 100%; border-radius: 100px; background: var(--purple); transition: width 0.8s var(--ease-out); }
     .hbar .track i.gold { background: var(--gold); }
 
     /* funnel */
     .funnel { display: grid; gap: 0.5rem; }
-    .fstep { display: grid; grid-template-columns: 1fr; justify-items: center; }
+    .fstep { display: grid; justify-items: center; }
     .fstep .fbar {
-      height: 40px; border-radius: 6px; background: var(--purple);
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      color: var(--paper); font-weight: 650; font-size: 0.95rem; min-width: 130px;
-      transition: width 0.8s var(--ease-out);
+      height: 38px; border-radius: 6px; background: var(--purple);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--paper); font-weight: 650; font-size: 0.92rem; min-width: 150px;
     }
     .fstep:nth-child(even) .fbar { background: #5d3d9e; }
-    .fstep small { font-size: 0.75rem; font-weight: 600; color: var(--ink-mute); margin-top: 0.25rem; letter-spacing: 0.04em; }
+    .fstep small { font-size: 0.78rem; font-weight: 600; color: var(--ink-mute); margin-top: 0.3rem; }
 
-    /* mini stat tiles */
-    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
-    .tile { background: #faf8f3; border: 1px solid var(--line); border-radius: 8px; padding: 0.95rem 1rem; }
-    .tile b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; color: var(--ink); font-variant-numeric: tabular-nums; }
-    .tile span { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); }
+    /* timeline */
+    .timeline { list-style: none; margin: 0; padding: 0 0 0 1.5rem; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+    .timeline li { position: relative; padding: 0.5rem 0 0.5rem 0.4rem; display: flex; gap: 0.9rem; align-items: baseline; flex-wrap: wrap; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -1.5rem; top: 0.95rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--line);
+    }
+    .timeline li.done::before { background: var(--purple); border-color: var(--purple); }
+    .timeline li.next::before { background: var(--gold); border-color: var(--gold-ink); }
+    .timeline .tdate { flex: none; width: 3.6rem; font-size: 0.8rem; font-weight: 650; color: var(--ink-mute); }
+    .timeline .tname { font-size: 0.94rem; font-weight: 650; color: var(--ink); }
+    .timeline .tmeta { font-size: 0.82rem; color: var(--ink-mute); }
 
     /* table */
-    .minitable { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-    .minitable th { text-align: left; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); padding: 0.5rem 0.6rem 0.5rem 0; border-bottom: 1px solid var(--line); }
-    .minitable td { padding: 0.75rem 0.6rem 0.75rem 0; border-bottom: 1px solid var(--line); }
-    .minitable tr:last-child td { border-bottom: 0; }
-    .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 100px; white-space: nowrap; }
-    .chip.ok { background: #e4efe6; color: #256b39; }
-    .chip.warn { background: #f6ecd7; color: #8a6d14; }
-    .chip.bad { background: #f6dede; color: #a03030; }
+    .minitable { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .minitable th { text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); padding: 0.5rem 0.7rem 0.5rem 0; border-bottom: 1px solid var(--line); }
+    .minitable td { padding: 0.72rem 0.7rem 0.72rem 0; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+    .minitable td.money { text-align: right; font-weight: 700; white-space: nowrap; }
+    .minitable th.money { text-align: right; }
+    .minitable .sub { display: block; font-size: 0.78rem; color: var(--ink-mute); font-weight: 400; }
+    .minitable tfoot td { border-bottom: 0; font-weight: 700; padding-top: 0.8rem; }
+    .minitable tbody tr:last-child td { border-bottom: 1px solid var(--line); }
+    .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.22rem 0.62rem; border-radius: 100px; white-space: nowrap; }
+    .chip.ok { background: #e2efe5; color: #1f6234; }
+    .chip.warn { background: #f6ecd7; color: #7c6410; }
+    .chip.bad { background: #f7dede; color: #9c2c2c; }
     .chip.role { background: #efe9f7; color: var(--purple); }
 
     /* feed + composer + todo */
@@ -172,21 +191,21 @@
     }
     .composer .btn { padding: 0.65rem 1.3rem; font-size: 0.85rem; border-radius: 6px; }
     .feed { list-style: none; margin: 0; padding: 0; }
-    .feed li { display: flex; gap: 0.9rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; align-items: baseline; }
+    .feed li { display: flex; gap: 0.9rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); font-size: 0.93rem; align-items: baseline; }
     .feed li:last-child { border-bottom: 0; }
-    .feed .when { flex: none; width: 3.4rem; font-size: 0.75rem; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+    .feed .when { flex: none; width: 3.2rem; font-size: 0.78rem; color: var(--ink-mute); }
     .todo { list-style: none; margin: 0; padding: 0; }
-    .todo li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0; font-size: 0.95rem; }
-    .todo input { margin-top: 0.3rem; accent-color: var(--purple); width: 16px; height: 16px; }
+    .todo li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.58rem 0; font-size: 0.94rem; }
+    .todo input { margin-top: 0.28rem; accent-color: var(--purple); width: 16px; height: 16px; }
     .todo li.done label { text-decoration: line-through; color: var(--ink-mute); }
     .todo label { cursor: pointer; }
-    .todo .muted { font-size: 0.78rem; display: block; color: var(--ink-mute); }
+    .todo .muted { font-size: 0.79rem; display: block; color: var(--ink-mute); }
 
-    .demo-note { text-align: center; font-size: 0.75rem; color: var(--ink-mute); padding: 1.6rem 0 0; }
+    .demo-note { text-align: center; font-size: 0.78rem; color: var(--ink-mute); padding: 1.6rem 0 0; }
 
     @media (max-width: 1080px) { .grid.c3 { grid-template-columns: 1fr; } .kpis { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 860px) { .grid.c2 { grid-template-columns: 1fr; } }
-    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } .tiles { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .composer { grid-template-columns: 1fr; } .dash-top .wrap { flex-wrap: wrap; } }
   </style>
 </head>
 <body>
@@ -228,11 +247,11 @@
 
         <!-- KPIs -->
         <div class="kpis">
-          <div class="kpi"><span>Active Members</span><b data-f="members">–</b><em class="delta" data-f="membersD"></em></div>
-          <div class="kpi"><span>Pledges</span><b data-f="pledges">–</b><em class="delta" data-f="pledgesD"></em></div>
-          <div class="kpi"><span>Dues Collected</span><b data-f="collected">–</b><em class="delta" data-f="collectedD"></em></div>
-          <div class="kpi"><span>Outstanding</span><b data-f="outstanding">–</b><em class="delta" data-f="outstandingD"></em></div>
-          <div class="kpi"><span>Chapter GPA</span><b data-f="gpa">–</b><em class="delta" data-f="gpaD"></em></div>
+          <div class="kpi"><span>Active Members</span><b data-f="members">–</b><span class="delta" data-f="membersD"></span></div>
+          <div class="kpi"><span>Pledges</span><b data-f="pledges">–</b><span class="delta" data-f="pledgesD"></span></div>
+          <div class="kpi"><span>Dues Collected</span><b data-f="collected">–</b><span class="delta" data-f="collectedD"></span></div>
+          <div class="kpi"><span>Outstanding</span><b data-f="outstanding">–</b><span class="delta" data-f="outstandingD"></span></div>
+          <div class="kpi"><span>Chapter GPA</span><b data-f="gpa">–</b><span class="delta" data-f="gpaD"></span></div>
         </div>
 
         <!-- Row: donut / trend / goal -->
@@ -245,13 +264,13 @@
               <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="Dues collected percentage">
                 <circle class="track" r="46" cx="60" cy="60"/>
                 <circle class="val" id="duesRing" r="46" cx="60" cy="60" stroke-dasharray="0 289"/>
-                <text x="60" y="60" text-anchor="middle" dominant-baseline="central" id="duesPct">–</text>
-                <text class="sub" x="60" y="78" text-anchor="middle">COLLECTED</text>
+                <text x="60" y="57" text-anchor="middle" dominant-baseline="central" id="duesPct">–</text>
+                <text class="sub" x="60" y="77" text-anchor="middle">COLLECTED</text>
               </svg>
               <div class="legend">
                 <div><i class="dot p"></i><span data-f="paidCount">–</span> paid · <b data-f="collected2">–</b></div>
                 <div><i class="dot t"></i><span data-f="unpaidCount">–</span> owe · <b data-f="outstanding2">–</b></div>
-                <div class="row" style="font-size:0.8rem">Expected <b data-f="expected">–</b></div>
+                <div class="exp">Expected <b data-f="expected">–</b></div>
               </div>
             </div>
           </div>
@@ -275,11 +294,93 @@
 
           <div class="card">
             <h2>Philanthropy Goal</h2>
-            <p class="who">Owner: <b>Philanthropy Chair</b></p>
+            <p class="who">Owner: <b>Philanthropy Chair</b> · to charity this semester</p>
             <div class="gauge-num" data-f="raised">–</div>
             <div class="gauge-sub">raised of <b data-f="raiseGoal">–</b> goal</div>
             <div class="fatbar"><i data-f="raiseBar" style="width:0%"></i></div>
             <div class="row"><span>Service hours logged</span><b data-f="hours">–</b></div>
+          </div>
+
+        </div>
+
+        <!-- Row: rush timeline / pledge timeline -->
+        <div class="grid c2">
+
+          <div class="card">
+            <h2>Rush Timeline — Fall 2026</h2>
+            <p class="who">Owner: <b>VP Recruitment</b> · six-event process · attendance per event</p>
+            <ul class="timeline">
+              <li class="done"><span class="tdate">Sep 5</span><span class="tname">Event 1 · Info Night</span><span class="tmeta">96 attended</span></li>
+              <li class="done"><span class="tdate">Sep 9</span><span class="tname">Event 2 · Networking Night</span><span class="tmeta">78 attended</span></li>
+              <li class="done"><span class="tdate">Sep 12</span><span class="tname">Event 3 · Business Workshop</span><span class="tmeta">64 attended</span></li>
+              <li class="done"><span class="tdate">Sep 16</span><span class="tname">Event 4 · Speed Networking</span><span class="tmeta">59 attended</span></li>
+              <li class="next"><span class="tdate">Sep 19</span><span class="tname">Event 5 · Field Day</span><span class="tmeta">51 RSVPs · <span class="chip warn">Up next</span></span></li>
+              <li><span class="tdate">Sep 23</span><span class="tname">Event 6 · Preference Night</span><span class="tmeta">invite-only · <span class="chip warn">Scheduled</span></span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>Pledge Process — Fall 2026 Class</h2>
+            <p class="who">Owner: <b>VP Membership</b> · 18 pledges in process</p>
+            <ul class="timeline">
+              <li class="done"><span class="tdate">Sep 26</span><span class="tname">Bid Day</span><span class="tmeta">18 of 24 bids accepted</span></li>
+              <li class="done"><span class="tdate">Oct 8</span><span class="tname">Big / Little Reveal</span><span class="tmeta">18 pairs matched</span></li>
+              <li class="next"><span class="tdate">Ongoing</span><span class="tname">Member Interviews</span><span class="tmeta">avg 12 of 18 complete · <span class="chip warn">In progress</span></span></li>
+              <li class="next"><span class="tdate">Ongoing</span><span class="tname">Service Hours</span><span class="tmeta">avg 6 of 10 hours · <span class="chip warn">In progress</span></span></li>
+              <li><span class="tdate">Nov 18</span><span class="tname">National Exam</span><span class="tmeta"><span class="chip warn">Scheduled</span></span></li>
+              <li><span class="tdate">Dec 5</span><span class="tname">Initiation</span><span class="tmeta"><span class="chip warn">Scheduled</span></span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Row: philanthropy events / fundraising + apparel -->
+        <div class="grid c2">
+
+          <div class="card">
+            <h2>Philanthropy Events — Money to Charity</h2>
+            <p class="who">Owner: <b>Philanthropy Chair</b> · not every event raises money — service counts</p>
+            <table class="minitable">
+              <thead><tr><th>Event</th><th>Beneficiary</th><th class="money">To charity</th></tr></thead>
+              <tbody>
+                <tr><td><b>Pie a Phi Chi</b><span class="sub">Sep 24 · campus fundraiser</span></td><td>Moffitt Cancer Center</td><td class="money">$480</td></tr>
+                <tr><td><b>Bulls Market Bake Sale</b><span class="sub">Oct 2</span></td><td>Hillsborough Ed. Foundation</td><td class="money">$340</td></tr>
+                <tr><td><b>JA Finance Park Day</b><span class="sub">Oct 10 · 45 volunteer hours</span></td><td>JA Finance Park</td><td class="money">—</td></tr>
+                <tr><td><b>Letter-Writing Drive</b><span class="sub">Oct 21</span></td><td>Parkland Cares</td><td class="money">$250</td></tr>
+                <tr><td><b>Charity Raffle</b><span class="sub">Nov 1</span></td><td>Hillsborough Ed. Foundation</td><td class="money">$750</td></tr>
+              </tbody>
+              <tfoot><tr><td>Semester total</td><td></td><td class="money">$1,820</td></tr></tfoot>
+            </table>
+          </div>
+
+          <div class="stack">
+            <div class="card">
+              <h2>Fundraising Events — Money to Chapter</h2>
+              <p class="who">Owner: <b>Fundraising Chair</b></p>
+              <table class="minitable">
+                <thead><tr><th>Event</th><th class="money">Net to chapter</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Car Wash</b><span class="sub">Sep 13</span></td><td class="money">$410</td></tr>
+                  <tr><td><b>Chipotle % Night</b><span class="sub">Oct 7</span></td><td class="money">$265</td></tr>
+                  <tr><td><b>Tailgate Concessions</b><span class="sub">Oct 25 · homecoming</span></td><td class="money">$580</td></tr>
+                </tbody>
+                <tfoot><tr><td>Semester total</td><td class="money">$1,255</td></tr></tfoot>
+              </table>
+            </div>
+
+            <div class="card">
+              <h2>Apparel Drops — Merch Revenue</h2>
+              <p class="who">Owner: <b>Apparel Chair</b> · via Printful store</p>
+              <table class="minitable">
+                <thead><tr><th>Drop</th><th>Orders</th><th class="money">Net</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Rush Polo Pre-Order</b><span class="sub">Aug 28</span></td><td>8</td><td class="money">$180</td></tr>
+                  <tr><td><b>Champion Tee Drop</b><span class="sub">Sep 20</span></td><td>11</td><td class="money">$210</td></tr>
+                  <tr><td><b>Heritage Hoodie Restock</b><span class="sub">Oct 14</span></td><td>12</td><td class="money">$250</td></tr>
+                </tbody>
+                <tfoot><tr><td>Semester total</td><td>31</td><td class="money">$640</td></tr></tfoot>
+              </table>
+            </div>
           </div>
 
         </div>
@@ -308,57 +409,23 @@
               <div class="fstep"><div class="fbar" style="width:78%">96 · Attended an event</div><small>76% of signups</small></div>
               <div class="fstep"><div class="fbar" style="width:48%">54 · Attended 3+</div><small>43%</small></div>
               <div class="fstep"><div class="fbar" style="width:30%">24 · Bids</div><small>19%</small></div>
-              <div class="fstep"><div class="fbar" style="width:24%">18 · Accepted</div><small>14% · 90% bid acceptance</small></div>
+              <div class="fstep"><div class="fbar" style="width:24%">18 · Accepted</div><small>90% bid acceptance</small></div>
             </div>
           </div>
 
         </div>
 
-        <!-- Row: GPA / events -->
+        <!-- Row: GPA / action items -->
         <div class="grid c2">
 
           <div class="card">
             <h2>Academics by Class</h2>
-            <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">41/62</b> in · <b>3</b> on study plan</p>
+            <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">41/62</b> in · 3 on study plan</p>
             <div class="hbars">
               <div class="hbar"><div class="row"><span>Seniors</span><b data-g="0">–</b></div><div class="track"><i class="gold" data-gb="0"></i></div></div>
               <div class="hbar"><div class="row"><span>Juniors</span><b data-g="1">–</b></div><div class="track"><i class="gold" data-gb="1"></i></div></div>
               <div class="hbar"><div class="row"><span>Sophomores</span><b data-g="2">–</b></div><div class="track"><i class="gold" data-gb="2"></i></div></div>
               <div class="hbar"><div class="row"><span>Freshmen</span><b data-g="3">–</b></div><div class="track"><i class="gold" data-gb="3"></i></div></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h2>Event Pipeline</h2>
-            <p class="who">All committees · Fall 2026</p>
-            <table class="minitable">
-              <thead><tr><th>Event</th><th>Owner</th><th>Date</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td><b>Pie a Phi Chi</b></td><td>Philanthropy</td><td>Sep 24</td><td><span class="chip ok">Confirmed</span></td></tr>
-                <tr><td><b>Fall Summit</b></td><td>Professional</td><td>Oct 3</td><td><span class="chip warn">Planning</span></td></tr>
-                <tr><td><b>Alumni Panel</b></td><td>Alumni</td><td>Oct 17</td><td><span class="chip ok">Confirmed</span></td></tr>
-                <tr><td><b>Halloween Social</b></td><td>Social</td><td>Oct 30</td><td><span class="chip warn">Planning</span></td></tr>
-                <tr><td><b>Fall Formal</b></td><td>Social</td><td>Nov 14</td><td><span class="chip bad">Needs venue</span></td></tr>
-                <tr><td><b>Finals Study Nights</b></td><td>Scholarship</td><td>Dec 1</td><td><span class="chip warn">Planning</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
-        <!-- Row: tiles / action items -->
-        <div class="grid c2">
-
-          <div class="card">
-            <h2>Committee Pulse</h2>
-            <p class="who">Apparel · Marketing · Alumni</p>
-            <div class="tiles">
-              <div class="tile"><b>$640</b><span>Apparel revenue</span></div>
-              <div class="tile"><b>31</b><span>Merch orders</span></div>
-              <div class="tile"><b>1,240</b><span>IG followers <em style="color:#256b39;font-style:normal">+85</em></span></div>
-              <div class="tile"><b>312</b><span>Flyer QR scans</span></div>
-              <div class="tile"><b>34</b><span>Alumni engaged</span></div>
-              <div class="tile"><b>6</b><span>Events planned</span></div>
             </div>
           </div>
 
@@ -377,30 +444,32 @@
         </div>
 
         <!-- Chair updates -->
-        <div class="card" style="margin-top:1.2rem">
-          <h2>Chair Updates</h2>
-          <p class="who">Post before the meeting — the board reads this first</p>
-          <form class="composer" id="composer">
-            <select id="cRole" aria-label="Your position">
-              <option>President</option><option>VP Internal</option><option>VP External</option>
-              <option>VP Finance</option><option>VP Membership</option><option>VP Recruitment</option>
-              <option>Secretary</option><option>Chaplain</option>
-              <option selected>Social Chair</option><option>Philanthropy Chair</option>
-              <option>Marketing Chair</option><option>Fundraising Chair</option>
-              <option>Apparel Chair</option><option>Alumni Chair</option>
-              <option>IT Chair</option><option>Scholarship Chair</option><option>Professional Chair</option>
-            </select>
-            <input type="text" id="cText" placeholder="Post an update, number, or blocker…" aria-label="Update text">
-            <button class="btn btn-gold" type="submit">Post</button>
-          </form>
-          <ul class="feed" id="feed">
-            <li><span class="when">2h</span><span class="chip role">VP Finance</span><span>Collected 4 more dues payments — outstanding down to 15 members.</span></li>
-            <li><span class="when">5h</span><span class="chip role">VP Recruitment</span><span>Interest form at 127 signups. QR flyers driving 40% of traffic.</span></li>
-            <li><span class="when">1d</span><span class="chip role">Philanthropy Chair</span><span>Pie a Phi Chi confirmed for Sep 24 — table + supplies booked.</span></li>
-            <li><span class="when">2d</span><span class="chip role">Scholarship Chair</span><span>Midterm grade reports: 41/62 submitted. 3 members moved to study-hall plan.</span></li>
-            <li><span class="when">3d</span><span class="chip role">Apparel Chair</span><span>Heritage Hoodie restock live — 12 orders this week.</span></li>
-            <li><span class="when">4d</span><span class="chip role">IT Chair</span><span>New website deployed. Portal dashboard beta is live.</span></li>
-          </ul>
+        <div class="grid">
+          <div class="card">
+            <h2>Chair Updates</h2>
+            <p class="who">Post before the meeting — the board reads this first</p>
+            <form class="composer" id="composer">
+              <select id="cRole" aria-label="Your position">
+                <option>President</option><option>VP Internal</option><option>VP External</option>
+                <option>VP Finance</option><option>VP Membership</option><option>VP Recruitment</option>
+                <option>Secretary</option><option>Chaplain</option>
+                <option selected>Social Chair</option><option>Philanthropy Chair</option>
+                <option>Marketing Chair</option><option>Fundraising Chair</option>
+                <option>Apparel Chair</option><option>Alumni Chair</option>
+                <option>IT Chair</option><option>Scholarship Chair</option><option>Professional Chair</option>
+              </select>
+              <input type="text" id="cText" placeholder="Post an update, number, or blocker…" aria-label="Update text">
+              <button class="btn btn-gold" type="submit">Post</button>
+            </form>
+            <ul class="feed" id="feed">
+              <li><span class="when">2h</span><span class="chip role">VP Finance</span><span>Collected 4 more dues payments — outstanding down to 15 members.</span></li>
+              <li><span class="when">5h</span><span class="chip role">VP Recruitment</span><span>Event 4 attendance logged: 59. Field Day RSVPs at 51.</span></li>
+              <li><span class="when">1d</span><span class="chip role">Philanthropy Chair</span><span>Charity Raffle netted $750 for HEF — semester total now $1,820.</span></li>
+              <li><span class="when">2d</span><span class="chip role">Scholarship Chair</span><span>Midterm grade reports: 41/62 submitted. 3 members moved to study-hall plan.</span></li>
+              <li><span class="when">3d</span><span class="chip role">Apparel Chair</span><span>Heritage Hoodie restock: 12 orders, $250 net.</span></li>
+              <li><span class="when">4d</span><span class="chip role">IT Chair</span><span>New website deployed. Portal dashboard beta is live.</span></li>
+            </ul>
+          </div>
         </div>
 
         <p class="demo-note">Demo data for e-board review — posting works in your browser only.
@@ -470,7 +539,6 @@
       t.textContent = (d > 0 ? "▲ " : d < 0 ? "▼ " : "· ") + fmt(Math.abs(d));
     }
 
-    /* trend chart geometry */
     var X = [55, 160, 265], Y0 = 120, Y1 = 30;
     function yFor(v, min, max) { return Y0 - (v - min) / (max - min) * (Y0 - Y1); }
     function drawTrend(activeKey) {
@@ -513,12 +581,10 @@
       setF("hours", s.hours);
       setF("reports", s.reports);
 
-      /* donut */
       var C = 2 * Math.PI * 46;
       document.getElementById("duesRing").setAttribute("stroke-dasharray", (pct / 100 * C).toFixed(1) + " " + C.toFixed(1));
       document.getElementById("duesPct").textContent = pct + "%";
 
-      /* gpa bars: scale 3.3–3.8 for visible spread */
       s.classGpa.forEach(function (g, i) {
         var el = document.querySelector('[data-g="' + i + '"]');
         var bar = document.querySelector('[data-gb="' + i + '"]');

@@ -158,6 +158,9 @@ section { padding: var(--section) 0; }
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
+  background: none; /* <button> UA default is a light fill — kill it */
+  -webkit-appearance: none;
+  appearance: none;
   border: 1px solid transparent;
   border-radius: 2px;
   cursor: pointer;

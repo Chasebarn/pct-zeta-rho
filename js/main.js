@@ -278,7 +278,7 @@
     var numBar = numScene.querySelector(".numscene-progress span");
     var numTarget = 0, numCurrent = 0, numActive = false;
     var numLoop = function () {
-      numCurrent += (numTarget - numCurrent) * 0.09;
+      numCurrent += (numTarget - numCurrent) * 0.18; /* tight enough to feel responsive */
       if (Math.abs(numTarget - numCurrent) < 0.0004) numCurrent = numTarget;
       var travel = numTrack.scrollWidth - window.innerWidth;
       numTrack.style.transform = "translate3d(" + (-numCurrent * travel).toFixed(1) + "px,0,0)";
@@ -314,34 +314,62 @@
     driftLetters();
   }
 
-  /* ---------- Placement rows: horizontal motion driven by vertical scroll ---------- */
-  var placeRows = Array.prototype.slice.call(document.querySelectorAll(".placerow"));
-  if (placeRows.length && !reduced) {
-    var placeTick = false;
-    var movePlace = function () {
-      placeRows.forEach(function (row) {
-        var wrap = row.parentElement;
-        var r = wrap.getBoundingClientRect();
-        if (r.bottom < -80 || r.top > window.innerHeight + 80) return;
-        /* 0 when the band enters the bottom of the viewport, 1 when it leaves the top */
-        var progress = (window.innerHeight - r.top) / (window.innerHeight + r.height);
-        progress = Math.max(0, Math.min(1, progress));
+  /* ---------- Placement rows: eased horizontal motion, 3 rows on mobile ---------- */
+  document.querySelectorAll(".placerows").forEach(function (wrap) {
+    if (reduced) return;
+    var spans = Array.prototype.slice.call(wrap.querySelectorAll(".placerow span"));
+    if (!spans.length) return;
+    var rows = [], targets = [], currents = [], layout = 0, running = false;
+
+    function build() {
+      var parts = window.innerWidth < 700 ? 3 : 2;
+      if (layout === parts) return;
+      layout = parts;
+      wrap.innerHTML = "";
+      rows = []; targets = []; currents = [];
+      var per = Math.ceil(spans.length / parts);
+      for (var i = 0; i < parts; i++) {
+        var row = document.createElement("div");
+        row.className = "placerow";
+        row.setAttribute("data-dir", i % 2 ? "1" : "-1");
+        spans.slice(i * per, (i + 1) * per).forEach(function (s) { row.appendChild(s); });
+        wrap.appendChild(row);
+        rows.push(row); targets.push(0); currents.push(null);
+      }
+    }
+    build();
+    window.addEventListener("resize", build);
+
+    function measure() {
+      var r = wrap.getBoundingClientRect();
+      var progress = Math.max(0, Math.min(1, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
+      rows.forEach(function (row, i) {
         var travel = row.scrollWidth - wrap.clientWidth;
-        if (travel <= 0) return;
-        var dir = row.getAttribute("data-dir") === "1" ? 1 : -1;
-        var x = dir === -1 ? -progress * travel : -(1 - progress) * travel;
-        row.style.transform = "translate3d(" + x.toFixed(1) + "px,0,0)";
+        if (travel <= 0) { targets[i] = 0; return; }
+        targets[i] = row.getAttribute("data-dir") === "1"
+          ? -(1 - progress) * travel
+          : -progress * travel;
       });
-      placeTick = false;
-    };
-    window.addEventListener("scroll", function () {
-      if (!placeTick) { requestAnimationFrame(movePlace); placeTick = true; }
-    }, { passive: true });
-    window.addEventListener("resize", function () {
-      if (!placeTick) { requestAnimationFrame(movePlace); placeTick = true; }
-    });
-    movePlace();
-  }
+      return r.bottom > -120 && r.top < window.innerHeight + 120;
+    }
+    function tick() {
+      var near = measure();
+      var settled = true;
+      rows.forEach(function (row, i) {
+        if (currents[i] === null) currents[i] = targets[i];
+        currents[i] += (targets[i] - currents[i]) * 0.07; /* gentle glide */
+        if (Math.abs(targets[i] - currents[i]) > 0.4) settled = false;
+        row.style.transform = "translate3d(" + currents[i].toFixed(1) + "px,0,0)";
+      });
+      if (near || !settled) requestAnimationFrame(tick);
+      else running = false;
+    }
+    function wake() {
+      if (!running) { running = true; requestAnimationFrame(tick); }
+    }
+    window.addEventListener("scroll", wake, { passive: true });
+    wake();
+  });
 
   /* ---------- Magnetic buttons ---------- */
   if (finePointer && !reduced) {

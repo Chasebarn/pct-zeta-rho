@@ -721,9 +721,12 @@ section { padding: var(--section) 0; }
 .split-copy .link-arrow { margin-top: 0.6rem; }
 
 @media (max-width: 860px) {
-  .split { grid-template-columns: 1fr; }
+  .split, .split.nat { grid-template-columns: 1fr; }
   .split.flip .split-media { order: 0; }
   .split-media::after { inset: 0.9rem -0.9rem -0.9rem 0.9rem; }
+  .crest-solo { padding: 0.5rem 0 1rem; }
+  .crest-solo img { width: min(52%, 190px); }
+  .crest-ghost { font-size: clamp(6rem, 24vw, 9rem); }
 }
 
 /* ---------- Steps / timeline ---------- */
@@ -1256,6 +1259,10 @@ section { padding: var(--section) 0; }
   color: var(--ink);
   will-change: transform;
 }
+@media (max-width: 700px) {
+  .placerow { font-size: 1.7rem; padding: 1.05rem 0; }
+  .placerow span::after { margin: 0 1.3rem; }
+}
 .placerow + .placerow { border-top: 1px solid var(--line); }
 .placerow span {
   display: inline-flex;
@@ -1340,8 +1347,11 @@ main > section { position: relative; }
 /* ---------- Pinned horizontal Numbers scene ---------- */
 
 .numscene {
-  height: 320vh;
+  height: 300vh;
   background: var(--paper);
+}
+@media (max-width: 700px) {
+  .numscene { height: 240vh; }
 }
 .numscene-pin {
   position: sticky;

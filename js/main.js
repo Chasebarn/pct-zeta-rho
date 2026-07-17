@@ -479,6 +479,39 @@
     });
   }
 
+  /* ---------- Share with a friend ---------- */
+  var SHARE_URL = "https://chasebarn.github.io/pct-zeta-rho/fallrush.html";
+  document.querySelectorAll("[data-share]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var payload = {
+        title: "Fall Rush · Phi Chi Theta — USF",
+        text: "Business major? You should look at Phi Chi Theta’s Fall Rush.",
+        url: SHARE_URL
+      };
+      if (navigator.share) {
+        navigator.share(payload).catch(function () {});
+        return;
+      }
+      /* no share sheet: copy the link and confirm on the button */
+      var old = btn.textContent;
+      btn.textContent = "Link copied ✓";
+      setTimeout(function () { btn.textContent = old; }, 2200);
+      var legacyCopy = function () {
+        var ta = document.createElement("textarea");
+        ta.value = SHARE_URL;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(SHARE_URL).catch(legacyCopy);
+      } else {
+        legacyCopy();
+      }
+    });
+  });
+
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

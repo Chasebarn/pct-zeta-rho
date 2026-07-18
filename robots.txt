@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /portal.html
+
+Sitemap: https://chasebarn.github.io/pct-zeta-rho/sitemap.xml

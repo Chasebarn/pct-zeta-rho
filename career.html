@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Navigator · Phi Chi Theta — Zeta Rho</title>
+  <meta name="description" content="See what your college-to-career path could look like. Choose your business major and year for a practical freshman-through-post-grad roadmap. Free, no email required.">
+  <link rel="icon" type="image/png" href="assets/crest.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Career Navigator · Phi Chi Theta — USF">
+  <meta property="og:description" content="See what your college-to-career path could look like. A practical roadmap for every business major. Free, no email required.">
+  <meta property="og:image" content="https://chasebarn.github.io/pct-zeta-rho/assets/og-home.png">
+  <meta property="og:url" content="https://chasebarn.github.io/pct-zeta-rho/career.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/styles.css?v=22">
+  <style>
+    /* ---------- Career Navigator ---------- */
+    .nav-screen[hidden] { display: none; }
+    .nav-screen { animation: scrIn 0.45s var(--ease-out); }
+    @keyframes scrIn { from { opacity: 0; transform: translateY(14px); } }
+    @media (prefers-reduced-motion: reduce) { .nav-screen { animation: none; } }
+
+    .setup-wrap { max-width: 860px; margin: 0 auto; }
+    .step-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-ink); margin-bottom: 1rem;
+    }
+    .q-title { font-size: 1.25rem; font-weight: 650; margin: 2.2rem 0 1rem; letter-spacing: -0.01em; }
+    .q-title:first-of-type { margin-top: 0; }
+
+    .opt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .opt-grid.narrow { grid-template-columns: repeat(5, 1fr); }
+    .opt-grid.stack { grid-template-columns: 1fr 1fr; }
+    .opt {
+      position: relative; display: flex; align-items: center;
+      padding: 0.85rem 1rem; background: var(--white);
+      border: 1px solid var(--line); border-radius: 6px;
+      font-size: 0.92rem; font-weight: 500; line-height: 1.35;
+      cursor: pointer; transition: border-color 0.25s, background 0.25s, color 0.25s;
+    }
+    .opt:hover { border-color: rgba(75, 46, 131, 0.45); }
+    .opt input {
+      position: absolute; opacity: 0; pointer-events: none;
+    }
+    .opt:has(input:checked) {
+      background: var(--purple); border-color: var(--purple); color: var(--paper);
+      font-weight: 600;
+    }
+    .opt:has(input:focus-visible) { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+    .setup-actions { margin-top: 2.4rem; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .btn[disabled] { opacity: 0.45; pointer-events: none; }
+    .ghost-link { background: none; border: 0; font: inherit; font-weight: 600; font-size: 0.9rem; color: var(--ink-mute); cursor: pointer; text-decoration: underline; }
+    .ghost-link:hover { color: var(--ink); }
+    .trust-line { font-size: 0.9rem; font-weight: 650; color: var(--gold-soft); margin-top: 1.4rem; }
+    .small-note { font-size: 0.82rem; color: rgba(250, 248, 243, 0.6); margin-top: 0.8rem; }
+
+    /* results */
+    .res-hero { padding-bottom: 0; }
+    .res-utils { display: flex; gap: 0.7rem 1.6rem; flex-wrap: wrap; margin-top: 1.6rem; }
+    .res-utils button {
+      background: none; border: 0; font: inherit; font-size: 0.88rem; font-weight: 600;
+      color: var(--ink-mute); cursor: pointer; padding: 0.2rem 0;
+      border-bottom: 1px solid transparent; transition: color 0.25s, border-color 0.25s;
+    }
+    .res-utils button:hover { color: var(--purple); border-bottom-color: var(--gold); }
+
+    .stagecards { display: grid; gap: 1.1rem; margin-top: clamp(2rem, 4vw, 3rem); }
+    .stagecard {
+      background: var(--white); border: 1px solid var(--line); border-radius: 8px;
+      padding: 1.5rem 1.6rem 1.4rem; position: relative;
+    }
+    .stagecard.muted { background: transparent; }
+    .stagecard.muted .sc-name, .stagecard.muted .sc-objective { color: var(--ink-mute); }
+    .stagecard.current {
+      border: 2px solid var(--purple);
+      background: var(--white);
+      box-shadow: 0 18px 40px -28px rgba(75, 46, 131, 0.45);
+    }
+    .here-chip {
+      position: absolute; top: -0.75rem; left: 1.4rem;
+      background: var(--purple); color: var(--paper);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+    }
+    .sc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .sc-stage {
+      font-family: var(--font-display); font-style: italic; font-size: 0.98rem;
+      color: var(--gold-ink);
+    }
+    .sc-name { font-size: 1.2rem; font-weight: 650; letter-spacing: -0.01em; margin-top: 0.15rem; }
+    .sc-status { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+    .sc-status.done { color: #1f6234; }
+    .sc-status.progress { color: var(--gold-ink); }
+    .sc-objective { font-size: 0.94rem; color: var(--ink-soft); margin-top: 0.6rem; max-width: 640px; }
+    .sc-count { font-size: 0.8rem; font-weight: 650; color: var(--ink-mute); margin-top: 0.9rem; }
+
+    .sc-toggle {
+      display: none; background: none; border: 0; font: inherit; font-size: 0.85rem;
+      font-weight: 650; color: var(--purple); cursor: pointer; margin-top: 0.7rem; padding: 0.2rem 0;
+    }
+    .milestones { list-style: none; margin: 1rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+    .milestone { border-bottom: 1px solid var(--line); }
+    .milestone label {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 0.85rem 0.2rem; cursor: pointer; font-size: 0.95rem; line-height: 1.5;
+    }
+    .milestone input {
+      flex: none; width: 18px; height: 18px; margin-top: 0.2rem;
+      accent-color: var(--purple); cursor: pointer;
+    }
+    .milestone input:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+    .milestone .m-title { flex: 1; }
+    .milestone .m-chip {
+      flex: none; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+      padding: 0.22rem 0.6rem; border-radius: 100px; margin-top: 0.2rem;
+      background: var(--paper-deep); color: var(--ink-mute); white-space: nowrap;
+    }
+    .milestone.checked .m-title { color: var(--ink-mute); }
+    .milestone.checked .m-chip { background: #efe9f7; color: var(--purple); }
+
+    @media (max-width: 760px) {
+      .sc-toggle { display: inline-block; }
+      .stagecard.collapsed .milestones,
+      .stagecard.collapsed .sc-objective { display: none; }
+    }
+
+    /* context + accordion + email */
+    .context-block { max-width: 820px; }
+    .context-block h2 { margin-bottom: 1.2rem; }
+    .context-block p { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.75; }
+
+    .major-acc { max-width: 820px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); margin-top: 2.5rem; }
+    .major-acc summary {
+      list-style: none; cursor: pointer; padding: 1.2rem 1.4rem;
+      font-weight: 650; font-size: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .major-acc summary::-webkit-details-marker { display: none; }
+    .major-acc summary::after { content: "+"; font-size: 1.4rem; font-weight: 300; color: var(--gold-ink); transition: transform 0.3s var(--ease-out); }
+    .major-acc[open] summary::after { transform: rotate(45deg); }
+    .major-acc .acc-body { padding: 0 1.4rem 1.4rem; display: grid; gap: 1.2rem; }
+    .major-acc h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-ink); margin-bottom: 0.45rem; }
+    .major-acc ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.94rem; display: grid; gap: 0.3rem; }
+    .major-acc p { color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
+
+    .email-cta { max-width: 820px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 2rem 2rem 1.8rem; margin-top: 2.5rem; }
+    .email-cta h2 { font-family: var(--font-text); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+    .email-cta > p { font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 1.4rem; }
+    .email-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .email-form label { display: grid; gap: 0.35rem; font-size: 0.78rem; font-weight: 650; color: var(--ink-mute); }
+    .email-form input, .email-form select {
+      font: inherit; font-size: 0.95rem; padding: 0.65rem 0.75rem;
+      border: 1px solid var(--line); border-radius: 5px; background: var(--paper);
+      color: var(--ink);
+    }
+    .email-form input:focus-visible, .email-form select:focus-visible { outline: 2px solid var(--purple); outline-offset: 1px; }
+    .email-consent { grid-column: 1 / -1; display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.88rem; color: var(--ink-soft); }
+    .email-consent input { width: 16px; height: 16px; margin-top: 0.2rem; accent-color: var(--purple); }
+    .email-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .email-trust { font-size: 0.8rem; color: var(--ink-mute); }
+    .email-done { font-weight: 650; color: #1f6234; }
+
+    @media (max-width: 860px) {
+      .opt-grid, .opt-grid.stack { grid-template-columns: 1fr 1fr; }
+      .opt-grid.narrow { grid-template-columns: repeat(2, 1fr); }
+      .email-form { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .opt-grid { grid-template-columns: 1fr; }
+    }
+
+    /* print */
+    @media print {
+      .site-header, .site-footer, .loader, .res-utils, .email-cta,
+      .major-acc, .sc-toggle, .subhero .hero-cta { display: none !important; }
+      body { background: #fff; }
+      .stagecard, .stagecard.current { break-inside: avoid; box-shadow: none; }
+      .stagecard.collapsed .milestones, .stagecard.collapsed .sc-objective { display: block; }
+      .subhero { background: none; color: #000; padding: 1rem 0; min-height: 0; }
+      .subhero .lede, .subhero h1 { color: #000; }
+      .hero-letters, #hero-canvas { display: none !important; }
+      section { padding: 1rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="loader" aria-hidden="true"><span class="loader-mark">ΦΧΘ</span></div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/crest.png" alt="Phi Chi Theta crest">
+        <span class="brand-name">Phi Chi Theta<span class="brand-sub">Zeta Rho · USF</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rush.html">Rush</a></li>
+        <li><a href="philanthropy.html">Philanthropy</a></li>
+        <li><a href="apparel.html">Apparel</a></li>
+        <li><a href="career.html" class="active">Career</a></li>
+        <li><a class="btn btn-gold" href="rush.html">Rush PCT</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Screen 1: Landing -->
+    <section class="subhero on-dark grain nav-screen" id="scr-landing">
+      <div class="hero-letters" aria-hidden="true">Path</div>
+      <div class="wrap">
+        <p class="eyebrow">Phi Chi Theta Career Resources</p>
+        <h1 class="h-page" data-split>See what your college-to-career path <em>could look like.</em></h1>
+        <p class="lede reveal">Choose your business major and current year to explore a
+          practical roadmap from freshman year through life after graduation. Check off
+          what you have already accomplished, see what remains, and leave with a clearer
+          idea of what to focus on next.</p>
+        <p class="trust-line reveal">Your complete roadmap is free. No email required.</p>
+        <div class="hero-cta reveal">
+          <button type="button" class="btn btn-gold" id="startBtn">Build My Career Roadmap
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-ghost" id="resumeBtn" hidden>View My Saved Roadmap</button>
+        </div>
+        <p class="small-note reveal">Takes less than a minute to set up.</p>
+      </div>
+    </section>
+
+    <!-- Screen 2: Major + stage -->
+    <section class="nav-screen" id="scr-setup1" hidden>
+      <div class="wrap">
+        <div class="setup-wrap">
+          <p class="step-label">Step 1 of 2</p>
+          <h2 class="h-sect" style="margin-bottom:2rem">Tell us where you are.</h2>
+
+          <p class="q-title">What is your major?</p>
+          <div class="opt-grid" id="majorOpts" role="radiogroup" aria-label="What is your major?"></div>
+
+          <p class="q-title">Where are you right now?</p>
+          <div class="opt-grid narrow" id="stageOpts" role="radiogroup" aria-label="Where are you right now?"></div>
+
+          <div class="setup-actions">
+            <button type="button" class="btn btn-ink" id="toStep2" disabled>Continue</button>
+            <button type="button" class="ghost-link" data-goto="scr-landing">Back</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3: Certainty -->
+    <section class="nav-screen" id="scr-setup2" hidden>
+      <div class="wrap">
+        <div class="setup-wrap">
+          <p class="step-label">Step 2 of 2</p>
+          <h2 class="h-sect" style="margin-bottom:2rem">Two honest questions.</h2>
+
+          <p class="q-title">How certain are you that your current major is right for you?</p>
+          <div class="opt-grid stack" id="certaintyOpts" role="radiogroup" aria-label="How certain are you that your current major is right for you?"></div>
+
+          <p class="q-title">How clear are you on what you want to do with this degree?</p>
+          <div class="opt-grid stack" id="directionOpts" role="radiogroup" aria-label="How clear are you on what you want to do with this degree?"></div>
+
+          <div class="setup-actions">
+            <button type="button" class="btn btn-gold" id="showRoadmap" disabled>Show My Roadmap</button>
+            <button type="button" class="ghost-link" data-goto="scr-setup1">Back</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4: Results -->
+    <div class="nav-screen" id="scr-results" hidden>
+
+      <section class="subhero on-dark grain res-hero" style="padding-bottom:4rem">
+        <div class="hero-letters" aria-hidden="true">Path</div>
+        <div class="wrap">
+          <p class="eyebrow">Your Career Navigator</p>
+          <h1 class="h-page" id="resTitle">Your Roadmap</h1>
+          <p class="lede" id="resStage" style="margin-top:0.8rem"></p>
+          <p class="lede" style="font-size:1rem; margin-top:0.9rem; color:rgba(250,248,243,0.7)">Check
+            off what you have already completed. Anything left unchecked is simply what
+            remains on the roadmap.</p>
+          <div class="res-utils">
+            <button type="button" id="editAnswers" style="color:rgba(250,248,243,0.75)">Edit answers</button>
+            <button type="button" id="resetRoadmap" style="color:rgba(250,248,243,0.75)">Reset roadmap</button>
+            <button type="button" id="printRoadmap" style="color:rgba(250,248,243,0.75)">Print or save</button>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding-top:clamp(2.5rem,5vw,4rem)">
+        <div class="wrap">
+          <div class="stagecards" id="stagecards"></div>
+        </div>
+      </section>
+
+      <section style="padding-top:0">
+        <div class="wrap">
+          <div class="context-block">
+            <h2 class="h-sect">A little context for your path.</h2>
+            <p id="contextPara"></p>
+          </div>
+
+          <details class="major-acc" id="majorAcc">
+            <summary id="accLabel">Explore Careers</summary>
+            <div class="acc-body">
+              <div><h4>Common directions</h4><ul id="accDirections"></ul></div>
+              <div><h4>What the work often looks like</h4><p id="accDaily"></p></div>
+              <div><h4>What tends to make a student more competitive</h4><ul id="accCompetitive"></ul></div>
+              <div><h4>One common misconception</h4><p id="accMisconception"></p></div>
+            </div>
+          </details>
+
+          <div class="email-cta">
+            <h2>Want more help building this roadmap?</h2>
+            <p>Phi Chi Theta can send you relevant professional-development resources,
+              upcoming events, alumni perspectives, and opportunities connected to your
+              current stage.</p>
+            <form class="email-form" id="emailForm">
+              <label>First name<input type="text" name="firstName" autocomplete="given-name" required></label>
+              <label>Email<input type="email" name="email" autocomplete="email" required></label>
+              <label>Major<input type="text" name="major" id="emailMajor" readonly></label>
+              <label>Graduation year<select name="gradYear" required>
+                <option value="" selected disabled>Select year</option>
+                <option>2026</option><option>2027</option><option>2028</option>
+                <option>2029</option><option>2030</option><option>2031</option>
+              </select></label>
+              <label class="email-consent"><input type="checkbox" required>
+                <span>Send me relevant Phi Chi Theta and professional-development opportunities.</span></label>
+              <div class="email-actions">
+                <button type="submit" class="btn btn-gold">Send Me Relevant Resources</button>
+                <span class="email-trust" id="emailTrust">Your full roadmap is already above.
+                  This is only for students who want additional help.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="brand" href="index.html">
+            <img src="assets/crest.png" alt="Phi Chi Theta crest">
+            <span class="brand-name">Phi Chi Theta<span class="brand-sub">Zeta Rho · USF</span></span>
+          </a>
+          <p>Phi Chi Theta&rsquo;s Zeta Rho Chapter was established at the University of South
+            Florida in September 2018 by 18 founding business students. Since its founding,
+            the chapter has focused on preparing members for internships and full-time roles
+            through structured professional development, service, and chapter standards.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rush.html">Rush</a></li>
+            <li><a href="philanthropy.html">Philanthropy</a></li>
+            <li><a href="apparel.html">Apparel</a></li>
+            <li><a href="career.html">Career Navigator</a></li>
+            <li><a href="fallrush.html">Fall Rush 2026</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect with us</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram — @pctusf</a></li>
+            <li><a href="https://www.linkedin.com/company/usfphichitheta/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://pctapparel.printful.me/" target="_blank" rel="noopener">Apparel Store</a></li>
+            <li><a href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-mark" aria-hidden="true">Zeta Rho</div>
+      <div class="footer-base">
+        <span>© <span id="year"></span> Phi Chi Theta — Zeta Rho Chapter</span>
+        <span>University of South Florida · Tampa, FL · <a href="portal.html" style="color:inherit">Officer Portal</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/career-data.js?v=1"></script>
+  <script>
+  (function () {
+    "use strict";
+    var D = window.CAREER_DATA;
+    var SETUP_KEY = "pctNavSetup";
+    var state = { majorId: null, currentStage: null, majorCertainty: null, careerDirection: null };
+
+    function $(id) { return document.getElementById(id); }
+    function majorById(id) {
+      for (var i = 0; i < D.MAJORS.length; i++) if (D.MAJORS[i].id === id) return D.MAJORS[i];
+      return null;
+    }
+    function checksKey(majorId) { return "pctNav:" + majorId; }
+    function loadChecks(majorId) {
+      try { return JSON.parse(localStorage.getItem(checksKey(majorId)) || "[]"); } catch (e) { return []; }
+    }
+    function saveChecks(majorId, arr) {
+      localStorage.setItem(checksKey(majorId), JSON.stringify(arr));
+    }
+
+    /* ---------- screens ---------- */
+    var screens = ["scr-landing", "scr-setup1", "scr-setup2", "scr-results"];
+    function show(id) {
+      screens.forEach(function (s) { $(s).hidden = s !== id; });
+      window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    }
+    document.querySelectorAll("[data-goto]").forEach(function (b) {
+      b.addEventListener("click", function () { show(b.getAttribute("data-goto")); });
+    });
+
+    /* ---------- option builders ---------- */
+    function buildOpts(container, name, options, onPick) {
+      options.forEach(function (opt) {
+        var label = document.createElement("label");
+        label.className = "opt";
+        var input = document.createElement("input");
+        input.type = "radio";
+        input.name = name;
+        input.value = opt.value;
+        input.addEventListener("change", function () { onPick(opt.value); });
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(opt.label));
+        container.appendChild(label);
+      });
+    }
+
+    buildOpts($("majorOpts"), "major",
+      D.MAJORS.map(function (mj) { return { value: mj.id, label: mj.name }; }),
+      function (v) { state.majorId = v; gateStep1(); });
+
+    buildOpts($("stageOpts"), "stage", [
+      { value: "freshman", label: "Freshman" },
+      { value: "sophomore", label: "Sophomore" },
+      { value: "junior", label: "Junior" },
+      { value: "senior", label: "Senior" },
+      { value: "postGrad", label: "Recently Graduated" }
+    ], function (v) { state.currentStage = v; gateStep1(); });
+
+    buildOpts($("certaintyOpts"), "certainty", [
+      { value: "confident", label: "I am confident it is right for me" },
+      { value: "evaluating", label: "I think it is right, but I am still evaluating it" },
+      { value: "considering_change", label: "I am seriously considering another major" },
+      { value: "unsure", label: "I honestly do not know yet" }
+    ], function (v) { state.majorCertainty = v; gateStep2(); });
+
+    buildOpts($("directionOpts"), "direction", [
+      { value: "clear", label: "I know the kind of role I want" },
+      { value: "narrowing", label: "I am choosing between a few directions" },
+      { value: "unclear_roles", label: "I understand the major, but not the actual jobs" },
+      { value: "no_direction", label: "I do not know what I would do with the degree" }
+    ], function (v) { state.careerDirection = v; gateStep2(); });
+
+    function gateStep1() { $("toStep2").disabled = !(state.majorId && state.currentStage); }
+    function gateStep2() { $("showRoadmap").disabled = !(state.majorCertainty && state.careerDirection); }
+
+    $("startBtn").addEventListener("click", function () { show("scr-setup1"); });
+    $("toStep2").addEventListener("click", function () { show("scr-setup2"); });
+    $("showRoadmap").addEventListener("click", function () {
+      localStorage.setItem(SETUP_KEY, JSON.stringify(state));
+      renderResults();
+      show("scr-results");
+    });
+
+    /* ---------- saved setup ---------- */
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(SETUP_KEY) || "null"); } catch (e) {}
+    if (saved && saved.majorId && majorById(saved.majorId) && saved.currentStage) {
+      $("resumeBtn").hidden = false;
+      $("resumeBtn").addEventListener("click", function () {
+        state = saved;
+        syncRadios();
+        renderResults();
+        show("scr-results");
+      });
+    }
+    function syncRadios() {
+      var map = { major: state.majorId, stage: state.currentStage, certainty: state.majorCertainty, direction: state.careerDirection };
+      Object.keys(map).forEach(function (name) {
+        if (!map[name]) return;
+        var input = document.querySelector('input[name="' + name + '"][value="' + map[name] + '"]');
+        if (input) input.checked = true;
+      });
+      gateStep1(); gateStep2();
+    }
+
+    /* ---------- results ---------- */
+    var STAGE_INDEX = {};
+    D.STAGE_ORDER.forEach(function (s, i) { STAGE_INDEX[s] = i; });
+
+    function renderResults() {
+      var mj = majorById(state.majorId);
+      var checks = loadChecks(mj.id);
+      var currentIdx = STAGE_INDEX[state.currentStage];
+
+      $("resTitle").textContent = "Your " + mj.name + " Roadmap";
+      var stageWord = state.currentStage === "postGrad" ? "Recently Graduated"
+        : D.STAGE_LABELS[state.currentStage];
+      $("resStage").textContent = state.currentStage === "postGrad"
+        ? "You are Recently Graduated."
+        : "You are currently a " + stageWord + ".";
+
+      /* stage cards */
+      var wrap = $("stagecards");
+      wrap.innerHTML = "";
+      D.STAGE_ORDER.forEach(function (stageId, idx) {
+        var st = mj.stages[stageId];
+        var card = document.createElement("article");
+        var cls = "stagecard";
+        if (idx < currentIdx) cls += " muted";
+        if (idx === currentIdx) cls += " current";
+        if (window.innerWidth <= 760 && idx !== currentIdx) cls += " collapsed";
+        card.className = cls;
+        card.setAttribute("data-stage", stageId);
+
+        var html = "";
+        if (idx === currentIdx) html += '<span class="here-chip">You Are Here</span>';
+        html += '<div class="sc-head"><div>' +
+          '<div class="sc-stage">' + D.STAGE_LABELS[stageId] + "</div>" +
+          '<h3 class="sc-name">' + st.title + "</h3>" +
+          "</div>" +
+          '<span class="sc-status" data-status></span></div>' +
+          '<p class="sc-objective">' + st.objective + "</p>" +
+          '<div class="sc-count" data-count></div>' +
+          '<button type="button" class="sc-toggle" aria-expanded="' + (idx === currentIdx) + '">' +
+          (idx === currentIdx ? "Hide milestones" : "Show milestones") + "</button>";
+        card.innerHTML = html;
+
+        var list = document.createElement("ul");
+        list.className = "milestones";
+        st.milestones.forEach(function (ms) {
+          var li = document.createElement("li");
+          li.className = "milestone" + (checks.indexOf(ms.id) !== -1 ? " checked" : "");
+          var label = document.createElement("label");
+          var box = document.createElement("input");
+          box.type = "checkbox";
+          box.checked = checks.indexOf(ms.id) !== -1;
+          box.setAttribute("data-mid", ms.id);
+          var title = document.createElement("span");
+          title.className = "m-title";
+          title.textContent = ms.title;
+          var chip = document.createElement("span");
+          chip.className = "m-chip";
+          chip.textContent = box.checked ? "Completed" : "Remaining";
+          label.appendChild(box); label.appendChild(title); label.appendChild(chip);
+          li.appendChild(label);
+          list.appendChild(li);
+
+          box.addEventListener("change", function () {
+            var arr = loadChecks(mj.id);
+            var i = arr.indexOf(ms.id);
+            if (box.checked && i === -1) arr.push(ms.id);
+            if (!box.checked && i !== -1) arr.splice(i, 1);
+            saveChecks(mj.id, arr);
+            li.classList.toggle("checked", box.checked);
+            chip.textContent = box.checked ? "Completed" : "Remaining";
+            updateCard(card, mj);
+          });
+        });
+        card.appendChild(list);
+
+        var toggle = card.querySelector(".sc-toggle");
+        toggle.addEventListener("click", function () {
+          var collapsed = card.classList.toggle("collapsed");
+          toggle.setAttribute("aria-expanded", String(!collapsed));
+          toggle.textContent = collapsed ? "Show milestones" : "Hide milestones";
+        });
+
+        wrap.appendChild(card);
+        updateCard(card, mj);
+      });
+
+      /* context paragraph — fixed assembly order */
+      $("contextPara").textContent = [
+        D.STAGE_BLOCKS[state.currentStage],
+        D.CERTAINTY_BLOCKS[state.majorCertainty],
+        D.DIRECTION_BLOCKS[state.careerDirection],
+        mj.overview,
+        mj.dailyLife,
+        mj.commonConcern,
+        mj.closingGuidance
+      ].join(" ");
+
+      /* accordion */
+      $("accLabel").textContent = "Explore " + mj.name + " Careers";
+      $("accDirections").innerHTML = "";
+      mj.directions.forEach(function (d) {
+        var li = document.createElement("li"); li.textContent = d;
+        $("accDirections").appendChild(li);
+      });
+      $("accDaily").textContent = mj.dailyLife;
+      $("accCompetitive").innerHTML = "";
+      mj.competitiveFactors.forEach(function (c) {
+        var li = document.createElement("li"); li.textContent = c;
+        $("accCompetitive").appendChild(li);
+      });
+      $("accMisconception").textContent = mj.misconception;
+      $("majorAcc").open = false;
+
+      $("emailMajor").value = mj.name;
+    }
+
+    function updateCard(card, mj) {
+      var boxes = card.querySelectorAll('input[type="checkbox"]');
+      var done = 0;
+      boxes.forEach(function (b) { if (b.checked) done++; });
+      card.querySelector("[data-count]").textContent = done + " of " + boxes.length + " completed";
+      var status = card.querySelector("[data-status]");
+      if (done === 0) { status.textContent = "Not started"; status.className = "sc-status"; }
+      else if (done === boxes.length) { status.textContent = "Completed"; status.className = "sc-status done"; }
+      else { status.textContent = "In progress"; status.className = "sc-status progress"; }
+    }
+
+    /* ---------- utilities ---------- */
+    $("editAnswers").addEventListener("click", function () {
+      syncRadios();
+      show("scr-setup1");
+    });
+    $("resetRoadmap").addEventListener("click", function () {
+      var mj = majorById(state.majorId);
+      if (!mj) return;
+      if (window.confirm("Reset your " + mj.name + " roadmap? This clears every checked milestone for this major only.")) {
+        saveChecks(mj.id, []);
+        renderResults();
+      }
+    });
+    $("printRoadmap").addEventListener("click", function () { window.print(); });
+
+    /* ---------- email form (front-end confirmation only) ---------- */
+    $("emailForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      $("emailTrust").innerHTML = '<span class="email-done">Got it — resources for your stage are on the way.</span>';
+      this.querySelector('button[type="submit"]').disabled = true;
+    });
+  })();
+  </script>
+  <script src="js/main.js?v=22"></script>
+</body>
+</html>

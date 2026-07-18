@@ -48,6 +48,15 @@ is demo data hardcoded in the same file (`SEM` object); a real version needs a
 backend with real logins (talk to the next IT chair / use Google Sheets embeds
 as a stopgap).
 
+## Career Navigator (career.html)
+
+An interactive roadmap tool — no AI, no backend, no score. ALL copy lives in
+`js/career-data.js` (one object per major; edit a sentence there and only there —
+`career.html` is just components). Checkbox progress saves per major in
+localStorage under `pctNav:<majorId>`; setup answers under `pctNavSetup`.
+The email form is front-end-only confirmation for now — wire it to a Google
+Form or mailing list before promoting it as real.
+
 ## Preview locally
 
 ```bash

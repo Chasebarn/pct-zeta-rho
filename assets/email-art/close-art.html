@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 420px; overflow: hidden; }
+  .art {
+    position: relative;
+    width: 1200px; height: 420px;
+    background:
+      radial-gradient(90% 130% at 12% -20%, #3b2559 0%, transparent 55%),
+      #241733;
+    overflow: hidden;
+  }
+  .art::after {
+    content: "";
+    position: absolute; inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .ghost {
+    position: absolute;
+    right: -50px; bottom: -90px;
+    font-family: "Instrument Serif", serif;
+    font-size: 300px; line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(201, 162, 39, 0.13);
+    white-space: nowrap;
+  }
+  .inner {
+    position: relative; z-index: 2;
+    height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start;
+    text-align: center;
+    padding-top: 92px;
+  }
+  .rule { width: 88px; height: 4px; background: #c9a227; }
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 96px; line-height: 1.0;
+    color: #faf8f3;
+    margin-top: 40px;
+  }
+  h1 em { font-style: italic; color: #e6c65b; }
+  .flat {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+    background: linear-gradient(transparent, #241733 80%);
+    z-index: 3;
+  }
+</style>
+</head>
+<body>
+  <div class="art">
+    <div class="ghost">ΦΧΘ</div>
+    <div class="inner">
+      <div class="rule"></div>
+      <h1>We&rsquo;ll see you <em>tonight.</em></h1>
+    </div>
+    <div class="flat"></div>
+  </div>
+</body>
+</html>

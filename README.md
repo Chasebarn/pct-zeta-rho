@@ -57,6 +57,17 @@ localStorage under `pctNav:<majorId>`; setup answers under `pctNavSetup`.
 The email form is front-end-only confirmation for now — wire it to a Google
 Form or mailing list before promoting it as real.
 
+## Rush confirmation email (email/rush-confirmation.html)
+
+The branded "you're on the list" email. Both gold buttons link to
+`assets/rush-events.ics` — a real calendar file with all six rush events.
+**When real dates/locations/dress codes land, edit BOTH files so the cards
+and the calendar match** (the ICS event list is the `EVENTS` block comment
+inside it; the email cards are plain HTML). `[First Name]` is a merge-tag
+placeholder — swap for `*|FNAME|*` (Mailchimp) or your sender's tag. To use
+with Gmail: open the file in a browser, select-all, copy, paste into a
+compose window.
+
 ## Preview locally
 
 ```bash

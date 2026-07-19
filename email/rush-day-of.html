@@ -7,15 +7,15 @@
   <title>Tonight&rsquo;s the night, [First Name].</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <!--
-    THE PCT EVENT PASS — day-of-event email
+    THE PCT EVENT PASS — day-of-event email (site design language)
     SUBJECT:      Tonight's the night, [First Name].
     PREVIEW TEXT: [Event Name] starts at [Time]. Professional attire. We'll see you there.
     MERGE TAG:    [First Name] -> *|FNAME|* (Mailchimp) / your sender's tag
 
-    EDIT BEFORE SENDING (marked ✎ below):
-      1. Event name, date, time, building + room  (hero AND bottom block)
-      2. GET DIRECTIONS link — both buttons, same URL. Use the exact
-         Google Maps pin:  https://www.google.com/maps/search/?api=1&query=YOUR+BUILDING+USF
+    EDIT BEFORE SENDING (marked ✎):
+      1. Event name + the three logistics blocks (TIME / ROOM / ATTIRE) — hero AND bottom line
+      2. GET DIRECTIONS link — both buttons, same exact Google Maps pin:
+         https://www.google.com/maps/search/?api=1&query=YOUR+BUILDING+USF
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
@@ -30,68 +30,76 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ HERO · deep purple, oversized type ══════════ -->
+          <!-- ══════════ HERO · centered, typographic ══════════ -->
           <tr>
-            <td bgcolor="#241733" style="background-color:#241733; padding:34px 40px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <td bgcolor="#241733" align="center" style="background-color:#241733; padding:52px 40px 0;">
+
+              <div style="width:44px; height:2px; background-color:#c9a227; font-size:0; line-height:0;">&nbsp;</div>
+
+              <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#e6c65b; text-transform:uppercase; padding-top:22px;">
+                PCT&nbsp;&nbsp;Fall&nbsp;Rush
+              </div>
+
+              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:58px; line-height:1.04; color:#faf8f3; padding-top:20px;">
+                Tonight&rsquo;s <span style="font-style:italic; color:#e6c65b;">the&nbsp;night.</span>
+              </div>
+
+              <!-- ✎ EVENT NAME -->
+              <div style="font-family:Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; letter-spacing:0.5px; color:#faf8f3; padding-top:24px;">
+                [Event Name]
+              </div>
+              <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#bfb6ce; padding-top:6px;">
+                [Day, Month Date]
+              </div>
+
+              <!-- logistics, countdown-style blocks -->
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:30px auto 0;">
                 <tr>
-                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#e6c65b; text-transform:uppercase;">
-                    PCT&nbsp;&nbsp;Fall&nbsp;Rush
+                  <!-- ✎ TIME -->
+                  <td align="center" style="padding:0 26px 0 0;">
+                    <div style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1; color:#faf8f3;">[7:00&nbsp;PM]</div>
+                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:3px; color:#8d81a3; text-transform:uppercase; padding-top:8px;">Time</div>
                   </td>
-                  <td align="right" style="font-family:'Instrument Serif', Georgia, serif; font-size:26px; color:#453361;">
-                    &Phi;&Chi;&Theta;
+                  <!-- ✎ ROOM -->
+                  <td align="center" style="border-left:1px solid #3a2b52; padding:0 26px;">
+                    <div style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1; color:#faf8f3;">[BSN&nbsp;120]</div>
+                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:3px; color:#8d81a3; text-transform:uppercase; padding-top:8px;">Room</div>
+                  </td>
+                  <td align="center" style="border-left:1px solid #3a2b52; padding:0 0 0 26px;">
+                    <div style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1; color:#faf8f3;">Professional</div>
+                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:3px; color:#8d81a3; text-transform:uppercase; padding-top:8px;">Attire</div>
                   </td>
                 </tr>
               </table>
 
-              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:64px; line-height:0.98; color:#faf8f3; padding-top:26px;">
-                TONIGHT&rsquo;S<br>
-                <span style="font-style:italic; color:#e6c65b;">THE NIGHT.</span>
-              </div>
-
-              <div style="width:44px; height:2px; background-color:#c9a227; font-size:0; line-height:0; margin-top:26px;">&nbsp;</div>
-
-              <!-- ✎ EVENT DETAILS -->
-              <div style="font-family:Arial, Helvetica, sans-serif; font-size:19px; font-weight:bold; color:#faf8f3; padding-top:18px;">
-                [Event Name]
-              </div>
-              <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.65; color:#bfb6ce; padding-top:8px;">
-                [Day, Month Date] &middot; [Time]<br>
-                [Building and room]<br>
-                Professional attire
-              </div>
-
               <!-- Primary CTA -->
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0 36px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:34px auto 0;">
                 <tr>
                   <td align="center" bgcolor="#c9a227" style="border-radius:2px;">
                     <!-- ✎ MAPS LINK -->
                     <a href="https://www.google.com/maps/search/?api=1&query=Muma+College+of+Business+USF+Tampa"
-                       style="display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:1.5px; color:#191221; text-decoration:none; padding:16px 34px;">
-                      GET&nbsp;DIRECTIONS
+                       style="display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:1.5px; color:#191221; text-decoration:none; padding:16px 36px;">
+                      GET&nbsp;DIRECTIONS&nbsp;&nbsp;&rarr;
                     </a>
                   </td>
                 </tr>
               </table>
-            </td>
-          </tr>
 
-          <!-- hero photo, full bleed under the purple -->
-          <tr>
-            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-service.jpg"
-                   width="600" alt="Phi Chi Theta members together at a chapter event"
-                   style="display:block; width:100%; height:auto;">
-            </td>
-          </tr>
-
-          <!-- ══════════ DON'T OVERTHINK IT ══════════ -->
-          <tr>
-            <td style="background-color:#ffffff; padding:44px 40px 40px;">
-              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:38px; line-height:1.05; color:#4b2e83;">
-                DON&rsquo;T OVERTHINK IT.
+              <!-- ghost letters, site hero signature -->
+              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:120px; line-height:0.72; color:#2c1f42; padding-top:26px; overflow:hidden;">
+                &Phi;&Chi;&Theta;
               </div>
-              <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.65; color:#453a52; padding-top:14px; max-width:480px;">
+            </td>
+          </tr>
+
+          <!-- ══════════ DON'T OVERTHINK IT · centered, cream ══════════ -->
+          <tr>
+            <td align="center" style="background-color:#faf8f3; padding:52px 44px 46px;">
+              <div style="width:44px; height:2px; background-color:#c9a227; font-size:0; line-height:0;">&nbsp;</div>
+              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:40px; line-height:1.05; color:#191221; padding-top:20px;">
+                Don&rsquo;t <span style="font-style:italic; color:#8a6d14;">overthink it.</span>
+              </div>
+              <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.7; color:#453a52; padding-top:14px; max-width:430px; margin:0 auto;">
                 You do not need to know anyone or have anything prepared. Come in
                 professional attire, meet the chapter, and see what Phi Chi Theta
                 is actually about.
@@ -99,111 +107,100 @@
             </td>
           </tr>
 
-          <!-- ══════════ THE PATH · three stops on one route ══════════ -->
+          <!-- ══════════ THE PATH · centered route ══════════ -->
           <tr>
-            <td style="background-color:#ffffff; padding:0 40px 8px;">
+            <td align="center" style="background-color:#faf8f3; padding:0 44px 20px;">
 
-              <!-- stop 01 -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="52" valign="top">
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr><td width="44" height="44" align="center" bgcolor="#4b2e83" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:19px; color:#faf8f3;">01</td></tr>
-                    </table>
-                  </td>
-                  <td valign="top" style="padding-left:16px;">
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; letter-spacing:2px; color:#191221; padding-top:2px;">ARRIVE</div>
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.5; color:#6f6580; padding-top:4px;">Check in and grab a name tag.</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="52" align="left"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="21"></td><td width="2" height="30" bgcolor="#4b2e83" style="font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-                  <td></td>
-                </tr>
-              </table>
-
-              <!-- stop 02 -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="52" valign="top">
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr><td width="44" height="44" align="center" bgcolor="#4b2e83" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:19px; color:#faf8f3;">02</td></tr>
-                    </table>
-                  </td>
-                  <td valign="top" style="padding-left:16px;">
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; letter-spacing:2px; color:#191221; padding-top:2px;">MEET&nbsp;PCT</div>
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.5; color:#6f6580; padding-top:4px;">Hear what we do and meet the people behind the chapter.</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="52" align="left"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="21"></td><td width="2" height="30" bgcolor="#4b2e83" style="font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-                  <td></td>
-                </tr>
-              </table>
-
-              <!-- stop 03 -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="52" valign="top">
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr><td width="44" height="44" align="center" bgcolor="#c9a227" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:19px; color:#191221;">03</td></tr>
-                    </table>
-                  </td>
-                  <td valign="top" style="padding-left:16px;">
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; letter-spacing:2px; color:#191221; padding-top:2px;">SEE&nbsp;IF&nbsp;IT&nbsp;FITS</div>
-                    <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.5; color:#6f6580; padding-top:4px;">Ask questions, make connections, and decide for yourself.</div>
-                  </td>
-                </tr>
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <!-- 01 -->
+                <tr><td align="center">
+                  <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                    <td width="46" height="46" align="center" bgcolor="#4b2e83" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:20px; color:#faf8f3;">01</td>
+                  </tr></table>
+                </td></tr>
+                <tr><td align="center" style="padding-top:12px;">
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:3px; color:#191221;">ARRIVE</div>
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#6f6580; padding-top:5px;">Check in and grab a name tag.</div>
+                </td></tr>
+                <tr><td align="center" style="padding:14px 0;">
+                  <table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="2" height="34" bgcolor="#4b2e83" style="font-size:0; line-height:0;">&nbsp;</td></tr></table>
+                </td></tr>
+                <!-- 02 -->
+                <tr><td align="center">
+                  <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                    <td width="46" height="46" align="center" bgcolor="#4b2e83" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:20px; color:#faf8f3;">02</td>
+                  </tr></table>
+                </td></tr>
+                <tr><td align="center" style="padding-top:12px;">
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:3px; color:#191221;">MEET&nbsp;PCT</div>
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#6f6580; padding-top:5px;">Hear what we do and meet the people behind the chapter.</div>
+                </td></tr>
+                <tr><td align="center" style="padding:14px 0;">
+                  <table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="2" height="34" bgcolor="#4b2e83" style="font-size:0; line-height:0;">&nbsp;</td></tr></table>
+                </td></tr>
+                <!-- 03 -->
+                <tr><td align="center">
+                  <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                    <td width="46" height="46" align="center" bgcolor="#c9a227" style="border-radius:50%; font-family:'Instrument Serif', Georgia, serif; font-size:20px; color:#191221;">03</td>
+                  </tr></table>
+                </td></tr>
+                <tr><td align="center" style="padding-top:12px;">
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:3px; color:#191221;">SEE&nbsp;IF&nbsp;IT&nbsp;FITS</div>
+                  <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#6f6580; padding-top:5px;">Ask questions, make connections, and decide for yourself.</div>
+                </td></tr>
               </table>
 
             </td>
           </tr>
 
-          <!-- ══════════ PHOTO STRIP · asymmetric collage ══════════ -->
+          <!-- ══════════ PHOTO STRIP · three equal, labeled ══════════ -->
           <tr>
-            <td style="background-color:#ffffff; padding:36px 40px 44px;">
+            <td style="background-color:#faf8f3; padding:36px 40px 52px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <!-- left: one card, centered against the taller right stack -->
-                  <td width="305" valign="middle" style="padding-right:11px;">
+                  <td width="168" valign="top">
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-letters.jpg"
-                         width="305" alt="Members in a professional development session"
+                         width="168" alt="Members in a professional development session"
                          style="display:block; width:100%; height:auto;">
-                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#faf8f3; text-transform:uppercase; padding:10px 14px;">Professional</div>
+                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:9px; font-weight:bold; letter-spacing:2px; color:#faf8f3; text-transform:uppercase; text-align:center; padding:9px 4px;">Professional</div>
                   </td>
-                  <!-- right: two stacked cards -->
-                  <td width="204" valign="top">
+                  <td width="8" style="font-size:0;">&nbsp;</td>
+                  <td width="168" valign="top">
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-fundraiser.jpg"
-                         width="204" alt="Member at the Pie a Phi Chi campus fundraiser"
+                         width="168" alt="Member at the Pie a Phi Chi campus fundraiser"
                          style="display:block; width:100%; height:auto;">
-                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#faf8f3; text-transform:uppercase; padding:10px 14px; margin-bottom:11px;">Philanthropy</div>
+                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:9px; font-weight:bold; letter-spacing:2px; color:#faf8f3; text-transform:uppercase; text-align:center; padding:9px 4px;">Philanthropy</div>
+                  </td>
+                  <td width="8" style="font-size:0;">&nbsp;</td>
+                  <td width="168" valign="top">
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-service.jpg"
-                         width="204" alt="Members together at a service day"
-                         style="display:block; width:100%; height:auto; margin-top:11px;">
-                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#faf8f3; text-transform:uppercase; padding:10px 14px;">Brotherhood</div>
+                         width="168" alt="Members together at a chapter service day"
+                         style="display:block; width:100%; height:auto;">
+                    <div style="background-color:#241733; font-family:Arial, Helvetica, sans-serif; font-size:9px; font-weight:bold; letter-spacing:2px; color:#faf8f3; text-transform:uppercase; text-align:center; padding:9px 4px;">Brotherhood</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ BOTTOM CLOSE · purple block ══════════ -->
+          <!-- ══════════ CLOSE · centered purple ══════════ -->
           <tr>
-            <td bgcolor="#241733" align="center" style="background-color:#241733; padding:44px 40px 40px;">
-              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:40px; line-height:1.05; color:#faf8f3;">
-                WE&rsquo;LL SEE YOU <span style="font-style:italic; color:#e6c65b;">TONIGHT.</span>
+            <td bgcolor="#241733" align="center" style="background-color:#241733; padding:50px 40px 42px;">
+              <div style="width:44px; height:2px; background-color:#c9a227; font-size:0; line-height:0;">&nbsp;</div>
+              <div style="font-family:'Instrument Serif', Georgia, serif; font-size:44px; line-height:1.05; color:#faf8f3; padding-top:20px;">
+                We&rsquo;ll see you <span style="font-style:italic; color:#e6c65b;">tonight.</span>
               </div>
-              <!-- ✎ EVENT DETAILS (keep in sync with hero) -->
-              <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; letter-spacing:1px; color:#bfb6ce; padding-top:14px;">
-                [Time] &middot; [Location] &middot; Professional attire
+              <!-- ✎ keep in sync with hero -->
+              <div style="font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight:bold; letter-spacing:2px; color:#8d81a3; text-transform:uppercase; padding-top:16px;">
+                [7:00 PM] &middot; [BSN 120] &middot; Professional attire
               </div>
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px auto 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:28px auto 0;">
                 <tr>
                   <td align="center" bgcolor="#c9a227" style="border-radius:2px;">
                     <!-- ✎ MAPS LINK (same as top) -->
                     <a href="https://www.google.com/maps/search/?api=1&query=Muma+College+of+Business+USF+Tampa"
-                       style="display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:1.5px; color:#191221; text-decoration:none; padding:16px 34px;">
-                      GET&nbsp;DIRECTIONS
+                       style="display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; letter-spacing:1.5px; color:#191221; text-decoration:none; padding:16px 36px;">
+                      GET&nbsp;DIRECTIONS&nbsp;&nbsp;&rarr;
                     </a>
                   </td>
                 </tr>
@@ -211,8 +208,8 @@
               <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#8d81a3; padding-top:18px;">
                 Questions before tonight? Just reply to this email.
               </div>
-              <div style="border-top:1px solid #3a2b52; margin-top:30px; padding-top:18px;">
-                <span style="font-family:'Instrument Serif', Georgia, serif; font-size:15px; color:#faf8f3;">Phi Chi Theta at USF</span><br>
+              <div style="border-top:1px solid #3a2b52; margin-top:32px; padding-top:20px;">
+                <span style="font-family:'Instrument Serif', Georgia, serif; font-size:16px; color:#faf8f3;">Phi Chi Theta at USF</span><br>
                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:2.5px; color:#e6c65b; text-transform:uppercase;">Professionalism &middot; Philanthropy &middot; Brotherhood</span>
               </div>
             </td>

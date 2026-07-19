@@ -1,76 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { width: 1200px; height: 640px; overflow: hidden; }
-  .art {
-    position: relative;
-    width: 1200px; height: 640px;
-    background:
-      radial-gradient(95% 110% at 82% -12%, #3b2559 0%, transparent 55%),
-      radial-gradient(70% 80% at -8% 115%, #34204d 0%, transparent 58%),
-      #241733;
-    overflow: hidden;
-  }
-  .art::after { /* film grain, from the site */
-    content: "";
-    position: absolute; inset: 0;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .ghost {
-    position: absolute;
-    right: -70px; top: 96px;
-    font-family: "Instrument Serif", serif;
-    font-size: 430px; line-height: 0.8;
-    color: transparent;
-    -webkit-text-stroke: 2px rgba(201, 162, 39, 0.15);
-    white-space: nowrap;
-  }
-  .inner {
-    position: relative; z-index: 2;
-    height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: flex-start;
-    text-align: center;
-    padding-top: 104px;
-  }
-  .rule { width: 88px; height: 4px; background: #c9a227; }
-  .kicker {
-    font-family: Inter, sans-serif;
-    font-size: 25px; font-weight: 700; letter-spacing: 0.36em;
-    color: #e6c65b; text-transform: uppercase;
-    margin-top: 44px;
-  }
-  h1 {
-    font-family: "Instrument Serif", serif;
-    font-weight: 400;
-    font-size: 128px; line-height: 1.0; letter-spacing: -0.01em;
-    color: #faf8f3;
-    margin-top: 34px;
-  }
-  h1 em { font-style: italic; color: #e6c65b; }
-  /* bottom of the canvas fades to flat #241733 so the live email
-     section below continues seamlessly */
-  .flat {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 120px;
-    background: linear-gradient(transparent, #241733 78%);
-    z-index: 3;
-  }
-</style>
-</head>
-<body>
-  <div class="art">
-    <div class="ghost">ΦΧΘ</div>
-    <div class="inner">
-      <div class="rule"></div>
-      <div class="kicker">PCT&nbsp;&nbsp;Fall&nbsp;Rush</div>
-      <h1>Tonight&rsquo;s <em>the night.</em></h1>
-    </div>
-    <div class="flat"></div>
-  </div>
-</body>
-</html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@600;700&display=swap" rel="stylesheet"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1200px; height:440px; overflow:hidden; }
+.art { position:relative; width:1200px; height:440px; overflow:hidden;
+  background: radial-gradient(95% 130% at 82% -18%, #3b2559 0%, transparent 55%),
+              radial-gradient(60% 80% at -8% 120%, #34204d 0%, transparent 58%), #241733; }
+.art::after { content:""; position:absolute; inset:0; opacity:0.05; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.inner { position:relative; z-index:2; height:100%; display:flex; flex-direction:column;
+  align-items:center; text-align:center; padding-top:88px; }
+.rule { width:88px; height:4px; background:#c9a227; }
+.kicker { font-family:Inter,sans-serif; font-size:24px; font-weight:700; letter-spacing:0.36em;
+  color:#e6c65b; text-transform:uppercase; margin-top:40px; }
+h1 { font-family:"Instrument Serif",serif; font-weight:400; font-size:122px; line-height:1;
+  letter-spacing:-0.01em; color:#faf8f3; margin-top:30px; }
+h1 em { font-style:italic; color:#e6c65b; }
+.flat { position:absolute; left:0; right:0; bottom:0; height:70px;
+  background:linear-gradient(transparent, #241733 85%); z-index:3; }
+</style></head><body><div class="art"><div class="inner">
+<div class="rule"></div><div class="kicker">PCT&nbsp;&nbsp;Fall&nbsp;Rush</div>
+<h1>Tonight&rsquo;s <em>the night.</em></h1>
+</div><div class="flat"></div></div></body></html>

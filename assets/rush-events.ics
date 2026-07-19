@@ -24,8 +24,8 @@ END:VTIMEZONE
 BEGIN:VEVENT
 UID:fallrush-2026-event-1@pct-zeta-rho
 DTSTAMP:20260717T120000Z
-DTSTART;TZID=America/New_York:20260905T170000
-DTEND;TZID=America/New_York:20260905T190000
+DTSTART;TZID=America/New_York:20260902T190000
+DTEND;TZID=America/New_York:20260902T210000
 SUMMARY:PCT Fall Rush · Event 1 — Info Night
 LOCATION:USF Tampa campus — room announced on @pctusf
 DESCRIPTION:Dress code: Casual\nDetails and updates: https://chasebarn.github.io/pct-zeta-rho/fallrush.html\nQuestions: @pctusf on Instagram

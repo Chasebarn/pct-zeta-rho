@@ -1,34 +1,47 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@600;700&display=swap" rel="stylesheet"><style>
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@500;600;800&display=swap" rel="stylesheet">
+<style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { width:1104px; height:730px; overflow:hidden; }
-.art { position:relative; width:1104px; height:730px; background:#faf8f3; }
+body { width:1104px; height:1060px; overflow:hidden; }
+.art { position:relative; width:1104px; height:1060px; background:#faf8f3; }
 svg.route { position:absolute; inset:0; }
-.stop { position:absolute; width:68px; height:68px; border-radius:50%;
+.stop { position:absolute; width:150px; height:150px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  font-family:"Instrument Serif",serif; font-size:28px; color:#faf8f3;
-  background:#4b2e83; box-shadow:0 10px 24px -10px rgba(75,46,131,0.5); }
-.stop.gold { background:#c9a227; color:#191221; }
-.lbl { position:absolute; max-width:460px; }
-.lbl h3 { font-family:Inter,sans-serif; font-size:24px; font-weight:700;
-  letter-spacing:0.22em; color:#191221; }
-.lbl p { font-family:Inter,sans-serif; font-size:21px; line-height:1.5;
-  color:#6f6580; margin-top:8px; font-weight:600; }
+  font-family:"Instrument Serif",serif; font-size:62px; color:#faf8f3;
+  background:#4b2e83; box-shadow:0 24px 48px -18px rgba(75,46,131,0.55); }
+.stop.gold { background:#c9a227; color:#191221;
+  box-shadow:0 24px 48px -18px rgba(138,109,20,0.55); }
+.lbl { position:absolute; max-width:560px; }
+.lbl h3 { font-family:Inter,sans-serif; font-size:36px; font-weight:800;
+  letter-spacing:0.1em; color:#191221; }
+.lbl p { font-family:Inter,sans-serif; font-size:25px; line-height:1.5;
+  color:#453a52; margin-top:12px; font-weight:500; }
 .r { text-align:right; }
 </style></head><body><div class="art">
-<svg class="route" width="1104" height="730" viewBox="0 0 1104 730" fill="none">
-  <path d="M 214 112 C 480 268, 930 150, 898 352 C 866 540, 500 470, 312 566 C 244 606, 248 636, 294 650"
-        stroke="#4b2e83" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.1 22"/>
+<svg class="route" width="1104" height="1060" viewBox="0 0 1104 1060" fill="none">
+  <defs>
+    <linearGradient id="g" x1="250" y1="160" x2="380" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4b2e83"/>
+      <stop offset="0.55" stop-color="#4b2e83"/>
+      <stop offset="1" stop-color="#c9a227"/>
+    </linearGradient>
+  </defs>
+  <path d="M 262 238 C 340 470, 830 260, 856 466 C 878 660, 560 640, 400 760 C 320 822, 330 850, 372 878"
+        stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="30 22"/>
 </svg>
-<div class="stop" style="left:176px; top:62px;">01</div>
-<div class="lbl" style="left:280px; top:58px;">
-  <h3>ARRIVE</h3><p>Check in and grab a name tag.</p>
+<div class="stop" style="left:180px; top:80px;">01</div>
+<div class="lbl" style="left:392px; top:92px;">
+  <h3>ARRIVE</h3>
+  <p>Check in with professional attire &mdash; suit and tie. We&rsquo;ll hand you a name tag.</p>
 </div>
-<div class="stop" style="left:866px; top:316px;">02</div>
-<div class="lbl r" style="right:278px; top:312px;">
-  <h3>MEET PCT</h3><p>Hear what we do and meet the people behind the chapter.</p>
+<div class="stop" style="left:788px; top:462px;">02</div>
+<div class="lbl r" style="right:376px; top:452px;">
+  <h3>MEET PCT</h3>
+  <p>A short presentation on who we are, what we do, and what makes PCT the right fit for you.</p>
 </div>
-<div class="stop gold" style="left:262px; top:614px;">03</div>
-<div class="lbl" style="left:366px; top:610px;">
-  <h3>SEE IF IT FITS</h3><p>Ask questions, make connections, and decide for yourself.</p>
+<div class="stop gold" style="left:288px; top:822px;">03</div>
+<div class="lbl" style="left:500px; top:834px;">
+  <h3>SEE IF IT FITS</h3>
+  <p>Talk with members, ask your questions, grab rush tips, and start building real relationships.</p>
 </div>
 </div></body></html>

@@ -68,6 +68,35 @@ placeholder — swap for `*|FNAME|*` (Mailchimp) or your sender's tag. To use
 with Gmail: open the file in a browser, select-all, copy, paste into a
 compose window.
 
+## Day-of email (email/rush-day-of.html) — Outlook-proof build
+
+The "Event Pass" email sent the morning of each rush event. **It is built to
+survive being pasted into Outlook's compose box** (the chapter's sending
+workflow): Outlook strips fonts, sizes, and letter-spacing from pasted HTML,
+so every piece of display typography — event name, date, time/room/attire,
+headings, section labels, the 01–05 numerals, the footer wordmark — is baked
+into PNGs in `assets/email-art/`. Live text uses only bold + color, which
+Outlook keeps.
+
+To send: open the file in a browser, select-all, copy, paste into an Outlook
+compose window, and send. Send from a USF account so Outlook shows images by
+default (external senders get "download pictures" blocking).
+
+**To change the event details you must re-render the art** — the event info
+lives inside `hero-art*.png` and `close-art*.png`. Edit
+`assets/email-art/hero-art3.html` and `close-art3.html`, re-render with
+headless Chrome (command below), and **rename the output PNGs** (bump the
+number) — GitHub Pages caches images by URL, so a re-render under the same
+name will not show up. Update the `<img>` URLs in the email to match, then
+push before sending (the email references the live site's images).
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+  --disable-gpu --no-first-run --hide-scrollbars --window-size=1200,860 \
+  --screenshot="$PWD/hero-art4.png" --virtual-time-budget=6000 \
+  "file://$PWD/hero-art3.html"
+```
+
 ## Preview locally
 
 ```bash

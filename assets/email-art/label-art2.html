@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1024px; height:44px; overflow:hidden; background:transparent; }
+.art { width:1024px; height:44px; background:transparent; display:flex; align-items:center; }
+.t { font-family:Inter,sans-serif; font-weight:700; font-size:22px; letter-spacing:7px;
+  color:#8a6d14; text-transform:uppercase; }
+</style></head><body><div class="art"><div class="t" id="t"></div></div>
+<script>document.getElementById('t').textContent = new URLSearchParams(location.search).get('t') || 'Label';</script>
+</body></html>

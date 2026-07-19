@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:160px; height:120px; overflow:hidden; background:transparent; }
+.art { width:160px; height:120px; background:transparent; }
+.n { font-family:"Instrument Serif",serif; font-style:italic; font-weight:400;
+  font-size:98px; line-height:116px; color:#8a6d14; }
+</style></head><body><div class="art"><div class="n" id="n"></div></div>
+<script>document.getElementById('n').textContent = new URLSearchParams(location.search).get('n') || '00';</script>
+</body></html>

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=22">
+  <link rel="stylesheet" href="css/styles.css?v=23">
   <style>
     /* ---------- gate ---------- */
     .gate {
@@ -182,7 +182,7 @@
     /* feed + composer + todo */
     .composer { display: grid; grid-template-columns: 210px 1fr auto; gap: 0.7rem; margin-bottom: 1.1rem; }
     .composer select, .composer input {
-      font: inherit; font-size: 0.92rem; padding: 0.65rem 0.75rem;
+      font: inherit; font-size: 1rem; padding: 0.65rem 0.75rem;
       border: 1px solid var(--line); border-radius: 6px; background: var(--paper);
     }
     .composer .btn { padding: 0.65rem 1.3rem; font-size: 0.85rem; border-radius: 6px; }
@@ -333,8 +333,10 @@
           </div>
         </div>
 
+        <p class="demo-note" id="archNote" style="display:none">Archived semesters keep KPIs, dues, GPA and goal tracking — rush and pledge timelines, committee budgets, the recruitment funnel and action items are only stored for the live semester.</p>
+
         <!-- Row: rush timeline / pledge timeline -->
-        <div class="grid c2">
+        <div class="grid c2" data-f26only>
           <div class="card">
             <h2>Rush Timeline — Fall 2026</h2>
             <p class="who">Owner: <b>VP Recruitment</b> · six-event process</p>
@@ -363,7 +365,7 @@
         </div>
 
         <!-- Row: budgets / funnel -->
-        <div class="grid c2">
+        <div class="grid c2" data-f26only>
           <div class="card">
             <h2>Committee Budgets</h2>
             <p class="who">Fall 2026 · spent vs allocated · <b>$3,295 / $5,550</b> total</p>
@@ -391,7 +393,7 @@
         </div>
 
         <!-- Row: GPA / action items -->
-        <div class="grid c2">
+        <div class="grid c2" id="acadRow">
           <div class="card">
             <h2>Academics by Class</h2>
             <p class="who">Owner: <b>Scholarship Chair</b> · midterm reports <b data-f="reports">–</b> in · 3 on study plan</p>
@@ -403,7 +405,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-f26only>
             <h2>Action Items</h2>
             <p class="who">Owner: <b>Secretary</b> · from Sep 8 minutes</p>
             <ul class="todo" id="todo">
@@ -435,12 +437,12 @@
               <button class="btn btn-gold" type="submit">Post</button>
             </form>
             <ul class="feed" id="feed">
-              <li><span class="when">2h</span><span class="chip role">VP Finance</span><span>Collected 4 more dues payments — outstanding down to 15 members.</span></li>
-              <li><span class="when">5h</span><span class="chip role">VP Recruitment</span><span>Event 4 attendance logged: 59. Field Day RSVPs at 51.</span></li>
-              <li><span class="when">1d</span><span class="chip role">Philanthropy Chair</span><span>Charity Raffle netted $750 for HEF — semester total now $1,820.</span></li>
-              <li><span class="when">2d</span><span class="chip role">Scholarship Chair</span><span>Midterm grade reports: 41/62 submitted. 3 members moved to study-hall plan.</span></li>
-              <li><span class="when">3d</span><span class="chip role">Apparel Chair</span><span>Heritage Hoodie restock: 12 orders, $250 net.</span></li>
-              <li><span class="when">4d</span><span class="chip role">IT Chair</span><span>New website deployed. Portal dashboard beta is live.</span></li>
+              <li data-f26only><span class="when">2h</span><span class="chip role">VP Finance</span><span>Collected 4 more dues payments — outstanding down to 15 members.</span></li>
+              <li data-f26only><span class="when">5h</span><span class="chip role">VP Recruitment</span><span>Event 4 attendance logged: 59. Field Day RSVPs at 51.</span></li>
+              <li data-f26only><span class="when">1d</span><span class="chip role">Philanthropy Chair</span><span>Charity Raffle netted $750 for HEF — semester total now $1,820.</span></li>
+              <li data-f26only><span class="when">2d</span><span class="chip role">Scholarship Chair</span><span>Midterm grade reports: 41/62 submitted. 3 members moved to study-hall plan.</span></li>
+              <li data-f26only><span class="when">3d</span><span class="chip role">Apparel Chair</span><span>Heritage Hoodie restock: 12 orders, $250 net.</span></li>
+              <li data-f26only><span class="when">4d</span><span class="chip role">IT Chair</span><span>New website deployed. Portal dashboard beta is live.</span></li>
             </ul>
           </div>
         </div>
@@ -680,6 +682,11 @@
 
       drawTrend(key);
 
+      var isF26 = key === "f26";
+      document.querySelectorAll("[data-f26only]").forEach(function (el) { el.style.display = isF26 ? "" : "none"; });
+      document.getElementById("acadRow").classList.toggle("c2", isF26);
+      document.getElementById("archNote").style.display = isF26 ? "none" : "";
+
       delta("membersD", s.members, p && p.members, function (n) { return n + " members"; });
       delta("pledgesD", s.pledges, p && p.pledges, function (n) { return n + " pledges"; });
       delta("collectedD", collected, p && p.paid * DUES, money);
@@ -708,7 +715,7 @@
       feed.insertBefore(li, feed.firstChild);
       if (save) {
         saved.unshift({ role: role, text: text });
-        localStorage.setItem("zrUpdates", JSON.stringify(saved.slice(0, 30)));
+        try { localStorage.setItem("zrUpdates", JSON.stringify(saved.slice(0, 30))); } catch (e) {}
       }
     }
     saved.slice().reverse().forEach(function (u) { addPost(u.role, u.text, false); });
@@ -732,7 +739,7 @@
         var i = done.indexOf(id);
         if (box.checked && i === -1) done.push(id);
         if (!box.checked && i !== -1) done.splice(i, 1);
-        localStorage.setItem("zrActions", JSON.stringify(done));
+        try { localStorage.setItem("zrActions", JSON.stringify(done)); } catch (e) {}
       });
     });
   })();

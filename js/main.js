@@ -16,16 +16,44 @@
 
   /* ---------- Mobile menu ---------- */
   if (toggle) {
-    toggle.addEventListener("click", function () {
-      var open = document.body.classList.toggle("nav-open");
+    var mobileNav = window.matchMedia("(max-width: 860px)");
+    var menu = document.querySelector(".nav-links");
+    var behindMenu = document.querySelectorAll("#main, .site-footer, .site-header .brand, .skip-link");
+    /* the overlay transitions `visibility`, so it is still computed hidden —
+       and therefore unfocusable — on the frame the class lands. Retry until
+       it takes, and give up if the menu closed again in the meantime. */
+    var focusFirstLink = function () {
+      var f = menu.querySelector("a");
+      if (!f) return;
+      var tries = 0;
+      var grab = function () {
+        if (!document.body.classList.contains("nav-open")) return;
+        f.focus();
+        if (document.activeElement !== f && ++tries < 30) requestAnimationFrame(grab);
+      };
+      grab();
+    };
+    var setNav = function (open, restoreFocus) {
+      document.body.classList.toggle("nav-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      var off = open && mobileNav.matches;
+      behindMenu.forEach(function (el) { el.inert = off; });
+      if (open) { focusFirstLink(); }
+      else if (restoreFocus) toggle.focus();
+    };
+    toggle.addEventListener("click", function () {
+      setNav(!document.body.classList.contains("nav-open"), true);
     });
-    document.querySelectorAll(".nav-links a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        document.body.classList.remove("nav-open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+    menu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setNav(false, false); });
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && document.body.classList.contains("nav-open")) setNav(false, true);
+    });
+    /* legacy Safari (<=13.1) exposes only addListener; an unguarded call would throw and kill the rest of this file */
+    var onNavMQ = function () { if (!mobileNav.matches) setNav(false, false); };
+    if (mobileNav.addEventListener) mobileNav.addEventListener("change", onNavMQ);
+    else if (mobileNav.addListener) mobileNav.addListener(onNavMQ);
   }
 
   /* ---------- Page-entry loader + page transitions ---------- */
@@ -51,15 +79,20 @@
     else if (document.readyState === "complete") setTimeout(lift, 250);
     else {
       window.addEventListener("load", function () { setTimeout(lift, 250); });
-      setTimeout(lift, 2200); /* never hold the page hostage */
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { setTimeout(lift, 250); });
+      }
+      setTimeout(lift, 1600); /* never hold the page hostage */
     }
     /* curtain drops before navigating to another page of the site */
     document.addEventListener("click", function (e) {
       if (reduced) return;
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       var a = e.target.closest("a");
       if (!a) return;
+      if (a.hasAttribute("download")) return;
       var href = a.getAttribute("href");
-      if (!href || a.target === "_blank" || href.charAt(0) === "#" || /^https?:/i.test(href)) return;
+      if (!href || a.target === "_blank" || href.charAt(0) === "#" || /^[a-z][a-z0-9+.-]*:/i.test(href)) return;
       e.preventDefault();
       loader.classList.add("closing");
       setTimeout(function () { window.location.href = href; }, 560);

@@ -1,0 +1,127 @@
+/* ============================================================
+   Phi Chi Theta — Zeta Rho · Craft polish
+   Additive layer. MUST be linked AFTER css/styles.css.
+   Everything here is static CSS: no motion, no JS dependency.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1 · SECTION-AWARE FOCUS RING
+   styles.css only rings .xpanel-btn and .tabbar button; every
+   other control falls back to the UA default, which reads as a
+   foreign artifact on an art-directed page. One token, flipped
+   per ground, drives a single global :focus-visible rule.
+
+   Contrast of the ring against the ground it sits on
+   (WCAG 2.2 SC 1.4.11 / 2.4.11 need 3:1):
+     purple    #4b2e83 on paper      #faf8f3 = 9.81:1
+     gold-soft #e6c65b on purple-deep #241733 = 10.11:1
+     gold-soft #e6c65b on ink        #191221 = 10.84:1
+   Gold #c9a227 is never used here — 2.28:1 on paper.
+   ------------------------------------------------------------ */
+
+:root { --focus-ring: var(--purple); }
+
+/* Dark grounds. Every selector below is a class that exists in
+   styles.css or portal.html — none are speculative.
+   .gate is deliberately excluded: its only focusables live inside
+   .gate-card, which is a paper island. */
+.on-dark,
+.hero,
+.subhero,
+.cta-band,
+.site-footer,
+.skip-link,
+.loader,
+.xpanel,
+.dash-top {
+  --focus-ring: var(--gold-soft);
+}
+
+/* The fixed header is transparent over the dark hero/subhero at rest
+   and becomes a paper bar once .scrolled — so its ring has to flip
+   with it. (0,2,0) beats the (0,1,0) rule above on the same element. */
+.site-header { --focus-ring: var(--gold-soft); }
+.site-header.scrolled { --focus-ring: var(--purple); }
+
+/* Open mobile nav: the purple-deep overlay covers the viewport, so the
+   header goes back to gold-soft even while .scrolled is still set. */
+body.nav-open .site-header,
+body.nav-open .site-header.scrolled { --focus-ring: var(--gold-soft); }
+
+/* :focus-visible only — pointer users see no change. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The skip link owns a 3px radius at equal specificity, so the rule above
+   would flatten it to 2px at the one moment it is visible. Restore it. */
+.skip-link:focus-visible { border-radius: 3px; }
+
+/* ------------------------------------------------------------
+   1b · SCROLLED-HEADER SUB-LABEL CONTRAST
+   .site-header.scrolled is a paper bar at 88% opacity, so dark
+   content scrolling behind it composites the ground down to
+   rgb(224,221,220). --gold-ink #8a6d14 measures 3.63:1 there —
+   under the 4.5:1 that 12px text requires. A slightly deeper gold
+   holds the same family and clears it with margin:
+     #6d5410 on rgb(224,221,220) = 5.31:1
+     #6d5410 on paper            = 6.76:1
+   Only the scrolled bar is affected; at rest the label is gold on
+   the dark hero and untouched.
+   ------------------------------------------------------------ */
+.site-header.scrolled .brand-sub { color: #6d5410; }
+
+/* ------------------------------------------------------------
+   2 · MOBILE SCROLLJACK REMOVAL
+   The pinned horizontal "Numbers don't lie" scene pins for 240vh on
+   phones. NN/g's scrolljacking research puts the worst damage exactly
+   here — an effect that changes scroll behaviour while the reader is
+   reading — and its recommendation list ends with "avoids mobile
+   entirely". This audience is overwhelmingly mobile.
+
+   These are the declarations styles.css already uses in its
+   prefers-reduced-motion block (styles.css:1472-1478), reused so both
+   paths produce one identical vertical editorial sequence. The single
+   deliberate difference is .numpanel's horizontal padding, noted below.
+   ------------------------------------------------------------ */
+
+/* Width alone misses a phone held sideways — an iPhone 14 in landscape is
+   844x390, so it clears the 767px gate and gets the full pinned scene on a
+   390px-tall screen, the worst case for a pinned horizontal scroll. A short
+   viewport is a bad host for a 300vh pin at any width, so the second arm is
+   height-only. js/main.js gates the rAF loop on the exact complement of this
+   query — (min-width: 768px) and (min-height: 501px) — so no viewport can
+   land between the two and get a stacked scene that JS still drives. */
+@media (max-width: 767px), (max-height: 500px) {
+  .numscene { height: auto; }
+  .numscene-pin { position: static; height: auto; overflow: visible; padding: var(--section) 0; }
+  .numscene-head { position: static; margin-bottom: 2rem; }
+  .numscene-track { position: static; flex-direction: column; width: auto; }
+
+  /* Deviation from the reduced-motion block, on purpose: that block drops
+     the horizontal gutter (`padding: 3rem 0`), which at 375px puts the
+     33-character "Internship & Full-Time Placements" label flush against
+     both screen edges. Restoring var(--gutter) keeps the base rule's own
+     horizontal padding while adopting the stacked vertical rhythm. This
+     rule also wins for narrow + reduced-motion users, so the two paths
+     stay visually identical where it matters. */
+  .numpanel { width: auto; height: auto; padding: 3rem var(--gutter); }
+
+  /* js/main.js:309 gates the pin on `!reduced` only, never on width, so
+     it keeps writing an inline transform to .numscene-track. Inline
+     styles outrank every stylesheet declaration regardless of specificity
+     or load order, so !important is the only mechanism that can neutralise
+     it. Measured in-browser: an ID-level selector
+     (html body main section.numscene div.numscene-pin div.numscene-track#x)
+     without !important still computed to matrix(1,0,0,1,-260,0); with
+     !important it computes to none. This is the one escape hatch in the file. */
+  .numscene-track { transform: none !important; will-change: auto; }
+
+  /* The progress rail measures horizontal travel that no longer happens;
+     JS would animate its gold fill against a vertical stack. It is
+     aria-hidden decoration, so removing it costs nothing. `display` is
+     not set inline, so no !important is needed. */
+  .numscene-progress { display: none; }
+}

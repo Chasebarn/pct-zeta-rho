@@ -4,8 +4,33 @@
 
   var header = document.querySelector(".site-header");
   var toggle = document.querySelector(".nav-toggle");
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var reducedMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var finePointerMQ = window.matchMedia("(pointer: fine)");
+  var reduced = reducedMQ.matches;
+  var finePointer = finePointerMQ.matches;
+
+  /* ---------- Live prefers-reduced-motion ----------
+     Every motion block below registers a teardown here. Reading the query once
+     at load meant a reader who reaches for the OS setting mid-session — the
+     exact moment they need it — got nothing until a reload. Flipping it to
+     "reduce" now stops every rAF loop on the spot and leaves each one in its
+     FINISHED state, never its start state.
+     The reverse is deliberately asymmetric: turning motion back ON does not
+     restart the loops, because re-arming observers and rebuilt DOM mid-session
+     is far more failure-prone than a reload, and nobody is harmed by ending up
+     with less motion than they asked for. A reload restores it. */
+  var motionOff = [];
+  var stopAllMotion = function () {
+    if (!reducedMQ.matches) return; /* this switch only ever tightens — see above */
+    reduced = true;
+    while (motionOff.length) {
+      /* one throwing teardown must not strand the rest */
+      try { motionOff.shift()(); } catch (err) {}
+    }
+  };
+  /* legacy Safari (<=13.1) exposes only addListener; an unguarded call would throw and kill the rest of this file */
+  if (reducedMQ.addEventListener) reducedMQ.addEventListener("change", stopAllMotion);
+  else if (reducedMQ.addListener) reducedMQ.addListener(stopAllMotion);
 
   /* ---------- Header: light bar once past the hero ---------- */
   function onScroll() {
@@ -74,6 +99,9 @@
       heroHold.forEach(function (el, i) {
         setTimeout(function () { el.classList.add("in"); }, 360 + i * 150);
       });
+      /* the hero canvas restamps its settle off this, so the arrival plays in
+         view rather than behind the curtain */
+      document.dispatchEvent(new CustomEvent("pct:curtain-up"));
     };
     if (reduced) lift();
     else if (document.readyState === "complete") setTimeout(lift, 250);
@@ -182,6 +210,7 @@
      Markup carries the real value as fallback text; the script only
      replaces it while animating, so no-JS still shows correct numbers. */
   var counters = document.querySelectorAll("[data-count]");
+  var countStops = []; /* one canceller per count that actually started */
   function animateCount(el) {
     var target = parseFloat(el.getAttribute("data-count"));
     var prefix = el.getAttribute("data-prefix") || "";
@@ -190,22 +219,30 @@
     var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
     var dur = 1800;
     var start = null;
+    var countRaf = null;
     function fmt(n) {
       if (decimals) return n.toFixed(decimals);
       n = Math.round(n);
       return plain ? String(n) : n.toLocaleString("en-US");
     }
+    function final() { el.textContent = prefix + fmt(target) + suffix; }
     function frame(ts) {
+      countRaf = null;
+      if (reduced) { final(); return; } /* belt and braces if a frame outruns the teardown */
       if (!start) start = ts;
       var p = Math.min((ts - start) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 4);
       el.textContent = prefix + fmt(target * eased) + suffix;
-      if (p < 1) requestAnimationFrame(frame);
+      if (p < 1) countRaf = requestAnimationFrame(frame);
     }
     if (reduced) {
-      el.textContent = prefix + fmt(target) + suffix;
+      final();
     } else {
-      requestAnimationFrame(frame);
+      countRaf = requestAnimationFrame(frame);
+      countStops.push(function () {
+        if (countRaf !== null) { cancelAnimationFrame(countRaf); countRaf = null; }
+        final(); /* the number it was counting to, not the number it stopped on */
+      });
     }
   }
   if ("IntersectionObserver" in window && !reduced) {
@@ -221,6 +258,13 @@
       { threshold: 0.5 }
     );
     counters.forEach(function (el) { cio.observe(el); });
+    motionOff.push(function () {
+      cio.disconnect();
+      /* a count caught mid-flight lands on its number instead of freezing
+         part-way; counters that never started still carry the real value in
+         the markup, so there is nothing to do for those */
+      while (countStops.length) countStops.shift()();
+    });
   }
   /* no-IO / reduced-motion: markup text already shows the real values */
 
@@ -253,44 +297,53 @@
     setInterval(tickCd, 1000);
   }
 
-  /* ---------- Hero canvas: flowing silk threads ---------- */
+  /* ---------- Hero canvas: flowing silk threads ----------
+     WCAG 2.2.2 (Pause, Stop, Hide): automatic motion that starts on load,
+     lasts more than five seconds and runs beside other content must be
+     stoppable. Rather than bolt a visible control onto the hero, the threads
+     SETTLE: the motion envelope eases to zero over ~4.5s and the rAF loop is
+     then cancelled outright — the animation genuinely ends, it does not idle
+     in the background. The threads come to rest pulled straight and still,
+     which reads as an arrival rather than as something switching off.
+     A fine pointer moving over the hero wakes it; when the pointer stops, the
+     same easing runs again. Touch never wakes it. */
   var heroCanvas = document.getElementById("hero-canvas");
-  if (heroCanvas && !reduced) {
+  if (heroCanvas) {
     var hctx = heroCanvas.getContext("2d");
     var hw, hh, ht = 0, hmx = 0.5, hmy = 0.5, heroVisible = true;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var LINES = 24;
+    var HERO_SETTLE = 4500; /* ms from first paint — or from the last pointer move — to rest */
+    var HERO_WAKE_GAP = 140; /* ms of pointer stillness that counts as "the pointer stopped" */
+    var heroRaf = null;
+    var heroRunning = false;
+    var heroEnv = 1;      /* motion envelope: 1 = full sway, 0 = fully at rest */
+    var heroEnvFrom = 1;  /* envelope value the current settle started from */
+    var heroSettleAt = 0; /* timestamp the current settle began */
+    var heroLastMove = -1e9;
+
     var sizeCanvas = function () {
       hw = heroCanvas.width = heroCanvas.offsetWidth * dpr;
       hh = heroCanvas.height = heroCanvas.offsetHeight * dpr;
     };
     sizeCanvas();
-    window.addEventListener("resize", sizeCanvas);
-    heroCanvas.parentElement.addEventListener("mousemove", function (e) {
-      var r = heroCanvas.getBoundingClientRect();
-      hmx = (e.clientX - r.left) / r.width;
-      hmy = (e.clientY - r.top) / r.height;
-    });
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        heroVisible = entries[0].isIntersecting;
-      }).observe(heroCanvas);
-    }
-    var LINES = 24;
-    (function drawThreads() {
-      requestAnimationFrame(drawThreads);
-      if (!heroVisible) return;
+
+    /* One frame. Thread count, colours, spacing and wave geometry are exactly
+       as before; `env` is the only addition — it scales both motion terms, so
+       env 1 is the original animation and env 0 draws the threads at rest. */
+    var paintThreads = function (env) {
       hctx.clearRect(0, 0, hw, hh);
       var step = Math.max(8 * dpr, hw / 150);
       for (var i = 0; i < LINES; i++) {
         var p = i / LINES;
         var yBase = hh * (0.18 + p * 0.74);
-        var amp = hh * 0.05 * (0.35 + p) * (0.7 + 0.6 * hmy);
+        var amp = hh * 0.05 * (0.35 + p) * (0.7 + 0.6 * hmy) * env;
         hctx.beginPath();
         for (var x = 0; x <= hw + step; x += step) {
           var wave =
             Math.sin(x * 0.0016 / dpr + ht * 0.7 + i * 0.42) *
             Math.cos(x * 0.0006 / dpr - ht * 0.32 + i * 1.7);
-          var y = yBase + wave * amp * (0.6 + 0.8 * hmx) + Math.sin(ht * 0.4 + i * 2.1) * 6 * dpr;
+          var y = yBase + wave * amp * (0.6 + 0.8 * hmx) + Math.sin(ht * 0.4 + i * 2.1) * 6 * dpr * env;
           if (x === 0) hctx.moveTo(x, y); else hctx.lineTo(x, y);
         }
         var gold = i % 4 === 0;
@@ -300,23 +353,106 @@
         hctx.lineWidth = (gold ? 1.2 : 0.8) * dpr;
         hctx.stroke();
       }
-      ht += 0.008;
-    })();
+    };
+
+    var stopHero = function (env) {
+      heroRunning = false;
+      if (heroRaf !== null) { cancelAnimationFrame(heroRaf); heroRaf = null; }
+      heroEnv = env;
+      /* paint the resting frame even when off-screen, so the hero is never
+         left frozen mid-sway for whoever scrolls back up to it */
+      paintThreads(heroEnv);
+    };
+
+    var heroFrame = function (ts) {
+      heroRaf = requestAnimationFrame(heroFrame);
+      if (ts - heroLastMove < HERO_WAKE_GAP) {
+        /* pointer is still moving: lift the envelope back toward full and hold
+           the settle clock at "now", so when it does stop the ease-out starts
+           from wherever the envelope currently is — never a jump to full sway */
+        heroEnv += (1 - heroEnv) * 0.12;
+        if (heroEnv > 0.999) heroEnv = 1;
+        heroEnvFrom = heroEnv;
+        heroSettleAt = ts;
+      } else {
+        var t = Math.min((ts - heroSettleAt) / HERO_SETTLE, 1);
+        /* eased out, not clamped: leaves full sway without a jerk and reaches
+           stillness with zero velocity, so the last moment of motion is
+           imperceptible and the cancel below is never seen */
+        heroEnv = heroEnvFrom * (1 - t * t * (3 - 2 * t));
+        if (t >= 1) { stopHero(0); return; }
+      }
+      if (!heroVisible) return; /* off-screen: the envelope still runs down, nothing is drawn */
+      paintThreads(heroEnv);
+      ht += 0.008 * heroEnv; /* time slows with the envelope, so the drift decelerates too */
+    };
+
+    var startHero = function (ts) {
+      if (heroRunning || reduced) return;
+      heroRunning = true;
+      heroEnvFrom = heroEnv;
+      heroSettleAt = ts;
+      heroRaf = requestAnimationFrame(heroFrame);
+    };
+
+    window.addEventListener("resize", function () {
+      sizeCanvas(); /* resizing the backing store clears it */
+      if (!heroRunning) paintThreads(heroEnv);
+    });
+
+    heroCanvas.parentElement.addEventListener("mousemove", function (e) {
+      var r = heroCanvas.getBoundingClientRect();
+      hmx = (e.clientX - r.left) / r.width;
+      hmy = (e.clientY - r.top) / r.height;
+      /* fine pointers only — a tap synthesises a mousemove, and touch must
+         never restart motion the reader did not ask for */
+      if (reduced || !finePointerMQ.matches) return;
+      heroLastMove = performance.now();
+      startHero(heroLastMove);
+    });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        heroVisible = entries[0].isIntersecting;
+      }).observe(heroCanvas);
+    }
+
+    if (reduced) {
+      stopHero(0); /* one static frame; the loop never starts */
+    } else {
+      startHero(performance.now());
+      motionOff.push(function () { stopHero(0); });
+      /* The settle is the hero's arrival, so it has to be seen. Starting it at
+         parse time meant most of the ease played behind the opaque loader
+         curtain — on the slow path the reader caught under half of it. Restamp
+         the envelope when the curtain actually lifts so the full ease runs in
+         view. `pct:curtain-up` is dispatched by the loader block above. */
+      document.addEventListener("pct:curtain-up", function () {
+        if (reduced || !heroRunning) return;
+        heroEnvFrom = heroEnv;
+        heroSettleAt = performance.now();
+      }, { once: true });
+    }
   }
 
   /* ---------- Pinned horizontal Numbers scene ---------- */
   var numScene = document.querySelector(".numscene");
-  if (numScene && !reduced) {
+  /* css/polish.css un-pins this scene on phones and on short landscape
+     viewports; without the same gate here the rAF loop keeps running and
+     writing an inline transform to a stack that no longer scrolls sideways. */
+  var numPinnedMQ = window.matchMedia("(min-width: 768px) and (min-height: 501px)");
+  if (numScene && !reduced && numPinnedMQ.matches) {
     var numTrack = numScene.querySelector(".numscene-track");
     var numBar = numScene.querySelector(".numscene-progress span");
-    var numTarget = 0, numCurrent = 0, numActive = false;
+    var numTarget = 0, numCurrent = 0, numActive = false, numRaf = null;
     var numLoop = function () {
+      numRaf = null;
       numCurrent += (numTarget - numCurrent) * 0.18; /* tight enough to feel responsive */
       if (Math.abs(numTarget - numCurrent) < 0.0004) numCurrent = numTarget;
       var travel = numTrack.scrollWidth - window.innerWidth;
       numTrack.style.transform = "translate3d(" + (-numCurrent * travel).toFixed(1) + "px,0,0)";
       if (numBar) numBar.style.transform = "scaleX(" + numCurrent.toFixed(4) + ")";
-      if (numActive || Math.abs(numTarget - numCurrent) > 0.0004) requestAnimationFrame(numLoop);
+      if (numActive || Math.abs(numTarget - numCurrent) > 0.0004) numRaf = requestAnimationFrame(numLoop);
     };
     var numOnScroll = function () {
       var r = numScene.getBoundingClientRect();
@@ -324,27 +460,49 @@
       var raw = total > 0 ? -r.top / total : 0;
       numTarget = Math.max(0, Math.min(1, raw));
       var near = r.bottom > -200 && r.top < window.innerHeight + 200;
-      if (near && !numActive) { numActive = true; requestAnimationFrame(numLoop); }
+      /* one loop at a time, so the handle we hold is always the live one */
+      if (near && !numActive) { numActive = true; if (numRaf === null) numRaf = requestAnimationFrame(numLoop); }
       if (!near) numActive = false;
     };
     window.addEventListener("scroll", numOnScroll, { passive: true });
     numOnScroll();
+    motionOff.push(function () {
+      numActive = false;
+      if (numRaf !== null) { cancelAnimationFrame(numRaf); numRaf = null; }
+      window.removeEventListener("scroll", numOnScroll);
+      /* the reduced-motion stylesheet un-pins this scene and stacks the panels
+         into a column; an inline horizontal translate left over from the
+         pinned layout would shove that column off-screen, so it has to go */
+      numTrack.style.transform = "";
+      if (numBar) numBar.style.transform = "scaleX(1)"; /* finished, not the scaleX(0) start */
+    });
   }
 
   /* ---------- Hero letters scroll drift ---------- */
   var heroLetters = document.querySelector(".hero-letters");
   if (heroLetters && !reduced) {
     var lettersTick = false;
+    var lettersRaf = null;
     var driftLetters = function () {
+      lettersRaf = null;
       var y = Math.min(window.scrollY, window.innerHeight * 1.5);
       heroLetters.style.transform =
         "translate(" + (y * -0.06).toFixed(1) + "px," + (y * 0.24).toFixed(1) + "px)";
       lettersTick = false;
     };
-    window.addEventListener("scroll", function () {
-      if (!lettersTick) { requestAnimationFrame(driftLetters); lettersTick = true; }
-    }, { passive: true });
+    var onLettersScroll = function () {
+      if (!lettersTick) { lettersRaf = requestAnimationFrame(driftLetters); lettersTick = true; }
+    };
+    window.addEventListener("scroll", onLettersScroll, { passive: true });
     driftLetters();
+    motionOff.push(function () {
+      if (lettersRaf !== null) { cancelAnimationFrame(lettersRaf); lettersRaf = null; }
+      lettersTick = false;
+      window.removeEventListener("scroll", onLettersScroll);
+      /* leave the letters where this scroll position puts them — snapping back
+         to the top-of-page offset would be a jump, i.e. more motion, not less */
+      driftLetters();
+    });
   }
 
   /* ---------- Placement rows: eased horizontal motion, 3 rows on mobile ---------- */
@@ -385,7 +543,9 @@
       });
       return r.bottom > -120 && r.top < window.innerHeight + 120;
     }
+    var rowRaf = null;
     function tick() {
+      rowRaf = null;
       var near = measure();
       var settled = true;
       rows.forEach(function (row, i) {
@@ -394,14 +554,28 @@
         if (Math.abs(targets[i] - currents[i]) > 0.4) settled = false;
         row.style.transform = "translate3d(" + currents[i].toFixed(1) + "px,0,0)";
       });
-      if (near || !settled) requestAnimationFrame(tick);
+      if (near || !settled) rowRaf = requestAnimationFrame(tick);
       else running = false;
     }
     function wake() {
-      if (!running) { running = true; requestAnimationFrame(tick); }
+      if (!running) { running = true; rowRaf = requestAnimationFrame(tick); }
     }
     window.addEventListener("scroll", wake, { passive: true });
     wake();
+    motionOff.push(function () {
+      running = false;
+      if (rowRaf !== null) { cancelAnimationFrame(rowRaf); rowRaf = null; }
+      window.removeEventListener("scroll", wake);
+      window.removeEventListener("resize", build);
+      /* land on the finished offsets for this scroll position, not the start
+         ones — the reduced-motion stylesheet then re-flows the rows to
+         `transform: none !important` on top of this */
+      measure();
+      rows.forEach(function (row, i) {
+        currents[i] = targets[i];
+        row.style.transform = "translate3d(" + targets[i].toFixed(1) + "px,0,0)";
+      });
+    });
   });
 
   /* ---------- Magnetic buttons ---------- */

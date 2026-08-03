@@ -78,6 +78,7 @@ h1, h2, .display {
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 h3 {
   font-family: var(--font-text);
@@ -89,6 +90,13 @@ h3 {
 .h-hero  { font-size: clamp(3.2rem, 8.5vw, 7rem); }
 .h-page  { font-size: clamp(2.75rem, 6.5vw, 4.75rem); }
 .h-sect  { font-size: clamp(2.1rem, 4.2vw, 3.4rem); }
+
+/* Wrapping quality. Progressive enhancement — unsupporting browsers get the
+   normal greedy wrap. `balance` on short display lines and captions only
+   (it is a no-op past ~6 lines); `pretty` on running prose to kill orphans.
+   Never both on one element, and never on a `white-space: nowrap` element. */
+.h-hero, .h-page, .h-sect, figcaption { text-wrap: balance; }
+p, li, .lede { text-wrap: pretty; }
 
 .eyebrow {
   display: flex;
@@ -112,7 +120,8 @@ h3 {
 
 .lede {
   font-size: clamp(1.1rem, 1.9vw, 1.3rem);
-  line-height: 1.6;
+  /* leading tightens as size grows: 1.5 is the band for 17.6-20.8px */
+  line-height: 1.5;
   color: var(--ink-soft);
   max-width: var(--w-text);
 }
@@ -225,9 +234,10 @@ section { padding: var(--section) 0; }
 .brand-sub {
   display: block;
   font-family: var(--font-text);
-  font-size: 0.64rem;
+  /* 12px floor; tracking trimmed from 0.24em so the lockup keeps its width */
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold);
   margin-top: 0.2rem;
@@ -449,7 +459,7 @@ section { padding: var(--section) 0; }
   margin: 0;
 }
 .crest-solo figcaption {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -732,7 +742,7 @@ section { padding: var(--section) 0; }
   left: 0; bottom: 0;
   background: var(--purple-deep);
   color: var(--paper);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -935,9 +945,10 @@ section { padding: var(--section) 0; }
 .product-media .tag {
   position: absolute;
   top: 1.35rem; left: 1.35rem;
-  font-size: 0.62rem;
+  /* 12px floor; tracking trimmed to hold the badge's original width */
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(250, 248, 243, 0.75);
 }
@@ -1009,7 +1020,9 @@ section { padding: var(--section) 0; }
 
 .footer-mark {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 13vw, 11rem);
+  /* WCAG 1.4.4: rem term added so the mark grows under zoom, and the
+     max/min ratio is brought to 2.5. Within 5% of the old 13vw curve. */
+  font-size: clamp(4.2rem, 1.4rem + 10.5vw, 10.5rem);
   font-weight: 400;
   line-height: 0.95;
   text-align: center;
@@ -1419,7 +1432,10 @@ main > section { position: relative; }
 }
 .numpanel-num {
   font-family: var(--font-display);
-  font-size: clamp(7rem, 26vw, 24rem);
+  /* WCAG 1.4.4: a vw-only preferred term is frozen in physical size under
+     zoom. The rem term keeps it growing. Measured within 4% of the old 26vw
+     curve at 390 / 768 / 1440 (+1.8% / +1.6% / -3.6%). */
+  font-size: clamp(7rem, 1.4rem + 23.5vw, 23rem);
   line-height: 0.95;
   color: var(--purple);
   font-variant-numeric: tabular-nums;
@@ -1466,7 +1482,7 @@ main > section { position: relative; }
    viewport height — cap it against height so it clears the pinned heading.
    Must stay ABOVE the reduced-motion block: equal specificity on .numpanel. */
 @media (orientation: landscape) and (max-height: 560px) {
-  .numpanel-num { font-size: min(clamp(7rem, 26vw, 24rem), 36vh); }
+  .numpanel-num { font-size: min(clamp(7rem, 1.4rem + 23.5vw, 23rem), 36vh); }
   .numpanel { padding: clamp(7rem, 32vh, 9rem) var(--gutter) 3rem; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1541,9 +1557,12 @@ main > section { position: relative; }
   font-variant-numeric: tabular-nums;
 }
 .cd-u {
-  font-size: 0.66rem;
+  /* 0.75rem is the 12px legibility floor; tracking trimmed from 0.2em so the
+     four-unit row keeps its measured width (within 2px at 320px, the tightest
+     case). Conversion-critical label — do not let this drop back below 12px. */
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(250, 248, 243, 0.55);
 }

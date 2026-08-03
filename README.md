@@ -27,16 +27,56 @@ assets/             Photos + crest
 | **Photos** | Drop new images in `assets/`, update the `<img src>` paths |
 | **Custom domain** | If the site moves off `pct-zeta-rho.github.io`, update the `og:image`/`og:url` meta tags in all four HTML heads |
 
-## After ANY edit to styles.css or main.js
+## After ANY edit to styles.css, polish.css, or main.js
 
-Bump the cache version on **all four** HTML pages so visitors get the new files:
+Bump the cache version on **every** HTML page so visitors get the new files:
 
 ```bash
-# example: v=14 -> v=15
-sed -i '' 's/?v=14/?v=15/g' index.html rush.html philanthropy.html apparel.html
+sed -i '' 's/?v=24/?v=25/g' *.html
 ```
 
 (Editing HTML only? No bump needed.)
+
+There are two stylesheets and **order matters**: `css/polish.css` must always be
+linked *after* `css/styles.css`. It wins by load order, not specificity — the
+mobile scene un-pinning in particular relies on coming second.
+
+## Each rush cycle: refresh the dated copy
+
+`rush.html` and `fallrush.html` hard-code the year. Google rewrites titles it
+considers to have obsolete dates, so refresh these at the start of every cycle
+(each file carries a `<!-- MAINTENANCE -->` comment above its `<title>`):
+
+| Where | What to update |
+|---|---|
+| `<title>` on both pages | "Fall Rush 2026" / "Fall 2026" |
+| `og:title` on both pages | same year string |
+| Event JSON-LD in `fallrush.html` | `name`, `startDate`, `endDate`, `location` |
+| `assets/rush-events.ics` | all six VEVENTs (dates, rooms, dress codes) |
+| `data-countdown` attributes | ISO datetime of event 1, on index/rush/fallrush |
+| `email/rush-confirmation.html` | the six event cards |
+| `email/rush-day-of.html` | re-render the baked art (see the email section) |
+
+Keep the ICS, the emails, and the Event JSON-LD saying the **same** thing —
+they contradicted each other once and rushees got the wrong dress code.
+
+## Things that will bite you
+
+- **`robots.txt` does nothing here.** Google only reads it at a host root, and
+  this site lives at `chasebarn.github.io/pct-zeta-rho/`. `portal.html` is
+  protected by its `noindex` meta tag, not by the `Disallow` line. **Before
+  moving to a custom domain, delete `Disallow: /portal.html`** — once robots.txt
+  starts working it would block crawling and stop Google from ever seeing the
+  noindex, which is the opposite of what you want.
+- **Don't shrink the images.** `assets/crest.png` and the three photos are sized
+  for 2× retina (the homepage renders photos at ~1305 device px, the crest at
+  ~430). Re-encode at the same pixel dimensions; downscaling visibly softens
+  them. They are already optimized — crest 27 KB, photos ~750 KB total.
+- **Base CSS must always render the finished state.** Every page carries a
+  `<noscript>` block that hides the loader curtain and un-hides `.reveal`
+  content. Without it, a blocked or failed script leaves the whole site a blank
+  purple screen. Don't add a new element that starts invisible and depends on JS
+  to appear.
 
 ## Chapter portal (portal.html)
 

@@ -74,6 +74,131 @@ body.nav-open .site-header.scrolled { --focus-ring: var(--gold-soft); }
 .site-header.scrolled .brand-sub { color: #6d5410; }
 
 /* ------------------------------------------------------------
+   1c · HERO: THE CLAIM AND THE NEXT EVENT
+   The hero used to say only who we are (name + school), spending the
+   most-viewed pixels on the two facts a visitor already knew from the
+   link they clicked, while the strongest claim (#3 nationally) sat in
+   body copy three screens down and the countdown lived at the page
+   bottom. These two lines carry the claim and the date into view.
+   Type stays inside the existing scale; no new colours.
+   ------------------------------------------------------------ */
+
+.hero-sub { margin-bottom: 1.4rem; }         /* was 2.6rem — the claim now follows */
+
+.hero-claim {
+  max-width: 34rem;                           /* ~62 characters at this size */
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(250, 248, 243, 0.82);           /* 11.4:1 on the hero ground */
+}
+.hero-claim strong { font-weight: 650; color: var(--paper); }
+
+.hero-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 0.85rem;
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: rgba(250, 248, 243, 0.9);
+}
+.hero-next-lab {
+  font-size: 0.75rem;          /* the 12px floor — do not lower */
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);                    /* 10.1:1 on purple-deep */
+  border: 1px solid rgba(230, 198, 91, 0.42);
+  border-radius: 2px;
+  padding: 0.3rem 0.55rem;
+}
+
+/* The hero copy is a compact restatement, not the page's main countdown
+   moment — so it runs at roughly half the scale of the one in the CTA band. */
+.countdown-hero { margin: 2.2rem 0 0; }
+.countdown-hero .cd-label { font-size: 0.75rem; margin-bottom: 0.75rem; }
+.countdown-hero .cd-num { font-size: clamp(1.5rem, 3.4vw, 2.1rem); }
+.countdown-hero .cd-units { gap: clamp(0.9rem, 2.6vw, 1.7rem); }
+
+@media (max-width: 700px) {
+  .hero-claim { font-size: 1rem; }
+  .hero-next { font-size: 0.9rem; margin-bottom: 1.6rem; }
+}
+
+/* ------------------------------------------------------------
+   1d · SUPPORTER BAND
+   Lifted out of the rush CTA band so the primary rush decision owns
+   its own screen. Quiet by design: this is a footer-adjacent ask, not
+   a competing call to action.
+   ------------------------------------------------------------ */
+.support-band {
+  background: var(--paper);
+  border-top: 1px solid var(--line, #e8e2d4);
+  padding: 2.4rem 0;
+}
+.support-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.6rem;
+}
+.support-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+.support-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.support-band .btn-ghost {
+  border-color: rgba(25, 18, 33, 0.22);
+  color: var(--ink);
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
+}
+.support-band .btn-ghost:hover { border-color: var(--purple); color: var(--purple); }
+
+@media (max-width: 700px) {
+  .support-inner { justify-content: flex-start; }
+}
+
+/* ------------------------------------------------------------
+   1e · "THE STRAIGHT ANSWERS" (rush.html)
+   A definition list, not cards — this is reference information a
+   prospect scans for one number, so the term/answer pairing is the
+   honest structure. Hairlines only, matching the site's ledger rows.
+   ------------------------------------------------------------ */
+.straight { margin: 0; }
+.straight-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: 1rem 2.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line, #e8e2d4);
+}
+.straight-row:first-child { border-top: 1px solid var(--line, #e8e2d4); }
+.straight dt {
+  margin: 0;
+  font-size: 0.75rem;          /* the 12px floor — do not lower */
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  padding-top: 0.25rem;
+}
+.straight dd {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.straight dd strong { color: var(--ink); font-weight: 650; }
+
+@media (max-width: 700px) {
+  .straight-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.3rem 0; }
+}
+
+/* ------------------------------------------------------------
    2 · MOBILE SCROLLJACK REMOVAL
    The pinned horizontal "Numbers don't lie" scene pins for 240vh on
    phones. NN/g's scrolljacking research puts the worst damage exactly

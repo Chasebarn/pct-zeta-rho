@@ -284,6 +284,65 @@ Stacks on narrow clients because each cell is a full-width table at 100%.
 </tr>
 ```
 
+
+---
+
+## HARD RULES ADDED AFTER THE FIRST BUILD FAILED REVIEW
+
+These are not suggestions. The first pass was rejected for exactly these.
+
+### R1 · NEVER put a ✎ in visible copy
+The pencil is for HTML COMMENTS ONLY: `<!-- EDIT: swap the date -->`.
+A ✎ inside a `<td>`, `<div>`, `<span>`, or any text node renders as a literal
+pencil character to the reader. The alumni template shipped 34 of them and looked
+broken. Visible placeholders use BRACKETED CAPS instead: `[FIRST LAST]`,
+`[CLASS OF 20XX]`, `[ROLE] at [COMPANY]`, `[$0,000]`. Those read as intentional
+mock content. Pencils read as a bug.
+
+### R2 · Placeholder images are BOXES, not photos
+Do not reference assets/photo-*.jpg. Those are three specific photos of unrelated
+events, and dropping them in reads as random stock. Use this block, which needs no
+image file and renders identically everywhere:
+```html
+<tr>
+  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:26px 44px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
+      <tr><td align="center" style="padding:64px 20px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+        Image placeholder
+      </td></tr>
+    </table>
+  </td>
+</tr>
+```
+Two side by side: same thing in a 2-column table, each `width="50%"`, inner cell
+padding `44px 12px`.
+
+### R3 · COPY LIMITS. These are counted.
+- Event reminder emails: **90 words of body copy, maximum**, excluding the detail
+  card. One short intro (2 sentences max). "What to expect" is **3 rows, one line
+  each**, not paragraphs.
+- Confirmation: 60 words plus the schedule list.
+- Follow up: 70 words.
+- Newsletter / support: each section is 2 sentences max.
+If a sentence is not carrying the date, the room, the attire, or the action, cut it.
+
+### R4 · Do not give advice, and do not explain things nobody asked
+Banned: "bring a question", "write your questions down beforehand", "come prepared
+to", "make sure you", "here is a tip", dues or cost information in a rush reminder,
+explanations of what a fraternity is, anything that reads as coaching. State the
+facts of the event. The reader decides what to do with them.
+
+### R5 · Dark mode must not break the cream panel
+Every `<td>` that sets `background-color:#faf8f3` must also carry `bgcolor="#faf8f3"`
+as an attribute, and every text `<div>` inside it must set an explicit `color:`.
+Never rely on an inherited colour. A client that inverts the panel will still find
+an explicit colour on the text, so the pairing stays legible instead of going
+dark-on-dark.
+
+### R6 · One idea per band
+Hero, then one thing, then the next. Do not stack a paragraph plus a callout plus a
+list plus a photo in a single cream run. Whitespace is the design.
+
 ---
 
 ## Fall Rush 2026 event data

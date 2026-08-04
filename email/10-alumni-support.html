@@ -12,56 +12,27 @@
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    PCT ZETA RHO · EMAIL 10 · ALUMNI CHAPTER UPDATE (Outlook-proof build)
     SUBJECT:      What Zeta Rho did this year.
-    PREVIEW TEXT: A short update from the chapter, the numbers behind it, and where we are headed.
+    PREVIEW TEXT: The year in numbers, and where members landed.
 
-    Built entirely from email/COMPONENTS.md:
-      A shell · B hero art · D section labels · E body paragraphs ·
-      F detail card reused for accomplishments and placements · K two-up stat pair ·
-      I photo slot · H numbered rows · J divider · C live cream CTA · L closing art + footer.
-
-    DARK MODE RULE (do not undo): purple panels are IMAGES only. Every readable,
-    editable word sits on cream #faf8f3. Never put live text on a purple td.
-
-    TONE RULE (do not undo): this is an update, not a fundraiser. One quiet
-    paragraph and one button at the end. No tiers, no goal amount, no deadline,
-    no matching gift, no thermometer. Do not add urgency to this email.
-
-    ✎ EDIT BEFORE SENDING
-      1. HERO ART: currently hero-alumni-panel.png, which is RUSH art and reads
-         "Alumni Panel · Wed Sep 9 · 7:00 PM · BSN 225". It is a stand-in so the
-         email never shows a broken image. Render a real one from
-         assets/email-art/event-hero.html with a query string like
-           ?kicker=Phi Chi Theta · Zeta Rho&title=Chapter <em>Update.</em>
-           &v1=2025-26&l1=Academic Year&v2=62&l2=Active Members&v3=USF&l3=Campus
-         using the headless Chrome command in COMPONENTS.md, save it under a NEW
-         filename (for example hero-chapter-update1.png), publish it, then swap
-         the src AND the alt text below. GitHub Pages caches images by URL forever.
-      2. CLOSING ART: close-art3.png is day-of rush copy and says "tonight". Edit
-         assets/email-art/close-art3.html, save as close-art5.html, render it, and
-         point the src at the NEW filename. Suggested line: "Thank you for staying
-         with this chapter." No dollar figures in the art.
-      3. EVERY ✎ IN THE BODY is a placeholder: the president's name and title, all
-         member names, class years, roles, companies, counts, dollar figures, the
-         spotlight photo and caption, and the three goals. Nothing in this file is
-         a verified chapter fact. Confirm every number with the exec board before
-         sending.
-      4. SPOTLIGHT PHOTO: photo-letters.jpg is a placeholder. Swap in a real photo
-         of the member, keep it square, and update the alt text and caption.
-      5. DONATION LINK: the button points at
-         https://sites.google.com/view/pct-zeta-rho/philanthropy
-         which is the OLD Google Site philanthropy page, used as a placeholder
-         until a real donation URL exists. Replace it before sending.
-      6. REPLY-TO: set the sending address to an inbox an officer actually watches.
-         Goal 01 tells alumni to reply.
+    ✎ EDIT BEFORE SENDING. Every visible [BRACKETED CAP] is a placeholder:
+      1. FROM THE PRESIDENT -> replace the two placeholder sentences with the
+                               president's own. Two sentences, not more.
+      2. [FIRST LAST]       -> president's name in the signature block.
+      3. [00] / [000]       -> active member count, chapter service hours.
+      4. PLACEMENTS rows    -> four members. Name and class year on line one,
+                               role and company on line two.
+      5. MEMBER SPOTLIGHT   -> swap the grey Image placeholder box for a real
+                               photo of that member, and replace the one
+                               placeholder sentence.
+      6. SUPPORT LINK       -> see the comment above the CTA. It is a stand-in.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
   <!-- preview text (hidden) -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    A short update from the chapter, the numbers behind it, and where we are headed.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    The year in numbers, and where members landed.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -69,151 +40,114 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ B · HERO ART ══════════ -->
-          <!-- ✎ SWAPPABLE. See edit note 1 in the head: this is rush art standing in for a chapter-update hero. Swap the src and this alt together. -->
+          <!-- ══════════ 1 · HERO ART ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-chapter-update1.png"
-                   width="600" height="260"
-                   alt="The Chapter Update from Phi Chi Theta Zeta Rho, from the President."
+                   width="600" height="220"
+                   alt="PCT Zeta Rho. The Chapter Update. From the president."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
 
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
+          <!-- ══════════ 2 · FROM THE PRESIDENT ══════════ -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">President&rsquo;s update</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">From the president</td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ E · THE LETTER ══════════ -->
-          <!-- ✎ Confirm the academic year, the member count, and the "largest since" claim before sending. -->
+          <!-- ✎ Two sentences from the president go here. Two. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              To our alumni,
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
+                [PLACEHOLDER SENTENCE ONE.] [PLACEHOLDER SENTENCE TWO.]
+              </div>
             </td>
           </tr>
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              Zeta Rho closed the ✎ 2025 to 2026 year with ✎ 62 active members. This is the
-              short version of what we did with it. Not a highlight reel, just the things
-              that took real work.
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              A lot of it traces back to people who graduated before us. Alumni ran our mock
-              interviews, sat on the panel during fall rush, and made the introductions behind
-              several of the placements below. That part of this chapter never shows up on a
-              resume, and it is the part we notice most.
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              If you have not been back in a while, the room is bigger and the standard is
-              higher. You would still recognize it.
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; color:#191221;">[FIRST LAST]</div>
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; color:#6f6580; padding-top:5px;">President, Zeta Rho Chapter</div>
             </td>
           </tr>
 
-          <!-- ✎ SIGNATURE: president's name and title -->
+          <!-- ══════════ 3 · THIS YEAR ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:26px 44px 0;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">✎ First Last</div>
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">✎ President, Zeta Rho Chapter &middot; Phi Chi Theta at USF</div>
-            </td>
-          </tr>
-
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:46px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Chapter accomplishments</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">This year</td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ K · TWO-UP STAT PAIR (the two most quantified) ══════════ -->
-          <!-- ✎ Both figures are placeholders. Get them from the secretary and the service chair. -->
+          <!-- ✎ [00] = active members. [000] = service hours. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:28px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td width="50%" valign="top" style="padding-right:12px;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:38px; line-height:1; color:#191221;">✎ 62</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase; padding-top:8px;">Active members</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:38px; line-height:1; color:#191221;">[00]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase; padding-top:10px;">Active members</div>
                   </td>
                   <td width="50%" valign="top" style="padding-left:12px;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:38px; line-height:1; color:#191221;">✎ 412</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase; padding-top:8px;">Service hours logged</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:38px; line-height:1; color:#191221;">[000]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase; padding-top:10px;">Service hours</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ F · SHORT ROWS (the rest) ══════════ -->
-          <!-- ✎ Confirm the dollar figure, the partner organization, and the workshop count. -->
+          <!-- ══════════ 4 · PLACEMENTS ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e8e2d4;">
-                <tr>
-                  <td width="34%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Philanthropy</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ $4,200 raised for ✎ Feeding Tampa Bay across two campus drives.</td>
-                </tr>
-                <tr>
-                  <td width="34%" valign="top" style="padding:14px 0 14px 18px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Development</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ 14 professional workshops and ✎ 3 corporate site visits, all run in house.</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:46px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Internship and career placements</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Placements</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- ✎ Four members. Line one: name, class year. Line two: role, company. -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:6px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td valign="top" style="padding:20px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="padding:20px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="padding:20px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="padding:20px 0 0;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
+                  </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ F · PLACEMENT ROWS ══════════ -->
-          <!-- ✎ EVERY name, class year, role and company below is a placeholder. Get written permission from each member before publishing their name and employer. -->
+          <!-- ══════════ 5 · MEMBER SPOTLIGHT ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e8e2d4;">
-                <tr>
-                  <td width="40%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">✎ First Last, Class of 2026</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ Investment Banking Analyst at ✎ Company</td>
-                </tr>
-                <tr>
-                  <td width="40%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">✎ First Last, Class of 2027</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ Summer Analyst at ✎ Company</td>
-                </tr>
-                <tr>
-                  <td width="40%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">✎ First Last, Class of 2026</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ Audit Associate at ✎ Company</td>
-                </tr>
-                <tr>
-                  <td width="40%" valign="top" style="padding:14px 0 14px 18px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">✎ First Last, Class of 2028</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.6; color:#191221;">✎ Marketing Intern at ✎ Company</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:46px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Member spotlight</td>
@@ -221,77 +155,29 @@
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ I · PHOTO SLOT ══════════ -->
-          <!-- ✎ Swap in a square photo of the member. Update the alt text and the caption with it. -->
+          <!-- ✎ Swap this grey box for a real photo of the member being spotlighted. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:26px 44px 0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-letters.jpg"
-                   width="512" height="512"
-                   alt="✎ Photo of the spotlighted member"
-                   style="display:block; width:100%; max-width:512px; height:auto; border:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; color:#453a52; background-color:#faf8f3;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:8px;">✎ First Last, Class of 2027</div>
-            </td>
-          </tr>
-          <!-- ✎ Rewrite these three sentences for the real member. Keep it specific and keep it short. -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              ✎ First joined as a freshman with no contacts in Tampa. She now runs the
-              chapter&rsquo;s mock interview program, which put ✎ 40 members through a full round
-              this spring. She starts at ✎ Company in ✎ May.
-            </td>
-          </tr>
-
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Upcoming goals</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ H · NUMBERED ROWS (forward looking) ══════════ -->
-          <!-- ✎ Replace all three goals with what the exec board actually committed to. -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:8px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="96" valign="top" style="padding:24px 0 22px; border-bottom:1px solid #e8e2d4;">
-                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-01b.png" width="80" height="60" alt="01" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14; background-color:#faf8f3;">
-                  </td>
-                  <td valign="top" style="padding:26px 0 22px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">✎ An alumni panel every semester</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:6px;">Right now we run one a year. If you would sit on a panel or take a call from a member, reply to this email and we will put you on the list.</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="96" valign="top" style="padding:24px 0 22px; border-bottom:1px solid #e8e2d4;">
-                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-02b.png" width="80" height="60" alt="02" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14; background-color:#faf8f3;">
-                  </td>
-                  <td valign="top" style="padding:26px 0 22px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">✎ A dues assistance fund</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:6px;">We want to cover dues for ✎ two members a year who earn a bid and cannot cover the cost themselves.</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="96" valign="top" style="padding:24px 0 0;">
-                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-03b.png" width="80" height="60" alt="03" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14; background-color:#faf8f3;">
-                  </td>
-                  <td valign="top" style="padding:26px 0 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">✎ Send a case competition team</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:6px;">✎ A four person team at the national competition in ✎ spring 2027. Travel is the only thing standing in the way.</div>
+                  <td align="center" style="padding:64px 20px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                    Image placeholder
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ J · DIVIDER ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:32px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
+                [ONE PLACEHOLDER SENTENCE ABOUT THIS MEMBER.]
+              </div>
+            </td>
+          </tr>
+
+          <!-- ══════════ 6 · DIVIDER ══════════ -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:40px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="border-top:1px solid #e8e2d4; font-size:0; line-height:0;">&nbsp;</td>
@@ -300,20 +186,24 @@
             </td>
           </tr>
 
-          <!-- ══════════ E · THE SUPPORT PARAGRAPH (keep it quiet, keep it one paragraph) ══════════ -->
+          <!-- ══════════ 7 · ONE QUIET PARAGRAPH ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:26px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              All of the above was paid for by dues, campus fundraisers, and alumni who
-              chose to give. If you&rsquo;d like to help us keep providing opportunities like
-              these, you can support the chapter here. There is no goal amount attached to
-              this and no deadline.
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:28px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
+                If you&rsquo;d like to help us keep providing opportunities like these,
+                you can support the chapter here.
+              </div>
             </td>
           </tr>
 
-          <!-- ══════════ C · PRIMARY CTA (live bulletproof button on cream) ══════════ -->
-          <!-- ✎ PLACEHOLDER LINK. This is the old Google Site philanthropy page, standing in until a real donation URL exists. Replace it before sending. -->
+          <!-- ══════════ 8 · CTA ══════════ -->
+          <!--
+            ✎ PLACEHOLDER LINK. This points at the philanthropy page on the old
+            Google Site because the chapter has no dedicated donation URL yet.
+            Repoint the href below as soon as the real one exists.
+          -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:26px 44px 44px;">
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:30px 44px 48px;">
               <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
                 <tr>
                   <td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
@@ -324,8 +214,7 @@
             </td>
           </tr>
 
-          <!-- ══════════ L · CLOSING ART ══════════ -->
-          <!-- ✎ REPLACE THIS IMAGE. close-art3.png is day-of rush copy and says "tonight". See edit note 2 in the head. -->
+          <!-- ══════════ 9 · CLOSING ART + FOOTER ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-alumni.png" width="600" height="200"
@@ -333,16 +222,27 @@
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
-
-          <!-- ══════════ L · FOOTER ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
-                   alt="Phi Chi Theta at USF" style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
+                   alt="Phi Chi Theta at USF"
+                   style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-                  <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+                  <td width="50%" style="padding:0;">
+                    <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;">
+                      <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65"
+                           alt="Visit our website"
+                           style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;">
+                    </a>
+                  </td>
+                  <td width="50%" style="padding:0;">
+                    <a href="https://www.instagram.com/pctusf/" style="display:block;">
+                      <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65"
+                           alt="@pctusf on Instagram"
+                           style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;">
+                    </a>
+                  </td>
                 </tr>
               </table>
             </td>

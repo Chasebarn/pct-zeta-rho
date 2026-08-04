@@ -6,57 +6,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
-  <title>Zeta Rho Alumni Letter &middot; August 2026</title>
+  <title>Zeta Rho Alumni Letter</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!--[if gte mso 9]><xml><o:OfficeDocumentSettings>
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    PCT ZETA RHO · EMAIL 09 · MONTHLY ALUMNI NEWSLETTER (Outlook-proof build)
-    SUBJECT:      Zeta Rho Alumni Letter. August 2026.
-    PREVIEW TEXT: One spotlight, one recap, the career news you sent in, and September's calendar.
+    PCT ZETA RHO . ALUMNI LETTER . monthly template
+    SUBJECT:      Zeta Rho Alumni Letter
+    PREVIEW TEXT: Issue [NO]. [MONTH YEAR].
 
-    ────────────────────────────────────────────────────────────────────
-    THIS IS A REUSABLE TEMPLATE. THE LAYOUT NEVER CHANGES.
-    Every month you replace the words inside the eight regions below and
-    send it again. Do not add, delete, or reorder sections. Do not change
-    any style attribute. If you only edit what is listed here, the email
-    cannot break.
+    HOW THIS FILE WORKS
+      The layout never changes. Each month the Alumni Chair replaces only the
+      text inside the [SQUARE BRACKETS]. Every editable region has an EDIT
+      comment directly above it. Do not add sections and do not add paragraphs.
 
-    THE EIGHT THINGS TO CHANGE EACH MONTH
-      1. HERO ART           the image at the very top, and its alt text
-      2. MONTH AND ISSUE    the line of live text under the hero
-      3. THE LETTER         one headline plus three paragraphs
-      4. MEMBER SPOTLIGHT   photo, name, class year, role, two to three sentences
-      5. EVENT HIGHLIGHT    photo, caption, and a short recap paragraph
-      6. CAREER WINS        three to five rows, name and class year, role and company
-      7. UPCOMING EVENTS    exactly three rows, name, date, and details
-      8. THE BUTTON         the label and the link for this month's ask
+    THE LIMITS THIS TEMPLATE ENFORCES
+      Two sentences maximum per section. Purple bands are images. Everything
+      readable sits on cream #faf8f3. The font stack is always exactly
+      'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif. No em dashes.
 
-    Also change the SUBJECT and the PREVIEW TEXT above, and the matching
-    hidden preview line at the top of the body. ✎
+    THE GREY BOXES
+      Each box marked "Image placeholder" is where a photo goes at send time.
+      Replace the placeholder table with an img at the same width and give it
+      a 1px #e8e2d4 border.
 
-    HOW TO FIND YOUR EDITS: search the file for the ✎ character. Every
-    editable region is marked with one. Text inside [square brackets] is a
-    placeholder that must be replaced before you send.
-
-    RULES THAT KEEP THIS WORKING (do not undo):
-      · Purple panels are IMAGES, never live text. Outlook dark mode
-        recolors live backgrounds but never touches images.
-      · Everything readable and editable sits on cream #faf8f3.
-      · Never substitute a different font. The stack is always exactly
-        'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif.
-      · No em dashes in the copy. Use a period, a colon, or "and".
-      · If you re-render a PNG, give it a NEW filename. GitHub Pages caches
-        images by URL forever.
-    ────────────────────────────────────────────────────────────────────
+    EDIT BEFORE SENDING
+      1. Issue number and month.
+      2. From the Chair: two sentences.
+      3. Member Spotlight: photo, name, class year, role, company, one sentence.
+      4. Event Highlight: photo, one sentence.
+      5. Career Wins: four names, class years, roles, companies.
+      6. Upcoming: three events, dates, locations.
+      7. Button label and button link.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
-  <!-- ✎ 1b · PREVIEW TEXT. Match the PREVIEW TEXT line in the head comment. -->
+  <!-- EDIT: preview text. Match the PREVIEW TEXT line in the head comment. -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    One spotlight, one recap, the career news you sent in, and September&rsquo;s calendar.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Issue [NO]. [MONTH YEAR].&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -64,19 +53,7 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ 1 · HERO ART (B) ══════════ -->
-          <!--
-            ✎ EDIT 1 OF 8: HERO ART.
-            hero-alumni-letter-01.png is the permanent masthead. It says nothing
-            month-specific on purpose, so in most months you change NOTHING here.
-            The month lives as live text directly below, which is where it belongs,
-            because live text is editable and baked art is not.
-            Only if you want the masthead itself to change: edit
-            assets/email-art/hero-alumni-letter.html, render it at 1200x440 with
-            headless Chrome (command in COMPONENTS.md), save it under a NEW filename
-            (bump to -02), point the src at that filename, and update the alt text to
-            match the new wording. Keep width="600" height="220".
-          -->
+          <!-- ══════════ 1 . HERO ART (baked: wordmark, title, standing subtitle) ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-alumni-letter-01.png"
@@ -86,286 +63,207 @@
             </td>
           </tr>
 
-          <!-- ══════════ 1 · MONTH AND ISSUE (live text, D styling without the rule) ══════════ -->
-          <!--
-            ✎ EDIT 2 OF 8: MONTH AND ISSUE.
-            This is the only place the month is live text, so it must be right.
-            Format: Month Year &middot; Issue No. N. Bump the issue number every send.
-          -->
+          <!-- EDIT: issue number and month. Example: Issue 07 &middot; October 2026 -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:30px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">
-              August 2026 &middot; Issue No. 12
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:30px 44px 0; color:#6f6580;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.5; color:#6f6580; text-transform:uppercase;">
+                Issue [NO] &middot; [MONTH YEAR]
+              </div>
             </td>
           </tr>
 
-          <!-- ══════════ 2 · SECTION LABEL (D) ══════════ -->
+          <!-- ══════════ 2 . FROM THE CHAIR ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:38px 44px 0; color:#8a6d14;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">From the Alumni Chair</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">From the Chair</div>
+                  </td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ 2 · HEADLINE + LETTER (E) ══════════ -->
-          <!--
-            ✎ EDIT 3 OF 8: THE LETTER. One headline and three paragraphs.
-            Keep it to three paragraphs. Four makes the email too long and the
-            spotlight falls below the fold on a phone.
-              Paragraph 1 is reusable as written. Change only the month.
-              Paragraph 2 is yours. Replace the bracketed text entirely.
-              Paragraph 3 is the standing ask. Leave it alone.
-            Headline: one short sentence, under 45 characters.
-          -->
+          <!-- EDIT: two sentences from the Alumni Chair. Two is the maximum. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Instrument Serif',Georgia,serif; font-size:30px; font-weight:400; line-height:1.3; color:#191221;">
-              A short update from Zeta Rho.
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              This is the August issue. Below you will find one member spotlight, a
-              recap of last month&rsquo;s chapter event, the career news you sent in,
-              and what is on the calendar for September.
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              [Two or three sentences from you. What the chapter has been working on,
-              and what you want alumni to know this month. Be specific. Name the thing
-              and name the date.]
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              New role, new city, or news worth printing? Reply to this email and it
-              goes in the next issue.
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0; color:#453a52;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
+                [FIRST SENTENCE FROM THE ALUMNI CHAIR.] [SECOND SENTENCE FROM THE ALUMNI CHAIR.]
+              </div>
             </td>
           </tr>
 
-          <!-- ══════════ 3 · SECTION LABEL (D) ══════════ -->
+          <!-- ══════════ 3 . MEMBER SPOTLIGHT ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Member Spotlight</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Member Spotlight</div>
+                  </td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ 3 · MEMBER SPOTLIGHT (I photo + two columns) ══════════ -->
-          <!--
-            ✎ EDIT 4 OF 8: MEMBER SPOTLIGHT. Five things to replace.
-              a. the photo src. Upload the headshot to assets/ and use its filename.
-                 Use a SQUARE crop. If it is not square, update BOTH width and height
-                 on the img so nothing reflows while it loads.
-              b. the photo alt text. Describe the person, not the word "headshot".
-              c. the name
-              d. the class year and the role and company line
-              e. two to three sentences, under 60 words, so the text column stays
-                 level with the photo.
-            Do not change the 188px column width. That is what holds the two-column
-            layout together in Outlook.
-          -->
+          <!-- EDIT: spotlight photo in the left box, then name, class year, role, company, one sentence -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0; color:#453a52;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td width="188" valign="top" style="padding-right:20px;">
-                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-letters.jpg"
-                         width="168" height="168"
-                         alt="[Full Name], Class of 20XX"
-                         style="display:block; width:100%; max-width:168px; height:auto; border:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; color:#6f6580; background-color:#faf8f3;">
+                  <td width="35%" valign="top" style="padding:0 18px 0 0;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
+                      <tr>
+                        <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:46px 10px;">
+                          <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; line-height:1.6; color:#6e6552; text-transform:uppercase;">Image placeholder</div>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
-                  <td valign="top">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:17px; font-weight:700; line-height:1.35; color:#191221;">[Full Name]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:3px;">Class of [20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:600; line-height:1.5; color:#4b2e83; padding-top:8px;">[Role] at [Company]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:10px;">[Two or three sentences. What they do now, what they ran in the chapter, and one specific thing they would tell a member who is graduating this year.]</div>
+                  <td width="65%" valign="top" style="padding:0; color:#453a52;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:17px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:12px;">[ONE SENTENCE ABOUT THIS MEMBER.]</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 4 · SECTION LABEL (D) ══════════ -->
+          <!-- ══════════ 4 . EVENT HIGHLIGHT ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Event Highlight</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Event Highlight</div>
+                  </td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ 4 · EVENT HIGHLIGHT (I photo + recap) ══════════ -->
-          <!--
-            ✎ EDIT 5 OF 8: EVENT HIGHLIGHT. Four things to replace.
-              a. the photo src. Upload it to assets/ and use its filename. The photo
-                 below is square (512x512). If yours is not square, update BOTH width
-                 and height on the img to your real pixel size.
-              b. the photo alt text
-              c. the caption under the photo: event name, date, and location
-              d. the recap paragraph. Three or four sentences. What happened, who
-                 showed up, and what came out of it. Numbers are better than adjectives.
-          -->
+          <!-- EDIT: one photo from the event -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/photo-service.jpg"
-                   width="512" height="512"
-                   alt="[Describe the photo: who is in it and what they are doing]"
-                   style="display:block; width:100%; max-width:512px; height:auto; border:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; color:#6f6580; background-color:#faf8f3;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:8px;">[Event name] &middot; [Month Day] &middot; [Location]</div>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0; color:#6e6552;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
+                <tr>
+                  <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:64px 20px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#6e6552; text-transform:uppercase;">Image placeholder</div>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+          <!-- EDIT: one sentence about the event. One is the maximum. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
-              [Three or four sentences on what happened. Say how many people came, what
-              the chapter actually did, and what it produced. If alumni were there, name
-              the count. If you want more alumni at the next one, say so here.]
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:16px 44px 0; color:#453a52;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52;">[ONE SENTENCE ABOUT THIS EVENT.]</div>
             </td>
           </tr>
 
-          <!-- ══════════ 5 · SECTION LABEL (D) ══════════ -->
+          <!-- ══════════ 5 . CAREER WINS ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Career Wins</td>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Career Wins</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- EDIT: four career wins. Name and class year on line one, role and company on line two. -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px; color:#453a52;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <!-- EDIT: career win 1 of 4 -->
+                <tr>
+                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <!-- EDIT: career win 2 of 4 -->
+                <tr>
+                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <!-- EDIT: career win 3 of 4 -->
+                <tr>
+                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <!-- EDIT: career win 4 of 4 -->
+                <tr>
+                  <td style="padding:18px 0 0;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                  </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 5 · CAREER WINS (H rows, no numerals, hairline between) ══════════ -->
-          <!--
-            ✎ EDIT 6 OF 8: CAREER WINS. Four rows are set up below. Three to five is
-            the right range.
-              · Top line:    Name, Class of 20XX
-              · Second line: Role at Company
-            TO REMOVE A ROW: delete the whole <tr> ... </tr> block, then make sure the
-            row that is now LAST has no "border-bottom:1px solid #e8e2d4;" in its style.
-            TO ADD A ROW: copy any row that still has a border-bottom, paste it above
-            the last row, and change the words. Never leave a border on the last row.
-          -->
+          <!-- ══════════ 6 . UPCOMING ══════════ -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:8px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td valign="top" style="padding:18px 0 16px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[Full Name], Class of [20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:4px;">[Role] at [Company]</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td valign="top" style="padding:18px 0 16px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[Full Name], Class of [20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:4px;">[Role] at [Company]</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td valign="top" style="padding:18px 0 16px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[Full Name], Class of [20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:4px;">[Role] at [Company]</div>
-                  </td>
-                </tr>
-                <!-- ✎ LAST ROW. No border-bottom. Keep it that way. -->
-                <tr>
-                  <td valign="top" style="padding:18px 0 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[Full Name], Class of [20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:4px;">[Role] at [Company]</div>
+                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Upcoming</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
-
-          <!-- ══════════ 6 · SECTION LABEL (D) ══════════ -->
+          <!-- EDIT: three upcoming events. Event name on line one, day, date and location on line two. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px; color:#453a52;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <!-- EDIT: upcoming 1 of 3 -->
                 <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Upcoming</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ 6 · UPCOMING EVENTS (F detail card, three rows) ══════════ -->
-          <!--
-            ✎ EDIT 7 OF 8: UPCOMING EVENTS. Exactly three rows. Not two, not four.
-            Three is what fits the card without it running past the button.
-              · Left cell:  the event name
-              · Right cell: the weekday and date on the first line, then time,
-                            location, and attire on the second line
-            The last row has no border-bottom. If you reorder rows, keep it that way.
-            Confirm every weekday against a real calendar. The Fall Rush dates below
-            are the 2026 dates (Wednesdays and Fridays). The source flyer says 2025,
-            where the same dates land on Tuesdays and Thursdays.
-          -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e8e2d4;">
-                <tr>
-                  <td width="34%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Info Night</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.4; color:#191221;">Wednesday, September 2</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">7:00 PM &middot; BSN 225 &middot; Fall Rush opens</div>
+                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
                   </td>
                 </tr>
+                <!-- EDIT: upcoming 2 of 3 -->
                 <tr>
-                  <td width="34%" valign="top" style="padding:14px 0 14px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Alumni Panel</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.4; color:#191221;">Wednesday, September 9</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">7:00 PM &middot; BSN 225 &middot; Business professional</div>
+                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
                   </td>
                 </tr>
-                <!-- ✎ LAST ROW. No border-bottom. Keep it that way. -->
+                <!-- EDIT: upcoming 3 of 3 -->
                 <tr>
-                  <td width="34%" valign="top" style="padding:14px 0 14px 18px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">[Event Name]</td>
-                  <td valign="top" style="padding:14px 18px 14px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; line-height:1.4; color:#191221;">[Weekday, Month Day]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[Time] &middot; [Location] &middot; [Attire or one detail]</div>
+                  <td style="padding:18px 0 0;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 7 · PRIMARY CTA (C, live button on cream) ══════════ -->
-          <!--
-            ✎ EDIT 8 OF 8: THE BUTTON. Change the label and the href to this month's
-            single ask. One ask per issue. If you have two, put the smaller one in
-            paragraph 2 of the letter as a plain sentence and leave the button alone.
-            This is the LIVE cream button from block C, not the baked purple one, on
-            purpose: the label is editable text, so you never have to re-render art
-            to change the ask. Keep it that way.
-            Label rules: four words or fewer, starts with a verb, no exclamation mark.
-            The href must be a full https:// or mailto: address.
-          -->
+          <!-- ══════════ 7 . CTA (live button on cream) ══════════ -->
+          <!-- EDIT: button label and button link -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:34px 44px 44px;">
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 48px; color:#191221;">
               <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
                 <tr>
                   <td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                    <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">Sit on the Alumni Panel</a>
+                    <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">[BUTTON LABEL]</a>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 8 · CLOSING ART (L) ══════════ -->
-          <!--
-            FIXED. Never edit this monthly. close-alumni-01.png carries the standing
-            ask and is true in every issue. Source: assets/email-art/close-alumni.html.
-            Note this is NOT close-art3.png, which is day-of rush art and says
-            "tonight". Do not swap it back.
-          -->
+          <!-- ══════════ 8 . CLOSING ART + FOOTER (fixed, never edited) ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-alumni-01.png" width="600" height="220"
@@ -373,18 +271,14 @@
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
-
-          <!-- ══════════ 8 · FOOTER (L, verbatim. Never edit.) ══════════ -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
                    alt="Phi Chi Theta at USF" style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-                  <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-                </tr>
-              </table>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+              <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+            </tr></table>
             </td>
           </tr>
 

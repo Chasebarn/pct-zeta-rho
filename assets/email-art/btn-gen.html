@@ -1,0 +1,14 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1200px; height:190px; overflow:hidden; }
+.art { width:1200px; height:190px; background:#241733; display:flex; align-items:center; justify-content:center; }
+.btn { background:#c9a227; border-radius:4px; padding:32px 66px;
+  font-family:Inter,sans-serif; font-weight:700; font-size:27px; letter-spacing:3px; color:#191221; white-space:nowrap; }
+</style></head><body><div class="art"><div class="btn" id="b"></div></div>
+<script>
+var q=new URLSearchParams(location.search);
+document.getElementById('b').innerHTML=(q.get('label')||'GET DIRECTIONS')+'&nbsp;&nbsp;&rarr;';
+var b=document.getElementById('b'),s=27;
+while(b.scrollWidth>1060&&s>16){s-=1;b.style.fontSize=s+'px';}
+</script></body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@700&display=swap" rel="stylesheet"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1200px; height:300px; overflow:hidden; }
+.art { position:relative; width:1200px; height:300px; overflow:hidden;
+  background: radial-gradient(95% 130% at 82% -18%, #3b2559 0%, transparent 55%),
+              radial-gradient(60% 80% at -8% 120%, #34204d 0%, transparent 58%), #241733; }
+.art::after { content:""; position:absolute; inset:0; opacity:0.05; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.inner { position:relative; z-index:2; height:100%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:0 70px; }
+.rule { width:88px; height:4px; background:#c9a227; }
+.kicker { font-family:Inter,sans-serif; font-size:21px; font-weight:700; letter-spacing:0.34em;
+  color:#e6c65b; text-transform:uppercase; margin-top:30px; }
+h1 { font-family:"Instrument Serif",serif; font-weight:400; font-size:96px; line-height:1.02;
+  letter-spacing:-0.01em; color:#faf8f3; margin-top:22px; }
+h1 em { font-style:italic; color:#e6c65b; }
+</style></head><body><div class="art"><div class="inner">
+<div class="rule"></div><div class="kicker" id="k"></div><h1 id="h"></h1>
+</div></div>
+<script>
+var q=new URLSearchParams(location.search);
+document.getElementById('k').innerHTML=q.get('kicker')||'PCT&nbsp;&nbsp;Fall&nbsp;Rush';
+document.getElementById('h').innerHTML=q.get('title')||'Event';
+var h=document.getElementById('h'),s=96;
+while(h.scrollHeight>140&&s>44){s-=4;h.style.fontSize=s+'px';}
+</script></body></html>

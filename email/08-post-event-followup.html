@@ -12,41 +12,26 @@
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    PCT FALL RUSH · POST EVENT FOLLOW UP · reusable after any rush event
-
+    POST EVENT FOLLOW UP  (send the morning after any rush event)
     SUBJECT:      Thanks for coming.
-    PREVIEW TEXT: Photos below, and what is up next.
+    PREVIEW TEXT: Photos below. Here is what is next.
 
-    ✎ EDIT BEFORE SENDING
-      1. ✎ [EVENT NAME] appears once, in the opening line. Set it to the event
-         that just ran.
-      2. ✎ HERO ART. This build ships hero-info-night.png. Swap the filename to
-         the matching hero for whichever event just ran:
-         hero-info-night.png, hero-workshop.png, hero-alumni-panel.png,
-         hero-phi-chi-fest.png, hero-quick-queue.png, hero-invite-only.png.
-         Rewrite the alt line to match the art.
-      3. ✎ PHOTOS. The two grey boxes are intentional placeholders. Replace them
-         with photos from THIS event only. If there are none, leave the boxes.
-      4. ✎ UP NEXT card. Replace [DAY, MONTH 0] / [0:00 PM] / [ROOM] / [ATTIRE]
-         with the next event on the schedule.
-      5. ✎ Button links to the public rush schedule. Confirm the page is live.
-
-    BUILD RULES (do not undo)
-      - Purple bands are baked PNGs. Never put live text on a purple cell.
-      - Every cream td carries bgcolor AND background-color, and every text div
-        sets its own color, so dark mode cannot leave dark text on a dark panel.
-      - Visible placeholders are BRACKETED CAPS. The pencil mark belongs in these
-        comments only, never in a text node.
-      - Body copy capped at 70 words. This build uses 24, plus 11 in the detail
-        card. Keep it there.
-      - No em dashes. No advice. No invented numbers.
+    EDIT BEFORE SENDING:
+      - Visible placeholders: [EVENT NAME] in the opening line, and the four
+        UP NEXT values [DAY, MONTH 0] / [0:00 PM] / [ROOM] / [ATTIRE].
+      - The two PHOTOS boxes are mock content. Replace each with a photo from
+        THIS event, or delete that whole tr before sending.
+      - The gold button points at the public rush schedule page. Confirm it is live.
+      - Baked art is cached by URL on GitHub Pages forever. If you re-render a
+        PNG, save it under a NEW filename.
+      - Dates assume Fall Rush 2026 (Sep 2 is a Wednesday). The source flyer says
+        2025, where Sep 2 is a Tuesday. Confirm before any real send.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
-  <!-- preview text (hidden) -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Photos below, and what is up next.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Photos below. Here is what is next.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -54,145 +39,126 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ 1 · HERO ART (block B) ══════════ -->
-          <!-- ✎ SWAP THE HERO: this file ships the Info Night art. Point src at the
-               matching hero for whichever event just ran, and rewrite the alt line. -->
+          <!-- HERO · swap to the matching hero for whichever event just ran:
+               hero-workshop-2.png, hero-alumni-panel-2.png, hero-phi-chi-fest-2.png,
+               hero-quick-queue-2.png, hero-invite-only-2.png. Rewrite the alt to match. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-info-night.png"
-                   width="600" height="260"
-                   alt="PCT Fall Rush. Info Night. Wednesday September 2, 7:00 PM, BSN 225."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-info-night-2.png"
+                   width="600" height="215" alt="PCT Fall Rush. Info Night. Wed Sep 2, 7:00 PM, BSN 225."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
 
-          <!-- ══════════ 2 · OPENING LINE · one idea, nothing else ══════════ -->
+          <!-- INTRO -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:46px 44px 0;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:17px; font-weight:400; line-height:1.7; color:#453a52;">
-                Thank you for coming to [EVENT NAME]. It was good to have you there.
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
+                Thank you for coming to [EVENT NAME].
               </div>
             </td>
           </tr>
 
-          <!-- ══════════ 3 · SECTION LABEL (block D) ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:48px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Photos</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ 4 · TWO IMAGE PLACEHOLDERS (rule R2) · no photo file ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:26px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%" valign="top" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 8px 0 0;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
-                      <tr>
-                        <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
-                          Image placeholder
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                  <td width="50%" valign="top" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 0 0 8px;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
-                      <tr>
-                        <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
-                          Image placeholder
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ 5 · DIVIDER (block J) ══════════ -->
+          <!-- PHOTOS -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; border-top:1px solid #e8e2d4; font-size:0; line-height:0;">&nbsp;</td>
-                </tr>
+                <tr><td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Photos</td></tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 6 · SECTION LABEL (block D) ══════════ -->
+          <!-- MOCK: replace each box with a real photo, or delete this tr before sending -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:40px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Up next</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ 7 · DETAIL CARD (block F) · all four values bracketed ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e8e2d4;">
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Date</td>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">[DAY, MONTH 0]</td>
-                </tr>
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Time</td>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">[0:00 PM]</td>
-                </tr>
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Location</td>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">[ROOM]</td>
-                </tr>
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Attire</td>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">[ATTIRE]</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ 8 · CTA (block C, live button on cream) ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 46px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
-                <tr>
-                  <td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                    <!-- ✎ RUSH SCHEDULE LINK -->
-                    <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">View Rush Schedule</a>
+                  <td width="50%" valign="top" style="padding:0 6px 0 0;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                        Image placeholder
+                      </td></tr>
+                    </table>
+                  </td>
+                  <td width="50%" valign="top" style="padding:0 0 0 6px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                        Image placeholder
+                      </td></tr>
+                    </table>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 9 · CLOSING ART + FOOTER (block L) ══════════ -->
+          <!-- UP NEXT -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr><td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Up next</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- 2x2 editorial grid · values set in the display serif -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
+                <tr>
+                  <td width="50%" valign="top" style="padding:30px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Date</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[DAY,<br>MONTH&nbsp;0]</div>
+                  </td>
+                  <td width="50%" valign="top" style="padding:30px 30px 22px 16px; border-bottom:1px solid #e2dac6; border-left:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Time</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[0:00&nbsp;PM]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="50%" valign="top" style="padding:22px 16px 30px 30px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Room</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[ROOM]</div>
+                  </td>
+                  <td width="50%" valign="top" style="padding:22px 30px 30px 16px; border-left:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Attire</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[ATTIRE]</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- PRIMARY CTA · live button on cream -->
+          <tr>
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 46px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <tr><td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
+                  <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">View Rush Schedule</a>
+                </td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-next-event.png"
-                   width="600" height="200"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-next-event.png" width="600" height="200"
                    alt="See you at the next one."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
+
+          <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
-                   alt="Phi Chi Theta at USF" style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-                  <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-                </tr>
-              </table>
+                   alt="Phi Chi Theta at USF"
+                   style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+                <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+                <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+              </tr></table>
             </td>
           </tr>
 

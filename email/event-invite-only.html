@@ -6,40 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
-  <title>Invite Only is Friday.</title>
+  <title>Invite Only is Friday. 7:00 PM, by invitation.</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!--[if gte mso 9]><xml><o:OfficeDocumentSettings>
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    PCT FALL RUSH · EVENT REMINDER · Invite Only
-    SUBJECT:      Invite Only is Friday.
-    PREVIEW TEXT: Friday, September 18. 7:00 PM.
+    EVENT REMINDER · Invite Only  (send 1 to 2 days ahead)
+    SUBJECT:      Invite Only is Friday. 7:00 PM, by invitation.
+    PREVIEW TEXT: Friday, September 18. 7:00 PM. Invited rushees only.
 
-    ✎ EDIT BEFORE SENDING
-      1. ✎ AUDIENCE. Segment to invited rushees only.
-      2. ✎ DATE. Built for Fall 2026, where Sep 18 is a Friday. The source flyer
-         reads 2025, where it is a Thursday. Confirm before sending.
-      3. ✎ IMAGE PLACEHOLDER. One grey box sits below the list. Drop in the real
-         photo when there is one, or delete that table row.
-      4. ✎ NO MAPS LINK on purpose. The location is private, so the gold button
-         goes to the rush schedule. Its art is btn-schedule1.png, a new render
-         that reads VIEW THE RUSH SCHEDULE. Do not swap in btn-art1.png, which
-         reads GET DIRECTIONS.
-      5. ✎ HERO AND CLOSING ART are baked PNGs. To change the wording, edit the
-         source HTML in assets/email-art/, re-render, and save under a NEW
-         filename. GitHub Pages caches images by URL.
-
-    DO NOT UNDO: purple panels are images, never live text on a purple cell.
-    Every cream cell carries bgcolor plus background-color, and every text
-    element sets its own colour, so dark mode cannot invert one without the other.
+    EDIT BEFORE SENDING:
+      - AUDIENCE. Segment to invited rushees only. The room and the attire are
+        withheld on purpose. They travel with the invitation.
+      - Hero art and closing art carry the date and time. If either changes,
+        re-render assets/email-art/event-hero.html and close-gen.html and save under
+        NEW filenames (GitHub Pages caches images by URL forever).
+      - Both rush schedule links must match.
+      - NO MAPS LINK on purpose. The button art is btn-schedule1.png, which reads
+        VIEW THE RUSH SCHEDULE. Do not swap in btn-art1.png, which reads GET
+        DIRECTIONS and would point at a location this email does not give.
+      - The image placeholder band is mock content. Replace with a real photo or
+        delete that whole tr before sending.
+      - Dates assume Fall Rush 2026 (Sep 18 is a Friday). The source flyer says
+        2025, where Sep 18 is a Thursday. Confirm before any real send.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
-  <!-- preview text (hidden) -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Friday, September 18. 7:00 PM.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Friday, September 18. 7:00 PM. Invited rushees only.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -47,139 +43,123 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ B · HERO ART ══════════ -->
+          <!-- HERO -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-invite-only.png"
-                   width="600" height="260"
-                   alt="PCT Fall Rush. Invite Only. Friday September 18, 7:00 PM."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-invite-only-2.png"
+                   width="600" height="215" alt="PCT Fall Rush. Invite Only. Fri Sep 18, 7:00 PM, by invite."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
 
-          <!-- ══════════ E · INTRO · one line ══════════ -->
+          <!-- INTRO -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:48px 44px 0;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:17px; font-weight:400; line-height:1.7; color:#453a52;">Invite Only is Friday. It is the last night of rush.</div>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
+                Invite Only is Friday. It is the last night of rush.
+              </div>
             </td>
           </tr>
 
-          <!-- ══════════ F · DETAIL CARD · live text, images-blocked safe ══════════ -->
+          <!-- THE DETAILS · 2x2 editorial grid, values set in the display serif -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e8e2d4;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
                 <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Date</div>
+                  <td width="50%" valign="top" style="padding:30px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Date</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">Friday,<br>September&nbsp;18</div>
                   </td>
-                  <!-- ✎ CONFIRM WEEKDAY AND YEAR -->
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">Friday, September 18</div>
+                  <td width="50%" valign="top" style="padding:30px 30px 22px 16px; border-bottom:1px solid #e2dac6; border-left:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Time</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">7:00&nbsp;PM</div>
                   </td>
                 </tr>
                 <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Time</div>
+                  <td width="50%" valign="top" style="padding:22px 16px 30px 30px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Room</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">Sent with<br>your invitation</div>
                   </td>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">7:00 PM</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Location</div>
-                  </td>
-                  <!-- ✎ LOCATION is withheld on purpose. -->
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">Sent with your invitation</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="34%" bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 0 15px 18px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#4b2e83; text-transform:uppercase;">Attire</div>
-                  </td>
-                  <!-- ✎ ATTIRE is withheld on purpose. -->
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:15px 18px 15px 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:600; color:#191221;">Sent with your invitation</div>
+                  <td width="50%" valign="top" style="padding:22px 30px 30px 16px; border-left:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Attire</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">Sent with<br>your invitation</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ D · SECTION LABEL ══════════ -->
+          <!-- WHAT TO EXPECT · signature italic numerals -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:48px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">What to expect</div>
-                  </td>
-                </tr>
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">What to expect</td></tr>
               </table>
-            </td>
-          </tr>
-
-          <!-- ══════════ THREE ROWS · hairline list, no numerals ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 0; border-bottom:1px solid #e8e2d4;">
+                  <td width="76" valign="top" style="padding:22px 0 20px;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-01b.png" width="62" height="47" alt="01" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">Who</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:5px;">Invited rushees only.</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Invited rushees only.</div>
                   </td>
                 </tr>
                 <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 0; border-bottom:1px solid #e8e2d4;">
+                  <td width="76" valign="top" style="padding:22px 0 20px;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-02b.png" width="62" height="47" alt="02" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">Where</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:5px;">Location comes with your invitation.</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Location comes with your invitation.</div>
                   </td>
                 </tr>
                 <tr>
-                  <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 0;">
+                  <td width="76" valign="top" style="padding:22px 0 0;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-03b.png" width="62" height="47" alt="03" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 0;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; color:#191221;">What to wear</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:5px;">Attire comes with it as well.</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Attire comes with it as well.</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ R2 · IMAGE PLACEHOLDER BOX ══════════ -->
-          <!-- ✎ Swap for the real photo, or delete this row. -->
+          <!-- MOCK: replace with a real photo or delete this tr before sending -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:34px 44px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
-                <tr>
-                  <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:64px 20px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">Image placeholder</div>
-                  </td>
-                </tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:38px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                <tr><td align="center" style="padding:64px 20px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                  Image placeholder
+                </td></tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ CTA LEAD LINE · live text fallback for the button ══════════ -->
+          <!-- live-text line, so the CTA survives blocked images -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 40px;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; line-height:1.6; color:#453a52;"><a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="color:#4b2e83; font-weight:600; text-decoration:underline;">The full rush schedule is on our site.</a></div>
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:38px 44px 30px;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; color:#453a52;">
+                Details come with your invitation.
+                <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="color:#4b2e83; font-weight:700; text-decoration:underline;">View the rush schedule</a>
+              </div>
             </td>
           </tr>
 
-          <!-- ══════════ C · PRIMARY CTA · baked gold on purple ══════════ -->
+          <!-- PRIMARY CTA -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:block;">
-                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-schedule1.png"
-                     width="600" height="95"
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-schedule1.png" width="600" height="95"
                      alt="View the rush schedule"
                      style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
               </a>
             </td>
           </tr>
 
-          <!-- ══════════ L · CLOSING ART + FOOTER ══════════ -->
+          <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-invite-only.png" width="600" height="200"
@@ -187,29 +167,17 @@
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
+
+          <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%" style="padding:0;">
-                    <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;">
-                      <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65"
-                           alt="Visit our website"
-                           style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;">
-                    </a>
-                  </td>
-                  <td width="50%" style="padding:0;">
-                    <a href="https://www.instagram.com/pctusf/" style="display:block;">
-                      <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65"
-                           alt="@pctusf on Instagram"
-                           style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;">
-                    </a>
-                  </td>
-                </tr>
-              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+                <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+                <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+              </tr></table>
             </td>
           </tr>
 

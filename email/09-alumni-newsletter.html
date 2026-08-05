@@ -12,40 +12,31 @@
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    PCT ZETA RHO . ALUMNI LETTER . monthly template
+    ALUMNI NEWSLETTER  (monthly, sent by the Alumni Chair)
     SUBJECT:      Zeta Rho Alumni Letter
-    PREVIEW TEXT: Issue [NO]. [MONTH YEAR].
+    PREVIEW TEXT: Issue [NO] . [MONTH YEAR]
 
-    HOW THIS FILE WORKS
-      The layout never changes. Each month the Alumni Chair replaces only the
-      text inside the [SQUARE BRACKETS]. Every editable region has an EDIT
-      comment directly above it. Do not add sections and do not add paragraphs.
+    THIS IS A REUSABLE SHELL. THE LAYOUT NEVER CHANGES.
+    Each month only the words inside the [BRACKETED CAPS] change. Every editable
+    region has an EDIT comment directly above it naming exactly what goes there.
 
-    THE LIMITS THIS TEMPLATE ENFORCES
-      Two sentences maximum per section. Purple bands are images. Everything
-      readable sits on cream #faf8f3. The font stack is always exactly
-      'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif. No em dashes.
-
-    THE GREY BOXES
-      Each box marked "Image placeholder" is where a photo goes at send time.
-      Replace the placeholder table with an img at the same width and give it
-      a 1px #e8e2d4 border.
-
-    EDIT BEFORE SENDING
-      1. Issue number and month.
-      2. From the Chair: two sentences.
-      3. Member Spotlight: photo, name, class year, role, company, one sentence.
-      4. Event Highlight: photo, one sentence.
-      5. Career Wins: four names, class years, roles, companies.
-      6. Upcoming: three events, dates, locations.
-      7. Button label and button link.
+    HOUSE RULES FOR WHOEVER EDITS THIS
+      - Two sentences maximum per section. If it runs longer, cut it.
+      - Replace every [BRACKETED CAPS] placeholder. Never leave one in a real send.
+      - Do not add sections, paragraphs or rows. Career Wins is always four rows,
+        Upcoming is always three.
+      - The grey "Image placeholder" boxes are mock content. Swap each one for a
+        real img at the same width, or delete that whole tr.
+      - Hero and closing art are baked PNGs. If either has to change, re-render it
+        and save under a NEW filename. GitHub Pages caches images by URL forever.
+      - No em dashes. Do not change the font stack and do not add a style block.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
-  <!-- EDIT: preview text. Match the PREVIEW TEXT line in the head comment. -->
+  <!-- EDIT: preview text. Issue number and month only. -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Issue [NO]. [MONTH YEAR].&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Issue [NO] &middot; [MONTH YEAR]&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -53,217 +44,214 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- ══════════ 1 . HERO ART (baked: wordmark, title, standing subtitle) ══════════ -->
+          <!-- HERO. Fixed masthead art, the same every issue. Do not swap. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-alumni-letter-01.png"
-                   width="600" height="220"
-                   alt="PCT Zeta Rho. The Alumni Letter. Monthly from the Alumni Chair."
+                   width="600" height="220" alt="PCT Zeta Rho. The Alumni Letter. Monthly from the Alumni Chair."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
 
-          <!-- EDIT: issue number and month. Example: Issue 07 &middot; October 2026 -->
+          <!-- EDIT: issue number and month. Format: Issue 12 &middot; March 2026 -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:30px 44px 0; color:#6f6580;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.5; color:#6f6580; text-transform:uppercase;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:38px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580;">
                 Issue [NO] &middot; [MONTH YEAR]
               </div>
             </td>
           </tr>
 
-          <!-- ══════════ 2 . FROM THE CHAIR ══════════ -->
+          <!-- SECTION LABEL. From the chair. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:38px 44px 0; color:#8a6d14;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">From the Chair</div>
-                  </td>
-                </tr>
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">From the chair</td></tr>
               </table>
             </td>
           </tr>
-          <!-- EDIT: two sentences from the Alumni Chair. Two is the maximum. -->
+
+          <!-- EDIT: the chair's note. TWO SENTENCES, nothing longer. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0; color:#453a52;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.75; color:#453a52;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.6; color:#453a52;">
                 [FIRST SENTENCE FROM THE ALUMNI CHAIR.] [SECOND SENTENCE FROM THE ALUMNI CHAIR.]
               </div>
             </td>
           </tr>
 
-          <!-- ══════════ 3 . MEMBER SPOTLIGHT ══════════ -->
+          <!-- SECTION LABEL. Member spotlight. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Member Spotlight</div>
-                  </td>
-                </tr>
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Member spotlight</td></tr>
               </table>
             </td>
           </tr>
-          <!-- EDIT: spotlight photo in the left box, then name, class year, role, company, one sentence -->
+
+          <!-- EDIT: spotlight photo on the left, then name, class year, role,
+               company, and ONE sentence on the right. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0; color:#453a52;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td width="35%" valign="top" style="padding:0 18px 0 0;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
-                      <tr>
-                        <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:46px 10px;">
-                          <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; line-height:1.6; color:#6e6552; text-transform:uppercase;">Image placeholder</div>
-                        </td>
-                      </tr>
+                  <td width="35%" valign="top" style="padding:0;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                      <tr><td align="center" style="padding:64px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                        Image placeholder
+                      </td></tr>
                     </table>
                   </td>
-                  <td width="65%" valign="top" style="padding:0; color:#453a52;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:17px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[ROLE] at [COMPANY]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52; padding-top:12px;">[ONE SENTENCE ABOUT THIS MEMBER.]</div>
+                  <td valign="top" style="padding:0 0 0 22px;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:6px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:12px;">[ONE SENTENCE ON THIS MEMBER.]</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 4 . EVENT HIGHLIGHT ══════════ -->
+          <!-- SECTION LABEL. Event highlight. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Event Highlight</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!-- EDIT: one photo from the event -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0; color:#6e6552;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efe9dc;">
-                <tr>
-                  <td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:64px 20px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#6e6552; text-transform:uppercase;">Image placeholder</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!-- EDIT: one sentence about the event. One is the maximum. -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:16px 44px 0; color:#453a52;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.7; color:#453a52;">[ONE SENTENCE ABOUT THIS EVENT.]</div>
-            </td>
-          </tr>
-
-          <!-- ══════════ 5 . CAREER WINS ══════════ -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Career Wins</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!-- EDIT: four career wins. Name and class year on line one, role and company on line two. -->
-          <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px; color:#453a52;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <!-- EDIT: career win 1 of 4 -->
-                <tr>
-                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
-                  </td>
-                </tr>
-                <!-- EDIT: career win 2 of 4 -->
-                <tr>
-                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
-                  </td>
-                </tr>
-                <!-- EDIT: career win 3 of 4 -->
-                <tr>
-                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
-                  </td>
-                </tr>
-                <!-- EDIT: career win 4 of 4 -->
-                <tr>
-                  <td style="padding:18px 0 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
-                  </td>
-                </tr>
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Event highlight</td></tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 6 . UPCOMING ══════════ -->
+          <!-- EDIT: one photo from the event. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0; color:#8a6d14;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; line-height:1.4; color:#8a6d14; text-transform:uppercase;">Upcoming</div>
-                  </td>
-                </tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                <tr><td align="center" style="padding:64px 20px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                  Image placeholder
+                </td></tr>
               </table>
             </td>
           </tr>
-          <!-- EDIT: three upcoming events. Event name on line one, day, date and location on line two. -->
+
+          <!-- EDIT: ONE sentence on the event above. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px; color:#453a52;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0;">
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52;">
+                [ONE SENTENCE ON THE EVENT.]
+              </div>
+            </td>
+          </tr>
+
+          <!-- SECTION LABEL. Career wins. -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <!-- EDIT: upcoming 1 of 3 -->
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Career wins</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- EDIT: four career wins. Name and class year on the first line, role
+               and company on the second. Always four rows. The numerals are fixed art. -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
+                  <td width="76" valign="top" style="padding:22px 0 20px;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-01b.png" width="62" height="47" alt="01" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
                   </td>
                 </tr>
-                <!-- EDIT: upcoming 2 of 3 -->
                 <tr>
-                  <td style="padding:18px 0; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
+                  <td width="76" valign="top" style="padding:22px 0 20px;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-02b.png" width="62" height="47" alt="02" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
                   </td>
                 </tr>
-                <!-- EDIT: upcoming 3 of 3 -->
                 <tr>
-                  <td style="padding:18px 0 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:4px;">[DAY, MONTH 0] &middot; [LOCATION]</div>
+                  <td width="76" valign="top" style="padding:22px 0 20px;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-03b.png" width="62" height="47" alt="03" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="76" valign="top" style="padding:22px 0 0;">
+                    <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-04b.png" width="62" height="47" alt="04" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
+                  </td>
+                  <td valign="top" style="padding:24px 0 0;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 7 . CTA (live button on cream) ══════════ -->
-          <!-- EDIT: button label and button link -->
+          <!-- SECTION LABEL. Upcoming. -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 48px; color:#191221;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Upcoming</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- EDIT: three upcoming events. Name on the left, date on the right,
+               location under the name. Always three rows. -->
+          <tr>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
+                <tr>
+                  <td valign="top" style="padding:24px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                  </td>
+                  <td align="right" valign="top" style="padding:28px 30px 22px 16px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="padding:24px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                  </td>
+                  <td align="right" valign="top" style="padding:28px 30px 22px 16px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" style="padding:24px 16px 30px 30px;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                  </td>
+                  <td align="right" valign="top" style="padding:28px 30px 30px 16px;">
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- EDIT: button label. The link stays on the chapter site. -->
+          <tr>
+            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:42px 44px 44px;">
               <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
-                <tr>
-                  <td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                    <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">[BUTTON LABEL]</a>
-                  </td>
-                </tr>
+                <tr><td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
+                  <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">[BUTTON LABEL]</a>
+                </td></tr>
               </table>
             </td>
           </tr>
 
-          <!-- ══════════ 8 . CLOSING ART + FOOTER (fixed, never edited) ══════════ -->
+          <!-- CLOSE. Fixed art, the same every issue. Do not swap. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-alumni-01.png" width="600" height="220"
@@ -271,14 +259,17 @@
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
+
+          <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
-                   alt="Phi Chi Theta at USF" style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-              <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-              <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
-            </tr></table>
+                   alt="Phi Chi Theta at USF"
+                   style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+                <td width="50%" style="padding:0;"><a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-web1.png" width="300" height="65" alt="Visit our website" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+                <td width="50%" style="padding:0;"><a href="https://www.instagram.com/pctusf/" style="display:block;"><img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-ig1.png" width="300" height="65" alt="@pctusf on Instagram" style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:bold; color:#faf8f3; background-color:#241733;"></a></td>
+              </tr></table>
             </td>
           </tr>
 

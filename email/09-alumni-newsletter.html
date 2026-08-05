@@ -14,29 +14,37 @@
   <!--
     ALUMNI NEWSLETTER  (monthly, sent by the Alumni Chair)
     SUBJECT:      Zeta Rho Alumni Letter
-    PREVIEW TEXT: Issue [NO] . [MONTH YEAR]
+    PREVIEW TEXT: News from the network, plus what is on the calendar this fall.
 
-    THIS IS A REUSABLE SHELL. THE LAYOUT NEVER CHANGES.
-    Each month only the words inside the [BRACKETED CAPS] change. Every editable
-    region has an EDIT comment directly above it naming exactly what goes there.
+    THIS IS A FILLED SAMPLE ISSUE. THE LAYOUT NEVER CHANGES.
+    Every month the Alumni Chair overwrites the words inside the eight regions
+    marked SWAP below. Do not add, remove or reorder sections. Career Wins is
+    always four rows. Upcoming is always three.
 
-    HOUSE RULES FOR WHOEVER EDITS THIS
-      - Two sentences maximum per section. If it runs longer, cut it.
-      - Replace every [BRACKETED CAPS] placeholder. Never leave one in a real send.
-      - Do not add sections, paragraphs or rows. Career Wins is always four rows,
-        Upcoming is always three.
-      - The grey "Image placeholder" boxes are mock content. Swap each one for a
-        real img at the same width, or delete that whole tr.
-      - Hero and closing art are baked PNGs. If either has to change, re-render it
-        and save under a NEW filename. GitHub Pages caches images by URL forever.
+    HOUSE RULES
+      - Two sentences maximum per region. If it runs longer, cut it.
+      - Each fact lives in exactly one place. If Upcoming lists it, no other
+        region may mention it, and the same goes for names and companies.
+      - The cream "Image placeholder" boxes are mock. Swap each for a real img at
+        the same width, or delete that whole tr.
+      - Hero art, closing art and the button are baked PNGs. If any has to
+        change, re-render it and save under a NEW filename. GitHub Pages caches
+        images by URL forever.
+      - One CTA per issue. Never add a live-text link that repeats the button.
       - No em dashes. Do not change the font stack and do not add a style block.
+
+    KNOWN ISSUE, FIX BEFORE A REAL SEND
+      btn-art1.png has the words GET DIRECTIONS baked into it. That label is
+      correct for an event email and wrong here. Re-render the button from
+      assets/email-art/btn-art1.html with the label VISIT THE CHAPTER SITE and
+      save it as btn-site1.png, then point the img below at the new file.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
-  <!-- EDIT: preview text. Issue number and month only. -->
+  <!-- SWAP 0 of 8. Preview text. One line, no issue number, it is already below. -->
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Issue [NO] &middot; [MONTH YEAR]&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    News from the network, plus what is on the calendar this fall.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -44,7 +52,7 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- HERO. Fixed masthead art, the same every issue. Do not swap. -->
+          <!-- HERO. Fixed masthead art, identical every issue. Never swapped. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
               <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-alumni-letter-01.png"
@@ -53,16 +61,15 @@
             </td>
           </tr>
 
-          <!-- EDIT: issue number and month. Format: Issue 12 &middot; March 2026 -->
+          <!-- SWAP 1 of 8. Issue number and month. Format: Issue 12 &middot; August 2026 -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:38px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580;">
-                Issue [NO] &middot; [MONTH YEAR]
+                Issue 12 &middot; August 2026
               </div>
             </td>
           </tr>
 
-          <!-- SECTION LABEL. From the chair. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -71,16 +78,16 @@
             </td>
           </tr>
 
-          <!-- EDIT: the chair's note. TWO SENTENCES, nothing longer. -->
+          <!-- SWAP 2 of 8. The chair's note. Two sentences. Do not recite the
+               contents of the issue, the sections below already do that. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:20px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:400; line-height:1.6; color:#453a52;">
-                [First sentence from the alumni chair.] [Second sentence from the alumni chair.]
+                Every month I get a little more evidence that this network works better than any job board. Thank you for picking up the phone when a younger member calls.
               </div>
             </td>
           </tr>
 
-          <!-- SECTION LABEL. Member spotlight. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -89,8 +96,9 @@
             </td>
           </tr>
 
-          <!-- EDIT: spotlight photo on the left, then name, class year, role,
-               company, and ONE sentence on the right. -->
+          <!-- SWAP 3 of 8. Spotlight photo on the left. Name and class year, then
+               role at company, then ONE sentence on the right. This person must
+               not appear again in Career Wins. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -103,16 +111,15 @@
                     </table>
                   </td>
                   <td valign="top" style="padding:0 0 0 22px;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:6px;">[ROLE] at [COMPANY]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:12px;">[One sentence on this member.]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Priya Raghunathan, Class of 2019</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:6px;">Senior Financial Analyst at Raymond James</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:12px;">She built the resume clinic that has now placed nine actives into internships.</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- SECTION LABEL. Event highlight. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -121,7 +128,7 @@
             </td>
           </tr>
 
-          <!-- EDIT: one photo from the event. -->
+          <!-- SWAP 4 of 8. One photo from an event that already happened. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
@@ -132,16 +139,16 @@
             </td>
           </tr>
 
-          <!-- EDIT: ONE sentence on the event above. -->
+          <!-- SWAP 5 of 8. One sentence on the photo above. Past tense only.
+               Never put a future event here, that is what Upcoming is for. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:18px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52;">
-                [One sentence on the event.]
+                Forty of you came back for the summer social at Armature Works on July 18.
               </div>
             </td>
           </tr>
 
-          <!-- SECTION LABEL. Career wins. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -150,8 +157,8 @@
             </td>
           </tr>
 
-          <!-- EDIT: four career wins. Name and class year on the first line, role
-               and company on the second. Always four rows. The numerals are fixed art. -->
+          <!-- SWAP 6 of 8. Four career wins, always four. Name and class year on
+               line one, role at company on line two. The numerals are fixed art. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:0 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -160,8 +167,8 @@
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-01b.png" width="62" height="47" alt="01" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
                   </td>
                   <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">Marcus Delgado, Class of 2021</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Associate Consultant at Deloitte</div>
                   </td>
                 </tr>
                 <tr>
@@ -169,8 +176,8 @@
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-02b.png" width="62" height="47" alt="02" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
                   </td>
                   <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">Hannah Whitfield, Class of 2022</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Audit Senior at KPMG</div>
                   </td>
                 </tr>
                 <tr>
@@ -178,8 +185,8 @@
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-03b.png" width="62" height="47" alt="03" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
                   </td>
                   <td valign="top" style="padding:24px 0 20px; border-bottom:1px solid #e8e2d4;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">Tyler Osei, Class of 2020</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Product Manager at TD Synnex</div>
                   </td>
                 </tr>
                 <tr>
@@ -187,15 +194,14 @@
                     <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/num-04b.png" width="62" height="47" alt="04" style="display:block; font-family:Georgia,serif; font-style:italic; font-size:20px; color:#8a6d14;">
                   </td>
                   <td valign="top" style="padding:24px 0 0;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">[FIRST LAST], [CLASS OF 20XX]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#6f6580; padding-top:4px;">[ROLE] at [COMPANY]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:16px; font-weight:700; line-height:1.4; color:#191221;">Sofia Marchetti, Class of 2023</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:4px;">Treasury Analyst at Jabil</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- SECTION LABEL. Upcoming. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -204,58 +210,61 @@
             </td>
           </tr>
 
-          <!-- EDIT: three upcoming events. Name on the left, date on the right,
-               location under the name. Always three rows. -->
+          <!-- SWAP 7 of 8. Three upcoming events, always three. Name on the left,
+               location under it, date on the right. This is the only place a
+               future date or venue may appear. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:24px 44px 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
                 <tr>
                   <td valign="top" style="padding:24px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">Alumni Career Panel</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">BSN 225, USF Tampa</div>
                   </td>
                   <td align="right" valign="top" style="padding:28px 30px 22px 16px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Thursday, September 17</div>
                   </td>
                 </tr>
                 <tr>
                   <td valign="top" style="padding:24px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">Founders Day Dinner</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">Ulele, Tampa Heights</div>
                   </td>
                   <td align="right" valign="top" style="padding:28px 30px 22px 16px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Saturday, October 24</div>
                   </td>
                 </tr>
                 <tr>
                   <td valign="top" style="padding:24px 16px 30px 30px;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">[EVENT NAME]</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">[LOCATION]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:20px; line-height:1.25; color:#191221;">Mentor Matching Call</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#6f6580; padding-top:5px;">Online</div>
                   </td>
                   <td align="right" valign="top" style="padding:28px 30px 30px 16px;">
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">[DAY, MONTH 0]</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Tuesday, November 10</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- EDIT: button label. The link stays on the chapter site. -->
+          <!-- SWAP 8 of 8. The only CTA in the email. Change the destination if a
+               given issue needs one, otherwise leave it on the chapter site.
+               Never add a live-text link that says the same thing. -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:42px 44px 44px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
-                <tr><td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                  <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">[BUTTON LABEL]</a>
-                </td></tr>
-              </table>
+            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
+              <a href="https://chasebarn.github.io/pct-zeta-rho/" style="display:block;">
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-art1.png" width="600" height="95"
+                     alt="Visit the chapter site"
+                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
+              </a>
             </td>
           </tr>
 
-          <!-- CLOSE. Fixed art, the same every issue. Do not swap. -->
+          <!-- CLOSE. Fixed art, identical every issue. Never swapped. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-alumni-01.png" width="600" height="220"
-                   alt="Send us your news. Just reply to this email."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/cx-alumni.png" width="600" height="130"
+                   alt="Thank you for staying with us."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -263,7 +272,7 @@
           <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art2.png" width="600" height="150"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>

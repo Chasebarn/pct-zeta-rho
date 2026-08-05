@@ -17,10 +17,13 @@
     PREVIEW TEXT: Friday, September 11. BSN 225. Casual.
 
     EDIT BEFORE SENDING:
-      - Hero art and closing art carry the date, room and attire. If any change,
-        re-render assets/email-art/event-hero.html and close-gen.html and save under
-        NEW filenames (GitHub Pages caches images by URL forever).
-      - Both Google Maps links must match.
+      - The hero art is name only. The closing art carries the time, room and
+        attire. If either needs to change, re-render
+        assets/email-art/hero-name.html and close-gen.html and save under NEW
+        filenames (GitHub Pages caches images by URL forever).
+      - The detail grid is the single source of the date, time, room and attire.
+        Do not restate any of them anywhere else in the body.
+      - One call to action only. The purple band is it.
       - The image placeholder band is mock content. Replace with a real photo or
         delete that whole tr before sending.
       - Dates assume Fall Rush 2026 (Sep 11 is a Friday). The source flyer says
@@ -38,11 +41,11 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- HERO -->
+          <!-- HERO · name only -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-phi-chi-fest-2.png"
-                   width="600" height="215" alt="PCT Fall Rush. Phi Chi Fest. Fri Sep 11, 7:00 PM, BSN 225."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hn-phi-chi-fest.png"
+                   width="600" height="150" alt="PCT Fall Rush. Phi Chi Fest."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -51,14 +54,14 @@
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
-                Phi Chi Fest is Friday. This one is casual.
+                Phi Chi Fest is the relaxed one.
               </div>
             </td>
           </tr>
 
           <!-- THE DETAILS · 2x2 editorial grid, values set in the display serif -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
                 <tr>
                   <td width="50%" valign="top" style="padding:30px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
@@ -82,6 +85,17 @@
                   </td>
                 </tr>
               </table>
+            </td>
+          </tr>
+
+          <!-- PRIMARY CTA · the only one in this email -->
+          <tr>
+            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=BSN+Building+Muma+College+of+Business+USF+Tampa" style="display:block;">
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-art1.png" width="600" height="95"
+                     alt="Get directions"
+                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
+              </a>
             </td>
           </tr>
 
@@ -134,32 +148,11 @@
             </td>
           </tr>
 
-          <!-- live-text directions, so the CTA survives blocked images -->
-          <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:38px 44px 30px;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; color:#453a52;">
-                BSN 225, Muma College of Business.
-                <a href="https://www.google.com/maps/search/?api=1&amp;query=BSN+Building+Muma+College+of+Business+USF+Tampa" style="color:#4b2e83; font-weight:700; text-decoration:underline;">Get directions</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- PRIMARY CTA -->
-          <tr>
-            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=BSN+Building+Muma+College+of+Business+USF+Tampa" style="display:block;">
-                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-art1.png" width="600" height="95"
-                     alt="Get directions"
-                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
-              </a>
-            </td>
-          </tr>
-
           <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-phi-chi-fest.png" width="600" height="200"
-                   alt="We will see you Friday. 7:00 PM, BSN 225, casual."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/cx-there.png" width="600" height="130"
+                   alt="We will see you there."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -167,7 +160,7 @@
           <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art2.png" width="600" height="150"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>

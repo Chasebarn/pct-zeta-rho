@@ -6,26 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
-  <title>Invite Only is Friday. 7:00 PM, by invitation.</title>
+  <title>Invite Only is Friday. The last night of rush.</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!--[if gte mso 9]><xml><o:OfficeDocumentSettings>
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
     EVENT REMINDER · Invite Only  (send 1 to 2 days ahead)
-    SUBJECT:      Invite Only is Friday. 7:00 PM, by invitation.
-    PREVIEW TEXT: Friday, September 18. 7:00 PM. Invited rushees only.
+    SUBJECT:      Invite Only is Friday. The last night of rush.
+    PREVIEW TEXT: 7:00 PM. Invited rushees only.
 
     EDIT BEFORE SENDING:
       - AUDIENCE. Segment to invited rushees only. The room and the attire are
         withheld on purpose. They travel with the invitation.
-      - Hero art and closing art carry the date and time. If either changes,
-        re-render assets/email-art/event-hero.html and close-gen.html and save under
-        NEW filenames (GitHub Pages caches images by URL forever).
-      - Both rush schedule links must match.
+      - The hero art is name only. It carries no date, time or room, so the grid
+        below is the single place any fact appears. Keep it that way.
+      - The closing art carries the date and time. If either changes, re-render
+        assets/email-art/close-gen.html and save under a NEW filename (GitHub
+        Pages caches images by URL forever).
       - NO MAPS LINK on purpose. The button art is btn-schedule1.png, which reads
         VIEW THE RUSH SCHEDULE. Do not swap in btn-art1.png, which reads GET
-        DIRECTIONS and would point at a location this email does not give.
+        DIRECTIONS and would promise a location this email does not give.
+      - One CTA only. Do not add a live-text link that repeats the button.
       - The image placeholder band is mock content. Replace with a real photo or
         delete that whole tr before sending.
       - Dates assume Fall Rush 2026 (Sep 18 is a Friday). The source flyer says
@@ -35,7 +37,7 @@
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Friday, September 18. 7:00 PM. Invited rushees only.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    7:00 PM. Invited rushees only.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -43,11 +45,11 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- HERO -->
+          <!-- HERO · name only. No date, no time, no room. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-invite-only-2.png"
-                   width="600" height="215" alt="PCT Fall Rush. Invite Only. Fri Sep 18, 7:00 PM, by invite."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hn-invite-only.png"
+                   width="600" height="150" alt="PCT Fall Rush. Invite Only."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -56,14 +58,15 @@
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
-                Invite Only is Friday. It is the last night of rush.
+                Invite Only is the last night of rush.
               </div>
             </td>
           </tr>
 
-          <!-- THE DETAILS · 2x2 editorial grid, values set in the display serif -->
+          <!-- THE DETAILS · 2x2 editorial grid, values set in the display serif.
+               This is the only place the facts appear. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
                 <tr>
                   <td width="50%" valign="top" style="padding:30px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
@@ -86,6 +89,17 @@
                   </td>
                 </tr>
               </table>
+            </td>
+          </tr>
+
+          <!-- PRIMARY CTA · the only CTA in this email -->
+          <tr>
+            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
+              <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:block;">
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-schedule1.png" width="600" height="95"
+                     alt="View the rush schedule"
+                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
+              </a>
             </td>
           </tr>
 
@@ -138,32 +152,11 @@
             </td>
           </tr>
 
-          <!-- live-text line, so the CTA survives blocked images -->
-          <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:38px 44px 30px;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; color:#453a52;">
-                Details come with your invitation.
-                <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="color:#4b2e83; font-weight:700; text-decoration:underline;">View the rush schedule</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- PRIMARY CTA -->
-          <tr>
-            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:block;">
-                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-schedule1.png" width="600" height="95"
-                     alt="View the rush schedule"
-                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
-              </a>
-            </td>
-          </tr>
-
           <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-invite-only.png" width="600" height="200"
-                   alt="We will see you Friday. 7:00 PM, details with your invitation."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/cx-there.png" width="600" height="130"
+                   alt="We will see you there."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -171,7 +164,7 @@
           <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art2.png" width="600" height="150"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>

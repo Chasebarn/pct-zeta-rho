@@ -6,26 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
-  <title>You&rsquo;re on the Fall Rush list.</title>
+  <title>You&rsquo;re in. Here is the Fall Rush schedule.</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!--[if gte mso 9]><xml><o:OfficeDocumentSettings>
     <o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch>
   </o:OfficeDocumentSettings></xml><![endif]-->
   <!--
-    INTEREST CONFIRMATION  (send on signup)
-    SUBJECT:      You're on the Fall Rush list.
-    PREVIEW TEXT: Six events, September 2 to September 18. Here is the full schedule.
+    INTEREST CONFIRMATION  (send immediately on form submit)
+    SUBJECT:      You're in. Here is the Fall Rush schedule.
+    PREVIEW TEXT: Six events, September 2 to September 18. Reminders before each one.
 
     EDIT BEFORE SENDING:
-      - [FIRST NAME] is the only visible placeholder. Swap it for your sender's
-        merge tag (Mailchimp: *|FNAME|*).
-      - Schedule rows are live text. Edit event, room, date and attire in place.
+      - "Chase" in the intro line is filled-in sample content. Swap it for your
+        sender's merge tag (Mailchimp: *|FNAME|*) and set a fallback so a blank
+        name does not leave a stray comma.
+      - The schedule table is the ONLY place the six events appear. If a date, room
+        or attire changes, change it there and nowhere else.
       - Invite Only withholds room and attire on purpose. Do not fill them in.
-      - Hero and closing art are baked PNGs. If a date, room or attire changes,
-        re-render assets/email-art/event-hero.html and close-gen.html and save under
-        NEW filenames (GitHub Pages caches images by URL forever).
-      - Two links: the gold button (fallrush.html) and the calendar line
-        (assets/rush-events.ics). The .ics must list the same six events as the table.
+      - The closing art bakes in "September 2" and the September 2 to 18 range. If
+        those dates move, re-render assets/email-art/close-gen.html and save under a
+        NEW filename (GitHub Pages caches images by URL forever).
+      - The CTA image is btn-calendar1.png, baked to read "ADD TO YOUR CALENDAR".
+        Do not swap in btn-art1.png, which is baked to read "GET DIRECTIONS".
+      - rush-events.ics must list the same six events as the table.
+      - The image placeholder band is mock content. Replace with a real photo or
+        delete that whole tr before sending.
       - Dates assume Fall Rush 2026 (Sep 2 is a Wednesday). The source flyer says
         2025, where Sep 2 is a Tuesday. Confirm before any real send.
   -->
@@ -33,7 +38,7 @@
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Six events, September 2 to September 18. Here is the full schedule.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Six events, September 2 to September 18. Reminders before each one.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -44,8 +49,8 @@
           <!-- HERO -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-info-night-2.png"
-                   width="600" height="215" alt="PCT Fall Rush. Info Night. Wed Sep 2, 7:00 PM, BSN 225."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hn-schedule.png"
+                   width="600" height="150" alt="PCT Fall Rush. You're in."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -54,88 +59,89 @@
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
-                <!-- merge tag -->[FIRST NAME], you&rsquo;re confirmed for Fall Rush 2026. We&rsquo;ll send a reminder before each event with the room and what to wear.
+                <!-- "Chase" is sample content. Replace with the merge tag, e.g. *|FNAME|* -->
+                Chase, you&rsquo;re confirmed for Fall Rush 2026. We&rsquo;ll send a reminder before each event with the room and what to wear.
               </div>
             </td>
           </tr>
 
-          <!-- THE SCHEDULE -->
+          <!-- SECTION LABEL -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:36px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr><td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">The schedule</td></tr>
+                <tr><td style="border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">The schedule</td></tr>
               </table>
             </td>
           </tr>
 
-          <!-- six events · names set in the display serif on the deeper cream -->
+          <!-- THE SCHEDULE · the only place the six events appear -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:28px 12px 20px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Info Night</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">BSN 225</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 22px 28px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Info Night</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">BSN 225</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:28px 30px 20px 12px; border-bottom:1px solid #e2dac6;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 22px 10px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Wed, Sep 2</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Business professional</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">Business professional</div>
                   </td>
                 </tr>
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:20px 12px 20px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Professional Workshop</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">BSN 225</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 22px 28px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Professional Workshop</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">BSN 225</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:20px 30px 20px 12px; border-bottom:1px solid #e2dac6;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 22px 10px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Fri, Sep 4</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Business casual</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">Business casual</div>
                   </td>
                 </tr>
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:20px 12px 20px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Alumni Panel</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">BSN 225</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 22px 28px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Alumni Panel</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">BSN 225</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:20px 30px 20px 12px; border-bottom:1px solid #e2dac6;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 22px 10px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Wed, Sep 9</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Business professional</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">Business professional</div>
                   </td>
                 </tr>
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:20px 12px 20px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Phi Chi Fest</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">BSN 225</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 22px 28px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Phi Chi Fest</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">BSN 225</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:20px 30px 20px 12px; border-bottom:1px solid #e2dac6;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 22px 10px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Fri, Sep 11</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Casual</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">Casual</div>
                   </td>
                 </tr>
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:20px 12px 20px 30px; border-bottom:1px solid #e2dac6;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Quick Queue</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">MSC 2709</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 22px 28px; border-bottom:1px solid #e2dac6;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Quick Queue</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">MSC 2709</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:20px 30px 20px 12px; border-bottom:1px solid #e2dac6;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 22px 10px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Wed, Sep 16</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Business casual</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">Business casual</div>
                   </td>
                 </tr>
 
                 <tr>
-                  <td width="55%" valign="top" style="padding:20px 12px 28px 30px;">
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; color:#191221;">Invite Only</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Sent with your invitation</div>
+                  <td width="55%" valign="top" style="padding:24px 10px 26px 28px;">
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.25; color:#191221;">Invite Only</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">By invitation</div>
                   </td>
-                  <td width="45%" valign="top" align="right" style="padding:20px 30px 28px 12px;">
+                  <td width="45%" valign="top" align="right" style="padding:26px 28px 26px 10px;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:700; line-height:1.4; color:#191221;">Fri, Sep 18</div>
-                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:5px;">Sent with your invitation</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; color:#6f6580; padding-top:4px;">By invitation</div>
                   </td>
                 </tr>
 
@@ -143,22 +149,23 @@
             </td>
           </tr>
 
-          <!-- live-text calendar line, so it survives blocked images -->
+          <!-- PRIMARY CTA · the only CTA in this email -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:34px 44px 26px;">
-              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; line-height:1.6; color:#453a52;">
-                All six events in one file.
-                <a href="https://chasebarn.github.io/pct-zeta-rho/assets/rush-events.ics" style="color:#4b2e83; font-weight:700; text-decoration:underline;">Add to your calendar</a>
-              </div>
+            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
+              <a href="https://chasebarn.github.io/pct-zeta-rho/assets/rush-events.ics" style="display:block;">
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-calendar1.png" width="600" height="95"
+                     alt="Add to your calendar"
+                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
+              </a>
             </td>
           </tr>
 
-          <!-- PRIMARY CTA · live button on cream -->
+          <!-- MOCK: replace with a real photo or delete this tr before sending -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:0 44px 44px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
-                <tr><td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                  <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">View Rush Schedule</a>
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
+                <tr><td align="center" style="padding:64px 20px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                  Image placeholder
                 </td></tr>
               </table>
             </td>
@@ -167,8 +174,8 @@
           <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-schedule.png" width="600" height="200"
-                   alt="We will see you September 2. Six events, September 2 to September 18."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/cx-schedule.png" width="600" height="130"
+                   alt="We will see you September 2."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
@@ -176,7 +183,7 @@
           <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art2.png" width="600" height="150"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>

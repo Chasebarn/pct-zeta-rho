@@ -14,24 +14,34 @@
   <!--
     POST EVENT FOLLOW UP  (send the morning after any rush event)
     SUBJECT:      Thanks for coming.
-    PREVIEW TEXT: Photos below. Here is what is next.
+    PREVIEW TEXT: Photos, and what is next.
 
-    EDIT BEFORE SENDING:
-      - Visible placeholders: [EVENT NAME] in the opening line, and the four
-        UP NEXT values [DAY, MONTH 0] / [0:00 PM] / [ROOM] / [ATTIRE].
-      - The two PHOTOS boxes are mock content. Replace each with a photo from
-        THIS event, or delete that whole tr before sending.
-      - The gold button points at the public rush schedule page. Confirm it is live.
+    This mock is filled with realistic sample content. Every value below is real
+    sample copy, not a placeholder, so it previews the way it will send. Swap the
+    four things named in the region comments and it is ready.
+
+    THE FOUR SWAPS:
+      1. INTRO      name the event that just happened.
+      2. PHOTOS     two mock boxes. Drop in two photos from THAT event, or delete
+                    both the PHOTOS label tr and the photo tr before sending.
+      3. UP NEXT    the sub-line names the next event, and the grid carries its
+                    four facts. Those facts appear in the grid and NOWHERE else.
+      4. CTA        confirm the rush schedule page is live.
+
+    NOTES:
+      - The hero and the closing art are name-only. They carry no date, time or
+        room, so nothing in this email restates the grid.
       - Baked art is cached by URL on GitHub Pages forever. If you re-render a
         PNG, save it under a NEW filename.
-      - Dates assume Fall Rush 2026 (Sep 2 is a Wednesday). The source flyer says
-        2025, where Sep 2 is a Tuesday. Confirm before any real send.
+      - Sample dates assume Fall Rush 2026, where Sep 2 is a Wednesday (Info
+        Night) and Sep 4 is a Friday (Workshop). The source flyer says 2025,
+        where those fall on Tuesday and Thursday. Confirm before any real send.
   -->
 </head>
 <body style="margin:0; padding:0; background-color:#f4f1ea; -webkit-text-size-adjust:100%;">
 
   <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
-    Photos below. Here is what is next.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    Photos, and what is next.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ea;">
@@ -39,27 +49,25 @@
       <td align="center" style="padding:26px 12px;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background-color:#ffffff;">
 
-          <!-- HERO · swap to the matching hero for whichever event just ran:
-               hero-workshop-2.png, hero-alumni-panel-2.png, hero-phi-chi-fest-2.png,
-               hero-quick-queue-2.png, hero-invite-only-2.png. Rewrite the alt to match. -->
+          <!-- HERO · name only. Reads "PCT Fall Rush / Thank you." Never carries a date. -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hero-info-night-2.png"
-                   width="600" height="215" alt="PCT Fall Rush. Info Night. Wed Sep 2, 7:00 PM, BSN 225."
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/hn-thanks.png"
+                   width="600" height="150" alt="PCT Fall Rush. Thank you."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
           </tr>
 
-          <!-- INTRO -->
+          <!-- INTRO · SWAP: name the event that just happened. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:42px 44px 0;">
               <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#453a52;">
-                Thank you for coming to [EVENT NAME].
+                Thanks for coming to Info Night. It was a good room.
               </div>
             </td>
           </tr>
 
-          <!-- PHOTOS -->
+          <!-- PHOTOS · label -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -68,21 +76,23 @@
             </td>
           </tr>
 
-          <!-- MOCK: replace each box with a real photo, or delete this tr before sending -->
+          <!-- PHOTOS · SWAP: two photos from the event that just happened.
+               Each box is 50% with a 12px gutter. Replace both, or delete this tr
+               and the PHOTOS label tr above it before sending. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td width="50%" valign="top" style="padding:0 6px 0 0;">
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
-                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:64px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
                         Image placeholder
                       </td></tr>
                     </table>
                   </td>
                   <td width="50%" valign="top" style="padding:0 0 0 6px;">
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#efe9dc" style="background-color:#efe9dc;">
-                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:44px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
+                      <tr><td align="center" bgcolor="#efe9dc" style="background-color:#efe9dc; padding:64px 12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#6e6552; text-transform:uppercase;">
                         Image placeholder
                       </td></tr>
                     </table>
@@ -92,58 +102,64 @@
             </td>
           </tr>
 
-          <!-- UP NEXT -->
+          <!-- UP NEXT · label, and the sub-line that names the next event. -->
           <tr>
             <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:44px 44px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr><td bgcolor="#faf8f3" style="background-color:#faf8f3; border-bottom:1px solid #e8e2d4; padding-bottom:12px; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:12px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Up next</td></tr>
               </table>
+              <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#453a52; padding-top:14px;">
+                The Professional Workshop.
+              </div>
             </td>
           </tr>
 
-          <!-- 2x2 editorial grid · values set in the display serif -->
+          <!-- UP NEXT · SWAP: the four facts for the next event. This grid is the
+               ONLY place they appear. Nothing above or below restates them. -->
           <tr>
-            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:22px 44px 0;">
+            <td bgcolor="#faf8f3" style="background-color:#faf8f3; padding:30px 44px 44px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2eee4" style="background-color:#f2eee4;">
                 <tr>
                   <td width="50%" valign="top" style="padding:30px 16px 22px 30px; border-bottom:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Date</div>
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[DAY,<br>MONTH&nbsp;0]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">Friday,<br>September&nbsp;4</div>
                   </td>
                   <td width="50%" valign="top" style="padding:30px 30px 22px 16px; border-bottom:1px solid #e2dac6; border-left:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Time</div>
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[0:00&nbsp;PM]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">7:00&nbsp;PM</div>
                   </td>
                 </tr>
                 <tr>
                   <td width="50%" valign="top" style="padding:22px 16px 30px 30px;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Room</div>
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[ROOM]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">BSN&nbsp;225</div>
+                    <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:13px; color:#6f6580; padding-top:5px;">Muma College of Business</div>
                   </td>
                   <td width="50%" valign="top" style="padding:22px 30px 30px 16px; border-left:1px solid #e2dac6;">
                     <div style="font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:#8a6d14; text-transform:uppercase;">Attire</div>
-                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">[ATTIRE]</div>
+                    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:27px; line-height:1.2; color:#191221; padding-top:7px;">Business<br>casual</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- PRIMARY CTA · live button on cream -->
+          <!-- PRIMARY CTA · the only CTA in this email. Baked gold button on the
+               purple band. SWAP: confirm the rush schedule page is live. -->
           <tr>
-            <td bgcolor="#faf8f3" align="center" style="background-color:#faf8f3; padding:40px 44px 46px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
-                <tr><td align="center" bgcolor="#c9a227" style="background-color:#c9a227;">
-                  <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:inline-block; font-family:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:700; color:#191221; text-decoration:none; padding:16px 34px;">View Rush Schedule</a>
-                </td></tr>
-              </table>
+            <td bgcolor="#241733" style="background-color:#241733; padding:0;">
+              <a href="https://chasebarn.github.io/pct-zeta-rho/fallrush.html" style="display:block;">
+                <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/btn-schedule1.png" width="600" height="95"
+                     alt="View the rush schedule"
+                     style="display:block; width:100%; height:auto; border:0; font-family:Helvetica,'Segoe UI',sans-serif; font-size:14px; font-weight:bold; color:#c9a227; background-color:#241733;">
+              </a>
             </td>
           </tr>
 
           <!-- CLOSE -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/close-next-event.png" width="600" height="200"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/cx-next-event.png" width="600" height="130"
                    alt="See you at the next one."
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:18px; line-height:1.5; color:#faf8f3; background-color:#241733;">
             </td>
@@ -152,7 +168,7 @@
           <!-- FOOTER -->
           <tr>
             <td bgcolor="#241733" style="background-color:#241733; padding:0;">
-              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art1.png" width="600" height="185"
+              <img src="https://chasebarn.github.io/pct-zeta-rho/assets/email-art/footer-art2.png" width="600" height="150"
                    alt="Phi Chi Theta at USF"
                    style="display:block; width:100%; height:auto; font-family:Georgia,serif; font-size:16px; color:#faf8f3; background-color:#241733;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>

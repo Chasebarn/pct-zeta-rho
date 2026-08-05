@@ -4,7 +4,7 @@ Every template in `email/` is built from these blocks. **Do not invent new styli
 Copy a block, change the words. If you need something that is not here, compose it
 from what is here.
 
-Reference implementation: `email/rush-day-of.html` (the proven Outlook build).
+Reference implementation: `email/event-info-night.html` (the approved current build).
 
 ---
 

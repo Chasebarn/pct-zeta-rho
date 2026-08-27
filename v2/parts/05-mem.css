@@ -1,0 +1,77 @@
+.mem{
+  background:var(--paper);
+  padding-block:var(--section) calc(var(--section) * .7);
+  overflow:hidden;            /* photos crop past the viewport on purpose */
+}
+.mem-h{
+  text-align:center;
+  font-size:clamp(2.3rem,6vw,5rem);
+  margin-bottom:clamp(2rem,4vw,3.2rem);
+}
+.mem-h em{font-style:italic;color:var(--gold-ink)}
+
+/* ---- the stage ---------------------------------------------------------- */
+.mem-stage{
+  position:relative;
+  height:clamp(340px,46vw,560px);
+  touch-action:pan-y;                 /* vertical page scroll still works */
+  cursor:grab;
+}
+.mem-stage.is-drag{cursor:grabbing}
+.mem-stage:focus-visible{outline:2px solid var(--purple);outline-offset:6px}
+
+.mem-fan{list-style:none;margin:0;padding:0;height:100%;position:relative}
+
+/* ---- one photo ---------------------------------------------------------- */
+.mem-i{
+  position:absolute;top:50%;left:50%;
+  width:clamp(200px,23vw,330px);
+  margin:0;
+  will-change:transform;
+}
+.mem-i figure{
+  margin:0;position:relative;
+  /* the scrapbook read: an off-white edge, not a literal Instax frame */
+  background:#fdfbf6;
+  padding:.5rem .5rem .55rem;
+  box-shadow:0 18px 40px rgba(25,18,33,.16), 0 2px 6px rgba(25,18,33,.10);
+}
+.mem-i img{width:100%;height:auto;display:block;background:var(--paper-deep)}
+
+/* caption: only the centred photo shows one, and it stays tiny */
+.mem-i figcaption{
+  position:absolute;left:.5rem;bottom:-1.9rem;
+  font-family:var(--font-text);
+  font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-mute);
+  opacity:0;transition:opacity 420ms var(--ease);
+  pointer-events:none;white-space:nowrap;
+}
+.mem-i.is-mid figcaption{opacity:1}
+
+/* ---- no JS: a plain scroll strip, every photo reachable ------------------ */
+.mem-stage:not([data-on]) .mem-fan{
+  position:static;height:auto;
+  display:flex;gap:1.2rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:2.4rem;
+}
+.mem-stage:not([data-on]) .mem-i{
+  position:static;flex:0 0 min(64vw,320px);scroll-snap-align:center;
+  transform:none!important;
+}
+.mem-stage:not([data-on]) .mem-i figcaption{position:static;opacity:1;margin-top:.6rem}
+
+@media (max-width:700px){
+  .mem-stage{height:clamp(300px,74vw,420px)}
+  .mem-i{width:clamp(170px,46vw,240px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* finished state: the same readable strip, no drift, no depth */
+  .mem-stage{height:auto;cursor:auto}
+  .mem-fan{position:static;height:auto;display:flex;gap:1.2rem;
+           overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:2.4rem}
+  .mem-i{position:static;flex:0 0 min(64vw,320px);scroll-snap-align:center;transform:none!important}
+  .mem-i figcaption{position:static;opacity:1;margin-top:.6rem}
+}

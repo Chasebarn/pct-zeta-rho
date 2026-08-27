@@ -1,0 +1,191 @@
+/* ============================================================
+   03 — Numbers don’t lie.  (cream ground / rational proof, at scale)
+   ONE signature interaction: the pinned horizontal scroll. The section
+   sticks and three monumental statistics travel through the viewport.
+
+   Everything above the "PINNED" mark is the finished, JS-free state: a
+   vertical sequence of the same three statistics, fully legible. The pin
+   is applied only by JS via .num--pin (>=768px, motion allowed), so no
+   copy in this section ever depends on script.
+
+   Both the pin and the mobile reveal are additionally gated on
+   (prefers-reduced-motion: no-preference), so under reduce they cannot
+   apply at all and the base rules — the finished state — are what render.
+
+   Restraint is the design. The size of the numeral IS the effect: no
+   outlines, no ticks, no orbiting marks, no grids. Each panel holds an
+   ordinal, a number, a hairline and one quiet line of type.
+   ============================================================ */
+
+.num{
+  background:var(--paper);
+  color:var(--ink-soft);
+  padding-block:var(--section);
+  /* the left edge every child aligns to — identical to .v2wrap's left edge */
+  --edge:max(var(--gutter), calc((100% - var(--wrap)) / 2));
+}
+
+/* .numscene takes an inline pixel height from JS while pinned; auto otherwise.
+   It must never be given overflow — that would break position:sticky. */
+.numscene{position:relative}
+.numpin{position:relative}
+
+/* ---------- heading ---------- */
+
+.num__head{
+  padding-inline:var(--edge);
+  margin-bottom:clamp(2.75rem,6vw,4.5rem);
+}
+.num__h{
+  font-size:clamp(2.6rem,6.2vw,4.75rem);
+  letter-spacing:-.015em;
+}
+.num__h em{font-style:italic;color:var(--gold-ink)}
+
+/* ---------- the track (a vertical stack until JS pins it) ---------- */
+
+.numtrack{
+  list-style:none;
+  margin:0;
+  padding-inline:var(--edge);
+  display:grid;
+  row-gap:clamp(4rem,11vw,7rem);
+}
+
+/* ---------- one statistic ---------- */
+
+.num__p{margin:0}
+
+.num__ord{
+  display:block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1.35rem;
+  line-height:1;
+  color:var(--gold-ink);
+  margin-bottom:clamp(1rem,2.4vw,1.9rem);
+}
+
+.num__val{
+  margin:0 0 clamp(1.25rem,2.6vw,2rem);
+  font-family:var(--font-display);
+  font-weight:400;                     /* the serif is 400 only — never faux-bold */
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:"tnum" 1,"lnum" 1;
+  font-size:clamp(5rem,30vw,11rem);    /* sane at every width with JS off */
+  line-height:.86;
+  letter-spacing:-.015em;
+  color:var(--ink);
+}
+.num__u{font-size:.5em;letter-spacing:0;margin-left:.05em}
+
+/* the unverified slot reads as an empty slot, never as a claim */
+.num__p[data-placeholder] .num__val{color:var(--ink-mute)}
+
+.num__lab{
+  margin:0;
+  width:min(30ch,100%);
+  padding-top:1.05rem;
+  border-top:1px solid var(--line);
+  font-size:clamp(.98rem,1.1vw,1.1rem);
+  line-height:1.5;
+  color:var(--ink-soft);
+}
+
+/* ============================================================
+   PINNED — desktop only, switched on by JS as .num--pin
+   ============================================================ */
+
+@media (min-width:768px) and (prefers-reduced-motion:no-preference){
+
+  .num--pin .numpin{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:hidden;                   /* the track leaves through this edge */
+    display:grid;
+    grid-template-rows:auto 1fr;
+    /* minmax(0,1fr), never auto: an auto column would be sized by the track's
+       max-content — the whole overflowing strip — and drag the heading out
+       with it. This keeps every child exactly one viewport wide. */
+    grid-template-columns:minmax(0,1fr);
+    padding-block:clamp(2.5rem,7vh,5.5rem);
+  }
+
+  .num--pin .num__head{margin-bottom:0}
+
+  /* The track keeps its auto width — the pin's width — and simply lets the
+     panels overflow to the right, where .numpin clips them. Do NOT give it
+     width:max-content: --edge is a percentage, and percentage padding inside
+     a max-content box resolves cyclically (it triples the track width). */
+  .num--pin .numtrack{
+    grid-row:2;
+    align-self:center;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;            /* every numeral shares one top edge */
+    column-gap:clamp(3.5rem,6vw,8rem);
+    row-gap:0;
+    transform:translate3d(0,0,0);
+    will-change:transform;             /* the only element that moves */
+  }
+
+  /* each statistic owns the screen: at rest only the next one's ordinal
+     shows at the right edge, never a second whole number */
+  .num--pin .num__p{flex:0 0 auto;width:max(30rem,76vw)}
+
+  /* monumental, but never taller than the pin it lives in */
+  .num--pin .num__val{font-size:min(clamp(7rem,20vw,18rem),38vh)}
+  .num--pin .num__lab{width:min(34ch,100%)}
+}
+
+/* ============================================================
+   MOBILE (<768px) — its own choreography. No pin, no horizontal
+   travel: one statistic per screen, arriving as you reach it.
+   ============================================================ */
+
+@media (max-width:767px){
+  .num__head{margin-bottom:clamp(2.25rem,9vw,3.25rem)}
+  .numtrack{row-gap:clamp(2rem,6vw,3rem)}
+  .num__p{
+    min-height:58vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .num__val{font-size:clamp(5.5rem,32vw,9.5rem)}
+  .num__lab{width:min(26ch,100%)}
+}
+
+/* The reveal is gated twice: on .num--js, which JS adds only once it has an
+   IntersectionObserver to switch it back on, and on no-preference. Without
+   JS — or under reduce — these rules never exist and every statistic is
+   simply on screen. */
+@media (max-width:767px) and (prefers-reduced-motion:no-preference){
+  .num--js .num__ord,
+  .num--js .num__val,
+  .num--js .num__lab{
+    opacity:0;
+    transform:translateY(.34em);
+    transition:opacity 520ms var(--ease), transform 640ms var(--ease);
+  }
+  .num--js .num__val{transition-delay:70ms}
+  .num--js .num__lab{transform:translateY(12px);transition-delay:180ms}
+
+  .num--js .is-in .num__ord,
+  .num--js .is-in .num__val,
+  .num--js .is-in .num__lab{opacity:1;transform:none}
+}
+
+/* ============================================================
+   REDUCED MOTION — the finished state is the vertical sequence, and
+   the rules above simply do not apply here. All that is left is to
+   neutralise the inline geometry JS may have written before the
+   setting was changed mid-session; !important beats those inline
+   styles, so the section is safe even if a teardown never runs.
+   ============================================================ */
+
+@media (prefers-reduced-motion:reduce){
+  .num .numscene{height:auto!important}
+  .num .numtrack{transform:none!important;will-change:auto}
+}

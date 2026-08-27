@@ -34,7 +34,7 @@ window.pctInitHero = function () {
     var mqSmall = window.matchMedia('(max-width: 767px)');
     var reduced = mqReduce.matches;
 
-    var SETTLE = 4600;   /* ms from first paint (or last pointer move) to stillness */
+    var SETTLE = 6200;   /* ms from first paint (or last pointer move) to stillness */
     var WAKE_GAP = 140;  /* ms of pointer stillness that counts as "the pointer stopped" */
 
     /* ---- geometry, measured on load + resize only, never inside the loop ---- */
@@ -144,7 +144,9 @@ window.pctInitHero = function () {
       }
 
       if (visible) paint(env, pull);
-      t += 0.008 * env;   /* drift decelerates with the envelope */
+      t += 0.0026 * env;  /* drift decelerates with the envelope. Deliberately slow:
+                             at the old 0.008 the threads read as fast-forwarding
+                             across the screen on load. */
 
       if (!busy) stop();
     }

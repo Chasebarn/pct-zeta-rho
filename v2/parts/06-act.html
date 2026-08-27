@@ -35,6 +35,22 @@
 
       <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
 
+
+      <!-- COUNTDOWN. data-until is the single source of truth and must stay in sync
+           with assets/rush-events.ics and the Event JSON-LD on fallrush.html.
+           data-ends marks the last event, so the section can switch to the active
+           state during rush. Remove both attributes and the block hides itself. -->
+      <div class="act-cd" data-until="2026-09-02T19:00:00-04:00"
+           data-ends="2026-09-18T21:00:00-04:00" aria-live="off">
+        <span class="act-cd-lab">Rush begins in</span>
+        <div class="act-cd-units">
+          <div class="act-cd-u"><span class="act-cd-n" data-cd="d">&ndash;</span><span class="act-cd-k">Days</span></div>
+          <div class="act-cd-u"><span class="act-cd-n" data-cd="h">&ndash;</span><span class="act-cd-k">Hours</span></div>
+          <div class="act-cd-u"><span class="act-cd-n" data-cd="m">&ndash;</span><span class="act-cd-k">Minutes</span></div>
+          <div class="act-cd-u"><span class="act-cd-n" data-cd="s">&ndash;</span><span class="act-cd-k">Seconds</span></div>
+        </div>
+      </div>
+
       <div class="act-go">
         <a class="act-cta" href="rush.html">
           <span class="act-cta-plate" aria-hidden="true"></span>
@@ -45,13 +61,6 @@
                   stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-
-        <a class="act-more" href="rush.html">
-          <span class="act-more-text">See events, eligibility and FAQs</span>
-          <span class="act-more-arrow" aria-hidden="true">&#8594;</span>
-        </a>
-
-        <span class="v2-label act-sub">Fall 2026 Rush</span>
       </div>
 
     </div>

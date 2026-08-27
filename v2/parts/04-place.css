@@ -1,0 +1,203 @@
+/* ============================================================
+   04 — Where members have placed.  (cream ground / proof, part two)
+
+   ONE signature interaction: two logo belts that drift in opposite
+   directions, pause under the cursor, and dissolve at both edges.
+
+   Everything below the "BELT" mark is gated on [data-on], which the
+   JS only sets after it has cloned each list. The base rules above it
+   stand alone and ARE the finished state: two static wrapped lists,
+   centred, every name readable, nothing clipped.
+   ============================================================ */
+
+.pl{
+  background:var(--paper);
+  color:var(--ink-soft);
+
+  /* Continuation, not a new chapter. The gap above is deliberately about
+     half a section so this lands under the numbers as their evidence.
+     If 03 ends with a full --section of its own, drop this to 0. */
+  padding-block:clamp(2.25rem,5vw,4rem) var(--section);
+
+  /* one place to retune the whole belt */
+  --pl-cell-h:clamp(3.6rem,5.4vw,4.6rem);   /* every cell the same height */
+  --pl-mark-h:clamp(1.5rem,2.3vw,2rem);     /* optical cap for a real logo */
+  --pl-pad:clamp(1rem,2.1vw,1.8rem);        /* HALF the space between marks */
+  --pl-fade:clamp(2.5rem,8vw,8rem);         /* how far the edges dissolve */
+}
+
+/* ---------- heading: the house display serif, one notch under a
+     chapter opener so the numbers above stay the loudest thing ---------- */
+
+.pl-h{
+  text-align:center;
+  font-size:clamp(2.1rem,4.6vw,3.4rem);
+  letter-spacing:-.01em;
+  margin-bottom:.85rem;
+}
+.pl-h em{font-style:italic;color:var(--gold-ink)}
+
+.pl-sub{
+  margin:0 auto clamp(2rem,4.2vw,3.2rem);
+  max-width:30rem;
+  text-align:center;
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--ink-mute);
+}
+
+/* ---------- the two rows (full bleed, no wrap) ---------- */
+
+.pl-row{position:relative}
+.pl-row + .pl-row{border-top:1px solid var(--line)}
+
+.pl-track{
+  list-style:none;
+  margin:0;
+  padding:clamp(.55rem,1.5vw,1rem) var(--gutter);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  row-gap:.15rem;
+}
+
+/* one cell: a fixed-height box with the mark optically centred in it.
+   The horizontal space between marks is this padding, doubled — it lives
+   on the cell rather than in a gap so that a belt of N cells is exactly
+   half the width of a belt of 2N and the loop can land on itself. */
+.pl-cell{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:var(--pl-cell-h);
+  padding-inline:var(--pl-pad);
+}
+
+/* the type-set stand-in for a logo we do not have a licensed file for */
+.pl-mark{
+  font-family:var(--font-text);
+  font-weight:600;
+  font-size:clamp(.95rem,1.3vw,1.08rem);
+  letter-spacing:.05em;
+  line-height:1;
+  white-space:nowrap;
+  color:var(--ink-mute);            /* 5.1:1 on --paper */
+}
+
+/* a real logo drops into the same cell: capped by HEIGHT so every brand
+   reads at the same optical size, desaturated so colour files still sit
+   inside the design system. */
+.pl-cell img{
+  width:auto;
+  height:auto;
+  max-height:var(--pl-mark-h);
+  max-width:min(11rem,44vw);
+  object-fit:contain;
+  filter:grayscale(1);
+  opacity:.78;
+}
+
+/* ============================================================
+   BELT — only exists once the JS has cloned each list
+   ============================================================ */
+
+.pl-row[data-on]{overflow:hidden}
+
+.pl-row[data-on] .pl-track{
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  width:max-content;
+  padding-inline:0;                 /* padding would break the exact 50% */
+  will-change:transform;
+  animation:pl-belt var(--pl-dur,64s) linear infinite;
+  /* a negative delay starts each belt already part-way along, so the section
+     never opens on two rows locked flush to the same left edge */
+  animation-delay:calc(var(--pl-dur,64s) * var(--pl-off,0));
+}
+.pl-row[data-on][data-pl-dir="-1"]{--pl-off:-.13}
+.pl-row[data-on][data-pl-dir="1"]{--pl-off:-.41}
+
+/* the list is doubled, so -50% lands the second copy exactly where the
+   first one started: no seam, no reset. */
+@keyframes pl-belt{
+  from{transform:translate3d(0,0,0)}
+  to  {transform:translate3d(-50%,0,0)}
+}
+
+/* row two runs the same keyframes backwards — opposite direction, and it
+   starts mid-list, which stops the two rows looking twinned. */
+.pl-row[data-on][data-pl-dir="1"] .pl-track{animation-direction:reverse}
+
+/* pause: under the cursor, on focus, and while off screen */
+@media (hover:hover){
+  .pl-row[data-on]:hover .pl-track{animation-play-state:paused}
+}
+.pl-row[data-on]:focus-within .pl-track,
+.pl-row[data-on].is-out .pl-track{animation-play-state:paused}
+
+/* ---------- soft edges ----------
+   Default is a pair of paper-to-transparent scrims, which work everywhere.
+   Where mask-image is supported it replaces them, so the row border fades
+   out with the marks instead of being painted over. */
+.pl-row[data-on]::before,
+.pl-row[data-on]::after{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;
+  width:var(--pl-fade);
+  z-index:2;
+  pointer-events:none;
+}
+.pl-row[data-on]::before{left:0;background:linear-gradient(to right,var(--paper),transparent)}
+.pl-row[data-on]::after{right:0;background:linear-gradient(to left,var(--paper),transparent)}
+
+@supports (mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000)){
+  .pl-row[data-on]{
+    -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--pl-fade),#000 calc(100% - var(--pl-fade)),transparent);
+            mask-image:linear-gradient(to right,transparent,#000 var(--pl-fade),#000 calc(100% - var(--pl-fade)),transparent);
+  }
+  .pl-row[data-on]::before,
+  .pl-row[data-on]::after{display:none}
+}
+
+/* ---------- phone: the same two strips, smaller and slower ----------
+   (the pixels-per-second drop is set in the JS; this is the sizing) */
+
+@media (max-width:767px){
+  .pl{
+    --pl-cell-h:clamp(3rem,10vw,3.5rem);
+    --pl-mark-h:clamp(1.2rem,4.6vw,1.55rem);
+    --pl-pad:clamp(.7rem,3vw,1.1rem);
+    --pl-fade:clamp(1.75rem,7vw,3.5rem);
+  }
+  .pl-mark{font-size:.9rem;letter-spacing:.04em}
+  .pl-cell img{max-width:8.5rem}
+}
+
+/* ---------- reduced motion: the FINISHED state ----------
+   Which here is the page as it ships without JS at all: both belts stop
+   being belts and become the static wrapped lists, all twenty names on
+   screen, the duplicate half hidden. The JS teardown does the same thing
+   to the DOM; this is the half that does not need JS to have run. */
+
+@media (prefers-reduced-motion:reduce){
+  .pl-row[data-on]{
+    overflow:visible;
+    -webkit-mask-image:none;
+            mask-image:none;
+  }
+  .pl-row[data-on]::before,
+  .pl-row[data-on]::after{display:none}
+  .pl-row[data-on] .pl-track{
+    animation:none;
+    transform:none;
+    will-change:auto;
+    flex-wrap:wrap;
+    justify-content:center;
+    width:auto;
+    padding-inline:var(--gutter);
+  }
+  .pl-cell[data-pl-clone]{display:none}
+}

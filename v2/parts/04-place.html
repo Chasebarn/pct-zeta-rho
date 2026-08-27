@@ -1,0 +1,101 @@
+<!-- 04 — Where members have placed.  (cream ground)
+     The second half of the proof chapter that opens with the numbers: same
+     ground, same voice, smaller heading, half-section gap above it, so it
+     reads as the numbers' evidence rather than a new idea.
+
+     ONE signature interaction: two logo belts drifting in opposite directions.
+     The markup below is the finished, JS-FREE state — two static wrapped
+     lists, every name readable, nothing clipped. 04-place.js clones each list
+     once and hands the drift to CSS.
+
+     ------------------------------------------------------------------
+     ASSETS THE OWNER STILL OWES.  Drop these into  assets/logos/  :
+
+       goldman-sachs.svg      Goldman Sachs
+       morgan-stanley.svg     Morgan Stanley
+       citi.svg               Citi
+       wells-fargo.svg        Wells Fargo
+       pnc.svg                PNC
+       raymond-james.svg      Raymond James
+       fisher-investments.svg Fisher Investments
+       sp-global.svg          S&P Global
+       kpmg.svg               KPMG
+       deloitte.svg           Deloitte
+       pwc.svg                PwC
+       amazon.svg             Amazon
+       nestle.svg             Nestlé
+       unilever.svg           Unilever
+       nbcuniversal.svg       NBCUniversal
+       lockheed-martin.svg    Lockheed Martin
+       victorias-secret.svg   Victoria's Secret
+       formula-1.svg          Formula 1
+       new-york-jets.svg      New York Jets
+       usf.svg                USF
+
+     MONOCHROME, SINGLE-COLOUR SVGs WORK BEST. Every cell is a fixed-height
+     box with the mark centred in it, and the CSS caps a logo by height (not
+     width) and desaturates it, so full-colour files still sit inside the
+     design system — but a one-colour file will always look cleaner.
+
+     TO DROP ONE IN: replace that cell's <span class="pl-mark"> with
+
+       <img src="assets/logos/<slug>.svg" alt="<Company name>"
+            width="160" height="40" loading="lazy" decoding="async">
+
+     Keep width/height on the tag (any values in the file's real ratio) so
+     nothing shifts while it loads. No CSS change is needed, and the belts
+     re-time themselves to the new widths on their own.
+     ------------------------------------------------------------------ -->
+<section class="pl" id="placements" aria-labelledby="pl-h" data-place data-pct-stage="proof">
+
+  <div class="v2wrap">
+    <h2 class="pl-h" id="pl-h">Where members have <em>placed.</em></h2>
+    <p class="pl-sub">Internships and full-time roles taken by Zeta Rho members.</p>
+  </div>
+
+  <div class="pl-rows" role="group" aria-label="Companies where members have placed">
+
+    <div class="pl-row" data-pl-row data-pl-dir="-1">
+      <ul class="pl-track" data-pl-track>
+        <li class="pl-cell">
+          <!-- LOGO HOOK: replace the span with
+               <img src="assets/logos/goldman-sachs.svg" alt="Goldman Sachs"
+                    width="160" height="40" loading="lazy" decoding="async">
+               Same cell, no CSS change needed. -->
+          <span class="pl-mark">Goldman Sachs</span>
+        </li>
+        <li class="pl-cell"><span class="pl-mark">Morgan Stanley</span></li>
+        <li class="pl-cell"><span class="pl-mark">Citi</span></li>
+        <li class="pl-cell"><span class="pl-mark">Wells Fargo</span></li>
+        <li class="pl-cell"><span class="pl-mark">PNC</span></li>
+        <li class="pl-cell"><span class="pl-mark">Raymond James</span></li>
+        <li class="pl-cell"><span class="pl-mark">Fisher Investments</span></li>
+        <li class="pl-cell"><span class="pl-mark">S&amp;P Global</span></li>
+        <li class="pl-cell"><span class="pl-mark">KPMG</span></li>
+        <li class="pl-cell"><span class="pl-mark">Deloitte</span></li>
+      </ul>
+    </div>
+
+    <div class="pl-row" data-pl-row data-pl-dir="1">
+      <ul class="pl-track" data-pl-track>
+        <li class="pl-cell">
+          <!-- LOGO HOOK: replace the span with
+               <img src="assets/logos/pwc.svg" alt="PwC"
+                    width="120" height="40" loading="lazy" decoding="async">
+               Same cell, no CSS change needed. -->
+          <span class="pl-mark">PwC</span>
+        </li>
+        <li class="pl-cell"><span class="pl-mark">Amazon</span></li>
+        <li class="pl-cell"><span class="pl-mark">Nestl&eacute;</span></li>
+        <li class="pl-cell"><span class="pl-mark">Unilever</span></li>
+        <li class="pl-cell"><span class="pl-mark">NBCUniversal</span></li>
+        <li class="pl-cell"><span class="pl-mark">Lockheed Martin</span></li>
+        <li class="pl-cell"><span class="pl-mark">Victoria&rsquo;s Secret</span></li>
+        <li class="pl-cell"><span class="pl-mark">Formula 1</span></li>
+        <li class="pl-cell"><span class="pl-mark">New York Jets</span></li>
+        <li class="pl-cell"><span class="pl-mark">USF</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>

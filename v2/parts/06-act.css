@@ -385,3 +385,83 @@
 .pct-rail.is-still .pct-rail-tick {
   transition: none;
 }
+
+/* ------------------------------------------------------------------
+   COUNTDOWN + headline bloom (added in the final pass)
+   ------------------------------------------------------------------ */
+
+/* A very diffuse white bloom so the headline separates from the ground.
+   Restraint is the point: this must never read as neon. Radial, low alpha,
+   sitting behind the type and nothing else. */
+.act-title { position: relative; }
+.act-title::before {
+  content: "";
+  position: absolute; left: 50%; top: 50%;
+  width: 150%; aspect-ratio: 2 / 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side,
+    rgba(250,248,243,.14) 0%, rgba(250,248,243,.06) 45%, rgba(250,248,243,0) 72%);
+  pointer-events: none; z-index: -1;
+}
+
+.act-cd { margin: 2.4rem 0 2.6rem; }
+.act-cd[hidden] { display: none; }
+.act-cd-lab {
+  display: block;
+  font-family: var(--font-text);
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold-soft);
+  margin-bottom: 1rem;
+}
+.act-cd-units {
+  display: flex; justify-content: center;
+  gap: clamp(1.1rem, 3.4vw, 2.6rem);
+}
+.act-cd-u { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.act-cd-u + .act-cd-u {
+  border-left: 1px solid var(--line-dark);
+  padding-left: clamp(1.1rem, 3.4vw, 2.6rem);
+}
+.act-cd-n {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1;
+  color: var(--paper); font-variant-numeric: tabular-nums;
+}
+.act-cd-k {
+  font-family: var(--font-text);
+  font-size: .68rem; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(250,248,243,.6);
+}
+/* the active state replaces the digits entirely */
+.act-cd.is-live .act-cd-units { display: none; }
+.act-cd.is-live .act-cd-lab {
+  font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 400; letter-spacing: 0; text-transform: none;
+  color: var(--gold-soft); margin: 0;
+}
+
+@media (max-width: 560px) {
+  .act-cd-units { gap: .9rem; }
+  .act-cd-u + .act-cd-u { padding-left: .9rem; }
+}
+
+
+/* Support band: quieter still. Rush is the page's conversion; these are for
+   people who already know us, so they read as text links with a hairline, not
+   as buttons competing with the gold CTA above. */
+.act-band-btn {
+  background: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(25, 18, 33, .28) !important;
+  border-radius: 0 !important;
+  padding: .3rem 0 .25rem !important;
+  font-size: .92rem !important;
+  font-weight: 600 !important;
+  color: var(--ink-soft) !important;
+  letter-spacing: 0 !important;
+  /* 44px pointer target without looking like a button */
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 44px;
+}
+.act-band-btn:hover { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }

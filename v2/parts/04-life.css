@@ -1,0 +1,316 @@
+/* ============================================================
+   04 · EXPERIENCE — "PCT in real life."
+   Signature interaction: 3D photo rail.
+   Base (no JS) = native scroll-snap strip, captions visible.
+   [data-mode="rail"] = desktop depth field   (set by 04-life.js)
+   [data-mode="deck"] = phone swipe deck      (set by 04-life.js)
+   ============================================================ */
+
+#life {
+  --card-w: clamp(17rem, 25vw, 24rem);
+  /* tallest card (4:5) + its caption — every card stands on one baseline */
+  --stage-h: calc(var(--card-w) * 1.25 + 2.9rem);
+  --edge: max(var(--gutter), calc((100% - var(--wrap)) / 2));
+  position: relative;
+  padding-block: var(--section);
+  background:
+    radial-gradient(120% 85% at 50% -18%, #35214f 0%, rgba(53, 33, 79, 0) 62%),
+    var(--purple-deep);
+  color: var(--paper);
+  /* the rail recedes past the wrap; clip it rather than widen the page */
+  overflow: hidden;
+}
+
+.life-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* ---------- head ---------- */
+
+.life-head { max-width: 44rem; }
+.life-label { margin: 0 0 1.15rem; }
+.life-h {
+  color: var(--paper);
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  letter-spacing: -0.012em;
+}
+.life-lede {
+  margin: 1rem 0 0;
+  max-width: 34rem;
+  color: rgba(250, 248, 243, 0.7);
+  font-size: clamp(1rem, 1.25vw, 1.1rem);
+}
+
+/* ---------- rail · base state (no JS) ---------- */
+
+.life-rail { margin-top: clamp(2.5rem, 5.5vw, 4.25rem); }
+
+.life-stage {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--edge);
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(250, 248, 243, 0.22) transparent;
+}
+.life-stage::-webkit-scrollbar { height: 6px; }
+.life-stage::-webkit-scrollbar-thumb {
+  background: rgba(250, 248, 243, 0.22);
+}
+.life-stage::-webkit-scrollbar-track { background: transparent; }
+
+.life-track {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--edge) 1rem;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.life-card {
+  flex: 0 0 auto;
+  width: var(--card-w);
+  scroll-snap-align: center;
+  scroll-margin-inline: var(--edge);
+}
+
+.life-figure { margin: 0; }
+
+.life-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  background: #1c1129;
+}
+.life-card.is-tall .life-media { aspect-ratio: 4 / 5; }
+.life-card.is-wide .life-media { aspect-ratio: 16 / 9; }
+
+.life-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.life-cap {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--font-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+/* ---------- position ticks + affordance ---------- */
+
+.life-foot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.life-ticks {
+  display: flex;
+  justify-content: center;
+  gap: 0.125rem;
+}
+
+.life-tick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 3.25rem;
+  min-height: 44px;
+  text-decoration: none;
+}
+.life-tick-bar {
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: rgba(250, 248, 243, 0.26);
+  transform: scaleX(0.55);
+  transform-origin: 50% 50%;
+  transition: transform var(--dur) var(--ease);
+}
+.life-tick:hover .life-tick-bar { background: rgba(250, 248, 243, 0.5); }
+.life-tick[aria-current="true"] .life-tick-bar {
+  background: var(--gold);
+  transform: scaleX(1);
+}
+
+/* No-JS position feedback: the anchor targets drive the tick.
+   Scoped to :not([data-mode]) so it can never fight the JS state. */
+.life-rail:not([data-mode]):has(.life-card:target) .life-tick[aria-current="true"] .life-tick-bar {
+  background: rgba(250, 248, 243, 0.26);
+  transform: scaleX(0.55);
+}
+.life-rail:not([data-mode]):has(#life-c1:target) .life-tick[href="#life-c1"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c2:target) .life-tick[href="#life-c2"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c3:target) .life-tick[href="#life-c3"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c4:target) .life-tick[href="#life-c4"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c5:target) .life-tick[href="#life-c5"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c6:target) .life-tick[href="#life-c6"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c7:target) .life-tick[href="#life-c7"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c8:target) .life-tick[href="#life-c8"] .life-tick-bar {
+  background: var(--gold);
+  transform: scaleX(1);
+}
+
+/* The hint describes a drag that only exists once JS is running. */
+.life-hint {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 243, 0.36);
+  transition: opacity var(--dur) var(--ease);
+}
+.life-rail[data-mode] .life-hint { display: block; }
+.life-rail.is-taken .life-hint { opacity: 0; }
+
+/* ---------- enhanced: depth rail + swipe deck ---------- */
+
+.life-rail[data-mode] .life-stage {
+  overflow: visible;
+  scroll-snap-type: none;
+  scroll-padding-inline: 0;
+  position: relative;
+  height: var(--stage-h);
+  perspective: 1200px;
+  perspective-origin: 50% 46%;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.life-rail[data-mode].is-dragging .life-stage { cursor: grabbing; }
+/* a drag is a rail drag, never a native image drag */
+.life-rail[data-mode] .life-media img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.life-rail[data-mode] .life-track {
+  display: block;
+  position: relative;
+  height: 100%;
+  padding: 0;
+  transform-style: preserve-3d;
+}
+
+/* every card stands on the same baseline: portraits break the line
+   upward, cards receding in depth rise toward the horizon */
+.life-rail[data-mode] .life-card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--card-w);
+  scroll-snap-align: none;
+  /* transform / z-index written by 04-life.js */
+}
+
+.life-rail[data-mode] .life-figure {
+  /* opacity + filter written by 04-life.js */
+  transform: translateZ(0);
+}
+
+.life-rail[data-mode] .life-cap {
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+}
+.life-rail[data-mode] .life-card.is-active .life-cap {
+  opacity: 1;
+  transform: none;
+}
+
+/* the deck stacks in one place, so the shelf buys nothing there:
+   centre it instead and keep the phone composition tight */
+.life-rail[data-mode="deck"] .life-stage { perspective: none; }
+.life-rail[data-mode="deck"] .life-track { transform-style: flat; }
+.life-rail[data-mode="deck"] .life-card { bottom: auto; top: 50%; }
+
+/* ---------- phone ---------- */
+
+@media (max-width: 767px) {
+  #life {
+    --card-w: min(76vw, 20rem);
+    --stage-h: calc(var(--card-w) * 1.25 + 3.4rem);
+  }
+  .life-foot {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  /* full-bleed so eight targets still clear 44px on a real phone */
+  .life-ticks {
+    align-self: stretch;
+    margin-inline: calc(var(--gutter) * -1);
+    gap: 0;
+  }
+  .life-tick { flex: 1 1 0; }
+  .life-tick-bar { width: 100%; max-width: 2rem; }
+  .life-hint {
+    position: static;
+    transform: none;
+  }
+}
+
+/* ---------- reduced motion: the strip, finished, no depth ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .life-rail[data-mode] .life-stage {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    height: auto;
+    perspective: none;
+    touch-action: auto;
+    cursor: auto;
+  }
+  .life-rail[data-mode] .life-track {
+    display: flex;
+    align-items: flex-end;
+    height: auto;
+    padding: 0 var(--edge) 1rem;
+    transform-style: flat;
+  }
+  .life-rail[data-mode] .life-card {
+    position: static !important;
+    scroll-snap-align: center;
+    transform: none !important;
+    z-index: auto !important;
+  }
+  .life-rail[data-mode] .life-figure {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+  .life-rail[data-mode] .life-cap {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .life-rail[data-mode] .life-hint { display: none; }
+  .life-tick-bar { transition: none; }
+}

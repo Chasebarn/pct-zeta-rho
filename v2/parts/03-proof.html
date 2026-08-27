@@ -1,0 +1,620 @@
+<!-- ==========================================================================
+     03 - PROOF.  Two bands on cream that run into one another:
+       A  "Numbers don't lie."        three numerals, one horizontal move
+       B  "Where members have placed." two belts, opposite directions
+
+     The markup below IS the finished state. No numeral, caption, ornament or
+     wordmark waits on JavaScript to become readable. window.pctInitProof adds
+     .is-live / .is-pinned to opt in to motion; with script off, or with
+     prefers-reduced-motion, this reads as a composed vertical sequence.
+     ========================================================================== -->
+<section class="pf" id="proof" aria-labelledby="pf-h">
+
+  <!-- ---------- BAND A -------------------------------------------------- -->
+  <div class="pf-scene">
+    <div class="pf-pin">
+
+      <div class="pf-head">
+        <div class="v2wrap">
+          <p class="v2-label">Proof</p>
+          <h2 id="pf-h">Numbers don&rsquo;t lie.</h2>
+        </div>
+      </div>
+
+      <div class="pf-track">
+
+        <article class="pf-panel pf-panel--orbit">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>01</span> Placement</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <span class="pf-num">95<span class="pf-pct">%</span></span>
+                <!-- the proof of the number, sitting inside it. Decorative:
+                     every one of these names is set at full contrast in Band B. -->
+                <div class="pf-orbit" aria-hidden="true">
+                  <span class="pf-omark"><span>Goldman Sachs</span></span>
+                  <span class="pf-omark"><span>Deloitte</span></span>
+                  <span class="pf-omark"><span>Citi</span></span>
+                  <span class="pf-omark"><span>Amazon</span></span>
+                  <span class="pf-omark"><span>KPMG</span></span>
+                  <span class="pf-omark"><span>PNC</span></span>
+                  <span class="pf-omark"><span>PwC</span></span>
+                  <span class="pf-omark"><span>Raymond James</span></span>
+                  <span class="pf-omark"><span>S&amp;P Global</span></span>
+                  <span class="pf-omark"><span>Wells Fargo</span></span>
+                </div>
+              </div>
+              <figcaption class="pf-say">Members placed in internships or full-time roles.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="pf-panel pf-panel--rule">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>02</span> Academics</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <!-- transcript ruling, drawn with repeating-linear-gradient -->
+                <div class="pf-rule" aria-hidden="true"></div>
+                <span class="pf-num pf-num--gold">3.60</span>
+              </div>
+              <figcaption class="pf-say">Chapter average GPA.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="pf-panel pf-panel--tally">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>03</span> Recognition</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <span class="pf-num pf-num--hollow">15</span>
+                <!-- fifteen ticks, one per honoree -->
+                <div class="pf-tally" aria-hidden="true">
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                </div>
+              </div>
+              <figcaption class="pf-say">&ldquo;25 Under 25&rdquo; honorees.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+      </div><!-- /.pf-track -->
+
+      <div class="pf-rail" aria-hidden="true"><span></span></div>
+
+    </div><!-- /.pf-pin -->
+  </div><!-- /.pf-scene -->
+
+  <!-- ---------- BAND B -------------------------------------------------- -->
+  <div class="pf-belts">
+
+    <div class="v2wrap pf-belthead">
+      <p class="v2-label">Placement</p>
+      <h3 class="pf-belttitle">Where members have placed.</h3>
+      <p class="pf-beltsub">Firms and organisations Zeta Rho members have joined as interns and as full-time hires.</p>
+    </div>
+
+    <!-- LOGO DROP-IN POINT. These are type-set wordmarks, not licensed logo
+         files - we do not have rights to the real marks, so none are faked.
+         To use a real logo later, replace the <span class="pf-word">...</span>
+         inside a cell with, exactly:
+           <img src="assets/logos/goldman-sachs.svg" alt="Goldman Sachs"
+                width="180" height="40" loading="lazy" decoding="async">
+         and change NO CSS. The cell already sizes, centres, caps and
+         desaturates any <img> it contains. Keep the alt text equal to the
+         wordmark it replaces. -->
+
+    <div class="pf-beltwrap pf-beltwrap--a">
+      <ul class="pf-belt pf-belt--a" aria-label="Organisations where Zeta Rho members have placed">
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <!-- swap this span for an <img> (see note above) - no CSS change needed -->
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <!-- second pass of the same roster: it is what makes the loop seamless -->
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pf-beltwrap pf-beltwrap--b">
+      <ul class="pf-belt pf-belt--b" aria-hidden="true">
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <!-- second pass of the same roster: it is what makes the loop seamless -->
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="v2wrap pf-beltctl">
+      <button type="button" class="pf-pause">Pause the belts</button>
+    </div>
+
+  </div><!-- /.pf-belts -->
+</section>

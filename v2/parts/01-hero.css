@@ -1,0 +1,214 @@
+/* 01 · HERO — atmosphere. Every selector scoped to .v2hero.
+   Base CSS is the FINISHED state: all copy is visible, sized and legible with
+   JS disabled and with the canvas empty. JS only paints the silk. */
+
+.v2hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:9rem 0 7rem;
+  background:
+    radial-gradient(120% 90% at 80% -10%, #3b2559 0%, transparent 55%),
+    var(--purple-deep);
+  color:var(--paper);
+}
+
+/* film grain — the same ground treatment every dark section on this site uses */
+.v2hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- layers ---------- */
+
+.v2hero-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+.v2hero-letters{
+  position:absolute;
+  right:-4rem;
+  bottom:-6rem;
+  z-index:1;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(16rem,34vw,30rem);
+  line-height:.8;
+  white-space:nowrap;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(201,162,39,.16);
+  user-select:none;
+  pointer-events:none;
+  opacity:.84;
+  transition: opacity 760ms var(--ease);
+}
+
+/* The watermark lift is CSS, not JS: it works with scripting off, and it is the
+   same single gesture as the silk pull toward the button. Hover is gated to fine
+   pointers so a phone tap never triggers it. */
+@media (hover:hover) and (pointer:fine){
+  .v2hero:has(.v2hero-btn:hover) .v2hero-letters{opacity:1}
+}
+.v2hero:has(.v2hero-btn:focus-visible) .v2hero-letters{opacity:1}
+
+.v2hero-stage{position:relative;z-index:2}
+.v2hero-inner{max-width:920px}
+
+/* ---------- copy ---------- */
+
+.v2hero-h1{
+  margin:0 0 .35rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(3.2rem,8.5vw,7rem);
+  line-height:1.02;
+  letter-spacing:-.01em;
+  color:var(--paper);
+  text-wrap:balance;
+}
+
+.v2hero-sub{
+  margin:0 0 2.4rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.5rem,3.2vw,2.5rem);
+  line-height:1.15;
+  color:var(--gold-soft);
+}
+
+.v2hero-claim{
+  max-width:44ch;
+  margin:0 0 2.1rem;
+  font-size:clamp(1.02rem,1.35vw,1.18rem);
+  line-height:1.6;
+  color:rgba(250,248,243,.76);
+}
+.v2hero-claim strong{
+  font-weight:650;
+  color:var(--gold-soft);
+}
+
+.v2hero-next{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.5rem .85rem;
+  margin:0 0 2.6rem;
+  padding-top:1.35rem;
+  border-top:1px solid var(--line-dark);
+  max-width:44ch;
+  font-size:.86rem;
+  line-height:1.5;
+  color:rgba(250,248,243,.8);
+}
+.v2hero-next-lab{
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold-soft);
+}
+
+/* ---------- CTA ---------- */
+
+.v2hero-cta{margin:0}
+
+.v2hero-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  min-height:48px;
+  padding:.95rem 1.9rem;
+  border:1px solid transparent;
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--font-text);
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-decoration:none;
+  transition: none;
+}
+.v2hero-btn:hover{background:var(--gold-soft)}
+.v2hero-btn svg{transition: transform .35s var(--ease)}
+.v2hero-btn:hover svg{transform:translateX(4px)}
+
+/* ---------- foot bar ---------- */
+
+.v2hero-foot{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  z-index:2;
+  border-top:1px solid var(--line-dark);
+}
+.v2hero-foot-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:1.1rem;
+  padding-bottom:1.1rem;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  /* .62 not .55: a gold thread (max alpha .17) plus the grain can brighten the
+     ground right under this line. Measured worst case 5.05:1, plain ground 6.9:1. */
+  color:rgba(250,248,243,.62);
+}
+.v2hero-scroll{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+}
+.v2hero-scroll::after{
+  content:"";
+  width:1px;
+  height:2rem;
+  background:linear-gradient(var(--gold),transparent);
+  transform-origin:top;
+  animation:v2hero-drip 2.2s var(--ease) infinite;
+}
+@keyframes v2hero-drip{
+  0%  {transform:scaleY(0);transform-origin:top}
+  45% {transform:scaleY(1);transform-origin:top}
+  55% {transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ---------- mobile: its own choreography ----------
+   No pointer, so no pull and no wake — but the settle still runs. The foot bar
+   drops the two flanking lines and keeps only the scroll hint, centred. */
+@media (max-width:767px){
+  .v2hero{padding:7.5rem 0 6rem;min-height:100svh}
+  .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
+  .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
+  .v2hero-sub{margin-bottom:1.9rem}
+  .v2hero-claim,.v2hero-next{max-width:none}
+  .v2hero-next{margin-bottom:2.2rem}
+  .v2hero-btn{width:100%;justify-content:center}
+  .v2hero-foot-side{display:none}
+  .v2hero-foot-row{justify-content:center}
+}
+
+/* ---------- reduced motion ----------
+   Everything resolves to its finished, composed state: the drip sits fully drawn
+   rather than collapsed, transitions are removed, and the JS never starts a loop
+   (it paints one settled frame instead). */
+@media (prefers-reduced-motion:reduce){
+  .v2hero-letters{transition: none}
+  .v2hero-btn, .v2hero-btn svg{transition:none}
+  .v2hero-scroll::after{animation:none;transform:scaleY(1)}
+}

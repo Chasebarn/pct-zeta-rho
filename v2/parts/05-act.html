@@ -1,0 +1,74 @@
+<!-- ==========================================================================
+     05 — THE ACT  (final CTA)  +  GLOBAL CHROME (chapter progress rail)
+     Ground: --purple-deep. After four sections of motion, everything stops.
+     No canvas, no marquee, no counters, no parallax, no image.
+     ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
+     the secondary line rises into view. Always visible under 768px, on
+     :focus-within, and under prefers-reduced-motion.
+     ========================================================================== -->
+
+<!-- Chapter progress indicator. Decorative + aria-hidden: it carries no
+     information that is not already on the page. Hidden by default; 05-act.js
+     reveals it only at >=900px once it has resolved the page's five stages. -->
+<div class="pct-rail" data-pct-rail aria-hidden="true">
+  <div class="pct-rail-labels">
+    <span class="pct-rail-label is-on" data-stage-label="0"><span class="pct-rail-num">01</span> Intro</span>
+    <span class="pct-rail-label" data-stage-label="1"><span class="pct-rail-num">02</span> Grow</span>
+    <span class="pct-rail-label" data-stage-label="2"><span class="pct-rail-num">03</span> Proof</span>
+    <span class="pct-rail-label" data-stage-label="3"><span class="pct-rail-num">04</span> Experience</span>
+    <span class="pct-rail-label" data-stage-label="4"><span class="pct-rail-num">05</span> Rush</span>
+  </div>
+  <div class="pct-rail-ticks">
+    <span class="pct-rail-tick is-on" data-stage-tick="0"></span>
+    <span class="pct-rail-tick" data-stage-tick="1"></span>
+    <span class="pct-rail-tick" data-stage-tick="2"></span>
+    <span class="pct-rail-tick" data-stage-tick="3"></span>
+    <span class="pct-rail-tick" data-stage-tick="4"></span>
+  </div>
+</div>
+
+<section class="act on-dark" id="act" data-pct-stage="rush">
+  <div class="v2wrap">
+    <div class="act-inner">
+
+      <h2 class="act-title">Your path starts <em>here.</em></h2>
+
+      <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
+
+      <div class="act-go">
+        <a class="act-cta" href="rush.html">
+          <span class="act-cta-plate" aria-hidden="true"></span>
+          <span class="act-cta-label">Rush PCT</span>
+          <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
+               aria-hidden="true" focusable="false">
+            <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <a class="act-more" href="rush.html">
+          <span class="act-more-text">See events, eligibility and FAQs</span>
+          <span class="act-more-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <span class="v2-label act-sub">Fall 2026 Rush</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Subordinate support band. Deliberately small and quiet: it must never
+     compete with the rush CTA above it. -->
+<aside class="act-band" aria-label="Support the chapter">
+  <div class="v2wrap act-band-in">
+    <p class="act-band-copy">Already know us? <span class="act-band-em">Support the chapter.</span></p>
+    <div class="act-band-acts">
+      <!-- PLACEHOLDER URL: donations still run through the chapter's old Google
+           Site. Swap this href when a real donation page exists. -->
+      <a class="act-band-btn is-primary" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
+         target="_blank" rel="noopener">Donate Today</a>
+      <a class="act-band-btn" href="apparel.html">Apparel</a>
+    </div>
+  </div>
+</aside>

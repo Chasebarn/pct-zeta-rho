@@ -1,0 +1,26 @@
+:root{
+  --purple-deep:#241733; --purple:#4b2e83; --purple-hero:#2b1c3d;
+  --gold:#c9a227; --gold-soft:#e6c65b; --gold-ink:#8a6d14;
+  --paper:#faf8f3; --paper-deep:#f2eee4;
+  --ink:#191221; --ink-soft:#453a52; --ink-mute:#6f6580;
+  --line:#e8e2d4; --line-dark:#3a2b52;
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-text:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif;
+  --wrap:1240px; --gutter:clamp(1.25rem,4vw,3rem); --section:clamp(5rem,10vw,9rem);
+  --ease:cubic-bezier(.22,.61,.36,1); --dur:620ms;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink-soft);
+  font-family:var(--font-text);font-size:1.0625rem;line-height:1.65;
+  text-wrap:pretty;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;color:var(--ink);
+  line-height:1.04;text-wrap:balance;margin:0}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.v2wrap{width:min(var(--wrap),100% - var(--gutter)*2);margin-inline:auto}
+.v2-label{font-family:var(--font-text);font-size:.75rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink)}
+.on-dark .v2-label{color:var(--gold-soft)}
+:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:2px}
+.on-dark :focus-visible{outline-color:var(--gold-soft)}

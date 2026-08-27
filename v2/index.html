@@ -1,0 +1,4131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phi Chi Theta at USF — Professional Business Fraternity</title>
+<meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida, ranked #3 nationally.">
+<link rel="icon" type="image/png" href="../assets/crest.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ===== 01-hero ===== */
+/* 01 · HERO — atmosphere. Every selector scoped to .v2hero.
+   Base CSS is the FINISHED state: all copy is visible, sized and legible with
+   JS disabled and with the canvas empty. JS only paints the silk. */
+
+.v2hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:9rem 0 7rem;
+  background:
+    radial-gradient(120% 90% at 80% -10%, #3b2559 0%, transparent 55%),
+    var(--purple-deep);
+  color:var(--paper);
+}
+
+/* film grain — the same ground treatment every dark section on this site uses */
+.v2hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- layers ---------- */
+
+.v2hero-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+.v2hero-letters{
+  position:absolute;
+  right:-4rem;
+  bottom:-6rem;
+  z-index:1;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(16rem,34vw,30rem);
+  line-height:.8;
+  white-space:nowrap;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(201,162,39,.16);
+  user-select:none;
+  pointer-events:none;
+  opacity:.84;
+  transition: opacity 760ms var(--ease);
+}
+
+/* The watermark lift is CSS, not JS: it works with scripting off, and it is the
+   same single gesture as the silk pull toward the button. Hover is gated to fine
+   pointers so a phone tap never triggers it. */
+@media (hover:hover) and (pointer:fine){
+  .v2hero:has(.v2hero-btn:hover) .v2hero-letters{opacity:1}
+}
+.v2hero:has(.v2hero-btn:focus-visible) .v2hero-letters{opacity:1}
+
+.v2hero-stage{position:relative;z-index:2}
+.v2hero-inner{max-width:920px}
+
+/* ---------- copy ---------- */
+
+.v2hero-h1{
+  margin:0 0 .35rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(3.2rem,8.5vw,7rem);
+  line-height:1.02;
+  letter-spacing:-.01em;
+  color:var(--paper);
+  text-wrap:balance;
+}
+
+.v2hero-sub{
+  margin:0 0 2.4rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.5rem,3.2vw,2.5rem);
+  line-height:1.15;
+  color:var(--gold-soft);
+}
+
+.v2hero-claim{
+  max-width:44ch;
+  margin:0 0 2.1rem;
+  font-size:clamp(1.02rem,1.35vw,1.18rem);
+  line-height:1.6;
+  color:rgba(250,248,243,.76);
+}
+.v2hero-claim strong{
+  font-weight:650;
+  color:var(--gold-soft);
+}
+
+.v2hero-next{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.5rem .85rem;
+  margin:0 0 2.6rem;
+  padding-top:1.35rem;
+  border-top:1px solid var(--line-dark);
+  max-width:44ch;
+  font-size:.86rem;
+  line-height:1.5;
+  color:rgba(250,248,243,.8);
+}
+.v2hero-next-lab{
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold-soft);
+}
+
+/* ---------- CTA ---------- */
+
+.v2hero-cta{margin:0}
+
+.v2hero-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  min-height:48px;
+  padding:.95rem 1.9rem;
+  border:1px solid transparent;
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--font-text);
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-decoration:none;
+  transition: none;
+}
+.v2hero-btn:hover{background:var(--gold-soft)}
+.v2hero-btn svg{transition: transform .35s var(--ease)}
+.v2hero-btn:hover svg{transform:translateX(4px)}
+
+/* ---------- foot bar ---------- */
+
+.v2hero-foot{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  z-index:2;
+  border-top:1px solid var(--line-dark);
+}
+.v2hero-foot-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:1.1rem;
+  padding-bottom:1.1rem;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  /* .62 not .55: a gold thread (max alpha .17) plus the grain can brighten the
+     ground right under this line. Measured worst case 5.05:1, plain ground 6.9:1. */
+  color:rgba(250,248,243,.62);
+}
+.v2hero-scroll{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+}
+.v2hero-scroll::after{
+  content:"";
+  width:1px;
+  height:2rem;
+  background:linear-gradient(var(--gold),transparent);
+  transform-origin:top;
+  animation:v2hero-drip 2.2s var(--ease) infinite;
+}
+@keyframes v2hero-drip{
+  0%  {transform:scaleY(0);transform-origin:top}
+  45% {transform:scaleY(1);transform-origin:top}
+  55% {transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ---------- mobile: its own choreography ----------
+   No pointer, so no pull and no wake — but the settle still runs. The foot bar
+   drops the two flanking lines and keeps only the scroll hint, centred. */
+@media (max-width:767px){
+  .v2hero{padding:7.5rem 0 6rem;min-height:100svh}
+  .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
+  .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
+  .v2hero-sub{margin-bottom:1.9rem}
+  .v2hero-claim,.v2hero-next{max-width:none}
+  .v2hero-next{margin-bottom:2.2rem}
+  .v2hero-btn{width:100%;justify-content:center}
+  .v2hero-foot-side{display:none}
+  .v2hero-foot-row{justify-content:center}
+}
+
+/* ---------- reduced motion ----------
+   Everything resolves to its finished, composed state: the drip sits fully drawn
+   rather than collapsed, transitions are removed, and the JS never starts a loop
+   (it paints one settled frame instead). */
+@media (prefers-reduced-motion:reduce){
+  .v2hero-letters{transition: none}
+  .v2hero-btn, .v2hero-btn svg{transition:none}
+  .v2hero-scroll::after{animation:none;transform:scaleY(1)}
+}
+/* ===== 02-grow ===== */
+/* ============================================================
+   02 — Graduate confident.  (cream ground / value proposition)
+   ONE signature interaction: the image accordion. Selecting a row
+   curtain-wipes a new photograph into a frame that never disappears;
+   row 03 breaks the frame open into a burst of polaroids.
+
+   Everything below the "JS-ENHANCED" mark is gated on .grow--js.
+   Without JS the base rules stand alone: every row open, every
+   photograph visible, a plain editorial list.
+   ============================================================ */
+
+.grow{
+  background:var(--paper);
+  color:var(--ink-soft);
+  padding-block:var(--section);
+}
+
+.grow__wrap{
+  display:grid;
+  row-gap:clamp(2rem,5vw,3rem);
+  grid-template-areas:"intro" "stage" "rows";
+}
+
+/* ---------- intro ---------- */
+
+.grow__intro{grid-area:intro;max-width:44rem}
+
+.grow__label{margin:0 0 1.35rem}
+.grow__label::before{
+  content:"";
+  display:inline-block;
+  width:2.25rem;height:1px;
+  background:currentColor;
+  vertical-align:middle;
+  margin-right:.85rem;
+  opacity:.7;
+}
+
+.grow__h{
+  font-size:clamp(2.6rem,5.4vw,4.25rem);
+  letter-spacing:-.015em;
+  margin-bottom:1.15rem;
+}
+.grow__h em{font-style:italic;color:var(--gold-ink)}
+
+.grow__lede{
+  margin:0;
+  max-width:34rem;
+  font-size:clamp(1.05rem,1.5vw,1.2rem);
+  line-height:1.55;
+  color:var(--ink-soft);
+}
+
+/* ---------- the three rows ---------- */
+
+.grow__rows{
+  grid-area:rows;
+  position:relative;
+  padding-left:clamp(1.1rem,2vw,1.6rem);
+}
+/* the rail the gold marker travels down */
+.grow__rows::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:1px;
+  background:var(--line);
+}
+.grow__rail{
+  position:absolute;
+  left:0;top:0;
+  width:2px;height:100%;
+  background:var(--gold-ink);
+  transform-origin:top;
+  transform:translateY(0) scaleY(0);
+  opacity:0;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.grow__row{border-bottom:1px solid var(--line)}
+.grow__row:first-child{border-top:1px solid var(--line)}
+.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
+
+.grow__btn{
+  display:grid;
+  grid-template-columns:3.1rem 1fr;
+  align-items:baseline;
+  gap:0 .9rem;
+  width:100%;
+  margin:0;
+  padding:1.65rem .25rem 1.7rem;
+  background:none;
+  border:0;
+  color:inherit;
+  font-family:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+.grow__num{
+  display:inline-block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1.45rem;
+  line-height:1;
+  color:var(--ink-mute);
+}
+.grow__ttl{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(1.55rem,2.5vw,2.1rem);
+  line-height:1.06;
+  color:var(--ink);
+  transform-origin:left center;
+  transition: transform var(--dur) var(--ease);
+}
+@media (hover:hover){
+  .grow__btn:hover .grow__ttl{color:var(--purple);transform:translateX(4px)}
+}
+
+/* ---------- photographs ---------- */
+
+.grow__fig{margin:0}
+.grow__row .grow__fig{margin:.4rem 0 2.4rem;max-width:32rem}
+@media (min-width:560px){
+  .grow__row .grow__fig{margin-left:4rem}
+}
+
+.grow__frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:var(--paper-deep);
+  border:1px solid var(--line-dark);
+}
+.grow__frame img{width:100%;height:100%;object-fit:cover}
+
+.grow__cap{display:block;padding-top:1.05rem;max-width:34rem}
+.grow__kick{
+  display:block;
+  margin-bottom:.45rem;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-ink);
+}
+.grow__body{display:block;font-size:1.02rem;line-height:1.5;color:var(--ink-soft)}
+
+/* ---------- row 03: the polaroid burst (pattern break) ---------- */
+
+.grow__frame--burst{border:0;background:none}
+
+.grow__poly{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  z-index:var(--z,1);
+  width:40%;
+  padding:.42rem .42rem .3rem;
+  background:var(--paper);
+  border:1px solid var(--line-dark);
+  box-shadow:0 20px 42px -26px color-mix(in srgb,var(--ink) 55%,transparent);
+  transform:rotate(var(--r));
+}
+.grow__poly img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.grow__polycap{
+  display:block;
+  padding-top:.32rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:.82rem;
+  line-height:1.4;
+  text-align:center;
+  color:var(--ink-mute);
+}
+.grow__poly:nth-child(1){--x:-3%;--y:1%;--r:-7deg;--z:1;--d:40ms}
+.grow__poly:nth-child(2){--x:45%;--y:0%;--r:4deg;--z:2;--d:110ms}
+.grow__poly:nth-child(3){--x:25%;--y:38%;--r:-2deg;--z:5;--d:180ms}
+.grow__poly:nth-child(4){--x:-1%;--y:55%;--r:6deg;--z:3;--d:250ms}
+.grow__poly:nth-child(5){--x:47%;--y:58%;--r:-3deg;--z:4;--d:320ms}
+
+/* ============================================================
+   JS-ENHANCED — the persistent stage
+   ============================================================ */
+
+.grow__stage{grid-area:stage;display:none;position:relative}
+.grow--js .grow__stage{display:grid;align-items:start}
+
+/* keeps the frame height reserved and carries the offset gold rule */
+.grow__mat{grid-area:1/1;position:relative;width:100%;aspect-ratio:4/5}
+@media (min-width:1024px){
+  .grow--js .grow__mat::after{
+    content:"";
+    position:absolute;
+    inset:1.4rem -1.4rem -1.4rem 1.4rem;
+    border:1px solid color-mix(in srgb,var(--gold-ink) 45%,transparent);
+    transition: opacity var(--dur) var(--ease);
+  }
+  .grow--js .grow__stage:has(.grow__fig--burst.is-active) .grow__mat::after{opacity:0}
+}
+
+/* every photograph lives in the same cell, permanently stacked */
+.grow--js .grow__fig{grid-area:1/1;margin:0;max-width:none;visibility:hidden}
+.grow--js .grow__fig.is-active{visibility:visible;z-index:3}
+.grow--js .grow__fig.is-leaving{visibility:visible;z-index:2}
+
+.grow--js .grow__frame{
+  opacity:0;
+  transform:scale(.98);
+  clip-path:inset(0 100% 0 0);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), clip-path var(--dur) var(--ease);
+}
+/* outgoing: settles back 2% and drops away underneath the curtain */
+.grow--js .is-leaving .grow__frame{opacity:0;transform:scale(.98);clip-path:inset(0 0 0 0)}
+/* incoming: curtain-wipes open from the left edge */
+.grow--js .is-active .grow__frame{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
+/* one frame with transitions off, so the curtain always starts closed */
+.grow--js .is-prewipe .grow__frame{transition: none;opacity:1;transform:none;clip-path:inset(0 100% 0 0)}
+
+/* the burst never wipes — it assembles */
+.grow--js .grow__frame--burst,
+.grow--js .is-prewipe .grow__frame--burst{clip-path:none}
+.grow--js .grow__poly{opacity:0}
+.grow--js .is-active .grow__poly{
+  opacity:1;
+  animation:growPoly 560ms var(--ease) both;
+  animation-delay:var(--d,0ms);
+}
+
+/* the caption changes with the photograph */
+.grow--js .grow__cap{opacity:0;transition: opacity 200ms var(--ease)}
+.grow--js .is-active .grow__cap{opacity:1;animation:growCap 460ms 140ms var(--ease) both}
+
+/* the active numeral rises */
+.grow--js .grow__ttl{color:var(--ink-mute)}
+.grow--js .is-open .grow__ttl{color:var(--ink)}
+.grow--js .is-open .grow__num{color:var(--gold-ink);animation:growNum var(--dur) var(--ease) both}
+.grow--js .grow__rail{opacity:1}
+
+@keyframes growNum{from{opacity:0;transform:translateY(.32em)}to{opacity:1;transform:none}}
+@keyframes growCap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes growPoly{
+  from{opacity:0;transform:translate3d(0,16px,0) scale(.94) rotate(calc(var(--r) * .25))}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(var(--r))}
+}
+
+/* ---------- desktop split ---------- */
+
+@media (min-width:768px){
+  .grow--js .grow__wrap{
+    grid-template-columns:minmax(0,45fr) minmax(0,55fr);
+    grid-template-rows:max-content 1fr;
+    grid-template-areas:"intro stage" "rows stage";
+    column-gap:clamp(2.25rem,4.5vw,4rem);
+    align-items:start;
+  }
+  .grow--js .grow__stage{justify-self:end;width:100%;max-width:34rem}
+  .grow--js .grow__cap{padding-top:2.2rem}
+  .grow--js .grow__rows{align-self:start}
+}
+
+/* ---------- mobile: photograph on top, accordion under it ---------- */
+
+@media (max-width:767px){
+  .grow__frame,
+  .grow__mat{aspect-ratio:1}
+  .grow__btn{grid-template-columns:2.5rem 1fr;padding:1.15rem .25rem 1.2rem}
+  .grow__num{font-size:1.25rem}
+  /* calmer 2-across overlap, shallower angles, no lip labels */
+  .grow__poly{width:44%;padding:.35rem}
+  .grow__polycap{display:none}
+  .grow__poly:nth-child(1){--x:-2%;--y:0%;--r:-4deg}
+  .grow__poly:nth-child(2){--x:49%;--y:4%;--r:3deg}
+  .grow__poly:nth-child(3){--x:24%;--y:25%;--r:-2deg}
+  .grow__poly:nth-child(4){--x:-3%;--y:49%;--r:5deg}
+  .grow__poly:nth-child(5){--x:50%;--y:52%;--r:-3deg}
+}
+
+/* ---------- reduced motion: land on the finished state, never the start ---------- */
+
+/* Both are dropped outright rather than shortened, because every state here is
+   written as a plain declaration: the active frame is opaque and unclipped, the
+   polaroids and caption are opacity 1, the numeral sits at its default transform.
+   Removing the motion therefore lands on the finished state, never the start. */
+@media (prefers-reduced-motion:reduce){
+  .grow *,.grow *::before,.grow *::after{
+    transition: none !important;
+    animation:none !important;
+  }
+}
+.grow--still *,.grow--still *::before,.grow--still *::after{
+  transition: none !important;
+  animation:none !important;
+}
+/* ===== 03-proof ===== */
+/* ==========================================================================
+   03 · PROOF — "Numbers don't lie." / "Where members have placed."
+   Ground: cream. Two bands, one continuous move.
+
+   THE CONTRACT, RESTATED IN CSS TERMS
+   Base CSS below is the FINISHED state: every numeral is resolved, every
+   orbiting wordmark is at its final opacity, every tick is at full height,
+   both belts are running. `.pf.is-live` — added only by window.pctInitProof,
+   and only when motion is permitted — is what introduces the *pre*-entry
+   states that the signature move then resolves. So "no JS" and "reduced
+   motion" both land on the same place: composed, legible, done.
+
+   Every selector is scoped under .pf.
+   ========================================================================== */
+
+.pf {
+  background: var(--paper);
+  color: var(--ink-soft);
+  position: relative;
+  /* `clip`, never `hidden`: hidden would make this element the sticky pin's
+     scroll container and the pin would stop pinning. This is only a guard —
+     nothing is meant to poke out — but an absolutely positioned ornament that
+     did would widen the document and shove every centred thing off-axis. */
+  overflow-x: clip;
+
+  --pw: min(86vw, 980px);          /* panel width in the horizontal ribbon */
+  --pgap: clamp(3rem, 7vw, 7rem);
+  --cellw: 16rem;                  /* placement cell — fixed so the belt reads as a wall */
+  --cellh: 5.25rem;
+  --cellgap: clamp(0.75rem, 1.5vw, 1.15rem);
+}
+
+/* ==========================================================================
+   BAND A — the three numerals
+   ========================================================================== */
+
+.pf-scene { position: relative; padding: var(--section) 0; }
+.pf-pin { position: relative; }
+
+.pf-head { margin-bottom: clamp(2.75rem, 6vw, 4.5rem); }
+.pf-head .v2-label { display: block; margin-bottom: 0.9rem; }
+.pf-head h2 { font-size: clamp(2.4rem, 5.6vw, 4.6rem); letter-spacing: -0.015em; }
+
+/* Base = a vertical sequence. Legible with no script at all. */
+.pf-track {
+  display: grid;
+  justify-items: center;
+  gap: clamp(4rem, 10vw, 8rem);
+}
+
+.pf-panel { width: min(100%, 980px); }
+.pf-comp { display: grid; justify-items: center; }
+
+/* ---- index label ---- */
+.pf-idx {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.pf-idx span {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--purple);
+  line-height: 1;
+}
+.pf-idx::after {
+  content: "";
+  width: 3.25rem;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---- the numeral and its stage ---- */
+.pf-fig { margin: 0; display: grid; justify-items: center; }
+
+.pf-stage {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: clamp(1.75rem, 4.5vw, 3.5rem) clamp(2.5rem, 7vw, 6rem);
+  max-width: 100%;
+}
+
+.pf-num {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(5.5rem, 2rem + 14.5vw, 15rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: var(--purple);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.pf-pct {
+  font-size: 0.5em;
+  vertical-align: 0.42em;
+  margin-left: 0.04em;
+  color: var(--gold-ink);
+  letter-spacing: 0;
+}
+.pf-num--gold { color: var(--gold-ink); }
+
+/* Hollow numeral. Solid purple is the default so anything that cannot paint a
+   text stroke still gets a legible, on-brand numeral; the stroke is layered on
+   only where it is actually supported. */
+.pf-num--hollow { color: var(--purple); }
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .pf-num--hollow {
+    color: transparent;
+    -webkit-text-stroke-color: var(--purple);
+    -webkit-text-stroke-width: clamp(1.5px, 0.22vw, 3px);
+  }
+}
+
+.pf-say {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  max-width: 32ch;
+  text-align: center;
+  text-wrap: balance;              /* never break "full-time" across lines */
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  /* Two lines' worth whether the caption uses one or two, so all three panels
+     are exactly the same height and their index labels line up as they cross. */
+  min-height: calc(3em + 1.15rem + 2px);
+}
+.pf-say::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--gold-ink);
+  margin: 0 auto 1.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   01 · ORBIT — the wordmarks sit around the numeral's edge as its proof.
+   Decorative and aria-hidden; the same names are set at full contrast in
+   Band B directly below.
+   -------------------------------------------------------------------------- */
+.pf-orbit { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+.pf-omark {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+}
+.pf-omark > span {
+  display: block;
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-mute);
+  opacity: 0.46;
+  transform: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition-delay: calc(var(--i, 0) * 42ms);
+}
+
+.pf-omark:nth-child(1)  { --x:  6%; --y: 26%; --ox: -16px; --oy: -10px; --i: 0; }
+.pf-omark:nth-child(2)  { --x: 25%; --y: 10%; --ox: -10px; --oy: -16px; --i: 3; }
+.pf-omark:nth-child(3)  { --x: 52%; --y:  6%; --ox:   2px; --oy: -18px; --i: 6; }
+.pf-omark:nth-child(4)  { --x: 78%; --y: 13%; --ox:  14px; --oy: -13px; --i: 2; }
+.pf-omark:nth-child(5)  { --x: 93%; --y: 38%; --ox:  18px; --oy:  -3px; --i: 5; }
+.pf-omark:nth-child(6)  { --x: 90%; --y: 70%; --ox:  17px; --oy:   9px; --i: 8; }
+.pf-omark:nth-child(7)  { --x: 69%; --y: 90%; --ox:   9px; --oy:  16px; --i: 4; }
+.pf-omark:nth-child(8)  { --x: 42%; --y: 94%; --ox:   0px; --oy:  18px; --i: 7; }
+.pf-omark:nth-child(9)  { --x: 17%; --y: 84%; --ox: -14px; --oy:  12px; --i: 1; }
+.pf-omark:nth-child(10) { --x:  4%; --y: 56%; --ox: -18px; --oy:   1px; --i: 9; }
+
+/* pre-state: further out and invisible, so they arrive inward into orbit */
+.pf.is-live .pf-panel:not(.is-lit) .pf-omark > span {
+  opacity: 0;
+  transform: translate(var(--ox), var(--oy)) scale(0.9);
+}
+
+/* --------------------------------------------------------------------------
+   02 · RULE — the numeral emerges from a transcript ruling.
+   -------------------------------------------------------------------------- */
+.pf-rule {
+  position: absolute;
+  inset: -10% -6%;
+  z-index: 0;
+  --row: 1.85rem;
+  --col: 4.5rem;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--row) - 1px),
+      var(--line) calc(var(--row) - 1px) var(--row)
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent 0 calc(var(--col) - 1px),
+      var(--line) calc(var(--col) - 1px) var(--col)
+    );
+  -webkit-mask-image: radial-gradient(118% 104% at 50% 50%, #000 40%, transparent 76%);
+          mask-image: radial-gradient(118% 104% at 50% 50%, #000 40%, transparent 76%);
+  opacity: 0.5;                    /* finished: the ruling has receded */
+  transform: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.pf.is-live .pf-panel:not(.is-lit) .pf-rule {
+  opacity: 1;                      /* pre: the ruling is the loudest thing here */
+  transform: scaleY(1.08);
+}
+.pf-panel--rule .pf-num {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition-delay: 90ms;
+}
+.pf.is-live .pf-panel--rule:not(.is-lit) .pf-num {
+  opacity: 0;
+  transform: scale(0.965);
+}
+
+/* --------------------------------------------------------------------------
+   03 · TALLY — fifteen ticks setting alongside the hollow numeral.
+   -------------------------------------------------------------------------- */
+.pf-panel--tally .pf-stage { padding-right: clamp(4.5rem, 11vw, 8.5rem); }
+
+.pf-tally {
+  position: absolute;
+  right: clamp(0.75rem, 2.5vw, 2rem);
+  top: 50%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateY(-50%);
+}
+.pf-tick {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--ink-mute);
+  opacity: 1;
+  transform: none;
+  transition: opacity 460ms var(--ease), transform 460ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 38ms);
+}
+/* every fifth tick closes a group of five */
+.pf-tick:nth-child(5n) { width: 2.6rem; background: var(--gold-ink); }
+
+.pf-tick:nth-child(1)  { --i:  0; }
+.pf-tick:nth-child(2)  { --i:  1; }
+.pf-tick:nth-child(3)  { --i:  2; }
+.pf-tick:nth-child(4)  { --i:  3; }
+.pf-tick:nth-child(5)  { --i:  4; }
+.pf-tick:nth-child(6)  { --i:  5; }
+.pf-tick:nth-child(7)  { --i:  6; }
+.pf-tick:nth-child(8)  { --i:  7; }
+.pf-tick:nth-child(9)  { --i:  8; }
+.pf-tick:nth-child(10) { --i:  9; }
+.pf-tick:nth-child(11) { --i: 10; }
+.pf-tick:nth-child(12) { --i: 11; }
+.pf-tick:nth-child(13) { --i: 12; }
+.pf-tick:nth-child(14) { --i: 13; }
+.pf-tick:nth-child(15) { --i: 14; }
+
+.pf.is-live .pf-panel--tally:not(.is-lit) .pf-tick {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+/* --------------------------------------------------------------------------
+   PINNED HORIZONTAL RIBBON — the signature move.
+   Only ever applied by window.pctInitProof, and only on a viewport big enough
+   to hold it. Everything above still describes the finished state.
+   -------------------------------------------------------------------------- */
+.pf.is-pinned .pf-scene {
+  padding: 0;
+  height: 300vh;                   /* JS replaces this with 100vh + exact travel */
+}
+.pf.is-pinned .pf-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.pf.is-pinned .pf-head {
+  position: absolute;
+  top: clamp(4.5rem, 11vh, 7.5rem);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  pointer-events: none;
+}
+.pf.is-pinned .pf-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: content-box;         /* so max-content stays a content measurement */
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: var(--pgap);
+  padding-inline: calc((100% - var(--pw)) / 2);   /* panel 1 starts centred */
+  will-change: transform;
+}
+.pf.is-pinned .pf-panel {
+  flex: none;
+  width: var(--pw);
+  padding-top: clamp(5rem, 14vh, 9.5rem);         /* clear the pinned heading */
+}
+
+/* progress rail — an indicator for a scroll that only exists with JS, so it
+   only exists with JS */
+.pf-rail { display: none; }
+.pf.is-pinned .pf-rail {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: clamp(3rem, 7vh, 5rem);
+  z-index: 2;
+  width: min(280px, 42vw);
+  height: 1px;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+.pf-rail > span {
+  display: block;
+  height: 100%;
+  background: var(--gold-ink);
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ==========================================================================
+   BAND B — the placement belts
+   The hairline below is the handoff: the pin releases straight onto it, and
+   the belts have been running since the section came near the viewport.
+   ========================================================================== */
+
+.pf-belts {
+  border-top: 1px solid var(--line);
+  padding: clamp(3.25rem, 7vw, 5.5rem) 0 var(--section);
+}
+
+.pf-belthead { margin-bottom: clamp(2.25rem, 5vw, 3.5rem); }
+.pf-belthead .v2-label { display: block; margin-bottom: 0.85rem; }
+.pf-belttitle { font-size: clamp(2rem, 4.4vw, 3.4rem); letter-spacing: -0.015em; }
+.pf-beltsub {
+  margin: 1rem 0 0;
+  max-width: 48ch;
+  font-size: 1rem;
+  color: var(--ink-mute);
+}
+
+.pf-beltwrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.pf-beltwrap--b { margin-top: clamp(0.9rem, 2vw, 1.5rem); }
+
+.pf-belt {
+  display: flex;
+  align-items: flex-start;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  will-change: transform;
+}
+/* Opposite directions, very slowly. The negative delay means the belt is
+   already mid-pass the first time it is seen — never a cold start. */
+.pf-belt--a { animation: pf-beltA 104s linear -34s infinite; }
+.pf-belt--b { animation: pf-beltB 128s linear -61s infinite; }
+
+@keyframes pf-beltA {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes pf-beltB {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* WCAG 2.2.2 — moving content must be stoppable. Three ways: hover, focus
+   anywhere inside a belt, and the explicit button below. */
+.pf-beltwrap:hover .pf-belt,
+.pf-beltwrap:focus-within .pf-belt,
+.pf-belts.is-paused .pf-belt { animation-play-state: paused; }
+
+.pf-cell {
+  position: relative;
+  flex: none;
+  padding-bottom: 1.5rem;          /* the caption's reserved room — no shift */
+  /* The gap is a per-cell margin rather than flex `gap` on purpose: one pass of
+     the roster is then exactly 50% of the track, gap included, so the loop
+     repeats on itself with no half-gap drift. */
+  margin-right: var(--cellgap);
+}
+.pf-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cellw);
+  height: var(--cellh);
+  padding: 0 1rem;
+  border: 1px solid var(--line);
+  transform: none;
+  transition: transform 300ms var(--ease);
+}
+/* the hover frame is a separate painted layer so the lift stays transform-only */
+.pf-mark::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--purple);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms var(--ease);
+}
+.pf-word {
+  font-family: var(--font-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--ink-mute);
+}
+/* A real logo file dropped into a cell inherits all of this for free. */
+.pf-mark img {
+  max-width: 100%;
+  max-height: 52%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.72;
+}
+.pf-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+}
+
+.pf-cell:hover .pf-mark,
+.pf-cell:focus-within .pf-mark { transform: translateY(-4px); }
+.pf-cell:hover .pf-mark::after,
+.pf-cell:focus-within .pf-mark::after { opacity: 1; }
+.pf-cell:hover .pf-cap,
+.pf-cell:focus-within .pf-cap { opacity: 1; transform: none; }
+.pf-cell:hover .pf-word,
+.pf-cell:focus-within .pf-word { color: var(--ink); }
+.pf-cell:hover .pf-mark img,
+.pf-cell:focus-within .pf-mark img { filter: none; opacity: 1; }
+
+/* The pause control cannot work without script, so it does not exist without
+   script. It is a control, not content. */
+.pf-beltctl { display: none; margin-top: clamp(1.75rem, 4vw, 2.75rem); }
+.pf.is-live .pf-beltctl { display: block; }
+.pf-pause {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  cursor: pointer;
+}
+.pf-pause:hover { border-color: var(--purple); color: var(--purple); }
+
+/* ==========================================================================
+   MOBILE — no pin, no horizontal scroll. The three numbers become a vertical
+   sequence with one composition per screenful, each still arriving by its own
+   micro-treatment. One belt, slower.
+   ========================================================================== */
+@media (max-width: 767px) {
+  .pf-scene { padding: var(--section) 0 clamp(3.5rem, 10vw, 5rem); }
+
+  .pf-track { gap: 0; }
+  .pf-panel {
+    width: 100%;
+    min-height: 76vh;
+    display: grid;
+    align-content: center;
+    padding: clamp(2rem, 8vw, 3.5rem) var(--gutter);
+  }
+  /* Band A is the scale moment, so the numeral takes as much of a phone screen
+     as "3.60" can hold without touching the gutter. */
+  .pf-num { font-size: clamp(4.75rem, 31vw, 9rem); }
+  .pf-stage { padding: clamp(1.5rem, 7vw, 2.5rem) clamp(1.25rem, 6vw, 2.75rem); }
+
+  /* Ten wordmarks around a phone-sized numeral is soup, and any of them level
+     with the numeral would sit on top of it. Keep four, above and below only. */
+  .pf-omark { display: none; }
+  .pf-omark:nth-child(1),
+  .pf-omark:nth-child(5),
+  .pf-omark:nth-child(7),
+  .pf-omark:nth-child(10) { display: block; }
+  .pf-omark:nth-child(1)  { --x: 32%; --y:  2%; --ox:  -7px; --oy: -12px; }
+  .pf-omark:nth-child(5)  { --x: 84%; --y:  8%; --ox:  11px; --oy: -10px; }
+  .pf-omark:nth-child(7)  { --x: 80%; --y: 98%; --ox:  10px; --oy:  12px; }
+  .pf-omark:nth-child(10) { --x: 26%; --y: 98%; --ox:  -9px; --oy:  12px; }
+  .pf-omark > span { font-size: 0.625rem; letter-spacing: 0.13em; }
+
+  /* the tally reads better as a row under the numeral than a column beside it */
+  .pf-panel--tally .pf-stage { padding-right: clamp(2rem, 10vw, 3.5rem); }
+  .pf-tally {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.35rem;
+    transform: none;
+  }
+  .pf-tick { width: 2px; height: 1.4rem; }
+  .pf-tick:nth-child(5n) { width: 2px; height: 2.3rem; }
+  .pf.is-live .pf-panel--tally:not(.is-lit) .pf-tick { transform: translateY(14px); }
+
+  .pf-belts { padding-top: clamp(2.5rem, 8vw, 3.5rem); }
+  .pf-beltwrap--b { display: none; }   /* belt B is the same twenty names, rotated */
+  .pf-belt--a { animation-duration: 168s; }
+  .pf { --cellw: 12.5rem; --cellh: 4.5rem; }
+  .pf-word { font-size: 0.7rem; letter-spacing: 0.12em; }
+  /* A phone has no hover, so the caption has no trigger — and repeating
+     "Member placement" under every cell forever is just noise under a heading
+     that already says it. Drop it, and reclaim its reserved room. */
+  .pf-cap { display: none; }
+  .pf-cell { padding-bottom: 0; }
+}
+
+/* Landscape phones and very short windows never get the pin either (JS gates
+   on the same query); make sure the numerals still fit the viewport. */
+@media (orientation: landscape) and (max-height: 620px) {
+  .pf-num { font-size: min(clamp(4.75rem, 2rem + 14.5vw, 15rem), 30vh); }
+}
+
+/* ==========================================================================
+   REDUCED MOTION — everything resolves to its finished state, never its start.
+   Kept last so it wins on equal specificity.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .pf-omark > span,
+  .pf-rule,
+  .pf-panel--rule .pf-num,
+  .pf-tick,
+  .pf-mark,
+  .pf-mark::after,
+  .pf-cap { transition: none; }
+
+  /* If .is-live somehow survives a mid-session switch, the pre-states must not. */
+  .pf .pf-omark > span { opacity: 0.46; transform: none; }
+  .pf .pf-rule { opacity: 0.5; transform: none; }
+  .pf .pf-panel--rule .pf-num { opacity: 1; transform: none; }
+  .pf .pf-tick { opacity: 1; transform: none; }
+
+  /* A marquee with the animation simply removed would leave most of the roster
+     parked outside the viewport. Wrap it into a static wall instead: drop the
+     duplicate pass, and drop belt B, which carries the same twenty names. */
+  .pf-belt {
+    animation: none;
+    transform: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    will-change: auto;
+  }
+  .pf-dup { display: none; }
+  .pf-beltwrap--b { display: none; }
+  .pf-beltwrap {
+    overflow: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+    width: min(var(--wrap), 100% - var(--gutter) * 2);
+    margin-inline: auto;
+  }
+  .pf-cell { margin-bottom: var(--cellgap); padding-bottom: 0; }
+  .pf-beltctl { display: none !important; }
+  .pf-cap { display: none; }   /* twenty identical labels under a static wall */
+  .pf-cell:hover .pf-mark,
+  .pf-cell:focus-within .pf-mark { transform: none; }
+}
+/* ===== 04-life ===== */
+/* ============================================================
+   04 · EXPERIENCE — "PCT in real life."
+   Signature interaction: 3D photo rail.
+   Base (no JS) = native scroll-snap strip, captions visible.
+   [data-mode="rail"] = desktop depth field   (set by 04-life.js)
+   [data-mode="deck"] = phone swipe deck      (set by 04-life.js)
+   ============================================================ */
+
+#life {
+  --card-w: clamp(17rem, 25vw, 24rem);
+  /* tallest card (4:5) + its caption — every card stands on one baseline */
+  --stage-h: calc(var(--card-w) * 1.25 + 2.9rem);
+  --edge: max(var(--gutter), calc((100% - var(--wrap)) / 2));
+  position: relative;
+  padding-block: var(--section);
+  background:
+    radial-gradient(120% 85% at 50% -18%, #35214f 0%, rgba(53, 33, 79, 0) 62%),
+    var(--purple-deep);
+  color: var(--paper);
+  /* the rail recedes past the wrap; clip it rather than widen the page */
+  overflow: hidden;
+}
+
+.life-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* ---------- head ---------- */
+
+.life-head { max-width: 44rem; }
+.life-label { margin: 0 0 1.15rem; }
+.life-h {
+  color: var(--paper);
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  letter-spacing: -0.012em;
+}
+.life-lede {
+  margin: 1rem 0 0;
+  max-width: 34rem;
+  color: rgba(250, 248, 243, 0.7);
+  font-size: clamp(1rem, 1.25vw, 1.1rem);
+}
+
+/* ---------- rail · base state (no JS) ---------- */
+
+.life-rail { margin-top: clamp(2.5rem, 5.5vw, 4.25rem); }
+
+.life-stage {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--edge);
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(250, 248, 243, 0.22) transparent;
+}
+.life-stage::-webkit-scrollbar { height: 6px; }
+.life-stage::-webkit-scrollbar-thumb {
+  background: rgba(250, 248, 243, 0.22);
+}
+.life-stage::-webkit-scrollbar-track { background: transparent; }
+
+.life-track {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--edge) 1rem;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.life-card {
+  flex: 0 0 auto;
+  width: var(--card-w);
+  scroll-snap-align: center;
+  scroll-margin-inline: var(--edge);
+}
+
+.life-figure { margin: 0; }
+
+.life-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  background: #1c1129;
+}
+.life-card.is-tall .life-media { aspect-ratio: 4 / 5; }
+.life-card.is-wide .life-media { aspect-ratio: 16 / 9; }
+
+.life-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.life-cap {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--font-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+/* ---------- position ticks + affordance ---------- */
+
+.life-foot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.life-ticks {
+  display: flex;
+  justify-content: center;
+  gap: 0.125rem;
+}
+
+.life-tick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 3.25rem;
+  min-height: 44px;
+  text-decoration: none;
+}
+.life-tick-bar {
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: rgba(250, 248, 243, 0.26);
+  transform: scaleX(0.55);
+  transform-origin: 50% 50%;
+  transition: transform var(--dur) var(--ease);
+}
+.life-tick:hover .life-tick-bar { background: rgba(250, 248, 243, 0.5); }
+.life-tick[aria-current="true"] .life-tick-bar {
+  background: var(--gold);
+  transform: scaleX(1);
+}
+
+/* No-JS position feedback: the anchor targets drive the tick.
+   Scoped to :not([data-mode]) so it can never fight the JS state. */
+.life-rail:not([data-mode]):has(.life-card:target) .life-tick[aria-current="true"] .life-tick-bar {
+  background: rgba(250, 248, 243, 0.26);
+  transform: scaleX(0.55);
+}
+.life-rail:not([data-mode]):has(#life-c1:target) .life-tick[href="#life-c1"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c2:target) .life-tick[href="#life-c2"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c3:target) .life-tick[href="#life-c3"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c4:target) .life-tick[href="#life-c4"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c5:target) .life-tick[href="#life-c5"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c6:target) .life-tick[href="#life-c6"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c7:target) .life-tick[href="#life-c7"] .life-tick-bar,
+.life-rail:not([data-mode]):has(#life-c8:target) .life-tick[href="#life-c8"] .life-tick-bar {
+  background: var(--gold);
+  transform: scaleX(1);
+}
+
+/* The hint describes a drag that only exists once JS is running. */
+.life-hint {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 243, 0.36);
+  transition: opacity var(--dur) var(--ease);
+}
+.life-rail[data-mode] .life-hint { display: block; }
+.life-rail.is-taken .life-hint { opacity: 0; }
+
+/* ---------- enhanced: depth rail + swipe deck ---------- */
+
+.life-rail[data-mode] .life-stage {
+  overflow: visible;
+  scroll-snap-type: none;
+  scroll-padding-inline: 0;
+  position: relative;
+  height: var(--stage-h);
+  perspective: 1200px;
+  perspective-origin: 50% 46%;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.life-rail[data-mode].is-dragging .life-stage { cursor: grabbing; }
+/* a drag is a rail drag, never a native image drag */
+.life-rail[data-mode] .life-media img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.life-rail[data-mode] .life-track {
+  display: block;
+  position: relative;
+  height: 100%;
+  padding: 0;
+  transform-style: preserve-3d;
+}
+
+/* every card stands on the same baseline: portraits break the line
+   upward, cards receding in depth rise toward the horizon */
+.life-rail[data-mode] .life-card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--card-w);
+  scroll-snap-align: none;
+  /* transform / z-index written by 04-life.js */
+}
+
+.life-rail[data-mode] .life-figure {
+  /* opacity + filter written by 04-life.js */
+  transform: translateZ(0);
+}
+
+.life-rail[data-mode] .life-cap {
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+}
+.life-rail[data-mode] .life-card.is-active .life-cap {
+  opacity: 1;
+  transform: none;
+}
+
+/* the deck stacks in one place, so the shelf buys nothing there:
+   centre it instead and keep the phone composition tight */
+.life-rail[data-mode="deck"] .life-stage { perspective: none; }
+.life-rail[data-mode="deck"] .life-track { transform-style: flat; }
+.life-rail[data-mode="deck"] .life-card { bottom: auto; top: 50%; }
+
+/* ---------- phone ---------- */
+
+@media (max-width: 767px) {
+  #life {
+    --card-w: min(76vw, 20rem);
+    --stage-h: calc(var(--card-w) * 1.25 + 3.4rem);
+  }
+  .life-foot {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  /* full-bleed so eight targets still clear 44px on a real phone */
+  .life-ticks {
+    align-self: stretch;
+    margin-inline: calc(var(--gutter) * -1);
+    gap: 0;
+  }
+  .life-tick { flex: 1 1 0; }
+  .life-tick-bar { width: 100%; max-width: 2rem; }
+  .life-hint {
+    position: static;
+    transform: none;
+  }
+}
+
+/* ---------- reduced motion: the strip, finished, no depth ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .life-rail[data-mode] .life-stage {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    height: auto;
+    perspective: none;
+    touch-action: auto;
+    cursor: auto;
+  }
+  .life-rail[data-mode] .life-track {
+    display: flex;
+    align-items: flex-end;
+    height: auto;
+    padding: 0 var(--edge) 1rem;
+    transform-style: flat;
+  }
+  .life-rail[data-mode] .life-card {
+    position: static !important;
+    scroll-snap-align: center;
+    transform: none !important;
+    z-index: auto !important;
+  }
+  .life-rail[data-mode] .life-figure {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+  .life-rail[data-mode] .life-cap {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .life-rail[data-mode] .life-hint { display: none; }
+  .life-tick-bar { transition: none; }
+}
+/* ===== 05-act ===== */
+/* ==========================================================================
+   05 — THE ACT (final CTA) + GLOBAL CHROME (chapter progress rail)
+   Every selector is scoped to .act* or .pct-rail*.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PART A — THE ACT
+   Flat --purple-deep, no image, no ornament. The move is the empty space:
+   the vertical rhythm is deliberately larger than --section so the page
+   audibly stops here.
+   -------------------------------------------------------------------------- */
+
+.act {
+  position: relative;
+  background: var(--purple-deep);
+  color: rgba(250, 248, 243, 0.78);
+  padding: clamp(7rem, 15vw, 12.5rem) 0;
+  text-align: center;
+}
+
+.act-inner {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.act-title {
+  font-size: clamp(2.85rem, 7.2vw, 5.4rem);
+  letter-spacing: -0.015em;
+  color: var(--paper);
+}
+.act-title em {
+  font-style: italic;
+  color: var(--gold-soft);
+}
+
+.act-line {
+  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
+  max-width: 33rem;
+  font-size: clamp(1.02rem, 1.55vw, 1.17rem);
+  line-height: 1.55;
+  color: rgba(250, 248, 243, 0.72);
+}
+
+/* ---- the CTA cluster: button, secondary line, term tag ---- */
+
+.act-go {
+  margin-top: clamp(2.75rem, 5.5vw, 3.75rem);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.act-cta {
+  position: relative;
+  isolation: isolate;              /* keeps the -1 plate above the section bg */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 52px;
+  padding: 1rem 2.15rem;
+  font-family: var(--font-text);
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+/* The plate is a separate layer so the swell is a pure transform and the
+   label never distorts or reflows. */
+.act-cta-plate {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gold);
+  border-radius: 2px;
+  transform-origin: 50% 50%;
+  transition: transform 420ms var(--ease);
+}
+
+.act-cta-arrow {
+  flex: none;
+  transition: transform 420ms var(--ease);
+}
+
+/* The secondary line. It is a real link, always in the layout (so revealing it
+   shifts nothing), and it is the second half of the one interaction. */
+.act-more {
+  padding: 0.9rem 0.5rem 0.35rem;  /* padding, not margin: the hover area stays
+                                      contiguous with the button, no flicker */
+  font-size: 0.86rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: rgba(250, 248, 243, 0.82);
+  /* Always readable. It carries real information (events, eligibility, FAQs), so it
+     must not be hover-gated: keyboard, touch and JS-off visitors never hover.
+     Hover/focus only lifts it from subdued to full. */
+  opacity: 0.72;
+  transform: translateY(2px);
+  transition: opacity 340ms var(--ease), transform 340ms var(--ease);
+  /* 44px minimum pointer target (WCAG 2.5.8) */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.act-more-text {
+  border-bottom: 1px solid rgba(230, 198, 91, 0.4);
+  padding-bottom: 2px;
+}
+.act-more-arrow {
+  display: inline-block;
+  margin-left: 0.3rem;
+}
+
+/* THE ONE INTERACTION — one trigger, two coordinated results. */
+.act-go:hover .act-cta-plate,
+.act-go:focus-within .act-cta-plate {
+  transform: scale(1.05, 1.12);
+  background: var(--gold-soft);
+}
+.act-go:hover .act-cta-arrow,
+.act-go:focus-within .act-cta-arrow {
+  transform: translateX(4px);
+}
+.act-go:hover .act-more,
+.act-go:focus-within .act-more {
+  opacity: 1;
+  transform: none;
+}
+/* The plate swells past the anchor box, and the ring is gold on gold — push the
+   focus ring out far enough to stay legible against the purple. */
+.act-cta:focus-visible { outline-offset: 7px; }
+
+.act-more:hover {
+  color: var(--gold-soft);
+}
+.act-more:hover .act-more-text {
+  border-bottom-color: var(--gold-soft);
+}
+
+.act-sub {
+  margin-top: 1.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   PART A2 — subordinate support band, on cream.
+   Gold is never used here (--gold on --paper fails contrast); purple carries it.
+   -------------------------------------------------------------------------- */
+
+.act-band {
+  background: var(--paper-deep);
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0;
+}
+
+.act-band-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+}
+
+.act-band-copy {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+}
+.act-band-em {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.act-band-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.act-band-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.3rem;
+  border: 1px solid rgba(25, 18, 33, 0.5);  /* 3.3:1 on --paper-deep: the border
+                                               is this control's only boundary */
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  transition: none;
+}
+.act-band-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.act-band-btn.is-primary {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: var(--paper);
+}
+.act-band-btn.is-primary:hover {
+  background: var(--purple-deep);
+  border-color: var(--purple-deep);
+  color: var(--paper);
+}
+
+/* --------------------------------------------------------------------------
+   PART B1 — CHAPTER PROGRESS RAIL (global chrome)
+   Fixed to the right gutter, never over content: at 900px the gutter is 36px
+   and the rail is ~30px wide including its offset. pointer-events: none, so
+   it can never intercept a click even in an edge case.
+   Hidden until JS resolves the page's stages (decorative, so no-JS = absent).
+   -------------------------------------------------------------------------- */
+
+.pct-rail {
+  display: none;
+  position: fixed;
+  right: 2px;
+  top: 50%;
+  z-index: 40;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ink-mute);
+  --rail-accent: var(--gold-ink);   /* gold-ink over cream sections */
+  --rail-dim: rgba(25, 18, 33, 0.32);
+}
+.pct-rail.is-dark {
+  color: rgba(250, 248, 243, 0.55);
+  --rail-accent: var(--gold-soft);  /* gold only on dark grounds */
+  --rail-dim: rgba(250, 248, 243, 0.34);
+}
+
+@media (min-width: 900px) {
+  .pct-rail.is-live { display: flex; }
+}
+
+/* All five labels occupy the same grid cell; only the active one is shown, so
+   the rail never mutates text and never reflows. */
+.pct-rail-labels {
+  display: grid;
+}
+.pct-rail-label {
+  grid-area: 1 / 1;
+  writing-mode: vertical-rl;
+  font-family: var(--font-text);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--rail-accent);
+  opacity: 0;
+  transform: translateX(4px);
+  /* the outgoing label leaves before the incoming one arrives, so two labels
+     never sit smudged on top of each other at 9px */
+  transition: opacity 170ms linear, transform 340ms var(--ease);
+}
+.pct-rail-label.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 260ms linear 150ms, transform 340ms var(--ease) 150ms;
+}
+.pct-rail-num {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
+.pct-rail-ticks {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  padding-right: 5px;
+}
+/* the thin line the ticks hang off — not a scrollbar, no thumb, no track */
+.pct-rail-ticks::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -12px;
+  bottom: -12px;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+.pct-rail-tick {
+  width: 8px;
+  height: 1px;
+  background: var(--rail-dim);
+  transform-origin: 100% 50%;
+  transition: transform 380ms var(--ease);
+}
+.pct-rail-tick.is-on {
+  background: var(--rail-accent);
+  transform: scaleX(1.9);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE — different execution, not a shrunken desktop.
+   The hover mechanic does not exist on a phone, so nothing is hidden behind
+   it: the button goes full width for the thumb and the secondary line is
+   simply stated underneath as a second, quieter tap target.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .act {
+    padding: clamp(5.5rem, 18vw, 7.5rem) 0;
+    text-align: left;
+  }
+  .act-inner { max-width: none; }
+  .act-line { margin-inline: 0; }
+
+  .act-go {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 22rem;
+  }
+  .act-cta {
+    min-height: 56px;
+    padding-inline: 1.5rem;
+  }
+  /* no swell, no reveal: both are always in their finished state */
+  .act-cta-plate,
+  .act-cta-arrow { transition: none; }
+  .act-go:hover .act-cta-plate,
+  .act-go:focus-within .act-cta-plate,
+  .act-go:hover .act-cta-arrow,
+  .act-go:focus-within .act-cta-arrow { transform: none; }
+  .act-more {
+    align-self: flex-start;
+    padding: 0.95rem 0 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .act-band-in {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .act-band-acts { width: 100%; }
+  .act-band-btn { flex: 1 1 auto; }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — every transition resolves to its finished state.
+   The secondary line is simply always readable; nothing swells, nothing moves.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .act-more {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .act-cta-plate,
+  .act-cta-arrow,
+  .pct-rail-label,
+  .pct-rail-label.is-on,
+  .pct-rail-tick {
+    transition: none;
+  }
+  .act-go:hover .act-cta-plate,
+  .act-go:focus-within .act-cta-plate { transform: none; }
+  .act-go:hover .act-cta-arrow,
+  .act-go:focus-within .act-cta-arrow { transform: none; }
+}
+
+/* Mid-session reduce toggle: 05-act.js flags the rail so its state changes
+   land instantly, without waiting for a media query re-evaluation. */
+.pct-rail.is-still .pct-rail-label,
+.pct-rail.is-still .pct-rail-label.is-on,
+.pct-rail.is-still .pct-rail-tick {
+  transition: none;
+}
+</style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+
+  <main id="main">
+
+    <!-- ===== 01-hero ===== -->
+<!-- 01 · HERO — communication method: ATMOSPHERE
+     Carried over from the live hero: silk-thread canvas, mouse response, the giant
+     outlined greek watermark, minimal copy, one Rush CTA, the scroll hint.
+     Refined: the silk now SETTLES (arrival, not wallpaper) and the field resolves
+     from turbulent to composed as it does. The watermark lift on CTA hover is pure
+     CSS (:has), so it survives with JS disabled. -->
+<section class="v2hero on-dark" id="hero">
+
+  <canvas class="v2hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+  <div class="v2hero-letters" aria-hidden="true">ΦΧΘ</div>
+
+  <div class="v2wrap v2hero-stage">
+    <div class="v2hero-inner">
+      <h1 class="v2hero-h1">Phi Chi Theta</h1>
+      <p class="v2hero-sub">University of South Florida</p>
+
+      <p class="v2hero-claim">The <strong>#3 ranked chapter</strong> in the country.
+        Career preparation, leadership, and a business network before you graduate.</p>
+
+      <p class="v2hero-next">
+        <span class="v2hero-next-lab">Next up</span>
+        <span class="v2hero-next-body">Info Night &middot; Wednesday, September&nbsp;2
+          &middot; 7:00&nbsp;PM &middot; BSN&nbsp;225</span>
+      </p>
+
+      <p class="v2hero-cta">
+        <a class="v2hero-btn" data-hero-cta href="rush.html">Rush PCT
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="v2hero-foot">
+    <div class="v2wrap v2hero-foot-row">
+      <span class="v2hero-foot-side">Professional Business Fraternity</span>
+      <span class="v2hero-scroll">Scroll</span>
+      <span class="v2hero-foot-side">Founded 1924</span>
+    </div>
+  </div>
+
+</section>
+
+    <!-- ===== 02-grow ===== -->
+<!-- 02 — Graduate confident.  Signature interaction: the image accordion.
+     Base markup below is the finished, JS-free state: all three rows open,
+     each with its photograph beneath it. JS moves the <figure>s (the very same
+     nodes, so nothing is downloaded twice) into the persistent stage. -->
+<section class="grow" id="grow" data-grow aria-labelledby="grow-title">
+  <div class="v2wrap grow__wrap">
+
+    <div class="grow__intro">
+      <p class="v2-label grow__label">What membership builds</p>
+      <h2 class="grow__h" id="grow-title">Graduate <em>confident.</em></h2>
+      <p class="grow__lede">Four years of practice before it counts. You leave with a resume that holds up, a record of leading real work, and people who answer.</p>
+    </div>
+
+    <div class="grow__stage" data-grow-stage>
+      <span class="grow__mat" aria-hidden="true"></span>
+    </div>
+
+    <div class="grow__rows" data-grow-rows role="group" aria-label="What membership builds">
+      <span class="grow__rail" data-grow-fill aria-hidden="true"></span>
+
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
+            <span class="grow__num" aria-hidden="true">01</span>
+            <span class="grow__ttl">Build Your Career</span>
+          </button>
+        </h3>
+        <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
+          <div class="grow__frame">
+            <img src="../assets/ph/career-1.png" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="A member marking up a printed resume with an alumnus at a chapter career night.">
+          </div>
+          <figcaption class="grow__cap">
+            <span class="grow__kick">Resume lab &middot; Muma College of Business</span>
+            <span class="grow__body">Resume work, interview practice, and speakers who actually hire.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
+            <span class="grow__num" aria-hidden="true">02</span>
+            <span class="grow__ttl">Lead Before You Graduate</span>
+          </button>
+        </h3>
+        <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
+          <div class="grow__frame">
+            <img src="../assets/ph/leadership-1.png" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="A member running a chapter meeting from the front of the room.">
+          </div>
+          <figcaption class="grow__cap">
+            <span class="grow__kick">Chapter meeting &middot; Marshall Student Center</span>
+            <span class="grow__body">Members run the projects, the budgets and the volunteer days themselves.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
+            <span class="grow__num" aria-hidden="true">03</span>
+            <span class="grow__ttl">Find Your People</span>
+          </button>
+        </h3>
+        <figure class="grow__fig grow__fig--burst" id="grow-f3" aria-labelledby="grow-b3">
+          <div class="grow__frame grow__frame--burst">
+            <div class="grow__poly">
+              <img src="../assets/ph/poly-1.png" width="700" height="700" loading="lazy" decoding="async"
+                   alt="Members in formal dress at the spring banquet.">
+              <span class="grow__polycap">Formal</span>
+            </div>
+            <div class="grow__poly">
+              <img src="../assets/ph/poly-2.png" width="700" height="700" loading="lazy" decoding="async"
+                   alt="The chapter together on the annual retreat.">
+              <span class="grow__polycap">Retreat</span>
+            </div>
+            <div class="grow__poly">
+              <img src="../assets/ph/poly-3.png" width="700" height="700" loading="lazy" decoding="async"
+                   alt="An intramural team huddled after a game.">
+              <span class="grow__polycap">Intramurals</span>
+            </div>
+            <div class="grow__poly">
+              <img src="../assets/ph/poly-4.png" width="700" height="700" loading="lazy" decoding="async"
+                   alt="Members painting at a Tampa service day.">
+              <span class="grow__polycap">Service day</span>
+            </div>
+            <div class="grow__poly">
+              <img src="../assets/ph/poly-5.png" width="700" height="700" loading="lazy" decoding="async"
+                   alt="New members on bid night.">
+              <span class="grow__polycap">Bid night</span>
+            </div>
+          </div>
+          <figcaption class="grow__cap">
+            <span class="grow__kick">Formal, retreat, intramurals &middot; Tampa</span>
+            <span class="grow__body">The people who prepare with you, refer you, and vouch for you later.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 03-proof ===== -->
+<!-- ==========================================================================
+     03 - PROOF.  Two bands on cream that run into one another:
+       A  "Numbers don't lie."        three numerals, one horizontal move
+       B  "Where members have placed." two belts, opposite directions
+
+     The markup below IS the finished state. No numeral, caption, ornament or
+     wordmark waits on JavaScript to become readable. window.pctInitProof adds
+     .is-live / .is-pinned to opt in to motion; with script off, or with
+     prefers-reduced-motion, this reads as a composed vertical sequence.
+     ========================================================================== -->
+<section class="pf" id="proof" aria-labelledby="pf-h">
+
+  <!-- ---------- BAND A -------------------------------------------------- -->
+  <div class="pf-scene">
+    <div class="pf-pin">
+
+      <div class="pf-head">
+        <div class="v2wrap">
+          <p class="v2-label">Proof</p>
+          <h2 id="pf-h">Numbers don&rsquo;t lie.</h2>
+        </div>
+      </div>
+
+      <div class="pf-track">
+
+        <article class="pf-panel pf-panel--orbit">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>01</span> Placement</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <span class="pf-num">95<span class="pf-pct">%</span></span>
+                <!-- the proof of the number, sitting inside it. Decorative:
+                     every one of these names is set at full contrast in Band B. -->
+                <div class="pf-orbit" aria-hidden="true">
+                  <span class="pf-omark"><span>Goldman Sachs</span></span>
+                  <span class="pf-omark"><span>Deloitte</span></span>
+                  <span class="pf-omark"><span>Citi</span></span>
+                  <span class="pf-omark"><span>Amazon</span></span>
+                  <span class="pf-omark"><span>KPMG</span></span>
+                  <span class="pf-omark"><span>PNC</span></span>
+                  <span class="pf-omark"><span>PwC</span></span>
+                  <span class="pf-omark"><span>Raymond James</span></span>
+                  <span class="pf-omark"><span>S&amp;P Global</span></span>
+                  <span class="pf-omark"><span>Wells Fargo</span></span>
+                </div>
+              </div>
+              <figcaption class="pf-say">Members placed in internships or full-time roles.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="pf-panel pf-panel--rule">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>02</span> Academics</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <!-- transcript ruling, drawn with repeating-linear-gradient -->
+                <div class="pf-rule" aria-hidden="true"></div>
+                <span class="pf-num pf-num--gold">3.60</span>
+              </div>
+              <figcaption class="pf-say">Chapter average GPA.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="pf-panel pf-panel--tally">
+          <div class="pf-comp">
+            <p class="pf-idx"><span>03</span> Recognition</p>
+            <figure class="pf-fig">
+              <div class="pf-stage">
+                <span class="pf-num pf-num--hollow">15</span>
+                <!-- fifteen ticks, one per honoree -->
+                <div class="pf-tally" aria-hidden="true">
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                  <span class="pf-tick"></span>
+                </div>
+              </div>
+              <figcaption class="pf-say">&ldquo;25 Under 25&rdquo; honorees.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+      </div><!-- /.pf-track -->
+
+      <div class="pf-rail" aria-hidden="true"><span></span></div>
+
+    </div><!-- /.pf-pin -->
+  </div><!-- /.pf-scene -->
+
+  <!-- ---------- BAND B -------------------------------------------------- -->
+  <div class="pf-belts">
+
+    <div class="v2wrap pf-belthead">
+      <p class="v2-label">Placement</p>
+      <h3 class="pf-belttitle">Where members have placed.</h3>
+      <p class="pf-beltsub">Firms and organisations Zeta Rho members have joined as interns and as full-time hires.</p>
+    </div>
+
+    <!-- LOGO DROP-IN POINT. These are type-set wordmarks, not licensed logo
+         files - we do not have rights to the real marks, so none are faked.
+         To use a real logo later, replace the <span class="pf-word">...</span>
+         inside a cell with, exactly:
+           <img src="../assets/logos/goldman-sachs.svg" alt="Goldman Sachs"
+                width="180" height="40" loading="lazy" decoding="async">
+         and change NO CSS. The cell already sizes, centres, caps and
+         desaturates any <img> it contains. Keep the alt text equal to the
+         wordmark it replaces. -->
+
+    <div class="pf-beltwrap pf-beltwrap--a">
+      <ul class="pf-belt pf-belt--a" aria-label="Organisations where Zeta Rho members have placed">
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <!-- swap this span for an <img> (see note above) - no CSS change needed -->
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <!-- second pass of the same roster: it is what makes the loop seamless -->
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pf-beltwrap pf-beltwrap--b">
+      <ul class="pf-belt pf-belt--b" aria-hidden="true">
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <!-- second pass of the same roster: it is what makes the loop seamless -->
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Amazon</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Nestlé</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Unilever</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">NBCUniversal</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Lockheed Martin</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Victoria’s Secret</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Formula 1</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">New York Jets</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">USF</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Goldman Sachs</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Morgan Stanley</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Citi</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Wells Fargo</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PNC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Raymond James</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Fisher Investments</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">S&amp;P Global</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">KPMG</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">Deloitte</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+        <li class="pf-cell pf-dup" aria-hidden="true">
+          <span class="pf-mark">
+            <span class="pf-word">PwC</span>
+          </span>
+          <span class="pf-cap">Member placement</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="v2wrap pf-beltctl">
+      <button type="button" class="pf-pause">Pause the belts</button>
+    </div>
+
+  </div><!-- /.pf-belts -->
+</section>
+
+    <!-- ===== 04-life ===== -->
+<!-- ============================================================
+     04 · EXPERIENCE — "PCT in real life."
+     Register shift: the proof band was typographic and controlled;
+     this is dark, and it is suddenly people everywhere.
+
+     Signature interaction: a 3D photo rail. The markup below is the
+     FINISHED state with no JS: a native scroll-snap strip, all eight
+     photographs reachable, every caption visible. 04-life.js only
+     lifts that same strip into a perspective depth field.
+
+     PHOTO DIRECTION FOR THE REAL SHOOT — keep the register mixed.
+     Roughly half of these should be properly lit, composed
+     photography (formal, summit, guest speaker, chapter portrait).
+     The other half must be iPhone candids (retreat, intramurals,
+     beach day, service day) — slightly off-level, someone laughing
+     out of frame. If all eight look art-directed the rail stops
+     reading as a real chapter and starts reading as stock. Keep the
+     aspect ratios mixed too: a couple of vertical phone shots
+     among the landscapes, exactly as below.
+     ============================================================ -->
+<section class="life on-dark" id="life" aria-labelledby="life-h">
+  <div class="v2wrap life-head">
+    <p class="v2-label life-label">Chapter life</p>
+    <h2 class="life-h" id="life-h">PCT in real life.</h2>
+    <p class="life-lede">One academic year in eight photographs.</p>
+  </div>
+
+  <div class="life-rail" data-life-rail>
+    <div class="life-stage"
+         data-life-stage
+         tabindex="0"
+         role="group"
+         aria-label="Chapter photographs. Use the left and right arrow keys to move through them.">
+      <ul class="life-track" data-life-track role="list">
+
+        <li class="life-card is-tall" id="life-c1">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-formal.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="Chapter members in formalwear at the fall formal.">
+            </div>
+            <figcaption class="life-cap">Fall Formal</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card" id="life-c2">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-retreat.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="Members outdoors together on the spring retreat.">
+            </div>
+            <figcaption class="life-cap">Spring Retreat</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card" id="life-c3">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-summit.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="Members seated at the fall leadership summit.">
+            </div>
+            <figcaption class="life-cap">Fall Summit</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card" id="life-c4">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-service.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="Members volunteering together on a chapter service day.">
+            </div>
+            <figcaption class="life-cap">Service day</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card is-tall" id="life-c5">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-intra.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="A chapter intramural team on the field.">
+            </div>
+            <figcaption class="life-cap">Intramurals</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card" id="life-c6">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-beach.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="Members on the sand at a chapter beach day.">
+            </div>
+            <figcaption class="life-cap">Beach day</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card" id="life-c7">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-speaker.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="A guest speaker addressing the chapter at a professional night.">
+            </div>
+            <figcaption class="life-cap">Guest speaker</figcaption>
+          </figure>
+        </li>
+
+        <li class="life-card is-wide" id="life-c8">
+          <figure class="life-figure">
+            <div class="life-media">
+              <img src="../assets/ph/rail-group.png" width="1200" height="800"
+                   loading="lazy" decoding="async"
+                   alt="The full chapter together in a group photograph.">
+            </div>
+            <figcaption class="life-cap">The chapter</figcaption>
+          </figure>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="v2wrap life-foot">
+      <nav class="life-ticks" aria-label="Photographs">
+        <a class="life-tick" href="#life-c1" aria-current="true"><span class="life-tick-bar"></span><span class="life-sr">Fall Formal</span></a>
+        <a class="life-tick" href="#life-c2"><span class="life-tick-bar"></span><span class="life-sr">Spring Retreat</span></a>
+        <a class="life-tick" href="#life-c3"><span class="life-tick-bar"></span><span class="life-sr">Fall Summit</span></a>
+        <a class="life-tick" href="#life-c4"><span class="life-tick-bar"></span><span class="life-sr">Service day</span></a>
+        <a class="life-tick" href="#life-c5"><span class="life-tick-bar"></span><span class="life-sr">Intramurals</span></a>
+        <a class="life-tick" href="#life-c6"><span class="life-tick-bar"></span><span class="life-sr">Beach day</span></a>
+        <a class="life-tick" href="#life-c7"><span class="life-tick-bar"></span><span class="life-sr">Guest speaker</span></a>
+        <a class="life-tick" href="#life-c8"><span class="life-tick-bar"></span><span class="life-sr">The chapter</span></a>
+      </nav>
+      <p class="life-hint" aria-hidden="true">Drag &mdash; or let it run</p>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 05-act ===== -->
+<!-- ==========================================================================
+     05 — THE ACT  (final CTA)  +  GLOBAL CHROME (chapter progress rail)
+     Ground: --purple-deep. After four sections of motion, everything stops.
+     No canvas, no marquee, no counters, no parallax, no image.
+     ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
+     the secondary line rises into view. Always visible under 768px, on
+     :focus-within, and under prefers-reduced-motion.
+     ========================================================================== -->
+
+<!-- Chapter progress indicator. Decorative + aria-hidden: it carries no
+     information that is not already on the page. Hidden by default; 05-act.js
+     reveals it only at >=900px once it has resolved the page's five stages. -->
+<div class="pct-rail" data-pct-rail aria-hidden="true">
+  <div class="pct-rail-labels">
+    <span class="pct-rail-label is-on" data-stage-label="0"><span class="pct-rail-num">01</span> Intro</span>
+    <span class="pct-rail-label" data-stage-label="1"><span class="pct-rail-num">02</span> Grow</span>
+    <span class="pct-rail-label" data-stage-label="2"><span class="pct-rail-num">03</span> Proof</span>
+    <span class="pct-rail-label" data-stage-label="3"><span class="pct-rail-num">04</span> Experience</span>
+    <span class="pct-rail-label" data-stage-label="4"><span class="pct-rail-num">05</span> Rush</span>
+  </div>
+  <div class="pct-rail-ticks">
+    <span class="pct-rail-tick is-on" data-stage-tick="0"></span>
+    <span class="pct-rail-tick" data-stage-tick="1"></span>
+    <span class="pct-rail-tick" data-stage-tick="2"></span>
+    <span class="pct-rail-tick" data-stage-tick="3"></span>
+    <span class="pct-rail-tick" data-stage-tick="4"></span>
+  </div>
+</div>
+
+<section class="act on-dark" id="act" data-pct-stage="rush">
+  <div class="v2wrap">
+    <div class="act-inner">
+
+      <h2 class="act-title">Your path starts <em>here.</em></h2>
+
+      <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
+
+      <div class="act-go">
+        <a class="act-cta" href="rush.html">
+          <span class="act-cta-plate" aria-hidden="true"></span>
+          <span class="act-cta-label">Rush PCT</span>
+          <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
+               aria-hidden="true" focusable="false">
+            <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <a class="act-more" href="rush.html">
+          <span class="act-more-text">See events, eligibility and FAQs</span>
+          <span class="act-more-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <span class="v2-label act-sub">Fall 2026 Rush</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Subordinate support band. Deliberately small and quiet: it must never
+     compete with the rush CTA above it. -->
+<aside class="act-band" aria-label="Support the chapter">
+  <div class="v2wrap act-band-in">
+    <p class="act-band-copy">Already know us? <span class="act-band-em">Support the chapter.</span></p>
+    <div class="act-band-acts">
+      <!-- PLACEHOLDER URL: donations still run through the chapter's old Google
+           Site. Swap this href when a real donation page exists. -->
+      <a class="act-band-btn is-primary" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
+         target="_blank" rel="noopener">Donate Today</a>
+      <a class="act-band-btn" href="apparel.html">Apparel</a>
+    </div>
+  </div>
+</aside>
+  </main>
+
+<script>
+/* ===== 05-act ===== */
+/* ==========================================================================
+   05-act.js
+   1. window.pctMotion  — the shared motion hook every section registers with.
+                          Defined at load time, outside any init, so it exists
+                          before the lead calls the first section init.
+                          (Load this file before the other section scripts.)
+   2. window.pctInitAct — wires the global chapter progress rail. The CTA
+                          itself is pure CSS and needs no JS at all.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. SHARED MOTION HOOK
+       window.pctMotion.reduced          live boolean
+       window.pctMotion.onReduce(fn)     fn runs when the user turns reduce ON
+   Turning reduce OFF again does not restart anything; a reload does.
+   If reduce is already ON when a section registers, its teardown runs at once,
+   so teardowns must be safe to call even if the section never started.
+   -------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  /* If this file is loaded twice, keep the live object and its registrations. */
+  if (window.pctMotion && window.pctMotion.__pct) return;
+
+  var QUERY = '(prefers-reduced-motion: reduce)';
+  var mql = typeof window.matchMedia === 'function' ? window.matchMedia(QUERY) : null;
+  var teardowns = [];
+
+  function run(fn) {
+    /* One bad teardown must never strand the ones behind it. */
+    try { fn(); } catch (err) {}
+  }
+
+  function fireAll() {
+    var list = teardowns;
+    teardowns = [];
+    for (var i = 0; i < list.length; i++) run(list[i]);
+  }
+
+  var motion = {
+    __pct: true,
+    reduced: !!(mql && mql.matches),
+    onReduce: function (fn) {
+      if (typeof fn !== 'function') return;
+      if (motion.reduced) { run(fn); return; }
+      teardowns.push(fn);
+    }
+  };
+
+  function onChange(evt) {
+    var on = evt && typeof evt.matches === 'boolean' ? evt.matches : !!(mql && mql.matches);
+    motion.reduced = on;
+    if (on) fireAll();
+  }
+
+  if (mql) {
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', onChange);
+    } else if (typeof mql.addListener === 'function') {
+      mql.addListener(onChange);            /* legacy Safari */
+    }
+  }
+
+  window.pctMotion = motion;
+}());
+
+
+/* --------------------------------------------------------------------------
+   2. SECTION INIT — chapter progress rail
+   One IntersectionObserver, no scroll handler, no layout reads in a loop.
+   The rail is decorative and aria-hidden, so if anything here fails to
+   resolve, it simply stays hidden and the page is unchanged.
+   -------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var STAGES = 5;
+
+  /* Keyword -> stage, checked against a section's data-pct-stage, id and class.
+     The lead can override any of it with data-pct-stage="intro|grow|proof|
+     experience|rush" (or "01".."05"). */
+  var HINTS = [
+    ['intro', 'hero', 'open', 'arrive'],
+    ['grow', 'graduate', 'confident', 'develop', 'pillar'],
+    ['proof', 'number', 'stat', 'placement', 'company', 'network', 'result'],
+    ['experience', 'life', 'moment', 'brotherhood', 'photo', 'year'],
+    ['act', 'rush', 'cta', 'join', 'apply']
+  ];
+
+  var started = false;
+
+  function topLevelSections() {
+    var all = document.querySelectorAll('section');
+    var out = [];
+    for (var i = 0; i < all.length; i++) {
+      var parent = all[i].parentNode;
+      var nested = parent && typeof parent.closest === 'function' && parent.closest('section');
+      if (!nested) out.push(all[i]);
+    }
+    return out;
+  }
+
+  function stageFor(el) {
+    var declared = el.getAttribute('data-pct-stage');
+    if (declared) {
+      var n = parseInt(declared, 10);
+      if (!isNaN(n) && n >= 1 && n <= STAGES) return n - 1;
+    }
+    var hay = ((declared || '') + ' ' + (el.id || '') + ' ' +
+      (typeof el.className === 'string' ? el.className : '')).toLowerCase();
+    for (var s = 0; s < HINTS.length; s++) {
+      for (var k = 0; k < HINTS[s].length; k++) {
+        if (hay.indexOf(HINTS[s][k]) !== -1) return s;
+      }
+    }
+    return -1;
+  }
+
+  /* Returns [{el, stage}] in document order. */
+  function resolveStages() {
+    var secs = topLevelSections();
+    if (!secs.length) return [];
+
+    var pairs = [];
+    var matched = 0;
+    var last = -1;
+    var i;
+
+    for (i = 0; i < secs.length; i++) {
+      var stage = stageFor(secs[i]);
+      if (stage < 0) {
+        stage = last;                    /* unnamed block = still the last stage */
+      } else {
+        matched++;
+        last = stage;
+      }
+      if (stage >= 0) pairs.push({ el: secs[i], stage: stage });
+    }
+
+    /* Heuristic came up empty — fall back to position on the page. */
+    if (matched < 2) {
+      pairs = [];
+      for (i = 0; i < secs.length; i++) {
+        pairs.push({
+          el: secs[i],
+          stage: Math.min(STAGES - 1, Math.floor(i * STAGES / secs.length))
+        });
+      }
+      pairs[pairs.length - 1].stage = STAGES - 1;
+    }
+    return pairs;
+  }
+
+  /* Read once per section, on first activation, never inside a frame loop. */
+  function groundIsDark(el) {
+    if (el.classList && el.classList.contains('on-dark')) return true;
+    if (typeof el.closest === 'function' && el.closest('.on-dark')) return true;
+    var bg = '';
+    try { bg = window.getComputedStyle(el).backgroundColor || ''; } catch (err) { return false; }
+    var m = /rgba?\(([^)]+)\)/.exec(bg);
+    if (!m) return false;
+    var p = m[1].split(',');
+    var alpha = p.length > 3 ? parseFloat(p[3]) : 1;
+    if (!(alpha > 0.5)) return false;              /* transparent = page ground */
+    var lum = 0.2126 * parseFloat(p[0]) + 0.7152 * parseFloat(p[1]) + 0.0722 * parseFloat(p[2]);
+    return lum < 130;
+  }
+
+  window.pctInitAct = function () {
+    try {
+      if (started) return;
+
+      var rail = document.querySelector('[data-pct-rail]');
+      if (!rail) return;
+      if (typeof window.IntersectionObserver !== 'function') return;
+
+      var pairs = resolveStages();
+      if (pairs.length < 2) return;
+
+      var labels = rail.querySelectorAll('[data-stage-label]');
+      var ticks = rail.querySelectorAll('[data-stage-tick]');
+      if (!labels.length || !ticks.length) return;
+
+      var els = [];
+      var stages = [];
+      var dark = [];
+      var live = [];
+      var i;
+      for (i = 0; i < pairs.length; i++) {
+        els.push(pairs[i].el);
+        stages.push(pairs[i].stage);
+        dark.push(null);
+        live.push(0);
+      }
+
+      var current = -1;
+
+      function setActive(idx) {
+        var stage = stages[idx];
+        if (dark[idx] === null) dark[idx] = groundIsDark(els[idx]);
+        rail.classList.toggle('is-dark', dark[idx]);
+        if (stage === current) return;
+        current = stage;
+        for (var j = 0; j < labels.length; j++) {
+          labels[j].classList.toggle('is-on', j === stage);
+        }
+        for (var t = 0; t < ticks.length; t++) {
+          ticks[t].classList.toggle('is-on', t === stage);
+        }
+      }
+
+      function onCross(entries) {
+        for (var e = 0; e < entries.length; e++) {
+          var idx = els.indexOf(entries[e].target);
+          if (idx > -1) live[idx] = entries[e].isIntersecting ? 1 : 0;
+        }
+        var best = -1;
+        for (var j = 0; j < live.length; j++) if (live[j]) best = j;
+        if (best < 0) return;              /* between sections: hold the last stage */
+        setActive(best);
+      }
+
+      /* A thin band across the middle of the viewport: whatever the reader is
+         actually looking at is the active stage. No scroll listener. */
+      var io = new window.IntersectionObserver(onCross, {
+        rootMargin: '-45% 0px -45% 0px',
+        threshold: 0
+      });
+      for (i = 0; i < els.length; i++) io.observe(els[i]);
+
+      started = true;
+      rail.classList.add('is-live');
+
+      if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+        window.pctMotion.onReduce(function () {
+          /* The rail is information, not motion: it keeps working, it just
+             stops easing between stages. */
+          rail.classList.add('is-still');
+        });
+      }
+    } catch (err) {
+      /* Never take the page down over decorative chrome. */
+    }
+  };
+}());
+/* ===== 01-hero ===== */
+/* 01 · HERO — the silk field.
+ *
+ * ONE interaction: the thread field. It has three states and nothing else.
+ *
+ *   ARRIVAL   Over ~4.6s from first paint the motion envelope eases to zero and the
+ *             rAF loop cancels itself outright. It does not idle in the background.
+ *             (This is also WCAG 2.2.2 — motion that starts on load and runs beside
+ *             other content has to be stoppable; ending is the strongest form of it.)
+ *   COMPOSURE As the envelope decays, the per-thread phase offset decays FASTER
+ *             (coh = env^2), so the field resolves from turbulent to parallel. The
+ *             threads come to rest hanging in unison, a static drape, not a grid.
+ *   PULL      Pointer over the Rush button (fine pointers only): the silk gathers
+ *             toward the button's centre on a target/current lerp with a gaussian
+ *             falloff. Release lerps back and the loop cancels itself again.
+ *             The watermark's opacity lift is CSS (:has), not this file.
+ *
+ * A touch tap never restarts anything. Nothing here is read from layout inside rAF.
+ */
+window.pctInitHero = function () {
+  try {
+    var root = document.querySelector('.v2hero');
+    if (!root || root.dataset.heroReady === '1') return;
+
+    var canvas = root.querySelector('[data-hero-canvas]');
+    var cta = root.querySelector('[data-hero-cta]');
+    if (!canvas || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    root.dataset.heroReady = '1';
+
+    var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var mqSmall = window.matchMedia('(max-width: 767px)');
+    var reduced = mqReduce.matches;
+
+    var SETTLE = 4600;   /* ms from first paint (or last pointer move) to stillness */
+    var WAKE_GAP = 140;  /* ms of pointer stillness that counts as "the pointer stopped" */
+
+    /* ---- geometry, measured on load + resize only, never inside the loop ---- */
+    var W = 0, H = 0, dpr = 1, LINES = 24, PR = 1;
+    var cx = 0, cy = 0;          /* CTA centre, canvas device px */
+    var mx = 0.5, my = 0.5;      /* normalised pointer over the hero */
+
+    function measure() {
+      /* phones: fewer threads and a lower dpr cap. Same picture, a third of the fill. */
+      var small = mqSmall.matches;
+      dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
+      LINES = small ? 14 : 26;
+      W = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * dpr));
+      H = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * dpr));
+      PR = Math.max(W, H) * 0.26;   /* pull falloff radius */
+      measureCta();
+    }
+
+    function measureCta() {
+      if (!cta) { cx = W * 0.5; cy = H * 0.5; return; }
+      var c = canvas.getBoundingClientRect();
+      var b = cta.getBoundingClientRect();
+      cx = (b.left + b.width / 2 - c.left) * dpr;
+      cy = (b.top + b.height / 2 - c.top) * dpr;
+    }
+
+    /* ---- one frame ---- */
+    var t = 0;
+
+    function paint(env, pull) {
+      ctx.clearRect(0, 0, W, H);
+      var step = Math.max(8 * dpr, W / 150);
+      var coh = env * env;                 /* phase spread: decays faster than amplitude */
+      var pulling = pull > 0.002;
+      var i, x, u;
+
+      for (i = 0; i < LINES; i++) {
+        var p = i / LINES;
+        var yBase = H * (0.16 + p * 0.76);
+        var amp = H * 0.05 * (0.35 + p) * (0.7 + 0.6 * my) * env;
+        var drape = H * 0.014 * (0.4 + p); /* time-independent: the resting hang */
+        var lateral = Math.sin(t * 0.4 + i * 2.1 * coh) * 6 * dpr * env;
+
+        ctx.beginPath();
+        for (x = 0; x <= W + step; x += step) {
+          u = x / dpr;
+          var wave =
+            Math.sin(u * 0.0016 + t * 0.7 + i * 0.42 * coh) *
+            Math.cos(u * 0.0006 - t * 0.32 + i * 1.7 * coh);
+          var y = yBase
+                + Math.sin(u * 0.0011 + i * 0.30 * coh) * drape
+                + wave * amp * (0.6 + 0.8 * mx)
+                + lateral;
+
+          if (pulling) {
+            var ndx = (x - cx) / PR, ndy = (y - cy) / PR;
+            var f = Math.exp(-(ndx * ndx + ndy * ndy));
+            y += (cy - y) * f * pull * 0.32;
+          }
+
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+
+        var gold = i % 4 === 0;
+        ctx.strokeStyle = gold
+          ? 'rgba(201,162,39,' + (0.06 + 0.11 * p).toFixed(3) + ')'
+          : 'rgba(150,118,215,' + (0.04 + 0.08 * p).toFixed(3) + ')';
+        ctx.lineWidth = (gold ? 1.2 : 0.8) * dpr;
+        ctx.stroke();
+      }
+    }
+
+    /* ---- loop lifecycle: runs only while something is actually changing ---- */
+    var raf = null, running = false, visible = true;
+    var env = 1, envFrom = 1, settleAt = 0, lastMove = -1e9;
+    var pull = 0, pullTarget = 0;
+
+    function stop() {
+      running = false;
+      if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+      paint(env, pull);   /* never leave the field frozen mid-sway */
+    }
+
+    function frame(ts) {
+      raf = requestAnimationFrame(frame);
+      var busy = false;
+
+      if (ts - lastMove < WAKE_GAP) {
+        /* pointer still moving: lift the envelope and hold the settle clock at now,
+           so the ease-out later starts from wherever we are — never a jump */
+        env += (1 - env) * 0.12;
+        if (env > 0.999) env = 1;
+        envFrom = env; settleAt = ts; busy = true;
+      } else if (env > 0) {
+        var k = Math.min((ts - settleAt) / SETTLE, 1);
+        /* smoothstep: leaves full sway without a jerk and arrives at stillness with
+           zero velocity, so the final moment of motion — and the cancel — is unseen */
+        env = envFrom * (1 - k * k * (3 - 2 * k));
+        if (k >= 1) env = 0;
+        if (env > 0) busy = true;
+      }
+
+      if (pull !== pullTarget) {
+        pull += (pullTarget - pull) * 0.10;
+        if (Math.abs(pullTarget - pull) < 0.002) pull = pullTarget;
+        busy = true;
+      }
+
+      if (visible) paint(env, pull);
+      t += 0.008 * env;   /* drift decelerates with the envelope */
+
+      if (!busy) stop();
+    }
+
+    function ensure(ts) {
+      if (running || reduced) return;
+      running = true;
+      envFrom = env;
+      settleAt = ts || performance.now();
+      raf = requestAnimationFrame(frame);
+    }
+
+    /* ---- teardown ---- */
+    function teardown() {
+      reduced = true;
+      env = 0; pull = 0; pullTarget = 0;
+      stop();   /* paints the composed resting frame */
+    }
+
+    /* ---- events ---- */
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        measure();                        /* resizing the backing store clears it */
+        if (!running) paint(env, pull);
+      }, 120);
+    }, { passive: true });
+
+    window.addEventListener('scroll', function () {
+      if (pullTarget > 0) measureCta();   /* only while a pull is live */
+    }, { passive: true });
+
+    root.addEventListener('mousemove', function (e) {
+      var r = canvas.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width;
+      my = (e.clientY - r.top) / r.height;
+      /* fine pointers only — a tap synthesises a mousemove, and touch must never
+         restart motion the reader did not ask for */
+      if (reduced || !mqFine.matches) return;
+      lastMove = performance.now();
+      ensure(lastMove);
+    }, { passive: true });
+
+    if (cta) {
+      var grab = function () {
+        if (reduced || !mqFine.matches) return;
+        measureCta();          /* layout read on the event, never in the loop */
+        pullTarget = 1;
+        ensure();
+      };
+      var release = function () {
+        if (pullTarget === 0) return;
+        pullTarget = 0;
+        ensure();
+      };
+      cta.addEventListener('pointerenter', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        grab();
+      });
+      cta.addEventListener('pointerleave', release);
+      cta.addEventListener('focus', grab);
+      cta.addEventListener('blur', release);
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+      }).observe(canvas);
+    }
+
+    /* ---- go ---- */
+    measure();
+
+    if (reduced) {
+      env = 0;
+      paint(0, 0);   /* one composed frame; the loop never starts */
+    } else {
+      ensure(performance.now());
+      if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+        window.pctMotion.onReduce(teardown);
+      }
+      var onMq = function () { if (mqReduce.matches) teardown(); };
+      if (mqReduce.addEventListener) mqReduce.addEventListener('change', onMq);
+      else if (mqReduce.addListener) mqReduce.addListener(onMq);
+
+      /* If the page runs an entrance curtain, restamp the envelope when it lifts so
+         the whole arrival plays in view rather than behind an opaque panel. */
+      document.addEventListener('pct:curtain-up', function () {
+        if (reduced || !running) return;
+        envFrom = env;
+        settleAt = performance.now();
+      }, { once: true });
+    }
+  } catch (err) {
+    /* one section must never be able to kill the page */
+    if (window.console && console.warn) console.warn('pctInitHero:', err);
+  }
+};
+/* ===== 02-grow ===== */
+/* ============================================================
+   02 — Graduate confident.  ONE interaction: the image accordion.
+   The <figure>s authored inside the rows are MOVED (not cloned) into
+   the persistent stage, so nothing downloads twice and the no-JS
+   markup stays the source of truth.
+   ============================================================ */
+window.pctInitGrow = function () {
+  'use strict';
+  try {
+    var root = document.querySelector('[data-grow]');
+    if (!root || root.getAttribute('data-grow-ready') === '1') return;
+
+    var rowsEl = root.querySelector('[data-grow-rows]');
+    var stage  = root.querySelector('[data-grow-stage]');
+    var fill   = root.querySelector('[data-grow-fill]');
+    var btns   = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
+    if (!rowsEl || !stage || !btns.length || !document.body.closest) return;
+
+    var figs = [], rows = [], i, fig, row;
+    for (i = 0; i < btns.length; i++) {
+      fig = document.getElementById(btns[i].getAttribute('aria-controls') || '');
+      row = btns[i].closest('.grow__row');
+      if (!fig || !row) return;            /* markup not as expected: keep the plain list */
+      figs.push(fig);
+      rows.push(row);
+    }
+
+    for (i = 0; i < figs.length; i++) stage.appendChild(figs[i]);
+    root.classList.add('grow--js');
+    root.setAttribute('data-grow-ready', '1');
+
+    var current = -1, tops = [], hts = [], railH = 1, leaveTimer = 0;
+
+    /* measured on load / resize / font swap only — never inside a frame loop */
+    function measure() {
+      railH = rowsEl.clientHeight || 1;
+      for (var k = 0; k < rows.length; k++) {
+        tops[k] = rows[k].offsetTop;
+        hts[k]  = rows[k].offsetHeight;
+      }
+    }
+
+    function paintRail() {
+      if (!fill || current < 0 || !hts.length) return;
+      fill.style.transform =
+        'translateY(' + tops[current] + 'px) scaleY(' + (hts[current] / railH) + ')';
+    }
+
+    function select(index) {
+      if (index === current || index < 0 || index >= figs.length) return;
+      current = index;
+
+      for (var k = 0; k < btns.length; k++) {
+        var on = (k === index), f = figs[k];
+        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
+        rows[k].classList.toggle('is-open', on);
+
+        if (on) {
+          f.classList.remove('is-leaving');
+          f.classList.add('is-prewipe');
+          void f.offsetWidth;              /* restart the curtain; a click handler, never rAF */
+          f.classList.remove('is-prewipe');
+          f.classList.add('is-active');
+          f.removeAttribute('aria-hidden');
+        } else {
+          if (f.classList.contains('is-active')) {
+            f.classList.remove('is-active');
+            f.classList.add('is-leaving');
+          }
+          f.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      clearTimeout(leaveTimer);
+      leaveTimer = setTimeout(function () {
+        for (var k = 0; k < figs.length; k++) figs[k].classList.remove('is-leaving');
+      }, 760);
+
+      paintRail();
+    }
+
+    for (i = 0; i < btns.length; i++) {
+      (function (n) {
+        btns[n].addEventListener('click', function () { select(n); });
+      }(i));
+    }
+
+    rowsEl.addEventListener('keydown', function (e) {
+      var at = btns.indexOf(document.activeElement), next = -1;
+      if (at < 0 || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (at + 1) % btns.length;
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (at - 1 + btns.length) % btns.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = btns.length - 1;
+      if (next < 0) return;
+      e.preventDefault();
+      btns[next].focus();
+    });
+
+    function remeasure() { measure(); paintRail(); }
+
+    if (typeof ResizeObserver === 'function') {
+      new ResizeObserver(remeasure).observe(rowsEl);
+    } else {
+      window.addEventListener('resize', remeasure);
+    }
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(remeasure).catch(function () {});
+    }
+
+    /* reduced motion: settle everything on its finished state, mid-session too */
+    function still(on) { root.classList.toggle('grow--still', on !== false); }
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    if (mq && mq.matches) still(true);
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(function (v) { still(v); });
+    } else if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) { still(e.matches); });
+    }
+
+    measure();
+    select(0);
+  } catch (err) {
+    /* one section must never take the page down */
+    if (window.console && console.warn) console.warn('pctInitGrow:', err);
+  }
+};
+/* ===== 03-proof ===== */
+/* ==========================================================================
+   03 · PROOF — window.pctInitProof
+
+   ONE signature move: the three numerals travel horizontally while the band
+   is pinned, and release straight onto the placement belts, which have been
+   running the whole time. Everything else in this section is CSS.
+
+   This file only ever ADDS motion. The markup already ships in its finished
+   state, so:
+     · no script          -> a composed vertical sequence, belts running on CSS
+     · reduced motion     -> the same sequence, belts wrapped into a static wall
+     · narrow / short      -> no pin, no horizontal scroll, per-panel reveal
+   ========================================================================== */
+
+window.pctInitProof = function () {
+  "use strict";
+
+  try {
+    var root = document.querySelector(".pf");
+    if (!root || root.getAttribute("data-pf-init") === "1") return;
+
+    var scene    = root.querySelector(".pf-scene");
+    var pin      = root.querySelector(".pf-pin");
+    var track    = root.querySelector(".pf-track");
+    var railFill = root.querySelector(".pf-rail > span");
+    var panels   = Array.prototype.slice.call(root.querySelectorAll(".pf-panel"));
+    var belts    = root.querySelector(".pf-belts");
+    var pause    = root.querySelector(".pf-pause");
+    if (!scene || !pin || !track || !panels.length) return;
+
+    root.setAttribute("data-pf-init", "1");
+
+    var comps = panels.map(function (p) { return p.querySelector(".pf-comp"); });
+    var last  = panels.length - 1;
+
+    /* The pin needs real width AND real height. A landscape phone has neither,
+       so it gets the same vertical choreography a portrait phone does. */
+    var reducedMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var pinMQ     = window.matchMedia("(min-width: 768px) and (min-height: 620px)");
+
+    var mode = null;                       /* "pinned" | "flow" | "still" */
+    var raf = null, resizeRaf = null, io = null;
+    var target = 0, cur = 0, active = false;
+
+    /* cached on load and on resize — never read inside the frame loop */
+    var sceneTop = 0, travel = 0, vh = 0, depth = 0;
+
+    /* ---------------------------------------------------------------- shared */
+
+    function lightTo(i) {
+      for (var k = 0; k <= i && k < panels.length; k++) {
+        if (!panels[k].classList.contains("is-lit")) panels[k].classList.add("is-lit");
+      }
+    }
+
+    function clearInline() {
+      scene.style.height = "";
+      track.style.transform = "";
+      if (railFill) railFill.style.transform = "";
+      for (var i = 0; i < comps.length; i++) {
+        if (!comps[i]) continue;
+        comps[i].style.transform = "";
+        comps[i].style.opacity = "";
+      }
+    }
+
+    /* ---------------------------------------------------- pinned (desktop) */
+
+    function measure() {
+      vh = window.innerHeight;
+      /* pin.clientWidth, not innerWidth: it already excludes the scrollbar */
+      travel = Math.max(0, track.scrollWidth - pin.clientWidth);
+      /* The scroll distance IS the horizontal travel, so the pin releases on
+         the exact frame the last numeral finishes centring. No dead tail
+         between the numbers and the belts. */
+      scene.style.height = (vh + travel) + "px";
+      sceneTop = scene.getBoundingClientRect().top + (window.pageYOffset || 0);
+      /* how far a panel's contents lag its own frame — the ribbon reads as
+         depth rather than as a stack of slides */
+      depth = Math.round(pin.clientWidth * 0.085);
+    }
+
+    function frame() {
+      raf = null;
+
+      cur += (target - cur) * 0.16;
+      if (Math.abs(target - cur) < 0.0004) cur = target;
+
+      track.style.transform = "translate3d(" + (-cur * travel).toFixed(1) + "px,0,0)";
+      if (railFill) railFill.style.transform = "scaleX(" + cur.toFixed(4) + ")";
+
+      for (var i = 0; i < comps.length; i++) {
+        var c = comps[i];
+        if (!c) continue;
+        var d = last > 0 ? cur * last - i : 0;   /* 0 when this panel is centred */
+        if (d > 1.4) d = 1.4; else if (d < -1.4) d = -1.4;
+        c.style.transform = "translate3d(" + (d * depth).toFixed(1) + "px,0,0)";
+        c.style.opacity = (1 - Math.min(0.6, Math.abs(d) * 0.55)).toFixed(3);
+      }
+
+      if (active || Math.abs(target - cur) > 0.0004) raf = requestAnimationFrame(frame);
+    }
+
+    function onScroll() {
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var p = travel > 0 ? (y - sceneTop) / travel : 0;
+      target = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+      /* light every panel up to the nearest one, so a fast flick never skips a
+         composition. Lighting is one-way: once composed, it stays composed. */
+      lightTo(Math.round(target * last));
+
+      var near = (y + vh * 1.4) > sceneTop && y < (sceneTop + travel + vh * 1.4);
+      if (near) {
+        if (!active) { active = true; if (raf === null) raf = requestAnimationFrame(frame); }
+      } else {
+        active = false;
+      }
+    }
+
+    function onResize() {
+      if (resizeRaf !== null) return;
+      resizeRaf = requestAnimationFrame(function () {
+        resizeRaf = null;
+        try {
+          if (mode !== "pinned") return;
+          measure();
+          onScroll();
+        } catch (e) { /* never take the page down over a resize */ }
+      });
+    }
+
+    function startPinned() {
+      root.classList.add("is-pinned");
+      measure();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize);
+      onScroll();
+      cur = target;                       /* land where the reader already is */
+      if (raf === null) raf = requestAnimationFrame(frame);
+    }
+
+    function stopPinned() {
+      active = false;
+      if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+      if (resizeRaf !== null) { cancelAnimationFrame(resizeRaf); resizeRaf = null; }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      root.classList.remove("is-pinned");
+      clearInline();                      /* a stale translate would shove the
+                                             un-pinned column off-screen */
+      cur = target = 0;
+    }
+
+    /* ------------------------------------------------------ flow (phones) */
+
+    function startFlow() {
+      if (!("IntersectionObserver" in window)) { lightTo(last); return; }
+      io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (!entries[i].isIntersecting) continue;
+          entries[i].target.classList.add("is-lit");
+          io.unobserve(entries[i].target);   /* compose once, then leave it alone */
+        }
+      }, { threshold: 0.3, rootMargin: "0px 0px -10% 0px" });
+      for (var i = 0; i < panels.length; i++) io.observe(panels[i]);
+    }
+
+    function stopFlow() {
+      if (io) { io.disconnect(); io = null; }
+    }
+
+    /* ------------------------------------------------------------ wiring */
+
+    function apply() {
+      var want = reducedMQ.matches ? "still" : (pinMQ.matches ? "pinned" : "flow");
+      if (want === mode) return;
+
+      if (mode === "pinned") stopPinned();
+      else if (mode === "flow") stopFlow();
+      mode = want;
+
+      if (want === "still") {
+        root.classList.remove("is-live");   /* base CSS is already the finish */
+        lightTo(last);
+        return;
+      }
+      root.classList.add("is-live");
+      if (want === "pinned") startPinned();
+      else startFlow();
+    }
+
+    /* The shared hook, so reduced-motion can stop this mid-session. */
+    function hardStop() {
+      try {
+        if (mode === "pinned") stopPinned();
+        else if (mode === "flow") stopFlow();
+        mode = "still";
+        root.classList.remove("is-live");
+        root.classList.remove("is-pinned");
+        clearInline();
+        lightTo(last);
+        if (belts) belts.classList.remove("is-paused");
+        if (pause) pause.textContent = "Pause the belts";
+      } catch (e) { /* a teardown must never be the thing that throws */ }
+    }
+    if (window.pctMotion && typeof window.pctMotion.onReduce === "function") {
+      window.pctMotion.onReduce(hardStop);
+    }
+
+    function onMQ() { try { apply(); } catch (e) {} }
+    if (reducedMQ.addEventListener) {
+      reducedMQ.addEventListener("change", onMQ);
+      pinMQ.addEventListener("change", onMQ);
+    } else if (reducedMQ.addListener) {          /* Safari < 14 */
+      reducedMQ.addListener(onMQ);
+      pinMQ.addListener(onMQ);
+    }
+
+    /* Band B: the belts pause on hover and on focus-within in CSS. This is the
+       explicit control (WCAG 2.2.2) — it only exists once script can run it. */
+    if (pause && belts) {
+      pause.addEventListener("click", function () {
+        var paused = belts.classList.toggle("is-paused");
+        pause.textContent = paused ? "Play the belts" : "Pause the belts";
+      });
+    }
+
+    apply();
+  } catch (e) {
+    /* One section must never be able to kill the page. Whatever happened, the
+       markup is still the finished state — the reader loses motion, not copy. */
+  }
+};
+/* ===== 04-life ===== */
+/* ============================================================
+   04 · EXPERIENCE — 3D photo rail
+   Lifts the base scroll-snap strip into a perspective depth field.
+   Auto-drifts card to card until the visitor drags, flicks
+   horizontally, presses an arrow key or picks a tick — at which
+   point they own it and the drift never comes back.
+   Writes only transform / opacity / filter / z-index.
+   ============================================================ */
+window.pctInitLife = function () {
+  'use strict';
+
+  try {
+    var rail = document.querySelector('[data-life-rail]');
+    if (!rail || rail.hasAttribute('data-mode')) return;
+
+    var stage = rail.querySelector('[data-life-stage]');
+    var track = rail.querySelector('[data-life-track]');
+    if (!stage || !track) return;
+
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.life-card'));
+    var ticks = Array.prototype.slice.call(rail.querySelectorAll('.life-tick'));
+    var N = cards.length;
+    if (N < 3) return;
+
+    var figs = cards.map(function (c) {
+      return c.querySelector('.life-figure') || c;
+    });
+
+    var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var mqSmall = window.matchMedia('(max-width: 767px)');
+    if (mqReduce.matches) return; /* never enhance: the strip is already finished */
+
+    /* ---- state ---- */
+    var deck = mqSmall.matches;
+    var cur = 0, to = 0, from = 0, t0 = 0, dur = 0;
+    var raf = 0, autoTimer = 0, resizeTimer = 0;
+    var visible = false, taken = false, dead = false;
+    var dragging = false, pending = false, pid = null;
+    var pressX = 0, pressY = 0, startCur = 0, lastX = 0, lastT = 0, vel = 0;
+    var suppressClick = false, wheelLock = 0;
+    var cardW = 320, spacing = 200, activeIdx = -1;
+    var cache = cards.map(function () {
+      return { tf: '', op: '', fl: '', z: 0 };
+    });
+
+    var TWEEN_AUTO = 1150;
+    var TWEEN_KEY = 560;
+    var TWEEN_SNAP = 520;
+
+    function dwell() { return deck ? 4300 : 3400; }
+    function now() { return window.performance ? performance.now() : Date.now(); }
+
+    /* brand easing, cubic-bezier(.22,.61,.36,1), solved by bisection */
+    function ease(p) {
+      var x1 = 0.22, y1 = 0.61, x2 = 0.36, y2 = 1;
+      var lo = 0, hi = 1, t = p, u, x, i;
+      for (i = 0; i < 16; i++) {
+        u = 1 - t;
+        x = 3 * u * u * t * x1 + 3 * u * t * t * x2 + t * t * t;
+        if (x < p) { lo = t; } else { hi = t; }
+        t = (lo + hi) / 2;
+      }
+      u = 1 - t;
+      return 3 * u * u * t * y1 + 3 * u * t * t * y2 + t * t * t;
+    }
+
+    /* ---- measurement (load + resize only, never inside rAF) ---- */
+    function measure() {
+      /* offsetWidth, not getBoundingClientRect: the cards are already
+         rotated in depth and a client rect would report the projection */
+      var w = cards[0].offsetWidth;
+      if (w > 0) cardW = w;
+      spacing = deck ? cardW * 1.02 : cardW * 0.62;
+    }
+
+    /* ---- geometry ---- */
+    function delta(i) {
+      var d = ((i - cur) % N + N) % N;
+      return d > N / 2 ? d - N : d;
+    }
+
+    function write(i, tf, op, fl, z) {
+      var c = cache[i];
+      if (c.tf !== tf) { cards[i].style.transform = tf; c.tf = tf; }
+      if (c.z !== z) { cards[i].style.zIndex = z; c.z = z; }
+      if (c.op !== op) { figs[i].style.opacity = op; c.op = op; }
+      if (c.fl !== fl) { figs[i].style.filter = fl; c.fl = fl; }
+    }
+
+    function render() {
+      var act = ((Math.round(cur) % N) + N) % N;
+      if (act !== activeIdx) setActive(act);
+
+      for (var i = 0; i < N; i++) {
+        var d = delta(i);
+        var ad = Math.abs(d);
+        var tf, op, fl, z;
+
+        if (deck) {
+          /* phone: a deck of prints. The top one flicks away left. */
+          if (d <= 0) {
+            var k = Math.max(d, -1.35);
+            tf = 'translate(-50%,-50%) translate3d(' + (k * cardW * 1.02).toFixed(1) +
+                 'px,0,0) rotate(' + (k * 5.5).toFixed(2) + 'deg)';
+            op = Math.max(0, 1 + d * 1.25);
+            fl = 'none';
+            z = 700 + Math.round(d * 20);
+          } else {
+            var m = Math.min(d, 3);
+            tf = 'translate(-50%,-50%) translate3d(' + (m * 11).toFixed(1) + 'px,' +
+                 (-m * 8).toFixed(1) + 'px,0) scale(' + (1 - m * 0.055).toFixed(4) + ')';
+            op = Math.max(0, 1 - m * 0.3);
+            fl = op <= 0.02 ? 'none' : 'blur(' + Math.min(m * 1.1, 3).toFixed(2) + 'px)';
+            z = 500 - Math.round(m * 100);
+          }
+        } else {
+          /* desktop: a stream of photographs receding through depth */
+          var x = d * spacing;
+          var zz = -Math.min(ad, 4) * 190;
+          var ry = -Math.max(-3, Math.min(3, d)) * 15;
+          tf = 'translate(-50%,0) translate3d(' + x.toFixed(1) + 'px,0,' +
+               zz.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg)';
+          op = Math.max(0, 1 - ad * 0.29);
+          fl = op <= 0.02
+            ? 'none'
+            : 'blur(' + Math.min(ad * 2.1, 5.5).toFixed(2) + 'px) saturate(' +
+              (1 - Math.min(ad * 0.17, 0.5)).toFixed(3) + ')';
+          z = 500 - Math.round(ad * 100);
+        }
+
+        write(i, tf, op.toFixed(3), fl, z);
+      }
+    }
+
+    function setActive(a) {
+      if (activeIdx > -1 && cards[activeIdx]) cards[activeIdx].classList.remove('is-active');
+      activeIdx = a;
+      if (cards[a]) cards[a].classList.add('is-active');
+      for (var i = 0; i < ticks.length; i++) {
+        if (i === a) ticks[i].setAttribute('aria-current', 'true');
+        else ticks[i].removeAttribute('aria-current');
+      }
+    }
+
+    /* ---- motion loop (runs only while something is actually moving) ---- */
+    function frame() {
+      raf = 0;
+      if (dead) return;
+
+      if (dur > 0) {
+        var p = (now() - t0) / dur;
+        if (p >= 1) {
+          cur = to;
+          dur = 0;
+          normalize();
+          render();
+          scheduleAuto();
+          return;
+        }
+        cur = from + (to - from) * ease(p);
+      }
+      render();
+      if (dur > 0 || dragging) raf = requestAnimationFrame(frame);
+    }
+
+    function kick() {
+      if (!raf && !dead) raf = requestAnimationFrame(frame);
+    }
+
+    function normalize() {
+      var m = ((to % N) + N) % N;
+      to = m;
+      cur = m;
+    }
+
+    function tweenTo(target, ms) {
+      from = cur;
+      to = target;
+      t0 = now();
+      dur = ms;
+      clearTimeout(autoTimer);
+      kick();
+    }
+
+    function goTo(i, ms) {
+      var d = ((i - (((to % N) + N) % N)) % N + N) % N;
+      if (d > N / 2) d -= N;
+      tweenTo(to + d, ms || 760);
+    }
+
+    function scheduleAuto() {
+      clearTimeout(autoTimer);
+      if (taken || dead || !visible || document.hidden) return;
+      autoTimer = setTimeout(function () {
+        if (taken || dead || !visible || document.hidden) return;
+        tweenTo(Math.round(to) + 1, TWEEN_AUTO);
+      }, dwell());
+    }
+
+    function takeControl() {
+      if (taken) return;
+      taken = true;
+      clearTimeout(autoTimer);
+      rail.classList.add('is-taken');
+    }
+
+    /* ---- pointer / touch drag ---- */
+    function onDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target.closest && e.target.closest('a,button')) return;
+      pending = true;
+      dragging = false;
+      pid = e.pointerId;
+      pressX = lastX = e.clientX;
+      pressY = e.clientY;
+      lastT = now();
+      vel = 0;
+      dur = 0;
+      to = cur;
+      startCur = cur;
+    }
+
+    function onMove(e) {
+      if (!pending || e.pointerId !== pid) return;
+      var dx = e.clientX - pressX;
+      var dy = e.clientY - pressY;
+
+      if (!dragging) {
+        if (Math.abs(dx) < 6) {
+          if (Math.abs(dy) > 12) pending = false; /* vertical: it's a page scroll */
+          return;
+        }
+        if (Math.abs(dx) <= Math.abs(dy)) { pending = false; return; }
+        dragging = true;
+        takeControl();
+        rail.classList.add('is-dragging');
+        try { stage.setPointerCapture(pid); } catch (err) {}
+      }
+
+      var t = now();
+      var dt = Math.max(t - lastT, 1);
+      vel = (e.clientX - lastX) / dt;
+      lastX = e.clientX;
+      lastT = t;
+
+      cur = startCur - dx / spacing;
+      if (e.cancelable) e.preventDefault();
+      kick();
+    }
+
+    function onUp(e) {
+      if (e.pointerId !== pid) return;
+      pending = false;
+      pid = null;
+      if (!dragging) {
+        /* a press that never became a drag still froze the tween: resettle */
+        if (Math.abs(cur - Math.round(cur)) > 0.001) tweenTo(Math.round(cur), TWEEN_SNAP);
+        else if (!taken) scheduleAuto();
+        return;
+      }
+      dragging = false;
+      suppressClick = true;
+      rail.classList.remove('is-dragging');
+      try { stage.releasePointerCapture(e.pointerId); } catch (err) {}
+
+      /* short, critically damped: at most one card of carry */
+      var near = Math.round(cur);
+      var target = Math.round(cur - (vel * 75) / spacing);
+      target = Math.max(near - 1, Math.min(near + 1, target));
+      tweenTo(target, TWEEN_SNAP);
+    }
+
+    /* horizontal trackpad flick takes control; vertical is left to the page */
+    function onWheel(e) {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      if (e.cancelable) e.preventDefault();
+      takeControl();
+      var t = now();
+      if (t < wheelLock) return;
+      wheelLock = t + 380;
+      step(e.deltaX > 0 ? 1 : -1);
+    }
+
+    /* always step from a whole card, even if a press froze mid-tween */
+    function step(dir) {
+      tweenTo(Math.round(to) + dir, TWEEN_KEY);
+    }
+
+    function onKey(e) {
+      var k = e.key;
+      if (k === 'ArrowRight') { e.preventDefault(); takeControl(); step(1); }
+      else if (k === 'ArrowLeft') { e.preventDefault(); takeControl(); step(-1); }
+      else if (k === 'Home') { e.preventDefault(); takeControl(); goTo(0); }
+      else if (k === 'End') { e.preventDefault(); takeControl(); goTo(N - 1); }
+    }
+
+    function onClick(e) {
+      if (suppressClick) { suppressClick = false; e.preventDefault(); return; }
+      var card = e.target.closest ? e.target.closest('.life-card') : null;
+      if (!card) return;
+      var i = cards.indexOf(card);
+      if (i < 0 || i === activeIdx) return;
+      takeControl();
+      goTo(i);
+    }
+
+    function onTick(e) {
+      e.preventDefault();
+      var i = ticks.indexOf(e.currentTarget);
+      if (i < 0) return;
+      takeControl();
+      goTo(i);
+    }
+
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (dead) return;
+        var wasDeck = deck;
+        deck = mqSmall.matches;
+        if (wasDeck !== deck) rail.setAttribute('data-mode', deck ? 'deck' : 'rail');
+        measure();
+        for (var i = 0; i < N; i++) cache[i] = { tf: '', op: '', fl: '', z: 0 };
+        render();
+      }, 150);
+    }
+
+    function onVisibility() {
+      if (document.hidden) clearTimeout(autoTimer);
+      else scheduleAuto();
+    }
+
+    /* ---- teardown: back to the plain scroll-snap strip ---- */
+    function destroy() {
+      if (dead) return;
+      dead = true;
+      clearTimeout(autoTimer);
+      clearTimeout(resizeTimer);
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+
+      stage.removeEventListener('pointerdown', onDown);
+      stage.removeEventListener('pointermove', onMove);
+      stage.removeEventListener('pointerup', onUp);
+      stage.removeEventListener('pointercancel', onUp);
+      stage.removeEventListener('wheel', onWheel);
+      stage.removeEventListener('keydown', onKey);
+      stage.removeEventListener('click', onClick);
+      ticks.forEach(function (t) { t.removeEventListener('click', onTick); });
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
+      if (io) { try { io.disconnect(); } catch (err) {} }
+
+      var landed = activeIdx > -1 ? activeIdx : 0;
+      for (var i = 0; i < N; i++) {
+        cards[i].style.transform = '';
+        cards[i].style.zIndex = '';
+        cards[i].classList.remove('is-active');
+        figs[i].style.opacity = '';
+        figs[i].style.filter = '';
+      }
+      ticks.forEach(function (t) { t.removeAttribute('aria-current'); });
+      if (ticks[0]) ticks[0].setAttribute('aria-current', 'true');
+      rail.classList.remove('is-taken', 'is-dragging');
+      rail.removeAttribute('data-mode');
+
+      /* keep the visitor where they were, in the strip */
+      try {
+        var c = cards[landed];
+        stage.scrollLeft = c.offsetLeft - (stage.clientWidth - c.offsetWidth) / 2;
+      } catch (err) {}
+    }
+
+    /* ---- go ---- */
+    stage.scrollLeft = 0;
+    rail.setAttribute('data-mode', deck ? 'deck' : 'rail');
+    measure();
+    setActive(0);
+    render();
+
+    stage.addEventListener('pointerdown', onDown);
+    stage.addEventListener('pointermove', onMove, { passive: false });
+    stage.addEventListener('pointerup', onUp);
+    stage.addEventListener('pointercancel', onUp);
+    stage.addEventListener('wheel', onWheel, { passive: false });
+    stage.addEventListener('keydown', onKey);
+    stage.addEventListener('click', onClick);
+    ticks.forEach(function (t) { t.addEventListener('click', onTick); });
+    window.addEventListener('resize', onResize);
+    document.addEventListener('visibilitychange', onVisibility);
+
+    var io = null;
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) scheduleAuto();
+        else clearTimeout(autoTimer);
+      }, { threshold: 0.2 });
+      io.observe(rail);
+    } else {
+      visible = true;
+      scheduleAuto();
+    }
+
+    /* reduced motion can arrive mid-session */
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(destroy);
+    }
+    if (mqReduce.addEventListener) {
+      mqReduce.addEventListener('change', function (e) { if (e.matches) destroy(); });
+    } else if (mqReduce.addListener) {
+      mqReduce.addListener(function (e) { if (e.matches) destroy(); });
+    }
+  } catch (err) {
+    /* one section must never take the page down */
+    if (window.console && console.warn) console.warn('pctInitLife:', err);
+  }
+};
+
+/* ---- boot: every init is optional and must never take the page down ---- */
+(function () {
+  var inits = ['pctInitAct', 'pctInitHero', 'pctInitGrow', 'pctInitProof', 'pctInitLife'];
+  inits.forEach(function (n) {
+    try { if (typeof window[n] === 'function') window[n](); }
+    catch (e) { if (window.console) console.warn(n + ' failed:', e); }
+  });
+})();
+</script>
+</body>
+</html>

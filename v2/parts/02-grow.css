@@ -1,0 +1,292 @@
+/* ============================================================
+   02 — Graduate confident.  (cream ground / value proposition)
+   ONE signature interaction: the image accordion. Selecting a row
+   curtain-wipes a new photograph into a frame that never disappears;
+   row 03 breaks the frame open into a burst of polaroids.
+
+   Everything below the "JS-ENHANCED" mark is gated on .grow--js.
+   Without JS the base rules stand alone: every row open, every
+   photograph visible, a plain editorial list.
+   ============================================================ */
+
+.grow{
+  background:var(--paper);
+  color:var(--ink-soft);
+  padding-block:var(--section);
+}
+
+.grow__wrap{
+  display:grid;
+  row-gap:clamp(2rem,5vw,3rem);
+  grid-template-areas:"intro" "stage" "rows";
+}
+
+/* ---------- intro ---------- */
+
+.grow__intro{grid-area:intro;max-width:44rem}
+
+.grow__label{margin:0 0 1.35rem}
+.grow__label::before{
+  content:"";
+  display:inline-block;
+  width:2.25rem;height:1px;
+  background:currentColor;
+  vertical-align:middle;
+  margin-right:.85rem;
+  opacity:.7;
+}
+
+.grow__h{
+  font-size:clamp(2.6rem,5.4vw,4.25rem);
+  letter-spacing:-.015em;
+  margin-bottom:1.15rem;
+}
+.grow__h em{font-style:italic;color:var(--gold-ink)}
+
+.grow__lede{
+  margin:0;
+  max-width:34rem;
+  font-size:clamp(1.05rem,1.5vw,1.2rem);
+  line-height:1.55;
+  color:var(--ink-soft);
+}
+
+/* ---------- the three rows ---------- */
+
+.grow__rows{
+  grid-area:rows;
+  position:relative;
+  padding-left:clamp(1.1rem,2vw,1.6rem);
+}
+/* the rail the gold marker travels down */
+.grow__rows::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:1px;
+  background:var(--line);
+}
+.grow__rail{
+  position:absolute;
+  left:0;top:0;
+  width:2px;height:100%;
+  background:var(--gold-ink);
+  transform-origin:top;
+  transform:translateY(0) scaleY(0);
+  opacity:0;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.grow__row{border-bottom:1px solid var(--line)}
+.grow__row:first-child{border-top:1px solid var(--line)}
+.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
+
+.grow__btn{
+  display:grid;
+  grid-template-columns:3.1rem 1fr;
+  align-items:baseline;
+  gap:0 .9rem;
+  width:100%;
+  margin:0;
+  padding:1.65rem .25rem 1.7rem;
+  background:none;
+  border:0;
+  color:inherit;
+  font-family:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+.grow__num{
+  display:inline-block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1.45rem;
+  line-height:1;
+  color:var(--ink-mute);
+}
+.grow__ttl{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(1.55rem,2.5vw,2.1rem);
+  line-height:1.06;
+  color:var(--ink);
+  transform-origin:left center;
+  transition: transform var(--dur) var(--ease);
+}
+@media (hover:hover){
+  .grow__btn:hover .grow__ttl{color:var(--purple);transform:translateX(4px)}
+}
+
+/* ---------- photographs ---------- */
+
+.grow__fig{margin:0}
+.grow__row .grow__fig{margin:.4rem 0 2.4rem;max-width:32rem}
+@media (min-width:560px){
+  .grow__row .grow__fig{margin-left:4rem}
+}
+
+.grow__frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:var(--paper-deep);
+  border:1px solid var(--line-dark);
+}
+.grow__frame img{width:100%;height:100%;object-fit:cover}
+
+.grow__cap{display:block;padding-top:1.05rem;max-width:34rem}
+.grow__kick{
+  display:block;
+  margin-bottom:.45rem;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-ink);
+}
+.grow__body{display:block;font-size:1.02rem;line-height:1.5;color:var(--ink-soft)}
+
+/* ---------- row 03: the polaroid burst (pattern break) ---------- */
+
+.grow__frame--burst{border:0;background:none}
+
+.grow__poly{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  z-index:var(--z,1);
+  width:40%;
+  padding:.42rem .42rem .3rem;
+  background:var(--paper);
+  border:1px solid var(--line-dark);
+  box-shadow:0 20px 42px -26px color-mix(in srgb,var(--ink) 55%,transparent);
+  transform:rotate(var(--r));
+}
+.grow__poly img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.grow__polycap{
+  display:block;
+  padding-top:.32rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:.82rem;
+  line-height:1.4;
+  text-align:center;
+  color:var(--ink-mute);
+}
+.grow__poly:nth-child(1){--x:-3%;--y:1%;--r:-7deg;--z:1;--d:40ms}
+.grow__poly:nth-child(2){--x:45%;--y:0%;--r:4deg;--z:2;--d:110ms}
+.grow__poly:nth-child(3){--x:25%;--y:38%;--r:-2deg;--z:5;--d:180ms}
+.grow__poly:nth-child(4){--x:-1%;--y:55%;--r:6deg;--z:3;--d:250ms}
+.grow__poly:nth-child(5){--x:47%;--y:58%;--r:-3deg;--z:4;--d:320ms}
+
+/* ============================================================
+   JS-ENHANCED — the persistent stage
+   ============================================================ */
+
+.grow__stage{grid-area:stage;display:none;position:relative}
+.grow--js .grow__stage{display:grid;align-items:start}
+
+/* keeps the frame height reserved and carries the offset gold rule */
+.grow__mat{grid-area:1/1;position:relative;width:100%;aspect-ratio:4/5}
+@media (min-width:1024px){
+  .grow--js .grow__mat::after{
+    content:"";
+    position:absolute;
+    inset:1.4rem -1.4rem -1.4rem 1.4rem;
+    border:1px solid color-mix(in srgb,var(--gold-ink) 45%,transparent);
+    transition: opacity var(--dur) var(--ease);
+  }
+  .grow--js .grow__stage:has(.grow__fig--burst.is-active) .grow__mat::after{opacity:0}
+}
+
+/* every photograph lives in the same cell, permanently stacked */
+.grow--js .grow__fig{grid-area:1/1;margin:0;max-width:none;visibility:hidden}
+.grow--js .grow__fig.is-active{visibility:visible;z-index:3}
+.grow--js .grow__fig.is-leaving{visibility:visible;z-index:2}
+
+.grow--js .grow__frame{
+  opacity:0;
+  transform:scale(.98);
+  clip-path:inset(0 100% 0 0);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), clip-path var(--dur) var(--ease);
+}
+/* outgoing: settles back 2% and drops away underneath the curtain */
+.grow--js .is-leaving .grow__frame{opacity:0;transform:scale(.98);clip-path:inset(0 0 0 0)}
+/* incoming: curtain-wipes open from the left edge */
+.grow--js .is-active .grow__frame{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
+/* one frame with transitions off, so the curtain always starts closed */
+.grow--js .is-prewipe .grow__frame{transition: none;opacity:1;transform:none;clip-path:inset(0 100% 0 0)}
+
+/* the burst never wipes — it assembles */
+.grow--js .grow__frame--burst,
+.grow--js .is-prewipe .grow__frame--burst{clip-path:none}
+.grow--js .grow__poly{opacity:0}
+.grow--js .is-active .grow__poly{
+  opacity:1;
+  animation:growPoly 560ms var(--ease) both;
+  animation-delay:var(--d,0ms);
+}
+
+/* the caption changes with the photograph */
+.grow--js .grow__cap{opacity:0;transition: opacity 200ms var(--ease)}
+.grow--js .is-active .grow__cap{opacity:1;animation:growCap 460ms 140ms var(--ease) both}
+
+/* the active numeral rises */
+.grow--js .grow__ttl{color:var(--ink-mute)}
+.grow--js .is-open .grow__ttl{color:var(--ink)}
+.grow--js .is-open .grow__num{color:var(--gold-ink);animation:growNum var(--dur) var(--ease) both}
+.grow--js .grow__rail{opacity:1}
+
+@keyframes growNum{from{opacity:0;transform:translateY(.32em)}to{opacity:1;transform:none}}
+@keyframes growCap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes growPoly{
+  from{opacity:0;transform:translate3d(0,16px,0) scale(.94) rotate(calc(var(--r) * .25))}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(var(--r))}
+}
+
+/* ---------- desktop split ---------- */
+
+@media (min-width:768px){
+  .grow--js .grow__wrap{
+    grid-template-columns:minmax(0,45fr) minmax(0,55fr);
+    grid-template-rows:max-content 1fr;
+    grid-template-areas:"intro stage" "rows stage";
+    column-gap:clamp(2.25rem,4.5vw,4rem);
+    align-items:start;
+  }
+  .grow--js .grow__stage{justify-self:end;width:100%;max-width:34rem}
+  .grow--js .grow__cap{padding-top:2.2rem}
+  .grow--js .grow__rows{align-self:start}
+}
+
+/* ---------- mobile: photograph on top, accordion under it ---------- */
+
+@media (max-width:767px){
+  .grow__frame,
+  .grow__mat{aspect-ratio:1}
+  .grow__btn{grid-template-columns:2.5rem 1fr;padding:1.15rem .25rem 1.2rem}
+  .grow__num{font-size:1.25rem}
+  /* calmer 2-across overlap, shallower angles, no lip labels */
+  .grow__poly{width:44%;padding:.35rem}
+  .grow__polycap{display:none}
+  .grow__poly:nth-child(1){--x:-2%;--y:0%;--r:-4deg}
+  .grow__poly:nth-child(2){--x:49%;--y:4%;--r:3deg}
+  .grow__poly:nth-child(3){--x:24%;--y:25%;--r:-2deg}
+  .grow__poly:nth-child(4){--x:-3%;--y:49%;--r:5deg}
+  .grow__poly:nth-child(5){--x:50%;--y:52%;--r:-3deg}
+}
+
+/* ---------- reduced motion: land on the finished state, never the start ---------- */
+
+/* Both are dropped outright rather than shortened, because every state here is
+   written as a plain declaration: the active frame is opaque and unclipped, the
+   polaroids and caption are opacity 1, the numeral sits at its default transform.
+   Removing the motion therefore lands on the finished state, never the start. */
+@media (prefers-reduced-motion:reduce){
+  .grow *,.grow *::before,.grow *::after{
+    transition: none !important;
+    animation:none !important;
+  }
+}
+.grow--still *,.grow--still *::before,.grow--still *::after{
+  transition: none !important;
+  animation:none !important;
+}

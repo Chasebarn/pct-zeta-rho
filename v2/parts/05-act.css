@@ -1,0 +1,387 @@
+/* ==========================================================================
+   05 — THE ACT (final CTA) + GLOBAL CHROME (chapter progress rail)
+   Every selector is scoped to .act* or .pct-rail*.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PART A — THE ACT
+   Flat --purple-deep, no image, no ornament. The move is the empty space:
+   the vertical rhythm is deliberately larger than --section so the page
+   audibly stops here.
+   -------------------------------------------------------------------------- */
+
+.act {
+  position: relative;
+  background: var(--purple-deep);
+  color: rgba(250, 248, 243, 0.78);
+  padding: clamp(7rem, 15vw, 12.5rem) 0;
+  text-align: center;
+}
+
+.act-inner {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.act-title {
+  font-size: clamp(2.85rem, 7.2vw, 5.4rem);
+  letter-spacing: -0.015em;
+  color: var(--paper);
+}
+.act-title em {
+  font-style: italic;
+  color: var(--gold-soft);
+}
+
+.act-line {
+  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
+  max-width: 33rem;
+  font-size: clamp(1.02rem, 1.55vw, 1.17rem);
+  line-height: 1.55;
+  color: rgba(250, 248, 243, 0.72);
+}
+
+/* ---- the CTA cluster: button, secondary line, term tag ---- */
+
+.act-go {
+  margin-top: clamp(2.75rem, 5.5vw, 3.75rem);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.act-cta {
+  position: relative;
+  isolation: isolate;              /* keeps the -1 plate above the section bg */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 52px;
+  padding: 1rem 2.15rem;
+  font-family: var(--font-text);
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+/* The plate is a separate layer so the swell is a pure transform and the
+   label never distorts or reflows. */
+.act-cta-plate {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gold);
+  border-radius: 2px;
+  transform-origin: 50% 50%;
+  transition: transform 420ms var(--ease);
+}
+
+.act-cta-arrow {
+  flex: none;
+  transition: transform 420ms var(--ease);
+}
+
+/* The secondary line. It is a real link, always in the layout (so revealing it
+   shifts nothing), and it is the second half of the one interaction. */
+.act-more {
+  padding: 0.9rem 0.5rem 0.35rem;  /* padding, not margin: the hover area stays
+                                      contiguous with the button, no flicker */
+  font-size: 0.86rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: rgba(250, 248, 243, 0.82);
+  /* Always readable. It carries real information (events, eligibility, FAQs), so it
+     must not be hover-gated: keyboard, touch and JS-off visitors never hover.
+     Hover/focus only lifts it from subdued to full. */
+  opacity: 0.72;
+  transform: translateY(2px);
+  transition: opacity 340ms var(--ease), transform 340ms var(--ease);
+  /* 44px minimum pointer target (WCAG 2.5.8) */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.act-more-text {
+  border-bottom: 1px solid rgba(230, 198, 91, 0.4);
+  padding-bottom: 2px;
+}
+.act-more-arrow {
+  display: inline-block;
+  margin-left: 0.3rem;
+}
+
+/* THE ONE INTERACTION — one trigger, two coordinated results. */
+.act-go:hover .act-cta-plate,
+.act-go:focus-within .act-cta-plate {
+  transform: scale(1.05, 1.12);
+  background: var(--gold-soft);
+}
+.act-go:hover .act-cta-arrow,
+.act-go:focus-within .act-cta-arrow {
+  transform: translateX(4px);
+}
+.act-go:hover .act-more,
+.act-go:focus-within .act-more {
+  opacity: 1;
+  transform: none;
+}
+/* The plate swells past the anchor box, and the ring is gold on gold — push the
+   focus ring out far enough to stay legible against the purple. */
+.act-cta:focus-visible { outline-offset: 7px; }
+
+.act-more:hover {
+  color: var(--gold-soft);
+}
+.act-more:hover .act-more-text {
+  border-bottom-color: var(--gold-soft);
+}
+
+.act-sub {
+  margin-top: 1.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   PART A2 — subordinate support band, on cream.
+   Gold is never used here (--gold on --paper fails contrast); purple carries it.
+   -------------------------------------------------------------------------- */
+
+.act-band {
+  background: var(--paper-deep);
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0;
+}
+
+.act-band-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+}
+
+.act-band-copy {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+}
+.act-band-em {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.act-band-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.act-band-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.3rem;
+  border: 1px solid rgba(25, 18, 33, 0.5);  /* 3.3:1 on --paper-deep: the border
+                                               is this control's only boundary */
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  transition: none;
+}
+.act-band-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.act-band-btn.is-primary {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: var(--paper);
+}
+.act-band-btn.is-primary:hover {
+  background: var(--purple-deep);
+  border-color: var(--purple-deep);
+  color: var(--paper);
+}
+
+/* --------------------------------------------------------------------------
+   PART B1 — CHAPTER PROGRESS RAIL (global chrome)
+   Fixed to the right gutter, never over content: at 900px the gutter is 36px
+   and the rail is ~30px wide including its offset. pointer-events: none, so
+   it can never intercept a click even in an edge case.
+   Hidden until JS resolves the page's stages (decorative, so no-JS = absent).
+   -------------------------------------------------------------------------- */
+
+.pct-rail {
+  display: none;
+  position: fixed;
+  right: 2px;
+  top: 50%;
+  z-index: 40;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ink-mute);
+  --rail-accent: var(--gold-ink);   /* gold-ink over cream sections */
+  --rail-dim: rgba(25, 18, 33, 0.32);
+}
+.pct-rail.is-dark {
+  color: rgba(250, 248, 243, 0.55);
+  --rail-accent: var(--gold-soft);  /* gold only on dark grounds */
+  --rail-dim: rgba(250, 248, 243, 0.34);
+}
+
+@media (min-width: 900px) {
+  .pct-rail.is-live { display: flex; }
+}
+
+/* All five labels occupy the same grid cell; only the active one is shown, so
+   the rail never mutates text and never reflows. */
+.pct-rail-labels {
+  display: grid;
+}
+.pct-rail-label {
+  grid-area: 1 / 1;
+  writing-mode: vertical-rl;
+  font-family: var(--font-text);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--rail-accent);
+  opacity: 0;
+  transform: translateX(4px);
+  /* the outgoing label leaves before the incoming one arrives, so two labels
+     never sit smudged on top of each other at 9px */
+  transition: opacity 170ms linear, transform 340ms var(--ease);
+}
+.pct-rail-label.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 260ms linear 150ms, transform 340ms var(--ease) 150ms;
+}
+.pct-rail-num {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
+.pct-rail-ticks {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  padding-right: 5px;
+}
+/* the thin line the ticks hang off — not a scrollbar, no thumb, no track */
+.pct-rail-ticks::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -12px;
+  bottom: -12px;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+.pct-rail-tick {
+  width: 8px;
+  height: 1px;
+  background: var(--rail-dim);
+  transform-origin: 100% 50%;
+  transition: transform 380ms var(--ease);
+}
+.pct-rail-tick.is-on {
+  background: var(--rail-accent);
+  transform: scaleX(1.9);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE — different execution, not a shrunken desktop.
+   The hover mechanic does not exist on a phone, so nothing is hidden behind
+   it: the button goes full width for the thumb and the secondary line is
+   simply stated underneath as a second, quieter tap target.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .act {
+    padding: clamp(5.5rem, 18vw, 7.5rem) 0;
+    text-align: left;
+  }
+  .act-inner { max-width: none; }
+  .act-line { margin-inline: 0; }
+
+  .act-go {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 22rem;
+  }
+  .act-cta {
+    min-height: 56px;
+    padding-inline: 1.5rem;
+  }
+  /* no swell, no reveal: both are always in their finished state */
+  .act-cta-plate,
+  .act-cta-arrow { transition: none; }
+  .act-go:hover .act-cta-plate,
+  .act-go:focus-within .act-cta-plate,
+  .act-go:hover .act-cta-arrow,
+  .act-go:focus-within .act-cta-arrow { transform: none; }
+  .act-more {
+    align-self: flex-start;
+    padding: 0.95rem 0 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .act-band-in {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .act-band-acts { width: 100%; }
+  .act-band-btn { flex: 1 1 auto; }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — every transition resolves to its finished state.
+   The secondary line is simply always readable; nothing swells, nothing moves.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .act-more {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .act-cta-plate,
+  .act-cta-arrow,
+  .pct-rail-label,
+  .pct-rail-label.is-on,
+  .pct-rail-tick {
+    transition: none;
+  }
+  .act-go:hover .act-cta-plate,
+  .act-go:focus-within .act-cta-plate { transform: none; }
+  .act-go:hover .act-cta-arrow,
+  .act-go:focus-within .act-cta-arrow { transform: none; }
+}
+
+/* Mid-session reduce toggle: 05-act.js flags the rail so its state changes
+   land instantly, without waiting for a media query re-evaluation. */
+.pct-rail.is-still .pct-rail-label,
+.pct-rail.is-still .pct-rail-label.is-on,
+.pct-rail.is-still .pct-rail-tick {
+  transition: none;
+}

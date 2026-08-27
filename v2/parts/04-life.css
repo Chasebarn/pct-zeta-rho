@@ -13,10 +13,8 @@
   --edge: max(var(--gutter), calc((100% - var(--wrap)) / 2));
   position: relative;
   padding-block: var(--section);
-  background:
-    radial-gradient(120% 85% at 50% -18%, #35214f 0%, rgba(53, 33, 79, 0) 62%),
-    var(--purple-deep);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink-soft);
   /* the rail recedes past the wrap; clip it rather than widen the page */
   overflow: hidden;
 }
@@ -57,11 +55,11 @@
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: rgba(250, 248, 243, 0.22) transparent;
+  scrollbar-color: rgba(25, 18, 33, 0.18) transparent;
 }
 .life-stage::-webkit-scrollbar { height: 6px; }
 .life-stage::-webkit-scrollbar-thumb {
-  background: rgba(250, 248, 243, 0.22);
+  background: rgba(25, 18, 33, 0.18);
 }
 .life-stage::-webkit-scrollbar-track { background: transparent; }
 
@@ -87,8 +85,8 @@
   position: relative;
   aspect-ratio: 3 / 2;
   overflow: hidden;
-  border: 1px solid var(--line-dark);
-  background: #1c1129;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
 }
 .life-card.is-tall .life-media { aspect-ratio: 4 / 5; }
 .life-card.is-wide .life-media { aspect-ratio: 16 / 9; }
@@ -140,12 +138,12 @@
   display: block;
   width: 2rem;
   height: 2px;
-  background: rgba(250, 248, 243, 0.26);
+  background: rgba(25, 18, 33, 0.20);
   transform: scaleX(0.55);
   transform-origin: 50% 50%;
   transition: transform var(--dur) var(--ease);
 }
-.life-tick:hover .life-tick-bar { background: rgba(250, 248, 243, 0.5); }
+.life-tick:hover .life-tick-bar { background: rgba(25, 18, 33, 0.42); }
 .life-tick[aria-current="true"] .life-tick-bar {
   background: var(--gold);
   transform: scaleX(1);
@@ -154,7 +152,7 @@
 /* No-JS position feedback: the anchor targets drive the tick.
    Scoped to :not([data-mode]) so it can never fight the JS state. */
 .life-rail:not([data-mode]):has(.life-card:target) .life-tick[aria-current="true"] .life-tick-bar {
-  background: rgba(250, 248, 243, 0.26);
+  background: rgba(25, 18, 33, 0.20);
   transform: scaleX(0.55);
 }
 .life-rail:not([data-mode]):has(#life-c1:target) .life-tick[href="#life-c1"] .life-tick-bar,
@@ -169,26 +167,6 @@
   transform: scaleX(1);
 }
 
-/* The hint describes a drag that only exists once JS is running. */
-.life-hint {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0;
-  white-space: nowrap;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(250, 248, 243, 0.36);
-  transition: opacity var(--dur) var(--ease);
-}
-.life-rail[data-mode] .life-hint { display: block; }
-.life-rail.is-taken .life-hint { opacity: 0; }
-
-/* ---------- enhanced: depth rail + swipe deck ---------- */
 
 .life-rail[data-mode] .life-stage {
   overflow: visible;
@@ -269,10 +247,6 @@
   }
   .life-tick { flex: 1 1 0; }
   .life-tick-bar { width: 100%; max-width: 2rem; }
-  .life-hint {
-    position: static;
-    transform: none;
-  }
 }
 
 /* ---------- reduced motion: the strip, finished, no depth ---------- */
@@ -311,6 +285,4 @@
     transform: none !important;
     transition: none;
   }
-  .life-rail[data-mode] .life-hint { display: none; }
-  .life-tick-bar { transition: none; }
 }

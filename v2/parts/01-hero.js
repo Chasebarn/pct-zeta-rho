@@ -83,7 +83,7 @@ window.pctInitHero = function () {
           u = x / dpr;
           var wave =
             Math.sin(u * 0.0016 + t * 0.7 + i * 0.42 * coh) *
-            Math.cos(u * 0.0006 - t * 0.32 + i * 1.7 * coh);
+            Math.cos(u * 0.0006 - t * 0.16 + i * 1.7 * coh);
           var y = yBase
                 + Math.sin(u * 0.0011 + i * 0.30 * coh) * drape
                 + wave * amp * (0.6 + 0.8 * mx)
@@ -92,7 +92,7 @@ window.pctInitHero = function () {
           if (pulling) {
             var ndx = (x - cx) / PR, ndy = (y - cy) / PR;
             var f = Math.exp(-(ndx * ndx + ndy * ndy));
-            y += (cy - y) * f * pull * 0.32;
+            y += (cy - y) * f * pull * 0.16;
           }
 
           if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
@@ -178,16 +178,7 @@ window.pctInitHero = function () {
       if (pullTarget > 0) measureCta();   /* only while a pull is live */
     }, { passive: true });
 
-    root.addEventListener('mousemove', function (e) {
-      var r = canvas.getBoundingClientRect();
-      mx = (e.clientX - r.left) / r.width;
-      my = (e.clientY - r.top) / r.height;
-      /* fine pointers only — a tap synthesises a mousemove, and touch must never
-         restart motion the reader did not ask for */
-      if (reduced || !mqFine.matches) return;
-      lastMove = performance.now();
-      ensure(lastMove);
-    }, { passive: true });
+    
 
     if (cta) {
       var grab = function () {

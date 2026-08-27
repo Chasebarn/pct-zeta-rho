@@ -171,10 +171,10 @@
   text-align:center;
   color:var(--ink-mute);
 }
-.grow__poly:nth-child(1){--x:-3%;--y:1%;--r:-7deg;--z:1;--d:40ms}
+.grow__poly:nth-child(1){--x:3%;--y:1%;--r:-6deg;--z:1;--d:40ms}
 .grow__poly:nth-child(2){--x:45%;--y:0%;--r:4deg;--z:2;--d:110ms}
-.grow__poly:nth-child(3){--x:25%;--y:38%;--r:-2deg;--z:5;--d:180ms}
-.grow__poly:nth-child(4){--x:-1%;--y:55%;--r:6deg;--z:3;--d:250ms}
+.grow__poly:nth-child(3){--x:26%;--y:38%;--r:-2deg;--z:5;--d:180ms}
+.grow__poly:nth-child(4){--x:4%;--y:55%;--r:5deg;--z:3;--d:250ms}
 .grow__poly:nth-child(5){--x:47%;--y:58%;--r:-3deg;--z:4;--d:320ms}
 
 /* ============================================================

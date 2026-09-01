@@ -1,5 +1,5 @@
 <!-- ==========================================================================
-     05 — THE ACT  (final CTA)  +  GLOBAL CHROME (chapter progress rail)
+     06 — THE ACT  (final CTA)
      Ground: --purple-deep. After four sections of motion, everything stops.
      No canvas, no marquee, no counters, no parallax, no image.
      ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
@@ -7,27 +7,7 @@
      :focus-within, and under prefers-reduced-motion.
      ========================================================================== -->
 
-<!-- Chapter progress indicator. Decorative + aria-hidden: it carries no
-     information that is not already on the page. Hidden by default; 05-act.js
-     reveals it only at >=900px once it has resolved the page's five stages. -->
-<div class="pct-rail" data-pct-rail aria-hidden="true">
-  <div class="pct-rail-labels">
-    <span class="pct-rail-label is-on" data-stage-label="0"><span class="pct-rail-num">01</span> Intro</span>
-    <span class="pct-rail-label" data-stage-label="1"><span class="pct-rail-num">02</span> Grow</span>
-    <span class="pct-rail-label" data-stage-label="2"><span class="pct-rail-num">03</span> Proof</span>
-    <span class="pct-rail-label" data-stage-label="3"><span class="pct-rail-num">04</span> Experience</span>
-    <span class="pct-rail-label" data-stage-label="4"><span class="pct-rail-num">05</span> Rush</span>
-  </div>
-  <div class="pct-rail-ticks">
-    <span class="pct-rail-tick is-on" data-stage-tick="0"></span>
-    <span class="pct-rail-tick" data-stage-tick="1"></span>
-    <span class="pct-rail-tick" data-stage-tick="2"></span>
-    <span class="pct-rail-tick" data-stage-tick="3"></span>
-    <span class="pct-rail-tick" data-stage-tick="4"></span>
-  </div>
-</div>
-
-<section class="act on-dark" id="act" data-pct-stage="rush">
+<section class="act on-dark" id="act">
   <div class="v2wrap">
     <div class="act-inner">
 

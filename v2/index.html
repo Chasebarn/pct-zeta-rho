@@ -122,8 +122,6 @@
   align-items:baseline;
   gap:.5rem .85rem;
   margin:0 0 2.6rem;
-  padding-top:1.35rem;
-  border-top:1px solid var(--line-dark);
   max-width:44ch;
   font-size:.86rem;
   line-height:1.5;
@@ -229,14 +227,16 @@
 }
 /* ===== 02-grow ===== */
 /* ============================================================
-   02 — Graduate confident.  (cream ground / value proposition)
-   ONE signature interaction: the image accordion. Selecting a row
-   curtain-wipes a new photograph into a frame that never disappears;
-   row 03 breaks the frame open into a burst of polaroids.
+   02 — Graduate confident.  (cream ground)
 
-   Everything below the "JS-ENHANCED" mark is gated on .grow--js.
-   Without JS the base rules stand alone: every row open, every
-   photograph visible, a plain editorial list.
+   ONE interaction: the photograph cross-fades when a row is selected.
+   Deliberately austere. There is no rail, no marker, no burst, no
+   frame ornament and no label baked into the photograph. Earlier
+   builds carried all five at once and the section read as busy.
+
+   Rules below the "JS-ENHANCED" mark are gated on .grow--js. Without
+   JS the base rules stand alone: every row open, every photograph in
+   the flow, a plain editorial list.
    ============================================================ */
 
 .grow{
@@ -247,7 +247,7 @@
 
 .grow__wrap{
   display:grid;
-  row-gap:clamp(2rem,5vw,3rem);
+  row-gap:clamp(2.2rem,5vw,3.4rem);
   grid-template-areas:"intro" "stage" "rows";
 }
 
@@ -255,57 +255,26 @@
 
 .grow__intro{grid-area:intro;max-width:44rem}
 
-.grow__label{margin:0 0 1.35rem}
-.grow__label::before{
-  content:"";
-  display:inline-block;
-  width:2.25rem;height:1px;
-  background:currentColor;
-  vertical-align:middle;
-  margin-right:.85rem;
-  opacity:.7;
-}
-
 .grow__h{
   font-size:clamp(2.6rem,5.4vw,4.25rem);
   letter-spacing:-.015em;
-  margin-bottom:1.15rem;
+  margin:0 0 .9rem;
 }
 .grow__h em{font-style:italic;color:var(--gold-ink)}
 
 .grow__lede{
   margin:0;
-  max-width:34rem;
-  font-size:clamp(1.05rem,1.5vw,1.2rem);
-  line-height:1.55;
-  color:var(--ink-soft);
+  max-width:32rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.35rem,2.1vw,1.75rem);
+  line-height:1.35;
+  color:var(--ink-mute);
 }
 
 /* ---------- the three rows ---------- */
 
-.grow__rows{
-  grid-area:rows;
-  position:relative;
-  padding-left:clamp(1.1rem,2vw,1.6rem);
-}
-/* the rail the gold marker travels down */
-.grow__rows::before{
-  content:"";
-  position:absolute;
-  left:0;top:0;bottom:0;
-  width:1px;
-  background:var(--line);
-}
-.grow__rail{
-  position:absolute;
-  left:0;top:0;
-  width:2px;height:100%;
-  background:var(--gold-ink);
-  transform-origin:top;
-  transform:translateY(0) scaleY(0);
-  opacity:0;
-  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
-}
+.grow__rows{grid-area:rows}
 
 .grow__row{border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
@@ -313,12 +282,12 @@
 
 .grow__btn{
   display:grid;
-  grid-template-columns:3.1rem 1fr;
+  grid-template-columns:3.2rem 1fr;
   align-items:baseline;
-  gap:0 .9rem;
+  gap:0 1rem;
   width:100%;
   margin:0;
-  padding:1.65rem .25rem 1.7rem;
+  padding:1.75rem .25rem;
   background:none;
   border:0;
   color:inherit;
@@ -327,433 +296,214 @@
   cursor:pointer;
 }
 .grow__num{
-  display:inline-block;
   font-family:var(--font-display);
   font-style:italic;
-  font-size:1.45rem;
+  font-size:1.35rem;
   line-height:1;
   color:var(--ink-mute);
+  transition:color var(--dur) var(--ease);
 }
 .grow__ttl{
   display:block;
   font-family:var(--font-display);
-  font-size:clamp(1.55rem,2.5vw,2.1rem);
-  line-height:1.06;
+  font-size:clamp(1.5rem,2.3vw,1.95rem);
+  line-height:1.1;
   color:var(--ink);
-  transform-origin:left center;
-  transition: transform var(--dur) var(--ease);
+  transition:color var(--dur) var(--ease);
 }
 @media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--purple);transform:translateX(4px)}
+  .grow__btn:hover .grow__ttl{color:var(--purple)}
 }
 
-/* ---------- photographs ---------- */
-
-.grow__fig{margin:0}
-.grow__row .grow__fig{margin:.4rem 0 2.4rem;max-width:32rem}
+/* the paragraph. The generous bottom padding is the point: an earlier build
+   let the copy finish 4px above the next row's hairline, so the open row and
+   the row beneath it read as one block. */
+.grow__say{
+  margin:0;
+  padding:0 0 2.2rem;
+  max-width:34rem;
+  font-size:1rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+/* Reserve the tallest paragraph's height. Without it, opening a two-line row
+   after a three-line row shortens the column, the photograph beside it is
+   centred against that column, and the whole composition jumps on every click. */
+.grow--js .grow__row.is-open .grow__say{min-height:5.1rem}
 @media (min-width:560px){
-  .grow__row .grow__fig{margin-left:4rem}
+  .grow__say{padding-left:4.2rem}
 }
 
-.grow__frame{
-  position:relative;
-  width:100%;
+/* ---------- the photograph ---------- */
+
+.grow__fig{
+  margin:0 0 2.4rem;
+  max-width:30rem;
   aspect-ratio:4/5;
   overflow:hidden;
   background:var(--paper-deep);
-  border:1px solid var(--line-dark);
 }
-.grow__frame img{width:100%;height:100%;object-fit:cover}
-.grow__kick{
-  display:block;
-  margin-bottom:.45rem;
-  font-size:.72rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;
-  color:var(--gold-ink);
+@media (min-width:560px){
+  .grow__fig{margin-left:4.2rem}
 }
-.grow__body{display:block;font-size:1.02rem;line-height:1.5;color:var(--ink-soft)}
-
-/* ---------- row 03: the polaroid burst (pattern break) ---------- */
-
-.grow__frame--burst{border:0;background:none}
-
-.grow__poly{
-  position:absolute;
-  left:var(--x);top:var(--y);
-  z-index:var(--z,1);
-  width:40%;
-  padding:.42rem .42rem .3rem;
-  background:var(--paper);
-  border:1px solid var(--line-dark);
-  box-shadow:0 20px 42px -26px color-mix(in srgb,var(--ink) 55%,transparent);
-  transform:rotate(var(--r));
-}
-.grow__poly img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
-.grow__polycap{
-  display:block;
-  padding-top:.32rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:.82rem;
-  line-height:1.4;
-  text-align:center;
-  color:var(--ink-mute);
-}
-.grow__poly:nth-child(1){--x:3%;--y:1%;--r:-6deg;--z:1;--d:40ms}
-.grow__poly:nth-child(2){--x:45%;--y:0%;--r:4deg;--z:2;--d:110ms}
-.grow__poly:nth-child(3){--x:26%;--y:38%;--r:-2deg;--z:5;--d:180ms}
-.grow__poly:nth-child(4){--x:4%;--y:55%;--r:5deg;--z:3;--d:250ms}
-.grow__poly:nth-child(5){--x:47%;--y:58%;--r:-3deg;--z:4;--d:320ms}
+.grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
 
 /* ============================================================
    JS-ENHANCED — the persistent stage
    ============================================================ */
 
 .grow__stage{grid-area:stage;display:none;position:relative}
-.grow--js .grow__stage{display:grid;align-items:start}
-
-/* keeps the frame height reserved and carries the offset gold rule */
-.grow__mat{grid-area:1/1;position:relative;width:100%;aspect-ratio:4/5}
-@media (min-width:1024px){
-  .grow--js .grow__mat::after{
-    content:"";
-    position:absolute;
-    inset:1.4rem -1.4rem -1.4rem 1.4rem;
-    border:1px solid color-mix(in srgb,var(--gold-ink) 45%,transparent);
-    transition: opacity var(--dur) var(--ease);
-  }
-  .grow--js .grow__stage:has(.grow__fig--burst.is-active) .grow__mat::after{opacity:0}
+.grow--js .grow__stage{
+  display:block;
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:var(--paper-deep);
 }
 
-/* every photograph lives in the same cell, permanently stacked */
-.grow--js .grow__fig{grid-area:1/1;margin:0;max-width:none;visibility:hidden}
-.grow--js .grow__fig.is-active{visibility:visible;z-index:3}
-.grow--js .grow__fig.is-leaving{visibility:visible;z-index:2}
-
-.grow--js .grow__frame{
+/* every photograph occupies the whole stage, permanently stacked */
+.grow--js .grow__fig{
+  position:absolute;
+  inset:0;
+  margin:0;
+  max-width:none;
+  aspect-ratio:auto;
   opacity:0;
-  transform:scale(.98);
-  clip-path:inset(0 100% 0 0);
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), clip-path var(--dur) var(--ease);
+  transition:opacity 520ms var(--ease);
+  pointer-events:none;
 }
-/* outgoing: settles back 2% and drops away underneath the curtain */
-.grow--js .is-leaving .grow__frame{opacity:0;transform:scale(.98);clip-path:inset(0 0 0 0)}
-/* incoming: curtain-wipes open from the left edge */
-.grow--js .is-active .grow__frame{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
-/* one frame with transitions off, so the curtain always starts closed */
-.grow--js .is-prewipe .grow__frame{transition: none;opacity:1;transform:none;clip-path:inset(0 100% 0 0)}
+.grow--js .grow__fig.is-active{opacity:1}
 
-/* the burst never wipes — it assembles */
-.grow--js .grow__frame--burst,
-.grow--js .is-prewipe .grow__frame--burst{clip-path:none}
-.grow--js .grow__poly{opacity:0}
-.grow--js .is-active .grow__poly{
-  opacity:1;
-  animation:growPoly 560ms var(--ease) both;
-  animation-delay:var(--d,0ms);
-}
-
-/* the active numeral rises */
+.grow--js .grow__say{display:none}
+.grow--js .is-open .grow__say{display:block}
 .grow--js .grow__ttl{color:var(--ink-mute)}
 .grow--js .is-open .grow__ttl{color:var(--ink)}
-.grow--js .is-open .grow__num{color:var(--gold-ink);animation:growNum var(--dur) var(--ease) both}
-.grow--js .grow__rail{opacity:1}
-
-@keyframes growNum{from{opacity:0;transform:translateY(.32em)}to{opacity:1;transform:none}}
-@keyframes growCap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes growPoly{
-  from{opacity:0;transform:translate3d(0,16px,0) scale(.94) rotate(calc(var(--r) * .25))}
-  to{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(var(--r))}
-}
+.grow--js .is-open .grow__num{color:var(--gold-ink)}
 
 /* ---------- desktop split ---------- */
 
 @media (min-width:768px){
   .grow--js .grow__wrap{
-    grid-template-columns:minmax(0,45fr) minmax(0,55fr);
+    grid-template-columns:minmax(0,47fr) minmax(0,53fr);
     grid-template-rows:max-content 1fr;
     grid-template-areas:"intro stage" "rows stage";
-    column-gap:clamp(2.25rem,4.5vw,4rem);
+    column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  .grow--js .grow__stage{justify-self:end;width:100%;max-width:34rem}
-  .grow--js .grow__rows{align-self:start}
+  /* the stage spans both rows of the grid and centres itself against them, so
+     the photograph is never bottom-heavy against a short accordion */
+  .grow--js .grow__stage{
+    align-self:center;
+    justify-self:end;
+    max-width:30rem;
+  }
+  /* the accordion carries the section on this side, so it gets the height to
+     stand against a 30rem photograph rather than floating at the top of it */
+  .grow--js .grow__btn{padding:2rem .25rem}
 }
 
-/* ---------- mobile: photograph on top, accordion under it ---------- */
+/* ---------- mobile ---------- */
 
 @media (max-width:767px){
-  .grow__frame,
-  .grow__mat{aspect-ratio:1}
-  .grow__btn{grid-template-columns:2.5rem 1fr;padding:1.15rem .25rem 1.2rem}
-  .grow__num{font-size:1.25rem}
-  /* calmer 2-across overlap, shallower angles, no lip labels */
-  .grow__poly{width:44%;padding:.35rem}
-  .grow__polycap{display:none}
-  .grow__poly:nth-child(1){--x:-2%;--y:0%;--r:-4deg}
-  .grow__poly:nth-child(2){--x:49%;--y:4%;--r:3deg}
-  .grow__poly:nth-child(3){--x:24%;--y:25%;--r:-2deg}
-  .grow__poly:nth-child(4){--x:-3%;--y:49%;--r:5deg}
-  .grow__poly:nth-child(5){--x:50%;--y:52%;--r:-3deg}
+  .grow--js .grow__stage{aspect-ratio:1}
+  .grow__fig{aspect-ratio:1}
+  .grow__btn{grid-template-columns:2.6rem 1fr;padding:1.25rem .25rem}
+  .grow__num{font-size:1.15rem}
 }
 
-/* ---------- reduced motion: land on the finished state, never the start ---------- */
-
-/* Both are dropped outright rather than shortened, because every state here is
-   written as a plain declaration: the active frame is opaque and unclipped, the
-   polaroids and caption are opacity 1, the numeral sits at its default transform.
-   Removing the motion therefore lands on the finished state, never the start. */
+/* ---------- reduced motion ----------
+   Every state here is a plain declaration (the active photograph is opacity 1,
+   the open paragraph is display block), so dropping the transition lands on the
+   finished state, never on the start of one. */
 @media (prefers-reduced-motion:reduce){
-  .grow *,.grow *::before,.grow *::after{
-    transition: none !important;
-    animation:none !important;
-  }
+  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
 }
 .grow--still *,.grow--still *::before,.grow--still *::after{
-  transition: none !important;
-  animation:none !important;
-}
-
-/* ------------------------------------------------------------------
-   Final pass: the explanation now lives with the row that triggers it,
-   and the photograph carries only a tiny inset label. The caption block
-   that used to sit under the image made the layout read as a portfolio
-   case study, so it is gone.
-   ------------------------------------------------------------------ */
-.grow__say {
-  margin: .1rem 0 0;
-  padding-left: 3.4rem;                 /* clears the numeral column */
-  max-width: 34rem;
-  font-size: .98rem; line-height: 1.65; color: var(--ink-soft);
-  /* collapsed by default only where JS is driving; see the .grow--js rule */
-}
-.grow--js .grow__say {
-  display: none;
-}
-.grow--js .grow__row.is-open .grow__say {
-  display: block;
-  animation: grow-say-in 480ms var(--ease) both;
-}
-@keyframes grow-say-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* tiny label inside the photograph, not under it */
-.grow__tag {
-  position: absolute; left: .9rem; bottom: .9rem;
-  font-family: var(--font-text);
-  font-size: .62rem; font-weight: 700; letter-spacing: .18em;
-  text-transform: uppercase; color: rgba(250, 248, 243, .92);
-  text-shadow: 0 1px 6px rgba(25, 18, 33, .55);
-  pointer-events: none;
-}
-.grow__frame { position: relative; }
-
-@media (max-width: 767px) {
-  .grow__say { padding-left: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .grow--js .grow__say { display: block; animation: none; }
+  transition:none!important;animation:none!important;
 }
 /* ===== 03-numbers ===== */
 /* ============================================================
-   03 — Numbers don’t lie.  (cream ground / rational proof, at scale)
-   ONE signature interaction: the pinned horizontal scroll. The section
-   sticks and three monumental statistics travel through the viewport.
+   03 — Numbers don’t lie.   One centred composition.
 
-   Everything above the "PINNED" mark is the finished, JS-free state: a
-   vertical sequence of the same three statistics, fully legible. The pin
-   is applied only by JS via .num--pin (>=768px, motion allowed), so no
-   copy in this section ever depends on script.
-
-   Both the pin and the mobile reveal are additionally gated on
-   (prefers-reduced-motion: no-preference), so under reduce they cannot
-   apply at all and the base rules — the finished state — are what render.
-
-   Restraint is the design. The size of the numeral IS the effect: no
-   outlines, no ticks, no orbiting marks, no grids. Each panel holds an
-   ordinal, a number, a hairline and one quiet line of type.
+   The three ornaments an earlier build carried here are all gone on
+   purpose: the 01/02/03 ordinals (they numbered things that have no
+   order), the hairline rule under each numeral (it fenced the label
+   away from the figure it belongs to), and the pinned horizontal
+   track. What is left is the figure, its label, and air.
    ============================================================ */
 
 .num{
   background:var(--paper);
   color:var(--ink-soft);
   padding-block:var(--section);
-  /* the left edge every child aligns to — identical to .v2wrap's left edge */
-  --edge:max(var(--gutter), calc((100% - var(--wrap)) / 2));
 }
 
-/* .numscene takes an inline pixel height from JS while pinned; auto otherwise.
-   It must never be given overflow — that would break position:sticky. */
-.numscene{position:relative}
-.numpin{position:relative}
-
-/* ---------- heading ---------- */
-
-.num__head{
-  padding-inline:var(--edge);
-  margin-bottom:clamp(2.75rem,6vw,4.5rem);
-}
 .num__h{
-  font-size:clamp(2.6rem,6.2vw,4.75rem);
+  text-align:center;
+  font-size:clamp(2.6rem,6vw,5rem);
   letter-spacing:-.015em;
+  margin:0 0 clamp(3rem,7vw,5.5rem);
 }
 .num__h em{font-style:italic;color:var(--gold-ink)}
 
-/* ---------- the track (a vertical stack until JS pins it) ---------- */
-
-.numtrack{
+.num__grid{
   list-style:none;
   margin:0;
-  padding-inline:var(--edge);
+  padding:0;
   display:grid;
-  row-gap:clamp(4rem,11vw,7rem);
+  gap:clamp(3.2rem,6vw,2.5rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:768px){
+  .num__grid{grid-template-columns:repeat(3,1fr)}
 }
 
-/* ---------- one statistic ---------- */
-
-.num__p{margin:0}
-
-.num__ord{
-  display:block;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:1.35rem;
-  line-height:1;
-  color:var(--gold-ink);
-  margin-bottom:clamp(1rem,2.4vw,1.9rem);
+.num__p{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 .num__val{
-  margin:0 0 clamp(1.25rem,2.6vw,2rem);
-  font-family:var(--font-display);
-  font-weight:400;                     /* the serif is 400 only — never faux-bold */
-  font-variant-numeric:tabular-nums lining-nums;
-  font-feature-settings:"tnum" 1,"lnum" 1;
-  font-size:clamp(5rem,30vw,11rem);    /* sane at every width with JS off */
-  line-height:.86;
-  letter-spacing:-.015em;
-  color:var(--ink);
-}
-.num__u{font-size:.5em;letter-spacing:0;margin-left:.05em}
-
-/* the unverified slot reads as an empty slot, never as a claim */
-.num__p[data-placeholder] .num__val{color:var(--ink-mute)}
-
-.num__lab{
   margin:0;
-  width:min(30ch,100%);
-  padding-top:1.05rem;
-  border-top:1px solid var(--line);
-  font-size:clamp(.98rem,1.1vw,1.1rem);
-  line-height:1.5;
+  font-family:var(--font-display);
+  font-weight:400;
+  /* the whole point of the section. Big enough to be the loudest thing
+     on the page, capped so three of them still fit one row at 1024px. */
+  font-size:clamp(4.6rem,11vw,9rem);
+  line-height:.9;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.num__u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
+
+/* the label is set in the display italic, not the UI sans. A 13px sans
+   caption under a 144px serif numeral reads as a chart legend. */
+.num__lab{
+  margin:1.4rem 0 0;
+  max-width:17rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.02rem,1.5vw,1.22rem);
+  line-height:1.4;
   color:var(--ink-soft);
+  text-wrap:balance;
 }
 
-/* ============================================================
-   PINNED — desktop only, switched on by JS as .num--pin
-   ============================================================ */
-
-@media (min-width:768px) and (prefers-reduced-motion:no-preference){
-
-  .num--pin .numpin{
-    position:sticky;
-    top:0;
-    height:100vh;
-    overflow:hidden;                   /* the track leaves through this edge */
-    display:grid;
-    grid-template-rows:auto 1fr;
-    /* minmax(0,1fr), never auto: an auto column would be sized by the track's
-       max-content — the whole overflowing strip — and drag the heading out
-       with it. This keeps every child exactly one viewport wide. */
-    grid-template-columns:minmax(0,1fr);
-    padding-block:clamp(2.5rem,7vh,5.5rem);
-  }
-
-  .num--pin .num__head{margin-bottom:0}
-
-  /* The track keeps its auto width — the pin's width — and simply lets the
-     panels overflow to the right, where .numpin clips them. Do NOT give it
-     width:max-content: --edge is a percentage, and percentage padding inside
-     a max-content box resolves cyclically (it triples the track width). */
-  .num--pin .numtrack{
-    grid-row:2;
-    align-self:center;
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;            /* every numeral shares one top edge */
-    column-gap:clamp(3.5rem,6vw,8rem);
-    row-gap:0;
-    transform:translate3d(0,0,0);
-    will-change:transform;             /* the only element that moves */
-  }
-
-  /* each statistic owns the screen: at rest only the next one's ordinal
-     shows at the right edge, never a second whole number */
-  .num--pin .num__p{flex:0 0 auto;width:max(30rem,76vw)}
-
-  /* monumental, but never taller than the pin it lives in */
-  .num--pin .num__val{font-size:min(clamp(7rem,20vw,18rem),38vh)}
-  .num--pin .num__lab{width:min(34ch,100%)}
-}
-
-/* ============================================================
-   MOBILE (<768px) — its own choreography. No pin, no horizontal
-   travel: one statistic per screen, arriving as you reach it.
-   ============================================================ */
-
-@media (max-width:767px){
-  .num__head{margin-bottom:clamp(2.25rem,9vw,3.25rem)}
-  .numtrack{row-gap:clamp(2rem,6vw,3rem)}
-  .num__p{
-    min-height:58vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-  }
-  .num__val{font-size:clamp(5.5rem,32vw,9.5rem)}
-  .num__lab{width:min(26ch,100%)}
-}
-
-/* The reveal is gated twice: on .num--js, which JS adds only once it has an
-   IntersectionObserver to switch it back on, and on no-preference. Without
-   JS — or under reduce — these rules never exist and every statistic is
-   simply on screen. */
-@media (max-width:767px) and (prefers-reduced-motion:no-preference){
-  .num--js .num__ord,
-  .num--js .num__val,
-  .num--js .num__lab{
-    opacity:0;
-    transform:translateY(.34em);
-    transition:opacity 520ms var(--ease), transform 640ms var(--ease);
-  }
-  .num--js .num__val{transition-delay:70ms}
-  .num--js .num__lab{transform:translateY(12px);transition-delay:180ms}
-
-  .num--js .is-in .num__ord,
-  .num--js .is-in .num__val,
-  .num--js .is-in .num__lab{opacity:1;transform:none}
-}
-
-/* ============================================================
-   REDUCED MOTION — the finished state is the vertical sequence, and
-   the rules above simply do not apply here. All that is left is to
-   neutralise the inline geometry JS may have written before the
-   setting was changed mid-session; !important beats those inline
-   styles, so the section is safe even if a teardown never runs.
-   ============================================================ */
-
+/* the count-up. The finished value is in the markup, so with JS off or
+   under reduced motion the number is simply there. */
 @media (prefers-reduced-motion:reduce){
-  .num .numscene{height:auto!important}
-  .num .numtrack{transform:none!important;will-change:auto}
+  .num *{transition:none!important;animation:none!important}
 }
 /* ===== 04-place ===== */
 /* ============================================================
    04 — Where members have placed.  (cream ground / proof, part two)
 
    ONE signature interaction: two logo belts that drift in opposite
-   directions, pause under the cursor, and dissolve at both edges.
+   directions and dissolve at both edges.
 
    Everything below the "BELT" mark is gated on [data-on], which the
    JS only sets after it has cloned each list. The base rules above it
@@ -881,10 +631,10 @@
    starts mid-list, which stops the two rows looking twinned. */
 .pl-row[data-on][data-pl-dir="1"] .pl-track{animation-direction:reverse}
 
-/* pause: under the cursor, on focus, and while off screen */
-@media (hover:hover){
-  .pl-row[data-on]:hover .pl-track{animation-play-state:paused}
-}
+/* Pause only while the row is off screen, or while a keyboard user is inside
+   it (they need a still target to tab through). It deliberately does NOT pause
+   on hover: a belt that halts under the cursor stops the moment the reader
+   moves toward it, which reads as the page breaking. */
 .pl-row[data-on]:focus-within .pl-track,
 .pl-row[data-on].is-out .pl-track{animation-play-state:paused}
 
@@ -953,87 +703,112 @@
   .pl-cell[data-pl-clone]{display:none}
 }
 /* ===== 05-mem ===== */
+/* ============================================================
+   05 — Your college should look like this.
+
+   A continuous band, not a fan. The earlier build spread the photos on a
+   parabola and scaled them by distance from centre, so no two were the
+   same size and the composition never resolved. Here every photograph is
+   identical in size; the band's own edges do the cropping.
+
+   The band is full-bleed and clips: card height is 118% of the band, so
+   the bottoms are cut flat while the tilted tops stay ragged.
+   ============================================================ */
+
 .mem{
   background:var(--paper);
-  padding-block:var(--section) calc(var(--section) * .7);
-  overflow:hidden;            /* photos crop past the viewport on purpose */
+  padding-block:var(--section) calc(var(--section) * .75);
 }
+
 .mem-h{
   text-align:center;
-  font-size:clamp(2.3rem,6vw,5rem);
-  margin-bottom:clamp(2rem,4vw,3.2rem);
+  font-size:clamp(2.4rem,6vw,5rem);
+  letter-spacing:-.015em;
+  margin:0 0 clamp(2.4rem,5vw,3.6rem);
 }
 .mem-h em{font-style:italic;color:var(--gold-ink)}
 
-/* ---- the stage ---------------------------------------------------------- */
-.mem-stage{
+/* ---- the band ---------------------------------------------------------- */
+
+.mem-band{
   position:relative;
-  height:clamp(340px,46vw,560px);
-  touch-action:pan-y;                 /* vertical page scroll still works */
-  cursor:grab;
+  height:clamp(280px,31vw,430px);
+  overflow:hidden;          /* this is the cut */
 }
-.mem-stage.is-drag{cursor:grabbing}
-.mem-stage:focus-visible{outline:2px solid var(--purple);outline-offset:6px}
 
-.mem-fan{list-style:none;margin:0;padding:0;height:100%;position:relative}
-
-/* ---- one photo ---------------------------------------------------------- */
-.mem-i{
-  position:absolute;top:50%;left:50%;
-  width:clamp(200px,23vw,330px);
+.mem-track{
+  list-style:none;
   margin:0;
+  padding:0;
+  height:100%;
+  display:flex;
+  align-items:flex-start;
+  gap:clamp(.25rem,.5vw,.55rem);   /* cards almost touch; the tilt does the rest */
+  width:max-content;
   will-change:transform;
 }
-.mem-i figure{
-  margin:0;position:relative;
-  /* the scrapbook read: an off-white edge, not a literal Instax frame */
-  background:#fdfbf6;
-  padding:.5rem .5rem .55rem;
-  box-shadow:0 18px 40px rgba(25,18,33,.16), 0 2px 6px rgba(25,18,33,.10);
-}
-.mem-i img{width:100%;height:auto;display:block;background:var(--paper-deep)}
 
-/* caption: only the centred photo shows one, and it stays tiny */
-.mem-i figcaption{
-  position:absolute;left:.5rem;bottom:-1.9rem;
-  font-family:var(--font-text);
-  font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-mute);
-  opacity:0;transition:opacity 420ms var(--ease);
-  pointer-events:none;white-space:nowrap;
+/* every card is the same size. Height is a percentage of the band, so the
+   bottom of each card sits below the band's bottom edge and is clipped. */
+.mem-i{
+  flex:0 0 auto;
+  height:124%;      /* taller than the band, so the bottoms are cut flat */
+  aspect-ratio:4/5;
+  margin:0;
+  transform:rotate(var(--r,0deg)) translateY(var(--y,0));
+  box-shadow:0 22px 44px -28px rgba(25,18,33,.55);
+  background:var(--paper-deep);
 }
-.mem-i.is-mid figcaption{opacity:1}
+.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 
-/* ---- no JS: a plain scroll strip, every photo reachable ------------------ */
-.mem-stage:not([data-on]) .mem-fan{
-  position:static;height:auto;
-  display:flex;gap:1.2rem;
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  padding-bottom:2.4rem;
-}
-.mem-stage:not([data-on]) .mem-i{
-  position:static;flex:0 0 min(64vw,320px);scroll-snap-align:center;
-  transform:none!important;
-}
-.mem-stage:not([data-on]) .mem-i figcaption{position:static;opacity:1;margin-top:.6rem}
+/* the tilt pattern. Seven values against a nine-photo set, so the sequence
+   never repeats in step with itself and the ragged top edge does not look
+   stamped. The angles are deliberately large: at 2 degrees the tilt reads as a
+   rendering error rather than as a decision. */
+.mem-i:nth-child(7n+1){--r:-5.5deg;--y:2.5%}
+.mem-i:nth-child(7n+2){--r:3.8deg;--y:-2%}
+.mem-i:nth-child(7n+3){--r:-2.6deg;--y:5%}
+.mem-i:nth-child(7n+4){--r:6.2deg;--y:.5%}
+.mem-i:nth-child(7n+5){--r:-4.4deg;--y:-2.6%}
+.mem-i:nth-child(7n+6){--r:2.4deg;--y:4.2%}
+.mem-i:nth-child(7n+7){--r:-6.5deg;--y:1.4%}
 
-@media (max-width:700px){
-  .mem-stage{height:clamp(300px,74vw,420px)}
-  .mem-i{width:clamp(170px,46vw,240px)}
+/* a rotated card overlaps its neighbours at the corners. Alternating the
+   stacking order keeps that overlap from reading as one long shingle. */
+.mem-i:nth-child(odd){z-index:2}
+.mem-i:nth-child(even){z-index:1}
+
+/* ---- the run ----------------------------------------------------------- */
+/* 05-mem.js clones the list once and sets --mem-shift to exactly half the
+   track width, so the loop point is invisible. Until it does, the track is
+   simply static and every photo is still reachable by scrolling the band. */
+
+.mem-band[data-on] .mem-track{
+  animation:memRun var(--mem-dur,64s) linear infinite;
 }
+.mem-band[data-on][data-paused] .mem-track{animation-play-state:paused}
+
+@keyframes memRun{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(var(--mem-shift,-50%),0,0)}
+}
+
+/* ---- no JS, and reduced motion: a scrollable strip ---------------------- */
+
+.mem-band:not([data-on]){overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
 
 @media (prefers-reduced-motion:reduce){
-  /* finished state: the same readable strip, no drift, no depth */
-  .mem-stage{height:auto;cursor:auto}
-  .mem-fan{position:static;height:auto;display:flex;gap:1.2rem;
-           overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:2.4rem}
-  .mem-i{position:static;flex:0 0 min(64vw,320px);scroll-snap-align:center;transform:none!important}
-  .mem-i figcaption{position:static;opacity:1;margin-top:.6rem}
+  .mem-band{overflow-x:auto;overflow-y:hidden}
+  .mem-band .mem-track{animation:none!important;transform:none!important}
+}
+
+@media (max-width:700px){
+  .mem-band{height:clamp(240px,58vw,340px)}
 }
 /* ===== 06-act ===== */
 /* ==========================================================================
-   05 — THE ACT (final CTA) + GLOBAL CHROME (chapter progress rail)
-   Every selector is scoped to .act* or .pct-rail*.
+   05 — THE ACT (final CTA)
+   Every selector is scoped to .act*.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -1049,6 +824,10 @@
   color: rgba(250, 248, 243, 0.78);
   padding: clamp(7rem, 15vw, 12.5rem) 0;
   text-align: center;
+  /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
+     390px phone it reached 95px past the viewport and gave the whole document
+     a horizontal scrollbar. Nothing in this section needs to escape it. */
+  overflow: hidden;
 }
 
 .act-inner {
@@ -1245,101 +1024,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   PART B1 — CHAPTER PROGRESS RAIL (global chrome)
-   Fixed to the right gutter, never over content: at 900px the gutter is 36px
-   and the rail is ~30px wide including its offset. pointer-events: none, so
-   it can never intercept a click even in an edge case.
-   Hidden until JS resolves the page's stages (decorative, so no-JS = absent).
-   -------------------------------------------------------------------------- */
-
-.pct-rail {
-  display: none;
-  position: fixed;
-  right: 2px;
-  top: 50%;
-  z-index: 40;
-  align-items: center;
-  gap: 0.4rem;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--ink-mute);
-  --rail-accent: var(--gold-ink);   /* gold-ink over cream sections */
-  --rail-dim: rgba(25, 18, 33, 0.32);
-}
-.pct-rail.is-dark {
-  color: rgba(250, 248, 243, 0.55);
-  --rail-accent: var(--gold-soft);  /* gold only on dark grounds */
-  --rail-dim: rgba(250, 248, 243, 0.34);
-}
-
-@media (min-width: 900px) {
-  .pct-rail.is-live { display: flex; }
-}
-
-/* All five labels occupy the same grid cell; only the active one is shown, so
-   the rail never mutates text and never reflows. */
-.pct-rail-labels {
-  display: grid;
-}
-.pct-rail-label {
-  grid-area: 1 / 1;
-  writing-mode: vertical-rl;
-  font-family: var(--font-text);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--rail-accent);
-  opacity: 0;
-  transform: translateX(4px);
-  /* the outgoing label leaves before the incoming one arrives, so two labels
-     never sit smudged on top of each other at 9px */
-  transition: opacity 170ms linear, transform 340ms var(--ease);
-}
-.pct-rail-label.is-on {
-  opacity: 1;
-  transform: none;
-  transition: opacity 260ms linear 150ms, transform 340ms var(--ease) 150ms;
-}
-.pct-rail-num {
-  font-variant-numeric: tabular-nums;
-  opacity: 0.75;
-}
-
-.pct-rail-ticks {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-  padding-right: 5px;
-}
-/* the thin line the ticks hang off — not a scrollbar, no thumb, no track */
-.pct-rail-ticks::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: -12px;
-  bottom: -12px;
-  width: 1px;
-  background: currentColor;
-  opacity: 0.22;
-}
-.pct-rail-tick {
-  width: 8px;
-  height: 1px;
-  background: var(--rail-dim);
-  transform-origin: 100% 50%;
-  transition: transform 380ms var(--ease);
-}
-.pct-rail-tick.is-on {
-  background: var(--rail-accent);
-  transform: scaleX(1.9);
-}
-
-/* --------------------------------------------------------------------------
    MOBILE — different execution, not a shrunken desktop.
    The hover mechanic does not exist on a phone, so nothing is hidden behind
    it: the button goes full width for the thumb and the secondary line is
@@ -1399,24 +1083,13 @@
     transition: none;
   }
   .act-cta-plate,
-  .act-cta-arrow,
-  .pct-rail-label,
-  .pct-rail-label.is-on,
-  .pct-rail-tick {
+  .act-cta-arrow {
     transition: none;
   }
   .act-go:hover .act-cta-plate,
   .act-go:focus-within .act-cta-plate { transform: none; }
   .act-go:hover .act-cta-arrow,
   .act-go:focus-within .act-cta-arrow { transform: none; }
-}
-
-/* Mid-session reduce toggle: 05-act.js flags the rail so its state changes
-   land instantly, without waiting for a media query re-evaluation. */
-.pct-rail.is-still .pct-rail-label,
-.pct-rail.is-still .pct-rail-label.is-on,
-.pct-rail.is-still .pct-rail-tick {
-  transition: none;
 }
 
 /* ------------------------------------------------------------------
@@ -1510,9 +1183,11 @@
 <!-- 01 · HERO — communication method: ATMOSPHERE
      Carried over from the live hero: silk-thread canvas, mouse response, the giant
      outlined greek watermark, minimal copy, one Rush CTA, the scroll hint.
-     Refined: the silk now SETTLES (arrival, not wallpaper) and the field resolves
-     from turbulent to composed as it does. The watermark lift on CTA hover is pure
-     CSS (:has), so it survives with JS disabled. -->
+     The silk sways CONTINUOUSLY and slowly, at the live site's own drift rate, and
+     leans toward the pointer. It never resolves to a straight line: an earlier
+     build eased it to a dead stop after six seconds, which read as broken.
+     The watermark lift on CTA hover is pure CSS (:has), so it survives with JS
+     disabled. -->
 <section class="v2hero on-dark" id="hero">
 
   <canvas class="v2hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
@@ -1554,97 +1229,68 @@
 </section>
 
     <!-- ===== 02-grow ===== -->
-<!-- 02 — Graduate confident.  Signature interaction: the image accordion.
-     Base markup below is the finished, JS-free state: all three rows open,
-     each with its photograph beneath it. JS moves the <figure>s (the very same
-     nodes, so nothing is downloaded twice) into the persistent stage. -->
+<!-- 02 — Graduate confident.
+     ONE interaction: selecting a row cross-fades a new photograph into a frame
+     that never moves. Nothing else animates. The base markup below is the
+     finished, script-free state: every row open, every photograph in the flow. -->
 <section class="grow" id="grow" data-grow aria-labelledby="grow-title">
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
       <h2 class="grow__h" id="grow-title">Graduate <em>confident.</em></h2>
-      <p class="grow__lede">Not sure what comes after college? PCT is where you build the experience, confidence, and relationships that leave you better prepared for what comes after graduation.</p>
+      <p class="grow__lede">Three things you leave with.</p>
     </div>
 
-    <div class="grow__stage" data-grow-stage>
-      <span class="grow__mat" aria-hidden="true"></span>
-    </div>
+    <div class="grow__stage" data-grow-stage></div>
 
     <div class="grow__rows" data-grow-rows role="group" aria-label="What membership builds">
-      <span class="grow__rail" data-grow-fill aria-hidden="true"></span>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">01</span>
-            <span class="grow__ttl">Connect With People in Your Field</span>
+            <span class="grow__ttl">A network in your field</span>
           </button>
         </h3>
-        <p class="grow__say">Alumni, recruiters, and speakers who work in the fields you are aiming at. Fall Summit puts the chapter in a room with them for a full day, and members in other business majors become the people you ask before you apply.</p>
-        <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
-          <div class="grow__frame">
+        <div class="grow__panel">
+          <p class="grow__say">Alumni, recruiters and speakers who already work where you want to. You meet them before you apply, not after.</p>
+          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
             <img src="../assets/ph/career-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member marking up a printed resume with an alumnus at a chapter career night.">
-            <span class="grow__tag">Fall Summit</span>
-          </div>
-        </figure>
+                 alt="A member reviewing a printed resume with an alumnus at a chapter career night.">
+          </figure>
+        </div>
       </div>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">02</span>
-            <span class="grow__ttl">Lead Before You Graduate</span>
+            <span class="grow__ttl">Leadership you have already done</span>
           </button>
         </h3>
-        <p class="grow__say">Members run the work rather than attend it: chair an initiative, plan an event, manage a budget, make the call. Leadership becomes something you have already done before your first full-time job.</p>
-        <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-          <div class="grow__frame">
+        <div class="grow__panel">
+          <p class="grow__say">Chair an initiative. Run an event. Manage a budget. It goes on your resume because you did it, not because you attended.</p>
+          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
             <img src="../assets/ph/leadership-1.png" width="1000" height="1250" loading="lazy" decoding="async"
                  alt="A member running a chapter meeting from the front of the room.">
-            <span class="grow__tag">Chapter meeting</span>
-          </div>
-        </figure>
+          </figure>
+        </div>
       </div>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">03</span>
-            <span class="grow__ttl">Find Your People</span>
+            <span class="grow__ttl">People who stay</span>
           </button>
         </h3>
-        <p class="grow__say">Formal, Spring Retreat, intramurals, and the traditions in between. The people who notice when you stop showing up, push you to apply, and are still around after graduation.</p>
-        <figure class="grow__fig grow__fig--burst" id="grow-f3" aria-labelledby="grow-b3">
-          <div class="grow__frame grow__frame--burst">
-            <div class="grow__poly">
-              <img src="../assets/ph/poly-1.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="Members in formal dress at the spring banquet.">
-              <span class="grow__polycap">Formal</span>
-              <span class="grow__tag">Formal</span>
-          </div>
-            <div class="grow__poly">
-              <img src="../assets/ph/poly-2.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="The chapter together on the annual retreat.">
-              <span class="grow__polycap">Retreat</span>
-            </div>
-            <div class="grow__poly">
-              <img src="../assets/ph/poly-3.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="An intramural team huddled after a game.">
-              <span class="grow__polycap">Intramurals</span>
-            </div>
-            <div class="grow__poly">
-              <img src="../assets/ph/poly-4.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="Members painting at a Tampa service day.">
-              <span class="grow__polycap">Service day</span>
-            </div>
-            <div class="grow__poly">
-              <img src="../assets/ph/poly-5.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="New members on bid night.">
-              <span class="grow__polycap">Bid night</span>
-            </div>
-          </div>
-        </figure>
+        <div class="grow__panel">
+          <p class="grow__say">Formal, retreat, intramurals and everything between. The people who notice when you stop showing up, and who are still around after graduation.</p>
+          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
+            <img src="../assets/ph/poly-1.png" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="Members in formal dress at the spring banquet.">
+          </figure>
+        </div>
       </div>
 
     </div>
@@ -1655,53 +1301,40 @@
 <!-- ============================================================
      03 — Numbers don’t lie.   Communication method: SCALE.
 
-     ONE signature interaction: the PINNED HORIZONTAL SCROLL (>=768px).
-     The markup below IS the finished state. With JavaScript disabled, on a
-     phone, or under prefers-reduced-motion it reads as a plain vertical
-     sequence of three monumental statistics — nothing here is hidden and
-     nothing waits on script.
+     No pinned horizontal scroll. Three statistics do not need 300vh of
+     hijacked scrolling to be read, and an earlier build spent it anyway:
+     the scene ran long, delivered little, and took the reader's scroll
+     away to do it. This is now one centred composition that resolves in
+     a single screen.
 
-     ONLY TWO OF THESE STATISTICS ARE VERIFIED (95%, 3.60). See stat 03.
-     The values are mirrored in the STATS array at the top of 03-numbers.js;
-     edit both, or the console will warn that they have drifted apart.
+     ALL THREE VALUES ARE VERIFIED and match the live site (index.html).
+     They are mirrored in the STATS array at the top of 03-numbers.js;
+     edit both, or the console warns that they have drifted apart.
      ============================================================ -->
-<section class="num" id="numbers" data-num data-pct-stage="proof" aria-labelledby="num-h">
-  <div class="numscene" data-num-scene>
-    <div class="numpin" data-num-pin>
+<section class="num" id="numbers" data-num aria-labelledby="num-h">
+  <div class="v2wrap">
 
-      <div class="num__head">
-        <h2 class="num__h" id="num-h">Numbers don’t <em>lie.</em></h2>
-      </div>
+    <h2 class="num__h" id="num-h">Numbers don’t <em>lie.</em></h2>
 
-      <ol class="numtrack" data-num-track role="list">
+    <ol class="num__grid" role="list">
 
-        <!-- STAT 01 — verified -->
-        <li class="num__p" data-num-p>
-          <span class="num__ord" aria-hidden="true">01</span>
-          <p class="num__val"><span data-num-n>95</span><span class="num__u" data-num-u>%</span></p>
-          <p class="num__lab" data-num-lab>Members placed in internships or full-time roles</p>
-        </li>
+      <li class="num__p" data-num-p>
+        <p class="num__val"><span data-num-n>95</span><span class="num__u" data-num-u>%</span></p>
+        <p class="num__lab" data-num-lab>Members placed in internships or full-time roles</p>
+      </li>
 
-        <!-- STAT 02 — verified -->
-        <li class="num__p" data-num-p>
-          <span class="num__ord" aria-hidden="true">02</span>
-          <p class="num__val"><span data-num-n>3.60</span><span class="num__u" data-num-u></span></p>
-          <p class="num__lab" data-num-lab>Chapter average GPA</p>
-        </li>
+      <li class="num__p" data-num-p>
+        <p class="num__val"><span data-num-n>3.60</span><span class="num__u" data-num-u></span></p>
+        <p class="num__lab" data-num-lab>Chapter average GPA</p>
+      </li>
 
-        <!-- STAT 03 — NOT VERIFIED.
-             this is a placeholder, the owner must supply a verified metric, do not publish invented data
-             It renders as a real panel so the layout is final. To fill it in, edit
-             STATS[2] in 03-numbers.js and mirror the same value + label here. -->
-        <li class="num__p" data-num-p data-placeholder>
-          <span class="num__ord" aria-hidden="true">03</span>
-          <p class="num__val" aria-hidden="true"><span data-num-n>&mdash;</span><span class="num__u" data-num-u></span></p>
-          <p class="num__lab" data-num-lab>Verified metric to be confirmed</p>
-        </li>
+      <li class="num__p" data-num-p>
+        <p class="num__val"><span data-num-n>15</span><span class="num__u" data-num-u></span></p>
+        <p class="num__lab" data-num-lab>“25 Under 25” honorees</p>
+      </li>
 
-      </ol>
+    </ol>
 
-    </div>
   </div>
 </section>
 
@@ -1754,7 +1387,7 @@
      nothing shifts while it loads. No CSS change is needed, and the belts
      re-time themselves to the new widths on their own.
      ------------------------------------------------------------------ -->
-<section class="pl" id="placements" aria-labelledby="pl-h" data-place data-pct-stage="proof">
+<section class="pl" id="placements" aria-labelledby="pl-h" data-place>
 
   <div class="v2wrap">
     <h2 class="pl-h" id="pl-h">Where members have <em>placed.</em></h2>
@@ -1809,37 +1442,38 @@
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- Your college should look like this.
-     A dense, oversized fan of chapter photography. The photos ARE the content:
-     they overlap, tilt, and deliberately crop past the viewport edges. No arrows,
-     no pagination, no cards. It drifts on its own; drag takes over; autoplay
-     resumes after a few idle seconds.
-     Swap assets/mem/m1..m9 for real photos at the same mixed orientations. Keep
-     the mix: posed shots AND phone candids. -->
-<section class="mem" id="life" aria-labelledby="mem-h" data-pct-stage="experience">
+<!-- 05 — Your college should look like this.
+     A single continuous band of chapter photography. Every photograph is the
+     SAME size; the only variation is a small tilt and a small vertical offset,
+     so the top edge of the band reads ragged and the bottom edge is cut dead
+     straight by the band itself. The band clips the photographs on purpose.
+
+     Replace assets/mem/m1..m9 with real photographs. Any aspect ratio works
+     (they are object-fit: cover), but keep the mix of posed shots and phone
+     candids. -->
+<section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">Your college should <em>look like this.</em></h2>
   </div>
 
-  <div class="mem-stage" role="group" aria-roledescription="photo collection"
-       aria-label="Chapter photographs" tabindex="0">
-    <ul class="mem-fan">
-      <li class="mem-i"><figure><img src="../assets/mem/m1.jpg" width="1100" height="760" alt="Fall Formal" loading="lazy" decoding="async"><figcaption>Fall Formal</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m2.jpg" width="900"  height="1120" alt="Spring Retreat" loading="lazy" decoding="async"><figcaption>Spring Retreat</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m3.jpg" width="1100" height="760" alt="Beach day" loading="lazy" decoding="async"><figcaption>Beach Day</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m4.jpg" width="980"  height="1180" alt="Service day" loading="lazy" decoding="async"><figcaption>Service</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m5.jpg" width="1100" height="760" alt="Fall Summit" loading="lazy" decoding="async"><figcaption>Fall Summit</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m6.jpg" width="940"  height="1160" alt="Intramurals" loading="lazy" decoding="async"><figcaption>Intramurals</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m7.jpg" width="1100" height="760" alt="A candid from the semester" loading="lazy" decoding="async"><figcaption>Candid</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m8.jpg" width="1000" height="1200" alt="Recruitment night" loading="lazy" decoding="async"><figcaption>Recruitment</figcaption></figure></li>
-      <li class="mem-i"><figure><img src="../assets/mem/m9.jpg" width="1100" height="760" alt="The chapter" loading="lazy" decoding="async"><figcaption>The Chapter</figcaption></figure></li>
+  <div class="mem-band" data-mem-band>
+    <ul class="mem-track" data-mem-track>
+      <li class="mem-i"><img src="../assets/mem/m1.jpg" width="1100" height="760" alt="The chapter at Fall Formal." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" width="900"  height="1120" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m3.jpg" width="1100" height="760" alt="A chapter beach day." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m4.jpg" width="980"  height="1180" alt="Members at a Tampa service day." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" width="1100" height="760" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m6.jpg" width="940"  height="1160" alt="An intramural team after a game." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m7.jpg" width="1100" height="760" alt="A candid from the semester." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m8.jpg" width="1000" height="1200" alt="Recruitment night." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m9.jpg" width="1100" height="760" alt="The chapter together." loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
 
     <!-- ===== 06-act ===== -->
 <!-- ==========================================================================
-     05 — THE ACT  (final CTA)  +  GLOBAL CHROME (chapter progress rail)
+     06 — THE ACT  (final CTA)
      Ground: --purple-deep. After four sections of motion, everything stops.
      No canvas, no marquee, no counters, no parallax, no image.
      ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
@@ -1847,27 +1481,7 @@
      :focus-within, and under prefers-reduced-motion.
      ========================================================================== -->
 
-<!-- Chapter progress indicator. Decorative + aria-hidden: it carries no
-     information that is not already on the page. Hidden by default; 05-act.js
-     reveals it only at >=900px once it has resolved the page's five stages. -->
-<div class="pct-rail" data-pct-rail aria-hidden="true">
-  <div class="pct-rail-labels">
-    <span class="pct-rail-label is-on" data-stage-label="0"><span class="pct-rail-num">01</span> Intro</span>
-    <span class="pct-rail-label" data-stage-label="1"><span class="pct-rail-num">02</span> Grow</span>
-    <span class="pct-rail-label" data-stage-label="2"><span class="pct-rail-num">03</span> Proof</span>
-    <span class="pct-rail-label" data-stage-label="3"><span class="pct-rail-num">04</span> Experience</span>
-    <span class="pct-rail-label" data-stage-label="4"><span class="pct-rail-num">05</span> Rush</span>
-  </div>
-  <div class="pct-rail-ticks">
-    <span class="pct-rail-tick is-on" data-stage-tick="0"></span>
-    <span class="pct-rail-tick" data-stage-tick="1"></span>
-    <span class="pct-rail-tick" data-stage-tick="2"></span>
-    <span class="pct-rail-tick" data-stage-tick="3"></span>
-    <span class="pct-rail-tick" data-stage-tick="4"></span>
-  </div>
-</div>
-
-<section class="act on-dark" id="act" data-pct-stage="rush">
+<section class="act on-dark" id="act">
   <div class="v2wrap">
     <div class="act-inner">
 
@@ -1978,8 +1592,13 @@
                           Defined at load time, outside any init, so it exists
                           before the lead calls the first section init.
                           (Load this file before the other section scripts.)
-   2. window.pctInitAct — wires the global chapter progress rail. The CTA
-                          itself is pure CSS and needs no JS at all.
+   2. window.pctInitCountdown — the state-aware rush clock. The CTA itself is
+                          pure CSS and needs no JS at all.
+
+   The chapter progress rail that used to live here (a fixed strip of stage
+   labels and ticks in the right gutter) is deleted, markup, CSS and observer.
+   It labelled the page at the reader rather than helping them, and on a site
+   this short it was chrome for its own sake.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -2039,184 +1658,6 @@
 }());
 
 
-/* --------------------------------------------------------------------------
-   2. SECTION INIT — chapter progress rail
-   One IntersectionObserver, no scroll handler, no layout reads in a loop.
-   The rail is decorative and aria-hidden, so if anything here fails to
-   resolve, it simply stays hidden and the page is unchanged.
-   -------------------------------------------------------------------------- */
-(function () {
-  'use strict';
-
-  var STAGES = 5;
-
-  /* Keyword -> stage, checked against a section's data-pct-stage, id and class.
-     The lead can override any of it with data-pct-stage="intro|grow|proof|
-     experience|rush" (or "01".."05"). */
-  var HINTS = [
-    ['intro', 'hero', 'open', 'arrive'],
-    ['grow', 'graduate', 'confident', 'develop', 'pillar'],
-    ['proof', 'number', 'stat', 'placement', 'company', 'network', 'result'],
-    ['experience', 'life', 'moment', 'brotherhood', 'photo', 'year'],
-    ['act', 'rush', 'cta', 'join', 'apply']
-  ];
-
-  var started = false;
-
-  function topLevelSections() {
-    var all = document.querySelectorAll('section');
-    var out = [];
-    for (var i = 0; i < all.length; i++) {
-      var parent = all[i].parentNode;
-      var nested = parent && typeof parent.closest === 'function' && parent.closest('section');
-      if (!nested) out.push(all[i]);
-    }
-    return out;
-  }
-
-  function stageFor(el) {
-    var declared = el.getAttribute('data-pct-stage');
-    if (declared) {
-      var n = parseInt(declared, 10);
-      if (!isNaN(n) && n >= 1 && n <= STAGES) return n - 1;
-    }
-    var hay = ((declared || '') + ' ' + (el.id || '') + ' ' +
-      (typeof el.className === 'string' ? el.className : '')).toLowerCase();
-    for (var s = 0; s < HINTS.length; s++) {
-      for (var k = 0; k < HINTS[s].length; k++) {
-        if (hay.indexOf(HINTS[s][k]) !== -1) return s;
-      }
-    }
-    return -1;
-  }
-
-  /* Returns [{el, stage}] in document order. */
-  function resolveStages() {
-    var secs = topLevelSections();
-    if (!secs.length) return [];
-
-    var pairs = [];
-    var matched = 0;
-    var last = -1;
-    var i;
-
-    for (i = 0; i < secs.length; i++) {
-      var stage = stageFor(secs[i]);
-      if (stage < 0) {
-        stage = last;                    /* unnamed block = still the last stage */
-      } else {
-        matched++;
-        last = stage;
-      }
-      if (stage >= 0) pairs.push({ el: secs[i], stage: stage });
-    }
-
-    /* Heuristic came up empty — fall back to position on the page. */
-    if (matched < 2) {
-      pairs = [];
-      for (i = 0; i < secs.length; i++) {
-        pairs.push({
-          el: secs[i],
-          stage: Math.min(STAGES - 1, Math.floor(i * STAGES / secs.length))
-        });
-      }
-      pairs[pairs.length - 1].stage = STAGES - 1;
-    }
-    return pairs;
-  }
-
-  /* Read once per section, on first activation, never inside a frame loop. */
-  function groundIsDark(el) {
-    if (el.classList && el.classList.contains('on-dark')) return true;
-    if (typeof el.closest === 'function' && el.closest('.on-dark')) return true;
-    var bg = '';
-    try { bg = window.getComputedStyle(el).backgroundColor || ''; } catch (err) { return false; }
-    var m = /rgba?\(([^)]+)\)/.exec(bg);
-    if (!m) return false;
-    var p = m[1].split(',');
-    var alpha = p.length > 3 ? parseFloat(p[3]) : 1;
-    if (!(alpha > 0.5)) return false;              /* transparent = page ground */
-    var lum = 0.2126 * parseFloat(p[0]) + 0.7152 * parseFloat(p[1]) + 0.0722 * parseFloat(p[2]);
-    return lum < 130;
-  }
-
-  window.pctInitAct = function () {
-    try {
-      if (started) return;
-
-      var rail = document.querySelector('[data-pct-rail]');
-      if (!rail) return;
-      if (typeof window.IntersectionObserver !== 'function') return;
-
-      var pairs = resolveStages();
-      if (pairs.length < 2) return;
-
-      var labels = rail.querySelectorAll('[data-stage-label]');
-      var ticks = rail.querySelectorAll('[data-stage-tick]');
-      if (!labels.length || !ticks.length) return;
-
-      var els = [];
-      var stages = [];
-      var dark = [];
-      var live = [];
-      var i;
-      for (i = 0; i < pairs.length; i++) {
-        els.push(pairs[i].el);
-        stages.push(pairs[i].stage);
-        dark.push(null);
-        live.push(0);
-      }
-
-      var current = -1;
-
-      function setActive(idx) {
-        var stage = stages[idx];
-        if (dark[idx] === null) dark[idx] = groundIsDark(els[idx]);
-        rail.classList.toggle('is-dark', dark[idx]);
-        if (stage === current) return;
-        current = stage;
-        for (var j = 0; j < labels.length; j++) {
-          labels[j].classList.toggle('is-on', j === stage);
-        }
-        for (var t = 0; t < ticks.length; t++) {
-          ticks[t].classList.toggle('is-on', t === stage);
-        }
-      }
-
-      function onCross(entries) {
-        for (var e = 0; e < entries.length; e++) {
-          var idx = els.indexOf(entries[e].target);
-          if (idx > -1) live[idx] = entries[e].isIntersecting ? 1 : 0;
-        }
-        var best = -1;
-        for (var j = 0; j < live.length; j++) if (live[j]) best = j;
-        if (best < 0) return;              /* between sections: hold the last stage */
-        setActive(best);
-      }
-
-      /* A thin band across the middle of the viewport: whatever the reader is
-         actually looking at is the active stage. No scroll listener. */
-      var io = new window.IntersectionObserver(onCross, {
-        rootMargin: '-45% 0px -45% 0px',
-        threshold: 0
-      });
-      for (i = 0; i < els.length; i++) io.observe(els[i]);
-
-      started = true;
-      rail.classList.add('is-live');
-
-      if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-        window.pctMotion.onReduce(function () {
-          /* The rail is information, not motion: it keeps working, it just
-             stops easing between stages. */
-          rail.classList.add('is-still');
-        });
-      }
-    } catch (err) {
-      /* Never take the page down over decorative chrome. */
-    }
-  };
-}());
 
 
 /* ---- countdown -----------------------------------------------------------
@@ -2266,21 +1707,19 @@ window.pctInitCountdown = function () {
 /* ===== 01-hero ===== */
 /* 01 · HERO — the silk field.
  *
- * ONE interaction: the thread field. It has three states and nothing else.
+ * This is atmosphere, not an event. The threads sway CONTINUOUSLY, slowly, and
+ * they never resolve to a dead straight line. An earlier build eased the motion
+ * envelope to zero over ~6s and cancelled the loop; the field then hung
+ * perfectly parallel and stopped responding to anything, which read as broken
+ * rather than as arrival. That behaviour is gone.
  *
- *   ARRIVAL   Over ~4.6s from first paint the motion envelope eases to zero and the
- *             rAF loop cancels itself outright. It does not idle in the background.
- *             (This is also WCAG 2.2.2 — motion that starts on load and runs beside
- *             other content has to be stoppable; ending is the strongest form of it.)
- *   COMPOSURE As the envelope decays, the per-thread phase offset decays FASTER
- *             (coh = env^2), so the field resolves from turbulent to parallel. The
- *             threads come to rest hanging in unison, a static drape, not a grid.
- *   PULL      Pointer over the Rush button (fine pointers only): the silk gathers
- *             toward the button's centre on a target/current lerp with a gaussian
- *             falloff. Release lerps back and the loop cancels itself again.
- *             The watermark's opacity lift is CSS (:has), not this file.
+ * MOUSE: the pointer's position over the hero eases two scalars (mx, my) that
+ * bend the wave. It is a lean, not a chase — the threads never snap toward the
+ * cursor. Touch does nothing; a tap must not make the page jump.
  *
- * A touch tap never restarts anything. Nothing here is read from layout inside rAF.
+ * COST CONTROL: the loop is gated on IntersectionObserver, so it stops dead the
+ * moment the hero leaves the viewport. prefers-reduced-motion paints one static
+ * frame and never starts. Nothing here reads layout inside rAF.
  */
 window.pctInitHero = function () {
   try {
@@ -2288,9 +1727,7 @@ window.pctInitHero = function () {
     if (!root || root.dataset.heroReady === '1') return;
 
     var canvas = root.querySelector('[data-hero-canvas]');
-    var cta = root.querySelector('[data-hero-cta]');
     if (!canvas || !canvas.getContext) return;
-
     var ctx = canvas.getContext('2d');
     if (!ctx) return;
     root.dataset.heroReady = '1';
@@ -2300,67 +1737,42 @@ window.pctInitHero = function () {
     var mqSmall = window.matchMedia('(max-width: 767px)');
     var reduced = mqReduce.matches;
 
-    var SETTLE = 6200;   /* ms from first paint (or last pointer move) to stillness */
-    var WAKE_GAP = 140;  /* ms of pointer stillness that counts as "the pointer stopped" */
-
     /* ---- geometry, measured on load + resize only, never inside the loop ---- */
-    var W = 0, H = 0, dpr = 1, LINES = 24, PR = 1;
-    var cx = 0, cy = 0;          /* CTA centre, canvas device px */
-    var mx = 0.5, my = 0.5;      /* normalised pointer over the hero */
+    var W = 0, H = 0, dpr = 1, LINES = 26;
 
     function measure() {
-      /* phones: fewer threads and a lower dpr cap. Same picture, a third of the fill. */
       var small = mqSmall.matches;
       dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
       LINES = small ? 14 : 26;
       W = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * dpr));
       H = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * dpr));
-      PR = Math.max(W, H) * 0.26;   /* pull falloff radius */
-      measureCta();
     }
 
-    function measureCta() {
-      if (!cta) { cx = W * 0.5; cy = H * 0.5; return; }
-      var c = canvas.getBoundingClientRect();
-      var b = cta.getBoundingClientRect();
-      cx = (b.left + b.width / 2 - c.left) * dpr;
-      cy = (b.top + b.height / 2 - c.top) * dpr;
-    }
+    /* pointer lean: target is set by the event, current eases toward it in the
+       loop, so a fast flick across the hero produces a swell, not a snap */
+    var mxT = 0.5, myT = 0.5, mx = 0.5, my = 0.5;
 
-    /* ---- one frame ---- */
     var t = 0;
 
-    function paint(env, pull) {
+    function paint() {
       ctx.clearRect(0, 0, W, H);
       var step = Math.max(8 * dpr, W / 150);
-      var coh = env * env;                 /* phase spread: decays faster than amplitude */
-      var pulling = pull > 0.002;
       var i, x, u;
 
       for (i = 0; i < LINES; i++) {
         var p = i / LINES;
         var yBase = H * (0.16 + p * 0.76);
-        var amp = H * 0.05 * (0.35 + p) * (0.7 + 0.6 * my) * env;
-        var drape = H * 0.014 * (0.4 + p); /* time-independent: the resting hang */
-        var lateral = Math.sin(t * 0.4 + i * 2.1 * coh) * 6 * dpr * env;
+        /* amplitude grows toward the bottom of the field and leans with my */
+        var amp = H * 0.052 * (0.35 + p) * (0.72 + 0.56 * my);
+        var lateral = Math.sin(t * 0.4 + i * 2.1) * 6 * dpr;
 
         ctx.beginPath();
         for (x = 0; x <= W + step; x += step) {
           u = x / dpr;
           var wave =
-            Math.sin(u * 0.0016 + t * 0.7 + i * 0.42 * coh) *
-            Math.cos(u * 0.0006 - t * 0.16 + i * 1.7 * coh);
-          var y = yBase
-                + Math.sin(u * 0.0011 + i * 0.30 * coh) * drape
-                + wave * amp * (0.6 + 0.8 * mx)
-                + lateral;
-
-          if (pulling) {
-            var ndx = (x - cx) / PR, ndy = (y - cy) / PR;
-            var f = Math.exp(-(ndx * ndx + ndy * ndy));
-            y += (cy - y) * f * pull * 0.16;
-          }
-
+            Math.sin(u * 0.0016 + t * 0.7 + i * 0.42) *
+            Math.cos(u * 0.0006 - t * 0.32 + i * 1.7);
+          var y = yBase + wave * amp * (0.62 + 0.76 * mx) + lateral;
           if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
 
@@ -2373,63 +1785,45 @@ window.pctInitHero = function () {
       }
     }
 
-    /* ---- loop lifecycle: runs only while something is actually changing ---- */
-    var raf = null, running = false, visible = true;
-    var env = 1, envFrom = 1, settleAt = 0, lastMove = -1e9;
-    var pull = 0, pullTarget = 0;
-
-    function stop() {
-      running = false;
-      if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
-      paint(env, pull);   /* never leave the field frozen mid-sway */
-    }
+    /* ---- loop ----
+       Everything advances on ELAPSED TIME, not on frame count. A per-frame
+       increment makes the sway run at the refresh rate: the same page drifts
+       twice as fast on a 120Hz laptop as on a 60Hz monitor. dt is clamped so a
+       backgrounded tab returning after ten seconds resumes rather than jumping. */
+    var raf = null, visible = true, last = 0;
+    /* 0.48 rad/s is exactly the live site's drift (js/main.js ran ht += 0.008 a
+       frame at 60Hz), which is the pace the owner signed off on. One full pass
+       of the wave across the hero takes about 19 seconds. */
+    var RATE = 0.48;
+    var LEAN = 2.8;    /* pointer lean convergence, per second */
 
     function frame(ts) {
       raf = requestAnimationFrame(frame);
-      var busy = false;
+      var dt = last ? Math.min((ts - last) / 1000, 0.05) : 1 / 60;
+      last = ts;
 
-      if (ts - lastMove < WAKE_GAP) {
-        /* pointer still moving: lift the envelope and hold the settle clock at now,
-           so the ease-out later starts from wherever we are — never a jump */
-        env += (1 - env) * 0.12;
-        if (env > 0.999) env = 1;
-        envFrom = env; settleAt = ts; busy = true;
-      } else if (env > 0) {
-        var k = Math.min((ts - settleAt) / SETTLE, 1);
-        /* smoothstep: leaves full sway without a jerk and arrives at stillness with
-           zero velocity, so the final moment of motion — and the cancel — is unseen */
-        env = envFrom * (1 - k * k * (3 - 2 * k));
-        if (k >= 1) env = 0;
-        if (env > 0) busy = true;
-      }
-
-      if (pull !== pullTarget) {
-        pull += (pullTarget - pull) * 0.10;
-        if (Math.abs(pullTarget - pull) < 0.002) pull = pullTarget;
-        busy = true;
-      }
-
-      if (visible) paint(env, pull);
-      t += 0.0026 * env;  /* drift decelerates with the envelope. Deliberately slow:
-                             at the old 0.008 the threads read as fast-forwarding
-                             across the screen on load. */
-
-      if (!busy) stop();
+      t += dt * RATE;
+      var k = Math.min(1, dt * LEAN);
+      mx += (mxT - mx) * k;
+      my += (myT - my) * k;
+      paint();
     }
 
-    function ensure(ts) {
-      if (running || reduced) return;
-      running = true;
-      envFrom = env;
-      settleAt = ts || performance.now();
+    function start() {
+      if (raf !== null || reduced || !visible) return;
+      last = 0;                   /* resume without a jump */
       raf = requestAnimationFrame(frame);
     }
+    function stop() {
+      if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    }
 
-    /* ---- teardown ---- */
+    /* ---- teardown for a mid-session reduce toggle ---- */
     function teardown() {
       reduced = true;
-      env = 0; pull = 0; pullTarget = 0;
-      stop();   /* paints the composed resting frame */
+      stop();
+      mx = my = 0.5;
+      paint();   /* one still frame, still a wave, just not moving */
     }
 
     /* ---- events ---- */
@@ -2437,41 +1831,25 @@ window.pctInitHero = function () {
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
-        measure();                        /* resizing the backing store clears it */
-        if (!running) paint(env, pull);
+        measure();               /* resizing the backing store clears it */
+        paint();
       }, 120);
     }, { passive: true });
 
-    window.addEventListener('scroll', function () {
-      if (pullTarget > 0) measureCta();   /* only while a pull is live */
+    root.addEventListener('pointermove', function (e) {
+      if (reduced || !mqFine.matches) return;
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      /* clientX/Y against a rect cached per event, not per frame */
+      var r = canvas.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      mxT = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      myT = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
     }, { passive: true });
-
-    
-
-    if (cta) {
-      var grab = function () {
-        if (reduced || !mqFine.matches) return;
-        measureCta();          /* layout read on the event, never in the loop */
-        pullTarget = 1;
-        ensure();
-      };
-      var release = function () {
-        if (pullTarget === 0) return;
-        pullTarget = 0;
-        ensure();
-      };
-      cta.addEventListener('pointerenter', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        grab();
-      });
-      cta.addEventListener('pointerleave', release);
-      cta.addEventListener('focus', grab);
-      cta.addEventListener('blur', release);
-    }
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         visible = entries[0].isIntersecting;
+        if (visible) start(); else stop();
       }).observe(canvas);
     }
 
@@ -2479,406 +1857,163 @@ window.pctInitHero = function () {
     measure();
 
     if (reduced) {
-      env = 0;
-      paint(0, 0);   /* one composed frame; the loop never starts */
+      paint();
     } else {
-      ensure(performance.now());
+      start();
       if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
         window.pctMotion.onReduce(teardown);
       }
       var onMq = function () { if (mqReduce.matches) teardown(); };
       if (mqReduce.addEventListener) mqReduce.addEventListener('change', onMq);
       else if (mqReduce.addListener) mqReduce.addListener(onMq);
-
-      /* If the page runs an entrance curtain, restamp the envelope when it lifts so
-         the whole arrival plays in view rather than behind an opaque panel. */
-      document.addEventListener('pct:curtain-up', function () {
-        if (reduced || !running) return;
-        envFrom = env;
-        settleAt = performance.now();
-      }, { once: true });
     }
   } catch (err) {
-    /* one section must never be able to kill the page */
     if (window.console && console.warn) console.warn('pctInitHero:', err);
   }
 };
 /* ===== 02-grow ===== */
-/* ============================================================
-   02 — Graduate confident.  ONE interaction: the image accordion.
-   The <figure>s authored inside the rows are MOVED (not cloned) into
-   the persistent stage, so nothing downloads twice and the no-JS
-   markup stays the source of truth.
-   ============================================================ */
+/* 02 — Graduate confident.
+   Moves each <figure> (the same node, so nothing downloads twice) into a
+   persistent stage, then runs a plain single-open accordion. Selecting a row
+   cross-fades its photograph. That is the whole interaction.
+
+   Everything the section shows without JS it also shows with JS. If this file
+   never runs, the base CSS leaves all three rows open with their photographs
+   in the flow. */
 window.pctInitGrow = function () {
-  'use strict';
   try {
     var root = document.querySelector('[data-grow]');
-    if (!root || root.getAttribute('data-grow-ready') === '1') return;
+    if (!root || root.dataset.growReady === '1') return;
 
-    var rowsEl = root.querySelector('[data-grow-rows]');
-    var stage  = root.querySelector('[data-grow-stage]');
-    var fill   = root.querySelector('[data-grow-fill]');
-    var btns   = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
-    if (!rowsEl || !stage || !btns.length || !document.body.closest) return;
+    var stage = root.querySelector('[data-grow-stage]');
+    var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
+    if (!stage || btns.length < 2) return;
 
-    var figs = [], rows = [], i, fig, row;
-    for (i = 0; i < btns.length; i++) {
-      fig = document.getElementById(btns[i].getAttribute('aria-controls') || '');
-      row = btns[i].closest('.grow__row');
-      if (!fig || !row) return;            /* markup not as expected: keep the plain list */
-      figs.push(fig);
-      rows.push(row);
-    }
+    var rows = [], figs = [];
+    var ok = btns.every(function (b) {
+      var row = b.closest('.grow__row');
+      var fig = document.getElementById(b.getAttribute('aria-controls'));
+      if (!row || !fig) return false;
+      rows.push(row); figs.push(fig);
+      return true;
+    });
+    if (!ok) return;   /* markup drifted: leave the no-JS state alone */
 
-    for (i = 0; i < figs.length; i++) stage.appendChild(figs[i]);
+    root.dataset.growReady = '1';
     root.classList.add('grow--js');
-    root.setAttribute('data-grow-ready', '1');
+    figs.forEach(function (f) { stage.appendChild(f); });
 
-    var current = -1, tops = [], hts = [], railH = 1, leaveTimer = 0;
+    var current = -1;
 
-    /* measured on load / resize / font swap only — never inside a frame loop */
-    function measure() {
-      railH = rowsEl.clientHeight || 1;
+    function open(i) {
+      if (i === current) return;
+      current = i;
       for (var k = 0; k < rows.length; k++) {
-        tops[k] = rows[k].offsetTop;
-        hts[k]  = rows[k].offsetHeight;
-      }
-    }
-
-    function paintRail() {
-      if (!fill || current < 0 || !hts.length) return;
-      fill.style.transform =
-        'translateY(' + tops[current] + 'px) scaleY(' + (hts[current] / railH) + ')';
-    }
-
-    function select(index) {
-      if (index === current || index < 0 || index >= figs.length) return;
-      current = index;
-
-      for (var k = 0; k < btns.length; k++) {
-        var on = (k === index), f = figs[k];
-        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
+        var on = k === i;
         rows[k].classList.toggle('is-open', on);
-
-        if (on) {
-          f.classList.remove('is-leaving');
-          f.classList.add('is-prewipe');
-          void f.offsetWidth;              /* restart the curtain; a click handler, never rAF */
-          f.classList.remove('is-prewipe');
-          f.classList.add('is-active');
-          f.removeAttribute('aria-hidden');
-        } else {
-          if (f.classList.contains('is-active')) {
-            f.classList.remove('is-active');
-            f.classList.add('is-leaving');
-          }
-          f.setAttribute('aria-hidden', 'true');
-        }
+        figs[k].classList.toggle('is-active', on);
+        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
       }
-
-      clearTimeout(leaveTimer);
-      leaveTimer = setTimeout(function () {
-        for (var k = 0; k < figs.length; k++) figs[k].classList.remove('is-leaving');
-      }, 760);
-
-      paintRail();
     }
 
-    for (i = 0; i < btns.length; i++) {
-      (function (n) {
-        btns[n].addEventListener('click', function () { select(n); });
-      }(i));
-    }
-
-    rowsEl.addEventListener('keydown', function (e) {
-      var at = btns.indexOf(document.activeElement), next = -1;
-      if (at < 0 || e.altKey || e.ctrlKey || e.metaKey) return;
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (at + 1) % btns.length;
-      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (at - 1 + btns.length) % btns.length;
-      else if (e.key === 'Home') next = 0;
-      else if (e.key === 'End') next = btns.length - 1;
-      if (next < 0) return;
-      e.preventDefault();
-      btns[next].focus();
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () { open(i); });
+      /* hovering the row is a preview, not a commitment: it swaps the photograph
+         the same way a click does, because there is no other state to lose */
+      b.addEventListener('focus', function () { open(i); });
     });
 
-    function remeasure() { measure(); paintRail(); }
+    open(0);
 
-    if (typeof ResizeObserver === 'function') {
-      new ResizeObserver(remeasure).observe(rowsEl);
-    } else {
-      window.addEventListener('resize', remeasure);
-    }
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      document.fonts.ready.then(remeasure).catch(function () {});
-    }
-
-    /* reduced motion: settle everything on its finished state, mid-session too */
-    function still(on) { root.classList.toggle('grow--still', on !== false); }
-    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    if (mq && mq.matches) still(true);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function (v) { still(v); });
-    } else if (mq && mq.addEventListener) {
-      mq.addEventListener('change', function (e) { still(e.matches); });
+      window.pctMotion.onReduce(function () { root.classList.add('grow--still'); });
     }
-
-    measure();
-    select(0);
   } catch (err) {
-    /* one section must never take the page down */
     if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }
 };
 /* ===== 03-numbers ===== */
-/* ============================================================
-   03 — Numbers don’t lie.
-   ONE signature interaction: the pinned horizontal scroll.
+/* 03 — Numbers don’t lie.
+   ONE interaction: each figure counts up once, the first time it is seen.
+   Nothing pins, nothing hijacks scroll, nothing runs after the count lands.
 
-   The section is a tall .numscene wrapper holding a position:sticky pin.
-   Vertical scroll inside that wrapper is mapped 1:1 onto a translateX of
-   the track, so the statistics travel through the viewport while the
-   heading holds still. Geometry (scene top, pin height, travel distance)
-   is measured ONCE on enable, on resize and after the webfonts land; the
-   frame loop only writes a transform.
-
-   Under 768px, with JS off, or under prefers-reduced-motion, none of this
-   runs and the CSS base state — a vertical sequence — is what renders.
-   ============================================================ */
-
+   STATS mirrors the values written in 03-numbers.html. They are duplicated so
+   the markup can be the finished state (readable with JS off); the check below
+   warns in the console if the two ever drift apart. */
 window.pctInitNumbers = function () {
-  'use strict';
-
-  /* ------------------------------------------------------------------
-     THE STATS — the single place these values live.
-
-     Only the first two are verified. Mirror any edit into
-     03-numbers.html; that copy is what renders with JavaScript disabled,
-     and this array overwrites it at runtime (warning in the console if
-     the two have drifted apart).
-     ------------------------------------------------------------------ */
-  var STATS = [
-    { value: '95',   unit: '%', label: 'Members placed in internships or full-time roles' },
-    { value: '3.60', unit: '',  label: 'Chapter average GPA' },
-
-    /* STAT 03 — NOT VERIFIED.
-       this is a placeholder, the owner must supply a verified metric, do not
-       publish invented data. Replace value/unit/label here and in the HTML. */
-    { value: '—', unit: '', label: 'Verified metric to be confirmed' }
-  ];
-
-  /* pacing, as fractions of the pin height */
-  var LEAD = 0.10;   /* held before the track starts to travel */
-  var HOLD = 0.15;   /* held after it arrives, so the last number lands */
-  var EASE = 0.18;   /* scroll → transform follow. 1 would be locked rigid */
-  var MIN_TRAVEL = 60; /* below this there is nothing worth pinning for */
-
   try {
+    var STATS = [
+      { to: 95,   decimals: 0 },
+      { to: 3.6,  decimals: 2 },
+      { to: 15,   decimals: 0 }
+    ];
+
     var root = document.querySelector('[data-num]');
-    if (!root || root.getAttribute('data-num-ready') === '1') return;
+    if (!root || root.dataset.numReady === '1') return;
 
-    var scene  = root.querySelector('[data-num-scene]');
-    var pin    = root.querySelector('[data-num-pin]');
-    var track  = root.querySelector('[data-num-track]');
     var panels = Array.prototype.slice.call(root.querySelectorAll('[data-num-p]'));
-    if (!scene || !pin || !track || !panels.length) return;
-    root.setAttribute('data-num-ready', '1');
+    if (!panels.length) return;
+    root.dataset.numReady = '1';
 
-    /* ---------------------------------------------------------------
-       1. Content: STATS drives the DOM, the DOM is never empty first.
-       --------------------------------------------------------------- */
+    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    function setText(el, txt) {
-      if (!el) return;
-      var want = String(txt == null ? '' : txt);
-      var now  = el.textContent || '';
-      if (now.replace(/\s+/g, ' ').trim() === want.replace(/\s+/g, ' ').trim()) return;
-      if (now.trim() && window.console && console.warn) {
-        console.warn('pctInitNumbers: 03-numbers.html says "' + now.trim() +
-          '" where STATS says "' + want.trim() +
-          '". The HTML copy is what shows with JS off — update both.');
+    function fmt(v, d) {
+      return d ? v.toFixed(d) : String(Math.round(v));
+    }
+
+    var targets = panels.map(function (p, i) {
+      var el = p.querySelector('[data-num-n]');
+      var spec = STATS[i];
+      if (!el || !spec) return null;
+      /* drift check against the value actually printed in the markup */
+      var printed = parseFloat(el.textContent.replace(/[^0-9.]/g, ''));
+      if (!isNaN(printed) && Math.abs(printed - spec.to) > 0.001 &&
+          window.console && console.warn) {
+        console.warn('pctInitNumbers: STATS[' + i + '] is ' + spec.to +
+                     ' but the markup says ' + printed + '. Fix both.');
       }
-      el.textContent = want;
-    }
+      return { el: el, to: spec.to, decimals: spec.decimals, done: false };
+    }).filter(Boolean);
 
-    for (var i = 0; i < panels.length; i++) {
-      var s = STATS[i];
-      if (!s) continue;
-      setText(panels[i].querySelector('[data-num-n]'), s.value);
-      setText(panels[i].querySelector('[data-num-u]'), s.unit || '');
-      setText(panels[i].querySelector('[data-num-lab]'), s.label);
-    }
+    if (reduced || !('IntersectionObserver' in window)) return;   /* markup already reads right */
 
-    /* ---------------------------------------------------------------
-       2. Mobile / unpinned: each statistic arrives as you reach it.
-          .num--js is only added once there is an observer to undo it,
-          so a statistic can never be left invisible.
-       --------------------------------------------------------------- */
+    var DUR = 1100;
 
-    var io = null;
-    if (typeof window.IntersectionObserver === 'function') {
-      root.classList.add('num--js');
-      io = new window.IntersectionObserver(function (entries) {
-        for (var k = 0; k < entries.length; k++) {
-          if (!entries[k].isIntersecting) continue;
-          entries[k].target.classList.add('is-in');
-          if (io) io.unobserve(entries[k].target);
-        }
-      }, { rootMargin: '0px 0px -15% 0px', threshold: 0.12 });
-      for (i = 0; i < panels.length; i++) io.observe(panels[i]);
-    }
-
-    /* ---------------------------------------------------------------
-       3. The pin.
-       --------------------------------------------------------------- */
-
-    var mqWide = window.matchMedia ? window.matchMedia('(min-width: 768px)') : null;
-    var mqRed  = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var reduced = !!((window.pctMotion && window.pctMotion.reduced) || (mqRed && mqRed.matches));
-
-    var on = false, sy = 0, cur = 0, snap = true, raf = 0;
-    var geo = { top: 0, lead: 0, travel: 0 };
-
-    function scrollY() {
-      return window.pageYOffset ||
-        (document.documentElement && document.documentElement.scrollTop) || 0;
-    }
-
-    /* The only place layout is read — never from inside a frame.
-       The track is the width of the pin and its panels overflow to the right.
-       Travel is the distance from the first panel to the last, so every
-       statistic comes to rest in exactly the same place: hard against the
-       left gutter, under the heading. offsetLeft is immune to the transform
-       already sitting on the track. */
-    var first = panels[0], last = panels[panels.length - 1];
-
-    function measure() {
-      var pinH = pin.clientHeight || window.innerHeight || 1;
-      var rect = scene.getBoundingClientRect();   /* transforms don't move it */
-      geo.top    = rect.top + scrollY();
-      geo.lead   = Math.round(pinH * LEAD);
-      geo.travel = Math.max(0, Math.round(last.offsetLeft - first.offsetLeft));
-      scene.style.height =
-        (pinH + geo.lead + geo.travel + Math.round(pinH * HOLD)) + 'px';
-      return pinH;
-    }
-
-    function wanted() {
-      if (reduced) return false;
-      return mqWide ? mqWide.matches : window.innerWidth >= 768;
-    }
-
-    function enable() {
-      if (on) return;
-      root.classList.add('num--pin');
-
-      /* If the pinned stylesheet is not in force — an old browser without
-         feature queries, or this part assembled without its CSS — sticky
-         will not have taken. Back out and stay a vertical sequence. */
-      var pos = '';
-      try { pos = window.getComputedStyle(pin).position; } catch (e) {}
-      if (pos !== 'sticky' && pos !== '-webkit-sticky') { root.classList.remove('num--pin'); return; }
-
-      on = true;
-      measure();
-      if (geo.travel < MIN_TRAVEL) { disable(); return; }
-
-      snap = true;
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
-
-    function disable() {
-      on = false;
-      root.classList.remove('num--pin');
-      scene.style.height = '';
-      track.style.transform = '';
-      cur = 0;
-      snap = true;
-      window.removeEventListener('scroll', onScroll);
-      if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    }
-
-    function onScroll() {
-      sy = scrollY();
-      if (!raf) raf = requestAnimationFrame(frame);
-    }
-
-    /* writes only. no measuring, no classList work, no layout reads. */
-    function frame() {
-      raf = 0;
-      if (!on) return;
-
-      var raw = sy - geo.top - geo.lead;
-      var target = raw < 0 ? 0 : (raw > geo.travel ? geo.travel : raw);
-      var d = target - cur;
-
-      if (snap || (d < 0.4 && d > -0.4)) {
-        if (!snap && d === 0) return;             /* nothing moved: don't paint */
-        cur = target;
-        snap = false;
-      } else {
-        cur += d * EASE;
-        raf = requestAnimationFrame(frame);
+    function run(t) {
+      if (t.done) return;
+      t.done = true;
+      var start = 0;
+      function step(ts) {
+        if (!start) start = ts;
+        var k = Math.min((ts - start) / DUR, 1);
+        /* ease-out cubic: fast off the mark, arrives without a bounce */
+        var e = 1 - Math.pow(1 - k, 3);
+        t.el.textContent = fmt(t.to * e, t.decimals);
+        if (k < 1) requestAnimationFrame(step);
+        else t.el.textContent = fmt(t.to, t.decimals);   /* exact, never 94.9997 */
       }
-
-      track.style.transform = 'translate3d(' + (-cur).toFixed(2) + 'px,0,0)';
+      requestAnimationFrame(step);
     }
 
-    /* ---- resize / font swap: re-measure, then land without easing ---- */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var i = panels.indexOf(en.target);
+        if (i > -1 && targets[i]) run(targets[i]);
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.45 });
 
-    var rTimer = 0;
-    function refresh() {
-      clearTimeout(rTimer);
-      rTimer = setTimeout(function () {
-        try {
-          if (!wanted()) { if (on) disable(); return; }
-          if (!on) { enable(); return; }
-          measure();
-          if (geo.travel < MIN_TRAVEL) { disable(); return; }
-          snap = true;
-          onScroll();
-        } catch (e) { disable(); }
-      }, 140);
-    }
-
-    window.addEventListener('resize', refresh, { passive: true });
-
-    /* A hidden tab stops firing frames, so a scroll made while away is painted
-       on return. Land it flat instead of easing in from a stale position. */
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden && on) { snap = true; onScroll(); }
-    });
-
-    if (window.screen && window.screen.orientation && window.screen.orientation.addEventListener) {
-      window.screen.orientation.addEventListener('change', refresh);
-    }
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      /* the numerals set the track width, so it changes when the serif lands */
-      document.fonts.ready.then(refresh).catch(function () {});
-    }
-
-    /* ---- reduced motion, including a change made mid-session ---- */
-
-    function stop() {
-      reduced = true;
-      disable();
-      root.classList.remove('num--js');
-      if (io) { io.disconnect(); io = null; }
-      for (var k = 0; k < panels.length; k++) panels[k].classList.add('is-in');
-    }
+    panels.forEach(function (p) { io.observe(p); });
 
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(stop);            /* fires at once if already on */
-    } else if (mqRed && mqRed.addEventListener) {
-      mqRed.addEventListener('change', function (e) { if (e.matches) stop(); });
+      window.pctMotion.onReduce(function () {
+        io.disconnect();
+        targets.forEach(function (t) { t.done = true; t.el.textContent = fmt(t.to, t.decimals); });
+      });
     }
-
-    if (wanted()) enable();
-
   } catch (err) {
-    /* one section must never take the page down */
     if (window.console && console.warn) console.warn('pctInitNumbers:', err);
   }
 };
@@ -3027,135 +2162,93 @@ window.pctInitPlace = function () {
   }
 };
 /* ===== 05-mem ===== */
-/* 04 — the memory fan.
-   One continuous scalar `pos` drives everything. Each photo's slot is its index
-   minus pos, wrapped, so the composition reshuffles forever with no snapping and
-   no clones. Drag adds to pos; autoplay resumes after a few idle seconds.
-   Every geometry input is measured once (load + resize) and cached — the loop
-   only writes transforms. */
+/* 05 — the photography band.
+   Clones the photo list once so the loop point falls exactly where the second
+   copy starts, then sets the keyframe's end transform to minus the width of one
+   copy. The result reads as an endless strip with no visible seam and no
+   snapping. There is no hover-pause: a strip that stops under the cursor
+   punishes the reader for looking at it.
+
+   The animation itself is CSS, so it runs on the compositor. This file only
+   measures, clones, and toggles play-state when the band leaves the screen. */
 window.pctInitLife = function () {
   try {
-    var stage = document.querySelector('.mem-stage');
-    if (!stage || stage.dataset.on) return;
-    var items = Array.prototype.slice.call(stage.querySelectorAll('.mem-i'));
+    var band = document.querySelector('[data-mem-band]');
+    if (!band || band.dataset.on) return;
+
+    var track = band.querySelector('[data-mem-track]');
+    if (!track) return;
+
+    var items = Array.prototype.slice.call(track.children);
     if (items.length < 3) return;
 
     var reduced = (window.pctMotion && window.pctMotion.reduced) ||
       (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    if (reduced) return;                 /* CSS already shows the finished strip */
+    if (reduced) return;                 /* CSS already shows a scrollable strip */
 
-    stage.dataset.on = '1';
-
-    var N = items.length, half = (N - 1) / 2;
-    var pos = 0, target = 0, drag = null, idle = 0, raf = null, last = 0;
-    var SPEED = 0.085;                   /* slots per second. deliberately slow */
-    var IDLE_RESUME = 2600;              /* ms of stillness before drift returns */
-
-    /* --- cached geometry ------------------------------------------------- */
-    var W = 0, spacing = 0, arc = 0;
-    function measure () {
-      W = stage.clientWidth || 1;
-      spacing = W * 0.235;               /* overlap: cards are wider than this */
-      arc = Math.min(W * 0.075, 74);     /* shallow fan drop at the edges */
-    }
-    measure();
-    var ro = null;
-    if ('ResizeObserver' in window) { ro = new ResizeObserver(measure); ro.observe(stage); }
-    else window.addEventListener('resize', measure);
-
-    /* --- paint ------------------------------------------------------------ */
-    function paint () {
-      for (var i = 0; i < N; i++) {
-        /* signed distance from centre, wrapped into -half..half */
-        var d = i - pos;
-        d = ((d % N) + N) % N;
-        if (d > N / 2) d -= N;
-
-        var a = Math.abs(d);
-        var x = d * spacing;
-        var y = arc * (d / (N / 2)) * (d / (N / 2));      /* parabola: edges sink */
-        var rot = d * 3.6 + (i % 2 ? 1.4 : -1.6);         /* imperfect, not mechanical */
-        var sc = 1 - Math.min(a / (N / 2), 1) * 0.3;      /* centre reads largest */
-        var op = a > N / 2 - 0.6 ? 0 : 1;                 /* hide the seam only */
-
-        var el = items[i];
-        el.style.transform =
-          'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) ' +
-          'rotate(' + rot.toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
-        el.style.zIndex = String(100 - Math.round(a * 10));
-        el.style.opacity = op;
-        el.classList.toggle('is-mid', a < 0.5);
-      }
-    }
-
-    /* --- loop ------------------------------------------------------------- */
-    function frame (t) {
-      var dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
-      last = t;
-      if (drag === null) {
-        if (idle > 0) idle -= dt * 1000;
-        if (idle <= 0) target += SPEED * dt;              /* free drift */
-      }
-      pos += (target - pos) * 0.12;                        /* always eased */
-      paint();
-      raf = requestAnimationFrame(frame);
-    }
-    function start () { if (raf === null) { last = 0; raf = requestAnimationFrame(frame); } }
-    function stop () { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
-
-    /* only run while on screen */
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es[0].isIntersecting ? start() : stop();
-      }, { rootMargin: '120px' }).observe(stage);
-    } else start();
-
-    /* --- drag ------------------------------------------------------------- */
-    function down (e) {
-      if (e.button != null && e.button !== 0) return;
-      drag = { x: e.clientX, at: target };
-      stage.classList.add('is-drag');
-      if (stage.setPointerCapture && e.pointerId != null) stage.setPointerCapture(e.pointerId);
-    }
-    function move (e) {
-      if (!drag) return;
-      target = drag.at - (e.clientX - drag.x) / spacing;
-      e.preventDefault();
-    }
-    function up () {
-      if (!drag) return;
-      drag = null; idle = IDLE_RESUME;                     /* autoplay comes back */
-      stage.classList.remove('is-drag');
-    }
-    stage.addEventListener('pointerdown', down);
-    stage.addEventListener('pointermove', move);
-    stage.addEventListener('pointerup', up);
-    stage.addEventListener('pointercancel', up);
-    stage.addEventListener('pointerleave', up);
-
-    /* keyboard: the stage is focusable, so it must be operable */
-    stage.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { target += 1; idle = IDLE_RESUME; e.preventDefault(); }
-      else if (e.key === 'ArrowLeft') { target -= 1; idle = IDLE_RESUME; e.preventDefault(); }
+    /* the second copy is decorative duplication: hide it from assistive tech */
+    items.forEach(function (li) {
+      var c = li.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      var img = c.querySelector('img');
+      if (img) img.setAttribute('alt', '');
+      track.appendChild(c);
     });
 
-    paint();
-    if (window.pctMotion && window.pctMotion.onReduce) {
+    /* px per second. At the desktop card width (~460px) one photograph passes
+       every ~6 seconds: clearly in motion, but slow enough to look at. 34 px/s,
+       the first value tried, took 126 seconds to complete a loop and read as a
+       still image. */
+    var SPEED = 75;
+
+    function measure() {
+      /* width of one copy = half the track, minus half of one gap that the
+         flex gap adds between the two copies */
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      var full = track.scrollWidth;
+      var one = (full + gap) / 2;
+      if (!one || !isFinite(one)) return;
+      track.style.setProperty('--mem-shift', (-one) + 'px');
+      track.style.setProperty('--mem-dur', (one / SPEED).toFixed(1) + 's');
+    }
+
+    /* images may still be loading when we first measure; remeasure once they land */
+    measure();
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', measure, { once: true });
+    }
+    if ('ResizeObserver' in window) {
+      var ro = new ResizeObserver(measure);
+      ro.observe(band);
+    } else {
+      window.addEventListener('resize', measure);
+    }
+
+    band.dataset.on = '1';
+
+    /* stop paying for frames the reader cannot see */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) band.removeAttribute('data-paused');
+        else band.setAttribute('data-paused', '');
+      }, { rootMargin: '160px' }).observe(band);
+    }
+
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
       window.pctMotion.onReduce(function () {
-        stop();
-        if (ro) ro.disconnect();
-        delete stage.dataset.on;
-        items.forEach(function (el) {
-          el.style.transform = ''; el.style.zIndex = ''; el.style.opacity = '';
-        });
+        band.removeAttribute('data-on');
+        track.style.removeProperty('--mem-shift');
+        track.style.removeProperty('--mem-dur');
       });
     }
-  } catch (err) { if (window.console) console.warn('life:', err); }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitLife:', err);
+  }
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitAct', 'pctInitCountdown', 'pctInitHero', 'pctInitGrow', 'pctInitNumbers', 'pctInitPlace', 'pctInitLife'];
+  var inits = ['pctInitCountdown', 'pctInitHero', 'pctInitGrow', 'pctInitNumbers', 'pctInitPlace', 'pctInitLife'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

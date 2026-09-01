@@ -2,7 +2,7 @@
    04 — Where members have placed.  (cream ground / proof, part two)
 
    ONE signature interaction: two logo belts that drift in opposite
-   directions, pause under the cursor, and dissolve at both edges.
+   directions and dissolve at both edges.
 
    Everything below the "BELT" mark is gated on [data-on], which the
    JS only sets after it has cloned each list. The base rules above it
@@ -130,10 +130,10 @@
    starts mid-list, which stops the two rows looking twinned. */
 .pl-row[data-on][data-pl-dir="1"] .pl-track{animation-direction:reverse}
 
-/* pause: under the cursor, on focus, and while off screen */
-@media (hover:hover){
-  .pl-row[data-on]:hover .pl-track{animation-play-state:paused}
-}
+/* Pause only while the row is off screen, or while a keyboard user is inside
+   it (they need a still target to tab through). It deliberately does NOT pause
+   on hover: a belt that halts under the cursor stops the moment the reader
+   moves toward it, which reads as the page breaking. */
 .pl-row[data-on]:focus-within .pl-track,
 .pl-row[data-on].is-out .pl-track{animation-play-state:paused}
 

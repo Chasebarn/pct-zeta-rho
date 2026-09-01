@@ -1,6 +1,6 @@
 /* ==========================================================================
-   05 — THE ACT (final CTA) + GLOBAL CHROME (chapter progress rail)
-   Every selector is scoped to .act* or .pct-rail*.
+   05 — THE ACT (final CTA)
+   Every selector is scoped to .act*.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -16,6 +16,10 @@
   color: rgba(250, 248, 243, 0.78);
   padding: clamp(7rem, 15vw, 12.5rem) 0;
   text-align: center;
+  /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
+     390px phone it reached 95px past the viewport and gave the whole document
+     a horizontal scrollbar. Nothing in this section needs to escape it. */
+  overflow: hidden;
 }
 
 .act-inner {
@@ -212,101 +216,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   PART B1 — CHAPTER PROGRESS RAIL (global chrome)
-   Fixed to the right gutter, never over content: at 900px the gutter is 36px
-   and the rail is ~30px wide including its offset. pointer-events: none, so
-   it can never intercept a click even in an edge case.
-   Hidden until JS resolves the page's stages (decorative, so no-JS = absent).
-   -------------------------------------------------------------------------- */
-
-.pct-rail {
-  display: none;
-  position: fixed;
-  right: 2px;
-  top: 50%;
-  z-index: 40;
-  align-items: center;
-  gap: 0.4rem;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--ink-mute);
-  --rail-accent: var(--gold-ink);   /* gold-ink over cream sections */
-  --rail-dim: rgba(25, 18, 33, 0.32);
-}
-.pct-rail.is-dark {
-  color: rgba(250, 248, 243, 0.55);
-  --rail-accent: var(--gold-soft);  /* gold only on dark grounds */
-  --rail-dim: rgba(250, 248, 243, 0.34);
-}
-
-@media (min-width: 900px) {
-  .pct-rail.is-live { display: flex; }
-}
-
-/* All five labels occupy the same grid cell; only the active one is shown, so
-   the rail never mutates text and never reflows. */
-.pct-rail-labels {
-  display: grid;
-}
-.pct-rail-label {
-  grid-area: 1 / 1;
-  writing-mode: vertical-rl;
-  font-family: var(--font-text);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--rail-accent);
-  opacity: 0;
-  transform: translateX(4px);
-  /* the outgoing label leaves before the incoming one arrives, so two labels
-     never sit smudged on top of each other at 9px */
-  transition: opacity 170ms linear, transform 340ms var(--ease);
-}
-.pct-rail-label.is-on {
-  opacity: 1;
-  transform: none;
-  transition: opacity 260ms linear 150ms, transform 340ms var(--ease) 150ms;
-}
-.pct-rail-num {
-  font-variant-numeric: tabular-nums;
-  opacity: 0.75;
-}
-
-.pct-rail-ticks {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-  padding-right: 5px;
-}
-/* the thin line the ticks hang off — not a scrollbar, no thumb, no track */
-.pct-rail-ticks::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: -12px;
-  bottom: -12px;
-  width: 1px;
-  background: currentColor;
-  opacity: 0.22;
-}
-.pct-rail-tick {
-  width: 8px;
-  height: 1px;
-  background: var(--rail-dim);
-  transform-origin: 100% 50%;
-  transition: transform 380ms var(--ease);
-}
-.pct-rail-tick.is-on {
-  background: var(--rail-accent);
-  transform: scaleX(1.9);
-}
-
-/* --------------------------------------------------------------------------
    MOBILE — different execution, not a shrunken desktop.
    The hover mechanic does not exist on a phone, so nothing is hidden behind
    it: the button goes full width for the thumb and the secondary line is
@@ -366,24 +275,13 @@
     transition: none;
   }
   .act-cta-plate,
-  .act-cta-arrow,
-  .pct-rail-label,
-  .pct-rail-label.is-on,
-  .pct-rail-tick {
+  .act-cta-arrow {
     transition: none;
   }
   .act-go:hover .act-cta-plate,
   .act-go:focus-within .act-cta-plate { transform: none; }
   .act-go:hover .act-cta-arrow,
   .act-go:focus-within .act-cta-arrow { transform: none; }
-}
-
-/* Mid-session reduce toggle: 05-act.js flags the rail so its state changes
-   land instantly, without waiting for a media query re-evaluation. */
-.pct-rail.is-still .pct-rail-label,
-.pct-rail.is-still .pct-rail-label.is-on,
-.pct-rail.is-still .pct-rail-tick {
-  transition: none;
 }
 
 /* ------------------------------------------------------------------

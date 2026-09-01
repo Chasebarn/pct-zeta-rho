@@ -107,8 +107,6 @@
   align-items:baseline;
   gap:.5rem .85rem;
   margin:0 0 2.6rem;
-  padding-top:1.35rem;
-  border-top:1px solid var(--line-dark);
   max-width:44ch;
   font-size:.86rem;
   line-height:1.5;

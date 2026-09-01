@@ -1,127 +1,60 @@
-/* ============================================================
-   02 — Graduate confident.  ONE interaction: the image accordion.
-   The <figure>s authored inside the rows are MOVED (not cloned) into
-   the persistent stage, so nothing downloads twice and the no-JS
-   markup stays the source of truth.
-   ============================================================ */
+/* 02 — Graduate confident.
+   Moves each <figure> (the same node, so nothing downloads twice) into a
+   persistent stage, then runs a plain single-open accordion. Selecting a row
+   cross-fades its photograph. That is the whole interaction.
+
+   Everything the section shows without JS it also shows with JS. If this file
+   never runs, the base CSS leaves all three rows open with their photographs
+   in the flow. */
 window.pctInitGrow = function () {
-  'use strict';
   try {
     var root = document.querySelector('[data-grow]');
-    if (!root || root.getAttribute('data-grow-ready') === '1') return;
+    if (!root || root.dataset.growReady === '1') return;
 
-    var rowsEl = root.querySelector('[data-grow-rows]');
-    var stage  = root.querySelector('[data-grow-stage]');
-    var fill   = root.querySelector('[data-grow-fill]');
-    var btns   = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
-    if (!rowsEl || !stage || !btns.length || !document.body.closest) return;
+    var stage = root.querySelector('[data-grow-stage]');
+    var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
+    if (!stage || btns.length < 2) return;
 
-    var figs = [], rows = [], i, fig, row;
-    for (i = 0; i < btns.length; i++) {
-      fig = document.getElementById(btns[i].getAttribute('aria-controls') || '');
-      row = btns[i].closest('.grow__row');
-      if (!fig || !row) return;            /* markup not as expected: keep the plain list */
-      figs.push(fig);
-      rows.push(row);
-    }
+    var rows = [], figs = [];
+    var ok = btns.every(function (b) {
+      var row = b.closest('.grow__row');
+      var fig = document.getElementById(b.getAttribute('aria-controls'));
+      if (!row || !fig) return false;
+      rows.push(row); figs.push(fig);
+      return true;
+    });
+    if (!ok) return;   /* markup drifted: leave the no-JS state alone */
 
-    for (i = 0; i < figs.length; i++) stage.appendChild(figs[i]);
+    root.dataset.growReady = '1';
     root.classList.add('grow--js');
-    root.setAttribute('data-grow-ready', '1');
+    figs.forEach(function (f) { stage.appendChild(f); });
 
-    var current = -1, tops = [], hts = [], railH = 1, leaveTimer = 0;
+    var current = -1;
 
-    /* measured on load / resize / font swap only — never inside a frame loop */
-    function measure() {
-      railH = rowsEl.clientHeight || 1;
+    function open(i) {
+      if (i === current) return;
+      current = i;
       for (var k = 0; k < rows.length; k++) {
-        tops[k] = rows[k].offsetTop;
-        hts[k]  = rows[k].offsetHeight;
-      }
-    }
-
-    function paintRail() {
-      if (!fill || current < 0 || !hts.length) return;
-      fill.style.transform =
-        'translateY(' + tops[current] + 'px) scaleY(' + (hts[current] / railH) + ')';
-    }
-
-    function select(index) {
-      if (index === current || index < 0 || index >= figs.length) return;
-      current = index;
-
-      for (var k = 0; k < btns.length; k++) {
-        var on = (k === index), f = figs[k];
-        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
+        var on = k === i;
         rows[k].classList.toggle('is-open', on);
-
-        if (on) {
-          f.classList.remove('is-leaving');
-          f.classList.add('is-prewipe');
-          void f.offsetWidth;              /* restart the curtain; a click handler, never rAF */
-          f.classList.remove('is-prewipe');
-          f.classList.add('is-active');
-          f.removeAttribute('aria-hidden');
-        } else {
-          if (f.classList.contains('is-active')) {
-            f.classList.remove('is-active');
-            f.classList.add('is-leaving');
-          }
-          f.setAttribute('aria-hidden', 'true');
-        }
+        figs[k].classList.toggle('is-active', on);
+        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
       }
-
-      clearTimeout(leaveTimer);
-      leaveTimer = setTimeout(function () {
-        for (var k = 0; k < figs.length; k++) figs[k].classList.remove('is-leaving');
-      }, 760);
-
-      paintRail();
     }
 
-    for (i = 0; i < btns.length; i++) {
-      (function (n) {
-        btns[n].addEventListener('click', function () { select(n); });
-      }(i));
-    }
-
-    rowsEl.addEventListener('keydown', function (e) {
-      var at = btns.indexOf(document.activeElement), next = -1;
-      if (at < 0 || e.altKey || e.ctrlKey || e.metaKey) return;
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (at + 1) % btns.length;
-      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (at - 1 + btns.length) % btns.length;
-      else if (e.key === 'Home') next = 0;
-      else if (e.key === 'End') next = btns.length - 1;
-      if (next < 0) return;
-      e.preventDefault();
-      btns[next].focus();
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () { open(i); });
+      /* hovering the row is a preview, not a commitment: it swaps the photograph
+         the same way a click does, because there is no other state to lose */
+      b.addEventListener('focus', function () { open(i); });
     });
 
-    function remeasure() { measure(); paintRail(); }
+    open(0);
 
-    if (typeof ResizeObserver === 'function') {
-      new ResizeObserver(remeasure).observe(rowsEl);
-    } else {
-      window.addEventListener('resize', remeasure);
-    }
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      document.fonts.ready.then(remeasure).catch(function () {});
-    }
-
-    /* reduced motion: settle everything on its finished state, mid-session too */
-    function still(on) { root.classList.toggle('grow--still', on !== false); }
-    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    if (mq && mq.matches) still(true);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function (v) { still(v); });
-    } else if (mq && mq.addEventListener) {
-      mq.addEventListener('change', function (e) { still(e.matches); });
+      window.pctMotion.onReduce(function () { root.classList.add('grow--still'); });
     }
-
-    measure();
-    select(0);
   } catch (err) {
-    /* one section must never take the page down */
     if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }
 };

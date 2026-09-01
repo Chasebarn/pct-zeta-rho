@@ -1,94 +1,65 @@
-<!-- 02 — Graduate confident.  Signature interaction: the image accordion.
-     Base markup below is the finished, JS-free state: all three rows open,
-     each with its photograph beneath it. JS moves the <figure>s (the very same
-     nodes, so nothing is downloaded twice) into the persistent stage. -->
+<!-- 02 — Graduate confident.
+     ONE interaction: selecting a row cross-fades a new photograph into a frame
+     that never moves. Nothing else animates. The base markup below is the
+     finished, script-free state: every row open, every photograph in the flow. -->
 <section class="grow" id="grow" data-grow aria-labelledby="grow-title">
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
       <h2 class="grow__h" id="grow-title">Graduate <em>confident.</em></h2>
-      <p class="grow__lede">Not sure what comes after college? PCT is where you build the experience, confidence, and relationships that leave you better prepared for what comes after graduation.</p>
+      <p class="grow__lede">Three things you leave with.</p>
     </div>
 
-    <div class="grow__stage" data-grow-stage>
-      <span class="grow__mat" aria-hidden="true"></span>
-    </div>
+    <div class="grow__stage" data-grow-stage></div>
 
     <div class="grow__rows" data-grow-rows role="group" aria-label="What membership builds">
-      <span class="grow__rail" data-grow-fill aria-hidden="true"></span>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">01</span>
-            <span class="grow__ttl">Connect With People in Your Field</span>
+            <span class="grow__ttl">A network in your field</span>
           </button>
         </h3>
-        <p class="grow__say">Alumni, recruiters, and speakers who work in the fields you are aiming at. Fall Summit puts the chapter in a room with them for a full day, and members in other business majors become the people you ask before you apply.</p>
-        <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
-          <div class="grow__frame">
+        <div class="grow__panel">
+          <p class="grow__say">Alumni, recruiters and speakers who already work where you want to. You meet them before you apply, not after.</p>
+          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
             <img src="assets/ph/career-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member marking up a printed resume with an alumnus at a chapter career night.">
-            <span class="grow__tag">Fall Summit</span>
-          </div>
-        </figure>
+                 alt="A member reviewing a printed resume with an alumnus at a chapter career night.">
+          </figure>
+        </div>
       </div>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">02</span>
-            <span class="grow__ttl">Lead Before You Graduate</span>
+            <span class="grow__ttl">Leadership you have already done</span>
           </button>
         </h3>
-        <p class="grow__say">Members run the work rather than attend it: chair an initiative, plan an event, manage a budget, make the call. Leadership becomes something you have already done before your first full-time job.</p>
-        <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-          <div class="grow__frame">
+        <div class="grow__panel">
+          <p class="grow__say">Chair an initiative. Run an event. Manage a budget. It goes on your resume because you did it, not because you attended.</p>
+          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
             <img src="assets/ph/leadership-1.png" width="1000" height="1250" loading="lazy" decoding="async"
                  alt="A member running a chapter meeting from the front of the room.">
-            <span class="grow__tag">Chapter meeting</span>
-          </div>
-        </figure>
+          </figure>
+        </div>
       </div>
 
       <div class="grow__row">
         <h3 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
             <span class="grow__num" aria-hidden="true">03</span>
-            <span class="grow__ttl">Find Your People</span>
+            <span class="grow__ttl">People who stay</span>
           </button>
         </h3>
-        <p class="grow__say">Formal, Spring Retreat, intramurals, and the traditions in between. The people who notice when you stop showing up, push you to apply, and are still around after graduation.</p>
-        <figure class="grow__fig grow__fig--burst" id="grow-f3" aria-labelledby="grow-b3">
-          <div class="grow__frame grow__frame--burst">
-            <div class="grow__poly">
-              <img src="assets/ph/poly-1.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="Members in formal dress at the spring banquet.">
-              <span class="grow__polycap">Formal</span>
-              <span class="grow__tag">Formal</span>
-          </div>
-            <div class="grow__poly">
-              <img src="assets/ph/poly-2.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="The chapter together on the annual retreat.">
-              <span class="grow__polycap">Retreat</span>
-            </div>
-            <div class="grow__poly">
-              <img src="assets/ph/poly-3.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="An intramural team huddled after a game.">
-              <span class="grow__polycap">Intramurals</span>
-            </div>
-            <div class="grow__poly">
-              <img src="assets/ph/poly-4.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="Members painting at a Tampa service day.">
-              <span class="grow__polycap">Service day</span>
-            </div>
-            <div class="grow__poly">
-              <img src="assets/ph/poly-5.png" width="700" height="700" loading="lazy" decoding="async"
-                   alt="New members on bid night.">
-              <span class="grow__polycap">Bid night</span>
-            </div>
-          </div>
-        </figure>
+        <div class="grow__panel">
+          <p class="grow__say">Formal, retreat, intramurals and everything between. The people who notice when you stop showing up, and who are still around after graduation.</p>
+          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
+            <img src="assets/ph/poly-1.png" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="Members in formal dress at the spring banquet.">
+          </figure>
+        </div>
       </div>
 
     </div>

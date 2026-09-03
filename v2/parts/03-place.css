@@ -14,10 +14,11 @@
   background:var(--paper);
   color:var(--ink-soft);
 
-  /* Continuation, not a new chapter. The gap above is deliberately about
-     half a section so this lands under the numbers as their evidence.
-     If 03 ends with a full --section of its own, drop this to 0. */
-  padding-block:clamp(2.25rem,5vw,4rem) var(--section);
+  /* A whole chapter now, not a continuation. This section used to be the second
+     half of a pair, sitting under a separate "Numbers don't lie." section with
+     roughly half a section of air above it. The two were merged, so it takes a
+     full --section on both sides. */
+  padding-block:var(--section);
 
   /* one place to retune the whole belt */
   --pl-cell-h:clamp(3.6rem,5.4vw,4.6rem);   /* every cell the same height */
@@ -29,24 +30,25 @@
 /* ---------- heading: the house display serif, one notch under a
      chapter opener so the numbers above stay the loudest thing ---------- */
 
+/* Chapter-opener scale, matching .mem-h in 06-mem.css. It was capped at 3.4rem
+   only because it used to be the second of two headings. tokens.css already sets
+   text-wrap:balance on h2, so at the 5rem cap this breaks after the comma, which
+   is the break we want: one register of proof per line. */
 .pl-h{
   text-align:center;
-  font-size:clamp(2.1rem,4.6vw,3.4rem);
-  letter-spacing:-.01em;
-  margin-bottom:.85rem;
+  font-size:clamp(2.6rem,6vw,5rem);
+  letter-spacing:-.015em;
+  margin:0 0 clamp(2.25rem,4.5vw,3.5rem);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
-.pl-sub{
-  margin:0 auto clamp(2rem,4.2vw,3.2rem);
-  max-width:30rem;
-  text-align:center;
-  font-size:1rem;
-  line-height:1.5;
-  color:var(--ink-mute);
-}
-
 /* ---------- the two rows (full bleed, no wrap) ---------- */
+
+/* Close the two belts into one ruled object. Three hairlines total: above the
+   first row, between them, and below the second. The band is full bleed, so its
+   borders sit outside the edge mask and do not fade with the marks. That is
+   correct: the marks dissolve at the edges, the band does not. */
+.pl-rows{border-block:1px solid var(--line)}
 
 .pl-row{position:relative}
 .pl-row + .pl-row{border-top:1px solid var(--line)}
@@ -164,6 +166,59 @@
 
 /* ---------- phone: the same two strips, smaller and slower ----------
    (the pixels-per-second drop is set in the JS; this is the sizing) */
+
+
+/* ---------- the three figures, under the belts ----------
+   Order is deliberate and is the owner's call: recognition first, arithmetic
+   second. "Goldman Sachs" lands on sight and costs the reader nothing; "95%" is
+   a claim that has to be read and believed. The belts earn the figures.
+
+   These do NOT count up. The section's one interaction is the belt above it, and
+   a marquee plus a counter is two. The values are static text in the markup. */
+.pl-nums{
+  list-style:none;
+  margin:clamp(3rem,6vw,4.75rem) 0 0;
+  padding:0;
+  display:grid;
+  gap:clamp(2.75rem,5vw,2rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:768px){
+  .pl-nums{grid-template-columns:repeat(3,1fr)}
+}
+
+.pl-n{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.pl-n-val{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  /* big enough to be the loudest thing in the section, capped so three still fit
+     one row at 1024px */
+  font-size:clamp(4.4rem,10vw,8rem);
+  line-height:.9;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
+
+/* the label is the display italic, not the UI sans. A 13px sans caption under a
+   128px serif numeral reads as a chart legend. */
+.pl-n-lab{
+  margin:1.3rem 0 0;
+  max-width:17rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  line-height:1.4;
+  color:var(--ink-soft);
+}
 
 @media (max-width:767px){
   .pl{

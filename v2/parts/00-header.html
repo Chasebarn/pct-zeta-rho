@@ -1,0 +1,47 @@
+<!-- 00 · HEADER. The site bar. This is a <header>, not a <section>, and it is
+     deliberately NOT position:fixed.
+
+     WHY STATIC: the live site's fixed header depends on js/main.js to add
+     .scrolled and swap to a paper ground once you clear the hero. v2 never loads
+     js/main.js, so a fixed bar here would keep its dark-ground colours (paper
+     text, gold-soft sub) and sit on top of the cream sections as pale-on-pale.
+     A static bar has no scrolled state to get wrong: it scrolls away with the
+     hero and does not come back. Zero JS, nothing to break.
+
+     WHY NO BOTTOM EDGE: the hero directly beneath is the same --purple-deep. A
+     border or shadow here would draw a visible seam across what has to read as
+     one continuous dark field, so the header carries neither, and its background
+     does not change on hover.
+
+     Class names are all v2hd-*. The live css/styles.css is linked by build.py and
+     already owns .site-header / .brand / .nav-links (fixed positioning plus a
+     JS-driven hamburger that hides .nav-links below 900px), so none of those
+     names are reused here. -->
+<header class="v2hd on-dark">
+  <div class="v2wrap v2hd-row">
+
+    <a class="v2hd-brand" href="index.html">
+      <!-- assets/crest.png is 337x445 intrinsic. The attributes are the real
+           pixel dimensions so the browser knows the aspect ratio before the file
+           arrives; CSS scales it to 42px tall. Above the fold, so not lazy. -->
+      <img class="v2hd-crest" src="assets/crest.png" alt="Phi Chi Theta crest"
+           width="337" height="445" decoding="async">
+      <span class="v2hd-lock">
+        <span class="v2hd-name">Phi Chi Theta</span>
+        <span class="v2hd-sub">Zeta Rho &middot; USF</span>
+      </span>
+    </a>
+
+    <nav class="v2hd-nav" aria-label="Primary">
+      <ul class="v2hd-list">
+        <li><a class="v2hd-link" href="index.html" aria-current="page"><span class="v2hd-t">Home</span></a></li>
+        <li><a class="v2hd-link" href="philanthropy.html"><span class="v2hd-t">Philanthropy</span></a></li>
+        <li><a class="v2hd-link" href="apparel.html"><span class="v2hd-t">Apparel</span></a></li>
+        <li><a class="v2hd-link" href="career.html"><span class="v2hd-t">Career</span></a></li>
+      </ul>
+    </nav>
+
+    <a class="v2hd-rush" href="rush.html">Rush PCT</a>
+
+  </div>
+</header>

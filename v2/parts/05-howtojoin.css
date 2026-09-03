@@ -1,0 +1,488 @@
+/* ============================================================
+   05. How to join PCT.   Every selector is scoped to .join*.
+
+   GROUND: --paper-deep. A dark section sits above and a --paper section
+   below; the deeper cream marks this one as a different KIND of content
+   (mechanics, not argument) without adding a third ground colour.
+
+   COLOUR BUDGET. Gold appears exactly once, on the italic in the heading.
+   --gold-ink measures 4.24:1 on --paper-deep (it is the quoted 4.62:1 on
+   --paper, and this ground is darker), which clears the 3:1 large-text bar
+   for a 40-68px display italic but FAILS the 4.5:1 body bar. So nothing
+   small is ever gold here. The live marker is --purple instead, at 8.99:1.
+
+   HAIRLINES. --line is the house rule on --paper, where it measures 1.22:1.
+   On --paper-deep the same colour drops to 1.12:1 and is effectively
+   invisible, which would have left the schedule as unruled floating text.
+   Every rule below is --ink at low alpha instead, tuned back up to ~1.46:1.
+
+   Nothing in this section transitions or animates, by instruction: the
+   schedule marks resolve at load and simply are. There is therefore no
+   prefers-reduced-motion block. That is the correct amount.
+   ============================================================ */
+
+.join{
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+  padding-block:var(--section);
+}
+
+/* ---------- head ---------- */
+
+.join-head{
+  max-width:46rem;
+  margin-bottom:clamp(2.6rem,5.5vw,4rem);
+}
+.join-h{
+  font-size:clamp(2.5rem,5.2vw,4.25rem);
+  letter-spacing:-.015em;
+  margin:0 0 .9rem;
+}
+.join-h em{font-style:italic;color:var(--gold-ink)}
+
+.join-sub{
+  margin:0;
+  max-width:36rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.3rem,2vw,1.65rem);
+  line-height:1.35;
+  color:var(--ink-mute);           /* 4.71:1 on --paper-deep */
+}
+
+/* ---------- the three steps ---------- */
+
+.join-steps{
+  list-style:none;                 /* the <ol> still carries the order for AT;
+                                      the visible numerals are aria-hidden so
+                                      nothing is announced twice */
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(1.5rem,3.5vw,3.25rem);
+}
+
+/* A top rule per step, not vertical dividers between them. One declaration
+   survives every breakpoint: three ruled columns on desktop, three ruled
+   rows when they stack. */
+.join-step{
+  border-top:1px solid rgba(25,18,33,.18);
+  padding-top:1.35rem;
+}
+
+.join-step .join-ord{
+  display:block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.6rem,2.6vw,2.15rem);
+  line-height:1;
+  color:var(--ink-mute);
+  margin-bottom:.85rem;
+}
+
+.join-step-h{
+  margin:0 0 .6rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.45rem,2.2vw,1.9rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+
+.join-step-p{
+  margin:0;
+  max-width:26rem;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);           /* 9.15:1 */
+}
+
+/* ---------- the schedule ---------- */
+
+.join-sched{margin-top:clamp(3.2rem,6vw,4.75rem)}
+
+.join-sched-head{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:.4rem 1rem;
+  margin-bottom:1.35rem;
+}
+.join-sched-h{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.4rem,2.1vw,1.8rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+.join-sched-meta{
+  margin:0;
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* THE LIST IS THE GRID, and each event is a subgrid of it. This is the whole
+   trick and it is not decoration: a grid on each <li> makes every row size
+   its own tracks, so the date column starts at a different x on every line
+   and the list stops being a list. One shared grid also lets the date track
+   be max-content, which means it is exactly as wide as the longest of the
+   six dates and not a pixel more, at any viewport and in whatever font
+   actually loaded. No hand-tuned rem value can promise that. */
+.join-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  /* Capped narrower than the 1240px wrap on purpose. Stretched to the full
+     wrap, the "Next" marker ended up 39rem from the event it marked. 68rem
+     is the narrowest cap that still fits the board on one line. */
+  max-width:68rem;
+  display:grid;
+  /* DEFAULT, 768px to 1119px: two lines. Name and date share the first, the
+     room takes the second. The single-line board below needs 1120px before
+     the longest LOCATION ("BSN 225, Muma College of Business, USF Tampa",
+     336px at .9rem) stops wrapping, and a room that wraps on four rows out
+     of six destroys the alignment this grid exists to create. */
+  grid-template-columns:2.2rem minmax(0,1fr) minmax(0,max-content) 4.5rem;
+  column-gap:clamp(.9rem,1.8vw,1.75rem);
+}
+
+.join-ev{
+  position:relative;               /* contains the absolutely positioned
+                                      .join-sr so it can never reach the
+                                      viewport edge and start a scrollbar */
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:subgrid;
+  grid-template-areas:
+    "n name when mark"
+    ". room room mark";
+  align-items:baseline;
+  row-gap:.3rem;
+  /* no horizontal padding: a subgrid's own padding is taken out of its first
+     and last tracks, and the rules already span the full list width */
+  padding:1.05rem 0;
+  border-top:1px solid rgba(25,18,33,.18);
+}
+.join-list > .join-ev:last-child{border-bottom:1px solid rgba(25,18,33,.18)}
+
+.join-ev .join-ord{
+  grid-area:n;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:1.15rem;
+  line-height:1;
+  color:var(--ink-mute);
+}
+
+.join-ev-name{
+  grid-area:name;
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.35;
+  color:var(--ink);                /* 15.8:1 */
+}
+
+.join-ev-when{
+  grid-area:when;
+  font-size:.95rem;
+  line-height:1.4;
+  color:var(--ink-soft);
+  font-variant-numeric:tabular-nums;
+}
+/* The date and the time each hold together; a line may only break BETWEEN
+   them, so a squeezed column gives two tidy lines rather than "September"
+   over "16 at 7:00 PM". */
+.join-ev-day,
+.join-ev-time{white-space:nowrap}
+
+.join-ev-room{
+  grid-area:room;
+  font-size:.9rem;
+  line-height:1.45;
+  color:var(--ink-mute);           /* 4.71:1 */
+}
+/* The room code is the only part anyone actually looks for. Full LOCATION
+   string is still printed; this just gives the eye a landing point. */
+.join-ev-rk{color:var(--ink-soft)}
+
+/* Revealing "Next" at load must not move a single character of the row, and
+   two things guarantee that. The track is a fixed 4.5rem whether or not a
+   marker lands in it, and this box is a fixed 1.35rem tall: exactly the line
+   box of .join-ev-name, so an empty marker cell and a filled one occupy the
+   same space. An earlier version let the chip size the cell and the marked
+   row grew 7px taller than its neighbours the instant the script ran. */
+.join-ev-mark{
+  grid-area:mark;
+  justify-self:end;
+  align-self:start;                /* it spans both lines of the row */
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  height:1.35rem;
+}
+
+.join-next{
+  font-family:var(--font-text);
+  font-size:.68rem;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--purple);             /* 8.99:1; gold would be 4.24:1 here */
+}
+
+/* ---- resolved states, written by 05-howtojoin.js ----
+   PAST: the row keeps every word and stays in the accessibility tree. What
+   changes is that its three-level hierarchy (ink / ink-soft / ink-mute)
+   flattens to one level. The collapse of contrast RANGE is the signal, so
+   nothing has to drop below 4.71:1 to read as finished.
+
+   Colour is the ONLY thing either state changes. Weight was tried and
+   dropped: the name track is sized by max-content, so re-weighting the
+   longest name would have re-sized the column and nudged the whole list
+   sideways the instant the script ran. */
+.join-ev.is-past .join-ev-name,
+.join-ev.is-past .join-ev-when,
+.join-ev.is-past .join-ev-rk{color:var(--ink-mute)}
+
+/* NEXT: the row's existing top rule turns purple. Colour only, never width,
+   so the row does not shift by a pixel when the mark lands. */
+.join-ev.is-next{border-top-color:var(--purple)}
+
+.join-over{
+  margin:0;
+  padding:1.15rem 0;
+  border-top:1px solid rgba(25,18,33,.18);
+  border-bottom:1px solid rgba(25,18,33,.18);
+  max-width:68rem;
+  font-size:1rem;
+  color:var(--ink-soft);
+}
+.join-over-a{
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:.22em;
+  text-decoration-thickness:1px;
+}
+.join-over-a:hover{color:var(--purple)}
+
+/* ---------- the closer ---------- */
+
+.join-end{
+  margin-top:clamp(3.5rem,7vw,5.5rem);
+  max-width:46rem;
+}
+
+/* No gold, no box, no rule. The separation is space: this line is the only
+   thing in the section that is not a fact, and it gets the room to say so. */
+.join-closer{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.55rem,3vw,2.35rem);
+  line-height:1.28;
+  letter-spacing:-.005em;
+  color:var(--ink-soft);
+}
+.join-closer em{
+  font-style:italic;
+  color:var(--ink);                /* the promise is the darkest ink here */
+}
+
+.join-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  min-height:44px;                 /* WCAG 2.5.8 pointer target */
+  margin-top:1.35rem;
+  font-family:var(--font-text);
+  font-size:.95rem;
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:none;
+}
+.join-link-t{
+  border-bottom:1px solid rgba(25,18,33,.32);
+  padding-bottom:2px;
+}
+.join-link-a{flex:none}
+.join-link:hover{color:var(--purple)}
+.join-link:hover .join-link-t{border-bottom-color:var(--purple)}
+
+/* ---------- utilities, scoped ---------- */
+
+/* The old site's stylesheet loads before this one and defines no [hidden]
+   rule, but it does set display on plenty of elements. Restate it locally so
+   a hidden marker is hidden and, crucially, out of the accessibility tree. */
+.join-list[hidden],
+.join-over[hidden],
+.join-next[hidden],
+.join-sr[hidden]{display:none}
+
+.join-sr{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+/* ============================================================
+   THE BOARD  >= 1120px
+   One event, one line, five columns. The breakpoint is measured, not
+   guessed: at 1120px the wrap is 1030px, the four fixed and max-content
+   tracks plus their gaps take 681px, and the room track finally clears the
+   336px the longest LOCATION string needs. Below that it wraps and the
+   two-line default above is the honest layout.
+   ============================================================ */
+
+@media (min-width:1120px){
+  .join-list{
+    grid-template-columns:2.2rem minmax(0,max-content) minmax(0,max-content) minmax(0,1fr) 4.5rem;
+  }
+  .join-ev{grid-template-areas:"n name when room mark"}
+  /* centred in the row rather than baseline-aligned: an empty flex box has
+     no baseline to align, so centring is the one rule that behaves the same
+     marked and unmarked */
+  .join-ev-mark{align-self:center}
+}
+
+/* ============================================================
+   STEPS, stacked  <= 899px
+   Three 200px columns is where the step paragraphs start setting at five
+   words a line. Below that they stack and the ordinal moves beside the
+   title instead of above it, so a step costs one screen-height less.
+   ============================================================ */
+
+@media (max-width:899px){
+  .join-steps{
+    grid-template-columns:minmax(0,1fr);
+    row-gap:0;
+  }
+  .join-step{
+    display:grid;
+    grid-template-columns:2.6rem minmax(0,1fr);
+    column-gap:.9rem;
+    padding:1.35rem 0 1.6rem;
+  }
+  .join-step .join-ord{
+    grid-row:1 / span 2;
+    font-size:1.3rem;
+    line-height:1.35;
+    margin-bottom:0;
+  }
+  .join-step-h{grid-column:2}
+  .join-step-p{grid-column:2;max-width:34rem}
+}
+
+/* ============================================================
+   PHONE  <= 767px
+
+   THE SCHEDULE IS REBUILT, NOT SHRUNK. Five columns inside a 280px content
+   box gives each field about 45px, which turns "BSN 225, Muma College of
+   Business, USF Tampa" into six wrapped lines and destroys the row grid
+   that made the thing scannable in the first place. A phone reader also
+   does not scan a table: they read one event, decide, and move on.
+
+   So one event becomes one block. Name, then when, then where, in the order
+   the question is actually asked, with a rule between blocks and enough
+   vertical padding that a thumb can rest on a row without covering two.
+   The numeral column is dropped: it cost 2.2rem of a 320px screen to
+   restate an order the <ol> and the dates already carry.
+   ============================================================ */
+
+@media (max-width:767px){
+  .join-list{
+    /* 3.5rem is the whole marker budget: "NEXT" sets at 40px, and at 320px
+       this still leaves the name 212px, enough for the longest of the six on
+       one line. Reserving it at every width keeps the phone layout identical
+       marked and unmarked, exactly as the board does. */
+    grid-template-columns:minmax(0,1fr) 3.5rem;
+    column-gap:.75rem;
+  }
+  .join-ev{
+    /* the marker sits beside the NAME only. Letting it span all three lines
+       squeezed the date into 267px, which wrapped the three Wednesdays and
+       not the three Fridays: alternating 154px and 132px blocks down the
+       list. Date and room now get the full 335px. */
+    grid-template-areas:
+      "name mark"
+      "when when"
+      "room room";
+    align-items:start;
+    row-gap:.2rem;
+    padding:1.15rem 0 1.3rem;
+  }
+  .join-ev .join-ord{display:none}
+
+  /* Larger than desktop, and serif: at this size the name is a heading for
+     its block rather than a cell in a row. */
+  .join-ev-name{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:1.3rem;
+    line-height:1.15;
+    letter-spacing:-.01em;
+  }
+  .join-ev-when{font-size:.95rem;font-weight:600;color:var(--ink-soft)}
+  .join-ev-day,
+  .join-ev-time{white-space:normal}   /* nothing to protect in a full-width
+                                         line; let it wrap naturally */
+  .join-ev-room{font-size:.875rem}
+  .join-ev-mark{align-self:center}
+
+  .join-sched-head{margin-bottom:1rem}
+
+  /* The closer carries the section's last word, so it keeps its scale here
+     rather than collapsing into body copy. */
+  .join-closer{font-size:1.5rem;line-height:1.3}
+  .join-end{margin-top:3rem}
+}
+
+/* ============================================================
+   NO SUBGRID.  Chrome 117, Safari 16 and Firefox 71 and up all have it; in
+   anything older the declaration above is dropped, each row falls back to
+   sizing its own tracks, and the columns come out ragged. Pin those
+   browsers to the two-line layout with fixed tracks, which aligns without a
+   shared grid, and restate the phone's two tracks as well: stacking is not
+   enough there, the name track still needs pinning (see below).
+   ============================================================ */
+
+@supports not (grid-template-columns:subgrid){
+  /* Phones are NOT exempt. Without subgrid the <li> takes its columns from
+     grid-template-areas alone, which sizes them auto/auto: the name track then
+     shrinks to its own text (measured 189-245px instead of a uniform 267px at
+     375px) and the marked row's name box moves the instant "NEXT" appears.
+     Restating the two tracks is the whole fix. */
+  @media (max-width:767px){
+    .join-ev{
+      grid-template-columns:minmax(0,1fr) 3.5rem;
+      column-gap:.75rem;
+    }
+  }
+  @media (min-width:768px){
+    .join-list{display:block}
+    .join-ev{
+      display:grid;
+      grid-template-columns:2.2rem minmax(0,1fr) 20.5rem 4.5rem;
+      grid-template-areas:
+        "n name when mark"
+        ". room room mark";
+      column-gap:clamp(.9rem,1.8vw,1.75rem);
+    }
+    .join-ev-mark{align-self:start}
+  }
+}

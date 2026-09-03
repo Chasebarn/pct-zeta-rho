@@ -1,67 +1,50 @@
-<!-- 02 — Graduate confident.
-     ONE interaction: selecting a row cross-fades a new photograph into a frame
-     that never moves. Nothing else animates. The base markup below is the
-     finished, script-free state: every row open, every photograph in the flow. -->
-<section class="grow" id="grow" data-grow aria-labelledby="grow-title">
+<!-- 02 - More than just a business fraternity.
+     The value proposition, as the three real parts of the chapter a prospect can
+     go and check, each with a door to the page that proves it.
+
+     NO accordion and NO cross-fading frame. The previous build hid two of three
+     paragraphs behind a click and staged three placeholder images in a frame that
+     only works if all three are shot and cropped alike. All three paragraphs are
+     now on screen at load, and the section carries ONE real photograph of real
+     members instead of three grey rectangles.
+
+     ONE interaction: none. Deliberately. -->
+<section class="grow" id="grow" aria-labelledby="grow-title">
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
-      <h2 class="grow__h" id="grow-title">Graduate <em>confident.</em></h2>
-      <p class="grow__lede">Three things you leave with.</p>
+      <h2 class="grow__h" id="grow-title">More than <em>just</em> a business fraternity.</h2>
+      <p class="grow__lede">Three parts of the chapter. Members run all three.</p>
     </div>
 
-    <div class="grow__stage" data-grow-stage></div>
+    <!-- REAL PHOTOGRAPH. assets/photo-service.jpg is three members in chapter
+         shirts loading roof shingles at a service project. It is already published
+         on the live site. Do not replace it with a placeholder. -->
+    <figure class="grow__fig">
+      <img src="assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
+           alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
+    </figure>
 
-    <div class="grow__rows" data-grow-rows role="group" aria-label="What membership builds">
+    <ol class="grow__rows" aria-label="The three parts of the chapter">
 
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">01</span>
-            <span class="grow__ttl">A network in your field</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Alumni, recruiters and speakers who already work where you want to. You meet them before you apply, not after.</p>
-          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
-            <img src="assets/ph/career-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member reviewing a printed resume with an alumnus at a chapter career night.">
-          </figure>
-        </div>
-      </div>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Professional development</h3>
+        <p class="grow__say">Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit.</p>
+        <a class="grow__link" href="career.html">Career Navigator</a>
+      </li>
 
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">02</span>
-            <span class="grow__ttl">Leadership you have already done</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Chair an initiative. Run an event. Manage a budget. It goes on your resume because you did it, not because you attended.</p>
-          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-            <img src="assets/ph/leadership-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member running a chapter meeting from the front of the room.">
-          </figure>
-        </div>
-      </div>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Philanthropy</h3>
+        <p class="grow__say">Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares.</p>
+        <a class="grow__link" href="philanthropy.html">Our impact</a>
+      </li>
 
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">03</span>
-            <span class="grow__ttl">People who stay</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Formal, retreat, intramurals and everything between. The people who notice when you stop showing up, and who are still around after graduation.</p>
-          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
-            <img src="assets/ph/poly-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="Members in formal dress at the spring banquet.">
-          </figure>
-        </div>
-      </div>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Chapter life</h3>
+        <p class="grow__say">Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation.</p>
+        <a class="grow__link" href="fallrush.html">Meet the chapter</a>
+      </li>
 
-    </div>
+    </ol>
   </div>
 </section>

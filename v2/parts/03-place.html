@@ -49,8 +49,7 @@
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
 
   <div class="v2wrap">
-    <h2 class="pl-h" id="pl-h">Where members have <em>placed.</em></h2>
-    <p class="pl-sub">Internships and full-time roles taken by Zeta Rho members.</p>
+    <h2 class="pl-h" id="pl-h">Where members have placed, by the <em>numbers.</em></h2>
   </div>
 
   <div class="pl-rows" role="group" aria-label="Companies where members have placed">
@@ -97,5 +96,28 @@
       </ul>
     </div>
 
+  </div>
+
+  <!-- All three figures are VERIFIED against the live site (index.html lines 137
+       to 146): 95% placed, 3.60 chapter GPA, 15 "25 Under 25" honorees. Do not add
+       a fourth and do not invent one. The values are printed literally here, so
+       the markup is the single source of truth and the finished state is the only
+       state with JS off or under reduced motion. There is no count-up any more:
+       this section's one interaction is the belt above. -->
+  <div class="v2wrap">
+    <ul class="pl-nums" role="list">
+      <li class="pl-n">
+        <p class="pl-n-val">95<span class="pl-n-u">%</span></p>
+        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">3.60</p>
+        <p class="pl-n-lab">Chapter average GPA</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">15</p>
+        <p class="pl-n-lab">&ldquo;25 Under 25&rdquo; honorees</p>
+      </li>
+    </ul>
   </div>
 </section>

@@ -1,0 +1,230 @@
+/* ============================================================
+   04. A national fraternity since 1924.   (--purple-deep ground)
+
+   ZERO interaction, zero motion, and that IS the design. It was written to
+   break up the drifting logo belt (03) and the drifting photograph band,
+   which read as one conveyor when they touch. NOTE: 05-howtojoin has since
+   landed in the slot below this one, so the two belts are no longer
+   adjacent and this plate no longer separates them directly. It still
+   holds: it is the only dark ground in the middle of the page and the only
+   section with no motion at all. This is the page's held breath: a dark,
+   still plate that stops the scroll for a beat. Nothing here
+   transitions or animates, so there is no prefers-reduced-motion block and
+   no .js file. There is nothing to resolve to a finished state, because
+   the shipped state IS the finished state.
+
+   Prefix is v2nat, NOT nat: the built page still links css/styles.css,
+   which already owns .nat-line, .nat-line b and .split.nat. A .nat- prefix
+   here would have inherited that old section's styling.
+
+   THE CREST IS DELIBERATELY OMITTED. assets/crest.png does have a real
+   alpha channel (all four corners are alpha 0), so it would not have
+   painted a white plate. It was excluded on contrast, not transparency:
+   its two largest visible colour regions are #390e66 (1.15:1 against this
+   ground, effectively invisible) and #030103, which is DARKER than the
+   ground and reads as a hole punched in the plate. Only the #ecaa00 gold
+   would have survived, leaving disconnected orange fragments floating on
+   purple. The crest is drawn for a light ground. Reducing it to a low
+   opacity watermark makes both problems worse, not better, and the one
+   fix, a light plate behind it, is the box this section may not have.
+
+   CONTRAST, measured against --purple-deep #241733 (relative luminance
+   0.0123). Every tone clears 4.5:1 with room:
+     --paper #faf8f3 .................................. 15.9:1  (h2, numerals)
+     --gold-soft #e6c65b .............................. 10.1:1  (the em)
+     rgba(250,248,243,.78) ............................ 10.0:1  (body)
+     rgba(250,248,243,.72) ............................  8.7:1  (fact labels)
+     rgba(250,248,243,.62) ............................  6.8:1  (charter line)
+   The film grain is stacked UNDER the type rather than over it, so these
+   are the delivered ratios and not approximations of them.
+   ============================================================ */
+
+.v2nat{
+  position:relative;
+  background:var(--purple-deep);
+  color:rgba(250,248,243,.78);
+  /* Larger than --section (5-9rem) so this plate visibly breathes more than
+     the cream sections it separates, but smaller than the closing CTA's
+     7-12.5rem, so the page's real ending still owns the biggest silence. */
+  padding-block:clamp(6rem,12vw,10rem);
+}
+
+/* Film grain: the exact technique from .v2hero::after, the ground treatment
+   every dark section on this site shares. */
+.v2nat::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* above the grain, matching the hero's stage */
+.v2nat-in{position:relative;z-index:2}
+
+/* ---------- heading ---------- */
+
+/* Deliberately SMALLER than the headings on the cream sections either side.
+   The brief for this plate is that the three figures are the visual event,
+   so the sentence introduces them rather than competing with them: the
+   numerals below run to 5.5rem against this 3.2rem cap. */
+.v2nat-h{
+  margin:0;
+  font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:-.015em;
+  color:var(--paper);
+}
+.v2nat-h em{
+  font-style:italic;
+  color:var(--gold-soft);
+}
+
+/* ---------- the three figures ---------- */
+
+/* One horizontal rule above the row and a hairline between each figure.
+   That is the whole ornament budget: it is a printed table rule, not a
+   card. Nothing here is enclosed, filled, rounded or shadowed. */
+.v2nat-figs{
+  list-style:none;
+  margin:clamp(2.75rem,5.5vw,4.25rem) 0 0;
+  padding:clamp(2rem,4vw,3rem) 0 0;
+  border-top:1px solid var(--line-dark);
+  display:grid;
+  /* Not three equal columns, and the reason is emphasis, NOT fit. Measured:
+     equal thirds clear "23,000+" comfortably at every width this row is used
+     at (768px gives a 181px content box for a 135px glyph run; 1440px gives
+     364px for 240px), so nothing wraps and nothing touches a divider either
+     way. The uneven split is here because the largest claim should carry the
+     widest field. Keep it as a judgement call, not as a fit constraint. */
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.85fr);
+}
+
+.v2nat-fig + .v2nat-fig{
+  border-left:1px solid var(--line-dark);
+  padding-left:clamp(1.25rem,3.5vw,3rem);
+}
+
+.v2nat-n{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;              /* Instrument Serif has one weight. Never bold. */
+  font-size:clamp(2.6rem,6.4vw,5.5rem);
+  line-height:.95;
+  letter-spacing:-.02em;
+  color:var(--paper);
+}
+
+/* Sentence case, not tracked uppercase. Two reasons: the copy was handed
+   over in sentence case and uppercasing it is an edit, and small caps would
+   introduce a third type treatment into a section whose whole argument is
+   restraint. The 5.5rem numeral above already does all the separating this
+   label needs. */
+.v2nat-k{
+  display:block;
+  margin-top:.9rem;
+  font-family:var(--font-text);
+  font-size:.9rem;
+  line-height:1.4;
+  color:rgba(250,248,243,.72);
+}
+
+/* ---------- body and charter line ---------- */
+
+.v2nat-tail{
+  margin-top:clamp(2.75rem,5.5vw,4.25rem);
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  column-gap:clamp(2.5rem,5vw,4.5rem);
+  align-items:start;
+}
+
+.v2nat-say{
+  margin:0;
+  max-width:38rem;
+  font-size:clamp(1rem,1.4vw,1.1rem);
+  line-height:1.7;
+  color:rgba(250,248,243,.78);
+}
+
+/* The provenance note, set as a margin footnote beside the paragraph rather
+   than beneath it: it is the quietest fact in the section and it should read
+   as a citation, not as a second claim. */
+.v2nat-charter{
+  /* optical, not structural: the smaller cap height needs a nudge to sit on
+     the same visual line as the paragraph's first line */
+  margin:.3rem 0 0;
+  max-width:24rem;
+  font-size:.92rem;
+  line-height:1.6;
+  color:rgba(250,248,243,.62);
+}
+
+/* ============================================================
+   MOBILE: a different execution, not a shrunken one.
+
+   Three columns cannot hold "23,000+" at 375px: each cell would be about
+   105px wide and the numeral alone needs more than that. The obvious fix,
+   stacking three numeral-over-word blocks, is worse: at these type sizes it
+   turns a single calm plate into roughly three phone screens of nothing but
+   numbers, and a section whose entire job is to be a brief full stop
+   becomes the longest thing on the page.
+
+   So on a phone the row becomes a ruled ledger: one figure per line,
+   numeral left, word right, sharing a baseline. It stays compact, the
+   numerals stay large, and a right-aligned column of figures against their
+   labels is if anything MORE institutional than the desktop row.
+   ============================================================ */
+
+@media (max-width:767px){
+  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
+
+  .v2nat-figs{
+    grid-template-columns:1fr;
+    padding-top:0;
+    border-top:0;              /* the per-row rules replace the single rule */
+  }
+
+  .v2nat-fig{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    padding:1rem 0 1.1rem;
+    border-top:1px solid var(--line-dark);
+  }
+  .v2nat-fig:last-child{border-bottom:1px solid var(--line-dark)}
+  /* undo the desktop divider: horizontal rules only, so this reads as a
+     ruled list and never closes into a box */
+  .v2nat-fig + .v2nat-fig{border-left:0;padding-left:0}
+
+  /* The headline and the numerals are both re-sized here, together, to hold
+     the desktop's ratio between them. Left on the shared clamps a 375px
+     phone landed on a 32px headline that ran the full width of the wrap with
+     no air beside it, and numerals only 1.3x its size, so the figures stopped
+     being the event. These two curves put that ratio back at about 1.7x, the
+     same as the desktop, and hand the headline a trailing margin again.
+     Both caps are tuned to meet the desktop values at the 767/768 seam so
+     nothing jumps size as the viewport crosses the breakpoint. */
+  .v2nat-h{font-size:clamp(1.75rem,7.4vw,2rem)}
+
+  /* Floor is 2.5rem: at 320px this figure plus "Members nationwide" has to
+     finish inside a 280px wrap on a single line. */
+  .v2nat-n{font-size:clamp(2.5rem,13vw,3.1rem)}
+
+  .v2nat-k{
+    margin-top:0;
+    font-size:.85rem;
+    text-align:right;
+  }
+
+  .v2nat-tail{
+    grid-template-columns:1fr;
+    row-gap:1.4rem;
+  }
+  .v2nat-charter{
+    margin:0;
+    max-width:none;
+  }
+}

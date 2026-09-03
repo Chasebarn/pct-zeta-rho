@@ -38,7 +38,7 @@ doc = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phi Chi Theta at USF — Professional Business Fraternity</title>
+<title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
 <link rel="icon" type="image/png" href="../assets/crest.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">

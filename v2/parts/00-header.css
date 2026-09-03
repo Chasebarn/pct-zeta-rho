@@ -1,0 +1,313 @@
+/* ==========================================================================
+   00 · HEADER. Every selector is scoped to .v2hd*.
+   No JS file ships with this section by design (see 00-header.html).
+
+   Contrast ratios below are WORST CASE, not nominal. This bar is not a flat
+   --purple-deep field: it carries the hero's bloom (see below), so the ground
+   under the type runs from a sampled rgb(40,27,54) at the left edge up to
+   rgb(56,37,85) beneath the nav. Every ratio quoted here was taken against the
+   brightest ground that actually sits under that element in a rendered 1:1
+   screenshot, so the real figure can only be better than the one stated.
+   ========================================================================== */
+
+.v2hd{
+  position:relative;
+  z-index:1;
+
+  /* No border-bottom and no box-shadow: the hero below is the same ground and
+     any edge would seam one dark field into two.
+
+     But a flat bar is not enough on its own. The hero paints a radial bloom
+     whose centre sits ABOVE its own top edge, so the hero's very first row of
+     pixels is already lifted: rgb(54,34,81) at x=80% against a flat bar's
+     rgb(36,23,51). That reads as a hairline ruled across the full width exactly
+     at the join, which is the one thing this bar must not do. So it continues
+     the bloom rather than ending it.
+
+     The geometry is picked so the match cannot drift. The hero centres its
+     ellipse 10% of its own height above its top edge with a vertical radius of
+     90% of that height, so at the hero's top edge the vertical offset is always
+     0.1H / 0.9H = one ninth of the radius, NO MATTER HOW TALL THE HERO IS.
+     Reproduce that one ratio and the join is exact for free: a centre 90px above
+     this bar's own bottom edge with an 810px vertical radius is the same 1:9.
+     An earlier version wrote this in svh, which held on a portrait phone and
+     then split open in landscape, where the hero runs well past one screen.
+     Horizontal radius is 120% to match, and both elements are full bleed, so the
+     tone agrees along the whole seam rather than at one x.
+
+     50% of --purple is tuned, not guessed: the hero blooms a raw tint, this bar
+     blooms a token colour that is bluer, so the two are matched at the join
+     rather than copied. Composited on --purple-deep the bar lands within 3/255
+     on every channel at x = 0, 50%, 80% and 100% of the width.
+
+     background-color and background-image are separate declarations on purpose:
+     if a browser cannot parse color-mix, only the bloom drops and the solid
+     purple survives. As one `background` shorthand a parse failure would drop
+     the ground entirely and leave paper-white text on the cream body. */
+  background-color:var(--purple-deep);
+  background-image:radial-gradient(120% 810px at 80% calc(100% - 90px),
+    color-mix(in srgb, var(--purple) 50%, transparent) 0%,
+    transparent 55%);
+
+  /* Safety net only. Measured, the bar has 48px of slack between the lockup and
+     the pill at a true 320px viewport and scrollWidth matches clientWidth at
+     every width from 320 to 2560, so nothing actually overflows today. This is
+     here so a fallback font on a machine without Inter still cannot push a
+     horizontal scrollbar onto the whole document. Verified it clips no focus
+     ring: every ring sits inside the gutter with room to spare. */
+  overflow:hidden;
+}
+
+/* Film grain, the same ground treatment every dark section on this site uses:
+   identical noise, identical 5% opacity. Colour-matching the bloom alone was not
+   enough. With the grain starting abruptly at the hero's top edge, the bar read
+   as a clean field butting a textured one and the change in TEXTURE redrew the
+   seam the colour match had just closed. A/B'd with the hero's grain disabled to
+   confirm that was the cause and not the gradient. */
+.v2hd::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* .v2wrap already owns the page's measure and gutter (tokens.css). This only
+   adds the row behaviour to that same element, it does not restate the gutter. */
+.v2hd-row{
+  position:relative;
+  z-index:1;          /* above the grain layer */
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem,3vw,2.4rem);
+  /* 76px is the live header's height. Keeping it means the v2 hero starts at the
+     same optical depth as the real site. */
+  min-height:76px;
+  padding-block:.9rem;
+}
+
+/* ---------- brand lockup ---------- */
+
+.v2hd-brand{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  flex:0 1 auto;
+  min-width:0;
+  min-height:44px;
+  text-decoration:none;
+  color:var(--paper);
+}
+
+.v2hd-crest{
+  flex:none;
+  height:42px;
+  width:auto;   /* intrinsic 337x445 attributes supply the ratio, so no shift */
+}
+
+.v2hd-lock{display:block;min-width:0}
+
+.v2hd-name{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;              /* Instrument Serif is 400 only, never bolded */
+  font-size:1.22rem;
+  line-height:1.1;
+  letter-spacing:.01em;
+  color:var(--paper);           /* 14.8:1 on the ground under the lockup */
+}
+
+.v2hd-sub{
+  display:block;
+  margin-top:.18rem;
+  font-family:var(--font-text);
+  font-size:.75rem;             /* 12px floor for uppercase tracked text */
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold-soft);       /* 9.4:1 on the ground under the lockup */
+}
+
+/* ---------- nav ---------- */
+
+.v2hd-nav{margin-left:auto}
+
+.v2hd-list{
+  display:flex;
+  align-items:center;
+  gap:clamp(1.1rem,2.6vw,2.2rem);
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.v2hd-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;              /* touch target, taller than the type itself */
+  font-family:var(--font-text);
+  font-size:.9rem;
+  font-weight:500;
+  letter-spacing:.01em;
+  text-decoration:none;
+  /* 9.0:1 where the bloom peaks under the nav (10.9:1 on the plain ground).
+     Kept well past the 4.5:1 floor on purpose: at 14.4px and weight 500 this is
+     small text, and it sits on a ground that is not uniform. */
+  color:rgba(250,248,243,.82);
+}
+
+/* The text is wrapped in its own span so the rule sits on the WORD, not on the
+   floor of the 44px tap box, without depending on font metrics. */
+.v2hd-t{
+  position:relative;
+  display:inline-block;
+  padding-bottom:3px;
+}
+
+/* THE ONE MOVE: a gold hairline wipes in under the link from the left.
+   Pure CSS, transform only, and the resting state (no rule) is the finished
+   state, so with JS off or motion reduced nothing is missing. */
+.v2hd-t::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:var(--gold-soft);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 320ms var(--ease);
+}
+
+.v2hd-link:hover,
+.v2hd-link:focus-visible{color:var(--paper)}
+
+.v2hd-link:hover .v2hd-t::after,
+.v2hd-link:focus-visible .v2hd-t::after{transform:scaleX(1)}
+
+/* Current page. Declared statically, so it is drawn with no JS and no pointer.
+   It must NOT be the same mark as :hover. When both were a 1px --gold-soft rule,
+   hovering "Philanthropy" from the home page drew an identical underline beneath
+   two links and "which page am I on" went ambiguous for as long as the pointer
+   rested there. The current page gets a thicker rule in the fuller gold; hover
+   keeps the hairline. --gold on --purple-deep measures 7.03:1, well clear. */
+.v2hd-link[aria-current="page"]{color:var(--paper)}
+.v2hd-link[aria-current="page"] .v2hd-t::after{
+  transform:scaleX(1);
+  height:2px;
+  background:var(--gold);
+}
+
+/* ---------- Rush pill ---------- */
+
+.v2hd-rush{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  min-height:44px;
+  padding:.6rem 1.35rem;
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);             /* 7.5:1 on --gold, ground-independent */
+  font-family:var(--font-text);
+  font-size:.86rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-decoration:none;
+  white-space:nowrap;
+  /* No transition, matching .v2hero-btn: the two gold buttons on this screen
+     must behave identically. */
+  transition:none;
+}
+.v2hd-rush:hover{background:var(--gold-soft)}
+
+/* ---------- focus ---------- */
+
+.v2hd a:focus-visible{
+  outline:2px solid var(--gold-soft);
+  outline-offset:3px;
+  border-radius:2px;
+}
+/* A gold-soft ring on a gold plate is invisible, so push the ring off the pill
+   and onto the purple ground, where it measures 9.4:1. Verified unclipped by the
+   overflow:hidden above at both 1000px and 600px. */
+.v2hd-rush:focus-visible{outline-offset:5px}
+
+/* ==========================================================================
+   MOBILE: a different execution, not a shrunk desktop.
+
+   No hamburger, because a hamburger needs JS and this section ships none.
+   Instead the bar splits by breakpoint:
+
+   560-767px : brand and the Rush pill hold row one; the four links drop to a
+               full-width second row, distributed edge to edge over a hairline.
+               There is room for them there and they stay one tap away.
+   under 560px: the four links are dropped entirely. Below this width a second
+               row of four links either crams or wraps to a third row, and the
+               header stops looking like a header. Nothing becomes unreachable:
+               99-footer.html carries Home, Rush, Philanthropy, Apparel, Career
+               Navigator and Fall Rush 2026 as a full page list.
+   ========================================================================== */
+
+@media (max-width:767px){
+  .v2hd-row{
+    flex-wrap:wrap;
+    min-height:0;
+    padding-block:.85rem;
+    gap:0 1rem;
+  }
+
+  .v2hd-brand{order:1;margin-right:auto}
+  .v2hd-rush{order:2}
+
+  .v2hd-nav{
+    order:3;
+    flex:1 0 100%;
+    margin-left:0;
+    margin-top:.85rem;
+    /* Internal hairline only. It gives the second row something to sit against
+       so the links do not read as orphans, and it is nowhere near the header's
+       bottom edge, so the seam with the hero stays closed. */
+    /* NOT --line-dark. That token is a flat #3a2b52 calibrated against a flat
+       --purple-deep ground; on this section's bloom it converges to the
+       background and measures 1.28:1 at the left gutter falling to 1.04:1 by
+       the last link, so the rule visibly dies mid-stroke. An alpha tint rides
+       the ground instead and holds at both ends. */
+    border-top:1px solid color-mix(in srgb, var(--paper) 12%, transparent);
+  }
+
+  .v2hd-list{
+    justify-content:space-between;
+    gap:.5rem;
+  }
+  .v2hd-link{font-size:.875rem}
+}
+
+@media (max-width:559px){
+  .v2hd-nav{display:none}
+
+  /* At 320px the usable width inside the gutters is 280px. The lockup and the
+     pill are trimmed here so the two of them provably fit one row rather than
+     relying on wrapping. */
+  .v2hd-row{min-height:64px}
+  .v2hd-crest{height:34px}
+  .v2hd-name{font-size:1.06rem}
+  .v2hd-sub{font-size:.68rem;letter-spacing:.1em;margin-top:.14rem}
+  .v2hd-brand{gap:.6rem}
+  .v2hd-rush{padding:.55rem 1rem;font-size:.8rem}
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   The underline's resting state (scaleX 0, no rule) and the current-page state
+   (scaleX 1) are both plain declarations, so removing the transition lands on
+   the finished state in either direction, never on the start of one.
+   ========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+  .v2hd-t::after{transition:none}
+}

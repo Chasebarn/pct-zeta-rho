@@ -1,14 +1,13 @@
 /* ============================================================
-   02 — Graduate confident.  (cream ground)
+   02 - More than just a business fraternity.  (cream ground)
 
-   ONE interaction: the photograph cross-fades when a row is selected.
-   Deliberately austere. There is no rail, no marker, no burst, no
-   frame ornament and no label baked into the photograph. Earlier
-   builds carried all five at once and the section read as busy.
+   ZERO interaction, and that is the design. Three earlier passes put an
+   accordion here: it hid two of three paragraphs behind a click, and the
+   photograph it cross-faded was one of three placeholders. Everything is now
+   on screen at load and the section needs no JavaScript at all, so there is
+   no 02-grow.js.
 
-   Rules below the "JS-ENHANCED" mark are gated on .grow--js. Without
-   JS the base rules stand alone: every row open, every photograph in
-   the flow, a plain editorial list.
+   One real photograph, three paragraphs, three doors out. Nothing else.
    ============================================================ */
 
 .grow{
@@ -19,19 +18,21 @@
 
 .grow__wrap{
   display:grid;
-  row-gap:clamp(2.2rem,5vw,3.4rem);
-  grid-template-areas:"intro" "stage" "rows";
+  row-gap:clamp(2.2rem,5vw,3.2rem);
+  grid-template-areas:"intro" "fig" "rows";
 }
 
 /* ---------- intro ---------- */
 
-.grow__intro{grid-area:intro;max-width:44rem}
+.grow__intro{grid-area:intro;max-width:46rem}
 
 .grow__h{
-  font-size:clamp(2.6rem,5.4vw,4.25rem);
+  font-size:clamp(2.5rem,5.2vw,4.25rem);
   letter-spacing:-.015em;
   margin:0 0 .9rem;
 }
+/* the italic falls on "just", so the sentence turns on the word that does the
+   work rather than on a noun at the end of it */
 .grow__h em{font-style:italic;color:var(--gold-ink)}
 
 .grow__lede{
@@ -39,158 +40,98 @@
   max-width:32rem;
   font-family:var(--font-display);
   font-style:italic;
-  font-size:clamp(1.35rem,2.1vw,1.75rem);
+  font-size:clamp(1.3rem,2vw,1.65rem);
   line-height:1.35;
   color:var(--ink-mute);
-}
-
-/* ---------- the three rows ---------- */
-
-.grow__rows{grid-area:rows}
-
-.grow__row{border-bottom:1px solid var(--line)}
-.grow__row:first-child{border-top:1px solid var(--line)}
-.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-
-.grow__btn{
-  display:grid;
-  grid-template-columns:3.2rem 1fr;
-  align-items:baseline;
-  gap:0 1rem;
-  width:100%;
-  margin:0;
-  padding:1.75rem .25rem;
-  background:none;
-  border:0;
-  color:inherit;
-  font-family:inherit;
-  text-align:left;
-  cursor:pointer;
-}
-.grow__num{
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:1.35rem;
-  line-height:1;
-  color:var(--ink-mute);
-  transition:color var(--dur) var(--ease);
-}
-.grow__ttl{
-  display:block;
-  font-family:var(--font-display);
-  font-size:clamp(1.5rem,2.3vw,1.95rem);
-  line-height:1.1;
-  color:var(--ink);
-  transition:color var(--dur) var(--ease);
-}
-@media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--purple)}
-}
-
-/* the paragraph. The generous bottom padding is the point: an earlier build
-   let the copy finish 4px above the next row's hairline, so the open row and
-   the row beneath it read as one block. */
-.grow__say{
-  margin:0;
-  padding:0 0 2.2rem;
-  max-width:34rem;
-  font-size:1rem;
-  line-height:1.7;
-  color:var(--ink-soft);
-}
-/* Reserve the tallest paragraph's height. Without it, opening a two-line row
-   after a three-line row shortens the column, the photograph beside it is
-   centred against that column, and the whole composition jumps on every click. */
-.grow--js .grow__row.is-open .grow__say{min-height:5.1rem}
-@media (min-width:560px){
-  .grow__say{padding-left:4.2rem}
 }
 
 /* ---------- the photograph ---------- */
 
 .grow__fig{
-  margin:0 0 2.4rem;
-  max-width:30rem;
-  aspect-ratio:4/5;
+  grid-area:fig;
+  margin:0;
   overflow:hidden;
   background:var(--paper-deep);
-}
-@media (min-width:560px){
-  .grow__fig{margin-left:4.2rem}
+  /* SQUARE, because the source file is 1300x1300. Cropping it to a 4:5 portrait
+     cut the third member out of the right of the frame. Never crop people out of
+     a photograph to satisfy a grid. */
+  aspect-ratio:1;
 }
 .grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
 
-/* ============================================================
-   JS-ENHANCED — the persistent stage
-   ============================================================ */
+/* ---------- the three parts ---------- */
 
-.grow__stage{grid-area:stage;display:none;position:relative}
-.grow--js .grow__stage{
-  display:block;
-  position:relative;
-  width:100%;
-  aspect-ratio:4/5;
-  overflow:hidden;
-  background:var(--paper-deep);
-}
-
-/* every photograph occupies the whole stage, permanently stacked */
-.grow--js .grow__fig{
-  position:absolute;
-  inset:0;
+.grow__rows{
+  grid-area:rows;
+  list-style:none;
   margin:0;
-  max-width:none;
-  aspect-ratio:auto;
-  opacity:0;
-  transition:opacity 520ms var(--ease);
-  pointer-events:none;
+  padding:0;
 }
-.grow--js .grow__fig.is-active{opacity:1}
 
-.grow--js .grow__say{display:none}
-.grow--js .is-open .grow__say{display:block}
-.grow--js .grow__ttl{color:var(--ink-mute)}
-.grow--js .is-open .grow__ttl{color:var(--ink)}
-.grow--js .is-open .grow__num{color:var(--gold-ink)}
+.grow__row{
+  border-bottom:1px solid var(--line);
+  padding:1.7rem 0 1.9rem;
+}
+.grow__row:first-child{border-top:1px solid var(--line);}
 
-/* ---------- desktop split ---------- */
+.grow__ttl{
+  margin:0 0 .55rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.5rem,2.3vw,1.95rem);
+  line-height:1.1;
+  color:var(--ink);
+}
 
-@media (min-width:768px){
-  .grow--js .grow__wrap{
-    grid-template-columns:minmax(0,47fr) minmax(0,53fr);
+.grow__say{
+  margin:0 0 .9rem;
+  max-width:34rem;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+}
+
+/* A text link, never a button. Three buttons in a column would compete with the
+   page's single Rush call to action. --gold-ink is the only gold legible on
+   cream at 4.62:1; the underline offset keeps it clear of the descenders. */
+.grow__link{
+  display:inline-block;
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--gold-ink);
+  text-decoration:underline;
+  text-underline-offset:.22em;
+  text-decoration-thickness:1px;
+}
+.grow__link:hover{color:var(--purple);}
+
+/* ---------- desktop: photograph beside the list ---------- */
+
+@media (min-width:860px){
+  .grow__wrap{
+    grid-template-columns:minmax(0,50fr) minmax(0,50fr);
     grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro stage" "rows stage";
+    grid-template-areas:"intro fig" "rows fig";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* the stage spans both rows of the grid and centres itself against them, so
-     the photograph is never bottom-heavy against a short accordion */
-  .grow--js .grow__stage{
+  /* centred against the whole left column, so a three-row list and a 4:5
+     photograph do not read as two blocks that happen to share a row */
+  .grow__fig{
     align-self:center;
     justify-self:end;
-    max-width:30rem;
+    width:100%;
+    max-width:32rem;
   }
-  /* the accordion carries the section on this side, so it gets the height to
-     stand against a 30rem photograph rather than floating at the top of it */
-  .grow--js .grow__btn{padding:2rem .25rem}
 }
 
 /* ---------- mobile ---------- */
 
-@media (max-width:767px){
-  .grow--js .grow__stage{aspect-ratio:1}
-  .grow__fig{aspect-ratio:1}
-  .grow__btn{grid-template-columns:2.6rem 1fr;padding:1.25rem .25rem}
-  .grow__num{font-size:1.15rem}
+@media (max-width:859px){
+  /* the photograph is already square; on a phone it only needs to stop being
+     the tallest thing on the screen before the first paragraph */
+  .grow__fig{max-width:32rem;margin-inline:auto}
 }
 
-/* ---------- reduced motion ----------
-   Every state here is a plain declaration (the active photograph is opacity 1,
-   the open paragraph is display block), so dropping the transition lands on the
-   finished state, never on the start of one. */
-@media (prefers-reduced-motion:reduce){
-  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
-}
-.grow--still *,.grow--still *::before,.grow--still *::after{
-  transition:none!important;animation:none!important;
-}
+/* Nothing in this section transitions or animates, so there is no
+   prefers-reduced-motion block to write. That is the point. */

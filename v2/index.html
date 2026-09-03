@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phi Chi Theta at USF — Professional Business Fraternity</title>
+<title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
 <link rel="icon" type="image/png" href="../assets/crest.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,320 @@
 <link rel="stylesheet" href="../css/styles.css?v=24">
 <link rel="stylesheet" href="tokens.css">
 <style>
+/* ===== 00-header ===== */
+/* ==========================================================================
+   00 · HEADER. Every selector is scoped to .v2hd*.
+   No JS file ships with this section by design (see 00-header.html).
+
+   Contrast ratios below are WORST CASE, not nominal. This bar is not a flat
+   --purple-deep field: it carries the hero's bloom (see below), so the ground
+   under the type runs from a sampled rgb(40,27,54) at the left edge up to
+   rgb(56,37,85) beneath the nav. Every ratio quoted here was taken against the
+   brightest ground that actually sits under that element in a rendered 1:1
+   screenshot, so the real figure can only be better than the one stated.
+   ========================================================================== */
+
+.v2hd{
+  position:relative;
+  z-index:1;
+
+  /* No border-bottom and no box-shadow: the hero below is the same ground and
+     any edge would seam one dark field into two.
+
+     But a flat bar is not enough on its own. The hero paints a radial bloom
+     whose centre sits ABOVE its own top edge, so the hero's very first row of
+     pixels is already lifted: rgb(54,34,81) at x=80% against a flat bar's
+     rgb(36,23,51). That reads as a hairline ruled across the full width exactly
+     at the join, which is the one thing this bar must not do. So it continues
+     the bloom rather than ending it.
+
+     The geometry is picked so the match cannot drift. The hero centres its
+     ellipse 10% of its own height above its top edge with a vertical radius of
+     90% of that height, so at the hero's top edge the vertical offset is always
+     0.1H / 0.9H = one ninth of the radius, NO MATTER HOW TALL THE HERO IS.
+     Reproduce that one ratio and the join is exact for free: a centre 90px above
+     this bar's own bottom edge with an 810px vertical radius is the same 1:9.
+     An earlier version wrote this in svh, which held on a portrait phone and
+     then split open in landscape, where the hero runs well past one screen.
+     Horizontal radius is 120% to match, and both elements are full bleed, so the
+     tone agrees along the whole seam rather than at one x.
+
+     50% of --purple is tuned, not guessed: the hero blooms a raw tint, this bar
+     blooms a token colour that is bluer, so the two are matched at the join
+     rather than copied. Composited on --purple-deep the bar lands within 3/255
+     on every channel at x = 0, 50%, 80% and 100% of the width.
+
+     background-color and background-image are separate declarations on purpose:
+     if a browser cannot parse color-mix, only the bloom drops and the solid
+     purple survives. As one `background` shorthand a parse failure would drop
+     the ground entirely and leave paper-white text on the cream body. */
+  background-color:var(--purple-deep);
+  background-image:radial-gradient(120% 810px at 80% calc(100% - 90px),
+    color-mix(in srgb, var(--purple) 50%, transparent) 0%,
+    transparent 55%);
+
+  /* Safety net only. Measured, the bar has 48px of slack between the lockup and
+     the pill at a true 320px viewport and scrollWidth matches clientWidth at
+     every width from 320 to 2560, so nothing actually overflows today. This is
+     here so a fallback font on a machine without Inter still cannot push a
+     horizontal scrollbar onto the whole document. Verified it clips no focus
+     ring: every ring sits inside the gutter with room to spare. */
+  overflow:hidden;
+}
+
+/* Film grain, the same ground treatment every dark section on this site uses:
+   identical noise, identical 5% opacity. Colour-matching the bloom alone was not
+   enough. With the grain starting abruptly at the hero's top edge, the bar read
+   as a clean field butting a textured one and the change in TEXTURE redrew the
+   seam the colour match had just closed. A/B'd with the hero's grain disabled to
+   confirm that was the cause and not the gradient. */
+.v2hd::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* .v2wrap already owns the page's measure and gutter (tokens.css). This only
+   adds the row behaviour to that same element, it does not restate the gutter. */
+.v2hd-row{
+  position:relative;
+  z-index:1;          /* above the grain layer */
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem,3vw,2.4rem);
+  /* 76px is the live header's height. Keeping it means the v2 hero starts at the
+     same optical depth as the real site. */
+  min-height:76px;
+  padding-block:.9rem;
+}
+
+/* ---------- brand lockup ---------- */
+
+.v2hd-brand{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  flex:0 1 auto;
+  min-width:0;
+  min-height:44px;
+  text-decoration:none;
+  color:var(--paper);
+}
+
+.v2hd-crest{
+  flex:none;
+  height:42px;
+  width:auto;   /* intrinsic 337x445 attributes supply the ratio, so no shift */
+}
+
+.v2hd-lock{display:block;min-width:0}
+
+.v2hd-name{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;              /* Instrument Serif is 400 only, never bolded */
+  font-size:1.22rem;
+  line-height:1.1;
+  letter-spacing:.01em;
+  color:var(--paper);           /* 14.8:1 on the ground under the lockup */
+}
+
+.v2hd-sub{
+  display:block;
+  margin-top:.18rem;
+  font-family:var(--font-text);
+  font-size:.75rem;             /* 12px floor for uppercase tracked text */
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold-soft);       /* 9.4:1 on the ground under the lockup */
+}
+
+/* ---------- nav ---------- */
+
+.v2hd-nav{margin-left:auto}
+
+.v2hd-list{
+  display:flex;
+  align-items:center;
+  gap:clamp(1.1rem,2.6vw,2.2rem);
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.v2hd-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;              /* touch target, taller than the type itself */
+  font-family:var(--font-text);
+  font-size:.9rem;
+  font-weight:500;
+  letter-spacing:.01em;
+  text-decoration:none;
+  /* 9.0:1 where the bloom peaks under the nav (10.9:1 on the plain ground).
+     Kept well past the 4.5:1 floor on purpose: at 14.4px and weight 500 this is
+     small text, and it sits on a ground that is not uniform. */
+  color:rgba(250,248,243,.82);
+}
+
+/* The text is wrapped in its own span so the rule sits on the WORD, not on the
+   floor of the 44px tap box, without depending on font metrics. */
+.v2hd-t{
+  position:relative;
+  display:inline-block;
+  padding-bottom:3px;
+}
+
+/* THE ONE MOVE: a gold hairline wipes in under the link from the left.
+   Pure CSS, transform only, and the resting state (no rule) is the finished
+   state, so with JS off or motion reduced nothing is missing. */
+.v2hd-t::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:var(--gold-soft);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 320ms var(--ease);
+}
+
+.v2hd-link:hover,
+.v2hd-link:focus-visible{color:var(--paper)}
+
+.v2hd-link:hover .v2hd-t::after,
+.v2hd-link:focus-visible .v2hd-t::after{transform:scaleX(1)}
+
+/* Current page. Declared statically, so it is drawn with no JS and no pointer.
+   It must NOT be the same mark as :hover. When both were a 1px --gold-soft rule,
+   hovering "Philanthropy" from the home page drew an identical underline beneath
+   two links and "which page am I on" went ambiguous for as long as the pointer
+   rested there. The current page gets a thicker rule in the fuller gold; hover
+   keeps the hairline. --gold on --purple-deep measures 7.03:1, well clear. */
+.v2hd-link[aria-current="page"]{color:var(--paper)}
+.v2hd-link[aria-current="page"] .v2hd-t::after{
+  transform:scaleX(1);
+  height:2px;
+  background:var(--gold);
+}
+
+/* ---------- Rush pill ---------- */
+
+.v2hd-rush{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  min-height:44px;
+  padding:.6rem 1.35rem;
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);             /* 7.5:1 on --gold, ground-independent */
+  font-family:var(--font-text);
+  font-size:.86rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-decoration:none;
+  white-space:nowrap;
+  /* No transition, matching .v2hero-btn: the two gold buttons on this screen
+     must behave identically. */
+  transition:none;
+}
+.v2hd-rush:hover{background:var(--gold-soft)}
+
+/* ---------- focus ---------- */
+
+.v2hd a:focus-visible{
+  outline:2px solid var(--gold-soft);
+  outline-offset:3px;
+  border-radius:2px;
+}
+/* A gold-soft ring on a gold plate is invisible, so push the ring off the pill
+   and onto the purple ground, where it measures 9.4:1. Verified unclipped by the
+   overflow:hidden above at both 1000px and 600px. */
+.v2hd-rush:focus-visible{outline-offset:5px}
+
+/* ==========================================================================
+   MOBILE: a different execution, not a shrunk desktop.
+
+   No hamburger, because a hamburger needs JS and this section ships none.
+   Instead the bar splits by breakpoint:
+
+   560-767px : brand and the Rush pill hold row one; the four links drop to a
+               full-width second row, distributed edge to edge over a hairline.
+               There is room for them there and they stay one tap away.
+   under 560px: the four links are dropped entirely. Below this width a second
+               row of four links either crams or wraps to a third row, and the
+               header stops looking like a header. Nothing becomes unreachable:
+               99-footer.html carries Home, Rush, Philanthropy, Apparel, Career
+               Navigator and Fall Rush 2026 as a full page list.
+   ========================================================================== */
+
+@media (max-width:767px){
+  .v2hd-row{
+    flex-wrap:wrap;
+    min-height:0;
+    padding-block:.85rem;
+    gap:0 1rem;
+  }
+
+  .v2hd-brand{order:1;margin-right:auto}
+  .v2hd-rush{order:2}
+
+  .v2hd-nav{
+    order:3;
+    flex:1 0 100%;
+    margin-left:0;
+    margin-top:.85rem;
+    /* Internal hairline only. It gives the second row something to sit against
+       so the links do not read as orphans, and it is nowhere near the header's
+       bottom edge, so the seam with the hero stays closed. */
+    /* NOT --line-dark. That token is a flat #3a2b52 calibrated against a flat
+       --purple-deep ground; on this section's bloom it converges to the
+       background and measures 1.28:1 at the left gutter falling to 1.04:1 by
+       the last link, so the rule visibly dies mid-stroke. An alpha tint rides
+       the ground instead and holds at both ends. */
+    border-top:1px solid color-mix(in srgb, var(--paper) 12%, transparent);
+  }
+
+  .v2hd-list{
+    justify-content:space-between;
+    gap:.5rem;
+  }
+  .v2hd-link{font-size:.875rem}
+}
+
+@media (max-width:559px){
+  .v2hd-nav{display:none}
+
+  /* At 320px the usable width inside the gutters is 280px. The lockup and the
+     pill are trimmed here so the two of them provably fit one row rather than
+     relying on wrapping. */
+  .v2hd-row{min-height:64px}
+  .v2hd-crest{height:34px}
+  .v2hd-name{font-size:1.06rem}
+  .v2hd-sub{font-size:.68rem;letter-spacing:.1em;margin-top:.14rem}
+  .v2hd-brand{gap:.6rem}
+  .v2hd-rush{padding:.55rem 1rem;font-size:.8rem}
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   The underline's resting state (scaleX 0, no rule) and the current-page state
+   (scaleX 1) are both plain declarations, so removing the transition lands on
+   the finished state in either direction, never on the start of one.
+   ========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+  .v2hd-t::after{transition:none}
+}
 /* ===== 01-hero ===== */
 /* 01 · HERO — atmosphere. Every selector scoped to .v2hero.
    Base CSS is the FINISHED state: all copy is visible, sized and legible with
@@ -227,16 +541,15 @@
 }
 /* ===== 02-grow ===== */
 /* ============================================================
-   02 — Graduate confident.  (cream ground)
+   02 - More than just a business fraternity.  (cream ground)
 
-   ONE interaction: the photograph cross-fades when a row is selected.
-   Deliberately austere. There is no rail, no marker, no burst, no
-   frame ornament and no label baked into the photograph. Earlier
-   builds carried all five at once and the section read as busy.
+   ZERO interaction, and that is the design. Three earlier passes put an
+   accordion here: it hid two of three paragraphs behind a click, and the
+   photograph it cross-faded was one of three placeholders. Everything is now
+   on screen at load and the section needs no JavaScript at all, so there is
+   no 02-grow.js.
 
-   Rules below the "JS-ENHANCED" mark are gated on .grow--js. Without
-   JS the base rules stand alone: every row open, every photograph in
-   the flow, a plain editorial list.
+   One real photograph, three paragraphs, three doors out. Nothing else.
    ============================================================ */
 
 .grow{
@@ -247,19 +560,21 @@
 
 .grow__wrap{
   display:grid;
-  row-gap:clamp(2.2rem,5vw,3.4rem);
-  grid-template-areas:"intro" "stage" "rows";
+  row-gap:clamp(2.2rem,5vw,3.2rem);
+  grid-template-areas:"intro" "fig" "rows";
 }
 
 /* ---------- intro ---------- */
 
-.grow__intro{grid-area:intro;max-width:44rem}
+.grow__intro{grid-area:intro;max-width:46rem}
 
 .grow__h{
-  font-size:clamp(2.6rem,5.4vw,4.25rem);
+  font-size:clamp(2.5rem,5.2vw,4.25rem);
   letter-spacing:-.015em;
   margin:0 0 .9rem;
 }
+/* the italic falls on "just", so the sentence turns on the word that does the
+   work rather than on a noun at the end of it */
 .grow__h em{font-style:italic;color:var(--gold-ink)}
 
 .grow__lede{
@@ -267,238 +582,102 @@
   max-width:32rem;
   font-family:var(--font-display);
   font-style:italic;
-  font-size:clamp(1.35rem,2.1vw,1.75rem);
+  font-size:clamp(1.3rem,2vw,1.65rem);
   line-height:1.35;
   color:var(--ink-mute);
-}
-
-/* ---------- the three rows ---------- */
-
-.grow__rows{grid-area:rows}
-
-.grow__row{border-bottom:1px solid var(--line)}
-.grow__row:first-child{border-top:1px solid var(--line)}
-.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-
-.grow__btn{
-  display:grid;
-  grid-template-columns:3.2rem 1fr;
-  align-items:baseline;
-  gap:0 1rem;
-  width:100%;
-  margin:0;
-  padding:1.75rem .25rem;
-  background:none;
-  border:0;
-  color:inherit;
-  font-family:inherit;
-  text-align:left;
-  cursor:pointer;
-}
-.grow__num{
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:1.35rem;
-  line-height:1;
-  color:var(--ink-mute);
-  transition:color var(--dur) var(--ease);
-}
-.grow__ttl{
-  display:block;
-  font-family:var(--font-display);
-  font-size:clamp(1.5rem,2.3vw,1.95rem);
-  line-height:1.1;
-  color:var(--ink);
-  transition:color var(--dur) var(--ease);
-}
-@media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--purple)}
-}
-
-/* the paragraph. The generous bottom padding is the point: an earlier build
-   let the copy finish 4px above the next row's hairline, so the open row and
-   the row beneath it read as one block. */
-.grow__say{
-  margin:0;
-  padding:0 0 2.2rem;
-  max-width:34rem;
-  font-size:1rem;
-  line-height:1.7;
-  color:var(--ink-soft);
-}
-/* Reserve the tallest paragraph's height. Without it, opening a two-line row
-   after a three-line row shortens the column, the photograph beside it is
-   centred against that column, and the whole composition jumps on every click. */
-.grow--js .grow__row.is-open .grow__say{min-height:5.1rem}
-@media (min-width:560px){
-  .grow__say{padding-left:4.2rem}
 }
 
 /* ---------- the photograph ---------- */
 
 .grow__fig{
-  margin:0 0 2.4rem;
-  max-width:30rem;
-  aspect-ratio:4/5;
+  grid-area:fig;
+  margin:0;
   overflow:hidden;
   background:var(--paper-deep);
-}
-@media (min-width:560px){
-  .grow__fig{margin-left:4.2rem}
+  /* SQUARE, because the source file is 1300x1300. Cropping it to a 4:5 portrait
+     cut the third member out of the right of the frame. Never crop people out of
+     a photograph to satisfy a grid. */
+  aspect-ratio:1;
 }
 .grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
 
-/* ============================================================
-   JS-ENHANCED — the persistent stage
-   ============================================================ */
+/* ---------- the three parts ---------- */
 
-.grow__stage{grid-area:stage;display:none;position:relative}
-.grow--js .grow__stage{
-  display:block;
-  position:relative;
-  width:100%;
-  aspect-ratio:4/5;
-  overflow:hidden;
-  background:var(--paper-deep);
-}
-
-/* every photograph occupies the whole stage, permanently stacked */
-.grow--js .grow__fig{
-  position:absolute;
-  inset:0;
+.grow__rows{
+  grid-area:rows;
+  list-style:none;
   margin:0;
-  max-width:none;
-  aspect-ratio:auto;
-  opacity:0;
-  transition:opacity 520ms var(--ease);
-  pointer-events:none;
+  padding:0;
 }
-.grow--js .grow__fig.is-active{opacity:1}
 
-.grow--js .grow__say{display:none}
-.grow--js .is-open .grow__say{display:block}
-.grow--js .grow__ttl{color:var(--ink-mute)}
-.grow--js .is-open .grow__ttl{color:var(--ink)}
-.grow--js .is-open .grow__num{color:var(--gold-ink)}
+.grow__row{
+  border-bottom:1px solid var(--line);
+  padding:1.7rem 0 1.9rem;
+}
+.grow__row:first-child{border-top:1px solid var(--line);}
 
-/* ---------- desktop split ---------- */
+.grow__ttl{
+  margin:0 0 .55rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.5rem,2.3vw,1.95rem);
+  line-height:1.1;
+  color:var(--ink);
+}
 
-@media (min-width:768px){
-  .grow--js .grow__wrap{
-    grid-template-columns:minmax(0,47fr) minmax(0,53fr);
+.grow__say{
+  margin:0 0 .9rem;
+  max-width:34rem;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+}
+
+/* A text link, never a button. Three buttons in a column would compete with the
+   page's single Rush call to action. --gold-ink is the only gold legible on
+   cream at 4.62:1; the underline offset keeps it clear of the descenders. */
+.grow__link{
+  display:inline-block;
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--gold-ink);
+  text-decoration:underline;
+  text-underline-offset:.22em;
+  text-decoration-thickness:1px;
+}
+.grow__link:hover{color:var(--purple);}
+
+/* ---------- desktop: photograph beside the list ---------- */
+
+@media (min-width:860px){
+  .grow__wrap{
+    grid-template-columns:minmax(0,50fr) minmax(0,50fr);
     grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro stage" "rows stage";
+    grid-template-areas:"intro fig" "rows fig";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* the stage spans both rows of the grid and centres itself against them, so
-     the photograph is never bottom-heavy against a short accordion */
-  .grow--js .grow__stage{
+  /* centred against the whole left column, so a three-row list and a 4:5
+     photograph do not read as two blocks that happen to share a row */
+  .grow__fig{
     align-self:center;
     justify-self:end;
-    max-width:30rem;
+    width:100%;
+    max-width:32rem;
   }
-  /* the accordion carries the section on this side, so it gets the height to
-     stand against a 30rem photograph rather than floating at the top of it */
-  .grow--js .grow__btn{padding:2rem .25rem}
 }
 
 /* ---------- mobile ---------- */
 
-@media (max-width:767px){
-  .grow--js .grow__stage{aspect-ratio:1}
-  .grow__fig{aspect-ratio:1}
-  .grow__btn{grid-template-columns:2.6rem 1fr;padding:1.25rem .25rem}
-  .grow__num{font-size:1.15rem}
+@media (max-width:859px){
+  /* the photograph is already square; on a phone it only needs to stop being
+     the tallest thing on the screen before the first paragraph */
+  .grow__fig{max-width:32rem;margin-inline:auto}
 }
 
-/* ---------- reduced motion ----------
-   Every state here is a plain declaration (the active photograph is opacity 1,
-   the open paragraph is display block), so dropping the transition lands on the
-   finished state, never on the start of one. */
-@media (prefers-reduced-motion:reduce){
-  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
-}
-.grow--still *,.grow--still *::before,.grow--still *::after{
-  transition:none!important;animation:none!important;
-}
-/* ===== 03-numbers ===== */
-/* ============================================================
-   03 — Numbers don’t lie.   One centred composition.
-
-   The three ornaments an earlier build carried here are all gone on
-   purpose: the 01/02/03 ordinals (they numbered things that have no
-   order), the hairline rule under each numeral (it fenced the label
-   away from the figure it belongs to), and the pinned horizontal
-   track. What is left is the figure, its label, and air.
-   ============================================================ */
-
-.num{
-  background:var(--paper);
-  color:var(--ink-soft);
-  padding-block:var(--section);
-}
-
-.num__h{
-  text-align:center;
-  font-size:clamp(2.6rem,6vw,5rem);
-  letter-spacing:-.015em;
-  margin:0 0 clamp(3rem,7vw,5.5rem);
-}
-.num__h em{font-style:italic;color:var(--gold-ink)}
-
-.num__grid{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:grid;
-  gap:clamp(3.2rem,6vw,2.5rem);
-  grid-template-columns:1fr;
-}
-@media (min-width:768px){
-  .num__grid{grid-template-columns:repeat(3,1fr)}
-}
-
-.num__p{
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.num__val{
-  margin:0;
-  font-family:var(--font-display);
-  font-weight:400;
-  /* the whole point of the section. Big enough to be the loudest thing
-     on the page, capped so three of them still fit one row at 1024px. */
-  font-size:clamp(4.6rem,11vw,9rem);
-  line-height:.9;
-  letter-spacing:-.02em;
-  color:var(--ink);
-  font-variant-numeric:lining-nums tabular-nums;
-}
-.num__u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
-
-/* the label is set in the display italic, not the UI sans. A 13px sans
-   caption under a 144px serif numeral reads as a chart legend. */
-.num__lab{
-  margin:1.4rem 0 0;
-  max-width:17rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:clamp(1.02rem,1.5vw,1.22rem);
-  line-height:1.4;
-  color:var(--ink-soft);
-  text-wrap:balance;
-}
-
-/* the count-up. The finished value is in the markup, so with JS off or
-   under reduced motion the number is simply there. */
-@media (prefers-reduced-motion:reduce){
-  .num *{transition:none!important;animation:none!important}
-}
-/* ===== 04-place ===== */
+/* Nothing in this section transitions or animates, so there is no
+   prefers-reduced-motion block to write. That is the point. */
+/* ===== 03-place ===== */
 /* ============================================================
    04 — Where members have placed.  (cream ground / proof, part two)
 
@@ -515,10 +694,11 @@
   background:var(--paper);
   color:var(--ink-soft);
 
-  /* Continuation, not a new chapter. The gap above is deliberately about
-     half a section so this lands under the numbers as their evidence.
-     If 03 ends with a full --section of its own, drop this to 0. */
-  padding-block:clamp(2.25rem,5vw,4rem) var(--section);
+  /* A whole chapter now, not a continuation. This section used to be the second
+     half of a pair, sitting under a separate "Numbers don't lie." section with
+     roughly half a section of air above it. The two were merged, so it takes a
+     full --section on both sides. */
+  padding-block:var(--section);
 
   /* one place to retune the whole belt */
   --pl-cell-h:clamp(3.6rem,5.4vw,4.6rem);   /* every cell the same height */
@@ -530,24 +710,25 @@
 /* ---------- heading: the house display serif, one notch under a
      chapter opener so the numbers above stay the loudest thing ---------- */
 
+/* Chapter-opener scale, matching .mem-h in 06-mem.css. It was capped at 3.4rem
+   only because it used to be the second of two headings. tokens.css already sets
+   text-wrap:balance on h2, so at the 5rem cap this breaks after the comma, which
+   is the break we want: one register of proof per line. */
 .pl-h{
   text-align:center;
-  font-size:clamp(2.1rem,4.6vw,3.4rem);
-  letter-spacing:-.01em;
-  margin-bottom:.85rem;
+  font-size:clamp(2.6rem,6vw,5rem);
+  letter-spacing:-.015em;
+  margin:0 0 clamp(2.25rem,4.5vw,3.5rem);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
-.pl-sub{
-  margin:0 auto clamp(2rem,4.2vw,3.2rem);
-  max-width:30rem;
-  text-align:center;
-  font-size:1rem;
-  line-height:1.5;
-  color:var(--ink-mute);
-}
-
 /* ---------- the two rows (full bleed, no wrap) ---------- */
+
+/* Close the two belts into one ruled object. Three hairlines total: above the
+   first row, between them, and below the second. The band is full bleed, so its
+   borders sit outside the edge mask and do not fade with the marks. That is
+   correct: the marks dissolve at the edges, the band does not. */
+.pl-rows{border-block:1px solid var(--line)}
 
 .pl-row{position:relative}
 .pl-row + .pl-row{border-top:1px solid var(--line)}
@@ -666,6 +847,59 @@
 /* ---------- phone: the same two strips, smaller and slower ----------
    (the pixels-per-second drop is set in the JS; this is the sizing) */
 
+
+/* ---------- the three figures, under the belts ----------
+   Order is deliberate and is the owner's call: recognition first, arithmetic
+   second. "Goldman Sachs" lands on sight and costs the reader nothing; "95%" is
+   a claim that has to be read and believed. The belts earn the figures.
+
+   These do NOT count up. The section's one interaction is the belt above it, and
+   a marquee plus a counter is two. The values are static text in the markup. */
+.pl-nums{
+  list-style:none;
+  margin:clamp(3rem,6vw,4.75rem) 0 0;
+  padding:0;
+  display:grid;
+  gap:clamp(2.75rem,5vw,2rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:768px){
+  .pl-nums{grid-template-columns:repeat(3,1fr)}
+}
+
+.pl-n{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.pl-n-val{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  /* big enough to be the loudest thing in the section, capped so three still fit
+     one row at 1024px */
+  font-size:clamp(4.4rem,10vw,8rem);
+  line-height:.9;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
+
+/* the label is the display italic, not the UI sans. A 13px sans caption under a
+   128px serif numeral reads as a chart legend. */
+.pl-n-lab{
+  margin:1.3rem 0 0;
+  max-width:17rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  line-height:1.4;
+  color:var(--ink-soft);
+}
+
 @media (max-width:767px){
   .pl{
     --pl-cell-h:clamp(3rem,10vw,3.5rem);
@@ -702,38 +936,808 @@
   }
   .pl-cell[data-pl-clone]{display:none}
 }
-/* ===== 05-mem ===== */
+/* ===== 04-national ===== */
 /* ============================================================
-   05 — Your college should look like this.
+   04. A national fraternity since 1924.   (--purple-deep ground)
 
-   A continuous band, not a fan. The earlier build spread the photos on a
-   parabola and scaled them by distance from centre, so no two were the
-   same size and the composition never resolved. Here every photograph is
-   identical in size; the band's own edges do the cropping.
+   ZERO interaction, zero motion, and that IS the design. It was written to
+   break up the drifting logo belt (03) and the drifting photograph band,
+   which read as one conveyor when they touch. NOTE: 05-howtojoin has since
+   landed in the slot below this one, so the two belts are no longer
+   adjacent and this plate no longer separates them directly. It still
+   holds: it is the only dark ground in the middle of the page and the only
+   section with no motion at all. This is the page's held breath: a dark,
+   still plate that stops the scroll for a beat. Nothing here
+   transitions or animates, so there is no prefers-reduced-motion block and
+   no .js file. There is nothing to resolve to a finished state, because
+   the shipped state IS the finished state.
 
-   The band is full-bleed and clips: card height is 118% of the band, so
-   the bottoms are cut flat while the tilted tops stay ragged.
+   Prefix is v2nat, NOT nat: the built page still links css/styles.css,
+   which already owns .nat-line, .nat-line b and .split.nat. A .nat- prefix
+   here would have inherited that old section's styling.
+
+   THE CREST IS DELIBERATELY OMITTED. assets/crest.png does have a real
+   alpha channel (all four corners are alpha 0), so it would not have
+   painted a white plate. It was excluded on contrast, not transparency:
+   its two largest visible colour regions are #390e66 (1.15:1 against this
+   ground, effectively invisible) and #030103, which is DARKER than the
+   ground and reads as a hole punched in the plate. Only the #ecaa00 gold
+   would have survived, leaving disconnected orange fragments floating on
+   purple. The crest is drawn for a light ground. Reducing it to a low
+   opacity watermark makes both problems worse, not better, and the one
+   fix, a light plate behind it, is the box this section may not have.
+
+   CONTRAST, measured against --purple-deep #241733 (relative luminance
+   0.0123). Every tone clears 4.5:1 with room:
+     --paper #faf8f3 .................................. 15.9:1  (h2, numerals)
+     --gold-soft #e6c65b .............................. 10.1:1  (the em)
+     rgba(250,248,243,.78) ............................ 10.0:1  (body)
+     rgba(250,248,243,.72) ............................  8.7:1  (fact labels)
+     rgba(250,248,243,.62) ............................  6.8:1  (charter line)
+   The film grain is stacked UNDER the type rather than over it, so these
+   are the delivered ratios and not approximations of them.
+   ============================================================ */
+
+.v2nat{
+  position:relative;
+  background:var(--purple-deep);
+  color:rgba(250,248,243,.78);
+  /* Larger than --section (5-9rem) so this plate visibly breathes more than
+     the cream sections it separates, but smaller than the closing CTA's
+     7-12.5rem, so the page's real ending still owns the biggest silence. */
+  padding-block:clamp(6rem,12vw,10rem);
+}
+
+/* Film grain: the exact technique from .v2hero::after, the ground treatment
+   every dark section on this site shares. */
+.v2nat::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* above the grain, matching the hero's stage */
+.v2nat-in{position:relative;z-index:2}
+
+/* ---------- heading ---------- */
+
+/* Deliberately SMALLER than the headings on the cream sections either side.
+   The brief for this plate is that the three figures are the visual event,
+   so the sentence introduces them rather than competing with them: the
+   numerals below run to 5.5rem against this 3.2rem cap. */
+.v2nat-h{
+  margin:0;
+  font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:-.015em;
+  color:var(--paper);
+}
+.v2nat-h em{
+  font-style:italic;
+  color:var(--gold-soft);
+}
+
+/* ---------- the three figures ---------- */
+
+/* One horizontal rule above the row and a hairline between each figure.
+   That is the whole ornament budget: it is a printed table rule, not a
+   card. Nothing here is enclosed, filled, rounded or shadowed. */
+.v2nat-figs{
+  list-style:none;
+  margin:clamp(2.75rem,5.5vw,4.25rem) 0 0;
+  padding:clamp(2rem,4vw,3rem) 0 0;
+  border-top:1px solid var(--line-dark);
+  display:grid;
+  /* Not three equal columns, and the reason is emphasis, NOT fit. Measured:
+     equal thirds clear "23,000+" comfortably at every width this row is used
+     at (768px gives a 181px content box for a 135px glyph run; 1440px gives
+     364px for 240px), so nothing wraps and nothing touches a divider either
+     way. The uneven split is here because the largest claim should carry the
+     widest field. Keep it as a judgement call, not as a fit constraint. */
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.85fr);
+}
+
+.v2nat-fig + .v2nat-fig{
+  border-left:1px solid var(--line-dark);
+  padding-left:clamp(1.25rem,3.5vw,3rem);
+}
+
+.v2nat-n{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;              /* Instrument Serif has one weight. Never bold. */
+  font-size:clamp(2.6rem,6.4vw,5.5rem);
+  line-height:.95;
+  letter-spacing:-.02em;
+  color:var(--paper);
+}
+
+/* Sentence case, not tracked uppercase. Two reasons: the copy was handed
+   over in sentence case and uppercasing it is an edit, and small caps would
+   introduce a third type treatment into a section whose whole argument is
+   restraint. The 5.5rem numeral above already does all the separating this
+   label needs. */
+.v2nat-k{
+  display:block;
+  margin-top:.9rem;
+  font-family:var(--font-text);
+  font-size:.9rem;
+  line-height:1.4;
+  color:rgba(250,248,243,.72);
+}
+
+/* ---------- body and charter line ---------- */
+
+.v2nat-tail{
+  margin-top:clamp(2.75rem,5.5vw,4.25rem);
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  column-gap:clamp(2.5rem,5vw,4.5rem);
+  align-items:start;
+}
+
+.v2nat-say{
+  margin:0;
+  max-width:38rem;
+  font-size:clamp(1rem,1.4vw,1.1rem);
+  line-height:1.7;
+  color:rgba(250,248,243,.78);
+}
+
+/* The provenance note, set as a margin footnote beside the paragraph rather
+   than beneath it: it is the quietest fact in the section and it should read
+   as a citation, not as a second claim. */
+.v2nat-charter{
+  /* optical, not structural: the smaller cap height needs a nudge to sit on
+     the same visual line as the paragraph's first line */
+  margin:.3rem 0 0;
+  max-width:24rem;
+  font-size:.92rem;
+  line-height:1.6;
+  color:rgba(250,248,243,.62);
+}
+
+/* ============================================================
+   MOBILE: a different execution, not a shrunken one.
+
+   Three columns cannot hold "23,000+" at 375px: each cell would be about
+   105px wide and the numeral alone needs more than that. The obvious fix,
+   stacking three numeral-over-word blocks, is worse: at these type sizes it
+   turns a single calm plate into roughly three phone screens of nothing but
+   numbers, and a section whose entire job is to be a brief full stop
+   becomes the longest thing on the page.
+
+   So on a phone the row becomes a ruled ledger: one figure per line,
+   numeral left, word right, sharing a baseline. It stays compact, the
+   numerals stay large, and a right-aligned column of figures against their
+   labels is if anything MORE institutional than the desktop row.
+   ============================================================ */
+
+@media (max-width:767px){
+  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
+
+  .v2nat-figs{
+    grid-template-columns:1fr;
+    padding-top:0;
+    border-top:0;              /* the per-row rules replace the single rule */
+  }
+
+  .v2nat-fig{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    padding:1rem 0 1.1rem;
+    border-top:1px solid var(--line-dark);
+  }
+  .v2nat-fig:last-child{border-bottom:1px solid var(--line-dark)}
+  /* undo the desktop divider: horizontal rules only, so this reads as a
+     ruled list and never closes into a box */
+  .v2nat-fig + .v2nat-fig{border-left:0;padding-left:0}
+
+  /* The headline and the numerals are both re-sized here, together, to hold
+     the desktop's ratio between them. Left on the shared clamps a 375px
+     phone landed on a 32px headline that ran the full width of the wrap with
+     no air beside it, and numerals only 1.3x its size, so the figures stopped
+     being the event. These two curves put that ratio back at about 1.7x, the
+     same as the desktop, and hand the headline a trailing margin again.
+     Both caps are tuned to meet the desktop values at the 767/768 seam so
+     nothing jumps size as the viewport crosses the breakpoint. */
+  .v2nat-h{font-size:clamp(1.75rem,7.4vw,2rem)}
+
+  /* Floor is 2.5rem: at 320px this figure plus "Members nationwide" has to
+     finish inside a 280px wrap on a single line. */
+  .v2nat-n{font-size:clamp(2.5rem,13vw,3.1rem)}
+
+  .v2nat-k{
+    margin-top:0;
+    font-size:.85rem;
+    text-align:right;
+  }
+
+  .v2nat-tail{
+    grid-template-columns:1fr;
+    row-gap:1.4rem;
+  }
+  .v2nat-charter{
+    margin:0;
+    max-width:none;
+  }
+}
+/* ===== 05-howtojoin ===== */
+/* ============================================================
+   05. How to join PCT.   Every selector is scoped to .join*.
+
+   GROUND: --paper-deep. A dark section sits above and a --paper section
+   below; the deeper cream marks this one as a different KIND of content
+   (mechanics, not argument) without adding a third ground colour.
+
+   COLOUR BUDGET. Gold appears exactly once, on the italic in the heading.
+   --gold-ink measures 4.24:1 on --paper-deep (it is the quoted 4.62:1 on
+   --paper, and this ground is darker), which clears the 3:1 large-text bar
+   for a 40-68px display italic but FAILS the 4.5:1 body bar. So nothing
+   small is ever gold here. The live marker is --purple instead, at 8.99:1.
+
+   HAIRLINES. --line is the house rule on --paper, where it measures 1.22:1.
+   On --paper-deep the same colour drops to 1.12:1 and is effectively
+   invisible, which would have left the schedule as unruled floating text.
+   Every rule below is --ink at low alpha instead, tuned back up to ~1.46:1.
+
+   Nothing in this section transitions or animates, by instruction: the
+   schedule marks resolve at load and simply are. There is therefore no
+   prefers-reduced-motion block. That is the correct amount.
+   ============================================================ */
+
+.join{
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+  padding-block:var(--section);
+}
+
+/* ---------- head ---------- */
+
+.join-head{
+  max-width:46rem;
+  margin-bottom:clamp(2.6rem,5.5vw,4rem);
+}
+.join-h{
+  font-size:clamp(2.5rem,5.2vw,4.25rem);
+  letter-spacing:-.015em;
+  margin:0 0 .9rem;
+}
+.join-h em{font-style:italic;color:var(--gold-ink)}
+
+.join-sub{
+  margin:0;
+  max-width:36rem;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.3rem,2vw,1.65rem);
+  line-height:1.35;
+  color:var(--ink-mute);           /* 4.71:1 on --paper-deep */
+}
+
+/* ---------- the three steps ---------- */
+
+.join-steps{
+  list-style:none;                 /* the <ol> still carries the order for AT;
+                                      the visible numerals are aria-hidden so
+                                      nothing is announced twice */
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(1.5rem,3.5vw,3.25rem);
+}
+
+/* A top rule per step, not vertical dividers between them. One declaration
+   survives every breakpoint: three ruled columns on desktop, three ruled
+   rows when they stack. */
+.join-step{
+  border-top:1px solid rgba(25,18,33,.18);
+  padding-top:1.35rem;
+}
+
+.join-step .join-ord{
+  display:block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.6rem,2.6vw,2.15rem);
+  line-height:1;
+  color:var(--ink-mute);
+  margin-bottom:.85rem;
+}
+
+.join-step-h{
+  margin:0 0 .6rem;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.45rem,2.2vw,1.9rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+
+.join-step-p{
+  margin:0;
+  max-width:26rem;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);           /* 9.15:1 */
+}
+
+/* ---------- the schedule ---------- */
+
+.join-sched{margin-top:clamp(3.2rem,6vw,4.75rem)}
+
+.join-sched-head{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:.4rem 1rem;
+  margin-bottom:1.35rem;
+}
+.join-sched-h{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.4rem,2.1vw,1.8rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+.join-sched-meta{
+  margin:0;
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* THE LIST IS THE GRID, and each event is a subgrid of it. This is the whole
+   trick and it is not decoration: a grid on each <li> makes every row size
+   its own tracks, so the date column starts at a different x on every line
+   and the list stops being a list. One shared grid also lets the date track
+   be max-content, which means it is exactly as wide as the longest of the
+   six dates and not a pixel more, at any viewport and in whatever font
+   actually loaded. No hand-tuned rem value can promise that. */
+.join-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  /* Capped narrower than the 1240px wrap on purpose. Stretched to the full
+     wrap, the "Next" marker ended up 39rem from the event it marked. 68rem
+     is the narrowest cap that still fits the board on one line. */
+  max-width:68rem;
+  display:grid;
+  /* DEFAULT, 768px to 1119px: two lines. Name and date share the first, the
+     room takes the second. The single-line board below needs 1120px before
+     the longest LOCATION ("BSN 225, Muma College of Business, USF Tampa",
+     336px at .9rem) stops wrapping, and a room that wraps on four rows out
+     of six destroys the alignment this grid exists to create. */
+  grid-template-columns:2.2rem minmax(0,1fr) minmax(0,max-content) 4.5rem;
+  column-gap:clamp(.9rem,1.8vw,1.75rem);
+}
+
+.join-ev{
+  position:relative;               /* contains the absolutely positioned
+                                      .join-sr so it can never reach the
+                                      viewport edge and start a scrollbar */
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:subgrid;
+  grid-template-areas:
+    "n name when mark"
+    ". room room mark";
+  align-items:baseline;
+  row-gap:.3rem;
+  /* no horizontal padding: a subgrid's own padding is taken out of its first
+     and last tracks, and the rules already span the full list width */
+  padding:1.05rem 0;
+  border-top:1px solid rgba(25,18,33,.18);
+}
+.join-list > .join-ev:last-child{border-bottom:1px solid rgba(25,18,33,.18)}
+
+.join-ev .join-ord{
+  grid-area:n;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:1.15rem;
+  line-height:1;
+  color:var(--ink-mute);
+}
+
+.join-ev-name{
+  grid-area:name;
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.35;
+  color:var(--ink);                /* 15.8:1 */
+}
+
+.join-ev-when{
+  grid-area:when;
+  font-size:.95rem;
+  line-height:1.4;
+  color:var(--ink-soft);
+  font-variant-numeric:tabular-nums;
+}
+/* The date and the time each hold together; a line may only break BETWEEN
+   them, so a squeezed column gives two tidy lines rather than "September"
+   over "16 at 7:00 PM". */
+.join-ev-day,
+.join-ev-time{white-space:nowrap}
+
+.join-ev-room{
+  grid-area:room;
+  font-size:.9rem;
+  line-height:1.45;
+  color:var(--ink-mute);           /* 4.71:1 */
+}
+/* The room code is the only part anyone actually looks for. Full LOCATION
+   string is still printed; this just gives the eye a landing point. */
+.join-ev-rk{color:var(--ink-soft)}
+
+/* Revealing "Next" at load must not move a single character of the row, and
+   two things guarantee that. The track is a fixed 4.5rem whether or not a
+   marker lands in it, and this box is a fixed 1.35rem tall: exactly the line
+   box of .join-ev-name, so an empty marker cell and a filled one occupy the
+   same space. An earlier version let the chip size the cell and the marked
+   row grew 7px taller than its neighbours the instant the script ran. */
+.join-ev-mark{
+  grid-area:mark;
+  justify-self:end;
+  align-self:start;                /* it spans both lines of the row */
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  height:1.35rem;
+}
+
+.join-next{
+  font-family:var(--font-text);
+  font-size:.68rem;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--purple);             /* 8.99:1; gold would be 4.24:1 here */
+}
+
+/* ---- resolved states, written by 05-howtojoin.js ----
+   PAST: the row keeps every word and stays in the accessibility tree. What
+   changes is that its three-level hierarchy (ink / ink-soft / ink-mute)
+   flattens to one level. The collapse of contrast RANGE is the signal, so
+   nothing has to drop below 4.71:1 to read as finished.
+
+   Colour is the ONLY thing either state changes. Weight was tried and
+   dropped: the name track is sized by max-content, so re-weighting the
+   longest name would have re-sized the column and nudged the whole list
+   sideways the instant the script ran. */
+.join-ev.is-past .join-ev-name,
+.join-ev.is-past .join-ev-when,
+.join-ev.is-past .join-ev-rk{color:var(--ink-mute)}
+
+/* NEXT: the row's existing top rule turns purple. Colour only, never width,
+   so the row does not shift by a pixel when the mark lands. */
+.join-ev.is-next{border-top-color:var(--purple)}
+
+.join-over{
+  margin:0;
+  padding:1.15rem 0;
+  border-top:1px solid rgba(25,18,33,.18);
+  border-bottom:1px solid rgba(25,18,33,.18);
+  max-width:68rem;
+  font-size:1rem;
+  color:var(--ink-soft);
+}
+.join-over-a{
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:.22em;
+  text-decoration-thickness:1px;
+}
+.join-over-a:hover{color:var(--purple)}
+
+/* ---------- the closer ---------- */
+
+.join-end{
+  margin-top:clamp(3.5rem,7vw,5.5rem);
+  max-width:46rem;
+}
+
+/* No gold, no box, no rule. The separation is space: this line is the only
+   thing in the section that is not a fact, and it gets the room to say so. */
+.join-closer{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(1.55rem,3vw,2.35rem);
+  line-height:1.28;
+  letter-spacing:-.005em;
+  color:var(--ink-soft);
+}
+.join-closer em{
+  font-style:italic;
+  color:var(--ink);                /* the promise is the darkest ink here */
+}
+
+.join-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  min-height:44px;                 /* WCAG 2.5.8 pointer target */
+  margin-top:1.35rem;
+  font-family:var(--font-text);
+  font-size:.95rem;
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:none;
+}
+.join-link-t{
+  border-bottom:1px solid rgba(25,18,33,.32);
+  padding-bottom:2px;
+}
+.join-link-a{flex:none}
+.join-link:hover{color:var(--purple)}
+.join-link:hover .join-link-t{border-bottom-color:var(--purple)}
+
+/* ---------- utilities, scoped ---------- */
+
+/* The old site's stylesheet loads before this one and defines no [hidden]
+   rule, but it does set display on plenty of elements. Restate it locally so
+   a hidden marker is hidden and, crucially, out of the accessibility tree. */
+.join-list[hidden],
+.join-over[hidden],
+.join-next[hidden],
+.join-sr[hidden]{display:none}
+
+.join-sr{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+/* ============================================================
+   THE BOARD  >= 1120px
+   One event, one line, five columns. The breakpoint is measured, not
+   guessed: at 1120px the wrap is 1030px, the four fixed and max-content
+   tracks plus their gaps take 681px, and the room track finally clears the
+   336px the longest LOCATION string needs. Below that it wraps and the
+   two-line default above is the honest layout.
+   ============================================================ */
+
+@media (min-width:1120px){
+  .join-list{
+    grid-template-columns:2.2rem minmax(0,max-content) minmax(0,max-content) minmax(0,1fr) 4.5rem;
+  }
+  .join-ev{grid-template-areas:"n name when room mark"}
+  /* centred in the row rather than baseline-aligned: an empty flex box has
+     no baseline to align, so centring is the one rule that behaves the same
+     marked and unmarked */
+  .join-ev-mark{align-self:center}
+}
+
+/* ============================================================
+   STEPS, stacked  <= 899px
+   Three 200px columns is where the step paragraphs start setting at five
+   words a line. Below that they stack and the ordinal moves beside the
+   title instead of above it, so a step costs one screen-height less.
+   ============================================================ */
+
+@media (max-width:899px){
+  .join-steps{
+    grid-template-columns:minmax(0,1fr);
+    row-gap:0;
+  }
+  .join-step{
+    display:grid;
+    grid-template-columns:2.6rem minmax(0,1fr);
+    column-gap:.9rem;
+    padding:1.35rem 0 1.6rem;
+  }
+  .join-step .join-ord{
+    grid-row:1 / span 2;
+    font-size:1.3rem;
+    line-height:1.35;
+    margin-bottom:0;
+  }
+  .join-step-h{grid-column:2}
+  .join-step-p{grid-column:2;max-width:34rem}
+}
+
+/* ============================================================
+   PHONE  <= 767px
+
+   THE SCHEDULE IS REBUILT, NOT SHRUNK. Five columns inside a 280px content
+   box gives each field about 45px, which turns "BSN 225, Muma College of
+   Business, USF Tampa" into six wrapped lines and destroys the row grid
+   that made the thing scannable in the first place. A phone reader also
+   does not scan a table: they read one event, decide, and move on.
+
+   So one event becomes one block. Name, then when, then where, in the order
+   the question is actually asked, with a rule between blocks and enough
+   vertical padding that a thumb can rest on a row without covering two.
+   The numeral column is dropped: it cost 2.2rem of a 320px screen to
+   restate an order the <ol> and the dates already carry.
+   ============================================================ */
+
+@media (max-width:767px){
+  .join-list{
+    /* 3.5rem is the whole marker budget: "NEXT" sets at 40px, and at 320px
+       this still leaves the name 212px, enough for the longest of the six on
+       one line. Reserving it at every width keeps the phone layout identical
+       marked and unmarked, exactly as the board does. */
+    grid-template-columns:minmax(0,1fr) 3.5rem;
+    column-gap:.75rem;
+  }
+  .join-ev{
+    /* the marker sits beside the NAME only. Letting it span all three lines
+       squeezed the date into 267px, which wrapped the three Wednesdays and
+       not the three Fridays: alternating 154px and 132px blocks down the
+       list. Date and room now get the full 335px. */
+    grid-template-areas:
+      "name mark"
+      "when when"
+      "room room";
+    align-items:start;
+    row-gap:.2rem;
+    padding:1.15rem 0 1.3rem;
+  }
+  .join-ev .join-ord{display:none}
+
+  /* Larger than desktop, and serif: at this size the name is a heading for
+     its block rather than a cell in a row. */
+  .join-ev-name{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:1.3rem;
+    line-height:1.15;
+    letter-spacing:-.01em;
+  }
+  .join-ev-when{font-size:.95rem;font-weight:600;color:var(--ink-soft)}
+  .join-ev-day,
+  .join-ev-time{white-space:normal}   /* nothing to protect in a full-width
+                                         line; let it wrap naturally */
+  .join-ev-room{font-size:.875rem}
+  .join-ev-mark{align-self:center}
+
+  .join-sched-head{margin-bottom:1rem}
+
+  /* The closer carries the section's last word, so it keeps its scale here
+     rather than collapsing into body copy. */
+  .join-closer{font-size:1.5rem;line-height:1.3}
+  .join-end{margin-top:3rem}
+}
+
+/* ============================================================
+   NO SUBGRID.  Chrome 117, Safari 16 and Firefox 71 and up all have it; in
+   anything older the declaration above is dropped, each row falls back to
+   sizing its own tracks, and the columns come out ragged. Pin those
+   browsers to the two-line layout with fixed tracks, which aligns without a
+   shared grid, and restate the phone's two tracks as well: stacking is not
+   enough there, the name track still needs pinning (see below).
+   ============================================================ */
+
+@supports not (grid-template-columns:subgrid){
+  /* Phones are NOT exempt. Without subgrid the <li> takes its columns from
+     grid-template-areas alone, which sizes them auto/auto: the name track then
+     shrinks to its own text (measured 189-245px instead of a uniform 267px at
+     375px) and the marked row's name box moves the instant "NEXT" appears.
+     Restating the two tracks is the whole fix. */
+  @media (max-width:767px){
+    .join-ev{
+      grid-template-columns:minmax(0,1fr) 3.5rem;
+      column-gap:.75rem;
+    }
+  }
+  @media (min-width:768px){
+    .join-list{display:block}
+    .join-ev{
+      display:grid;
+      grid-template-columns:2.2rem minmax(0,1fr) 20.5rem 4.5rem;
+      grid-template-areas:
+        "n name when mark"
+        ". room room mark";
+      column-gap:clamp(.9rem,1.8vw,1.75rem);
+    }
+    .join-ev-mark{align-self:start}
+  }
+}
+/* ===== 06-mem ===== */
+/* ============================================================
+   06 - Your college should look like this.
+
+   A continuous band, not a fan. Every photograph is identical in size; the
+   band's own edges do the cropping.
+
+   THE GEOMETRY, written down once so it stops being re-solved by hand.
+
+     Hc = card height, W = card width (0.8 * Hc at 4:5), t = tilt.
+     rotate(t) about the card's own centre lifts the leading top corner ABOVE
+     the card's untransformed top edge by
+
+         lift(t) = (W/2)|sin t| - (Hc/2)(1 - cos t)
+                 = Hc * ( 0.4|sin t| - 0.5(1 - cos t) )
+
+   That lift is always positive and does not depend on any vertical offset,
+   which is why "push the cards down a bit" was never the fix: an earlier pass
+   solved a per-card offset backwards from one specific angle, and seven of nine
+   cards were still sliced at the top by up to 29.4px measured.
+
+   overflow clips at the PADDING box, so padding-top is headroom that CANNOT be
+   clipped. Keep this true and no tilt can ever slice a top:
+
+         --head / --band  >  1.24 * ( 0.4 sin(tmax) - 0.5(1 - cos tmax) )
+
+   At tmax 6.5deg the right side is 0.0522 and --head is 0.09 of --band, a 1.7x
+   margin. Raising the angle cap cannot silently reintroduce the bug, and every
+   --y below is POSITIVE, so an offset can only ever push a card further down.
    ============================================================ */
 
 .mem{
   background:var(--paper);
-  padding-block:var(--section) calc(var(--section) * .75);
+  /* NO bottom padding, and a -1px pull. The band's cut line and the purple of
+     section 07 must be the same pixel row, or nothing is doing the cutting.
+     --band is a vw clamp and lands on fractional device pixels, and a fractional
+     gap paints as a cream hairline directly on the cut.
+     COUPLING: this depends on 07-act staying the immediate next sibling with an
+     opaque full-bleed background. If a section is ever inserted between them,
+     restore the bottom padding. */
+  padding-block:var(--section) 0;
+  margin-bottom:-1px;
 }
 
 .mem-h{
   text-align:center;
   font-size:clamp(2.4rem,6vw,5rem);
   letter-spacing:-.015em;
-  margin:0 0 clamp(2.4rem,5vw,3.6rem);
+  margin:0 0 .9rem;
 }
 .mem-h em{font-style:italic;color:var(--gold-ink)}
 
-/* ---- the band ---------------------------------------------------------- */
+/* the proper nouns belong in legible type, not on a caption drifting past at
+   75px a second */
+.mem-lede{
+  margin:0 auto clamp(1.9rem,4vw,2.9rem);
+  max-width:36rem;
+  text-align:center;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.1rem,1.7vw,1.4rem);
+  line-height:1.4;
+  color:var(--ink-mute);
+}
 
+/* ---- the band ---------------------------------------------------------- */
+/* --band is the height of VISIBLE photography and the line the purple cuts on.
+   --head is unclippable headroom above it. box-sizing is border-box globally,
+   so the content box is exactly --band tall and .mem-track's height:100%
+   resolves to --band. */
 .mem-band{
+  --band:clamp(280px,31vw,430px);
+  --head:calc(var(--band) * .09);
   position:relative;
-  height:clamp(280px,31vw,430px);
+  height:calc(var(--band) + var(--head));
+  padding-top:var(--head);
   overflow:hidden;          /* this is the cut */
+  /* REQUIRED, not tidiness. .mem-i carries z-index, which applies to flex items
+     at position:static, and .mem-band at position:relative with z-index:auto is
+     not a stacking context. Without this the cards paint ABOVE .act and a sliver
+     of photograph shows over the purple at the -1px seam. */
+  isolation:isolate;
 }
 
 .mem-track{
@@ -743,35 +1747,35 @@
   height:100%;
   display:flex;
   align-items:flex-start;
-  gap:clamp(.25rem,.5vw,.55rem);   /* cards almost touch; the tilt does the rest */
+  gap:clamp(.25rem,.5vw,.55rem);
   width:max-content;
   will-change:transform;
 }
 
-/* every card is the same size. Height is a percentage of the band, so the
-   bottom of each card sits below the band's bottom edge and is clipped. */
+/* every card identical. 4:5 matches the portrait in section 02. */
 .mem-i{
   flex:0 0 auto;
-  height:124%;      /* taller than the band, so the bottoms are cut flat */
+  height:124%;
   aspect-ratio:4/5;
   margin:0;
   transform:rotate(var(--r,0deg)) translateY(var(--y,0));
-  box-shadow:0 22px 44px -28px rgba(25,18,33,.55);
   background:var(--paper-deep);
 }
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 
-/* the tilt pattern. Seven values against a nine-photo set, so the sequence
-   never repeats in step with itself and the ragged top edge does not look
-   stamped. The angles are deliberately large: at 2 degrees the tilt reads as a
-   rendering error rather than as a decision. */
-.mem-i:nth-child(7n+1){--r:-5.5deg;--y:2.5%}
-.mem-i:nth-child(7n+2){--r:3.8deg;--y:-2%}
-.mem-i:nth-child(7n+3){--r:-2.6deg;--y:5%}
-.mem-i:nth-child(7n+4){--r:6.2deg;--y:.5%}
-.mem-i:nth-child(7n+5){--r:-4.4deg;--y:-2.6%}
-.mem-i:nth-child(7n+6){--r:2.4deg;--y:4.2%}
-.mem-i:nth-child(7n+7){--r:-6.5deg;--y:1.4%}
+/* SEVEN tilts against SEVEN photographs. The count must match the set: 06-mem.js
+   clones the frames into the same track, and at nine frames against a 7-value
+   cycle the second copy ran two steps out of phase, so every card's tilt jumped
+   at the loop restart. Signs alternate so the row never reads as a metronome,
+   and magnitudes are unevenly spread so no two neighbours look like a pair.
+   Every --y is POSITIVE: it can only push a card down, never up into the cut. */
+.mem-i:nth-child(7n+1){--r:-5.5deg;--y:1.6%}
+.mem-i:nth-child(7n+2){--r:3.8deg;--y:4.4%}
+.mem-i:nth-child(7n+3){--r:-2.6deg;--y:0%}
+.mem-i:nth-child(7n+4){--r:6.2deg;--y:3.2%}
+.mem-i:nth-child(7n+5){--r:-4.4deg;--y:5.6%}
+.mem-i:nth-child(7n+6){--r:2.4deg;--y:1.1%}
+.mem-i:nth-child(7n+7){--r:-6.5deg;--y:3.9%}
 
 /* a rotated card overlaps its neighbours at the corners. Alternating the
    stacking order keeps that overlap from reading as one long shingle. */
@@ -779,12 +1783,12 @@
 .mem-i:nth-child(even){z-index:1}
 
 /* ---- the run ----------------------------------------------------------- */
-/* 05-mem.js clones the list once and sets --mem-shift to exactly half the
-   track width, so the loop point is invisible. Until it does, the track is
-   simply static and every photo is still reachable by scrolling the band. */
+/* 06-mem.js clones the list once and sets --mem-shift to exactly the width of
+   one copy, so the loop point is invisible. Until it does, the track is static
+   and every photograph is still reachable by scrolling the band. */
 
 .mem-band[data-on] .mem-track{
-  animation:memRun var(--mem-dur,64s) linear infinite;
+  animation:memRun var(--mem-dur,52s) linear infinite;
 }
 .mem-band[data-on][data-paused] .mem-track{animation-play-state:paused}
 
@@ -803,9 +1807,9 @@
 }
 
 @media (max-width:700px){
-  .mem-band{height:clamp(240px,58vw,340px)}
+  .mem-band{--band:clamp(240px,58vw,340px)}
 }
-/* ===== 06-act ===== */
+/* ===== 07-act ===== */
 /* ==========================================================================
    05 — THE ACT (final CTA)
    Every selector is scoped to .act*.
@@ -1179,6 +2183,55 @@
 
   <main id="main">
 
+    <!-- ===== 00-header ===== -->
+<!-- 00 · HEADER. The site bar. This is a <header>, not a <section>, and it is
+     deliberately NOT position:fixed.
+
+     WHY STATIC: the live site's fixed header depends on js/main.js to add
+     .scrolled and swap to a paper ground once you clear the hero. v2 never loads
+     js/main.js, so a fixed bar here would keep its dark-ground colours (paper
+     text, gold-soft sub) and sit on top of the cream sections as pale-on-pale.
+     A static bar has no scrolled state to get wrong: it scrolls away with the
+     hero and does not come back. Zero JS, nothing to break.
+
+     WHY NO BOTTOM EDGE: the hero directly beneath is the same --purple-deep. A
+     border or shadow here would draw a visible seam across what has to read as
+     one continuous dark field, so the header carries neither, and its background
+     does not change on hover.
+
+     Class names are all v2hd-*. The live css/styles.css is linked by build.py and
+     already owns .site-header / .brand / .nav-links (fixed positioning plus a
+     JS-driven hamburger that hides .nav-links below 900px), so none of those
+     names are reused here. -->
+<header class="v2hd on-dark">
+  <div class="v2wrap v2hd-row">
+
+    <a class="v2hd-brand" href="index.html">
+      <!-- assets/crest.png is 337x445 intrinsic. The attributes are the real
+           pixel dimensions so the browser knows the aspect ratio before the file
+           arrives; CSS scales it to 42px tall. Above the fold, so not lazy. -->
+      <img class="v2hd-crest" src="../assets/crest.png" alt="Phi Chi Theta crest"
+           width="337" height="445" decoding="async">
+      <span class="v2hd-lock">
+        <span class="v2hd-name">Phi Chi Theta</span>
+        <span class="v2hd-sub">Zeta Rho &middot; USF</span>
+      </span>
+    </a>
+
+    <nav class="v2hd-nav" aria-label="Primary">
+      <ul class="v2hd-list">
+        <li><a class="v2hd-link" href="index.html" aria-current="page"><span class="v2hd-t">Home</span></a></li>
+        <li><a class="v2hd-link" href="philanthropy.html"><span class="v2hd-t">Philanthropy</span></a></li>
+        <li><a class="v2hd-link" href="apparel.html"><span class="v2hd-t">Apparel</span></a></li>
+        <li><a class="v2hd-link" href="career.html"><span class="v2hd-t">Career</span></a></li>
+      </ul>
+    </nav>
+
+    <a class="v2hd-rush" href="rush.html">Rush PCT</a>
+
+  </div>
+</header>
+
     <!-- ===== 01-hero ===== -->
 <!-- 01 · HERO — communication method: ATMOSPHERE
      Carried over from the live hero: silk-thread canvas, mouse response, the giant
@@ -1229,116 +2282,58 @@
 </section>
 
     <!-- ===== 02-grow ===== -->
-<!-- 02 — Graduate confident.
-     ONE interaction: selecting a row cross-fades a new photograph into a frame
-     that never moves. Nothing else animates. The base markup below is the
-     finished, script-free state: every row open, every photograph in the flow. -->
-<section class="grow" id="grow" data-grow aria-labelledby="grow-title">
+<!-- 02 - More than just a business fraternity.
+     The value proposition, as the three real parts of the chapter a prospect can
+     go and check, each with a door to the page that proves it.
+
+     NO accordion and NO cross-fading frame. The previous build hid two of three
+     paragraphs behind a click and staged three placeholder images in a frame that
+     only works if all three are shot and cropped alike. All three paragraphs are
+     now on screen at load, and the section carries ONE real photograph of real
+     members instead of three grey rectangles.
+
+     ONE interaction: none. Deliberately. -->
+<section class="grow" id="grow" aria-labelledby="grow-title">
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
-      <h2 class="grow__h" id="grow-title">Graduate <em>confident.</em></h2>
-      <p class="grow__lede">Three things you leave with.</p>
+      <h2 class="grow__h" id="grow-title">More than <em>just</em> a business fraternity.</h2>
+      <p class="grow__lede">Three parts of the chapter. Members run all three.</p>
     </div>
 
-    <div class="grow__stage" data-grow-stage></div>
+    <!-- REAL PHOTOGRAPH. assets/photo-service.jpg is three members in chapter
+         shirts loading roof shingles at a service project. It is already published
+         on the live site. Do not replace it with a placeholder. -->
+    <figure class="grow__fig">
+      <img src="../assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
+           alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
+    </figure>
 
-    <div class="grow__rows" data-grow-rows role="group" aria-label="What membership builds">
+    <ol class="grow__rows" aria-label="The three parts of the chapter">
 
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">01</span>
-            <span class="grow__ttl">A network in your field</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Alumni, recruiters and speakers who already work where you want to. You meet them before you apply, not after.</p>
-          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
-            <img src="../assets/ph/career-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member reviewing a printed resume with an alumnus at a chapter career night.">
-          </figure>
-        </div>
-      </div>
-
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">02</span>
-            <span class="grow__ttl">Leadership you have already done</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Chair an initiative. Run an event. Manage a budget. It goes on your resume because you did it, not because you attended.</p>
-          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-            <img src="../assets/ph/leadership-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="A member running a chapter meeting from the front of the room.">
-          </figure>
-        </div>
-      </div>
-
-      <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
-            <span class="grow__num" aria-hidden="true">03</span>
-            <span class="grow__ttl">People who stay</span>
-          </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Formal, retreat, intramurals and everything between. The people who notice when you stop showing up, and who are still around after graduation.</p>
-          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
-            <img src="../assets/ph/poly-1.png" width="1000" height="1250" loading="lazy" decoding="async"
-                 alt="Members in formal dress at the spring banquet.">
-          </figure>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-    <!-- ===== 03-numbers ===== -->
-<!-- ============================================================
-     03 — Numbers don’t lie.   Communication method: SCALE.
-
-     No pinned horizontal scroll. Three statistics do not need 300vh of
-     hijacked scrolling to be read, and an earlier build spent it anyway:
-     the scene ran long, delivered little, and took the reader's scroll
-     away to do it. This is now one centred composition that resolves in
-     a single screen.
-
-     ALL THREE VALUES ARE VERIFIED and match the live site (index.html).
-     They are mirrored in the STATS array at the top of 03-numbers.js;
-     edit both, or the console warns that they have drifted apart.
-     ============================================================ -->
-<section class="num" id="numbers" data-num aria-labelledby="num-h">
-  <div class="v2wrap">
-
-    <h2 class="num__h" id="num-h">Numbers don’t <em>lie.</em></h2>
-
-    <ol class="num__grid" role="list">
-
-      <li class="num__p" data-num-p>
-        <p class="num__val"><span data-num-n>95</span><span class="num__u" data-num-u>%</span></p>
-        <p class="num__lab" data-num-lab>Members placed in internships or full-time roles</p>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Professional development</h3>
+        <p class="grow__say">Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit.</p>
+        <a class="grow__link" href="career.html">Career Navigator</a>
       </li>
 
-      <li class="num__p" data-num-p>
-        <p class="num__val"><span data-num-n>3.60</span><span class="num__u" data-num-u></span></p>
-        <p class="num__lab" data-num-lab>Chapter average GPA</p>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Philanthropy</h3>
+        <p class="grow__say">Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares.</p>
+        <a class="grow__link" href="philanthropy.html">Our impact</a>
       </li>
 
-      <li class="num__p" data-num-p>
-        <p class="num__val"><span data-num-n>15</span><span class="num__u" data-num-u></span></p>
-        <p class="num__lab" data-num-lab>“25 Under 25” honorees</p>
+      <li class="grow__row">
+        <h3 class="grow__ttl">Chapter life</h3>
+        <p class="grow__say">Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation.</p>
+        <a class="grow__link" href="fallrush.html">Meet the chapter</a>
       </li>
 
     </ol>
-
   </div>
 </section>
 
-    <!-- ===== 04-place ===== -->
+    <!-- ===== 03-place ===== -->
 <!-- 04 — Where members have placed.  (cream ground)
      The second half of the proof chapter that opens with the numbers: same
      ground, same voice, smaller heading, half-section gap above it, so it
@@ -1390,8 +2385,7 @@
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
 
   <div class="v2wrap">
-    <h2 class="pl-h" id="pl-h">Where members have <em>placed.</em></h2>
-    <p class="pl-sub">Internships and full-time roles taken by Zeta Rho members.</p>
+    <h2 class="pl-h" id="pl-h">Where members have placed, by the <em>numbers.</em></h2>
   </div>
 
   <div class="pl-rows" role="group" aria-label="Companies where members have placed">
@@ -1439,39 +2433,272 @@
     </div>
 
   </div>
-</section>
 
-    <!-- ===== 05-mem ===== -->
-<!-- 05 — Your college should look like this.
-     A single continuous band of chapter photography. Every photograph is the
-     SAME size; the only variation is a small tilt and a small vertical offset,
-     so the top edge of the band reads ragged and the bottom edge is cut dead
-     straight by the band itself. The band clips the photographs on purpose.
-
-     Replace assets/mem/m1..m9 with real photographs. Any aspect ratio works
-     (they are object-fit: cover), but keep the mix of posed shots and phone
-     candids. -->
-<section class="mem" id="life" aria-labelledby="mem-h">
+  <!-- All three figures are VERIFIED against the live site (index.html lines 137
+       to 146): 95% placed, 3.60 chapter GPA, 15 "25 Under 25" honorees. Do not add
+       a fourth and do not invent one. The values are printed literally here, so
+       the markup is the single source of truth and the finished state is the only
+       state with JS off or under reduced motion. There is no count-up any more:
+       this section's one interaction is the belt above. -->
   <div class="v2wrap">
-    <h2 class="mem-h" id="mem-h">Your college should <em>look like this.</em></h2>
-  </div>
-
-  <div class="mem-band" data-mem-band>
-    <ul class="mem-track" data-mem-track>
-      <li class="mem-i"><img src="../assets/mem/m1.jpg" width="1100" height="760" alt="The chapter at Fall Formal." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m2.jpg" width="900"  height="1120" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m3.jpg" width="1100" height="760" alt="A chapter beach day." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m4.jpg" width="980"  height="1180" alt="Members at a Tampa service day." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m5.jpg" width="1100" height="760" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m6.jpg" width="940"  height="1160" alt="An intramural team after a game." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m7.jpg" width="1100" height="760" alt="A candid from the semester." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m8.jpg" width="1000" height="1200" alt="Recruitment night." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/mem/m9.jpg" width="1100" height="760" alt="The chapter together." loading="lazy" decoding="async"></li>
+    <ul class="pl-nums" role="list">
+      <li class="pl-n">
+        <p class="pl-n-val">95<span class="pl-n-u">%</span></p>
+        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">3.60</p>
+        <p class="pl-n-lab">Chapter average GPA</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">15</p>
+        <p class="pl-n-lab">&ldquo;25 Under 25&rdquo; honorees</p>
+      </li>
     </ul>
   </div>
 </section>
 
-    <!-- ===== 06-act ===== -->
+    <!-- ===== 04-national ===== -->
+<!-- 04 · THE NATIONAL FRATERNITY. Communication method: A FULL STOP.
+
+     This section exists to SEPARATE. The logo belt above it drifts and the
+     photograph band drifts, and back to back they read as one long conveyor.
+     (05-howtojoin has since taken the slot below this one, so those two are
+     no longer adjacent; this plate is still the only dark ground in the
+     middle of the page and still the only section with no motion at all.)
+     Nothing in it moves: no interaction, no transition, no animation, no JS.
+     There is deliberately no 04-national.js. If anything here ever starts to
+     move, the section has lost the only reason it is on the page.
+
+     Every figure and every sentence below is verbatim from the live site
+     (index.html, the "07 · National Chapter" section, plus the charter line
+     from the site footer). Nothing here is invented and nothing is rounded.
+
+     NOTE ON "1924": it appears twice, in the heading and inside the body
+     paragraph. The paragraph is quoted copy and was not altered. No third,
+     ornamental 1924 was added. The live site set a giant ghosted "1924"
+     behind the crest here, and that is exactly what is being left out.
+
+     NO CREST. See the head of 04-national.css for the measurement that
+     disqualified it on this ground. -->
+<section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
+  <div class="v2wrap v2nat-in">
+
+    <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+
+    <!-- role="list" is required, not decoration: list-style:none strips the list
+         role in WebKit/VoiceOver, and without it these three figures stop being
+         announced as a set of three. Same treatment as .pl-nums in 03-place.html. -->
+    <ul class="v2nat-figs" role="list">
+      <li class="v2nat-fig">
+        <span class="v2nat-n">40+</span>
+        <span class="v2nat-k">Chapters</span>
+      </li>
+      <li class="v2nat-fig">
+        <span class="v2nat-n">23,000+</span>
+        <span class="v2nat-k">Members nationwide</span>
+      </li>
+      <li class="v2nat-fig">
+        <span class="v2nat-n">20+</span>
+        <span class="v2nat-k">Chapter awards</span>
+      </li>
+    </ul>
+
+    <div class="v2nat-tail">
+      <p class="v2nat-say">Phi Chi Theta has operated as a national professional business
+        fraternity since 1924. Membership connects Zeta Rho to alumni and chapters in
+        cities across the country, which matters when members recruit, relocate, or need
+        an introduction in a new market.</p>
+
+      <p class="v2nat-charter">Zeta Rho was chartered at the University of South Florida
+        in September 2018 by 18 founding business students.</p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ===== 05-howtojoin ===== -->
+<!-- 05. How to join PCT.  (ground: --paper-deep)
+
+     The mechanics section. Everything else on this page argues; this one
+     answers "what actually happens, when, and where". It sits between a dark
+     section and a --paper section, so the slightly deeper cream separates it
+     without introducing a third ground colour.
+
+     NO TABS. The original site split this content across "Rush Events" and
+     "Rush Benefits" tabs, which hid half the answer behind a click at the
+     exact moment a prospect needs all of it. Everything is on screen at load.
+
+     ONE interaction, in 05-howtojoin.js: the schedule resolves against today.
+     Past events go quiet, the next one is marked, and once the last event has
+     passed the list is replaced by a single line. Nothing animates. The markup
+     below is the finished, script-free state.
+
+     ============================================================
+     DATES. OWNER MUST CONFIRM BEFORE ANY REAL SEND.
+     Every date here is copied from assets/rush-events.ics, which is dated
+     2026 (DTSTART:20260902T190000, X-WR-CALNAME: PCT Fall Rush 2026), and it
+     matches the Fall 2026 hero and the Fall 2026 CTA countdown on this page.
+     The printed rush flyer these dates came from said 2025. One of the two is
+     wrong. Do not send this page to a rushee until the chapter confirms the
+     year, and if it changes, update all four places at once: this file, the
+     ISO array in 05-howtojoin.js, assets/rush-events.ics, and the countdown
+     attributes in 07-act.html.
+     ============================================================ -->
+
+<section class="join" id="join" aria-labelledby="join-h">
+  <div class="v2wrap">
+
+    <div class="join-head">
+      <h2 class="join-h" id="join-h">How to join <em>PCT.</em></h2>
+      <p class="join-sub">Six events, open to business and economics majors and minors. Rush is free.</p>
+    </div>
+
+    <!-- role="list" on both <ol> below is not redundant. Safari strips list
+         semantics from any list with list-style:none, and both lists have it.
+         The visible ordinals are aria-hidden precisely BECAUSE the <ol> was
+         supposed to carry the order; without this, a VoiceOver user gets
+         neither, and on a phone the schedule numerals are display:none too. -->
+    <ol class="join-steps" role="list" aria-label="How to join PCT, in three steps">
+      <li class="join-step">
+        <span class="join-ord" aria-hidden="true">01</span>
+        <h3 class="join-step-h">Show up.</h3>
+        <p class="join-step-p">Info Night is Wednesday, September 2 at 7:00 PM in BSN 225. You do not need prior experience or to know anyone there.</p>
+      </li>
+      <li class="join-step">
+        <span class="join-ord" aria-hidden="true">02</span>
+        <h3 class="join-step-h">Meet the chapter.</h3>
+        <p class="join-step-p">Talk with members and exec in person. Bring the real questions: time commitment, dues, GPA, what the first semester looks like.</p>
+      </li>
+      <li class="join-step">
+        <span class="join-ord" aria-hidden="true">03</span>
+        <h3 class="join-step-h">Both sides decide.</h3>
+        <p class="join-step-p">You are getting to know us while we get to know you. Nothing is settled on night one.</p>
+      </li>
+    </ol>
+
+    <!-- The schedule. Names, dates and rooms are transcribed verbatim from the
+         SUMMARY, DTSTART and LOCATION fields of assets/rush-events.ics. Nothing
+         here is written copy: if a room changes, it changes in the .ics first. -->
+    <div class="join-sched" data-join>
+      <div class="join-sched-head">
+        <h3 class="join-sched-h" id="join-sched-h">The six events.</h3>
+        <p class="join-sched-meta">Fall 2026</p>
+      </div>
+
+      <ol class="join-list" role="list" aria-labelledby="join-sched-h" data-join-list>
+
+        <li class="join-ev" data-join-ev>
+          <!-- The "Past" label is first in source order, not in the mark column,
+               so a screen reader hears the status before the details rather than
+               after them. It is visually hidden at every state. -->
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">1</span>
+          <span class="join-ev-name">Info Night</span>
+          <time class="join-ev-when" datetime="2026-09-02T19:00-04:00"><span class="join-ev-day">Wednesday, September 2</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room"><span class="join-ev-rk">BSN 225</span>, Muma College of Business, USF Tampa</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+        <li class="join-ev" data-join-ev>
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">2</span>
+          <span class="join-ev-name">Professional Workshop</span>
+          <time class="join-ev-when" datetime="2026-09-04T19:00-04:00"><span class="join-ev-day">Friday, September 4</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room"><span class="join-ev-rk">BSN 225</span>, Muma College of Business, USF Tampa</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+        <li class="join-ev" data-join-ev>
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">3</span>
+          <span class="join-ev-name">Alumni Panel</span>
+          <time class="join-ev-when" datetime="2026-09-09T19:00-04:00"><span class="join-ev-day">Wednesday, September 9</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room"><span class="join-ev-rk">BSN 225</span>, Muma College of Business, USF Tampa</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+        <li class="join-ev" data-join-ev>
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">4</span>
+          <span class="join-ev-name">Phi Chi Fest</span>
+          <time class="join-ev-when" datetime="2026-09-11T19:00-04:00"><span class="join-ev-day">Friday, September 11</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room"><span class="join-ev-rk">BSN 225</span>, Muma College of Business, USF Tampa</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+        <li class="join-ev" data-join-ev>
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">5</span>
+          <span class="join-ev-name">Quick Queue</span>
+          <time class="join-ev-when" datetime="2026-09-16T19:00-04:00"><span class="join-ev-day">Wednesday, September 16</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room"><span class="join-ev-rk">MSC 2709</span>, Marshall Student Center, USF Tampa</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+        <li class="join-ev" data-join-ev>
+          <span class="join-sr" data-join-past hidden>Past.</span>
+          <span class="join-ord" aria-hidden="true">6</span>
+          <span class="join-ev-name">Invite Only</span>
+          <time class="join-ev-when" datetime="2026-09-18T19:00-04:00"><span class="join-ev-day">Friday, September 18</span> <span class="join-ev-time">at 7:00 PM</span></time>
+          <span class="join-ev-room">Location shared with invited rushees</span>
+          <span class="join-ev-mark"><span class="join-next" data-join-next hidden>Next</span></span>
+        </li>
+
+      </ol>
+
+      <!-- Shown only once the last event has ended. Hidden in the base state
+           because on the day this was authored the schedule was still ahead. -->
+      <p class="join-over" data-join-over hidden>Rush has ended for the semester. <a class="join-over-a" href="rush.html">Read how rush works</a></p>
+    </div>
+
+    <div class="join-end">
+      <p class="join-closer"><em>Yours either way.</em> You keep the resume, the practice, and the contacts whether or not you join.</p>
+      <a class="join-link" href="rush.html">
+        <span class="join-link-t">How rush works</span>
+        <svg class="join-link-a" width="17" height="10" viewBox="0 0 17 10" fill="none"
+             aria-hidden="true" focusable="false">
+          <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ===== 06-mem ===== -->
+<!-- 06 - Your college should look like this.
+     One continuous band of chapter photography. Every frame is the SAME size; the
+     only variation is a small tilt. The band's own bottom edge cuts every frame
+     flat, and the purple CTA below comes straight up to that cut line, so the next
+     section does the slicing. Tops are never cut: see the geometry note in
+     06-mem.css for why that needs solving rather than eyeballing.
+
+     Frame 1 is a REAL photograph already published on the live site. The other
+     five are placeholders. Replace assets/mem/m2, m1, m5, m6, m8 with real
+     photographs at any aspect ratio (they are cropped to fill), keeping the mix
+     of posed shots and phone candids. -->
+<section class="mem" id="life" aria-labelledby="mem-h">
+  <div class="v2wrap">
+    <h2 class="mem-h" id="mem-h">Your college should <em>look like this.</em></h2>
+    <p class="mem-lede">Fall Formal, Spring Retreat, Fall Summit, intramurals, and the fundraisers in between.</p>
+  </div>
+
+  <div class="mem-band" data-mem-band>
+    <ul class="mem-track" data-mem-track>
+      <li class="mem-i"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" width="900"  height="1120" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m1.jpg" width="1100" height="760"  alt="The chapter at Fall Formal." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" width="1100" height="760"  alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m6.jpg" width="940"  height="1160" alt="An intramural team after a game." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m8.jpg" width="1000" height="1200" alt="Recruitment night." loading="lazy" decoding="async"></li>
+    </ul>
+  </div>
+</section>
+
+    <!-- ===== 07-act ===== -->
 <!-- ==========================================================================
      06 — THE ACT  (final CTA)
      Ground: --purple-deep. After four sections of motion, everything stops.
@@ -1536,7 +2763,7 @@
   </div>
 </aside>
 
-    <!-- ===== 07-footer ===== -->
+    <!-- ===== 99-footer ===== -->
 <!-- The site footer, lifted verbatim from index.html so the mock is not missing it.
      Styling comes from the real stylesheet, linked by the assembler. -->
 <footer class="site-footer">
@@ -1568,7 +2795,7 @@
         <div class="footer-col">
           <h4>Connect with us</h4>
           <ul>
-            <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram — @pctusf</a></li>
+            <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram · @pctusf</a></li>
             <li><a href="https://www.linkedin.com/company/usfphichitheta/" target="_blank" rel="noopener">LinkedIn</a></li>
             <li><a href="https://pctapparel.printful.me/" target="_blank" rel="noopener">Apparel Store</a></li>
             <li><a href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a></li>
@@ -1577,7 +2804,7 @@
       </div>
       <div class="footer-mark" aria-hidden="true">Zeta Rho</div>
       <div class="footer-base">
-        <span>© <span id="year"></span> Phi Chi Theta — Zeta Rho Chapter</span>
+        <span>© <span id="year"></span> Phi Chi Theta · Zeta Rho Chapter</span>
         <span>University of South Florida · Tampa, FL · <a href="portal.html" style="color:inherit">Officer Portal</a></span>
       </div>
     </div>
@@ -1585,7 +2812,7 @@
   </main>
 
 <script>
-/* ===== 06-act ===== */
+/* ===== 07-act ===== */
 /* ==========================================================================
    05-act.js
    1. window.pctMotion  — the shared motion hook every section registers with.
@@ -1871,153 +3098,7 @@ window.pctInitHero = function () {
     if (window.console && console.warn) console.warn('pctInitHero:', err);
   }
 };
-/* ===== 02-grow ===== */
-/* 02 — Graduate confident.
-   Moves each <figure> (the same node, so nothing downloads twice) into a
-   persistent stage, then runs a plain single-open accordion. Selecting a row
-   cross-fades its photograph. That is the whole interaction.
-
-   Everything the section shows without JS it also shows with JS. If this file
-   never runs, the base CSS leaves all three rows open with their photographs
-   in the flow. */
-window.pctInitGrow = function () {
-  try {
-    var root = document.querySelector('[data-grow]');
-    if (!root || root.dataset.growReady === '1') return;
-
-    var stage = root.querySelector('[data-grow-stage]');
-    var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
-    if (!stage || btns.length < 2) return;
-
-    var rows = [], figs = [];
-    var ok = btns.every(function (b) {
-      var row = b.closest('.grow__row');
-      var fig = document.getElementById(b.getAttribute('aria-controls'));
-      if (!row || !fig) return false;
-      rows.push(row); figs.push(fig);
-      return true;
-    });
-    if (!ok) return;   /* markup drifted: leave the no-JS state alone */
-
-    root.dataset.growReady = '1';
-    root.classList.add('grow--js');
-    figs.forEach(function (f) { stage.appendChild(f); });
-
-    var current = -1;
-
-    function open(i) {
-      if (i === current) return;
-      current = i;
-      for (var k = 0; k < rows.length; k++) {
-        var on = k === i;
-        rows[k].classList.toggle('is-open', on);
-        figs[k].classList.toggle('is-active', on);
-        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
-      }
-    }
-
-    btns.forEach(function (b, i) {
-      b.addEventListener('click', function () { open(i); });
-      /* hovering the row is a preview, not a commitment: it swaps the photograph
-         the same way a click does, because there is no other state to lose */
-      b.addEventListener('focus', function () { open(i); });
-    });
-
-    open(0);
-
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function () { root.classList.add('grow--still'); });
-    }
-  } catch (err) {
-    if (window.console && console.warn) console.warn('pctInitGrow:', err);
-  }
-};
-/* ===== 03-numbers ===== */
-/* 03 — Numbers don’t lie.
-   ONE interaction: each figure counts up once, the first time it is seen.
-   Nothing pins, nothing hijacks scroll, nothing runs after the count lands.
-
-   STATS mirrors the values written in 03-numbers.html. They are duplicated so
-   the markup can be the finished state (readable with JS off); the check below
-   warns in the console if the two ever drift apart. */
-window.pctInitNumbers = function () {
-  try {
-    var STATS = [
-      { to: 95,   decimals: 0 },
-      { to: 3.6,  decimals: 2 },
-      { to: 15,   decimals: 0 }
-    ];
-
-    var root = document.querySelector('[data-num]');
-    if (!root || root.dataset.numReady === '1') return;
-
-    var panels = Array.prototype.slice.call(root.querySelectorAll('[data-num-p]'));
-    if (!panels.length) return;
-    root.dataset.numReady = '1';
-
-    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
-      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-
-    function fmt(v, d) {
-      return d ? v.toFixed(d) : String(Math.round(v));
-    }
-
-    var targets = panels.map(function (p, i) {
-      var el = p.querySelector('[data-num-n]');
-      var spec = STATS[i];
-      if (!el || !spec) return null;
-      /* drift check against the value actually printed in the markup */
-      var printed = parseFloat(el.textContent.replace(/[^0-9.]/g, ''));
-      if (!isNaN(printed) && Math.abs(printed - spec.to) > 0.001 &&
-          window.console && console.warn) {
-        console.warn('pctInitNumbers: STATS[' + i + '] is ' + spec.to +
-                     ' but the markup says ' + printed + '. Fix both.');
-      }
-      return { el: el, to: spec.to, decimals: spec.decimals, done: false };
-    }).filter(Boolean);
-
-    if (reduced || !('IntersectionObserver' in window)) return;   /* markup already reads right */
-
-    var DUR = 1100;
-
-    function run(t) {
-      if (t.done) return;
-      t.done = true;
-      var start = 0;
-      function step(ts) {
-        if (!start) start = ts;
-        var k = Math.min((ts - start) / DUR, 1);
-        /* ease-out cubic: fast off the mark, arrives without a bounce */
-        var e = 1 - Math.pow(1 - k, 3);
-        t.el.textContent = fmt(t.to * e, t.decimals);
-        if (k < 1) requestAnimationFrame(step);
-        else t.el.textContent = fmt(t.to, t.decimals);   /* exact, never 94.9997 */
-      }
-      requestAnimationFrame(step);
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var i = panels.indexOf(en.target);
-        if (i > -1 && targets[i]) run(targets[i]);
-        io.unobserve(en.target);
-      });
-    }, { threshold: 0.45 });
-
-    panels.forEach(function (p) { io.observe(p); });
-
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function () {
-        io.disconnect();
-        targets.forEach(function (t) { t.done = true; t.el.textContent = fmt(t.to, t.decimals); });
-      });
-    }
-  } catch (err) {
-    if (window.console && console.warn) console.warn('pctInitNumbers:', err);
-  }
-};
-/* ===== 04-place ===== */
+/* ===== 03-place ===== */
 /* ==========================================================================
    04 — the placement belts.
 
@@ -2161,7 +3242,113 @@ window.pctInitPlace = function () {
     if (window.console && console.warn) console.warn('pctInitPlace:', err);
   }
 };
-/* ===== 05-mem ===== */
+/* ===== 05-howtojoin ===== */
+/* 05. How to join PCT.
+   The section's one interaction, and it is not an animation: the printed
+   schedule resolves against the clock. Events that have finished go quiet,
+   the next one anybody can attend is marked, and once the last one has ended
+   the whole list is replaced by a single line pointing at rush.html.
+
+   Nothing here moves, fades, counts or reveals. The marks are applied once,
+   before first paint in practice, and then they simply are.
+
+   WITHOUT THIS FILE the markup is already correct: six events, six dates, six
+   rooms, all readable, nothing hidden. This only adds "where are we now".
+   Because it animates nothing, there is no teardown to register on
+   window.pctMotion.onReduce.
+
+   ---------------------------------------------------------------------------
+   THE DATES BELOW ARE THE SECOND COPY. The first is the human-readable date
+   printed in 05-howtojoin.html; both are transcribed from
+   assets/rush-events.ics (DTSTART/DTEND, America/New_York, EDT = -04:00).
+   All three must be changed together, and the owner still has to confirm the
+   year: the .ics says 2026, the printed flyer said 2025. See the header
+   comment in 05-howtojoin.html.
+   --------------------------------------------------------------------------- */
+window.pctInitJoin = function () {
+  try {
+    var root = document.querySelector('[data-join]');
+    if (!root || root.dataset.joinReady === '1') return;
+
+    var list = root.querySelector('[data-join-list]');
+    var over = root.querySelector('[data-join-over]');
+    if (!list) return;
+
+    var rows = Array.prototype.slice.call(list.querySelectorAll('[data-join-ev]'));
+
+    /* Index-matched to the six <li> in 05-howtojoin.html, in source order. */
+    var EVENTS = [
+      { start: '2026-09-02T19:00:00-04:00', end: '2026-09-02T21:00:00-04:00' },
+      { start: '2026-09-04T19:00:00-04:00', end: '2026-09-04T21:00:00-04:00' },
+      { start: '2026-09-09T19:00:00-04:00', end: '2026-09-09T21:00:00-04:00' },
+      { start: '2026-09-11T19:00:00-04:00', end: '2026-09-11T21:00:00-04:00' },
+      { start: '2026-09-16T19:00:00-04:00', end: '2026-09-16T21:00:00-04:00' },
+      { start: '2026-09-18T19:00:00-04:00', end: '2026-09-18T21:00:00-04:00' }
+    ];
+
+    /* If the markup and this array have drifted apart, every mark below would
+       land on the wrong event. Say nothing rather than lie about a date. */
+    if (rows.length !== EVENTS.length) return;
+
+    var now = Date.now();
+    var ends = [];
+    var i, t;
+    for (i = 0; i < EVENTS.length; i++) {
+      /* An event is past when it has ENDED, not when it has started: someone
+         checking the page at 7:40 on a Wednesday can still walk in. */
+      t = Date.parse(EVENTS[i].end);
+      if (isNaN(t)) return;
+      ends.push(t);
+    }
+
+    /* Resolve first, write second, so a bad date cannot leave half a list
+       marked. `next` is the first event that has not ended, which means an
+       event in progress right now is the one you are pointed at. */
+    var past = [];
+    var next = -1;
+    for (i = 0; i < rows.length; i++) {
+      var isPast = now >= ends[i];
+      past.push(isPast);
+      if (!isPast && next === -1) next = i;
+    }
+
+    root.dataset.joinReady = '1';
+
+    if (next === -1) {
+      /* Every event has ended. The list is now a list of things nobody can
+         attend, so it is replaced rather than greyed out wholesale. */
+      if (over) {
+        over.hidden = false;
+        list.hidden = true;
+      }
+      return;
+    }
+
+    for (i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      if (past[i]) {
+        row.classList.add('is-past');
+        /* Explicit, not decorative. A quieted row is still real information
+           (it names a room a rushee may be asked about) and it stays in both
+           the DOM and the accessibility tree. The visually hidden "Past" is
+           what carries the state to a screen reader, since the only visual
+           cue is a drop in contrast. */
+        row.setAttribute('aria-hidden', 'false');
+        var lab = row.querySelector('[data-join-past]');
+        if (lab) lab.hidden = false;
+      } else if (i === next) {
+        row.classList.add('is-next');
+        var mark = row.querySelector('[data-join-next]');
+        if (mark) mark.hidden = false;
+      }
+    }
+  } catch (err) {
+    /* A wrong schedule is worse than an unresolved one: leave the printed
+       markup exactly as authored. */
+    if (window.console && console.warn) console.warn('pctInitJoin:', err);
+  }
+};
+/* ===== 06-mem ===== */
 /* 05 — the photography band.
    Clones the photo list once so the loop point falls exactly where the second
    copy starts, then sets the keyframe's end transform to minus the width of one
@@ -2248,7 +3435,7 @@ window.pctInitLife = function () {
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitCountdown', 'pctInitHero', 'pctInitGrow', 'pctInitNumbers', 'pctInitPlace', 'pctInitLife'];
+  var inits = ['pctInitCountdown', 'pctInitHero', 'pctInitPlace', 'pctInitJoin', 'pctInitLife'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

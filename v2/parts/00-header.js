@@ -71,3 +71,34 @@ window.pctInitReveal = function () {
     if (window.console && console.warn) console.warn('pctInitReveal:', err);
   }
 };
+
+/* The header is transparent while the reader is still on the hero, so header and
+   hero read as one dark field. Once the page has scrolled past a threshold the
+   ground fades in and the bar becomes a real sticky header.
+
+   A sentinel element rather than a scroll listener: one IntersectionObserver
+   callback per crossing instead of a handler on every scroll frame, and no layout
+   read at any point. */
+window.pctInitStick = function () {
+  try {
+    var hd = document.querySelector('.v2hd');
+    if (!hd) return;
+
+    var sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    /* 120px down the page: far enough that the bar does not flicker solid on the
+       tiniest scroll, close enough that it is opaque before it overlaps any
+       cream section. */
+    sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
+    document.body.appendChild(sentinel);
+
+    if (!('IntersectionObserver' in window)) { hd.classList.add('is-stuck'); return; }
+
+    new IntersectionObserver(function (entries) {
+      hd.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  } catch (err) {
+    /* a header that never goes solid is survivable; one that throws is not */
+    if (window.console && console.warn) console.warn('pctInitStick:', err);
+  }
+};

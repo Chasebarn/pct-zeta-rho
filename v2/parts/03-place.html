@@ -49,7 +49,7 @@
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
 
   <div class="v2wrap">
-    <h2 class="pl-h" id="pl-h">What we have to <em>show for it.</em></h2>
+    <h2 class="pl-h" id="pl-h">What we have to show for it.</h2>
   </div>
 
   <div class="pl-rows" role="group" aria-label="Companies where members have placed">
@@ -103,19 +103,21 @@
        a fourth and do not invent one. The values are printed literally here, so
        the markup is the single source of truth and the finished state is the only
        state with JS off or under reduced motion. There is no count-up any more:
-       this section's one interaction is the belt above. -->
+       The finished value is printed in the markup, so with JS off, under reduced
+       motion, or if the observer never fires, the reader simply sees the number.
+       data-count only tells the counter where to start from. -->
   <div class="v2wrap">
     <ul class="pl-nums" role="list">
       <li class="pl-n">
-        <p class="pl-n-val">95<span class="pl-n-u">%</span></p>
+        <p class="pl-n-val"><span data-count="95">95</span><span class="pl-n-u">%</span></p>
         <p class="pl-n-lab">Members placed in internships or full-time roles</p>
       </li>
       <li class="pl-n">
-        <p class="pl-n-val">3.60</p>
+        <p class="pl-n-val"><span data-count="3.6" data-decimals="2">3.60</span></p>
         <p class="pl-n-lab">Chapter average GPA</p>
       </li>
       <li class="pl-n">
-        <p class="pl-n-val">15</p>
+        <p class="pl-n-val"><span data-count="15">15</span></p>
         <p class="pl-n-lab">&ldquo;25 Under 25&rdquo; honorees</p>
       </li>
     </ul>

@@ -4,14 +4,16 @@
 
 .v2hero{
   position:relative;
-  /* The site header is static and sits ABOVE this section, so a full 100svh here
-     pushed the foot bar below the fold and the reader never saw it. Subtract the
-     header's own height so hero + header together are exactly one screen. */
-  min-height:calc(100svh - var(--v2hd-h,76px));
+  /* The header is transparent and sits ON this section rather than above it, so
+     the hero pulls itself up by the header's height and pads its own content back
+     down. Header plus hero is then exactly one screen with no seam between them,
+     and the foot bar still lands on the fold. */
+  margin-top:calc(var(--v2hd-h,76px) * -1);
+  min-height:100svh;
   display:flex;
   align-items:center;
   overflow:hidden;
-  padding:9rem 0 7rem;
+  padding:calc(var(--v2hd-h,76px) + 8rem) 0 7rem;
   background:
     radial-gradient(120% 90% at 80% -10%, #3b2559 0%, transparent 55%),
     var(--purple-deep);
@@ -193,7 +195,7 @@
    No pointer, so no pull and no wake — but the settle still runs. The foot bar
    drops the two flanking lines and keeps only the scroll hint, centred. */
 @media (max-width:767px){
-  .v2hero{padding:7.5rem 0 6rem;min-height:calc(100svh - var(--v2hd-h,64px))}
+  .v2hero{padding:calc(var(--v2hd-h,64px) + 6.5rem) 0 6rem;min-height:100svh}
   .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
   .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
   .v2hero-sub{margin-bottom:1.9rem}

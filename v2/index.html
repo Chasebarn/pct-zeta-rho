@@ -29,52 +29,46 @@
 @media (max-width:767px){:root{--v2hd-h:64px}}
 
 .v2hd{
-  position:relative;
-  z-index:1;
+  /* AT REST: transparent, sitting ON the hero. Header and hero are one continuous
+     dark field with no seam to match, which is why the elaborate bloom-matching
+     this rule used to carry is gone: there is nothing to match any more. The hero
+     pulls itself up underneath with a negative margin and pads its content back
+     down (see 01-hero.css).
 
-  /* No border-bottom and no box-shadow: the hero below is the same ground and
-     any edge would seam one dark field into two.
+     ON SCROLL: 00-header.js adds .is-stuck and the ground fades in. position is
+     sticky rather than fixed, so the element keeps its own row in the flow and
+     nothing downstream has to be told its height.
 
-     But a flat bar is not enough on its own. The hero paints a radial bloom
-     whose centre sits ABOVE its own top edge, so the hero's very first row of
-     pixels is already lifted: rgb(54,34,81) at x=80% against a flat bar's
-     rgb(36,23,51). That reads as a hairline ruled across the full width exactly
-     at the join, which is the one thing this bar must not do. So it continues
-     the bloom rather than ending it.
-
-     The geometry is picked so the match cannot drift. The hero centres its
-     ellipse 10% of its own height above its top edge with a vertical radius of
-     90% of that height, so at the hero's top edge the vertical offset is always
-     0.1H / 0.9H = one ninth of the radius, NO MATTER HOW TALL THE HERO IS.
-     Reproduce that one ratio and the join is exact for free: a centre 90px above
-     this bar's own bottom edge with an 810px vertical radius is the same 1:9.
-     An earlier version wrote this in svh, which held on a portrait phone and
-     then split open in landscape, where the hero runs well past one screen.
-     Horizontal radius is 120% to match, and both elements are full bleed, so the
-     tone agrees along the whole seam rather than at one x.
-
-     50% of --purple is tuned, not guessed: the hero blooms a raw tint, this bar
-     blooms a token colour that is bluer, so the two are matched at the join
-     rather than copied. Composited on --purple-deep the bar lands within 3/255
-     on every channel at x = 0, 50%, 80% and 100% of the width.
-
-     background-color and background-image are separate declarations on purpose:
-     if a browser cannot parse color-mix, only the bloom drops and the solid
-     purple survives. As one `background` shorthand a parse failure would drop
-     the ground entirely and leave paper-white text on the cream body. */
-  background-color:var(--purple-deep);
-  background-image:radial-gradient(120% 810px at 80% calc(100% - 90px),
-    color-mix(in srgb, var(--purple) 50%, transparent) 0%,
-    transparent 55%);
-
-  /* Safety net only. Measured, the bar has 48px of slack between the lockup and
-     the pill at a true 320px viewport and scrollWidth matches clientWidth at
-     every width from 320 to 2560, so nothing actually overflows today. This is
-     here so a fallback font on a machine without Inter still cannot push a
-     horizontal scrollbar onto the whole document. Verified it clips no focus
-     ring: every ring sits inside the gutter with room to spare. */
+     overflow:hidden is a safety net for a fallback font pushing the lockup and
+     the pill apart at 320px. Verified it clips no focus ring. */
+  position:sticky;
+  top:0;
+  z-index:60;
+  background:transparent;
   overflow:hidden;
+  transition:background-color 260ms var(--ease), box-shadow 260ms var(--ease);
 }
+
+.v2hd.is-stuck{
+  background:var(--purple-deep);
+  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .v2hd{transition:none}
+}
+
+
+
+.v2hd.is-stuck{
+  background:var(--purple-deep);
+  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .v2hd{transition:none}
+}
+
 
 /* Film grain, the same ground treatment every dark section on this site uses:
    identical noise, identical 5% opacity. Colour-matching the bloom alone was not
@@ -237,17 +231,13 @@
   letter-spacing:.04em;
   text-decoration:none;
   white-space:nowrap;
-  /* A soft gold glow, so the one conversion target on the bar reads as lit
-     rather than as another flat chip. Box-shadow rather than filter, so it stays
-     on the compositor and never rasterises the label. */
-  box-shadow:0 0 26px 2px rgba(201,162,39,.26);
-  transition:background-color 320ms var(--ease), box-shadow 320ms var(--ease);
+  /* No glow. A lit pill lights the header's own ground with it, and that made the
+     seam between the header band and the hero underneath visible as a hard line
+     across what has to read as one continuous dark field. */
+  transition:background-color 320ms var(--ease);
 }
 .v2hd-rush:hover,
-.v2hd-rush:focus-visible{
-  background:var(--gold-soft);
-  box-shadow:0 0 38px 6px rgba(230,198,91,.42);
-}
+.v2hd-rush:focus-visible{background:var(--gold-soft)}
 @media (prefers-reduced-motion:reduce){
   .v2hd-rush{transition:none}
 }
@@ -364,14 +354,16 @@
 
 .v2hero{
   position:relative;
-  /* The site header is static and sits ABOVE this section, so a full 100svh here
-     pushed the foot bar below the fold and the reader never saw it. Subtract the
-     header's own height so hero + header together are exactly one screen. */
-  min-height:calc(100svh - var(--v2hd-h,76px));
+  /* The header is transparent and sits ON this section rather than above it, so
+     the hero pulls itself up by the header's height and pads its own content back
+     down. Header plus hero is then exactly one screen with no seam between them,
+     and the foot bar still lands on the fold. */
+  margin-top:calc(var(--v2hd-h,76px) * -1);
+  min-height:100svh;
   display:flex;
   align-items:center;
   overflow:hidden;
-  padding:9rem 0 7rem;
+  padding:calc(var(--v2hd-h,76px) + 8rem) 0 7rem;
   background:
     radial-gradient(120% 90% at 80% -10%, #3b2559 0%, transparent 55%),
     var(--purple-deep);
@@ -553,7 +545,7 @@
    No pointer, so no pull and no wake — but the settle still runs. The foot bar
    drops the two flanking lines and keeps only the scroll hint, centred. */
 @media (max-width:767px){
-  .v2hero{padding:7.5rem 0 6rem;min-height:calc(100svh - var(--v2hd-h,64px))}
+  .v2hero{padding:calc(var(--v2hd-h,64px) + 6.5rem) 0 6rem;min-height:100svh}
   .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
   .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
   .v2hero-sub{margin-bottom:1.9rem}
@@ -671,6 +663,9 @@
   margin:0;
   padding:0 .25rem 1.9rem;
   max-width:34rem;
+  /* Reserve the tallest of the three paragraphs. Without it the rows block
+     changes height on every click and everything below it jumps. */
+  min-height:5.2rem;
   font-size:1rem;
   line-height:1.65;
   color:var(--ink-soft);
@@ -718,7 +713,11 @@
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  .grow--js .grow__stage{align-self:center;justify-self:end;max-width:32rem}
+  /* align-self START, not centre. Centring measured the stage against a left
+     column whose height changes with the open row, so selecting Philanthropy
+     (a three line paragraph) slid the photograph down and selecting another slid
+     it back. Anchored to the top it never moves. */
+  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:32rem}
 }
 
 @media (max-width:859px){
@@ -1289,19 +1288,20 @@
 
 .mem-h{
   text-align:center;
-  font-size:clamp(2.4rem,6vw,5rem);
-  letter-spacing:-.015em;
-  margin:0 0 clamp(1.8rem,3.6vw,2.6rem);
+  /* Command. This heading sits over the largest photography on the page and was
+     being out-scaled by it. */
+  font-size:clamp(2.9rem,7.5vw,6.5rem);
+  letter-spacing:-.02em;
+  margin:0 0 clamp(2rem,4vw,3rem);
 }
-.mem-h em{font-style:italic;color:var(--gold-ink)}
 
 /* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:150vw;                            /* circle radius. 2160px at a 1440 viewport */
-  --w:calc(var(--R) * 0.15736);         /* locked to --R by the derivation above */
+  --R:90vw;                             /* circle radius. 1296px at a 1440 viewport */
+  --w:calc(var(--R) * 0.3527);          /* locked to --R by the derivation above */
   --h:calc(var(--w) * 1.25);            /* 4:5 */
-  --step:10deg;                         /* 360 / 36 */
-  --inset:1rem;                         /* air above the topmost card */
+  --step:24deg;                         /* 360 / 15 */
+  --inset:1.1rem;                       /* air above the topmost card */
 
   position:relative;
   /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
@@ -1327,7 +1327,7 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 150s linear infinite;
+  animation:memSpin 96s linear infinite;
   will-change:transform;
 }
 
@@ -1358,7 +1358,7 @@
 /* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
   .mem-band{
-    --R:292vw;        /* same w/R ratio, so the corners still touch */
+    --R:170vw;        /* same w/R ratio, so the overlap is identical */
     --inset:.7rem;
   }
 }
@@ -1369,113 +1369,6 @@
 @media (prefers-reduced-motion:reduce){
   .mem-wheel{animation:none}
 }
-/* ===== 06-howtojoin ===== */
-/* ============================================================
-   06 - How to join PCT.  (--paper-deep ground)
-
-   Sized to fit ONE screen. The previous build put a six-row schedule table
-   between the steps and the closer and ran to two full screens on desktop,
-   which is the opposite of what a section about removing friction should do.
-   rush.html carries the full schedule; this section carries the shape.
-
-   Zero interaction, zero JavaScript.
-   ============================================================ */
-
-.join{
-  background:var(--paper-deep);
-  color:var(--ink-soft);
-  padding-block:var(--section);
-}
-
-.join-h{
-  font-size:clamp(2.9rem,7vw,6rem);
-  letter-spacing:-.02em;
-  margin:0 0 .9rem;
-}
-.join-h em{font-style:italic;color:var(--gold-ink)}
-
-.join-sub{
-  margin:0 0 clamp(2.4rem,5vw,3.4rem);
-  max-width:34rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:clamp(1.15rem,1.8vw,1.5rem);
-  line-height:1.35;
-  color:var(--ink-mute);
-}
-
-/* three across on desktop, so the steps read as one gesture rather than a list
-   the reader has to scroll through */
-.join-steps{
-  list-style:none;
-  margin:0 0 clamp(2.6rem,5vw,3.6rem);
-  padding:0;
-  display:grid;
-  gap:clamp(2.2rem,4vw,3.4rem);
-  grid-template-columns:1fr;
-  counter-reset:join;
-}
-@media (min-width:768px){
-  .join-steps{grid-template-columns:repeat(3,1fr)}
-}
-
-/* No hairline over each step. A rule, a gold ordinal and a serif title were
-   three separate devices marking the same boundary, which is what made this
-   read busy. The ordinal alone is enough. */
-.join-step{
-  counter-increment:join;
-  padding-top:0;
-}
-/* the ordinal is decorative: the <ol> already conveys order to assistive tech */
-.join-step::before{
-  content:counter(join,decimal-leading-zero);
-  display:block;
-  margin-bottom:.75rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:1.5rem;
-  line-height:1;
-  color:var(--gold-ink);
-}
-
-.join-t{
-  margin:0 0 .4rem;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:clamp(1.35rem,2vw,1.65rem);
-  line-height:1.15;
-  color:var(--ink);
-}
-.join-b{
-  margin:0;
-  font-size:1.05rem;
-  line-height:1.65;
-  color:var(--ink-soft);
-}
-
-/* the section's emotional payload: it removes risk from the decision. Real
-   typographic weight, no gold and no box. */
-.join-close{
-  margin:0 0 1.6rem;
-  max-width:46rem;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:clamp(1.4rem,2.4vw,2rem);
-  line-height:1.35;
-  color:var(--ink);
-}
-.join-close em{font-style:italic}
-
-.join-more{margin:0}
-.join-link{
-  font-size:.95rem;
-  font-weight:600;
-  color:var(--ink);
-  text-decoration:underline;
-  text-underline-offset:.22em;
-  text-decoration-thickness:1px;
-}
-.join-link:hover{color:var(--purple)}
 /* ===== 07-act ===== */
 /* ==========================================================================
    05 — THE ACT (final CTA)
@@ -1500,13 +1393,21 @@
      a horizontal scrollbar. Nothing in this section needs to escape it. */
   overflow: hidden;
 
-  /* The corner highlight. The original section had a light source in the upper
-     right and it is most of why that version reads as fuller than a flat purple
-     panel. Painted on the section's own background so it costs no element and
-     cannot intercept a pointer. */
+  /* ONE light source, not two. The previous version stacked a radial in the upper
+     right and a second in the lower left, and both had a visible edge where they
+     ran out: two blobs dropped on a flat panel. This is a single ellipse centred
+     ABOVE the section's own top edge and wider than the section, so what shows is
+     only its smooth middle. Its falloff runs past the bottom of the panel, so
+     there is nowhere for the reader to see it end.
+
+     Three stops rather than two: a straight two stop radial in sRGB is what
+     produces the grey banded ring that reads as cheap. */
   background:
-    radial-gradient(58% 74% at 88% 4%, rgba(150, 118, 215, 0.42) 0%, rgba(150, 118, 215, 0) 62%),
-    radial-gradient(42% 56% at 12% 96%, rgba(75, 46, 131, 0.34) 0%, rgba(75, 46, 131, 0) 66%),
+    radial-gradient(135% 118% at 62% -22%,
+      rgba(126, 92, 184, 0.50) 0%,
+      rgba(96, 66, 150, 0.26) 34%,
+      rgba(58, 36, 92, 0.10) 62%,
+      rgba(36, 23, 51, 0) 100%),
     var(--purple-deep);
 }
 
@@ -1860,6 +1761,27 @@
   min-height: 44px;
 }
 .act-band-btn:hover { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }
+
+
+/* ------------------------------------------------------------------
+   ARRIVAL FLARE. The owner liked the glow but not as a permanent state:
+   "it's just supposed to glow when you scroll to it, the button glows real
+   quick." 00-header.js adds .pct-rv-in when this element is first scrolled
+   into view, so the flare hangs off that one class and can only ever fire
+   once. It is an animation, not a transition, so it returns to rest by
+   itself and leaves no lit state behind.
+   ------------------------------------------------------------------ */
+.act-go.pct-rv-in .act-cta-plate{
+  animation:actFlare 1500ms var(--ease) 260ms both;
+}
+@keyframes actFlare{
+  0%   { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+  28%  { box-shadow:0 0 52px 10px rgba(230,198,91,.52); }
+  100% { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+}
+@media (prefers-reduced-motion:reduce){
+  .act-go.pct-rv-in .act-cta-plate{animation:none}
+}
 </style>
 </head>
 <body>
@@ -1981,7 +1903,7 @@
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
-      <h2 class="grow__h" id="grow-title">More than <em>just</em> a business fraternity.</h2>
+      <h2 class="grow__h" id="grow-title">More than just a business fraternity.</h2>
       <p class="grow__lede">Three parts of the chapter. Members run all three.</p>
     </div>
 
@@ -2084,7 +2006,7 @@
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
 
   <div class="v2wrap">
-    <h2 class="pl-h" id="pl-h">What we have to <em>show for it.</em></h2>
+    <h2 class="pl-h" id="pl-h">What we have to show for it.</h2>
   </div>
 
   <div class="pl-rows" role="group" aria-label="Companies where members have placed">
@@ -2138,19 +2060,21 @@
        a fourth and do not invent one. The values are printed literally here, so
        the markup is the single source of truth and the finished state is the only
        state with JS off or under reduced motion. There is no count-up any more:
-       this section's one interaction is the belt above. -->
+       The finished value is printed in the markup, so with JS off, under reduced
+       motion, or if the observer never fires, the reader simply sees the number.
+       data-count only tells the counter where to start from. -->
   <div class="v2wrap">
     <ul class="pl-nums" role="list">
       <li class="pl-n">
-        <p class="pl-n-val">95<span class="pl-n-u">%</span></p>
+        <p class="pl-n-val"><span data-count="95">95</span><span class="pl-n-u">%</span></p>
         <p class="pl-n-lab">Members placed in internships or full-time roles</p>
       </li>
       <li class="pl-n">
-        <p class="pl-n-val">3.60</p>
+        <p class="pl-n-val"><span data-count="3.6" data-decimals="2">3.60</span></p>
         <p class="pl-n-lab">Chapter average GPA</p>
       </li>
       <li class="pl-n">
-        <p class="pl-n-val">15</p>
+        <p class="pl-n-val"><span data-count="15">15</span></p>
         <p class="pl-n-lab">&ldquo;25 Under 25&rdquo; honorees</p>
       </li>
     </ul>
@@ -2227,103 +2151,40 @@
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- 05 - Your college should look like this.
-     A WHEEL, not a strip. The photographs sit on a circle whose centre is far below
-     the section, each one rotated to its own angular position so it points radially
-     outward. That is what makes their bottom corners touch while their tops splay
-     apart, and it is why the whole thing reads as spinning rather than sliding.
+<!-- 05 - College should look like this.
+     A WHEEL. The photographs sit on a circle whose centre is below the section,
+     each rotated to its own angular position so it points radially outward. Bottom
+     corners OVERLAP their neighbours, tops splay apart, and the arc is deep enough
+     to read as a curve rather than a line.
 
-     36 slots around a full circle, filled by six photographs on repeat. Because it
-     is a complete circle, one revolution returns to the identical frame, so the spin
-     has no loop point and no seam anywhere.
+     15 slots around a full circle, filled by five photographs on repeat. A whole
+     circle means one revolution returns to the identical frame, so the spin has no
+     loop point anywhere. 15 divides by 5, so the wrap never doubles a frame.
 
-     The band clips the top of the wheel, so the bottoms are cut flat by the section
-     below and the arc is what you see. Geometry is derived in 05-mem.css.
-
-     Two of the six photographs are real. Replace assets/mem/m1, m2, m5, m6. -->
+     Three of the five photographs are real. Replace assets/mem/m2 and m5. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
-    <h2 class="mem-h" id="mem-h">College should <em>look like this.</em></h2>
+    <h2 class="mem-h" id="mem-h">College should look like this.</h2>
   </div>
 
   <div class="mem-band">
     <ul class="mem-wheel" aria-label="Chapter photographs">
       <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:1"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="../assets/mem/m1.jpg" alt="The chapter at Fall Formal." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="../assets/mem/m5.jpg" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9"><img src="../assets/mem/m1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:3"><img src="../assets/mem/m5.jpg" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:5"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:6"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:7"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:9"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:11"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:13"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:14"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15"><img src="../assets/mem/m1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21"><img src="../assets/mem/m1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27"><img src="../assets/mem/m1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:32"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:33"><img src="../assets/mem/m1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:34"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:35"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
-  </div>
-</section>
-
-    <!-- ===== 06-howtojoin ===== -->
-<!-- 06 - How to join PCT.
-     Deliberately ONE SCREEN. An earlier build ran to two full screens: three
-     steps, then a six-row schedule table carrying every date and room, then a
-     closer. The schedule is real and it is good, but rush.html already carries
-     it in full, and a prospect at this point on the page needs the shape of the
-     thing, not the timetable.
-
-     ONE interaction: none. Nothing here moves. -->
-<section class="join" id="join" aria-labelledby="join-h">
-  <div class="v2wrap">
-
-    <h2 class="join-h" id="join-h">How to join <em>PCT.</em></h2>
-    <p class="join-sub">Six events, September 2 to 18. Open to business and economics
-      majors and minors. Rush is free.</p>
-
-    <ol class="join-steps" role="list" aria-label="How to join PCT, in three steps">
-      <li class="join-step">
-        <h3 class="join-t">Show up.</h3>
-        <p class="join-b">Info Night is Wednesday, September 2 at 7:00 PM in BSN 225.</p>
-      </li>
-      <li class="join-step">
-        <h3 class="join-t">Meet the chapter.</h3>
-        <p class="join-b">Bring the real questions: time commitment, dues, GPA.</p>
-      </li>
-      <li class="join-step">
-        <h3 class="join-t">Both sides decide.</h3>
-        <p class="join-b">Nothing is settled on night one.</p>
-      </li>
-    </ol>
-
-    <p class="join-close"><em>Yours either way.</em> You keep the resume, the practice,
-      and the contacts whether or not you join.</p>
-
-    <p class="join-more"><a class="join-link" href="rush.html">See all six events</a></p>
-
   </div>
 </section>
 
@@ -2638,6 +2499,37 @@ window.pctInitReveal = function () {
     }
   } catch (err) {
     if (window.console && console.warn) console.warn('pctInitReveal:', err);
+  }
+};
+
+/* The header is transparent while the reader is still on the hero, so header and
+   hero read as one dark field. Once the page has scrolled past a threshold the
+   ground fades in and the bar becomes a real sticky header.
+
+   A sentinel element rather than a scroll listener: one IntersectionObserver
+   callback per crossing instead of a handler on every scroll frame, and no layout
+   read at any point. */
+window.pctInitStick = function () {
+  try {
+    var hd = document.querySelector('.v2hd');
+    if (!hd) return;
+
+    var sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    /* 120px down the page: far enough that the bar does not flicker solid on the
+       tiniest scroll, close enough that it is opaque before it overlaps any
+       cream section. */
+    sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
+    document.body.appendChild(sentinel);
+
+    if (!('IntersectionObserver' in window)) { hd.classList.add('is-stuck'); return; }
+
+    new IntersectionObserver(function (entries) {
+      hd.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  } catch (err) {
+    /* a header that never goes solid is survivable; one that throws is not */
+    if (window.console && console.warn) console.warn('pctInitStick:', err);
   }
 };
 /* ===== 01-hero ===== */
@@ -3004,9 +2896,75 @@ window.pctInitPlace = function () {
   }
 };
 
+/* The count-up. The owner asked for it by name: "make every number load, pick a
+   section and just have them come in", on this section.
+
+   It runs ONCE, the first time the figures are scrolled into view, and each target
+   is unobserved the moment it fires. The finished value is already printed in the
+   markup, so this only ever replaces a correct number with the same correct number
+   at the end. With JS off, under reduced motion, or if the observer never fires,
+   the reader sees the real figure and nothing is missing. */
+window.pctInitCount = function () {
+  try {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+
+    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (reduced) return;
+
+    var DUR = 1500;
+
+    function run(el, i) {
+      var to = parseFloat(el.getAttribute('data-count'));
+      var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if (isNaN(to)) return;
+      /* a short stagger so the three read as one gesture rather than a drum roll */
+      var delay = i * 130;
+      var start = 0;
+      el.textContent = dec ? (0).toFixed(dec) : '0';
+      function step(ts) {
+        if (!start) start = ts;
+        var k = (ts - start - delay) / DUR;
+        if (k < 0) { requestAnimationFrame(step); return; }
+        if (k > 1) k = 1;
+        /* ease-out cubic: quick off the mark, arrives without overshoot */
+        var e = 1 - Math.pow(1 - k, 3);
+        el.textContent = dec ? (to * e).toFixed(dec) : String(Math.round(to * e));
+        if (k < 1) requestAnimationFrame(step);
+        else el.textContent = dec ? to.toFixed(dec) : String(to);   /* exact, never 94.9997 */
+      }
+      requestAnimationFrame(step);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        run(en.target, els.indexOf(en.target));
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.5 });
+
+    els.forEach(function (el) { io.observe(el); });
+
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(function () {
+        io.disconnect();
+        els.forEach(function (el) {
+          var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
+          var v = parseFloat(el.getAttribute('data-count'));
+          if (!isNaN(v)) el.textContent = d ? v.toFixed(d) : String(v);
+        });
+      });
+    }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitCount:', err);
+  }
+};
+
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitCountdown', 'pctInitReveal', 'pctInitHero', 'pctInitGrow', 'pctInitPlace'];
+  var inits = ['pctInitCountdown', 'pctInitReveal', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlace', 'pctInitCount'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

@@ -141,3 +141,69 @@ window.pctInitPlace = function () {
     if (window.console && console.warn) console.warn('pctInitPlace:', err);
   }
 };
+
+/* The count-up. The owner asked for it by name: "make every number load, pick a
+   section and just have them come in", on this section.
+
+   It runs ONCE, the first time the figures are scrolled into view, and each target
+   is unobserved the moment it fires. The finished value is already printed in the
+   markup, so this only ever replaces a correct number with the same correct number
+   at the end. With JS off, under reduced motion, or if the observer never fires,
+   the reader sees the real figure and nothing is missing. */
+window.pctInitCount = function () {
+  try {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+
+    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (reduced) return;
+
+    var DUR = 1500;
+
+    function run(el, i) {
+      var to = parseFloat(el.getAttribute('data-count'));
+      var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if (isNaN(to)) return;
+      /* a short stagger so the three read as one gesture rather than a drum roll */
+      var delay = i * 130;
+      var start = 0;
+      el.textContent = dec ? (0).toFixed(dec) : '0';
+      function step(ts) {
+        if (!start) start = ts;
+        var k = (ts - start - delay) / DUR;
+        if (k < 0) { requestAnimationFrame(step); return; }
+        if (k > 1) k = 1;
+        /* ease-out cubic: quick off the mark, arrives without overshoot */
+        var e = 1 - Math.pow(1 - k, 3);
+        el.textContent = dec ? (to * e).toFixed(dec) : String(Math.round(to * e));
+        if (k < 1) requestAnimationFrame(step);
+        else el.textContent = dec ? to.toFixed(dec) : String(to);   /* exact, never 94.9997 */
+      }
+      requestAnimationFrame(step);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        run(en.target, els.indexOf(en.target));
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.5 });
+
+    els.forEach(function (el) { io.observe(el); });
+
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(function () {
+        io.disconnect();
+        els.forEach(function (el) {
+          var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
+          var v = parseFloat(el.getAttribute('data-count'));
+          if (!isNaN(v)) el.textContent = d ? v.toFixed(d) : String(v);
+        });
+      });
+    }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitCount:', err);
+  }
+};

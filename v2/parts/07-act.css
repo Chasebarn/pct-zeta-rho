@@ -21,13 +21,21 @@
      a horizontal scrollbar. Nothing in this section needs to escape it. */
   overflow: hidden;
 
-  /* The corner highlight. The original section had a light source in the upper
-     right and it is most of why that version reads as fuller than a flat purple
-     panel. Painted on the section's own background so it costs no element and
-     cannot intercept a pointer. */
+  /* ONE light source, not two. The previous version stacked a radial in the upper
+     right and a second in the lower left, and both had a visible edge where they
+     ran out: two blobs dropped on a flat panel. This is a single ellipse centred
+     ABOVE the section's own top edge and wider than the section, so what shows is
+     only its smooth middle. Its falloff runs past the bottom of the panel, so
+     there is nowhere for the reader to see it end.
+
+     Three stops rather than two: a straight two stop radial in sRGB is what
+     produces the grey banded ring that reads as cheap. */
   background:
-    radial-gradient(58% 74% at 88% 4%, rgba(150, 118, 215, 0.42) 0%, rgba(150, 118, 215, 0) 62%),
-    radial-gradient(42% 56% at 12% 96%, rgba(75, 46, 131, 0.34) 0%, rgba(75, 46, 131, 0) 66%),
+    radial-gradient(135% 118% at 62% -22%,
+      rgba(126, 92, 184, 0.50) 0%,
+      rgba(96, 66, 150, 0.26) 34%,
+      rgba(58, 36, 92, 0.10) 62%,
+      rgba(36, 23, 51, 0) 100%),
     var(--purple-deep);
 }
 
@@ -381,3 +389,24 @@
   min-height: 44px;
 }
 .act-band-btn:hover { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }
+
+
+/* ------------------------------------------------------------------
+   ARRIVAL FLARE. The owner liked the glow but not as a permanent state:
+   "it's just supposed to glow when you scroll to it, the button glows real
+   quick." 00-header.js adds .pct-rv-in when this element is first scrolled
+   into view, so the flare hangs off that one class and can only ever fire
+   once. It is an animation, not a transition, so it returns to rest by
+   itself and leaves no lit state behind.
+   ------------------------------------------------------------------ */
+.act-go.pct-rv-in .act-cta-plate{
+  animation:actFlare 1500ms var(--ease) 260ms both;
+}
+@keyframes actFlare{
+  0%   { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+  28%  { box-shadow:0 0 52px 10px rgba(230,198,91,.52); }
+  100% { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+}
+@media (prefers-reduced-motion:reduce){
+  .act-go.pct-rv-in .act-cta-plate{animation:none}
+}

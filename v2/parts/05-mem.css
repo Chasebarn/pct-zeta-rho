@@ -48,11 +48,11 @@
 
 /* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:90vw;                             /* circle radius. 1296px at a 1440 viewport */
-  --w:calc(var(--R) * 0.3527);          /* locked to --R by the derivation above */
-  --h:calc(var(--w) * 1.25);            /* 4:5 */
-  --step:24deg;                         /* 360 / 15 */
-  --inset:1.1rem;                       /* air above the topmost card */
+  --R:138vw;                            /* circle radius. 1987px at a 1440 viewport */
+  --w:calc(var(--R) * 0.1443);          /* locked to --R by the derivation above */
+  --h:calc(var(--w) * 1.68);            /* taller than wide, like the reference */
+  --step:9deg;                          /* 360 / 44 */
+  --inset:.9rem;                        /* air above the topmost card */
 
   position:relative;
   /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
@@ -78,7 +78,7 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 96s linear infinite;
+  animation:memSpin 62s linear infinite;
   will-change:transform;
 }
 
@@ -109,7 +109,7 @@
 /* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
   .mem-band{
-    --R:170vw;        /* same w/R ratio, so the overlap is identical */
+    --R:300vw;        /* same w/R ratio, so the overlap is identical */
     --inset:.7rem;
   }
 }

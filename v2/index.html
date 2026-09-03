@@ -44,15 +44,36 @@
   position:sticky;
   top:0;
   z-index:60;
-  background:transparent;
-  overflow:hidden;
+  /* rgba(250,248,243,0), NOT `transparent`. `transparent` is rgba(0,0,0,0), so
+     fading from it to a cream bar interpolates through BLACK and the header
+     visibly darkens on its way to going light. Starting from the same hue at zero
+     alpha fades cleanly. */
+  background:rgba(250,248,243,0);
   transition:background-color 260ms var(--ease), box-shadow 260ms var(--ease);
 }
 
+/* SCROLLED: a PAPER bar, not a darker purple one. Purple on purple was the
+   problem: the bar changed state and the reader could barely tell, so it read as
+   a rendering artefact rather than as a header arriving. Cream is an unmistakable
+   switch, and it is what the live site does.
+
+   Every colour inside has to flip with it. Contrast on --paper:
+     --ink       #191221  16.1:1
+     --ink-soft  #453a52   9.0:1
+     --gold-ink  #8a6d14   4.6:1   (the only gold legible on cream) */
 .v2hd.is-stuck{
-  background:var(--purple-deep);
-  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
+  background:var(--paper);
+  box-shadow:0 8px 26px -20px rgba(25,18,33,.5);
 }
+.v2hd.is-stuck .v2hd-name{color:var(--ink)}
+.v2hd.is-stuck .v2hd-sub{color:var(--gold-ink)}
+.v2hd.is-stuck .v2hd-link{color:var(--ink-soft)}
+.v2hd.is-stuck .v2hd-link:hover,
+.v2hd.is-stuck .v2hd-link[aria-current="page"]{color:var(--ink)}
+.v2hd.is-stuck .v2hd-t::after{background:var(--gold-ink)}
+.v2hd.is-stuck .v2hd-link[aria-current="page"] .v2hd-t::after{background:var(--gold-ink)}
+/* the focus ring must flip too: --gold-soft is invisible on cream */
+.v2hd.is-stuck a:focus-visible{outline-color:var(--purple)}
 
 @media (prefers-reduced-motion:reduce){
   .v2hd{transition:none}
@@ -60,14 +81,6 @@
 
 
 
-.v2hd.is-stuck{
-  background:var(--purple-deep);
-  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
-}
-
-@media (prefers-reduced-motion:reduce){
-  .v2hd{transition:none}
-}
 
 
 /* Film grain, the same ground treatment every dark section on this site uses:
@@ -603,15 +616,6 @@
    work rather than on a noun at the end of it */
 .grow__h em{font-style:italic;color:var(--gold-ink)}
 
-.grow__lede{
-  margin:0;
-  max-width:32rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:clamp(1.3rem,2vw,1.65rem);
-  line-height:1.35;
-  color:var(--ink-mute);
-}
 
 /* ---------- the photographs ---------- */
 /* SQUARE. Every source file is 1300x1300, so a 4:5 crop would cut people out of
@@ -638,7 +642,7 @@
   display:block;
   width:100%;
   margin:0;
-  padding:1.5rem .25rem;
+  padding:1.35rem .25rem;
   background:none;
   border:0;
   color:inherit;
@@ -661,11 +665,8 @@
 
 .grow__say{
   margin:0;
-  padding:0 .25rem 1.9rem;
+  padding:0 .25rem 1.6rem;
   max-width:34rem;
-  /* Reserve the tallest of the three paragraphs. Without it the rows block
-     changes height on every click and everything below it jumps. */
-  min-height:5.2rem;
   font-size:1rem;
   line-height:1.65;
   color:var(--ink-soft);
@@ -698,8 +699,18 @@
 .grow--js .grow__fig.is-active{opacity:1}
 
 /* only the open row shows its paragraph, so the section fits one screen */
-.grow--js .grow__say{display:none}
-.grow--js .is-open .grow__say{display:block}
+/* The paragraph ANIMATES open. display:none to block cannot transition, which is
+   why the accordion read as a hard flick rather than a movement. grid-template-rows
+   0fr to 1fr does animate, and it needs no measured height, so nothing here reads
+   layout. */
+.grow--js .grow__panel{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows 420ms var(--ease), opacity 300ms var(--ease);
+  opacity:0;
+}
+.grow--js .grow__panel > *{overflow:hidden;min-height:0}
+.grow--js .is-open .grow__panel{grid-template-rows:1fr;opacity:1}
 .grow--js .grow__ttl{color:var(--ink-mute)}
 .grow--js .is-open .grow__ttl{color:var(--ink)}
 
@@ -717,7 +728,7 @@
      column whose height changes with the open row, so selecting Philanthropy
      (a three line paragraph) slid the photograph down and selecting another slid
      it back. Anchored to the top it never moves. */
-  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:32rem}
+  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:27rem}
 }
 
 @media (max-width:859px){
@@ -773,6 +784,10 @@
   font-size:clamp(2.9rem,7vw,6rem);
   letter-spacing:-.02em;
   margin:0 0 clamp(2.6rem,5vw,4rem);
+  /* Ruled underneath rather than gold-italicised. It marks the heading as the
+     start of a chapter and hands off to the belts below it. */
+  padding-bottom:clamp(1.4rem,2.6vw,2.2rem);
+  border-bottom:1px solid var(--line);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
@@ -940,7 +955,9 @@
   color:var(--ink);
   font-variant-numeric:lining-nums tabular-nums;
 }
-.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
+/* the unit is part of the figure, not an accent. It was the only gold left in
+   the section and read as a stray. */
+.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--ink-mute)}
 
 /* the label is the display italic, not the UI sans. A 13px sans caption under a
    128px serif numeral reads as a chart legend. */
@@ -1228,23 +1245,24 @@
    Full colour, at a size that reads as a mark rather than a favicon. On desktop
    it sits in its own column beside the type; the section has no photography and
    no motion, so this is the only thing carrying visual weight. */
-.v2nat-crest{
-  margin:0 0 clamp(1.6rem,3vw,2.2rem);
-  width:clamp(88px,11vw,150px);
+/* crest and heading on one baseline, as a single lockup */
+.v2nat-lock{
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem,2.2vw,1.8rem);
+  margin-bottom:clamp(2rem,4vw,3rem);
 }
-.v2nat-crest img{width:100%;height:auto;display:block}
+.v2nat-crest{
+  flex:none;
+  width:clamp(56px,7vw,96px);
+  height:auto;
+  display:block;
+}
+.v2nat-lock .v2nat-h{margin:0}
 
-@media (min-width:900px){
-  .v2nat-in{
-    display:grid;
-    grid-template-columns:auto minmax(0,1fr);
-    column-gap:clamp(2.5rem,5vw,4.5rem);
-    align-items:start;
-  }
-  .v2nat-crest{grid-row:1 / span 3;margin-bottom:0;align-self:center}
-  .v2nat-h,
-  .v2nat-figs,
-  .v2nat-tail{grid-column:2}
+@media (max-width:559px){
+  .v2nat-lock{gap:.9rem}
+  .v2nat-crest{width:48px}
 }
 /* ===== 05-mem ===== */
 /* ============================================================
@@ -1297,11 +1315,11 @@
 
 /* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:90vw;                             /* circle radius. 1296px at a 1440 viewport */
-  --w:calc(var(--R) * 0.3527);          /* locked to --R by the derivation above */
-  --h:calc(var(--w) * 1.25);            /* 4:5 */
-  --step:24deg;                         /* 360 / 15 */
-  --inset:1.1rem;                       /* air above the topmost card */
+  --R:138vw;                            /* circle radius. 1987px at a 1440 viewport */
+  --w:calc(var(--R) * 0.1443);          /* locked to --R by the derivation above */
+  --h:calc(var(--w) * 1.68);            /* taller than wide, like the reference */
+  --step:9deg;                          /* 360 / 44 */
+  --inset:.9rem;                        /* air above the topmost card */
 
   position:relative;
   /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
@@ -1327,7 +1345,7 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 96s linear infinite;
+  animation:memSpin 62s linear infinite;
   will-change:transform;
 }
 
@@ -1358,7 +1376,7 @@
 /* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
   .mem-band{
-    --R:170vw;        /* same w/R ratio, so the overlap is identical */
+    --R:300vw;        /* same w/R ratio, so the overlap is identical */
     --inset:.7rem;
   }
 }
@@ -1429,8 +1447,8 @@
 .act-line {
   margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
   max-width: 33rem;
-  font-size: clamp(1.02rem, 1.55vw, 1.17rem);
-  line-height: 1.55;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.5;
   color: rgba(250, 248, 243, 0.72);
 }
 
@@ -1541,9 +1559,9 @@
 /* The sub was set at body size on the page's single most important screen, which
    is why the whole block read small. */
 .act-sub {
-  margin-top: 1.35rem;
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-  line-height: 1.55;
+  margin-top: 1.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.5;
 }
 
 /* --------------------------------------------------------------------------
@@ -1904,7 +1922,6 @@
 
     <div class="grow__intro">
       <h2 class="grow__h" id="grow-title">More than just a business fraternity.</h2>
-      <p class="grow__lede">Three parts of the chapter. Members run all three.</p>
     </div>
 
     <div class="grow__stage" data-grow-stage></div>
@@ -1917,7 +1934,9 @@
             <span class="grow__ttl">Professional development</span>
           </button>
         </h3>
-        <p class="grow__say">Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit.</p>
+        <div class="grow__panel">
+          <p class="grow__say">Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit.</p>
+        </div>
         <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
           <img src="../assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
                alt="Members in chapter Fall Rush shirts working around a table.">
@@ -1930,7 +1949,9 @@
             <span class="grow__ttl">Philanthropy</span>
           </button>
         </h3>
-        <p class="grow__say">Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares.</p>
+        <div class="grow__panel">
+          <p class="grow__say">Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares.</p>
+        </div>
         <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
           <img src="../assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
                alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
@@ -1943,7 +1964,9 @@
             <span class="grow__ttl">Chapter life</span>
           </button>
         </h3>
-        <p class="grow__say">Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation.</p>
+        <div class="grow__panel">
+          <p class="grow__say">Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation.</p>
+        </div>
         <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
           <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async"
                alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center.">
@@ -2107,15 +2130,13 @@
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
   <div class="v2wrap v2nat-in">
 
-    <!-- The crest, at real size and in full colour. It is the one place on this
-         page where the chapter's own mark belongs: an institutional section with
-         no photograph and no motion. It was missing entirely. -->
-    <figure class="v2nat-crest">
-      <img src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async"
-           alt="The Phi Chi Theta crest.">
-    </figure>
-
-    <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    <!-- Crest and heading are ONE lockup. Floated off to the left of the whole
+         block it read as a stray graphic parked in the margin. -->
+    <div class="v2nat-lock">
+      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445"
+           loading="lazy" decoding="async" alt="The Phi Chi Theta crest.">
+      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    </div>
 
     <!-- role="list" is required, not decoration: list-style:none strips the list
          role in WebKit/VoiceOver, and without it these three figures stop being
@@ -2136,15 +2157,18 @@
     </ul>
 
     <div class="v2nat-tail">
-      <!-- Trimmed. The opening sentence restated the heading, which already says
-           "a national fraternity since 1924", and the paragraph ran to 39 words
-           to make one point. -->
-      <p class="v2nat-say">Membership connects Zeta Rho to alumni and chapters in cities
-        across the country. That matters when members recruit, relocate, or need an
-        introduction.</p>
+      <!-- This answers the only question a rushee actually has about the national
+           organisation: what does it get ME. The previous version described the
+           institution instead, which nobody reads. -->
+      <!-- Every claim here is supported by the original site's own copy: alumni and
+           chapters in cities across the country, which matters when members recruit,
+           relocate, or need an introduction in a new market. An earlier draft added
+           "national conferences and case competitions", which has no source. -->
+      <p class="v2nat-say">You are not joining one chapter at one school. You are joining
+        an alumni network in the city you move to after graduation, and a name that the
+        person reading your resume in Charlotte or Chicago already recognises.</p>
 
-      <p class="v2nat-charter">Zeta Rho was chartered at USF in September 2018 by 18
-        founding students.</p>
+      <p class="v2nat-charter">Zeta Rho has been the USF chapter since 2018.</p>
     </div>
 
   </div>
@@ -2152,16 +2176,17 @@
 
     <!-- ===== 05-mem ===== -->
 <!-- 05 - College should look like this.
-     A WHEEL. The photographs sit on a circle whose centre is below the section,
-     each rotated to its own angular position so it points radially outward. Bottom
-     corners OVERLAP their neighbours, tops splay apart, and the arc is deep enough
-     to read as a curve rather than a line.
+     A WHEEL. Each photograph sits on a circle whose centre is below the section and
+     is rotated to its own angular position, so it points radially outward. The card
+     nearest each edge of the viewport is tilted about 23 degrees off vertical, which
+     is what makes the row read as an arc rather than a slideshow.
 
-     15 slots around a full circle, filled by five photographs on repeat. A whole
-     circle means one revolution returns to the identical frame, so the spin has no
-     loop point anywhere. 15 divides by 5, so the wrap never doubles a frame.
+     44 slots around a full circle, four photographs on repeat. A whole circle means
+     one revolution returns to the identical frame, so there is no loop point. 44
+     divides by 4, so the wrap never doubles a frame.
 
-     Three of the five photographs are real. Replace assets/mem/m2 and m5. -->
+     THREE OF THE FOUR PHOTOGRAPHS ARE REAL. Replace assets/mem/m2 and the section
+     is entirely real. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">College should look like this.</h2>
@@ -2170,20 +2195,49 @@
   <div class="mem-band">
     <ul class="mem-wheel" aria-label="Chapter photographs">
       <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="../assets/mem/m5.jpg" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:1"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:2"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:3"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:5"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:6"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:7"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:9"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:11"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:13"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:14"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:15"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:16"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:17"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:18"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:19"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:20"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:21"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:22"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:23"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:24"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:25"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:26"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:27"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:28"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:29"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:30"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:31"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:32"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:33"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:34"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:35"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:36"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:37"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:38"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:39"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:40"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:41"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:42"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:43"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -2202,9 +2256,9 @@
   <div class="v2wrap">
     <div class="act-inner">
 
-      <h2 class="act-title">Your path starts <em>here.</em></h2>
+      <h2 class="act-title">Make college <em>count.</em></h2>
 
-      <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
+      <p class="act-line">Rush is six events and it costs nothing. Come to one and find out whether this is your chapter.</p>
 
 
       <!-- COUNTDOWN.

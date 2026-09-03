@@ -23,15 +23,13 @@
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
   <div class="v2wrap v2nat-in">
 
-    <!-- The crest, at real size and in full colour. It is the one place on this
-         page where the chapter's own mark belongs: an institutional section with
-         no photograph and no motion. It was missing entirely. -->
-    <figure class="v2nat-crest">
-      <img src="assets/crest.png" width="337" height="445" loading="lazy" decoding="async"
-           alt="The Phi Chi Theta crest.">
-    </figure>
-
-    <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    <!-- Crest and heading are ONE lockup. Floated off to the left of the whole
+         block it read as a stray graphic parked in the margin. -->
+    <div class="v2nat-lock">
+      <img class="v2nat-crest" src="assets/crest.png" width="337" height="445"
+           loading="lazy" decoding="async" alt="The Phi Chi Theta crest.">
+      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    </div>
 
     <!-- role="list" is required, not decoration: list-style:none strips the list
          role in WebKit/VoiceOver, and without it these three figures stop being
@@ -52,15 +50,18 @@
     </ul>
 
     <div class="v2nat-tail">
-      <!-- Trimmed. The opening sentence restated the heading, which already says
-           "a national fraternity since 1924", and the paragraph ran to 39 words
-           to make one point. -->
-      <p class="v2nat-say">Membership connects Zeta Rho to alumni and chapters in cities
-        across the country. That matters when members recruit, relocate, or need an
-        introduction.</p>
+      <!-- This answers the only question a rushee actually has about the national
+           organisation: what does it get ME. The previous version described the
+           institution instead, which nobody reads. -->
+      <!-- Every claim here is supported by the original site's own copy: alumni and
+           chapters in cities across the country, which matters when members recruit,
+           relocate, or need an introduction in a new market. An earlier draft added
+           "national conferences and case competitions", which has no source. -->
+      <p class="v2nat-say">You are not joining one chapter at one school. You are joining
+        an alumni network in the city you move to after graduation, and a name that the
+        person reading your resume in Charlotte or Chicago already recognises.</p>
 
-      <p class="v2nat-charter">Zeta Rho was chartered at USF in September 2018 by 18
-        founding students.</p>
+      <p class="v2nat-charter">Zeta Rho has been the USF chapter since 2018.</p>
     </div>
 
   </div>

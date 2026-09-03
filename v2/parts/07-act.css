@@ -57,8 +57,8 @@
 .act-line {
   margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
   max-width: 33rem;
-  font-size: clamp(1.02rem, 1.55vw, 1.17rem);
-  line-height: 1.55;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.5;
   color: rgba(250, 248, 243, 0.72);
 }
 
@@ -169,9 +169,9 @@
 /* The sub was set at body size on the page's single most important screen, which
    is why the whole block read small. */
 .act-sub {
-  margin-top: 1.35rem;
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-  line-height: 1.55;
+  margin-top: 1.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.5;
 }
 
 /* --------------------------------------------------------------------------

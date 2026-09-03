@@ -39,6 +39,10 @@
   font-size:clamp(2.9rem,7vw,6rem);
   letter-spacing:-.02em;
   margin:0 0 clamp(2.6rem,5vw,4rem);
+  /* Ruled underneath rather than gold-italicised. It marks the heading as the
+     start of a chapter and hands off to the belts below it. */
+  padding-bottom:clamp(1.4rem,2.6vw,2.2rem);
+  border-bottom:1px solid var(--line);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
@@ -206,7 +210,9 @@
   color:var(--ink);
   font-variant-numeric:lining-nums tabular-nums;
 }
-.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--gold-ink)}
+/* the unit is part of the figure, not an accent. It was the only gold left in
+   the section and read as a stray. */
+.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--ink-mute)}
 
 /* the label is the display italic, not the UI sans. A 13px sans caption under a
    128px serif numeral reads as a chart legend. */

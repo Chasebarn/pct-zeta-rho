@@ -29,15 +29,36 @@
   position:sticky;
   top:0;
   z-index:60;
-  background:transparent;
-  overflow:hidden;
+  /* rgba(250,248,243,0), NOT `transparent`. `transparent` is rgba(0,0,0,0), so
+     fading from it to a cream bar interpolates through BLACK and the header
+     visibly darkens on its way to going light. Starting from the same hue at zero
+     alpha fades cleanly. */
+  background:rgba(250,248,243,0);
   transition:background-color 260ms var(--ease), box-shadow 260ms var(--ease);
 }
 
+/* SCROLLED: a PAPER bar, not a darker purple one. Purple on purple was the
+   problem: the bar changed state and the reader could barely tell, so it read as
+   a rendering artefact rather than as a header arriving. Cream is an unmistakable
+   switch, and it is what the live site does.
+
+   Every colour inside has to flip with it. Contrast on --paper:
+     --ink       #191221  16.1:1
+     --ink-soft  #453a52   9.0:1
+     --gold-ink  #8a6d14   4.6:1   (the only gold legible on cream) */
 .v2hd.is-stuck{
-  background:var(--purple-deep);
-  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
+  background:var(--paper);
+  box-shadow:0 8px 26px -20px rgba(25,18,33,.5);
 }
+.v2hd.is-stuck .v2hd-name{color:var(--ink)}
+.v2hd.is-stuck .v2hd-sub{color:var(--gold-ink)}
+.v2hd.is-stuck .v2hd-link{color:var(--ink-soft)}
+.v2hd.is-stuck .v2hd-link:hover,
+.v2hd.is-stuck .v2hd-link[aria-current="page"]{color:var(--ink)}
+.v2hd.is-stuck .v2hd-t::after{background:var(--gold-ink)}
+.v2hd.is-stuck .v2hd-link[aria-current="page"] .v2hd-t::after{background:var(--gold-ink)}
+/* the focus ring must flip too: --gold-soft is invisible on cream */
+.v2hd.is-stuck a:focus-visible{outline-color:var(--purple)}
 
 @media (prefers-reduced-motion:reduce){
   .v2hd{transition:none}
@@ -45,14 +66,6 @@
 
 
 
-.v2hd.is-stuck{
-  background:var(--purple-deep);
-  box-shadow:0 10px 30px -22px rgba(0,0,0,.85);
-}
-
-@media (prefers-reduced-motion:reduce){
-  .v2hd{transition:none}
-}
 
 
 /* Film grain, the same ground treatment every dark section on this site uses:

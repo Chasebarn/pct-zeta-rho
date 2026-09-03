@@ -4,7 +4,10 @@
 
 .v2hero{
   position:relative;
-  min-height:100svh;
+  /* The site header is static and sits ABOVE this section, so a full 100svh here
+     pushed the foot bar below the fold and the reader never saw it. Subtract the
+     header's own height so hero + header together are exactly one screen. */
+  min-height:calc(100svh - var(--v2hd-h,76px));
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -190,7 +193,7 @@
    No pointer, so no pull and no wake — but the settle still runs. The foot bar
    drops the two flanking lines and keeps only the scroll hint, centred. */
 @media (max-width:767px){
-  .v2hero{padding:7.5rem 0 6rem;min-height:100svh}
+  .v2hero{padding:7.5rem 0 6rem;min-height:calc(100svh - var(--v2hd-h,64px))}
   .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
   .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
   .v2hero-sub{margin-bottom:1.9rem}

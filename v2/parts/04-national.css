@@ -228,3 +228,27 @@
     max-width:none;
   }
 }
+
+
+/* ---------- the crest ----------------------------------------------------
+   Full colour, at a size that reads as a mark rather than a favicon. On desktop
+   it sits in its own column beside the type; the section has no photography and
+   no motion, so this is the only thing carrying visual weight. */
+.v2nat-crest{
+  margin:0 0 clamp(1.6rem,3vw,2.2rem);
+  width:clamp(88px,11vw,150px);
+}
+.v2nat-crest img{width:100%;height:auto;display:block}
+
+@media (min-width:900px){
+  .v2nat-in{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    column-gap:clamp(2.5rem,5vw,4.5rem);
+    align-items:start;
+  }
+  .v2nat-crest{grid-row:1 / span 3;margin-bottom:0;align-self:center}
+  .v2nat-h,
+  .v2nat-figs,
+  .v2nat-tail{grid-column:2}
+}

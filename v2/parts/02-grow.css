@@ -19,7 +19,7 @@
 .grow__wrap{
   display:grid;
   row-gap:clamp(2.2rem,5vw,3.2rem);
-  grid-template-areas:"intro" "fig" "rows";
+  grid-template-areas:"intro" "stage" "rows";
 }
 
 /* ---------- intro ---------- */
@@ -45,93 +45,114 @@
   color:var(--ink-mute);
 }
 
-/* ---------- the photograph ---------- */
+/* ---------- the photographs ---------- */
+/* SQUARE. Every source file is 1300x1300, so a 4:5 crop would cut people out of
+   the right of the frame to satisfy a grid. */
 
 .grow__fig{
-  grid-area:fig;
-  margin:0;
+  margin:0 0 2rem;
+  max-width:32rem;
   overflow:hidden;
   background:var(--paper-deep);
-  /* SQUARE, because the source file is 1300x1300. Cropping it to a 4:5 portrait
-     cut the third member out of the right of the frame. Never crop people out of
-     a photograph to satisfy a grid. */
   aspect-ratio:1;
 }
 .grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
 
 /* ---------- the three parts ---------- */
 
-.grow__rows{
-  grid-area:rows;
-  list-style:none;
+.grow__rows{grid-area:rows}
+
+.grow__row{border-bottom:1px solid var(--line)}
+.grow__row:first-child{border-top:1px solid var(--line)}
+.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
+
+.grow__btn{
+  display:block;
+  width:100%;
   margin:0;
-  padding:0;
+  padding:1.5rem .25rem;
+  background:none;
+  border:0;
+  color:inherit;
+  font-family:inherit;
+  text-align:left;
+  cursor:pointer;
 }
-
-.grow__row{
-  border-bottom:1px solid var(--line);
-  padding:1.7rem 0 1.9rem;
-}
-.grow__row:first-child{border-top:1px solid var(--line);}
-
 .grow__ttl{
-  margin:0 0 .55rem;
+  display:block;
   font-family:var(--font-display);
   font-weight:400;
   font-size:clamp(1.5rem,2.3vw,1.95rem);
   line-height:1.1;
   color:var(--ink);
+  transition:color var(--dur) var(--ease);
+}
+@media (hover:hover){
+  .grow__btn:hover .grow__ttl{color:var(--purple)}
 }
 
 .grow__say{
-  margin:0 0 .9rem;
+  margin:0;
+  padding:0 .25rem 1.9rem;
   max-width:34rem;
   font-size:1rem;
   line-height:1.65;
   color:var(--ink-soft);
 }
 
-/* A text link, never a button. Three buttons in a column would compete with the
-   page's single Rush call to action. --gold-ink is the only gold legible on
-   cream at 4.62:1; the underline offset keeps it clear of the descenders. */
-.grow__link{
-  display:inline-block;
-  font-size:.92rem;
-  font-weight:600;
-  color:var(--gold-ink);
-  text-decoration:underline;
-  text-underline-offset:.22em;
-  text-decoration-thickness:1px;
+
+/* ============================================================
+   JS-ENHANCED: one persistent stage, one open row
+   ============================================================ */
+
+.grow__stage{grid-area:stage;display:none}
+.grow--js .grow__stage{
+  display:block;
+  position:relative;
+  width:100%;
+  aspect-ratio:1;
+  overflow:hidden;
+  background:var(--paper-deep);
 }
-.grow__link:hover{color:var(--purple);}
+.grow--js .grow__fig{
+  position:absolute;
+  inset:0;
+  margin:0;
+  max-width:none;
+  aspect-ratio:auto;
+  opacity:0;
+  transition:opacity 420ms var(--ease);
+  pointer-events:none;
+}
+.grow--js .grow__fig.is-active{opacity:1}
+
+/* only the open row shows its paragraph, so the section fits one screen */
+.grow--js .grow__say{display:none}
+.grow--js .is-open .grow__say{display:block}
+.grow--js .grow__ttl{color:var(--ink-mute)}
+.grow--js .is-open .grow__ttl{color:var(--ink)}
 
 /* ---------- desktop: photograph beside the list ---------- */
 
 @media (min-width:860px){
   .grow__wrap{
-    grid-template-columns:minmax(0,50fr) minmax(0,50fr);
+    grid-template-columns:minmax(0,48fr) minmax(0,52fr);
     grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro fig" "rows fig";
+    grid-template-areas:"intro stage" "rows stage";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* centred against the whole left column, so a three-row list and a 4:5
-     photograph do not read as two blocks that happen to share a row */
-  .grow__fig{
-    align-self:center;
-    justify-self:end;
-    width:100%;
-    max-width:32rem;
-  }
+  .grow--js .grow__stage{align-self:center;justify-self:end;max-width:32rem}
 }
-
-/* ---------- mobile ---------- */
 
 @media (max-width:859px){
-  /* the photograph is already square; on a phone it only needs to stop being
-     the tallest thing on the screen before the first paragraph */
-  .grow__fig{max-width:32rem;margin-inline:auto}
+  .grow__fig,
+  .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
 }
 
-/* Nothing in this section transitions or animates, so there is no
-   prefers-reduced-motion block to write. That is the point. */
+/* ---------- reduced motion ----------
+   Every state here is a plain declaration, so dropping the transition lands on
+   the finished state and never on the start of one. */
+@media (prefers-reduced-motion:reduce){
+  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
+}

@@ -1,0 +1,113 @@
+/* ============================================================
+   05 - Your college should look like this.   THE WHEEL.
+
+   THE GEOMETRY, derived rather than eyeballed.
+
+   Every photograph sits on a circle of radius R whose centre is far below the
+   section. Slot i is placed by `rotate(i * step) translateY(-R)`, which puts it
+   on the circumference AND rotates it to point radially outward. That single
+   transform is what produces the look:
+
+     - at the INNER edge (radius R - h/2) the arc length between two card centres
+       is exactly the card width, so adjacent bottom corners touch;
+     - at the OUTER edge (radius R + h/2) the same angle spans more arc, so the
+       tops splay apart and leave a wedge of space between them.
+
+   Solving `w = step * (R - h/2)` with a 4:5 card (h = 1.25w) gives
+
+       w / R  =  step / (1 + 0.625 * step)        [step in radians]
+
+   At 36 slots the step is 10deg = 0.17453 rad, so w = 0.15736 * R. That ratio is
+   fixed: scale R and every card scales with it and the corners still touch.
+
+   36 slots is a WHOLE circle, so one revolution lands on the identical frame.
+   The spin therefore has no loop point and no seam, which a linear strip can
+   never manage no matter how carefully its clone is measured.
+
+   An earlier build made this a flat strip with per-card tilts. It was wrong: a
+   flat row cannot make bottom corners meet while tops open up, because that
+   relationship only exists on a curve.
+   ============================================================ */
+
+.mem{
+  background:var(--paper);
+  /* No bottom padding and a -1px pull, so the purple of the section below lands
+     on the same pixel row as the cut and does the slicing. */
+  padding-block:var(--section) 0;
+  margin-bottom:-1px;
+}
+
+.mem-h{
+  text-align:center;
+  font-size:clamp(2.4rem,6vw,5rem);
+  letter-spacing:-.015em;
+  margin:0 0 clamp(1.8rem,3.6vw,2.6rem);
+}
+.mem-h em{font-style:italic;color:var(--gold-ink)}
+
+/* ---- the band: a window onto the top of the wheel ---------------------- */
+.mem-band{
+  --R:150vw;                            /* circle radius. 2160px at a 1440 viewport */
+  --w:calc(var(--R) * 0.15736);         /* locked to --R by the derivation above */
+  --h:calc(var(--w) * 1.25);            /* 4:5 */
+  --step:10deg;                         /* 360 / 36 */
+  --inset:1rem;                         /* air above the topmost card */
+
+  position:relative;
+  height:clamp(270px,25vw,360px);
+  overflow:hidden;                      /* this is the cut */
+  isolation:isolate;                    /* keep cards under the next section's ground */
+}
+
+/* The hub sits below the band by one radius plus half a card, so the topmost
+   card's upper edge lands --inset below the band's top edge. Rotating THIS
+   element carries every card around the circle at once, which is one
+   compositor-only transform rather than 36 per frame. */
+.mem-wheel{
+  list-style:none;
+  margin:0;
+  padding:0;
+  position:absolute;
+  left:50%;
+  top:calc(var(--R) + var(--h) / 2 + var(--inset));
+  width:0;
+  height:0;
+  animation:memSpin 260s linear infinite;
+  will-change:transform;
+}
+
+.mem-i{
+  position:absolute;
+  left:0;
+  top:0;
+  width:var(--w);
+  height:var(--h);
+  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
+  background:var(--paper-deep);
+  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
+}
+.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
+
+@keyframes memSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}   /* negative: the wheel carries photographs to the right */
+}
+
+.mem-band:hover .mem-wheel{animation-play-state:running}  /* never pause on hover */
+
+/* ---- phones: a tighter circle so the cards are not postage stamps ------- */
+@media (max-width:767px){
+  .mem-band{
+    --R:292vw;        /* same w/R ratio, so the corners still touch */
+    height:clamp(210px,44vw,300px);
+    --inset:.9rem;
+  }
+}
+
+/* ---- reduced motion: the wheel stops. It does not disappear. ------------ */
+/* The composition is the content here, so the finished state is the wheel at
+   rest, not a fallback strip. */
+@media (prefers-reduced-motion:reduce){
+  .mem-wheel{animation:none}
+}

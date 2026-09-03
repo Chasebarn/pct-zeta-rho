@@ -1,15 +1,14 @@
 <!-- 02 - More than just a business fraternity.
-     The value proposition, as the three real parts of the chapter a prospect can
-     go and check, each with a door to the page that proves it.
+     ONE interaction: selecting a row opens it and closes the other two, and the
+     photograph beside it cross-fades. Only one paragraph is ever on screen, so
+     the whole section fits one screen instead of running past two.
 
-     NO accordion and NO cross-fading frame. The previous build hid two of three
-     paragraphs behind a click and staged three placeholder images in a frame that
-     only works if all three are shot and cropped alike. All three paragraphs are
-     now on screen at load, and the section carries ONE real photograph of real
-     members instead of three grey rectangles.
+     No outbound links here: three of them pulled the reader out of the copy
+     before the page had made its case, and the page already has one job.
 
-     ONE interaction: none. Deliberately. -->
-<section class="grow" id="grow" aria-labelledby="grow-title">
+     The base markup below is the finished, script-free state: all three rows
+     open with their photographs in the flow. -->
+<section class="grow" id="grow" data-grow aria-labelledby="grow-title">
   <div class="v2wrap grow__wrap">
 
     <div class="grow__intro">
@@ -17,34 +16,49 @@
       <p class="grow__lede">Three parts of the chapter. Members run all three.</p>
     </div>
 
-    <!-- REAL PHOTOGRAPH. assets/photo-service.jpg is three members in chapter
-         shirts loading roof shingles at a service project. It is already published
-         on the live site. Do not replace it with a placeholder. -->
-    <figure class="grow__fig">
-      <img src="assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
-           alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
-    </figure>
+    <div class="grow__stage" data-grow-stage></div>
 
-    <ol class="grow__rows" aria-label="The three parts of the chapter">
+    <div class="grow__rows" data-grow-rows role="group" aria-label="The three parts of the chapter">
 
-      <li class="grow__row">
-        <h3 class="grow__ttl">Professional development</h3>
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
+            <span class="grow__ttl">Professional development</span>
+          </button>
+        </h3>
         <p class="grow__say">Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit.</p>
-        <a class="grow__link" href="career.html">Career Navigator</a>
-      </li>
+        <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
+          <img src="assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
+               alt="Members in chapter Fall Rush shirts working around a table.">
+        </figure>
+      </div>
 
-      <li class="grow__row">
-        <h3 class="grow__ttl">Philanthropy</h3>
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
+            <span class="grow__ttl">Philanthropy</span>
+          </button>
+        </h3>
         <p class="grow__say">Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares.</p>
-        <a class="grow__link" href="philanthropy.html">Our impact</a>
-      </li>
+        <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
+          <img src="assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
+               alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
+        </figure>
+      </div>
 
-      <li class="grow__row">
-        <h3 class="grow__ttl">Chapter life</h3>
+      <div class="grow__row">
+        <h3 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
+            <span class="grow__ttl">Chapter life</span>
+          </button>
+        </h3>
         <p class="grow__say">Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation.</p>
-        <a class="grow__link" href="fallrush.html">Meet the chapter</a>
-      </li>
+        <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
+          <img src="assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async"
+               alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center.">
+        </figure>
+      </div>
 
-    </ol>
+    </div>
   </div>
 </section>

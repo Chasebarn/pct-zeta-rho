@@ -168,6 +168,9 @@ window.pctInitCount = function () {
       /* a short stagger so the three read as one gesture rather than a drum roll */
       var delay = i * 130;
       var start = 0;
+      /* reserve the finished width BEFORE zeroing the text, or the figure narrows
+         to one character and springs back out as the count runs */
+      el.style.minWidth = el.textContent.trim().length + 'ch';
       el.textContent = dec ? (0).toFixed(dec) : '0';
       function step(ts) {
         if (!start) start = ts;

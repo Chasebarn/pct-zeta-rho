@@ -659,8 +659,12 @@
   color:var(--ink);
   transition:color var(--dur) var(--ease);
 }
+/* Two states, not three. Closed is muted, open is ink, and hover simply previews
+   the open state. An earlier build made hover PURPLE, which introduced a third
+   colour that only ever existed under a cursor and made the row look like it had
+   changed meaning rather than gained focus. */
 @media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--purple)}
+  .grow__btn:hover .grow__ttl{color:var(--ink)}
 }
 
 .grow__say{
@@ -784,10 +788,6 @@
   font-size:clamp(2.9rem,7vw,6rem);
   letter-spacing:-.02em;
   margin:0 0 clamp(2.6rem,5vw,4rem);
-  /* Ruled underneath rather than gold-italicised. It marks the heading as the
-     start of a chapter and hands off to the belts below it. */
-  padding-bottom:clamp(1.4rem,2.6vw,2.2rem);
-  border-bottom:1px solid var(--line);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
@@ -943,6 +943,12 @@
   text-align:center;
 }
 
+/* [data-count] is reserved at its FINAL width before the count starts. Going
+   0 -> 9 -> 95 changes the character count, so without this the figure narrows
+   and springs back as it runs. tabular-nums below makes every digit the same
+   width, which is what makes a ch reservation exact. */
+.pl-n-val [data-count]{display:inline-block;text-align:center}
+
 .pl-n-val{
   margin:0;
   font-family:var(--font-display);
@@ -955,9 +961,9 @@
   color:var(--ink);
   font-variant-numeric:lining-nums tabular-nums;
 }
-/* the unit is part of the figure, not an accent. It was the only gold left in
-   the section and read as a stray. */
-.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--ink-mute)}
+/* The unit is part of the figure and takes the figure's colour. It was gold, which
+   read as a stray accent, and then grey, which read like it had been disabled. */
+.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--ink)}
 
 /* the label is the display italic, not the UI sans. A 13px sans caption under a
    128px serif numeral reads as a chart legend. */
@@ -1008,292 +1014,36 @@
   }
   .pl-cell[data-pl-clone]{display:none}
 }
-/* ===== 04-national ===== */
-/* ============================================================
-   04. A national fraternity since 1924.   (--purple-deep ground)
-
-   ZERO interaction, zero motion, and that IS the design. It was written to
-   break up the drifting logo belt (03) and the drifting photograph band,
-   which read as one conveyor when they touch. NOTE: 05-howtojoin has since
-   landed in the slot below this one, so the two belts are no longer
-   adjacent and this plate no longer separates them directly. It still
-   holds: it is the only dark ground in the middle of the page and the only
-   section with no motion at all. This is the page's held breath: a dark,
-   still plate that stops the scroll for a beat. Nothing here
-   transitions or animates, so there is no prefers-reduced-motion block and
-   no .js file. There is nothing to resolve to a finished state, because
-   the shipped state IS the finished state.
-
-   Prefix is v2nat, NOT nat: the built page still links css/styles.css,
-   which already owns .nat-line, .nat-line b and .split.nat. A .nat- prefix
-   here would have inherited that old section's styling.
-
-   THE CREST IS DELIBERATELY OMITTED. assets/crest.png does have a real
-   alpha channel (all four corners are alpha 0), so it would not have
-   painted a white plate. It was excluded on contrast, not transparency:
-   its two largest visible colour regions are #390e66 (1.15:1 against this
-   ground, effectively invisible) and #030103, which is DARKER than the
-   ground and reads as a hole punched in the plate. Only the #ecaa00 gold
-   would have survived, leaving disconnected orange fragments floating on
-   purple. The crest is drawn for a light ground. Reducing it to a low
-   opacity watermark makes both problems worse, not better, and the one
-   fix, a light plate behind it, is the box this section may not have.
-
-   CONTRAST, measured against --purple-deep #241733 (relative luminance
-   0.0123). Every tone clears 4.5:1 with room:
-     --paper #faf8f3 .................................. 15.9:1  (h2, numerals)
-     --gold-soft #e6c65b .............................. 10.1:1  (the em)
-     rgba(250,248,243,.78) ............................ 10.0:1  (body)
-     rgba(250,248,243,.72) ............................  8.7:1  (fact labels)
-     rgba(250,248,243,.62) ............................  6.8:1  (charter line)
-   The film grain is stacked UNDER the type rather than over it, so these
-   are the delivered ratios and not approximations of them.
-   ============================================================ */
-
-.v2nat{
-  position:relative;
-  background:var(--purple-deep);
-  color:rgba(250,248,243,.78);
-  /* Larger than --section (5-9rem) so this plate visibly breathes more than
-     the cream sections it separates, but smaller than the closing CTA's
-     7-12.5rem, so the page's real ending still owns the biggest silence. */
-  padding-block:clamp(6rem,12vw,10rem);
-}
-
-/* Film grain: the exact technique from .v2hero::after, the ground treatment
-   every dark section on this site shares. */
-.v2nat::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* above the grain, matching the hero's stage */
-.v2nat-in{position:relative;z-index:2}
-
-/* ---------- heading ---------- */
-
-/* Deliberately SMALLER than the headings on the cream sections either side.
-   The brief for this plate is that the three figures are the visual event,
-   so the sentence introduces them rather than competing with them: the
-   numerals below run to 5.5rem against this 3.2rem cap. */
-.v2nat-h{
-  margin:0;
-  font-size:clamp(2.6rem, 6vw, 4.6rem);
-  letter-spacing:-.015em;
-  color:var(--paper);
-}
-.v2nat-h em{
-  font-style:italic;
-  color:var(--gold-soft);
-}
-
-/* ---------- the three figures ---------- */
-
-/* One horizontal rule above the row and a hairline between each figure.
-   That is the whole ornament budget: it is a printed table rule, not a
-   card. Nothing here is enclosed, filled, rounded or shadowed. */
-.v2nat-figs{
-  list-style:none;
-  margin:clamp(2.75rem,5.5vw,4.25rem) 0 0;
-  padding:clamp(2rem,4vw,3rem) 0 0;
-  border-top:1px solid var(--line-dark);
-  display:grid;
-  /* Not three equal columns, and the reason is emphasis, NOT fit. Measured:
-     equal thirds clear "23,000+" comfortably at every width this row is used
-     at (768px gives a 181px content box for a 135px glyph run; 1440px gives
-     364px for 240px), so nothing wraps and nothing touches a divider either
-     way. The uneven split is here because the largest claim should carry the
-     widest field. Keep it as a judgement call, not as a fit constraint. */
-  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.85fr);
-}
-
-.v2nat-fig + .v2nat-fig{
-  border-left:1px solid var(--line-dark);
-  padding-left:clamp(1.25rem,3.5vw,3rem);
-}
-
-.v2nat-n{
-  display:block;
-  font-family:var(--font-display);
-  font-weight:400;              /* Instrument Serif has one weight. Never bold. */
-  font-size:clamp(2.6rem,6.4vw,5.5rem);
-  line-height:.95;
-  letter-spacing:-.02em;
-  color:var(--paper);
-}
-
-/* Sentence case, not tracked uppercase. Two reasons: the copy was handed
-   over in sentence case and uppercasing it is an edit, and small caps would
-   introduce a third type treatment into a section whose whole argument is
-   restraint. The 5.5rem numeral above already does all the separating this
-   label needs. */
-.v2nat-k{
-  display:block;
-  margin-top:.9rem;
-  font-family:var(--font-text);
-  font-size:.9rem;
-  line-height:1.4;
-  color:rgba(250,248,243,.72);
-}
-
-/* ---------- body and charter line ---------- */
-
-.v2nat-tail{
-  margin-top:clamp(2.75rem,5.5vw,4.25rem);
-  display:grid;
-  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
-  column-gap:clamp(2.5rem,5vw,4.5rem);
-  align-items:start;
-}
-
-.v2nat-say{
-  margin:0;
-  max-width:38rem;
-  font-size:clamp(1rem,1.4vw,1.1rem);
-  line-height:1.7;
-  color:rgba(250,248,243,.78);
-}
-
-/* The provenance note, set as a margin footnote beside the paragraph rather
-   than beneath it: it is the quietest fact in the section and it should read
-   as a citation, not as a second claim. */
-.v2nat-charter{
-  /* optical, not structural: the smaller cap height needs a nudge to sit on
-     the same visual line as the paragraph's first line */
-  margin:.3rem 0 0;
-  max-width:24rem;
-  font-size:.92rem;
-  line-height:1.6;
-  color:rgba(250,248,243,.62);
-}
-
-/* ============================================================
-   MOBILE: a different execution, not a shrunken one.
-
-   Three columns cannot hold "23,000+" at 375px: each cell would be about
-   105px wide and the numeral alone needs more than that. The obvious fix,
-   stacking three numeral-over-word blocks, is worse: at these type sizes it
-   turns a single calm plate into roughly three phone screens of nothing but
-   numbers, and a section whose entire job is to be a brief full stop
-   becomes the longest thing on the page.
-
-   So on a phone the row becomes a ruled ledger: one figure per line,
-   numeral left, word right, sharing a baseline. It stays compact, the
-   numerals stay large, and a right-aligned column of figures against their
-   labels is if anything MORE institutional than the desktop row.
-   ============================================================ */
-
-@media (max-width:767px){
-  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
-
-  .v2nat-figs{
-    grid-template-columns:1fr;
-    padding-top:0;
-    border-top:0;              /* the per-row rules replace the single rule */
-  }
-
-  .v2nat-fig{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:1rem;
-    padding:1rem 0 1.1rem;
-    border-top:1px solid var(--line-dark);
-  }
-  .v2nat-fig:last-child{border-bottom:1px solid var(--line-dark)}
-  /* undo the desktop divider: horizontal rules only, so this reads as a
-     ruled list and never closes into a box */
-  .v2nat-fig + .v2nat-fig{border-left:0;padding-left:0}
-
-  /* The headline and the numerals are both re-sized here, together, to hold
-     the desktop's ratio between them. Left on the shared clamps a 375px
-     phone landed on a 32px headline that ran the full width of the wrap with
-     no air beside it, and numerals only 1.3x its size, so the figures stopped
-     being the event. These two curves put that ratio back at about 1.7x, the
-     same as the desktop, and hand the headline a trailing margin again.
-     Both caps are tuned to meet the desktop values at the 767/768 seam so
-     nothing jumps size as the viewport crosses the breakpoint. */
-  .v2nat-h{font-size:clamp(1.75rem,7.4vw,2rem)}
-
-  /* Floor is 2.5rem: at 320px this figure plus "Members nationwide" has to
-     finish inside a 280px wrap on a single line. */
-  .v2nat-n{font-size:clamp(2.5rem,13vw,3.1rem)}
-
-  .v2nat-k{
-    margin-top:0;
-    font-size:.85rem;
-    text-align:right;
-  }
-
-  .v2nat-tail{
-    grid-template-columns:1fr;
-    row-gap:1.4rem;
-  }
-  .v2nat-charter{
-    margin:0;
-    max-width:none;
-  }
-}
-
-
-/* ---------- the crest ----------------------------------------------------
-   Full colour, at a size that reads as a mark rather than a favicon. On desktop
-   it sits in its own column beside the type; the section has no photography and
-   no motion, so this is the only thing carrying visual weight. */
-/* crest and heading on one baseline, as a single lockup */
-.v2nat-lock{
-  display:flex;
-  align-items:center;
-  gap:clamp(1rem,2.2vw,1.8rem);
-  margin-bottom:clamp(2rem,4vw,3rem);
-}
-.v2nat-crest{
-  flex:none;
-  width:clamp(56px,7vw,96px);
-  height:auto;
-  display:block;
-}
-.v2nat-lock .v2nat-h{margin:0}
-
-@media (max-width:559px){
-  .v2nat-lock{gap:.9rem}
-  .v2nat-crest{width:48px}
-}
 /* ===== 05-mem ===== */
 /* ============================================================
-   05 - Your college should look like this.   THE WHEEL.
+   05 - College should look like this.   THE WHEEL.
 
-   THE GEOMETRY, derived rather than eyeballed.
+   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
 
-   Every photograph sits on a circle of radius R whose centre is far below the
-   section. Slot i is placed by `rotate(i * step) translateY(-R)`, which puts it
-   on the circumference AND rotates it to point radially outward. That single
-   transform is what produces the look:
+       card width      538px      = 0.288 of the viewport
+       cards across    3.48
+       card height     >800px cut = h/w of at least 1.49
+       arc drop        115px from the centre card to its neighbour
 
-     - at the INNER edge (radius R - h/2) the arc length between two card centres
-       is exactly the card width, so adjacent bottom corners touch;
-     - at the OUTER edge (radius R + h/2) the same angle spans more arc, so the
-       tops splay apart and leave a wedge of space between them.
+   The previous build measured 293px wide at 1440, which is 0.203 of the
+   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
+   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
+   every one of them missed on all four numbers at once.
 
-   Solving `w = step * (R - h/2)` with a 4:5 card (h = 1.25w) gives
+   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
+   angular position so it points radially outward:
 
-       w / R  =  step / (1 + 0.625 * step)        [step in radians]
+       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
 
-   At 36 slots the step is 10deg = 0.17453 rad, so w = 0.15736 * R. That ratio is
-   fixed: scale R and every card scales with it and the corners still touch.
+   Solving for the four measured targets gives 32 slots at an 11.25deg step,
+   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
 
-   36 slots is a WHOLE circle, so one revolution lands on the identical frame.
-   The spin therefore has no loop point and no seam, which a linear strip can
-   never manage no matter how carefully its clone is measured.
+       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
+       h/w 1.50                          drop 120px       [ref 1.49,  115px]
+       edge card 19.5deg off vertical    overlap 54px
 
-   An earlier build made this a flat strip with per-card tilts. It was wrong: a
-   flat row cannot make bottom corners meet while tops open up, because that
-   relationship only exists on a curve.
+   A whole circle means one revolution returns to the identical frame, so the
+   spin has no loop point anywhere.
    ============================================================ */
 
 .mem{
@@ -1315,11 +1065,11 @@
 
 /* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:138vw;                            /* circle radius. 1987px at a 1440 viewport */
-  --w:calc(var(--R) * 0.1443);          /* locked to --R by the derivation above */
-  --h:calc(var(--w) * 1.68);            /* taller than wide, like the reference */
-  --step:9deg;                          /* 360 / 44 */
-  --inset:.9rem;                        /* air above the topmost card */
+  --R:149vw;                            /* 2148px at a 1440 viewport */
+  --w:calc(var(--R) * 0.1932);          /* -> 415px, 0.288 of the viewport */
+  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
+  --step:11.25deg;                      /* 360 / 32 */
+  --inset:.8rem;
 
   position:relative;
   /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
@@ -1345,7 +1095,9 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 62s linear infinite;
+  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
+     conveyor rather than a drift. */
+  animation:memSpin 150s linear infinite;
   will-change:transform;
 }
 
@@ -1376,7 +1128,7 @@
 /* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
   .mem-band{
-    --R:300vw;        /* same w/R ratio, so the overlap is identical */
+    --R:330vw;        /* same w/R ratio, so the overlap is identical */
     --inset:.7rem;
   }
 }
@@ -2104,89 +1856,12 @@
   </div>
 </section>
 
-    <!-- ===== 04-national ===== -->
-<!-- 04 · THE NATIONAL FRATERNITY. Communication method: A FULL STOP.
-
-     This section exists to SEPARATE. The logo belt above it drifts and the
-     photograph band drifts, and back to back they read as one long conveyor.
-     (05-howtojoin has since taken the slot below this one, so those two are
-     no longer adjacent; this plate is still the only dark ground in the
-     middle of the page and still the only section with no motion at all.)
-     Nothing in it moves: no interaction, no transition, no animation, no JS.
-     There is deliberately no 04-national.js. If anything here ever starts to
-     move, the section has lost the only reason it is on the page.
-
-     Every figure and every sentence below is verbatim from the live site
-     (index.html, the "07 · National Chapter" section, plus the charter line
-     from the site footer). Nothing here is invented and nothing is rounded.
-
-     NOTE ON "1924": it appears twice, in the heading and inside the body
-     paragraph. The paragraph is quoted copy and was not altered. No third,
-     ornamental 1924 was added. The live site set a giant ghosted "1924"
-     behind the crest here, and that is exactly what is being left out.
-
-     NO CREST. See the head of 04-national.css for the measurement that
-     disqualified it on this ground. -->
-<section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
-  <div class="v2wrap v2nat-in">
-
-    <!-- Crest and heading are ONE lockup. Floated off to the left of the whole
-         block it read as a stray graphic parked in the margin. -->
-    <div class="v2nat-lock">
-      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445"
-           loading="lazy" decoding="async" alt="The Phi Chi Theta crest.">
-      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
-    </div>
-
-    <!-- role="list" is required, not decoration: list-style:none strips the list
-         role in WebKit/VoiceOver, and without it these three figures stop being
-         announced as a set of three. Same treatment as .pl-nums in 03-place.html. -->
-    <ul class="v2nat-figs" role="list">
-      <li class="v2nat-fig">
-        <span class="v2nat-n">40+</span>
-        <span class="v2nat-k">Chapters</span>
-      </li>
-      <li class="v2nat-fig">
-        <span class="v2nat-n">23,000+</span>
-        <span class="v2nat-k">Members nationwide</span>
-      </li>
-      <li class="v2nat-fig">
-        <span class="v2nat-n">20+</span>
-        <span class="v2nat-k">Chapter awards</span>
-      </li>
-    </ul>
-
-    <div class="v2nat-tail">
-      <!-- This answers the only question a rushee actually has about the national
-           organisation: what does it get ME. The previous version described the
-           institution instead, which nobody reads. -->
-      <!-- Every claim here is supported by the original site's own copy: alumni and
-           chapters in cities across the country, which matters when members recruit,
-           relocate, or need an introduction in a new market. An earlier draft added
-           "national conferences and case competitions", which has no source. -->
-      <p class="v2nat-say">You are not joining one chapter at one school. You are joining
-        an alumni network in the city you move to after graduation, and a name that the
-        person reading your resume in Charlotte or Chicago already recognises.</p>
-
-      <p class="v2nat-charter">Zeta Rho has been the USF chapter since 2018.</p>
-    </div>
-
-  </div>
-</section>
-
     <!-- ===== 05-mem ===== -->
 <!-- 05 - College should look like this.
-     A WHEEL. Each photograph sits on a circle whose centre is below the section and
-     is rotated to its own angular position, so it points radially outward. The card
-     nearest each edge of the viewport is tilted about 23 degrees off vertical, which
-     is what makes the row read as an arc rather than a slideshow.
-
-     44 slots around a full circle, four photographs on repeat. A whole circle means
-     one revolution returns to the identical frame, so there is no loop point. 44
-     divides by 4, so the wrap never doubles a frame.
-
-     THREE OF THE FOUR PHOTOGRAPHS ARE REAL. Replace assets/mem/m2 and the section
-     is entirely real. -->
+     A WHEEL, built to MEASURED values rather than guessed ones. See 05-mem.css for
+     the numbers taken off the reference and what each one forced.
+     32 slots, four photographs, three of them real. 32 divides by 4 so the wrap
+     never doubles a frame, and a whole circle means no loop point. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">College should look like this.</h2>
@@ -2226,18 +1901,6 @@
       <li class="mem-i" style="--i:29"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:30"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:31"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:32"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:33"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:34"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:35"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:36"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:37"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:38"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:39"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:40"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:41"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:42"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:43"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -2976,6 +2639,9 @@ window.pctInitCount = function () {
       /* a short stagger so the three read as one gesture rather than a drum roll */
       var delay = i * 130;
       var start = 0;
+      /* reserve the finished width BEFORE zeroing the text, or the figure narrows
+         to one character and springs back out as the count runs */
+      el.style.minWidth = el.textContent.trim().length + 'ch';
       el.textContent = dec ? (0).toFixed(dec) : '0';
       function step(ts) {
         if (!start) start = ts;

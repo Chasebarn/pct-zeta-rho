@@ -1,32 +1,32 @@
 /* ============================================================
-   05 - Your college should look like this.   THE WHEEL.
+   05 - College should look like this.   THE WHEEL.
 
-   THE GEOMETRY, derived rather than eyeballed.
+   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
 
-   Every photograph sits on a circle of radius R whose centre is far below the
-   section. Slot i is placed by `rotate(i * step) translateY(-R)`, which puts it
-   on the circumference AND rotates it to point radially outward. That single
-   transform is what produces the look:
+       card width      538px      = 0.288 of the viewport
+       cards across    3.48
+       card height     >800px cut = h/w of at least 1.49
+       arc drop        115px from the centre card to its neighbour
 
-     - at the INNER edge (radius R - h/2) the arc length between two card centres
-       is exactly the card width, so adjacent bottom corners touch;
-     - at the OUTER edge (radius R + h/2) the same angle spans more arc, so the
-       tops splay apart and leave a wedge of space between them.
+   The previous build measured 293px wide at 1440, which is 0.203 of the
+   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
+   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
+   every one of them missed on all four numbers at once.
 
-   Solving `w = step * (R - h/2)` with a 4:5 card (h = 1.25w) gives
+   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
+   angular position so it points radially outward:
 
-       w / R  =  step / (1 + 0.625 * step)        [step in radians]
+       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
 
-   At 36 slots the step is 10deg = 0.17453 rad, so w = 0.15736 * R. That ratio is
-   fixed: scale R and every card scales with it and the corners still touch.
+   Solving for the four measured targets gives 32 slots at an 11.25deg step,
+   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
 
-   36 slots is a WHOLE circle, so one revolution lands on the identical frame.
-   The spin therefore has no loop point and no seam, which a linear strip can
-   never manage no matter how carefully its clone is measured.
+       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
+       h/w 1.50                          drop 120px       [ref 1.49,  115px]
+       edge card 19.5deg off vertical    overlap 54px
 
-   An earlier build made this a flat strip with per-card tilts. It was wrong: a
-   flat row cannot make bottom corners meet while tops open up, because that
-   relationship only exists on a curve.
+   A whole circle means one revolution returns to the identical frame, so the
+   spin has no loop point anywhere.
    ============================================================ */
 
 .mem{
@@ -48,11 +48,11 @@
 
 /* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:138vw;                            /* circle radius. 1987px at a 1440 viewport */
-  --w:calc(var(--R) * 0.1443);          /* locked to --R by the derivation above */
-  --h:calc(var(--w) * 1.68);            /* taller than wide, like the reference */
-  --step:9deg;                          /* 360 / 44 */
-  --inset:.9rem;                        /* air above the topmost card */
+  --R:149vw;                            /* 2148px at a 1440 viewport */
+  --w:calc(var(--R) * 0.1932);          /* -> 415px, 0.288 of the viewport */
+  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
+  --step:11.25deg;                      /* 360 / 32 */
+  --inset:.8rem;
 
   position:relative;
   /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
@@ -78,7 +78,9 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 62s linear infinite;
+  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
+     conveyor rather than a drift. */
+  animation:memSpin 150s linear infinite;
   will-change:transform;
 }
 
@@ -109,7 +111,7 @@
 /* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
   .mem-band{
-    --R:300vw;        /* same w/R ratio, so the overlap is identical */
+    --R:330vw;        /* same w/R ratio, so the overlap is identical */
     --inset:.7rem;
   }
 }

@@ -78,8 +78,12 @@
   color:var(--ink);
   transition:color var(--dur) var(--ease);
 }
+/* Two states, not three. Closed is muted, open is ink, and hover simply previews
+   the open state. An earlier build made hover PURPLE, which introduced a third
+   colour that only ever existed under a cursor and made the row look like it had
+   changed meaning rather than gained focus. */
 @media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--purple)}
+  .grow__btn:hover .grow__ttl{color:var(--ink)}
 }
 
 .grow__say{

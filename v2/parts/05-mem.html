@@ -1,47 +1,38 @@
 <!-- 05 - College should look like this.
-     A WHEEL, built to MEASURED values rather than guessed ones. See 05-mem.css for
-     the numbers taken off the reference and what each one forced.
-     32 slots, four photographs, three of them real. 32 divides by 4 so the wrap
-     never doubles a frame, and a whole circle means no loop point. -->
+     An ARC. Cards sit on a circle whose centre is far below the section, but their
+     ROTATION is damped to about half their angular position: a pure radial wheel
+     at this radius tilts the edge cards 39 degrees, and the reference tilts about
+     20. That damping is why this cannot be pure CSS. See 05-mem.js.
+
+     20 slots, five photographs, three of them real. 20 divides by 5, so the wrap
+     never doubles a frame. Four photographs put a repeat on screen. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">College should look like this.</h2>
   </div>
 
-  <div class="mem-band">
-    <ul class="mem-wheel" aria-label="Chapter photographs">
-      <li class="mem-i" style="--i:0"><img src="assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+  <div class="mem-band" data-mem-band>
+    <ul class="mem-arc" data-mem-arc aria-label="Chapter photographs">
+      <li class="mem-i"><img src="assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m5.jpg" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>

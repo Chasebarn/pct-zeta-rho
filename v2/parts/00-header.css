@@ -34,7 +34,8 @@
      visibly darkens on its way to going light. Starting from the same hue at zero
      alpha fades cleanly. */
   background:rgba(250,248,243,0);
-  transition:background-color 260ms var(--ease), box-shadow 260ms var(--ease);
+  border-bottom:1px solid transparent;
+  transition:background-color 260ms var(--ease), border-color 260ms var(--ease);
 }
 
 /* SCROLLED: a PAPER bar, not a darker purple one. Purple on purple was the
@@ -48,7 +49,9 @@
      --gold-ink  #8a6d14   4.6:1   (the only gold legible on cream) */
 .v2hd.is-stuck{
   background:var(--paper);
-  box-shadow:0 8px 26px -20px rgba(25,18,33,.5);
+  /* A clean hairline, not a drop shadow. A shadow under a bar that is only 76px
+     tall reads as a floating card rather than as a header. */
+  border-bottom:1px solid var(--line);
 }
 .v2hd.is-stuck .v2hd-name{color:var(--ink)}
 .v2hd.is-stuck .v2hd-sub{color:var(--gold-ink)}
@@ -68,21 +71,6 @@
 
 
 
-/* Film grain, the same ground treatment every dark section on this site uses:
-   identical noise, identical 5% opacity. Colour-matching the bloom alone was not
-   enough. With the grain starting abruptly at the hero's top edge, the bar read
-   as a clean field butting a textured one and the change in TEXTURE redrew the
-   seam the colour match had just closed. A/B'd with the hero's grain disabled to
-   confirm that was the cause and not the gradient. */
-.v2hd::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* .v2wrap already owns the page's measure and gutter (tokens.css). This only
    adds the row behaviour to that same element, it does not restate the gutter. */

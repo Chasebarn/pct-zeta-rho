@@ -49,7 +49,8 @@
      visibly darkens on its way to going light. Starting from the same hue at zero
      alpha fades cleanly. */
   background:rgba(250,248,243,0);
-  transition:background-color 260ms var(--ease), box-shadow 260ms var(--ease);
+  border-bottom:1px solid transparent;
+  transition:background-color 260ms var(--ease), border-color 260ms var(--ease);
 }
 
 /* SCROLLED: a PAPER bar, not a darker purple one. Purple on purple was the
@@ -63,7 +64,9 @@
      --gold-ink  #8a6d14   4.6:1   (the only gold legible on cream) */
 .v2hd.is-stuck{
   background:var(--paper);
-  box-shadow:0 8px 26px -20px rgba(25,18,33,.5);
+  /* A clean hairline, not a drop shadow. A shadow under a bar that is only 76px
+     tall reads as a floating card rather than as a header. */
+  border-bottom:1px solid var(--line);
 }
 .v2hd.is-stuck .v2hd-name{color:var(--ink)}
 .v2hd.is-stuck .v2hd-sub{color:var(--gold-ink)}
@@ -83,21 +86,6 @@
 
 
 
-/* Film grain, the same ground treatment every dark section on this site uses:
-   identical noise, identical 5% opacity. Colour-matching the bloom alone was not
-   enough. With the grain starting abruptly at the hero's top edge, the bar read
-   as a clean field butting a textured one and the change in TEXTURE redrew the
-   seam the colour match had just closed. A/B'd with the hero's grain disabled to
-   confirm that was the cause and not the gradient. */
-.v2hd::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* .v2wrap already owns the page's measure and gutter (tokens.css). This only
    adds the row behaviour to that same element, it does not restate the gutter. */
@@ -1014,130 +1002,381 @@
   }
   .pl-cell[data-pl-clone]{display:none}
 }
+/* ===== 04-national ===== */
+/* ============================================================
+   04. A national fraternity since 1924.   (--purple-deep ground)
+
+   ZERO interaction, zero motion, and that IS the design. It was written to
+   break up the drifting logo belt (03) and the drifting photograph band,
+   which read as one conveyor when they touch. NOTE: 05-howtojoin has since
+   landed in the slot below this one, so the two belts are no longer
+   adjacent and this plate no longer separates them directly. It still
+   holds: it is the only dark ground in the middle of the page and the only
+   section with no motion at all. This is the page's held breath: a dark,
+   still plate that stops the scroll for a beat. Nothing here
+   transitions or animates, so there is no prefers-reduced-motion block and
+   no .js file. There is nothing to resolve to a finished state, because
+   the shipped state IS the finished state.
+
+   Prefix is v2nat, NOT nat: the built page still links css/styles.css,
+   which already owns .nat-line, .nat-line b and .split.nat. A .nat- prefix
+   here would have inherited that old section's styling.
+
+   THE CREST IS DELIBERATELY OMITTED. assets/crest.png does have a real
+   alpha channel (all four corners are alpha 0), so it would not have
+   painted a white plate. It was excluded on contrast, not transparency:
+   its two largest visible colour regions are #390e66 (1.15:1 against this
+   ground, effectively invisible) and #030103, which is DARKER than the
+   ground and reads as a hole punched in the plate. Only the #ecaa00 gold
+   would have survived, leaving disconnected orange fragments floating on
+   purple. The crest is drawn for a light ground. Reducing it to a low
+   opacity watermark makes both problems worse, not better, and the one
+   fix, a light plate behind it, is the box this section may not have.
+
+   CONTRAST, measured against --purple-deep #241733 (relative luminance
+   0.0123). Every tone clears 4.5:1 with room:
+     --paper #faf8f3 .................................. 15.9:1  (h2, numerals)
+     --gold-soft #e6c65b .............................. 10.1:1  (the em)
+     rgba(250,248,243,.78) ............................ 10.0:1  (body)
+     rgba(250,248,243,.72) ............................  8.7:1  (fact labels)
+     rgba(250,248,243,.62) ............................  6.8:1  (charter line)
+   The film grain is stacked UNDER the type rather than over it, so these
+   are the delivered ratios and not approximations of them.
+   ============================================================ */
+
+.v2nat{
+  position:relative;
+  background:var(--purple-deep);
+  color:rgba(250,248,243,.78);
+  /* Larger than --section (5-9rem) so this plate visibly breathes more than
+     the cream sections it separates, but smaller than the closing CTA's
+     7-12.5rem, so the page's real ending still owns the biggest silence. */
+  padding-block:clamp(6rem,12vw,10rem);
+}
+
+/* Film grain: the exact technique from .v2hero::after, the ground treatment
+   every dark section on this site shares. */
+.v2nat::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* above the grain, matching the hero's stage */
+.v2nat-in{position:relative;z-index:2}
+
+/* ---------- heading ---------- */
+
+/* Deliberately SMALLER than the headings on the cream sections either side.
+   The brief for this plate is that the three figures are the visual event,
+   so the sentence introduces them rather than competing with them: the
+   numerals below run to 5.5rem against this 3.2rem cap. */
+.v2nat-h{
+  margin:0;
+  font-size:clamp(2.6rem, 6vw, 4.6rem);
+  letter-spacing:-.015em;
+  color:var(--paper);
+}
+.v2nat-h em{
+  font-style:italic;
+  color:var(--gold-soft);
+}
+
+/* ---------- the three figures ---------- */
+
+/* One horizontal rule above the row and a hairline between each figure.
+   That is the whole ornament budget: it is a printed table rule, not a
+   card. Nothing here is enclosed, filled, rounded or shadowed. */
+.v2nat-figs{
+  list-style:none;
+  margin:clamp(2.75rem,5.5vw,4.25rem) 0 0;
+  padding:clamp(2rem,4vw,3rem) 0 0;
+  border-top:1px solid var(--line-dark);
+  display:grid;
+  /* Not three equal columns, and the reason is emphasis, NOT fit. Measured:
+     equal thirds clear "23,000+" comfortably at every width this row is used
+     at (768px gives a 181px content box for a 135px glyph run; 1440px gives
+     364px for 240px), so nothing wraps and nothing touches a divider either
+     way. The uneven split is here because the largest claim should carry the
+     widest field. Keep it as a judgement call, not as a fit constraint. */
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.85fr);
+}
+
+.v2nat-fig + .v2nat-fig{
+  border-left:1px solid var(--line-dark);
+  padding-left:clamp(1.25rem,3.5vw,3rem);
+}
+
+.v2nat-n{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;              /* Instrument Serif has one weight. Never bold. */
+  font-size:clamp(2.6rem,6.4vw,5.5rem);
+  line-height:.95;
+  letter-spacing:-.02em;
+  color:var(--paper);
+}
+
+/* Sentence case, not tracked uppercase. Two reasons: the copy was handed
+   over in sentence case and uppercasing it is an edit, and small caps would
+   introduce a third type treatment into a section whose whole argument is
+   restraint. The 5.5rem numeral above already does all the separating this
+   label needs. */
+.v2nat-k{
+  display:block;
+  margin-top:.9rem;
+  font-family:var(--font-text);
+  font-size:.9rem;
+  line-height:1.4;
+  color:rgba(250,248,243,.72);
+}
+
+/* ---------- body and charter line ---------- */
+
+.v2nat-tail{
+  margin-top:clamp(2.75rem,5.5vw,4.25rem);
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  column-gap:clamp(2.5rem,5vw,4.5rem);
+  align-items:start;
+}
+
+.v2nat-say{
+  margin:0;
+  max-width:38rem;
+  font-size:clamp(1rem,1.4vw,1.1rem);
+  line-height:1.7;
+  color:rgba(250,248,243,.78);
+}
+
+/* The provenance note, set as a margin footnote beside the paragraph rather
+   than beneath it: it is the quietest fact in the section and it should read
+   as a citation, not as a second claim. */
+.v2nat-charter{
+  /* optical, not structural: the smaller cap height needs a nudge to sit on
+     the same visual line as the paragraph's first line */
+  margin:.3rem 0 0;
+  max-width:24rem;
+  font-size:.92rem;
+  line-height:1.6;
+  color:rgba(250,248,243,.62);
+}
+
+/* ============================================================
+   MOBILE: a different execution, not a shrunken one.
+
+   Three columns cannot hold "23,000+" at 375px: each cell would be about
+   105px wide and the numeral alone needs more than that. The obvious fix,
+   stacking three numeral-over-word blocks, is worse: at these type sizes it
+   turns a single calm plate into roughly three phone screens of nothing but
+   numbers, and a section whose entire job is to be a brief full stop
+   becomes the longest thing on the page.
+
+   So on a phone the row becomes a ruled ledger: one figure per line,
+   numeral left, word right, sharing a baseline. It stays compact, the
+   numerals stay large, and a right-aligned column of figures against their
+   labels is if anything MORE institutional than the desktop row.
+   ============================================================ */
+
+@media (max-width:767px){
+  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
+
+  .v2nat-figs{
+    grid-template-columns:1fr;
+    padding-top:0;
+    border-top:0;              /* the per-row rules replace the single rule */
+  }
+
+  .v2nat-fig{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    padding:1rem 0 1.1rem;
+    border-top:1px solid var(--line-dark);
+  }
+  .v2nat-fig:last-child{border-bottom:1px solid var(--line-dark)}
+  /* undo the desktop divider: horizontal rules only, so this reads as a
+     ruled list and never closes into a box */
+  .v2nat-fig + .v2nat-fig{border-left:0;padding-left:0}
+
+  /* The headline and the numerals are both re-sized here, together, to hold
+     the desktop's ratio between them. Left on the shared clamps a 375px
+     phone landed on a 32px headline that ran the full width of the wrap with
+     no air beside it, and numerals only 1.3x its size, so the figures stopped
+     being the event. These two curves put that ratio back at about 1.7x, the
+     same as the desktop, and hand the headline a trailing margin again.
+     Both caps are tuned to meet the desktop values at the 767/768 seam so
+     nothing jumps size as the viewport crosses the breakpoint. */
+  .v2nat-h{font-size:clamp(1.75rem,7.4vw,2rem)}
+
+  /* Floor is 2.5rem: at 320px this figure plus "Members nationwide" has to
+     finish inside a 280px wrap on a single line. */
+  .v2nat-n{font-size:clamp(2.5rem,13vw,3.1rem)}
+
+  .v2nat-k{
+    margin-top:0;
+    font-size:.85rem;
+    text-align:right;
+  }
+
+  .v2nat-tail{
+    grid-template-columns:1fr;
+    row-gap:1.4rem;
+  }
+  .v2nat-charter{
+    margin:0;
+    max-width:none;
+  }
+}
+
+
+/* ---------- the crest ----------------------------------------------------
+   Full colour, at a size that reads as a mark rather than a favicon. On desktop
+   it sits in its own column beside the type; the section has no photography and
+   no motion, so this is the only thing carrying visual weight. */
+/* crest and heading on one baseline, as a single lockup */
+.v2nat-lock{
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem,2.2vw,1.8rem);
+  margin-bottom:clamp(2rem,4vw,3rem);
+}
+.v2nat-crest{
+  flex:none;
+  width:clamp(56px,7vw,96px);
+  height:auto;
+  display:block;
+}
+.v2nat-lock .v2nat-h{margin:0}
+
+@media (max-width:559px){
+  .v2nat-lock{gap:.9rem}
+  .v2nat-crest{width:48px}
+}
 /* ===== 05-mem ===== */
 /* ============================================================
-   05 - College should look like this.   THE WHEEL.
+   05 - College should look like this.   THE ARC.
 
-   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
+   WHAT I HAD NEVER BEEN SOLVING FOR: the cream wedge under the arc. Measured off
+   the reference, the wedge spans about 90% of the width and is roughly 0.33 of a
+   card width deep. Every previous build cut the centre card flat at the band's
+   bottom edge, so there was no wedge at all and the row read as a straight strip
+   with the cards slightly askew.
 
-       card width      538px      = 0.288 of the viewport
-       cards across    3.48
-       card height     >800px cut = h/w of at least 1.49
-       arc drop        115px from the centre card to its neighbour
+   Solved from the wedge instead of from the card:
 
-   The previous build measured 293px wide at 1440, which is 0.203 of the
-   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
-   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
-   every one of them missed on all four numbers at once.
+     wedge  = 0.33 * cardW                      137px at a 1440 viewport
+     drop   = 2 * wedge                         274px, so the edge cards are still cut
+     R      = solve  drop = R(1 - cos(VW/2R))   1145px = 79.5vw
 
-   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
-   angular position so it points radially outward:
+   At that radius the edge card sits 39 degrees around the circle, but the
+   reference tilts its edge cards about 20. So the ROTATION IS DAMPED to 0.51 of
+   the angular position. That is the whole reason this section cannot be a CSS
+   keyframe on a rotating hub: a hub rotation applies the full angle to every
+   card, and a per-card counter-rotation cannot track a hub that is itself
+   turning. 05-mem.js writes the transforms instead.
 
-       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
-
-   Solving for the four measured targets gives 32 slots at an 11.25deg step,
-   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
-
-       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
-       h/w 1.50                          drop 120px       [ref 1.49,  115px]
-       edge card 19.5deg off vertical    overlap 54px
-
-   A whole circle means one revolution returns to the identical frame, so the
-   spin has no loop point anywhere.
+   Card size is unchanged and still matches the reference: 0.288 of the viewport
+   wide, h/w 1.50.
    ============================================================ */
 
 .mem{
   background:var(--paper);
-  /* No bottom padding and a -1px pull, so the purple of the section below lands
-     on the same pixel row as the cut and does the slicing. */
+  /* no bottom padding: the next section's ground is what cuts the arc */
   padding-block:var(--section) 0;
   margin-bottom:-1px;
 }
 
 .mem-h{
   text-align:center;
-  /* Command. This heading sits over the largest photography on the page and was
-     being out-scaled by it. */
   font-size:clamp(2.9rem,7.5vw,6.5rem);
   letter-spacing:-.02em;
   margin:0 0 clamp(2rem,4vw,3rem);
 }
 
-/* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --R:149vw;                            /* 2148px at a 1440 viewport */
-  --w:calc(var(--R) * 0.1932);          /* -> 415px, 0.288 of the viewport */
-  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
-  --step:11.25deg;                      /* 360 / 32 */
-  --inset:.8rem;
+  --cardW:28.8vw;                 /* measured off the reference */
+  --cardH:calc(var(--cardW) * 1.5);
+  /* 0.50, not 0.33. The wedge's DEPTH was already right at 0.33 of a card width,
+     but only 63% of the width had cream beneath a card, against the reference's
+     ~80%. On a circle the drop is quadratic near the apex, so a card clears the
+     band while |x| < halfVW * sqrt(wedge/drop). At 0.33 that is 70% of the width;
+     at 0.42 it is about 85%, with the outermost card still cut. 0.50 cleared every
+     visible card and lost the cut entirely. The depth follows from the width. */
+  --wedge:calc(var(--cardW) * .48);
+  --inset:.9rem;
 
   position:relative;
-  /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
-     at the top of the arc is therefore fully visible, bottom edge and all, while
-     every card the curve has carried downward runs past the cut. That asymmetry
-     is the reference's silhouette; an earlier height cut all of them equally and
-     lost it. --h is 1.25 * 0.15736 * --R, so this tracks the circle. */
-  height:calc(var(--h) + var(--inset) + 1.1rem);
-  overflow:hidden;                      /* this is the cut */
-  isolation:isolate;                    /* keep cards under the next section's ground */
+  /* inset + one whole card + the wedge beneath it. The centre card is fully
+     visible with cream under it; the edge cards have dropped past the bottom and
+     are cut. That asymmetry IS the arc. */
+  height:calc(var(--inset) + var(--cardH) + var(--wedge));
+  overflow:hidden;
+  isolation:isolate;
 }
 
-/* The hub sits below the band by one radius plus half a card, so the topmost
-   card's upper edge lands --inset below the band's top edge. Rotating THIS
-   element carries every card around the circle at once, which is one
-   compositor-only transform rather than 36 per frame. */
-.mem-wheel{
+.mem-arc{
   list-style:none;
   margin:0;
   padding:0;
   position:absolute;
   left:50%;
-  top:calc(var(--R) + var(--h) / 2 + var(--inset));
+  top:var(--inset);
   width:0;
   height:0;
-  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
-     conveyor rather than a drift. */
-  animation:memSpin 150s linear infinite;
-  will-change:transform;
 }
 
 .mem-i{
   position:absolute;
   left:0;
   top:0;
-  width:var(--w);
-  height:var(--h);
-  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
-  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
-  background:var(--paper-deep);
-  /* Rounded, like the reference. Square corners on a tilted card read as a
-     cropped screenshot; a radius reads as a printed card. */
+  width:var(--cardW);
+  height:var(--cardH);
+  margin-left:calc(var(--cardW) / -2);
+  transform-origin:50% 0;
   border-radius:clamp(10px,1.1vw,18px);
   overflow:hidden;
-  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
+  background:var(--paper-deep);
+  box-shadow:0 20px 44px -34px rgba(25,18,33,.55);
+  /* hidden until the script places it, so nothing stacks at the centre on load */
+  visibility:hidden;
+  will-change:transform;
 }
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 
-@keyframes memSpin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(-360deg)}   /* negative: the wheel carries photographs to the right */
+/* NO JS: the arc needs measured transforms, so without them this becomes an
+   honest horizontal strip. Every photograph is still reachable. */
+.mem-band:not([data-on]){
+  height:auto;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.mem-band:not([data-on]) .mem-arc{
+  position:static;
+  width:auto;
+  height:auto;
+  display:flex;
+  gap:1rem;
+  padding-bottom:1.5rem;
+}
+.mem-band:not([data-on]) .mem-i{
+  position:static;
+  flex:0 0 min(62vw,320px);
+  height:auto;
+  aspect-ratio:1/1.5;
+  margin:0;
+  visibility:visible;
+  transform:none;
 }
 
-.mem-band:hover .mem-wheel{animation-play-state:running}  /* never pause on hover */
-
-/* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
-  .mem-band{
-    --R:330vw;        /* same w/R ratio, so the overlap is identical */
-    --inset:.7rem;
-  }
-}
-
-/* ---- reduced motion: the wheel stops. It does not disappear. ------------ */
-/* The composition is the content here, so the finished state is the wheel at
-   rest, not a fallback strip. */
-@media (prefers-reduced-motion:reduce){
-  .mem-wheel{animation:none}
+  .mem-band{--cardW:52vw;--inset:.6rem}
 }
 /* ===== 07-act ===== */
 /* ==========================================================================
@@ -1856,51 +2095,112 @@
   </div>
 </section>
 
+    <!-- ===== 04-national ===== -->
+<!-- 04 · THE NATIONAL FRATERNITY. Communication method: A FULL STOP.
+
+     This section exists to SEPARATE. The logo belt above it drifts and the
+     photograph band drifts, and back to back they read as one long conveyor.
+     (05-howtojoin has since taken the slot below this one, so those two are
+     no longer adjacent; this plate is still the only dark ground in the
+     middle of the page and still the only section with no motion at all.)
+     Nothing in it moves: no interaction, no transition, no animation, no JS.
+     There is deliberately no 04-national.js. If anything here ever starts to
+     move, the section has lost the only reason it is on the page.
+
+     Every figure and every sentence below is verbatim from the live site
+     (index.html, the "07 · National Chapter" section, plus the charter line
+     from the site footer). Nothing here is invented and nothing is rounded.
+
+     NOTE ON "1924": it appears twice, in the heading and inside the body
+     paragraph. The paragraph is quoted copy and was not altered. No third,
+     ornamental 1924 was added. The live site set a giant ghosted "1924"
+     behind the crest here, and that is exactly what is being left out.
+
+     NO CREST. See the head of 04-national.css for the measurement that
+     disqualified it on this ground. -->
+<section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
+  <div class="v2wrap v2nat-in">
+
+    <!-- Crest and heading are ONE lockup. Floated off to the left of the whole
+         block it read as a stray graphic parked in the margin. -->
+    <div class="v2nat-lock">
+      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445"
+           loading="lazy" decoding="async" alt="The Phi Chi Theta crest.">
+      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    </div>
+
+    <!-- role="list" is required, not decoration: list-style:none strips the list
+         role in WebKit/VoiceOver, and without it these three figures stop being
+         announced as a set of three. Same treatment as .pl-nums in 03-place.html. -->
+    <ul class="v2nat-figs" role="list">
+      <li class="v2nat-fig">
+        <span class="v2nat-n">40+</span>
+        <span class="v2nat-k">Chapters</span>
+      </li>
+      <li class="v2nat-fig">
+        <span class="v2nat-n">23,000+</span>
+        <span class="v2nat-k">Members nationwide</span>
+      </li>
+      <li class="v2nat-fig">
+        <span class="v2nat-n">20+</span>
+        <span class="v2nat-k">Chapter awards</span>
+      </li>
+    </ul>
+
+    <div class="v2nat-tail">
+      <!-- This answers the only question a rushee actually has about the national
+           organisation: what does it get ME. The previous version described the
+           institution instead, which nobody reads. -->
+      <!-- Every claim here is supported by the original site's own copy: alumni and
+           chapters in cities across the country, which matters when members recruit,
+           relocate, or need an introduction in a new market. An earlier draft added
+           "national conferences and case competitions", which has no source. -->
+      <p class="v2nat-say">You are not joining one chapter at one school. You are joining
+        an alumni network in the city you move to after graduation, and a name that the
+        person reading your resume in Charlotte or Chicago already recognises.</p>
+
+      <p class="v2nat-charter">Zeta Rho has been the USF chapter since 2018.</p>
+    </div>
+
+  </div>
+</section>
+
     <!-- ===== 05-mem ===== -->
 <!-- 05 - College should look like this.
-     A WHEEL, built to MEASURED values rather than guessed ones. See 05-mem.css for
-     the numbers taken off the reference and what each one forced.
-     32 slots, four photographs, three of them real. 32 divides by 4 so the wrap
-     never doubles a frame, and a whole circle means no loop point. -->
+     An ARC. Cards sit on a circle whose centre is far below the section, but their
+     ROTATION is damped to about half their angular position: a pure radial wheel
+     at this radius tilts the edge cards 39 degrees, and the reference tilts about
+     20. That damping is why this cannot be pure CSS. See 05-mem.js.
+
+     20 slots, five photographs, three of them real. 20 divides by 5, so the wrap
+     never doubles a frame. Four photographs put a repeat on screen. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">College should look like this.</h2>
   </div>
 
-  <div class="mem-band">
-    <ul class="mem-wheel" aria-label="Chapter photographs">
-      <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+  <div class="mem-band" data-mem-band>
+    <ul class="mem-arc" data-mem-arc aria-label="Chapter photographs">
+      <li class="mem-i"><img src="../assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" alt="The chapter at Fall Summit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/mem/m5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -1919,7 +2219,7 @@
   <div class="v2wrap">
     <div class="act-inner">
 
-      <h2 class="act-title">Make college <em>count.</em></h2>
+      <h2 class="act-title">Your path starts <em>here.</em></h2>
 
       <p class="act-line">Rush is six events and it costs nothing. Come to one and find out whether this is your chapter.</p>
 
@@ -2681,10 +2981,144 @@ window.pctInitCount = function () {
     if (window.console && console.warn) console.warn('pctInitCount:', err);
   }
 };
+/* ===== 05-mem ===== */
+/* 05 - the arc.
+ *
+ * Cards sit on a circle whose centre is far below the section. One scalar `pos`
+ * advances with time and every card's angle is its slot minus pos, wrapped, so
+ * the strip is endless with no clone and no loop point.
+ *
+ * THE ONE THING THAT MAKES THIS LOOK RIGHT: the rotation is DAMPED. A card at
+ * angle a sits at x = R sin a, y = R (1 - cos a), but it is rotated by only
+ * a * TILT. At this radius the edge card is 39 degrees around the circle while
+ * the reference tilts its edge cards about 20, so TILT is 0.51.
+ *
+ * That damping is also why this cannot be a CSS keyframe on a rotating hub: a hub
+ * rotation applies the FULL angle to every child, and a fixed per-card
+ * counter-rotation cannot track a hub that is itself turning.
+ *
+ * Geometry is measured on load and resize only. The loop writes transforms and
+ * reads nothing.
+ */
+window.pctInitArc = function () {
+  try {
+    var band = document.querySelector('[data-mem-band]');
+    var arc = band && band.querySelector('[data-mem-arc]');
+    if (!band || !arc || band.dataset.on) return;
+
+    var items = Array.prototype.slice.call(arc.children);
+    var N = items.length;
+    if (N < 6) return;
+
+    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    var TILT = 0.51;      /* fraction of the angular position applied as rotation */
+    /* Arc spacing equal to the card width. Projected to the screen as x = R sin a,
+       that means neighbours just meet at the apex and overlap progressively harder
+       toward the edges, which is the reference's behaviour. A constant 13% overlap
+       in ARC space compounded into roughly 45% on screen at the edges and the row
+       turned into a stack. */
+    var OVERLAP = 0;
+    var SPEED = 0.052;    /* slots per second. one card passes about every 19s */
+
+    /* --- geometry, measured on load and resize only ---------------------
+       JS owns the card width and writes it back to CSS, rather than reading it
+       back out of the stylesheet. Reading it back was the bug: --cardW is
+       authored in vw, getPropertyValue returns the unresolved "28.8vw", and the
+       offsetWidth fallback was measured before layout had settled. R and the
+       angular step were both computed off a wrong width, which is why the arc
+       came out shallow and lopsided with a hole on one side. */
+    var CARD_FRAC_WIDE = 0.288;   /* measured off the reference */
+    var CARD_FRAC_NARROW = 0.52;
+    var R = 0, STEP = 0, W = 0, halfVW = 0;
+    function measure() {
+      var bw = band.clientWidth || 1;
+      W = Math.round(bw * (bw < 768 ? CARD_FRAC_NARROW : CARD_FRAC_WIDE));
+      band.style.setProperty('--cardW', W + 'px');
+      halfVW = bw / 2;
+      /* R solves drop = R(1 - cos(halfVW / R)) with drop = 2 * wedge.
+         Bisection rather than a closed form: the equation has no elementary
+         inverse and this runs twice in the life of the page. */
+      /* d(R) = R(1 - cos(halfVW/R)) is NOT monotonic: below halfVW/(PI/2) the
+         argument clamps and d rises with R, above it d falls. Bisecting the whole
+         range can therefore land on the wrong branch. Search only the falling
+         branch, which is the one that gives a wide shallow arc rather than a
+         tight one. */
+      var target = 2.4 * (0.33 * W);
+      var lo = halfVW / (Math.PI / 2) + 1, hi = 40000, mid = lo, d;
+      for (var k = 0; k < 60; k++) {
+        mid = (lo + hi) / 2;
+        d = mid * (1 - Math.cos(halfVW / mid));
+        if (d > target) lo = mid; else hi = mid;
+      }
+      R = mid;
+      STEP = (W * (1 - OVERLAP)) / R;   /* arc spacing between card centres */
+    }
+
+    /* --- paint ---------------------------------------------------------- */
+    var pos = 0;
+    function paint() {
+      for (var i = 0; i < N; i++) {
+        var a = (i - pos) * STEP;
+        /* wrap into -PI..PI so cards recycle around the back of the circle */
+        a = ((a + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+        var el = items[i];
+        if (Math.abs(a) > 1.35) { el.style.visibility = 'hidden'; continue; }
+        var x = R * Math.sin(a);
+        if (Math.abs(x) > halfVW + W) { el.style.visibility = 'hidden'; continue; }
+        var y = R * (1 - Math.cos(a));
+        el.style.visibility = 'visible';
+        el.style.transform =
+          'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' +
+          (a * TILT * 180 / Math.PI).toFixed(2) + 'deg)';
+        /* nearer the apex paints on top, so the overlap reads as a fan */
+        el.style.zIndex = String(100 - Math.round(Math.abs(a) * 40));
+      }
+    }
+
+    /* --- loop ----------------------------------------------------------- */
+    var raf = null, last = 0, visible = true;
+    function frame(ts) {
+      raf = requestAnimationFrame(frame);
+      var dt = last ? Math.min((ts - last) / 1000, 0.05) : 1 / 60;
+      last = ts;
+      pos += dt * SPEED;
+      paint();
+    }
+    function start() { if (raf === null && !reduced && visible) { last = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
+
+    var t = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { measure(); paint(); }, 140);
+    }, { passive: true });
+
+    measure();
+    band.dataset.on = '1';
+    paint();
+
+    if (reduced) return;   /* laid out and still */
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting;
+        if (visible) start(); else stop();
+      }, { rootMargin: '150px' }).observe(band);
+    } else start();
+
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(function () { reduced = true; stop(); });
+    }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitArc:', err);
+  }
+};
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitCountdown', 'pctInitReveal', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlace', 'pctInitCount'];
+  var inits = ['pctInitCountdown', 'pctInitReveal', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlace', 'pctInitCount', 'pctInitArc'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

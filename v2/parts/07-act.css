@@ -14,22 +14,31 @@
   position: relative;
   background: var(--purple-deep);
   color: rgba(250, 248, 243, 0.78);
-  padding: clamp(7rem, 15vw, 12.5rem) 0;
+  padding: clamp(6rem, 12vw, 10rem) 0 clamp(5rem, 9vw, 7.5rem);
   text-align: center;
   /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
      390px phone it reached 95px past the viewport and gave the whole document
      a horizontal scrollbar. Nothing in this section needs to escape it. */
   overflow: hidden;
+
+  /* The corner highlight. The original section had a light source in the upper
+     right and it is most of why that version reads as fuller than a flat purple
+     panel. Painted on the section's own background so it costs no element and
+     cannot intercept a pointer. */
+  background:
+    radial-gradient(58% 74% at 88% 4%, rgba(150, 118, 215, 0.42) 0%, rgba(150, 118, 215, 0) 62%),
+    radial-gradient(42% 56% at 12% 96%, rgba(75, 46, 131, 0.34) 0%, rgba(75, 46, 131, 0) 66%),
+    var(--purple-deep);
 }
 
 .act-inner {
-  max-width: 46rem;
+  max-width: 52rem;
   margin-inline: auto;
 }
 
 .act-title {
-  font-size: clamp(2.85rem, 7.2vw, 5.4rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(3.2rem, 8vw, 6.2rem);
+  letter-spacing: -0.02em;
   color: var(--paper);
 }
 .act-title em {
@@ -80,7 +89,11 @@
   background: var(--gold);
   border-radius: 2px;
   transform-origin: 50% 50%;
-  transition: transform 420ms var(--ease);
+  /* the glow is a box-shadow on the plate rather than a filter, so it stays on
+     the compositor and never rasterises the button's text */
+  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
+  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease),
+              background-color 420ms var(--ease);
 }
 
 .act-cta-arrow {
@@ -123,6 +136,7 @@
 .act-go:focus-within .act-cta-plate {
   transform: scale(1.05, 1.12);
   background: var(--gold-soft);
+  box-shadow: 0 0 46px 6px rgba(230, 198, 91, 0.34);
 }
 .act-go:hover .act-cta-arrow,
 .act-go:focus-within .act-cta-arrow {
@@ -144,8 +158,12 @@
   border-bottom-color: var(--gold-soft);
 }
 
+/* The sub was set at body size on the page's single most important screen, which
+   is why the whole block read small. */
 .act-sub {
-  margin-top: 1.2rem;
+  margin-top: 1.35rem;
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  line-height: 1.55;
 }
 
 /* --------------------------------------------------------------------------
@@ -298,7 +316,7 @@
   width: 150%; aspect-ratio: 2 / 1;
   transform: translate(-50%, -50%);
   background: radial-gradient(closest-side,
-    rgba(250,248,243,.14) 0%, rgba(250,248,243,.06) 45%, rgba(250,248,243,0) 72%);
+    rgba(250,248,243,.08) 0%, rgba(250,248,243,.03) 45%, rgba(250,248,243,0) 72%);
   pointer-events: none; z-index: -1;
 }
 

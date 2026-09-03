@@ -16,13 +16,19 @@
       <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
 
 
-      <!-- COUNTDOWN. data-until is the single source of truth and must stay in sync
+      <!-- COUNTDOWN.
+           PLACEHOLDER DATE. Fall 2026 rush has already begun, so the clock had
+           nothing left to count down to and the section fell back to a single
+           line. These are MOCK Spring 2027 dates so the countdown is visible.
+           REPLACE data-until and data-ends with the real spring rush dates
+           before this goes in front of anyone.
+           data-until is the single source of truth and must stay in sync
            with assets/rush-events.ics and the Event JSON-LD on fallrush.html.
            data-ends marks the last event, so the section can switch to the active
            state during rush. Remove both attributes and the block hides itself. -->
-      <div class="act-cd" data-until="2026-09-02T19:00:00-04:00"
-           data-ends="2026-09-18T21:00:00-04:00" aria-live="off">
-        <span class="act-cd-lab">Rush begins in</span>
+      <div class="act-cd" data-until="2027-01-13T19:00:00-05:00"
+           data-ends="2027-01-29T21:00:00-05:00" aria-live="off">
+        <span class="act-cd-lab">Spring rush begins in</span>
         <div class="act-cd-units">
           <div class="act-cd-u"><span class="act-cd-n" data-cd="d">&ndash;</span><span class="act-cd-k">Days</span></div>
           <div class="act-cd-u"><span class="act-cd-n" data-cd="h">&ndash;</span><span class="act-cd-k">Hours</span></div>

@@ -237,11 +237,20 @@
   letter-spacing:.04em;
   text-decoration:none;
   white-space:nowrap;
-  /* No transition, matching .v2hero-btn: the two gold buttons on this screen
-     must behave identically. */
-  transition:none;
+  /* A soft gold glow, so the one conversion target on the bar reads as lit
+     rather than as another flat chip. Box-shadow rather than filter, so it stays
+     on the compositor and never rasterises the label. */
+  box-shadow:0 0 26px 2px rgba(201,162,39,.26);
+  transition:background-color 320ms var(--ease), box-shadow 320ms var(--ease);
 }
-.v2hd-rush:hover{background:var(--gold-soft)}
+.v2hd-rush:hover,
+.v2hd-rush:focus-visible{
+  background:var(--gold-soft);
+  box-shadow:0 0 38px 6px rgba(230,198,91,.42);
+}
+@media (prefers-reduced-motion:reduce){
+  .v2hd-rush{transition:none}
+}
 
 /* ---------- focus ---------- */
 
@@ -762,9 +771,9 @@
    is the break we want: one register of proof per line. */
 .pl-h{
   text-align:center;
-  font-size:clamp(2.6rem,6vw,5rem);
-  letter-spacing:-.015em;
-  margin:0 0 clamp(2.25rem,4.5vw,3.5rem);
+  font-size:clamp(2.9rem,7vw,6rem);
+  letter-spacing:-.02em;
+  margin:0 0 clamp(2.6rem,5vw,4rem);
 }
 .pl-h em{font-style:italic;color:var(--gold-ink)}
 
@@ -903,10 +912,10 @@
    a marquee plus a counter is two. The values are static text in the markup. */
 .pl-nums{
   list-style:none;
-  margin:clamp(3rem,6vw,4.75rem) 0 0;
+  margin:clamp(3.6rem,7vw,5.5rem) 0 0;
   padding:0;
   display:grid;
-  gap:clamp(2.75rem,5vw,2rem);
+  gap:clamp(3.2rem,6vw,2.5rem);
   grid-template-columns:1fr;
 }
 @media (min-width:768px){
@@ -937,13 +946,14 @@
 /* the label is the display italic, not the UI sans. A 13px sans caption under a
    128px serif numeral reads as a chart legend. */
 .pl-n-lab{
-  margin:1.3rem 0 0;
-  max-width:17rem;
+  margin:1.5rem 0 0;
+  max-width:20rem;
   font-family:var(--font-display);
   font-style:italic;
-  font-size:clamp(1rem,1.5vw,1.2rem);
-  line-height:1.4;
+  font-size:clamp(1.25rem,2vw,1.7rem);
+  line-height:1.3;
   color:var(--ink-soft);
+  text-wrap:balance;
 }
 
 @media (max-width:767px){
@@ -1057,7 +1067,7 @@
    numerals below run to 5.5rem against this 3.2rem cap. */
 .v2nat-h{
   margin:0;
-  font-size:clamp(2rem,4vw,3.2rem);
+  font-size:clamp(2.6rem, 6vw, 4.6rem);
   letter-spacing:-.015em;
   color:var(--paper);
 }
@@ -1294,7 +1304,12 @@
   --inset:1rem;                         /* air above the topmost card */
 
   position:relative;
-  height:clamp(270px,25vw,360px);
+  /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
+     at the top of the arc is therefore fully visible, bottom edge and all, while
+     every card the curve has carried downward runs past the cut. That asymmetry
+     is the reference's silhouette; an earlier height cut all of them equally and
+     lost it. --h is 1.25 * 0.15736 * --R, so this tracks the circle. */
+  height:calc(var(--h) + var(--inset) + 1.1rem);
   overflow:hidden;                      /* this is the cut */
   isolation:isolate;                    /* keep cards under the next section's ground */
 }
@@ -1312,7 +1327,7 @@
   top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
-  animation:memSpin 260s linear infinite;
+  animation:memSpin 150s linear infinite;
   will-change:transform;
 }
 
@@ -1325,6 +1340,10 @@
   margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
   transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
   background:var(--paper-deep);
+  /* Rounded, like the reference. Square corners on a tilted card read as a
+     cropped screenshot; a radius reads as a printed card. */
+  border-radius:clamp(10px,1.1vw,18px);
+  overflow:hidden;
   box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
 }
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
@@ -1340,8 +1359,7 @@
 @media (max-width:767px){
   .mem-band{
     --R:292vw;        /* same w/R ratio, so the corners still touch */
-    height:clamp(210px,44vw,300px);
-    --inset:.9rem;
+    --inset:.7rem;
   }
 }
 
@@ -1370,9 +1388,9 @@
 }
 
 .join-h{
-  font-size:clamp(2.4rem,5.4vw,4.25rem);
-  letter-spacing:-.015em;
-  margin:0 0 .8rem;
+  font-size:clamp(2.9rem,7vw,6rem);
+  letter-spacing:-.02em;
+  margin:0 0 .9rem;
 }
 .join-h em{font-style:italic;color:var(--gold-ink)}
 
@@ -1393,7 +1411,7 @@
   margin:0 0 clamp(2.6rem,5vw,3.6rem);
   padding:0;
   display:grid;
-  gap:clamp(1.6rem,3vw,2.4rem);
+  gap:clamp(2.2rem,4vw,3.4rem);
   grid-template-columns:1fr;
   counter-reset:join;
 }
@@ -1401,19 +1419,21 @@
   .join-steps{grid-template-columns:repeat(3,1fr)}
 }
 
+/* No hairline over each step. A rule, a gold ordinal and a serif title were
+   three separate devices marking the same boundary, which is what made this
+   read busy. The ordinal alone is enough. */
 .join-step{
   counter-increment:join;
-  border-top:1px solid var(--line);
-  padding-top:1.1rem;
+  padding-top:0;
 }
 /* the ordinal is decorative: the <ol> already conveys order to assistive tech */
 .join-step::before{
   content:counter(join,decimal-leading-zero);
   display:block;
-  margin-bottom:.6rem;
+  margin-bottom:.75rem;
   font-family:var(--font-display);
   font-style:italic;
-  font-size:1.15rem;
+  font-size:1.5rem;
   line-height:1;
   color:var(--gold-ink);
 }
@@ -1428,8 +1448,8 @@
 }
 .join-b{
   margin:0;
-  font-size:.98rem;
-  line-height:1.6;
+  font-size:1.05rem;
+  line-height:1.65;
   color:var(--ink-soft);
 }
 
@@ -1473,22 +1493,31 @@
   position: relative;
   background: var(--purple-deep);
   color: rgba(250, 248, 243, 0.78);
-  padding: clamp(7rem, 15vw, 12.5rem) 0;
+  padding: clamp(6rem, 12vw, 10rem) 0 clamp(5rem, 9vw, 7.5rem);
   text-align: center;
   /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
      390px phone it reached 95px past the viewport and gave the whole document
      a horizontal scrollbar. Nothing in this section needs to escape it. */
   overflow: hidden;
+
+  /* The corner highlight. The original section had a light source in the upper
+     right and it is most of why that version reads as fuller than a flat purple
+     panel. Painted on the section's own background so it costs no element and
+     cannot intercept a pointer. */
+  background:
+    radial-gradient(58% 74% at 88% 4%, rgba(150, 118, 215, 0.42) 0%, rgba(150, 118, 215, 0) 62%),
+    radial-gradient(42% 56% at 12% 96%, rgba(75, 46, 131, 0.34) 0%, rgba(75, 46, 131, 0) 66%),
+    var(--purple-deep);
 }
 
 .act-inner {
-  max-width: 46rem;
+  max-width: 52rem;
   margin-inline: auto;
 }
 
 .act-title {
-  font-size: clamp(2.85rem, 7.2vw, 5.4rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(3.2rem, 8vw, 6.2rem);
+  letter-spacing: -0.02em;
   color: var(--paper);
 }
 .act-title em {
@@ -1539,7 +1568,11 @@
   background: var(--gold);
   border-radius: 2px;
   transform-origin: 50% 50%;
-  transition: transform 420ms var(--ease);
+  /* the glow is a box-shadow on the plate rather than a filter, so it stays on
+     the compositor and never rasterises the button's text */
+  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
+  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease),
+              background-color 420ms var(--ease);
 }
 
 .act-cta-arrow {
@@ -1582,6 +1615,7 @@
 .act-go:focus-within .act-cta-plate {
   transform: scale(1.05, 1.12);
   background: var(--gold-soft);
+  box-shadow: 0 0 46px 6px rgba(230, 198, 91, 0.34);
 }
 .act-go:hover .act-cta-arrow,
 .act-go:focus-within .act-cta-arrow {
@@ -1603,8 +1637,12 @@
   border-bottom-color: var(--gold-soft);
 }
 
+/* The sub was set at body size on the page's single most important screen, which
+   is why the whole block read small. */
 .act-sub {
-  margin-top: 1.2rem;
+  margin-top: 1.35rem;
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  line-height: 1.55;
 }
 
 /* --------------------------------------------------------------------------
@@ -1757,7 +1795,7 @@
   width: 150%; aspect-ratio: 2 / 1;
   transform: translate(-50%, -50%);
   background: radial-gradient(closest-side,
-    rgba(250,248,243,.14) 0%, rgba(250,248,243,.06) 45%, rgba(250,248,243,0) 72%);
+    rgba(250,248,243,.08) 0%, rgba(250,248,243,.03) 45%, rgba(250,248,243,0) 72%);
   pointer-events: none; z-index: -1;
 }
 
@@ -2174,13 +2212,15 @@
     </ul>
 
     <div class="v2nat-tail">
-      <p class="v2nat-say">Phi Chi Theta has operated as a national professional business
-        fraternity since 1924. Membership connects Zeta Rho to alumni and chapters in
-        cities across the country, which matters when members recruit, relocate, or need
-        an introduction in a new market.</p>
+      <!-- Trimmed. The opening sentence restated the heading, which already says
+           "a national fraternity since 1924", and the paragraph ran to 39 words
+           to make one point. -->
+      <p class="v2nat-say">Membership connects Zeta Rho to alumni and chapters in cities
+        across the country. That matters when members recruit, relocate, or need an
+        introduction.</p>
 
-      <p class="v2nat-charter">Zeta Rho was chartered at the University of South Florida
-        in September 2018 by 18 founding business students.</p>
+      <p class="v2nat-charter">Zeta Rho was chartered at USF in September 2018 by 18
+        founding students.</p>
     </div>
 
   </div>
@@ -2203,7 +2243,7 @@
      Two of the six photographs are real. Replace assets/mem/m1, m2, m5, m6. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
-    <h2 class="mem-h" id="mem-h">Your college should <em>look like this.</em></h2>
+    <h2 class="mem-h" id="mem-h">College should <em>look like this.</em></h2>
   </div>
 
   <div class="mem-band">
@@ -2306,13 +2346,19 @@
       <p class="act-line">Meet the chapter and see whether PCT belongs in your college experience.</p>
 
 
-      <!-- COUNTDOWN. data-until is the single source of truth and must stay in sync
+      <!-- COUNTDOWN.
+           PLACEHOLDER DATE. Fall 2026 rush has already begun, so the clock had
+           nothing left to count down to and the section fell back to a single
+           line. These are MOCK Spring 2027 dates so the countdown is visible.
+           REPLACE data-until and data-ends with the real spring rush dates
+           before this goes in front of anyone.
+           data-until is the single source of truth and must stay in sync
            with assets/rush-events.ics and the Event JSON-LD on fallrush.html.
            data-ends marks the last event, so the section can switch to the active
            state during rush. Remove both attributes and the block hides itself. -->
-      <div class="act-cd" data-until="2026-09-02T19:00:00-04:00"
-           data-ends="2026-09-18T21:00:00-04:00" aria-live="off">
-        <span class="act-cd-lab">Rush begins in</span>
+      <div class="act-cd" data-until="2027-01-13T19:00:00-05:00"
+           data-ends="2027-01-29T21:00:00-05:00" aria-live="off">
+        <span class="act-cd-lab">Spring rush begins in</span>
         <div class="act-cd-units">
           <div class="act-cd-u"><span class="act-cd-n" data-cd="d">&ndash;</span><span class="act-cd-k">Days</span></div>
           <div class="act-cd-u"><span class="act-cd-n" data-cd="h">&ndash;</span><span class="act-cd-k">Hours</span></div>

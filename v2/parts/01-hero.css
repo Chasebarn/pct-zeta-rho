@@ -8,7 +8,11 @@
      the hero pulls itself up by the header's height and pads its own content back
      down. Header plus hero is then exactly one screen with no seam between them,
      and the foot bar still lands on the fold. */
-  margin-top:calc(var(--v2hd-h,76px) * -1);
+  /* -1px past the header's height, not exactly it. The header's rendered height
+     lands on a fractional device pixel, so pulling up by exactly --v2hd-h left a
+     1px row at the very top of the page where the body's cream showed through as
+     a white hairline above the hero. */
+  margin-top:calc(var(--v2hd-h,76px) * -1 - 1px);
   min-height:100svh;
   display:flex;
   align-items:center;

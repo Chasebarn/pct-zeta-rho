@@ -29,47 +29,38 @@ window.pctInitArc = function () {
     var reduced = (window.pctMotion && window.pctMotion.reduced) ||
       (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    var TILT = 0.51;      /* fraction of the angular position applied as rotation */
-    /* Arc spacing equal to the card width. Projected to the screen as x = R sin a,
-       that means neighbours just meet at the apex and overlap progressively harder
-       toward the edges, which is the reference's behaviour. A constant 13% overlap
-       in ARC space compounded into roughly 45% on screen at the edges and the row
-       turned into a stack. */
-    var OVERLAP = 0;
-    var SPEED = 0.052;    /* slots per second. one card passes about every 19s */
+    /* Fraction of the angular position applied as rotation. At this radius the
+       edge card is 47 degrees around the circle; the reference tilts about 20. */
+    var TILT = 0.45;
+    var SPEED = 0.040;    /* slots per second. one card passes about every 19s */
 
     /* --- geometry, measured on load and resize only ---------------------
-       JS owns the card width and writes it back to CSS, rather than reading it
-       back out of the stylesheet. Reading it back was the bug: --cardW is
-       authored in vw, getPropertyValue returns the unresolved "28.8vw", and the
-       offsetWidth fallback was measured before layout had settled. R and the
-       angular step were both computed off a wrong width, which is why the arc
-       came out shallow and lopsided with a hole on one side. */
-    var CARD_FRAC_WIDE = 0.288;   /* measured off the reference */
+       Derived directly, with no solver. An earlier version bisected for R against
+       d(R) = R(1 - cos(h/R)), which is NOT monotonic, so it could land on the
+       tight-arc branch. And it read the card width back out of the stylesheet,
+       where --cardW is authored in vw and comes back as the unresolved string.
+       JS now owns the width and writes it INTO the CSS.
+
+       SLOTS is a whole circle, so STEP closes exactly and there is no seam.
+       Setting the arc spacing equal to the card width means neighbours TOUCH at
+       the apex rather than pile up. That also removes the glitching: with no
+       overlap in the middle there is no z-order for the eye to catch changing.
+       Toward the edges the projection compresses (x = R sin a) so they do overlap
+       there, which is the fan. */
+    var SLOTS = 15;                          /* matches the 15 <li> in the markup */
+    var STEP = 2 * Math.PI / SLOTS;          /* 24 degrees */
+    var CARD_FRAC_WIDE = 0.288;              /* measured off the reference */
     var CARD_FRAC_NARROW = 0.52;
-    var R = 0, STEP = 0, W = 0, halfVW = 0;
+    var R = 0, W = 0, halfVW = 0;
     function measure() {
       var bw = band.clientWidth || 1;
       W = Math.round(bw * (bw < 768 ? CARD_FRAC_NARROW : CARD_FRAC_WIDE));
       band.style.setProperty('--cardW', W + 'px');
       halfVW = bw / 2;
-      /* R solves drop = R(1 - cos(halfVW / R)) with drop = 2 * wedge.
-         Bisection rather than a closed form: the equation has no elementary
-         inverse and this runs twice in the life of the page. */
-      /* d(R) = R(1 - cos(halfVW/R)) is NOT monotonic: below halfVW/(PI/2) the
-         argument clamps and d rises with R, above it d falls. Bisecting the whole
-         range can therefore land on the wrong branch. Search only the falling
-         branch, which is the one that gives a wide shallow arc rather than a
-         tight one. */
-      var target = 2.4 * (0.33 * W);
-      var lo = halfVW / (Math.PI / 2) + 1, hi = 40000, mid = lo, d;
-      for (var k = 0; k < 60; k++) {
-        mid = (lo + hi) / 2;
-        d = mid * (1 - Math.cos(halfVW / mid));
-        if (d > target) lo = mid; else hi = mid;
-      }
-      R = mid;
-      STEP = (W * (1 - OVERLAP)) / R;   /* arc spacing between card centres */
+      /* arc spacing == card width  =>  R = W / STEP. At 15 slots that is 68.8vw,
+         which drops 250px across a 1440 viewport: about twice the curvature of
+         the 32-slot version, which read as flat. */
+      R = W / STEP;
     }
 
     /* --- paint ---------------------------------------------------------- */

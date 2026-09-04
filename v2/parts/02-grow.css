@@ -27,9 +27,14 @@
 .grow__intro{grid-area:intro;max-width:46rem}
 
 .grow__h{
-  font-size:clamp(2.5rem,5.2vw,4.25rem);
-  letter-spacing:-.015em;
-  margin:0 0 .9rem;
+  /* The vw term was 5.2, which at 520px resolves to 27px and falls back to the
+     2.5rem floor: the section's own title ended up smaller than the row titles
+     under it once you account for their weight on screen. A 7vw term and a
+     2.9rem floor give it presence at every width, and wrapping to two lines on a
+     phone is the right outcome for a six word heading. */
+  font-size:clamp(2.9rem,7vw,4.6rem);
+  letter-spacing:-.02em;
+  margin:0 0 1rem;
 }
 /* the italic falls on "just", so the sentence turns on the word that does the
    work rather than on a noun at the end of it */
@@ -68,7 +73,13 @@
   font-family:inherit;
   text-align:left;
   cursor:pointer;
+  transition:padding var(--dur) var(--ease);
 }
+
+/* A CLOSED row is a label, not a panel. Giving every row the open row's padding
+   meant the two shut rows claimed the same vertical weight as the one actually
+   showing content. */
+.grow--js .grow__row:not(.is-open) .grow__btn{padding-block:1rem}
 .grow__ttl{
   display:block;
   font-family:var(--font-display);
@@ -157,6 +168,16 @@
 @media (max-width:859px){
   .grow__fig,
   .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
+}
+
+@media (max-width:600px){
+  /* the photograph is the tallest thing between the heading and the first row,
+     so a 1:1 crop pushes the accordion most of a screen down on a phone */
+  .grow--js .grow__stage,
+  .grow__fig{aspect-ratio:4/3}
+  .grow__btn{padding-block:1.15rem}
+  .grow--js .grow__row:not(.is-open) .grow__btn{padding-block:.85rem}
+  .grow__say{padding-bottom:1.3rem}
 }
 
 /* ---------- reduced motion ----------

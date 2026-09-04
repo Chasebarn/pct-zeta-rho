@@ -1,0 +1,40 @@
+/* ============================================================
+   99 - FOOTER, mobile touch targets.
+
+   The footer markup is lifted from the live site and is styled by
+   css/styles.css, which build.py links. That stylesheet is shared with the
+   production pages, so nothing here edits it: these rules are additive and
+   scoped to .site-footer inside this page only.
+
+   MEASURED at 520px: every footer link rendered 19px tall and the brand lockup
+   42px, against the 44px minimum a finger needs. Ten links in two columns at
+   19px with the gaps between them is a column of near-misses.
+   ============================================================ */
+
+@media (max-width:767px){
+  /* The link itself becomes the target rather than the text inside it, so the
+     tappable area matches what the eye reads as the row. */
+  .site-footer .footer-col a{
+    display:flex;
+    align-items:center;
+    min-height:44px;
+  }
+
+  /* The list rhythm came from margins between 19px items. With 44px rows that
+     doubles the column's height for no gain, so the margins come off and the
+     row height carries the spacing. */
+  .site-footer .footer-col li{margin:0}
+
+  .site-footer .footer-about .brand{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+  }
+
+  /* The base row's links sit inline in a sentence, so they cannot become 44px
+     blocks without breaking the line. Padding buys vertical room instead. */
+  .site-footer .footer-base a{
+    display:inline-block;
+    padding-block:1rem;
+  }
+}

@@ -25,8 +25,15 @@
    screenshot, so the real figure can only be better than the one stated.
    ========================================================================== */
 
-:root{--v2hd-h:76px}
-@media (max-width:767px){:root{--v2hd-h:64px}}
+:root{--v2hd-h:77px}
+/* Fallbacks only. 00-header.js measures the bar and overwrites this token, which
+   is what makes it exact. These three bands match the header's real heights so a
+   no-JS reader still gets no gap above the hero:
+     >=768  one row, 77px
+     560-767  nav wraps to a second row, 131px
+     <560   the four links drop entirely, 72px */
+@media (min-width:560px) and (max-width:767px){:root{--v2hd-h:131px}}
+@media (max-width:559px){:root{--v2hd-h:72px}}
 
 .v2hd{
   /* AT REST: transparent, sitting ON the hero. Header and hero are one continuous
@@ -622,9 +629,14 @@
 .grow__intro{grid-area:intro;max-width:46rem}
 
 .grow__h{
-  font-size:clamp(2.5rem,5.2vw,4.25rem);
-  letter-spacing:-.015em;
-  margin:0 0 .9rem;
+  /* The vw term was 5.2, which at 520px resolves to 27px and falls back to the
+     2.5rem floor: the section's own title ended up smaller than the row titles
+     under it once you account for their weight on screen. A 7vw term and a
+     2.9rem floor give it presence at every width, and wrapping to two lines on a
+     phone is the right outcome for a six word heading. */
+  font-size:clamp(2.9rem,7vw,4.6rem);
+  letter-spacing:-.02em;
+  margin:0 0 1rem;
 }
 /* the italic falls on "just", so the sentence turns on the word that does the
    work rather than on a noun at the end of it */
@@ -663,7 +675,13 @@
   font-family:inherit;
   text-align:left;
   cursor:pointer;
+  transition:padding var(--dur) var(--ease);
 }
+
+/* A CLOSED row is a label, not a panel. Giving every row the open row's padding
+   meant the two shut rows claimed the same vertical weight as the one actually
+   showing content. */
+.grow--js .grow__row:not(.is-open) .grow__btn{padding-block:1rem}
 .grow__ttl{
   display:block;
   font-family:var(--font-display);
@@ -752,6 +770,16 @@
 @media (max-width:859px){
   .grow__fig,
   .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
+}
+
+@media (max-width:600px){
+  /* the photograph is the tallest thing between the heading and the first row,
+     so a 1:1 crop pushes the accordion most of a screen down on a phone */
+  .grow--js .grow__stage,
+  .grow__fig{aspect-ratio:4/3}
+  .grow__btn{padding-block:1.15rem}
+  .grow--js .grow__row:not(.is-open) .grow__btn{padding-block:.85rem}
+  .grow__say{padding-bottom:1.3rem}
 }
 
 /* ---------- reduced motion ----------
@@ -1818,6 +1846,47 @@
 @media (prefers-reduced-motion:reduce){
   .act-go.pct-rv-in .act-cta-plate{animation:none}
 }
+/* ===== 99-footer ===== */
+/* ============================================================
+   99 - FOOTER, mobile touch targets.
+
+   The footer markup is lifted from the live site and is styled by
+   css/styles.css, which build.py links. That stylesheet is shared with the
+   production pages, so nothing here edits it: these rules are additive and
+   scoped to .site-footer inside this page only.
+
+   MEASURED at 520px: every footer link rendered 19px tall and the brand lockup
+   42px, against the 44px minimum a finger needs. Ten links in two columns at
+   19px with the gaps between them is a column of near-misses.
+   ============================================================ */
+
+@media (max-width:767px){
+  /* The link itself becomes the target rather than the text inside it, so the
+     tappable area matches what the eye reads as the row. */
+  .site-footer .footer-col a{
+    display:flex;
+    align-items:center;
+    min-height:44px;
+  }
+
+  /* The list rhythm came from margins between 19px items. With 44px rows that
+     doubles the column's height for no gain, so the margins come off and the
+     row height carries the spacing. */
+  .site-footer .footer-col li{margin:0}
+
+  .site-footer .footer-about .brand{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+  }
+
+  /* The base row's links sit inline in a sentence, so they cannot become 44px
+     blocks without breaking the line. Padding buys vertical room instead. */
+  .site-footer .footer-base a{
+    display:inline-block;
+    padding-block:1rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -2565,6 +2634,24 @@ window.pctInitStick = function () {
   try {
     var hd = document.querySelector('.v2hd');
     if (!hd) return;
+
+    /* PUBLISH THE HEADER'S REAL HEIGHT.
+       The hero pulls itself up under the transparent header by --v2hd-h, and that
+       token used to be two hardcoded guesses. Measured, the header is 77px on
+       desktop but 131px between 560 and 767 where the nav wraps to a second row,
+       and 72px below 560 where the links drop entirely. So the guess was wrong at
+       every mobile width and left a 66px band of the body's cream above the hero.
+       Measuring it is the only thing that is right at every width. */
+    var root = document.documentElement;
+    function publishHeight() {
+      var h = hd.getBoundingClientRect().height;
+      if (h > 0) root.style.setProperty('--v2hd-h', h.toFixed(1) + 'px');
+    }
+    publishHeight();
+    if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(hd);
+    else window.addEventListener('resize', publishHeight, { passive: true });
+    /* the brand lockup uses a webfont, so the bar can grow after it swaps in */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(publishHeight);
 
     var sentinel = document.createElement('div');
     sentinel.setAttribute('aria-hidden', 'true');

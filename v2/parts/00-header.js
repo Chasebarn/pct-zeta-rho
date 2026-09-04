@@ -84,6 +84,24 @@ window.pctInitStick = function () {
     var hd = document.querySelector('.v2hd');
     if (!hd) return;
 
+    /* PUBLISH THE HEADER'S REAL HEIGHT.
+       The hero pulls itself up under the transparent header by --v2hd-h, and that
+       token used to be two hardcoded guesses. Measured, the header is 77px on
+       desktop but 131px between 560 and 767 where the nav wraps to a second row,
+       and 72px below 560 where the links drop entirely. So the guess was wrong at
+       every mobile width and left a 66px band of the body's cream above the hero.
+       Measuring it is the only thing that is right at every width. */
+    var root = document.documentElement;
+    function publishHeight() {
+      var h = hd.getBoundingClientRect().height;
+      if (h > 0) root.style.setProperty('--v2hd-h', h.toFixed(1) + 'px');
+    }
+    publishHeight();
+    if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(hd);
+    else window.addEventListener('resize', publishHeight, { passive: true });
+    /* the brand lockup uses a webfont, so the bar can grow after it swaps in */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(publishHeight);
+
     var sentinel = document.createElement('div');
     sentinel.setAttribute('aria-hidden', 'true');
     /* 120px down the page: far enough that the bar does not flicker solid on the

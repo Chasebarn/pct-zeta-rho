@@ -10,8 +10,15 @@
    screenshot, so the real figure can only be better than the one stated.
    ========================================================================== */
 
-:root{--v2hd-h:76px}
-@media (max-width:767px){:root{--v2hd-h:64px}}
+:root{--v2hd-h:77px}
+/* Fallbacks only. 00-header.js measures the bar and overwrites this token, which
+   is what makes it exact. These three bands match the header's real heights so a
+   no-JS reader still gets no gap above the hero:
+     >=768  one row, 77px
+     560-767  nav wraps to a second row, 131px
+     <560   the four links drop entirely, 72px */
+@media (min-width:560px) and (max-width:767px){:root{--v2hd-h:131px}}
+@media (max-width:559px){:root{--v2hd-h:72px}}
 
 .v2hd{
   /* AT REST: transparent, sitting ON the hero. Header and hero are one continuous

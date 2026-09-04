@@ -424,7 +424,18 @@
 .v2hero:has(.v2hero-btn:focus-visible) .v2hero-letters{opacity:1}
 
 .v2hero-stage{position:relative;z-index:2}
-.v2hero-inner{max-width:920px}
+/* CENTRED ON DESKTOP, left aligned on mobile. A centred column reads as a title
+   card, which is what this section is; on a phone the same treatment ragged both
+   edges of every line and cost real width, so the mobile rule below reverts it. */
+.v2hero-inner{
+  max-width:920px;
+  margin-inline:auto;
+  text-align:center;
+}
+.v2hero-claim,
+.v2hero-next{margin-inline:auto}
+.v2hero-next{justify-content:center}
+.v2hero-cta{display:flex;justify-content:center}
 
 /* ---------- copy ---------- */
 
@@ -555,6 +566,13 @@
   .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
   .v2hero-sub{margin-bottom:1.9rem}
   .v2hero-claim,.v2hero-next{max-width:none}
+
+  /* back to left aligned on a phone: centring ragged both edges of every line
+     and the CTA lost its anchor against the screen edge */
+  .v2hero-inner{text-align:left;margin-inline:0}
+  .v2hero-claim,.v2hero-next{margin-inline:0}
+  .v2hero-next{justify-content:flex-start}
+  .v2hero-cta{justify-content:flex-start}
   .v2hero-next{margin-bottom:2.2rem}
   .v2hero-btn{width:100%;justify-content:center}
   .v2hero-foot-side{display:none}
@@ -1055,7 +1073,9 @@
   /* Larger than --section (5-9rem) so this plate visibly breathes more than
      the cream sections it separates, but smaller than the closing CTA's
      7-12.5rem, so the page's real ending still owns the biggest silence. */
-  padding-block:clamp(6rem,12vw,10rem);
+  /* asymmetric: the section ends on a paragraph and does not need a full
+     opening measure of air under it as well */
+  padding-block:clamp(6rem,12vw,10rem) clamp(3.5rem,7vw,6rem);
 }
 
 /* Film grain: the exact technique from .v2hero::after, the ground treatment
@@ -1141,34 +1161,28 @@
 
 /* ---------- body and charter line ---------- */
 
+/* One column, not two. The second column held a single short line with nothing
+   under it, so the block read as a paragraph pushed left with a stranded caption
+   and a large empty quarter to its right. */
 .v2nat-tail{
-  margin-top:clamp(2.75rem,5.5vw,4.25rem);
-  display:grid;
-  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
-  column-gap:clamp(2.5rem,5vw,4.5rem);
-  align-items:start;
+  margin-top:clamp(2.25rem,4.5vw,3.25rem);
 }
 
 .v2nat-say{
   margin:0;
-  max-width:38rem;
-  font-size:clamp(1rem,1.4vw,1.1rem);
-  line-height:1.7;
+  /* This is the section's argument, not a caption under it. At 1.1rem in a 52ch
+     column it occupied the left third of a 1240px measure and left the other two
+     thirds empty, which is what made the block read unbalanced. Set at the lede
+     size across a 62ch measure it fills the width it is given. */
+  max-width:62ch;
+  font-size:clamp(1.15rem,1.75vw,1.45rem);
+  line-height:1.6;
   color:rgba(250,248,243,.78);
 }
 
 /* The provenance note, set as a margin footnote beside the paragraph rather
    than beneath it: it is the quietest fact in the section and it should read
    as a citation, not as a second claim. */
-.v2nat-charter{
-  /* optical, not structural: the smaller cap height needs a nudge to sit on
-     the same visual line as the paragraph's first line */
-  margin:.3rem 0 0;
-  max-width:24rem;
-  font-size:.92rem;
-  line-height:1.6;
-  color:rgba(250,248,243,.62);
-}
 
 /* ============================================================
    MOBILE: a different execution, not a shrunken one.
@@ -1228,16 +1242,9 @@
     text-align:right;
   }
 
-  .v2nat-tail{
-    grid-template-columns:1fr;
-    row-gap:1.4rem;
-  }
-  .v2nat-charter{
-    margin:0;
-    max-width:none;
-  }
+  /* .v2nat-tail is a single column at every width now, so it needs no override
+     here. This closes the media query. */
 }
-
 
 /* ---------- the crest ----------------------------------------------------
    Full colour, at a size that reads as a mark rather than a favicon. On desktop
@@ -2175,7 +2182,6 @@
         an alumni network in the city you move to after graduation, and a name that the
         person reading your resume in Charlotte or Chicago already recognises.</p>
 
-      <p class="v2nat-charter">Zeta Rho has been the USF chapter since 2018.</p>
     </div>
 
   </div>

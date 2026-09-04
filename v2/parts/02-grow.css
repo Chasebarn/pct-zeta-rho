@@ -40,6 +40,23 @@
    work rather than on a noun at the end of it */
 .grow__h em{font-style:italic;color:var(--gold-ink)}
 
+/* The lede returns. It was deleted when it read "Three parts of the chapter,
+   members run all three", which restated the three headings under it. This one
+   does the opposite: it names the reader's actual question before the rows start
+   answering it, so it earns the space the old one did not. */
+.grow__lede{
+  margin:0 0 .4rem;
+  max-width:40rem;
+  font-size:clamp(1.05rem,1.5vw,1.2rem);
+  line-height:1.6;
+  color:var(--ink-soft);
+}
+@media (min-width:860px){
+  /* the intro column is narrower than the paragraph wants, so it sets its own
+     measure rather than inheriting the column's */
+  .grow__lede{max-width:34rem}
+}
+
 
 /* ---------- the photographs ---------- */
 /* SQUARE. Every source file is 1300x1300, so a 4:5 crop would cut people out of
@@ -154,14 +171,19 @@
   .grow__wrap{
     grid-template-columns:minmax(0,48fr) minmax(0,52fr);
     grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro stage" "rows stage";
+    grid-template-areas:"intro ....." "rows  stage";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* align-self START, not centre. Centring measured the stage against a left
-     column whose height changes with the open row, so selecting Philanthropy
-     (a three line paragraph) slid the photograph down and selecting another slid
-     it back. Anchored to the top it never moves. */
+  /* The stage occupies the ROWS row only, not both. Spanning both put the
+     photograph's top edge level with the headline while the accordion started
+     240px lower, so the right half of the section was a picture floating beside
+     a heading with a column of air under it.
+
+     align-self START, not centre. Centring measured the stage against a left
+     column whose height changes with the open row, so opening a longer row slid
+     the photograph down and opening a shorter one slid it back. The accordion's
+     TOP never moves, so anchoring there is stable. */
   .grow--js .grow__stage{align-self:start;justify-self:end;max-width:27rem}
 }
 

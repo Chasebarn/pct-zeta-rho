@@ -49,29 +49,28 @@ still advertise it.
 
 ---
 
-## 02 · MORE THAN JUST A BUSINESS FRATERNITY
+## 02 · GRADUATE CONFIDENT
 
 Cream. Accordion: opening a row closes the other two, and the photograph beside
-it cross-fades.
+it cross-fades. The photograph's top edge is level with the first row and does
+not move when a different row opens.
 
 | Element | Copy |
 |---|---|
-| H2 | More than just a business fraternity. |
-| 1 title | Professional development |
-| 1 body | Speakers, resume and LinkedIn workshops, and a full day of training at Fall Summit. |
-| 2 title | Philanthropy |
-| 2 body | Members run the fundraisers and volunteer days, not just attend them. Recent partners: Hillsborough Education Foundation, JA Finance Park, Parkland Cares. |
-| 3 title | Chapter life |
-| 3 body | Intramurals, Fall Formal, Spring Retreat. Members refer and vouch for each other long after graduation. |
+| H2 | Graduate confident. |
+| Lede | Not sure what comes after college? PCT helps you build the experience, network, and confidence to be ready for what's next. |
+| 1 title | Connect with people in your field |
+| 1 body | Meet professionals, alumni, and members who can help you understand the path ahead. |
+| 2 title | Lead before you graduate |
+| 2 body | Take ownership of real projects, events, and chapter initiatives while you're still in college. |
+| 3 title | Find your people |
+| 3 body | Build relationships through Formal, Retreat, intramurals, and the everyday chapter experience. |
 
-**Job:** the value proposition, as three real parts of the chapter a prospect can
-go and check.
+**Job:** the value proposition. The lede names the reader's actual question before
+the rows start answering it.
 
 **Photography:** THREE, all **real**. `photo-letters.jpg`, `photo-service.jpg`,
 `photo-fundraiser.jpg`. Square on desktop, 4:3 under 600px.
-
-**There is no sub-line.** It said "Three parts of the chapter. Members run all
-three" and restated the three headings directly beneath it.
 
 ---
 

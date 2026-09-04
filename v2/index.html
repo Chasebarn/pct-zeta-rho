@@ -626,7 +626,9 @@
 
 /* ---------- intro ---------- */
 
-.grow__intro{grid-area:intro;max-width:46rem}
+/* No cap: the intro spans both columns, so the heading and lede set their own
+   measures below rather than sharing one that was sized for a single column. */
+.grow__intro{grid-area:intro}
 
 .grow__h{
   /* The vw term was 5.2, which at 520px resolves to 27px and falls back to the
@@ -653,10 +655,10 @@
   line-height:1.6;
   color:var(--ink-soft);
 }
-@media (min-width:860px){
-  /* the intro column is narrower than the paragraph wants, so it sets its own
-     measure rather than inheriting the column's */
-  .grow__lede{max-width:34rem}
+@media (min-width:900px){
+  /* 46rem sets this on two lines instead of three. At 34rem it was still sized
+     for the old single-column intro. */
+  .grow__lede{max-width:46rem}
 }
 
 
@@ -769,11 +771,21 @@
 
 /* ---------- desktop: photograph beside the list ---------- */
 
-@media (min-width:860px){
+@media (min-width:900px){
+  /* THE INTRO SPANS BOTH COLUMNS. Confined to one 48% column, the heading wrapped
+     to two lines and the lede to three at every width under about 1400, while the
+     top right of the section sat empty because the photograph starts level with
+     the rows. Measured at 940: the intro was 393px wide against its own 736px
+     max-width, so the measure was being set by the grid, not by the type.
+
+     Below it: rows left, photograph right, starting together. */
   .grow__wrap{
-    grid-template-columns:minmax(0,48fr) minmax(0,52fr);
+    /* Not 1fr/1fr. Even columns gave the photograph a 596px cell for a 416px
+       picture, so 180px of empty cream sat between the accordion and the image
+       and read as a hole rather than as a gutter. */
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
     grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro ....." "rows  stage";
+    grid-template-areas:"intro intro" "rows  stage";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
@@ -786,10 +798,10 @@
      column whose height changes with the open row, so opening a longer row slid
      the photograph down and opening a shorter one slid it back. The accordion's
      TOP never moves, so anchoring there is stable. */
-  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:27rem}
+  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:32rem}
 }
 
-@media (max-width:859px){
+@media (max-width:899px){
   .grow__fig,
   .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
 }

@@ -75,14 +75,18 @@
 .v2hero-stage{position:relative;z-index:2}
 /* CENTRED ON DESKTOP, left aligned on mobile. A centred column reads as a title
    card, which is what this section is; on a phone the same treatment ragged both
-   edges of every line and cost real width, so the mobile rule below reverts it. */
+   edges of every line and cost real width, so the mobile rule below reverts it.
+
+   The horizontal auto margins live in each element's OWN margin shorthand below,
+   not here. Setting margin-inline:auto in this rule looked correct and did
+   nothing: .v2hero-claim and .v2hero-next each declare `margin: 0 0 Xrem` further
+   down the file, and a later shorthand resets left and right to 0. The headline
+   and the button centred, the claim and the next-up line did not. */
 .v2hero-inner{
   max-width:920px;
   margin-inline:auto;
   text-align:center;
 }
-.v2hero-claim,
-.v2hero-next{margin-inline:auto}
 .v2hero-next{justify-content:center}
 .v2hero-cta{display:flex;justify-content:center}
 
@@ -111,7 +115,7 @@
 
 .v2hero-claim{
   max-width:44ch;
-  margin:0 0 2.1rem;
+  margin:0 auto 2.1rem;
   font-size:clamp(1.02rem,1.35vw,1.18rem);
   line-height:1.6;
   color:rgba(250,248,243,.76);
@@ -126,7 +130,7 @@
   flex-wrap:wrap;
   align-items:baseline;
   gap:.5rem .85rem;
-  margin:0 0 2.6rem;
+  margin:0 auto 2.6rem;
   max-width:44ch;
   font-size:.86rem;
   line-height:1.5;

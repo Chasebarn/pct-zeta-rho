@@ -1,119 +1,131 @@
 /* ============================================================
-   05 - College should look like this.   THE ARC.
+   05 - College should look like this.   THE WHEEL.
 
-   WHAT I HAD NEVER BEEN SOLVING FOR: the cream wedge under the arc. Measured off
-   the reference, the wedge spans about 90% of the width and is roughly 0.33 of a
-   card width deep. Every previous build cut the centre card flat at the band's
-   bottom edge, so there was no wedge at all and the row read as a straight strip
-   with the cards slightly askew.
+   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
 
-   Solved from the wedge instead of from the card:
+       card width      538px      = 0.288 of the viewport
+       cards across    3.48
+       card height     >800px cut = h/w of at least 1.49
+       arc drop        115px from the centre card to its neighbour
 
-     wedge  = 0.33 * cardW                      137px at a 1440 viewport
-     drop   = 2 * wedge                         274px, so the edge cards are still cut
-     R      = solve  drop = R(1 - cos(VW/2R))   1145px = 79.5vw
+   The previous build measured 293px wide at 1440, which is 0.203 of the
+   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
+   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
+   every one of them missed on all four numbers at once.
 
-   At that radius the edge card sits 39 degrees around the circle, but the
-   reference tilts its edge cards about 20. So the ROTATION IS DAMPED to 0.51 of
-   the angular position. That is the whole reason this section cannot be a CSS
-   keyframe on a rotating hub: a hub rotation applies the full angle to every
-   card, and a per-card counter-rotation cannot track a hub that is itself
-   turning. 05-mem.js writes the transforms instead.
+   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
+   angular position so it points radially outward:
 
-   Card size is unchanged and still matches the reference: 0.288 of the viewport
-   wide, h/w 1.50.
+       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
+
+   Solving for the four measured targets gives 32 slots at an 11.25deg step,
+   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
+
+       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
+       h/w 1.50                          drop 120px       [ref 1.49,  115px]
+       edge card 19.5deg off vertical    overlap 54px
+
+   A whole circle means one revolution returns to the identical frame, so the
+   spin has no loop point anywhere.
    ============================================================ */
 
 .mem{
   background:var(--paper);
-  /* no bottom padding: the next section's ground is what cuts the arc */
-  padding-block:var(--section) 0;
+  /* No bottom padding and a -1px pull, so the purple of the section below lands
+     on the same pixel row as the cut and does the slicing. */
+  /* Deliberately less than --section on top: this is the one section that must
+     land whole on a single screen, heading included. */
+  padding-block:clamp(3rem,5.5vw,4.5rem) 0;
   margin-bottom:-1px;
 }
 
 .mem-h{
   text-align:center;
-  font-size:clamp(2.9rem,7.5vw,6.5rem);
+  /* Command. This heading sits over the largest photography on the page and was
+     being out-scaled by it. */
+  font-size:clamp(2.6rem,6.4vw,5.4rem);
   letter-spacing:-.02em;
-  margin:0 0 clamp(2rem,4vw,3rem);
+  margin:0 0 clamp(1.3rem,2.4vw,1.9rem);
 }
 
+/* ---- the band: a window onto the top of the wheel ---------------------- */
 .mem-band{
-  --cardW:28.8vw;                 /* measured off the reference */
-  --cardH:calc(var(--cardW) * 1.5);
-  /* 0.50, not 0.33. The wedge's DEPTH was already right at 0.33 of a card width,
-     but only 63% of the width had cream beneath a card, against the reference's
-     ~80%. On a circle the drop is quadratic near the apex, so a card clears the
-     band while |x| < halfVW * sqrt(wedge/drop). At 0.33 that is 70% of the width;
-     at 0.42 it is about 85%, with the outermost card still cut. 0.50 cleared every
-     visible card and lost the cut entirely. The depth follows from the width. */
-  --wedge:calc(var(--cardW) * .48);
-  --inset:.9rem;
+  --R:149vw;                            /* 2148px at a 1440 viewport */
+  /* 0.175, down from 0.1932. The section has to fit ONE SCREEN with its heading,
+     and at 0.1932 the card was 622px tall, the band 652, and the whole section
+     952px against an 813px viewport. At 0.175 the card is 376px wide and 564
+     tall. Arc spacing at this step is 366px, so neighbours now sit 10px apart
+     instead of overlapping by 54: they touch rather than pile up. */
+  --w:calc(var(--R) * 0.175);
+  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
+  --step:11.25deg;                      /* 360 / 32 */
+  --inset:.7rem;
 
   position:relative;
-  /* inset + one whole card + the wedge beneath it. The centre card is fully
-     visible with cream under it; the edge cards have dropped past the bottom and
-     are cut. That asymmetry IS the arc. */
-  height:calc(var(--inset) + var(--cardH) + var(--wedge));
-  overflow:hidden;
-  isolation:isolate;
+  /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
+     at the top of the arc is therefore fully visible, bottom edge and all, while
+     every card the curve has carried downward runs past the cut. That asymmetry
+     is the reference's silhouette; an earlier height cut all of them equally and
+     lost it. --h is 1.25 * 0.15736 * --R, so this tracks the circle. */
+  height:calc(var(--h) + var(--inset) + 1.1rem);
+  overflow:hidden;                      /* this is the cut */
+  isolation:isolate;                    /* keep cards under the next section's ground */
 }
 
-.mem-arc{
+/* The hub sits below the band by one radius plus half a card, so the topmost
+   card's upper edge lands --inset below the band's top edge. Rotating THIS
+   element carries every card around the circle at once, which is one
+   compositor-only transform rather than 36 per frame. */
+.mem-wheel{
   list-style:none;
   margin:0;
   padding:0;
   position:absolute;
   left:50%;
-  top:var(--inset);
+  top:calc(var(--R) + var(--h) / 2 + var(--inset));
   width:0;
   height:0;
+  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
+     conveyor rather than a drift. */
+  animation:memSpin 150s linear infinite;
+  will-change:transform;
 }
 
 .mem-i{
   position:absolute;
   left:0;
   top:0;
-  width:var(--cardW);
-  height:var(--cardH);
-  margin-left:calc(var(--cardW) / -2);
-  transform-origin:50% 0;
+  width:var(--w);
+  height:var(--h);
+  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
+  background:var(--paper-deep);
+  /* Rounded, like the reference. Square corners on a tilted card read as a
+     cropped screenshot; a radius reads as a printed card. */
   border-radius:clamp(10px,1.1vw,18px);
   overflow:hidden;
-  background:var(--paper-deep);
-  box-shadow:0 20px 44px -34px rgba(25,18,33,.55);
-  /* hidden until the script places it, so nothing stacks at the centre on load */
-  visibility:hidden;
-  will-change:transform;
+  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
 }
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 
-/* NO JS: the arc needs measured transforms, so without them this becomes an
-   honest horizontal strip. Every photograph is still reachable. */
-.mem-band:not([data-on]){
-  height:auto;
-  overflow-x:auto;
-  overflow-y:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-.mem-band:not([data-on]) .mem-arc{
-  position:static;
-  width:auto;
-  height:auto;
-  display:flex;
-  gap:1rem;
-  padding-bottom:1.5rem;
-}
-.mem-band:not([data-on]) .mem-i{
-  position:static;
-  flex:0 0 min(62vw,320px);
-  height:auto;
-  aspect-ratio:1/1.5;
-  margin:0;
-  visibility:visible;
-  transform:none;
+@keyframes memSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}   /* negative: the wheel carries photographs to the right */
 }
 
+.mem-band:hover .mem-wheel{animation-play-state:running}  /* never pause on hover */
+
+/* ---- phones: a tighter circle so the cards are not postage stamps ------- */
 @media (max-width:767px){
-  .mem-band{--cardW:52vw;--inset:.6rem}
+  .mem-band{
+    --R:330vw;        /* same w/R ratio, so the overlap is identical */
+    --inset:.7rem;
+  }
+}
+
+/* ---- reduced motion: the wheel stops. It does not disappear. ------------ */
+/* The composition is the content here, so the finished state is the wheel at
+   rest, not a fallback strip. */
+@media (prefers-reduced-motion:reduce){
+  .mem-wheel{animation:none}
 }

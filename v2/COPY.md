@@ -49,7 +49,7 @@ still advertise it.
 
 ---
 
-## 02 · GRADUATE CONFIDENT
+## 02 · MEMBER VALUE
 
 Cream. Accordion: opening a row closes the other two, and the photograph beside
 it cross-fades. The photograph's top edge is level with the first row and does
@@ -57,7 +57,7 @@ not move when a different row opens.
 
 | Element | Copy |
 |---|---|
-| H2 | Graduate confident. |
+| Section heading | None |
 | Lede | Not sure what comes after college? PCT helps you build the experience, network, and confidence to be ready for what's next. |
 | 1 title | Connect with people in your field |
 | 1 body | Meet professionals, alumni, and members who can help you understand the path ahead. |
@@ -74,14 +74,14 @@ the rows start answering it.
 
 ---
 
-## 03 · WHAT WE HAVE TO SHOW FOR IT
+## 03 · MEMBER SUCCESS
 
 Cream. Two belts of company wordmarks scrolling in opposite directions, then the
 three figures, which count up once when first scrolled into view.
 
 | Element | Copy |
 |---|---|
-| H2 | What we have to show for it. |
+| H2 | Member Success |
 
 **Belt one:** Goldman Sachs · Morgan Stanley · Citi · Wells Fargo · PNC · Raymond
 James · Fisher Investments · S&P Global · KPMG · Deloitte

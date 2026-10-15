@@ -1,40 +1,69 @@
-/* ============================================================
-   99 - FOOTER, mobile touch targets.
-
-   The footer markup is lifted from the live site and is styled by
-   css/styles.css, which build.py links. That stylesheet is shared with the
-   production pages, so nothing here edits it: these rules are additive and
-   scoped to .site-footer inside this page only.
-
-   MEASURED at 520px: every footer link rendered 19px tall and the brand lockup
-   42px, against the 44px minimum a finger needs. Ten links in two columns at
-   19px with the gaps between them is a column of near-misses.
-   ============================================================ */
-
+/* V2 footer, independent of the production footer's display watermark. */
+.v2footer{
+  padding:clamp(2.5rem,5vw,4rem) 0 1rem;
+  background:var(--ink);
+  color:rgba(250,248,243,.75);
+}
+.v2footer-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr));
+  gap:2rem clamp(2rem,5vw,4.5rem);
+}
+.v2footer-about{min-width:0}
+.v2footer-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:.85rem;
+  min-height:48px;
+  text-decoration:none;
+  color:var(--paper);
+}
+.v2footer-brand img{width:auto;height:42px;flex:none}
+.v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
+.v2footer-name{font-family:var(--font-display);font-size:1.55rem;line-height:1.1}
+.v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
+.v2footer-about p{max-width:30ch;margin:1rem 0 0;font-size:.9rem;line-height:1.65}
+.v2footer-nav{min-width:0}
+.v2footer-label{
+  margin:0 0 .55rem;
+  font-family:var(--font-text);
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.5;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gold-soft);
+}
+.v2footer-nav ul{list-style:none;margin:0;padding:0}
+.v2footer-nav li{margin:0;padding:0}
+.v2footer-nav a{
+  display:flex;
+  align-items:center;
+  width:fit-content;
+  min-height:44px;
+  font-size:.875rem;
+  line-height:1.45;
+  color:rgba(250,248,243,.8);
+  text-decoration:none;
+}
+.v2footer a:hover{color:var(--gold-soft)}
+.v2footer-base{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:.25rem 1.5rem;
+  margin-top:2rem;
+  padding-top:.75rem;
+  border-top:1px solid rgba(250,248,243,.15);
+  color:rgba(250,248,243,.65);
+  font-size:.75rem;
+  line-height:1.5;
+}
+.v2footer-base a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none}
 @media (max-width:767px){
-  /* The link itself becomes the target rather than the text inside it, so the
-     tappable area matches what the eye reads as the row. */
-  .site-footer .footer-col a{
-    display:flex;
-    align-items:center;
-    min-height:44px;
-  }
-
-  /* The list rhythm came from margins between 19px items. With 44px rows that
-     doubles the column's height for no gain, so the margins come off and the
-     row height carries the spacing. */
-  .site-footer .footer-col li{margin:0}
-
-  .site-footer .footer-about .brand{
-    display:flex;
-    align-items:center;
-    min-height:48px;
-  }
-
-  /* The base row's links sit inline in a sentence, so they cannot become 44px
-     blocks without breaking the line. Padding buys vertical room instead. */
-  .site-footer .footer-base a{
-    display:inline-block;
-    padding-block:1rem;
-  }
+  .v2footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.5rem}
+  .v2footer-about{grid-column:1/-1}
+  .v2footer-about p{max-width:35ch}
+  .v2footer-nav a{width:100%}
 }

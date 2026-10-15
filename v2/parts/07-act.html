@@ -1,68 +1,29 @@
-<!-- ==========================================================================
-     06 — THE ACT  (final CTA)
-     Ground: --purple-deep. After four sections of motion, everything stops.
-     No canvas, no marquee, no counters, no parallax, no image.
-     ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
-     the secondary line rises into view. Always visible under 768px, on
-     :focus-within, and under prefers-reduced-motion.
-     ========================================================================== -->
-
-<section class="act on-dark" id="act">
-  <div class="v2wrap">
-    <div class="act-inner">
-
-      <h2 class="act-title">Your path starts <em>here.</em></h2>
-
-      <p class="act-line">Rush is six events and it costs nothing. Come to one and find out whether this is your chapter.</p>
-
-
-      <!-- COUNTDOWN.
-           PLACEHOLDER DATE. Fall 2026 rush has already begun, so the clock had
-           nothing left to count down to and the section fell back to a single
-           line. These are MOCK Spring 2027 dates so the countdown is visible.
-           REPLACE data-until and data-ends with the real spring rush dates
-           before this goes in front of anyone.
-           data-until is the single source of truth and must stay in sync
-           with assets/rush-events.ics and the Event JSON-LD on fallrush.html.
-           data-ends marks the last event, so the section can switch to the active
-           state during rush. Remove both attributes and the block hides itself. -->
-      <div class="act-cd" data-until="2027-01-13T19:00:00-05:00"
-           data-ends="2027-01-29T21:00:00-05:00" aria-live="off">
-        <span class="act-cd-lab">Spring rush begins in</span>
-        <div class="act-cd-units">
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="d">&ndash;</span><span class="act-cd-k">Days</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="h">&ndash;</span><span class="act-cd-k">Hours</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="m">&ndash;</span><span class="act-cd-k">Minutes</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="s">&ndash;</span><span class="act-cd-k">Seconds</span></div>
-        </div>
-      </div>
-
-      <div class="act-go">
-        <a class="act-cta" href="rush.html">
-          <span class="act-cta-plate" aria-hidden="true"></span>
-          <span class="act-cta-label">Rush PCT</span>
-          <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
-               aria-hidden="true" focusable="false">
-            <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
+<!-- A direct route to rush information, without unconfirmed dates. -->
+<section class="act on-dark" id="act" aria-labelledby="act-title">
+  <div class="v2wrap act-inner">
+    <div class="act-copy">
+      <h2 class="act-title" id="act-title">Rush Phi Chi Theta</h2>
+      <p class="act-line">View eligibility and the rush process.</p>
+    </div>
+    <div class="act-go">
+      <a class="act-cta" href="rush.html">
+        <span>Rush Information</span>
+        <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
+             aria-hidden="true" focusable="false">
+          <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- Subordinate support band. Deliberately small and quiet: it must never
-     compete with the rush CTA above it. -->
 <aside class="act-band" aria-label="Support the chapter">
   <div class="v2wrap act-band-in">
-    <p class="act-band-copy">Already know us? <span class="act-band-em">Support the chapter.</span></p>
+    <p class="act-band-copy">Support the Chapter</p>
     <div class="act-band-acts">
-      <!-- PLACEHOLDER URL: donations still run through the chapter's old Google
-           Site. Swap this href when a real donation page exists. -->
-      <a class="act-band-btn is-primary" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
-         target="_blank" rel="noopener">Donate Today</a>
+      <a class="act-band-btn" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
+         target="_blank" rel="noopener">Donate</a>
       <a class="act-band-btn" href="apparel.html">Apparel</a>
     </div>
   </div>

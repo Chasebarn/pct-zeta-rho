@@ -1,222 +1,125 @@
-/* ============================================================
-   02 - More than just a business fraternity.  (cream ground)
-
-   ZERO interaction, and that is the design. Three earlier passes put an
-   accordion here: it hid two of three paragraphs behind a click, and the
-   photograph it cross-faded was one of three placeholders. Everything is now
-   on screen at load and the section needs no JavaScript at all, so there is
-   no 02-grow.js.
-
-   One real photograph, three paragraphs, three doors out. Nothing else.
-   ============================================================ */
-
+/* Membership. The base page shows every description and photograph;
+   JavaScript adds the single-open accordion and shared photograph stage. */
 .grow{
   background:var(--paper);
   color:var(--ink-soft);
   padding-block:var(--section);
 }
-
 .grow__wrap{
   display:grid;
-  row-gap:clamp(2.2rem,5vw,3.2rem);
-  grid-template-areas:"intro" "stage" "rows";
+  grid-template-areas:"rows";
+  gap:1.75rem;
 }
-
-/* ---------- intro ---------- */
-
-/* No cap: the intro spans both columns, so the heading and lede set their own
-   measures below rather than sharing one that was sized for a single column. */
-.grow__intro{grid-area:intro}
-
-.grow__h{
-  /* The vw term was 5.2, which at 520px resolves to 27px and falls back to the
-     2.5rem floor: the section's own title ended up smaller than the row titles
-     under it once you account for their weight on screen. A 7vw term and a
-     2.9rem floor give it presence at every width, and wrapping to two lines on a
-     phone is the right outcome for a six word heading. */
-  font-size:clamp(2.9rem,7vw,4.6rem);
-  letter-spacing:-.02em;
-  margin:0 0 1rem;
-}
-/* the italic falls on "just", so the sentence turns on the word that does the
-   work rather than on a noun at the end of it */
-.grow__h em{font-style:italic;color:var(--gold-ink)}
-
-/* The lede returns. It was deleted when it read "Three parts of the chapter,
-   members run all three", which restated the three headings under it. This one
-   does the opposite: it names the reader's actual question before the rows start
-   answering it, so it earns the space the old one did not. */
-.grow__lede{
-  margin:0 0 .4rem;
-  max-width:40rem;
-  font-size:clamp(1.05rem,1.5vw,1.2rem);
-  line-height:1.6;
-  color:var(--ink-soft);
-}
-@media (min-width:900px){
-  /* 46rem sets this on two lines instead of three. At 34rem it was still sized
-     for the old single-column intro. */
-  .grow__lede{max-width:46rem}
-}
-
-
-/* ---------- the photographs ---------- */
-/* SQUARE. Every source file is 1300x1300, so a 4:5 crop would cut people out of
-   the right of the frame to satisfy a grid. */
-
-.grow__fig{
-  margin:0 0 2rem;
-  max-width:32rem;
-  overflow:hidden;
-  background:var(--paper-deep);
-  aspect-ratio:1;
-}
-.grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
-
-/* ---------- the three parts ---------- */
-
-.grow__rows{grid-area:rows}
-
+.grow__rows{grid-area:rows;min-width:0}
 .grow__row{border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-
 .grow__btn{
-  display:block;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
   width:100%;
+  min-height:64px;
   margin:0;
-  padding:1.35rem .25rem;
-  background:none;
+  padding:1.25rem 0;
   border:0;
+  background:none;
   color:inherit;
-  font-family:inherit;
   text-align:left;
-  cursor:pointer;
-  transition:padding var(--dur) var(--ease);
+  font-family:inherit;
+  cursor:default;
 }
-
-/* A CLOSED row is a label, not a panel. Giving every row the open row's padding
-   meant the two shut rows claimed the same vertical weight as the one actually
-   showing content. */
-.grow--js .grow__row:not(.is-open) .grow__btn{padding-block:1rem}
 .grow__ttl{
-  display:block;
   font-family:var(--font-display);
+  font-size:clamp(1.4rem,2.3vw,1.85rem);
   font-weight:400;
-  font-size:clamp(1.5rem,2.3vw,1.95rem);
-  line-height:1.1;
+  line-height:1.15;
   color:var(--ink);
-  transition:color var(--dur) var(--ease);
 }
-/* Two states, not three. Closed is muted, open is ink, and hover simply previews
-   the open state. An earlier build made hover PURPLE, which introduced a third
-   colour that only ever existed under a cursor and made the row look like it had
-   changed meaning rather than gained focus. */
-@media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--ink)}
-}
-
 .grow__say{
-  margin:0;
-  padding:0 .25rem 1.6rem;
   max-width:34rem;
-  font-size:1rem;
+  margin:0;
+  padding:0 0 1.4rem;
+  font-size:.95rem;
   line-height:1.65;
   color:var(--ink-soft);
 }
-
-
-/* ============================================================
-   JS-ENHANCED: one persistent stage, one open row
-   ============================================================ */
-
+.grow__panel[hidden]{display:none}
+.grow__fig{
+  aspect-ratio:1;
+  max-width:32rem;
+  margin:0 0 1.5rem;
+  overflow:hidden;
+  background:var(--paper-deep);
+}
+.grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
 .grow__stage{grid-area:stage;display:none}
+.grow__icon{display:none}
+
+/* The stage keeps a stable position and size as panels change. */
+.grow--js .grow__wrap{grid-template-areas:"stage" "rows"}
 .grow--js .grow__stage{
   display:block;
   position:relative;
   width:100%;
-  aspect-ratio:1;
+  aspect-ratio:4/3;
   overflow:hidden;
   background:var(--paper-deep);
 }
 .grow--js .grow__fig{
   position:absolute;
   inset:0;
-  margin:0;
   max-width:none;
+  margin:0;
   aspect-ratio:auto;
   opacity:0;
-  transition:opacity 420ms var(--ease);
   pointer-events:none;
+  transition:opacity 300ms var(--ease);
 }
 .grow--js .grow__fig.is-active{opacity:1}
-
-/* only the open row shows its paragraph, so the section fits one screen */
-/* The paragraph ANIMATES open. display:none to block cannot transition, which is
-   why the accordion read as a hard flick rather than a movement. grid-template-rows
-   0fr to 1fr does animate, and it needs no measured height, so nothing here reads
-   layout. */
-.grow--js .grow__panel{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows 420ms var(--ease), opacity 300ms var(--ease);
-  opacity:0;
+.grow--js .grow__btn{cursor:pointer}
+.grow--js .grow__icon{
+  display:block;
+  flex:none;
+  width:1.25rem;
+  font-family:var(--font-text);
+  font-size:1.25rem;
+  font-weight:400;
+  line-height:1;
+  text-align:center;
+  color:var(--gold-ink);
 }
-.grow--js .grow__panel > *{overflow:hidden;min-height:0}
-.grow--js .is-open .grow__panel{grid-template-rows:1fr;opacity:1}
-.grow--js .grow__ttl{color:var(--ink-mute)}
-.grow--js .is-open .grow__ttl{color:var(--ink)}
-
-/* ---------- desktop: photograph beside the list ---------- */
-
+.grow--js .grow__icon::before{content:"+"}
+.grow--js .is-open .grow__icon::before{content:"−"}
+.grow--js .grow__row:not(.is-open) .grow__ttl{color:var(--ink-mute)}
+.grow__btn:focus-visible{outline-offset:5px}
+@media (hover:hover){
+  .grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}
+}
 @media (min-width:900px){
-  /* THE INTRO SPANS BOTH COLUMNS. Confined to one 48% column, the heading wrapped
-     to two lines and the lede to three at every width under about 1400, while the
-     top right of the section sat empty because the photograph starts level with
-     the rows. Measured at 940: the intro was 393px wide against its own 736px
-     max-width, so the measure was being set by the grid, not by the type.
-
-     Below it: rows left, photograph right, starting together. */
-  .grow__wrap{
-    /* Not 1fr/1fr. Even columns gave the photograph a 596px cell for a 416px
-       picture, so 180px of empty cream sat between the accordion and the image
-       and read as a hole rather than as a gutter. */
+  .grow--js .grow__wrap{
     grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-    grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro intro" "rows  stage";
+    grid-template-areas:"rows stage";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* The stage occupies the ROWS row only, not both. Spanning both put the
-     photograph's top edge level with the headline while the accordion started
-     240px lower, so the right half of the section was a picture floating beside
-     a heading with a column of air under it.
-
-     align-self START, not centre. Centring measured the stage against a left
-     column whose height changes with the open row, so opening a longer row slid
-     the photograph down and opening a shorter one slid it back. The accordion's
-     TOP never moves, so anchoring there is stable. */
-  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:32rem}
+  .grow--js .grow__stage{
+    aspect-ratio:1;
+    align-self:start;
+    justify-self:end;
+    max-width:30rem;
+  }
 }
-
 @media (max-width:899px){
-  .grow__fig,
-  .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
+  .grow__fig,.grow--js .grow__stage{max-width:36rem;margin-inline:auto}
 }
-
 @media (max-width:600px){
-  /* the photograph is the tallest thing between the heading and the first row,
-     so a 1:1 crop pushes the accordion most of a screen down on a phone */
-  .grow--js .grow__stage,
+  .grow__wrap{gap:1.25rem}
   .grow__fig{aspect-ratio:4/3}
-  .grow__btn{padding-block:1.15rem}
-  .grow--js .grow__row:not(.is-open) .grow__btn{padding-block:.85rem}
-  .grow__say{padding-bottom:1.3rem}
+  .grow__btn{padding-block:1.05rem}
+  .grow__say{padding-bottom:1.15rem;font-size:.925rem}
 }
-
-/* ---------- reduced motion ----------
-   Every state here is a plain declaration, so dropping the transition lands on
-   the finished state and never on the start of one. */
 @media (prefers-reduced-motion:reduce){
   .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
 }

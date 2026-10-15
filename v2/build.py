@@ -19,6 +19,14 @@ for p in parts:
     h = read(p)
     # parts are authored with repo-root-relative asset paths; the page lives in /v2/
     h = re.sub(r'(src|href)="assets/', r'\1="../assets/', h)
+    # Homepage links stay inside /v2/; dedicated pages live at the repo root.
+    def page_href(match):
+        target = match.group(1)
+        page = re.split(r'[?#]', target, maxsplit=1)[0]
+        if page != 'index.html' and os.path.isfile(os.path.join(ROOT, '..', page)):
+            return 'href="../' + target + '"'
+        return match.group(0)
+    h = re.sub(r'href="([a-zA-Z0-9-]+\.html(?:[?#][^\"]*)?)"', page_href, h)
     html.append(f'\n    <!-- ===== {slug} ===== -->\n' + h)
     c = read(stem + '.css')
     if c:
@@ -29,15 +37,20 @@ for p in parts:
         j = j.replace("'assets/", "'../assets/").replace('"assets/', '"../assets/')
         js.append(f'/* ===== {slug} ===== */\n' + j)
 
-# section 05 defines window.pctMotion and must be evaluated first
+# The shared reduced-motion lifecycle must be evaluated before section inits
 js.sort(key=lambda s: 0 if 'pctMotion' in s[:400] else 1)
 inits = re.findall(r'window\.(pctInit\w+)\s*=', '\n'.join(js))
+header_html = html[names.index('00-header')] if '00-header' in names else ''
+footer_html = html[names.index('99-footer')] if '99-footer' in names else ''
+main_html = '\n'.join(part for name, part in zip(names, html)
+                      if name not in ('00-header', '99-footer'))
 
 doc = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
 <link rel="icon" type="image/png" href="../assets/crest.png">
@@ -45,18 +58,22 @@ doc = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="tokens.css?v=20261015">
 <style>
 {chr(10).join(css)}
 </style>
 </head>
 <body>
 
-  <a class="skip-link" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+{header_html}
 
   <main id="main">
-{chr(10).join(html)}
+{main_html}
   </main>
+
+{footer_html}
 
 <script>
 {chr(10).join(js)}

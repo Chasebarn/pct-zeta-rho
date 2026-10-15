@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
 <link rel="icon" type="image/png" href="../assets/crest.png">
@@ -10,2053 +11,601 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="tokens.css?v=20261015">
 <style>
 /* ===== 00-header ===== */
-/* ==========================================================================
-   00 · HEADER. Every selector is scoped to .v2hd*.
-   No JS file ships with this section by design (see 00-header.html).
-
-   Contrast ratios below are WORST CASE, not nominal. This bar is not a flat
-   --purple-deep field: it carries the hero's bloom (see below), so the ground
-   under the type runs from a sampled rgb(40,27,54) at the left edge up to
-   rgb(56,37,85) beneath the nav. Every ratio quoted here was taken against the
-   brightest ground that actually sits under that element in a rendered 1:1
-   screenshot, so the real figure can only be better than the one stated.
-   ========================================================================== */
-
-:root{--v2hd-h:77px}
-/* Fallbacks only. 00-header.js measures the bar and overwrites this token, which
-   is what makes it exact. These three bands match the header's real heights so a
-   no-JS reader still gets no gap above the hero:
-     >=768  one row, 77px
-     560-767  nav wraps to a second row, 131px
-     <560   the four links drop entirely, 72px */
-@media (min-width:560px) and (max-width:767px){:root{--v2hd-h:131px}}
-@media (max-width:559px){:root{--v2hd-h:72px}}
-
-.v2hd{
-  /* AT REST: transparent, sitting ON the hero. Header and hero are one continuous
-     dark field with no seam to match, which is why the elaborate bloom-matching
-     this rule used to carry is gone: there is nothing to match any more. The hero
-     pulls itself up underneath with a negative margin and pads its content back
-     down (see 01-hero.css).
-
-     ON SCROLL: 00-header.js adds .is-stuck and the ground fades in. position is
-     sticky rather than fixed, so the element keeps its own row in the flow and
-     nothing downstream has to be told its height.
-
-     overflow:hidden is a safety net for a fallback font pushing the lockup and
-     the pill apart at 320px. Verified it clips no focus ring. */
-  position:sticky;
-  top:0;
-  z-index:60;
-  /* rgba(250,248,243,0), NOT `transparent`. `transparent` is rgba(0,0,0,0), so
-     fading from it to a cream bar interpolates through BLACK and the header
-     visibly darkens on its way to going light. Starting from the same hue at zero
-     alpha fades cleanly. */
-  background:rgba(250,248,243,0);
-  border-bottom:1px solid transparent;
-  transition:background-color 260ms var(--ease), border-color 260ms var(--ease);
-}
-
-/* SCROLLED: a PAPER bar, not a darker purple one. Purple on purple was the
-   problem: the bar changed state and the reader could barely tell, so it read as
-   a rendering artefact rather than as a header arriving. Cream is an unmistakable
-   switch, and it is what the live site does.
-
-   Every colour inside has to flip with it. Contrast on --paper:
-     --ink       #191221  16.1:1
-     --ink-soft  #453a52   9.0:1
-     --gold-ink  #8a6d14   4.6:1   (the only gold legible on cream) */
-.v2hd.is-stuck{
-  background:var(--paper);
-  /* A clean hairline, not a drop shadow. A shadow under a bar that is only 76px
-     tall reads as a floating card rather than as a header. */
-  border-bottom:1px solid var(--line);
-}
-.v2hd.is-stuck .v2hd-name{color:var(--ink)}
-.v2hd.is-stuck .v2hd-sub{color:var(--gold-ink)}
-.v2hd.is-stuck .v2hd-link{color:var(--ink-soft)}
-.v2hd.is-stuck .v2hd-link:hover,
-.v2hd.is-stuck .v2hd-link[aria-current="page"]{color:var(--ink)}
-.v2hd.is-stuck .v2hd-t::after{background:var(--gold-ink)}
-.v2hd.is-stuck .v2hd-link[aria-current="page"] .v2hd-t::after{background:var(--gold-ink)}
-/* the focus ring must flip too: --gold-soft is invisible on cream */
-.v2hd.is-stuck a:focus-visible{outline-color:var(--purple)}
-
-@media (prefers-reduced-motion:reduce){
-  .v2hd{transition:none}
-}
-
-
-
-
-
-
-/* .v2wrap already owns the page's measure and gutter (tokens.css). This only
-   adds the row behaviour to that same element, it does not restate the gutter. */
-.v2hd-row{
-  position:relative;
-  z-index:1;          /* above the grain layer */
-  display:flex;
-  align-items:center;
-  gap:clamp(1rem,3vw,2.4rem);
-  /* 76px is the live header's height. Keeping it means the v2 hero starts at the
-     same optical depth as the real site. */
-  min-height:76px;
-  padding-block:.9rem;
-}
-
-/* ---------- brand lockup ---------- */
-
-.v2hd-brand{
-  display:flex;
-  align-items:center;
-  gap:.8rem;
-  flex:0 1 auto;
-  min-width:0;
-  min-height:44px;
-  text-decoration:none;
-  color:var(--paper);
-}
-
-.v2hd-crest{
-  flex:none;
-  height:42px;
-  width:auto;   /* intrinsic 337x445 attributes supply the ratio, so no shift */
-}
-
+:root{--v2hd-h:81px}
+.v2hd{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line);transition:background-color 220ms ease,border-color 220ms ease}
+.v2hd-row{position:relative;display:flex;align-items:center;gap:1.5rem;min-height:80px;padding-block:12px}
+.v2hd-brand{display:flex;align-items:center;gap:.75rem;min-width:0;text-decoration:none;margin-right:auto}
+.v2hd-crest{height:44px;width:auto;flex:none}
 .v2hd-lock{display:block;min-width:0}
-
-.v2hd-name{
-  display:block;
-  font-family:var(--font-display);
-  font-weight:400;              /* Instrument Serif is 400 only, never bolded */
-  font-size:1.22rem;
-  line-height:1.1;
-  letter-spacing:.01em;
-  color:var(--paper);           /* 14.8:1 on the ground under the lockup */
-}
-
-.v2hd-sub{
-  display:block;
-  margin-top:.18rem;
-  font-family:var(--font-text);
-  font-size:.75rem;             /* 12px floor for uppercase tracked text */
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--gold-soft);       /* 9.4:1 on the ground under the lockup */
-}
-
-/* ---------- nav ---------- */
-
-.v2hd-nav{margin-left:auto}
-
-.v2hd-list{
-  display:flex;
-  align-items:center;
-  gap:clamp(1.1rem,2.6vw,2.2rem);
-  margin:0;
-  padding:0;
-  list-style:none;
-}
-
-.v2hd-link{
-  display:inline-flex;
-  align-items:center;
-  min-height:44px;              /* touch target, taller than the type itself */
-  font-family:var(--font-text);
-  font-size:.9rem;
-  font-weight:500;
-  letter-spacing:.01em;
-  text-decoration:none;
-  /* 9.0:1 where the bloom peaks under the nav (10.9:1 on the plain ground).
-     Kept well past the 4.5:1 floor on purpose: at 14.4px and weight 500 this is
-     small text, and it sits on a ground that is not uniform. */
-  color:rgba(250,248,243,.82);
-}
-
-/* The text is wrapped in its own span so the rule sits on the WORD, not on the
-   floor of the 44px tap box, without depending on font metrics. */
-.v2hd-t{
-  position:relative;
-  display:inline-block;
-  padding-bottom:3px;
-}
-
-/* THE ONE MOVE: a gold hairline wipes in under the link from the left.
-   Pure CSS, transform only, and the resting state (no rule) is the finished
-   state, so with JS off or motion reduced nothing is missing. */
-.v2hd-t::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:1px;
-  background:var(--gold-soft);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform 320ms var(--ease);
-}
-
-.v2hd-link:hover,
-.v2hd-link:focus-visible{color:var(--paper)}
-
-.v2hd-link:hover .v2hd-t::after,
-.v2hd-link:focus-visible .v2hd-t::after{transform:scaleX(1)}
-
-/* Current page. Declared statically, so it is drawn with no JS and no pointer.
-   It must NOT be the same mark as :hover. When both were a 1px --gold-soft rule,
-   hovering "Philanthropy" from the home page drew an identical underline beneath
-   two links and "which page am I on" went ambiguous for as long as the pointer
-   rested there. The current page gets a thicker rule in the fuller gold; hover
-   keeps the hairline. --gold on --purple-deep measures 7.03:1, well clear. */
-.v2hd-link[aria-current="page"]{color:var(--paper)}
-.v2hd-link[aria-current="page"] .v2hd-t::after{
-  transform:scaleX(1);
-  height:2px;
-  background:var(--gold);
-}
-
-/* ---------- Rush pill ---------- */
-
-.v2hd-rush{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  flex:none;
-  min-height:44px;
-  padding:.6rem 1.35rem;
-  border-radius:2px;
-  background:var(--gold);
-  color:var(--ink);             /* 7.5:1 on --gold, ground-independent */
-  font-family:var(--font-text);
-  font-size:.86rem;
-  font-weight:600;
-  letter-spacing:.04em;
-  text-decoration:none;
-  white-space:nowrap;
-  /* No glow. A lit pill lights the header's own ground with it, and that made the
-     seam between the header band and the hero underneath visible as a hard line
-     across what has to read as one continuous dark field. */
-  transition:background-color 320ms var(--ease);
-}
-.v2hd-rush:hover,
-.v2hd-rush:focus-visible{background:var(--gold-soft)}
-@media (prefers-reduced-motion:reduce){
-  .v2hd-rush{transition:none}
-}
-
-/* ---------- focus ---------- */
-
-.v2hd a:focus-visible{
-  outline:2px solid var(--gold-soft);
-  outline-offset:3px;
-  border-radius:2px;
-}
-/* A gold-soft ring on a gold plate is invisible, so push the ring off the pill
-   and onto the purple ground, where it measures 9.4:1. Verified unclipped by the
-   overflow:hidden above at both 1000px and 600px. */
-.v2hd-rush:focus-visible{outline-offset:5px}
-
-/* ==========================================================================
-   MOBILE: a different execution, not a shrunk desktop.
-
-   No hamburger, because a hamburger needs JS and this section ships none.
-   Instead the bar splits by breakpoint:
-
-   560-767px : brand and the Rush pill hold row one; the four links drop to a
-               full-width second row, distributed edge to edge over a hairline.
-               There is room for them there and they stay one tap away.
-   under 560px: the four links are dropped entirely. Below this width a second
-               row of four links either crams or wraps to a third row, and the
-               header stops looking like a header. Nothing becomes unreachable:
-               99-footer.html carries Home, Rush, Philanthropy, Apparel, Career
-               Navigator and Fall Rush 2026 as a full page list.
-   ========================================================================== */
-
-@media (max-width:767px){
-  .v2hd-row{
-    flex-wrap:wrap;
-    min-height:0;
-    padding-block:.85rem;
-    gap:0 1rem;
-  }
-
-  .v2hd-brand{order:1;margin-right:auto}
-  .v2hd-rush{order:2}
-
-  .v2hd-nav{
-    order:3;
-    flex:1 0 100%;
-    margin-left:0;
-    margin-top:.85rem;
-    /* Internal hairline only. It gives the second row something to sit against
-       so the links do not read as orphans, and it is nowhere near the header's
-       bottom edge, so the seam with the hero stays closed. */
-    /* NOT --line-dark. That token is a flat #3a2b52 calibrated against a flat
-       --purple-deep ground; on this section's bloom it converges to the
-       background and measures 1.28:1 at the left gutter falling to 1.04:1 by
-       the last link, so the rule visibly dies mid-stroke. An alpha tint rides
-       the ground instead and holds at both ends. */
-    border-top:1px solid color-mix(in srgb, var(--paper) 12%, transparent);
-  }
-
-  .v2hd-list{
-    justify-content:space-between;
-    gap:.5rem;
-  }
-  .v2hd-link{font-size:.875rem}
-}
-
-@media (max-width:559px){
-  .v2hd-nav{display:none}
-
-  /* At 320px the usable width inside the gutters is 280px. The lockup and the
-     pill are trimmed here so the two of them provably fit one row rather than
-     relying on wrapping. */
-  .v2hd-row{min-height:64px}
-  .v2hd-crest{height:34px}
-  .v2hd-name{font-size:1.06rem}
-  .v2hd-sub{font-size:.68rem;letter-spacing:.1em;margin-top:.14rem}
-  .v2hd-brand{gap:.6rem}
-  .v2hd-rush{padding:.55rem 1rem;font-size:.8rem}
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   The underline's resting state (scaleX 0, no rule) and the current-page state
-   (scaleX 1) are both plain declarations, so removing the transition lands on
-   the finished state in either direction, never on the start of one.
-   ========================================================================== */
-
-@media (prefers-reduced-motion:reduce){
-  .v2hd-t::after{transition:none}
-}
-
-
-/* ---------- shared scroll reveal ----------------------------------------
-   The .pct-rv class is added by 00-header.js, never by this stylesheet. That
-   ordering is the whole safety property: with JS off or reduced motion on, no
-   element is ever hidden, so nothing can be left invisible by a script that
-   failed to run. Transform and opacity only, so it stays on the compositor. */
-.pct-rv{
-  opacity:0;
-  transform:translate3d(0,18px,0);
-  transition:opacity 620ms var(--ease), transform 620ms var(--ease);
-}
-.pct-rv-in{
-  opacity:1;
-  transform:none;
-}
-@media (prefers-reduced-motion:reduce){
-  .pct-rv{opacity:1;transform:none;transition:none}
-}
+.v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.45rem;line-height:1.1;color:var(--ink)}
+.v2hd-sub{display:block;margin-top:.3rem;font-size:.66rem;line-height:1.3;letter-spacing:.13em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
+.v2hd-list{display:flex;align-items:center;gap:1.65rem;list-style:none;margin:0;padding:0}
+.v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
+.v2hd-link:hover,.v2hd-link[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--gold-ink);color:var(--ink)}
+.v2hd-rush{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;padding:.65rem 1.2rem;background:var(--gold);color:var(--ink);font-size:.82rem;font-weight:600;line-height:1.3;text-decoration:none;white-space:nowrap;border-radius:2px;transition:background-color 180ms ease}
+.v2hd-rush:hover{background:var(--gold-soft)}
+.v2hd.is-over-hero{background:transparent;border-color:transparent}
+.v2hd.is-over-hero .v2hd-name{color:var(--paper)}
+.v2hd.is-over-hero .v2hd-link{color:rgba(250,248,243,.85)}
+.v2hd.is-over-hero .v2hd-sub{color:var(--gold-soft)}
+.v2hd.is-over-hero .v2hd-link:hover,.v2hd.is-over-hero .v2hd-link[aria-current="page"]{text-decoration-color:var(--gold-soft);color:var(--paper)}
+.v2hd.is-over-hero a:focus-visible,.v2hd.is-over-hero summary:focus-visible{outline-color:var(--gold-soft)}
+.v2hd .v2hd-mobile a:focus-visible{outline-color:var(--purple)}
+.v2hd-menu{display:none;position:relative;flex:none}
+.v2hd-menu summary{display:flex;align-items:center;justify-content:center;list-style:none;cursor:pointer;width:44px;height:44px;color:var(--ink);border:1px solid var(--line);border-radius:2px}
+.v2hd-menu summary::-webkit-details-marker{display:none}
+.v2hd.is-over-hero .v2hd-menu summary{color:var(--paper);border-color:rgba(250,248,243,.24)}
+.v2hd-mobile{position:absolute;top:calc(100% + 14px);right:0;width:230px;padding:.5rem;background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 30px rgba(25,18,33,.1);color:var(--ink)}
+.v2hd-mobile a{display:flex;align-items:center;min-height:46px;padding:.65rem .9rem;font-size:.9rem;text-decoration:none;border-radius:2px}
+.v2hd-mobile a:hover,.v2hd-mobile a[aria-current="page"]{background:var(--paper-deep)}
+@media(max-width:899px){:root{--v2hd-h:73px}.v2hd-row{min-height:72px;gap:.65rem}.v2hd-nav{display:none}.v2hd-menu{display:block}.v2hd-crest{height:38px}.v2hd-name{font-size:1.2rem}.v2hd-sub{font-size:.6rem;letter-spacing:.1em}.v2hd-brand{gap:.55rem}.v2hd-rush{padding:.65rem .95rem}}
+@media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
+@media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
 /* ===== 01-hero ===== */
-/* 01 · HERO — atmosphere. Every selector scoped to .v2hero.
-   Base CSS is the FINISHED state: all copy is visible, sized and legible with
-   JS disabled and with the canvas empty. JS only paints the silk. */
-
-.v2hero{
-  position:relative;
-  /* The header is transparent and sits ON this section rather than above it, so
-     the hero pulls itself up by the header's height and pads its own content back
-     down. Header plus hero is then exactly one screen with no seam between them,
-     and the foot bar still lands on the fold. */
-  /* -1px past the header's height, not exactly it. The header's rendered height
-     lands on a fractional device pixel, so pulling up by exactly --v2hd-h left a
-     1px row at the very top of the page where the body's cream showed through as
-     a white hairline above the hero. */
-  margin-top:calc(var(--v2hd-h,76px) * -1 - 1px);
-  min-height:100svh;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  padding:calc(var(--v2hd-h,76px) + 8rem) 0 7rem;
-  background:
-    radial-gradient(120% 90% at 80% -10%, #3b2559 0%, transparent 55%),
-    var(--purple-deep);
-  color:var(--paper);
-}
-
-/* film grain — the same ground treatment every dark section on this site uses */
-.v2hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ---------- layers ---------- */
-
-.v2hero-canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  pointer-events:none;
-}
-
-.v2hero-letters{
-  position:absolute;
-  right:-4rem;
-  bottom:-6rem;
-  z-index:1;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:clamp(16rem,34vw,30rem);
-  line-height:.8;
-  white-space:nowrap;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(201,162,39,.16);
-  user-select:none;
-  pointer-events:none;
-  opacity:.84;
-  transition: opacity 760ms var(--ease);
-}
-
-/* The watermark lift is CSS, not JS: it works with scripting off, and it is the
-   same single gesture as the silk pull toward the button. Hover is gated to fine
-   pointers so a phone tap never triggers it. */
-@media (hover:hover) and (pointer:fine){
-  .v2hero:has(.v2hero-btn:hover) .v2hero-letters{opacity:1}
-}
-.v2hero:has(.v2hero-btn:focus-visible) .v2hero-letters{opacity:1}
-
+.v2hero{position:relative;margin-top:calc(var(--v2hd-h,80px) * -1 - 1px);min-height:680px;display:flex;align-items:center;overflow:hidden;padding:calc(var(--v2hd-h,80px) + 6rem) 0 7rem;background:radial-gradient(90% 110% at 75% 0,#3a2751 0,transparent 70%),var(--purple-deep);color:var(--paper)}
+.v2hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7}
+.v2hero-letters{position:absolute;right:-2rem;bottom:-3rem;font-family:var(--font-display);font-size:clamp(18rem,31vw,28rem);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(201,162,39,.12);pointer-events:none;user-select:none}
 .v2hero-stage{position:relative;z-index:2}
-/* CENTRED ON DESKTOP, left aligned on mobile. A centred column reads as a title
-   card, which is what this section is; on a phone the same treatment ragged both
-   edges of every line and cost real width, so the mobile rule below reverts it.
-
-   The horizontal auto margins live in each element's OWN margin shorthand below,
-   not here. Setting margin-inline:auto in this rule looked correct and did
-   nothing: .v2hero-claim and .v2hero-next each declare `margin: 0 0 Xrem` further
-   down the file, and a later shorthand resets left and right to 0. The headline
-   and the button centred, the claim and the next-up line did not. */
-.v2hero-inner{
-  max-width:920px;
-  margin-inline:auto;
-  text-align:center;
-}
-.v2hero-next{justify-content:center}
-.v2hero-cta{display:flex;justify-content:center}
-
-/* ---------- copy ---------- */
-
-.v2hero-h1{
-  margin:0 0 .35rem;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:clamp(3.2rem,8.5vw,7rem);
-  line-height:1.02;
-  letter-spacing:-.01em;
-  color:var(--paper);
-  text-wrap:balance;
-}
-
-.v2hero-sub{
-  margin:0 0 2.4rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-weight:400;
-  font-size:clamp(1.5rem,3.2vw,2.5rem);
-  line-height:1.15;
-  color:var(--gold-soft);
-}
-
-.v2hero-claim{
-  max-width:44ch;
-  margin:0 auto 2.1rem;
-  font-size:clamp(1.02rem,1.35vw,1.18rem);
-  line-height:1.6;
-  color:rgba(250,248,243,.76);
-}
-.v2hero-claim strong{
-  font-weight:650;
-  color:var(--gold-soft);
-}
-
-.v2hero-next{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:baseline;
-  gap:.5rem .85rem;
-  margin:0 auto 2.6rem;
-  max-width:44ch;
-  font-size:.86rem;
-  line-height:1.5;
-  color:rgba(250,248,243,.8);
-}
-.v2hero-next-lab{
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--gold-soft);
-}
-
-/* ---------- CTA ---------- */
-
-.v2hero-cta{margin:0}
-
-.v2hero-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:.6rem;
-  min-height:48px;
-  padding:.95rem 1.9rem;
-  border:1px solid transparent;
-  border-radius:2px;
-  background:var(--gold);
-  color:var(--ink);
-  font-family:var(--font-text);
-  font-size:.92rem;
-  font-weight:600;
-  letter-spacing:.04em;
-  text-decoration:none;
-  transition: none;
-}
+.v2hero-inner{max-width:900px;margin-inline:auto;text-align:center}
+.v2hero-eyebrow{margin:0 0 1.7rem;font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
+.v2hero-h1{margin:0 0 .6rem;font-size:clamp(4rem,8vw,6.75rem);line-height:1.02;letter-spacing:-.025em;color:var(--paper)}
+.v2hero-sub{margin:0 0 1.7rem;font-family:var(--font-display);font-style:italic;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.2;color:var(--gold-soft)}
+.v2hero-claim{max-width:42ch;margin:0 auto 2rem;font-size:1.05rem;line-height:1.75;color:rgba(250,248,243,.8)}
+.v2hero-cta{display:flex;justify-content:center;margin:0}
+.v2hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:1rem;min-height:50px;padding:.85rem 1.6rem;border:1px solid transparent;border-radius:2px;background:var(--gold);color:var(--ink);font-size:.88rem;font-weight:600;line-height:1.4;text-decoration:none;transition:background-color 180ms ease}
 .v2hero-btn:hover{background:var(--gold-soft)}
-.v2hero-btn svg{transition: transform .35s var(--ease)}
-.v2hero-btn:hover svg{transform:translateX(4px)}
-
-/* ---------- foot bar ---------- */
-
-.v2hero-foot{
-  position:absolute;
-  left:0;right:0;bottom:0;
-  z-index:2;
-  border-top:1px solid var(--line-dark);
-}
-.v2hero-foot-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding-top:1.1rem;
-  padding-bottom:1.1rem;
-  font-size:.72rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  /* .62 not .55: a gold thread (max alpha .17) plus the grain can brighten the
-     ground right under this line. Measured worst case 5.05:1, plain ground 6.9:1. */
-  color:rgba(250,248,243,.62);
-}
-.v2hero-scroll{
-  display:inline-flex;
-  align-items:center;
-  gap:.6rem;
-}
-.v2hero-scroll::after{
-  content:"";
-  width:1px;
-  height:2rem;
-  background:linear-gradient(var(--gold),transparent);
-  transform-origin:top;
-  animation:v2hero-drip 2.2s var(--ease) infinite;
-}
-@keyframes v2hero-drip{
-  0%  {transform:scaleY(0);transform-origin:top}
-  45% {transform:scaleY(1);transform-origin:top}
-  55% {transform:scaleY(1);transform-origin:bottom}
-  100%{transform:scaleY(0);transform-origin:bottom}
-}
-
-/* ---------- mobile: its own choreography ----------
-   No pointer, so no pull and no wake — but the settle still runs. The foot bar
-   drops the two flanking lines and keeps only the scroll hint, centred. */
-@media (max-width:767px){
-  .v2hero{padding:calc(var(--v2hd-h,64px) + 6.5rem) 0 6rem;min-height:100svh}
-  .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
-  .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem)}
-  .v2hero-sub{margin-bottom:1.9rem}
-  .v2hero-claim,.v2hero-next{max-width:none}
-
-  /* back to left aligned on a phone: centring ragged both edges of every line
-     and the CTA lost its anchor against the screen edge */
-  .v2hero-inner{text-align:left;margin-inline:0}
-  .v2hero-claim,.v2hero-next{margin-inline:0}
-  .v2hero-next{justify-content:flex-start}
-  .v2hero-cta{justify-content:flex-start}
-  .v2hero-next{margin-bottom:2.2rem}
-  .v2hero-btn{width:100%;justify-content:center}
-  .v2hero-foot-side{display:none}
-  .v2hero-foot-row{justify-content:center}
-}
-
-/* ---------- reduced motion ----------
-   Everything resolves to its finished, composed state: the drip sits fully drawn
-   rather than collapsed, transitions are removed, and the JS never starts a loop
-   (it paints one settled frame instead). */
-@media (prefers-reduced-motion:reduce){
-  .v2hero-letters{transition: none}
-  .v2hero-btn, .v2hero-btn svg{transition:none}
-  .v2hero-scroll::after{animation:none;transform:scaleY(1)}
-}
+.v2hero-foot{position:absolute;bottom:1.7rem;left:0;right:0;text-align:center}
+.v2hero-scroll{display:inline-flex;align-items:center;gap:.75rem;font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,248,243,.6)}
+.v2hero-scroll span{font-size:1rem;line-height:1}
+@media(max-width:767px){.v2hero{min-height:0;padding:calc(var(--v2hd-h,72px) + 3.25rem) 0 4.25rem}.v2hero-inner{text-align:left;margin-inline:0}.v2hero-eyebrow{font-size:.66rem;letter-spacing:.13em;margin-bottom:1.4rem}.v2hero-h1{font-size:clamp(3.05rem,13.3vw,4.5rem);letter-spacing:-.02em}.v2hero-sub{font-size:1.55rem;margin-bottom:1.5rem}.v2hero-claim{font-size:.98rem;line-height:1.75;max-width:34ch;margin:0 0 1.8rem}.v2hero-cta{justify-content:flex-start}.v2hero-btn{min-width:170px}.v2hero-letters{display:none}.v2hero-foot{display:none}}
+@media(prefers-reduced-motion:reduce){.v2hero-btn{transition:none}}
 /* ===== 02-grow ===== */
-/* ============================================================
-   02 - More than just a business fraternity.  (cream ground)
-
-   ZERO interaction, and that is the design. Three earlier passes put an
-   accordion here: it hid two of three paragraphs behind a click, and the
-   photograph it cross-faded was one of three placeholders. Everything is now
-   on screen at load and the section needs no JavaScript at all, so there is
-   no 02-grow.js.
-
-   One real photograph, three paragraphs, three doors out. Nothing else.
-   ============================================================ */
-
+/* Membership. The base page shows every description and photograph;
+   JavaScript adds the single-open accordion and shared photograph stage. */
 .grow{
   background:var(--paper);
   color:var(--ink-soft);
   padding-block:var(--section);
 }
-
 .grow__wrap{
   display:grid;
-  row-gap:clamp(2.2rem,5vw,3.2rem);
-  grid-template-areas:"intro" "stage" "rows";
+  grid-template-areas:"rows";
+  gap:1.75rem;
 }
-
-/* ---------- intro ---------- */
-
-/* No cap: the intro spans both columns, so the heading and lede set their own
-   measures below rather than sharing one that was sized for a single column. */
-.grow__intro{grid-area:intro}
-
-.grow__h{
-  /* The vw term was 5.2, which at 520px resolves to 27px and falls back to the
-     2.5rem floor: the section's own title ended up smaller than the row titles
-     under it once you account for their weight on screen. A 7vw term and a
-     2.9rem floor give it presence at every width, and wrapping to two lines on a
-     phone is the right outcome for a six word heading. */
-  font-size:clamp(2.9rem,7vw,4.6rem);
-  letter-spacing:-.02em;
-  margin:0 0 1rem;
-}
-/* the italic falls on "just", so the sentence turns on the word that does the
-   work rather than on a noun at the end of it */
-.grow__h em{font-style:italic;color:var(--gold-ink)}
-
-/* The lede returns. It was deleted when it read "Three parts of the chapter,
-   members run all three", which restated the three headings under it. This one
-   does the opposite: it names the reader's actual question before the rows start
-   answering it, so it earns the space the old one did not. */
-.grow__lede{
-  margin:0 0 .4rem;
-  max-width:40rem;
-  font-size:clamp(1.05rem,1.5vw,1.2rem);
-  line-height:1.6;
-  color:var(--ink-soft);
-}
-@media (min-width:900px){
-  /* 46rem sets this on two lines instead of three. At 34rem it was still sized
-     for the old single-column intro. */
-  .grow__lede{max-width:46rem}
-}
-
-
-/* ---------- the photographs ---------- */
-/* SQUARE. Every source file is 1300x1300, so a 4:5 crop would cut people out of
-   the right of the frame to satisfy a grid. */
-
-.grow__fig{
-  margin:0 0 2rem;
-  max-width:32rem;
-  overflow:hidden;
-  background:var(--paper-deep);
-  aspect-ratio:1;
-}
-.grow__fig img{width:100%;height:100%;display:block;object-fit:cover}
-
-/* ---------- the three parts ---------- */
-
-.grow__rows{grid-area:rows}
-
+.grow__rows{grid-area:rows;min-width:0}
 .grow__row{border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-
 .grow__btn{
-  display:block;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
   width:100%;
+  min-height:64px;
   margin:0;
-  padding:1.35rem .25rem;
-  background:none;
+  padding:1.25rem 0;
   border:0;
+  background:none;
   color:inherit;
-  font-family:inherit;
   text-align:left;
-  cursor:pointer;
-  transition:padding var(--dur) var(--ease);
+  font-family:inherit;
+  cursor:default;
 }
-
-/* A CLOSED row is a label, not a panel. Giving every row the open row's padding
-   meant the two shut rows claimed the same vertical weight as the one actually
-   showing content. */
-.grow--js .grow__row:not(.is-open) .grow__btn{padding-block:1rem}
 .grow__ttl{
-  display:block;
   font-family:var(--font-display);
+  font-size:clamp(1.4rem,2.3vw,1.85rem);
   font-weight:400;
-  font-size:clamp(1.5rem,2.3vw,1.95rem);
-  line-height:1.1;
+  line-height:1.15;
   color:var(--ink);
-  transition:color var(--dur) var(--ease);
 }
-/* Two states, not three. Closed is muted, open is ink, and hover simply previews
-   the open state. An earlier build made hover PURPLE, which introduced a third
-   colour that only ever existed under a cursor and made the row look like it had
-   changed meaning rather than gained focus. */
-@media (hover:hover){
-  .grow__btn:hover .grow__ttl{color:var(--ink)}
-}
-
 .grow__say{
-  margin:0;
-  padding:0 .25rem 1.6rem;
   max-width:34rem;
-  font-size:1rem;
+  margin:0;
+  padding:0 0 1.4rem;
+  font-size:.95rem;
   line-height:1.65;
   color:var(--ink-soft);
 }
-
-
-/* ============================================================
-   JS-ENHANCED: one persistent stage, one open row
-   ============================================================ */
-
+.grow__panel[hidden]{display:none}
+.grow__fig{
+  aspect-ratio:1;
+  max-width:32rem;
+  margin:0 0 1.5rem;
+  overflow:hidden;
+  background:var(--paper-deep);
+}
+.grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
 .grow__stage{grid-area:stage;display:none}
+.grow__icon{display:none}
+
+/* The stage keeps a stable position and size as panels change. */
+.grow--js .grow__wrap{grid-template-areas:"stage" "rows"}
 .grow--js .grow__stage{
   display:block;
   position:relative;
   width:100%;
-  aspect-ratio:1;
+  aspect-ratio:4/3;
   overflow:hidden;
   background:var(--paper-deep);
 }
 .grow--js .grow__fig{
   position:absolute;
   inset:0;
-  margin:0;
   max-width:none;
+  margin:0;
   aspect-ratio:auto;
   opacity:0;
-  transition:opacity 420ms var(--ease);
   pointer-events:none;
+  transition:opacity 300ms var(--ease);
 }
 .grow--js .grow__fig.is-active{opacity:1}
-
-/* only the open row shows its paragraph, so the section fits one screen */
-/* The paragraph ANIMATES open. display:none to block cannot transition, which is
-   why the accordion read as a hard flick rather than a movement. grid-template-rows
-   0fr to 1fr does animate, and it needs no measured height, so nothing here reads
-   layout. */
-.grow--js .grow__panel{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows 420ms var(--ease), opacity 300ms var(--ease);
-  opacity:0;
+.grow--js .grow__btn{cursor:pointer}
+.grow--js .grow__icon{
+  display:block;
+  flex:none;
+  width:1.25rem;
+  font-family:var(--font-text);
+  font-size:1.25rem;
+  font-weight:400;
+  line-height:1;
+  text-align:center;
+  color:var(--gold-ink);
 }
-.grow--js .grow__panel > *{overflow:hidden;min-height:0}
-.grow--js .is-open .grow__panel{grid-template-rows:1fr;opacity:1}
-.grow--js .grow__ttl{color:var(--ink-mute)}
-.grow--js .is-open .grow__ttl{color:var(--ink)}
-
-/* ---------- desktop: photograph beside the list ---------- */
-
+.grow--js .grow__icon::before{content:"+"}
+.grow--js .is-open .grow__icon::before{content:"−"}
+.grow--js .grow__row:not(.is-open) .grow__ttl{color:var(--ink-mute)}
+.grow__btn:focus-visible{outline-offset:5px}
+@media (hover:hover){
+  .grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}
+}
 @media (min-width:900px){
-  /* THE INTRO SPANS BOTH COLUMNS. Confined to one 48% column, the heading wrapped
-     to two lines and the lede to three at every width under about 1400, while the
-     top right of the section sat empty because the photograph starts level with
-     the rows. Measured at 940: the intro was 393px wide against its own 736px
-     max-width, so the measure was being set by the grid, not by the type.
-
-     Below it: rows left, photograph right, starting together. */
-  .grow__wrap{
-    /* Not 1fr/1fr. Even columns gave the photograph a 596px cell for a 416px
-       picture, so 180px of empty cream sat between the accordion and the image
-       and read as a hole rather than as a gutter. */
+  .grow--js .grow__wrap{
     grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-    grid-template-rows:max-content 1fr;
-    grid-template-areas:"intro intro" "rows  stage";
+    grid-template-areas:"rows stage";
     column-gap:clamp(2.5rem,5vw,4.5rem);
     align-items:start;
   }
-  /* The stage occupies the ROWS row only, not both. Spanning both put the
-     photograph's top edge level with the headline while the accordion started
-     240px lower, so the right half of the section was a picture floating beside
-     a heading with a column of air under it.
-
-     align-self START, not centre. Centring measured the stage against a left
-     column whose height changes with the open row, so opening a longer row slid
-     the photograph down and opening a shorter one slid it back. The accordion's
-     TOP never moves, so anchoring there is stable. */
-  .grow--js .grow__stage{align-self:start;justify-self:end;max-width:32rem}
+  .grow--js .grow__stage{
+    aspect-ratio:1;
+    align-self:start;
+    justify-self:end;
+    max-width:30rem;
+  }
 }
-
 @media (max-width:899px){
-  .grow__fig,
-  .grow--js .grow__stage{max-width:32rem;margin-inline:auto}
+  .grow__fig,.grow--js .grow__stage{max-width:36rem;margin-inline:auto}
 }
-
 @media (max-width:600px){
-  /* the photograph is the tallest thing between the heading and the first row,
-     so a 1:1 crop pushes the accordion most of a screen down on a phone */
-  .grow--js .grow__stage,
+  .grow__wrap{gap:1.25rem}
   .grow__fig{aspect-ratio:4/3}
-  .grow__btn{padding-block:1.15rem}
-  .grow--js .grow__row:not(.is-open) .grow__btn{padding-block:.85rem}
-  .grow__say{padding-bottom:1.3rem}
+  .grow__btn{padding-block:1.05rem}
+  .grow__say{padding-bottom:1.15rem;font-size:.925rem}
 }
-
-/* ---------- reduced motion ----------
-   Every state here is a plain declaration, so dropping the transition lands on
-   the finished state and never on the start of one. */
 @media (prefers-reduced-motion:reduce){
   .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
 }
 /* ===== 03-place ===== */
-/* ============================================================
-   04 — Where members have placed.  (cream ground / proof, part two)
-
-   ONE signature interaction: two logo belts that drift in opposite
-   directions and dissolve at both edges.
-
-   Everything below the "BELT" mark is gated on [data-on], which the
-   JS only sets after it has cloned each list. The base rules above it
-   stand alone and ARE the finished state: two static wrapped lists,
-   centred, every name readable, nothing clipped.
-   ============================================================ */
-
+/* Actual member-placement marks in a still, responsive grid. All twenty are
+   present once in the accessible list, with or without JavaScript. */
 .pl{
+  padding:0 0 var(--section);
   background:var(--paper);
   color:var(--ink-soft);
-
-  /* A whole chapter now, not a continuation. This section used to be the second
-     half of a pair, sitting under a separate "Numbers don't lie." section with
-     roughly half a section of air above it. The two were merged, so it takes a
-     full --section on both sides. */
-  padding-block:var(--section);
-
-  /* one place to retune the whole belt */
-  --pl-cell-h:clamp(3.6rem,5.4vw,4.6rem);   /* every cell the same height */
-  --pl-mark-h:clamp(1.5rem,2.3vw,2rem);     /* optical cap for a real logo */
-  --pl-pad:clamp(1rem,2.1vw,1.8rem);        /* HALF the space between marks */
-  --pl-fade:clamp(2.5rem,8vw,8rem);         /* how far the edges dissolve */
 }
-
-/* ---------- heading: the house display serif, one notch under a
-     chapter opener so the numbers above stay the loudest thing ---------- */
-
-/* Chapter-opener scale, matching .mem-h in 06-mem.css. It was capped at 3.4rem
-   only because it used to be the second of two headings. tokens.css already sets
-   text-wrap:balance on h2, so at the 5rem cap this breaks after the comma, which
-   is the break we want: one register of proof per line. */
 .pl-h{
   text-align:center;
   font-size:clamp(2.9rem,7vw,6rem);
-  letter-spacing:-.02em;
-  margin:0 0 clamp(2.6rem,5vw,4rem);
+  letter-spacing:-.025em;
+  margin:0 0 1.65rem;
 }
-.pl-h em{font-style:italic;color:var(--gold-ink)}
-
-/* ---------- the two rows (full bleed, no wrap) ---------- */
-
-/* Close the two belts into one ruled object. Three hairlines total: above the
-   first row, between them, and below the second. The band is full bleed, so its
-   borders sit outside the edge mask and do not fade with the marks. That is
-   correct: the marks dissolve at the edges, the band does not. */
-.pl-rows{border-block:1px solid var(--line)}
-
-.pl-row{position:relative}
-.pl-row + .pl-row{border-top:1px solid var(--line)}
-
-.pl-track{
+.pl-kicker{
+  margin:0 0 1.75rem;
+  color:var(--ink-mute);
+  text-align:center;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.pl-grid{
   list-style:none;
   margin:0;
-  padding:clamp(.55rem,1.5vw,1rem) var(--gutter);
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  row-gap:.15rem;
-}
-
-/* one cell: a fixed-height box with the mark optically centred in it.
-   The horizontal space between marks is this padding, doubled — it lives
-   on the cell rather than in a gap so that a belt of N cells is exactly
-   half the width of a belt of 2N and the loop can land on itself. */
-.pl-cell{
-  flex:0 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:var(--pl-cell-h);
-  padding-inline:var(--pl-pad);
-}
-
-/* the type-set stand-in for a logo we do not have a licensed file for */
-.pl-mark{
-  font-family:var(--font-text);
-  font-weight:600;
-  font-size:clamp(.95rem,1.3vw,1.08rem);
-  letter-spacing:.05em;
-  line-height:1;
-  white-space:nowrap;
-  color:var(--ink-mute);            /* 5.1:1 on --paper */
-}
-
-/* a real logo drops into the same cell: capped by HEIGHT so every brand
-   reads at the same optical size, desaturated so colour files still sit
-   inside the design system. */
-.pl-cell img{
-  width:auto;
-  height:auto;
-  max-height:var(--pl-mark-h);
-  max-width:min(11rem,44vw);
-  object-fit:contain;
-  filter:grayscale(1);
-  opacity:.78;
-}
-
-/* ============================================================
-   BELT — only exists once the JS has cloned each list
-   ============================================================ */
-
-.pl-row[data-on]{overflow:hidden}
-
-.pl-row[data-on] .pl-track{
-  flex-wrap:nowrap;
-  justify-content:flex-start;
-  width:max-content;
-  padding-inline:0;                 /* padding would break the exact 50% */
-  will-change:transform;
-  animation:pl-belt var(--pl-dur,64s) linear infinite;
-  /* a negative delay starts each belt already part-way along, so the section
-     never opens on two rows locked flush to the same left edge */
-  animation-delay:calc(var(--pl-dur,64s) * var(--pl-off,0));
-}
-.pl-row[data-on][data-pl-dir="-1"]{--pl-off:-.13}
-.pl-row[data-on][data-pl-dir="1"]{--pl-off:-.41}
-
-/* the list is doubled, so -50% lands the second copy exactly where the
-   first one started: no seam, no reset. */
-@keyframes pl-belt{
-  from{transform:translate3d(0,0,0)}
-  to  {transform:translate3d(-50%,0,0)}
-}
-
-/* row two runs the same keyframes backwards — opposite direction, and it
-   starts mid-list, which stops the two rows looking twinned. */
-.pl-row[data-on][data-pl-dir="1"] .pl-track{animation-direction:reverse}
-
-/* Pause only while the row is off screen, or while a keyboard user is inside
-   it (they need a still target to tab through). It deliberately does NOT pause
-   on hover: a belt that halts under the cursor stops the moment the reader
-   moves toward it, which reads as the page breaking. */
-.pl-row[data-on]:focus-within .pl-track,
-.pl-row[data-on].is-out .pl-track{animation-play-state:paused}
-
-/* ---------- soft edges ----------
-   Default is a pair of paper-to-transparent scrims, which work everywhere.
-   Where mask-image is supported it replaces them, so the row border fades
-   out with the marks instead of being painted over. */
-.pl-row[data-on]::before,
-.pl-row[data-on]::after{
-  content:"";
-  position:absolute;
-  top:0;bottom:0;
-  width:var(--pl-fade);
-  z-index:2;
-  pointer-events:none;
-}
-.pl-row[data-on]::before{left:0;background:linear-gradient(to right,var(--paper),transparent)}
-.pl-row[data-on]::after{right:0;background:linear-gradient(to left,var(--paper),transparent)}
-
-@supports (mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000)){
-  .pl-row[data-on]{
-    -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--pl-fade),#000 calc(100% - var(--pl-fade)),transparent);
-            mask-image:linear-gradient(to right,transparent,#000 var(--pl-fade),#000 calc(100% - var(--pl-fade)),transparent);
-  }
-  .pl-row[data-on]::before,
-  .pl-row[data-on]::after{display:none}
-}
-
-/* ---------- phone: the same two strips, smaller and slower ----------
-   (the pixels-per-second drop is set in the JS; this is the sizing) */
-
-
-/* ---------- the three figures, under the belts ----------
-   Order is deliberate and is the owner's call: recognition first, arithmetic
-   second. "Goldman Sachs" lands on sight and costs the reader nothing; "95%" is
-   a claim that has to be read and believed. The belts earn the figures.
-
-   These do NOT count up. The section's one interaction is the belt above it, and
-   a marquee plus a counter is two. The values are static text in the markup. */
-.pl-nums{
-  list-style:none;
-  margin:clamp(3.6rem,7vw,5.5rem) 0 0;
   padding:0;
   display:grid;
-  gap:clamp(3.2rem,6vw,2.5rem);
-  grid-template-columns:1fr;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
 }
-@media (min-width:768px){
-  .pl-nums{grid-template-columns:repeat(3,1fr)}
+.pl-cell{
+  min-width:0;
+  min-height:7.1rem;
+  padding:1.4rem 1.2rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
-
+.pl-cell img{
+  display:block;
+  width:8rem;
+  height:auto;
+  max-width:100%;
+  max-height:3rem;
+  object-fit:contain;
+  filter:grayscale(1);
+  opacity:.85;
+}
+.pl-cell--wide img{width:10rem;max-height:2.4rem}
+.pl-cell--reverse img{filter:brightness(0);opacity:.78}
+.pl-cell--goldman img{width:7.3rem;max-height:3.3rem}
+.pl-cell--citi img{width:4.3rem;max-height:2.8rem}
+.pl-cell--pnc img{width:6rem}
+.pl-cell--kpmg img{width:6.1rem}
+.pl-cell--pwc img{width:5.7rem;max-height:3.2rem}
+.pl-cell--amazon img{width:6.5rem}
+.pl-cell--nestle img{width:3.6rem;max-height:3.8rem}
+.pl-cell--victoria img{width:8.4rem;max-height:3.1rem}
+.pl-cell--formula img{width:6.3rem}
+/* The NFL source has intentional clear space around the horizontal mark. */
+.pl-cell--jets img{width:7rem;max-height:5rem}
+.pl-nums{
+  list-style:none;
+  margin:clamp(3.8rem,7vw,5.7rem) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:2rem;
+}
 .pl-n{
+  min-width:0;
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
 }
-
-/* [data-count] is reserved at its FINAL width before the count starts. Going
-   0 -> 9 -> 95 changes the character count, so without this the figure narrows
-   and springs back as it runs. tabular-nums below makes every digit the same
-   width, which is what makes a ch reservation exact. */
-.pl-n-val [data-count]{display:inline-block;text-align:center}
-
 .pl-n-val{
   margin:0;
   font-family:var(--font-display);
+  font-size:clamp(4.4rem,9vw,7.4rem);
   font-weight:400;
-  /* big enough to be the loudest thing in the section, capped so three still fit
-     one row at 1024px */
-  font-size:clamp(4.4rem,10vw,8rem);
-  line-height:.9;
-  letter-spacing:-.02em;
+  line-height:.95;
+  letter-spacing:-.025em;
   color:var(--ink);
   font-variant-numeric:lining-nums tabular-nums;
 }
-/* The unit is part of the figure and takes the figure's colour. It was gold, which
-   read as a stray accent, and then grey, which read like it had been disabled. */
-.pl-n-u{font-size:.44em;letter-spacing:0;color:var(--ink)}
-
-/* the label is the display italic, not the UI sans. A 13px sans caption under a
-   128px serif numeral reads as a chart legend. */
+.pl-n-val [data-count]{display:inline-block;text-align:center}
+.pl-number-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.pl-n-u{font-size:.44em;letter-spacing:0}
 .pl-n-lab{
-  margin:1.5rem 0 0;
-  max-width:20rem;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:clamp(1.25rem,2vw,1.7rem);
-  line-height:1.3;
+  max-width:17rem;
+  margin:1rem 0 0;
+  font-family:var(--font-text);
+  font-size:.93rem;
+  line-height:1.55;
   color:var(--ink-soft);
   text-wrap:balance;
 }
-
-@media (max-width:767px){
-  .pl{
-    --pl-cell-h:clamp(3rem,10vw,3.5rem);
-    --pl-mark-h:clamp(1.2rem,4.6vw,1.55rem);
-    --pl-pad:clamp(.7rem,3vw,1.1rem);
-    --pl-fade:clamp(1.75rem,7vw,3.5rem);
-  }
-  .pl-mark{font-size:.9rem;letter-spacing:.04em}
-  .pl-cell img{max-width:8.5rem}
+@media (max-width:1000px){
+  .pl-cell{min-height:6.5rem;padding:1.1rem .9rem}
 }
-
-/* ---------- reduced motion: the FINISHED state ----------
-   Which here is the page as it ships without JS at all: both belts stop
-   being belts and become the static wrapped lists, all twenty names on
-   screen, the duplicate half hidden. The JS teardown does the same thing
-   to the DOM; this is the half that does not need JS to have run. */
-
-@media (prefers-reduced-motion:reduce){
-  .pl-row[data-on]{
-    overflow:visible;
-    -webkit-mask-image:none;
-            mask-image:none;
-  }
-  .pl-row[data-on]::before,
-  .pl-row[data-on]::after{display:none}
-  .pl-row[data-on] .pl-track{
-    animation:none;
-    transform:none;
-    will-change:auto;
-    flex-wrap:wrap;
-    justify-content:center;
-    width:auto;
-    padding-inline:var(--gutter);
-  }
-  .pl-cell[data-pl-clone]{display:none}
+@media (min-width:601px) and (max-width:800px){
+  .pl-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pl-nums{gap:1.25rem}
+  .pl-n-lab{font-size:.85rem}
+}
+@media (max-width:600px){
+  .pl-h{margin-bottom:1.3rem}
+  .pl-kicker{font-size:.68rem;margin-bottom:1.4rem}
+  .pl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pl-cell{min-height:5.6rem;padding:.9rem 1rem}
+  .pl-cell img{max-width:100%;max-height:2.8rem}
+  .pl-cell--wide img{max-height:2.1rem}
+  .pl-cell--nestle img{max-height:3.4rem}
+  .pl-cell--jets img{max-height:4.6rem}
+  .pl-nums{grid-template-columns:1fr;margin-top:3.8rem;gap:2.6rem}
+  .pl-n-val{font-size:5.6rem}
+  .pl-n-lab{max-width:16rem;margin-top:.8rem;font-size:.92rem}
 }
 /* ===== 04-national ===== */
-/* ============================================================
-   04. A national fraternity since 1924.   (--purple-deep ground)
-
-   ZERO interaction, zero motion, and that IS the design. It was written to
-   break up the drifting logo belt (03) and the drifting photograph band,
-   which read as one conveyor when they touch. NOTE: 05-howtojoin has since
-   landed in the slot below this one, so the two belts are no longer
-   adjacent and this plate no longer separates them directly. It still
-   holds: it is the only dark ground in the middle of the page and the only
-   section with no motion at all. This is the page's held breath: a dark,
-   still plate that stops the scroll for a beat. Nothing here
-   transitions or animates, so there is no prefers-reduced-motion block and
-   no .js file. There is nothing to resolve to a finished state, because
-   the shipped state IS the finished state.
-
-   Prefix is v2nat, NOT nat: the built page still links css/styles.css,
-   which already owns .nat-line, .nat-line b and .split.nat. A .nat- prefix
-   here would have inherited that old section's styling.
-
-   THE CREST IS DELIBERATELY OMITTED. assets/crest.png does have a real
-   alpha channel (all four corners are alpha 0), so it would not have
-   painted a white plate. It was excluded on contrast, not transparency:
-   its two largest visible colour regions are #390e66 (1.15:1 against this
-   ground, effectively invisible) and #030103, which is DARKER than the
-   ground and reads as a hole punched in the plate. Only the #ecaa00 gold
-   would have survived, leaving disconnected orange fragments floating on
-   purple. The crest is drawn for a light ground. Reducing it to a low
-   opacity watermark makes both problems worse, not better, and the one
-   fix, a light plate behind it, is the box this section may not have.
-
-   CONTRAST, measured against --purple-deep #241733 (relative luminance
-   0.0123). Every tone clears 4.5:1 with room:
-     --paper #faf8f3 .................................. 15.9:1  (h2, numerals)
-     --gold-soft #e6c65b .............................. 10.1:1  (the em)
-     rgba(250,248,243,.78) ............................ 10.0:1  (body)
-     rgba(250,248,243,.72) ............................  8.7:1  (fact labels)
-     rgba(250,248,243,.62) ............................  6.8:1  (charter line)
-   The film grain is stacked UNDER the type rather than over it, so these
-   are the delivered ratios and not approximations of them.
-   ============================================================ */
-
-.v2nat{
-  position:relative;
-  background:var(--purple-deep);
-  color:rgba(250,248,243,.78);
-  /* Larger than --section (5-9rem) so this plate visibly breathes more than
-     the cream sections it separates, but smaller than the closing CTA's
-     7-12.5rem, so the page's real ending still owns the biggest silence. */
-  /* asymmetric: the section ends on a paragraph and does not need a full
-     opening measure of air under it as well */
-  padding-block:clamp(6rem,12vw,10rem) clamp(3.5rem,7vw,6rem);
-}
-
-/* Film grain: the exact technique from .v2hero::after, the ground treatment
-   every dark section on this site shares. */
-.v2nat::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* above the grain, matching the hero's stage */
-.v2nat-in{position:relative;z-index:2}
-
-/* ---------- heading ---------- */
-
-/* Deliberately SMALLER than the headings on the cream sections either side.
-   The brief for this plate is that the three figures are the visual event,
-   so the sentence introduces them rather than competing with them: the
-   numerals below run to 5.5rem against this 3.2rem cap. */
-.v2nat-h{
-  margin:0;
-  font-size:clamp(2.6rem, 6vw, 4.6rem);
-  letter-spacing:-.015em;
-  color:var(--paper);
-}
-.v2nat-h em{
-  font-style:italic;
-  color:var(--gold-soft);
-}
-
-/* ---------- the three figures ---------- */
-
-/* One horizontal rule above the row and a hairline between each figure.
-   That is the whole ornament budget: it is a printed table rule, not a
-   card. Nothing here is enclosed, filled, rounded or shadowed. */
-.v2nat-figs{
-  list-style:none;
-  margin:clamp(2.75rem,5.5vw,4.25rem) 0 0;
-  padding:clamp(2rem,4vw,3rem) 0 0;
-  border-top:1px solid var(--line-dark);
-  display:grid;
-  /* Not three equal columns, and the reason is emphasis, NOT fit. Measured:
-     equal thirds clear "23,000+" comfortably at every width this row is used
-     at (768px gives a 181px content box for a 135px glyph run; 1440px gives
-     364px for 240px), so nothing wraps and nothing touches a divider either
-     way. The uneven split is here because the largest claim should carry the
-     widest field. Keep it as a judgement call, not as a fit constraint. */
-  grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.85fr);
-}
-
-.v2nat-fig + .v2nat-fig{
-  border-left:1px solid var(--line-dark);
-  padding-left:clamp(1.25rem,3.5vw,3rem);
-}
-
-.v2nat-n{
-  display:block;
-  font-family:var(--font-display);
-  font-weight:400;              /* Instrument Serif has one weight. Never bold. */
-  font-size:clamp(2.6rem,6.4vw,5.5rem);
-  line-height:.95;
-  letter-spacing:-.02em;
-  color:var(--paper);
-}
-
-/* Sentence case, not tracked uppercase. Two reasons: the copy was handed
-   over in sentence case and uppercasing it is an edit, and small caps would
-   introduce a third type treatment into a section whose whole argument is
-   restraint. The 5.5rem numeral above already does all the separating this
-   label needs. */
-.v2nat-k{
-  display:block;
-  margin-top:.9rem;
-  font-family:var(--font-text);
-  font-size:.9rem;
-  line-height:1.4;
-  color:rgba(250,248,243,.72);
-}
-
-/* ---------- body and charter line ---------- */
-
-/* One column, not two. The second column held a single short line with nothing
-   under it, so the block read as a paragraph pushed left with a stranded caption
-   and a large empty quarter to its right. */
-.v2nat-tail{
-  margin-top:clamp(2.25rem,4.5vw,3.25rem);
-}
-
-.v2nat-say{
-  margin:0;
-  /* This is the section's argument, not a caption under it. At 1.1rem in a 52ch
-     column it occupied the left third of a 1240px measure and left the other two
-     thirds empty, which is what made the block read unbalanced. Set at the lede
-     size across a 62ch measure it fills the width it is given. */
-  max-width:62ch;
-  font-size:clamp(1.15rem,1.75vw,1.45rem);
-  line-height:1.6;
-  color:rgba(250,248,243,.78);
-}
-
-/* The provenance note, set as a margin footnote beside the paragraph rather
-   than beneath it: it is the quietest fact in the section and it should read
-   as a citation, not as a second claim. */
-
-/* ============================================================
-   MOBILE: a different execution, not a shrunken one.
-
-   Three columns cannot hold "23,000+" at 375px: each cell would be about
-   105px wide and the numeral alone needs more than that. The obvious fix,
-   stacking three numeral-over-word blocks, is worse: at these type sizes it
-   turns a single calm plate into roughly three phone screens of nothing but
-   numbers, and a section whose entire job is to be a brief full stop
-   becomes the longest thing on the page.
-
-   So on a phone the row becomes a ruled ledger: one figure per line,
-   numeral left, word right, sharing a baseline. It stays compact, the
-   numerals stay large, and a right-aligned column of figures against their
-   labels is if anything MORE institutional than the desktop row.
-   ============================================================ */
-
-@media (max-width:767px){
-  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
-
-  .v2nat-figs{
-    grid-template-columns:1fr;
-    padding-top:0;
-    border-top:0;              /* the per-row rules replace the single rule */
-  }
-
-  .v2nat-fig{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:1rem;
-    padding:1rem 0 1.1rem;
-    border-top:1px solid var(--line-dark);
-  }
-  .v2nat-fig:last-child{border-bottom:1px solid var(--line-dark)}
-  /* undo the desktop divider: horizontal rules only, so this reads as a
-     ruled list and never closes into a box */
-  .v2nat-fig + .v2nat-fig{border-left:0;padding-left:0}
-
-  /* The headline and the numerals are both re-sized here, together, to hold
-     the desktop's ratio between them. Left on the shared clamps a 375px
-     phone landed on a 32px headline that ran the full width of the wrap with
-     no air beside it, and numerals only 1.3x its size, so the figures stopped
-     being the event. These two curves put that ratio back at about 1.7x, the
-     same as the desktop, and hand the headline a trailing margin again.
-     Both caps are tuned to meet the desktop values at the 767/768 seam so
-     nothing jumps size as the viewport crosses the breakpoint. */
-  .v2nat-h{font-size:clamp(1.75rem,7.4vw,2rem)}
-
-  /* Floor is 2.5rem: at 320px this figure plus "Members nationwide" has to
-     finish inside a 280px wrap on a single line. */
-  .v2nat-n{font-size:clamp(2.5rem,13vw,3.1rem)}
-
-  .v2nat-k{
-    margin-top:0;
-    font-size:.85rem;
-    text-align:right;
-  }
-
-  /* .v2nat-tail is a single column at every width now, so it needs no override
-     here. This closes the media query. */
-}
-
-/* ---------- the crest ----------------------------------------------------
-   Full colour, at a size that reads as a mark rather than a favicon. On desktop
-   it sits in its own column beside the type; the section has no photography and
-   no motion, so this is the only thing carrying visual weight. */
-/* crest and heading on one baseline, as a single lockup */
-.v2nat-lock{
-  display:flex;
-  align-items:center;
-  gap:clamp(1rem,2.2vw,1.8rem);
-  margin-bottom:clamp(2rem,4vw,3rem);
-}
-.v2nat-crest{
-  flex:none;
-  width:clamp(56px,7vw,96px);
-  height:auto;
-  display:block;
-}
-.v2nat-lock .v2nat-h{margin:0}
-
-@media (max-width:559px){
-  .v2nat-lock{gap:.9rem}
-  .v2nat-crest{width:48px}
-}
+.v2nat{background:var(--purple-deep);color:var(--paper);padding-block:clamp(3.5rem,6vw,5.5rem)}
+.v2nat-in{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:2.25rem;align-items:center}
+.v2nat-emblem{padding:14px;background:var(--paper);border-radius:2px}
+.v2nat-crest{width:100%;height:auto}
+.v2nat-h{font-size:clamp(2.1rem,3.5vw,3rem);line-height:1.15;color:var(--paper);letter-spacing:-.02em}
+.v2nat-say{max-width:49ch;margin:1rem 0;font-size:.95rem;line-height:1.8;color:rgba(250,248,243,.76)}
+.v2nat-link{display:inline-flex;align-items:center;gap:.7rem;min-height:44px;font-size:.8rem;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(230,198,91,.55);color:var(--gold-soft)}
+.v2nat-figs{display:flex;gap:2rem;list-style:none;padding:0 0 0 2.25rem;margin:0;border-left:1px solid var(--line-dark)}
+.v2nat-n{display:block;font-family:var(--font-display);font-size:3.3rem;line-height:1.05;font-weight:400;letter-spacing:-.025em}
+.v2nat-k{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.02em;color:rgba(250,248,243,.72)}
+@media(max-width:999px){.v2nat-in{grid-template-columns:80px minmax(0,1fr);gap:1.5rem 2rem}.v2nat-figs{grid-column:2;padding:1.5rem 0 0;border-left:0;border-top:1px solid var(--line-dark);gap:3.5rem}.v2nat-n{font-size:2.75rem}}
+@media(max-width:559px){.v2nat-in{grid-template-columns:60px minmax(0,1fr);column-gap:1.25rem;align-items:start}.v2nat-emblem{padding:10px}.v2nat-h{font-size:2rem;line-height:1.15}.v2nat-say{font-size:.9rem;line-height:1.75;margin-top:.8rem}.v2nat-figs{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.4rem;padding-top:1.6rem}.v2nat-n{font-size:2.8rem}.v2nat-k{font-size:.75rem}}
 /* ===== 05-mem ===== */
-/* ============================================================
-   05 - College should look like this.   THE WHEEL.
-
-   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
-
-       card width      538px      = 0.288 of the viewport
-       cards across    3.48
-       card height     >800px cut = h/w of at least 1.49
-       arc drop        115px from the centre card to its neighbour
-
-   The previous build measured 293px wide at 1440, which is 0.203 of the
-   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
-   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
-   every one of them missed on all four numbers at once.
-
-   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
-   angular position so it points radially outward:
-
-       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
-
-   Solving for the four measured targets gives 32 slots at an 11.25deg step,
-   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
-
-       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
-       h/w 1.50                          drop 120px       [ref 1.49,  115px]
-       edge card 19.5deg off vertical    overlap 54px
-
-   A whole circle means one revolution returns to the identical frame, so the
-   spin has no loop point anywhere.
-   ============================================================ */
-
+/* 05 · Chapter Life. The photographs carry the section; no duplicated rail,
+   autoplay, hidden content, or placeholders. */
 .mem{
   background:var(--paper);
-  /* No bottom padding and a -1px pull, so the purple of the section below lands
-     on the same pixel row as the cut and does the slicing. */
-  /* Deliberately less than --section on top: this is the one section that must
-     land whole on a single screen, heading included. */
-  padding-block:clamp(3rem,5.5vw,4.5rem) 0;
-  margin-bottom:-1px;
+  padding-block:clamp(3.5rem,7vw,6.5rem);
 }
 
 .mem-h{
-  text-align:center;
-  /* Command. This heading sits over the largest photography on the page and was
-     being out-scaled by it. */
-  font-size:clamp(2.6rem,6.4vw,5.4rem);
-  letter-spacing:-.02em;
-  margin:0 0 clamp(1.3rem,2.4vw,1.9rem);
+  margin:0 0 clamp(1.5rem,3vw,2.5rem);
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  line-height:1.05;
+  letter-spacing:-.025em;
 }
 
-/* ---- the band: a window onto the top of the wheel ---------------------- */
-.mem-band{
-  --R:149vw;                            /* 2148px at a 1440 viewport */
-  /* 0.175, down from 0.1932. The section has to fit ONE SCREEN with its heading,
-     and at 0.1932 the card was 622px tall, the band 652, and the whole section
-     952px against an 813px viewport. At 0.175 the card is 376px wide and 564
-     tall. Arc spacing at this step is 366px, so neighbours now sit 10px apart
-     instead of overlapping by 54: they touch rather than pile up. */
-  --w:calc(var(--R) * 0.175);
-  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
-  --step:11.25deg;                      /* 360 / 32 */
-  --inset:.7rem;
-
-  position:relative;
-  /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
-     at the top of the arc is therefore fully visible, bottom edge and all, while
-     every card the curve has carried downward runs past the cut. That asymmetry
-     is the reference's silhouette; an earlier height cut all of them equally and
-     lost it. --h is 1.25 * 0.15736 * --R, so this tracks the circle. */
-  height:calc(var(--h) + var(--inset) + 1.1rem);
-  overflow:hidden;                      /* this is the cut */
-  isolation:isolate;                    /* keep cards under the next section's ground */
-}
-
-/* The hub sits below the band by one radius plus half a card, so the topmost
-   card's upper edge lands --inset below the band's top edge. Rotating THIS
-   element carries every card around the circle at once, which is one
-   compositor-only transform rather than 36 per frame. */
-.mem-wheel{
+.mem-gallery{
   list-style:none;
   margin:0;
   padding:0;
-  position:absolute;
-  left:50%;
-  top:calc(var(--R) + var(--h) / 2 + var(--inset));
-  width:0;
-  height:0;
-  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
-     conveyor rather than a drift. */
-  animation:memSpin 150s linear infinite;
-  will-change:transform;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(.75rem,1.5vw,1.25rem);
 }
 
-.mem-i{
-  position:absolute;
-  left:0;
-  top:0;
-  width:var(--w);
-  height:var(--h);
-  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
-  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
-  background:var(--paper-deep);
-  /* Rounded, like the reference. Square corners on a tilted card read as a
-     cropped screenshot; a radius reads as a printed card. */
-  border-radius:clamp(10px,1.1vw,18px);
+.mem-photo{
+  min-width:0;
+  aspect-ratio:1;
   overflow:hidden;
-  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
-}
-.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
-
-@keyframes memSpin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(-360deg)}   /* negative: the wheel carries photographs to the right */
+  background:var(--paper-deep);
+  border-radius:2px;
 }
 
-.mem-band:hover .mem-wheel{animation-play-state:running}  /* never pause on hover */
+.mem-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-/* ---- phones: a tighter circle so the cards are not postage stamps ------- */
+/* A complete first photograph anchors the phone composition. Two square
+   supporting images sit beneath it, keeping every photograph visible without
+   a horizontal rail or a lengthy stack of three full-width images. */
 @media (max-width:767px){
-  .mem-band{
-    --R:330vw;        /* same w/R ratio, so the overlap is identical */
-    --inset:.7rem;
-  }
-}
-
-/* ---- reduced motion: the wheel stops. It does not disappear. ------------ */
-/* The composition is the content here, so the finished state is the wheel at
-   rest, not a fallback strip. */
-@media (prefers-reduced-motion:reduce){
-  .mem-wheel{animation:none}
+  .mem{padding-block:3.5rem}
+  .mem-h{font-size:clamp(2.3rem,9vw,3rem);margin-bottom:1.5rem}
+  .mem-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+  .mem-photo-lead{grid-column:1 / -1}
 }
 /* ===== 07-act ===== */
-/* ==========================================================================
-   05 — THE ACT (final CTA)
-   Every selector is scoped to .act*.
-   ========================================================================== */
+/* A compact closing section with one clear action. */
+.act{
+  padding-block:clamp(3.25rem,7vw,5.5rem);
+  background:var(--purple-deep);
+  color:var(--paper);
+}
+.act-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:2rem 3rem;
+}
+.act-copy{min-width:0}
+.act-title{
+  margin:0;
+  font-size:clamp(2.1rem,4.5vw,3.35rem);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  color:var(--paper);
+}
+.act-line{
+  max-width:42ch;
+  margin:1rem 0 0;
+  font-size:1rem;
+  line-height:1.65;
+  color:rgba(250,248,243,.78);
+}
+.act-go{flex:none}
+.act-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9rem;
+  max-width:100%;
+  min-height:48px;
+  padding:.8rem 1.4rem;
+  border:1px solid var(--gold);
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--font-text);
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.4;
+  text-decoration:none;
+}
+.act-cta-arrow{flex:none;transition:transform 200ms var(--ease)}
+.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
+.act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:translateX(3px)}
+.act-cta:focus-visible{outline-offset:5px}
 
-/* --------------------------------------------------------------------------
-   PART A — THE ACT
-   Flat --purple-deep, no image, no ornament. The move is the empty space:
-   the vertical rhythm is deliberately larger than --section so the page
-   audibly stops here.
-   -------------------------------------------------------------------------- */
-
-.act {
-  position: relative;
-  background: var(--purple-deep);
-  color: rgba(250, 248, 243, 0.78);
-  padding: clamp(6rem, 12vw, 10rem) 0 clamp(5rem, 9vw, 7.5rem);
-  text-align: center;
-  /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
-     390px phone it reached 95px past the viewport and gave the whole document
-     a horizontal scrollbar. Nothing in this section needs to escape it. */
-  overflow: hidden;
-
-  /* ONE light source, not two. The previous version stacked a radial in the upper
-     right and a second in the lower left, and both had a visible edge where they
-     ran out: two blobs dropped on a flat panel. This is a single ellipse centred
-     ABOVE the section's own top edge and wider than the section, so what shows is
-     only its smooth middle. Its falloff runs past the bottom of the panel, so
-     there is nowhere for the reader to see it end.
-
-     Three stops rather than two: a straight two stop radial in sRGB is what
-     produces the grey banded ring that reads as cheap. */
-  background:
-    radial-gradient(135% 118% at 62% -22%,
-      rgba(126, 92, 184, 0.50) 0%,
-      rgba(96, 66, 150, 0.26) 34%,
-      rgba(58, 36, 92, 0.10) 62%,
-      rgba(36, 23, 51, 0) 100%),
-    var(--purple-deep);
+.act-band{
+  padding-block:1rem;
+  border-bottom:1px solid var(--line);
+  background:var(--paper-deep);
 }
-
-.act-inner {
-  max-width: 52rem;
-  margin-inline: auto;
+.act-band-in{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:.25rem 1.5rem;
 }
-
-.act-title {
-  font-size: clamp(3.2rem, 8vw, 6.2rem);
-  letter-spacing: -0.02em;
-  color: var(--paper);
+.act-band-copy{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
+.act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
+.act-band-btn{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  font-size:.9rem;
+  color:var(--ink-soft);
+  text-decoration:underline;
+  text-decoration-color:rgba(25,18,33,.25);
+  text-underline-offset:.3em;
 }
-.act-title em {
-  font-style: italic;
-  color: var(--gold-soft);
+.act-band-btn:hover{color:var(--purple);text-decoration-color:var(--purple)}
+@media (max-width:767px){
+  .act-inner{display:block}
+  .act-title{max-width:15ch}
+  .act-go{margin-top:1.5rem}
+  .act-line{font-size:.95rem;max-width:35ch}
 }
-
-.act-line {
-  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
-  max-width: 33rem;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.5;
-  color: rgba(250, 248, 243, 0.72);
-}
-
-/* ---- the CTA cluster: button, secondary line, term tag ---- */
-
-.act-go {
-  margin-top: clamp(2.75rem, 5.5vw, 3.75rem);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.act-cta {
-  position: relative;
-  isolation: isolate;              /* keeps the -1 plate above the section bg */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  min-height: 52px;
-  padding: 1rem 2.15rem;
-  font-family: var(--font-text);
-  font-size: 0.94rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: var(--ink);
-}
-
-/* The plate is a separate layer so the swell is a pure transform and the
-   label never distorts or reflows. */
-.act-cta-plate {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--gold);
-  border-radius: 2px;
-  transform-origin: 50% 50%;
-  /* the glow is a box-shadow on the plate rather than a filter, so it stays on
-     the compositor and never rasterises the button's text */
-  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
-  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease),
-              background-color 420ms var(--ease);
-}
-
-.act-cta-arrow {
-  flex: none;
-  transition: transform 420ms var(--ease);
-}
-
-/* The secondary line. It is a real link, always in the layout (so revealing it
-   shifts nothing), and it is the second half of the one interaction. */
-.act-more {
-  padding: 0.9rem 0.5rem 0.35rem;  /* padding, not margin: the hover area stays
-                                      contiguous with the button, no flicker */
-  font-size: 0.86rem;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  color: rgba(250, 248, 243, 0.82);
-  /* Always readable. It carries real information (events, eligibility, FAQs), so it
-     must not be hover-gated: keyboard, touch and JS-off visitors never hover.
-     Hover/focus only lifts it from subdued to full. */
-  opacity: 0.72;
-  transform: translateY(2px);
-  transition: opacity 340ms var(--ease), transform 340ms var(--ease);
-  /* 44px minimum pointer target (WCAG 2.5.8) */
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
-.act-more-text {
-  border-bottom: 1px solid rgba(230, 198, 91, 0.4);
-  padding-bottom: 2px;
-}
-.act-more-arrow {
-  display: inline-block;
-  margin-left: 0.3rem;
-}
-
-/* THE ONE INTERACTION — one trigger, two coordinated results. */
-.act-go:hover .act-cta-plate,
-.act-go:focus-within .act-cta-plate {
-  transform: scale(1.05, 1.12);
-  background: var(--gold-soft);
-  box-shadow: 0 0 46px 6px rgba(230, 198, 91, 0.34);
-}
-.act-go:hover .act-cta-arrow,
-.act-go:focus-within .act-cta-arrow {
-  transform: translateX(4px);
-}
-.act-go:hover .act-more,
-.act-go:focus-within .act-more {
-  opacity: 1;
-  transform: none;
-}
-/* The plate swells past the anchor box, and the ring is gold on gold — push the
-   focus ring out far enough to stay legible against the purple. */
-.act-cta:focus-visible { outline-offset: 7px; }
-
-.act-more:hover {
-  color: var(--gold-soft);
-}
-.act-more:hover .act-more-text {
-  border-bottom-color: var(--gold-soft);
-}
-
-/* The sub was set at body size on the page's single most important screen, which
-   is why the whole block read small. */
-.act-sub {
-  margin-top: 1.5rem;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.5;
-}
-
-/* --------------------------------------------------------------------------
-   PART A2 — subordinate support band, on cream.
-   Gold is never used here (--gold on --paper fails contrast); purple carries it.
-   -------------------------------------------------------------------------- */
-
-.act-band {
-  background: var(--paper-deep);
-  border-top: 1px solid var(--line);
-  padding: 1.5rem 0;
-}
-
-.act-band-in {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-}
-
-.act-band-copy {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--ink-mute);
-}
-.act-band-em {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.act-band-acts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.act-band-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.5rem 1.3rem;
-  border: 1px solid rgba(25, 18, 33, 0.5);  /* 3.3:1 on --paper-deep: the border
-                                               is this control's only boundary */
-  border-radius: 2px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: var(--ink);
-  background: transparent;
-  transition: none;
-}
-.act-band-btn:hover {
-  border-color: var(--purple);
-  color: var(--purple);
-}
-.act-band-btn.is-primary {
-  background: var(--purple);
-  border-color: var(--purple);
-  color: var(--paper);
-}
-.act-band-btn.is-primary:hover {
-  background: var(--purple-deep);
-  border-color: var(--purple-deep);
-  color: var(--paper);
-}
-
-/* --------------------------------------------------------------------------
-   MOBILE — different execution, not a shrunken desktop.
-   The hover mechanic does not exist on a phone, so nothing is hidden behind
-   it: the button goes full width for the thumb and the secondary line is
-   simply stated underneath as a second, quieter tap target.
-   -------------------------------------------------------------------------- */
-
-@media (max-width: 767px) {
-  .act {
-    padding: clamp(5.5rem, 18vw, 7.5rem) 0;
-    text-align: left;
-  }
-  .act-inner { max-width: none; }
-  .act-line { margin-inline: 0; }
-
-  .act-go {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    max-width: 22rem;
-  }
-  .act-cta {
-    min-height: 56px;
-    padding-inline: 1.5rem;
-  }
-  /* no swell, no reveal: both are always in their finished state */
-  .act-cta-plate,
-  .act-cta-arrow { transition: none; }
-  .act-go:hover .act-cta-plate,
-  .act-go:focus-within .act-cta-plate,
-  .act-go:hover .act-cta-arrow,
-  .act-go:focus-within .act-cta-arrow { transform: none; }
-  .act-more {
-    align-self: flex-start;
-    padding: 0.95rem 0 0;
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .act-band-in {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .act-band-acts { width: 100%; }
-  .act-band-btn { flex: 1 1 auto; }
-}
-
-/* --------------------------------------------------------------------------
-   REDUCED MOTION — every transition resolves to its finished state.
-   The secondary line is simply always readable; nothing swells, nothing moves.
-   -------------------------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .act-more {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .act-cta-plate,
-  .act-cta-arrow {
-    transition: none;
-  }
-  .act-go:hover .act-cta-plate,
-  .act-go:focus-within .act-cta-plate { transform: none; }
-  .act-go:hover .act-cta-arrow,
-  .act-go:focus-within .act-cta-arrow { transform: none; }
-}
-
-/* ------------------------------------------------------------------
-   COUNTDOWN + headline bloom (added in the final pass)
-   ------------------------------------------------------------------ */
-
-/* A very diffuse white bloom so the headline separates from the ground.
-   Restraint is the point: this must never read as neon. Radial, low alpha,
-   sitting behind the type and nothing else. */
-.act-title { position: relative; }
-.act-title::before {
-  content: "";
-  position: absolute; left: 50%; top: 50%;
-  width: 150%; aspect-ratio: 2 / 1;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side,
-    rgba(250,248,243,.08) 0%, rgba(250,248,243,.03) 45%, rgba(250,248,243,0) 72%);
-  pointer-events: none; z-index: -1;
-}
-
-.act-cd { margin: 2.4rem 0 2.6rem; }
-.act-cd[hidden] { display: none; }
-.act-cd-lab {
-  display: block;
-  font-family: var(--font-text);
-  font-size: .72rem; font-weight: 700; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--gold-soft);
-  margin-bottom: 1rem;
-}
-.act-cd-units {
-  display: flex; justify-content: center;
-  gap: clamp(1.1rem, 3.4vw, 2.6rem);
-}
-.act-cd-u { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
-.act-cd-u + .act-cd-u {
-  border-left: 1px solid var(--line-dark);
-  padding-left: clamp(1.1rem, 3.4vw, 2.6rem);
-}
-.act-cd-n {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1;
-  color: var(--paper); font-variant-numeric: tabular-nums;
-}
-.act-cd-k {
-  font-family: var(--font-text);
-  font-size: .68rem; font-weight: 600; letter-spacing: .16em;
-  text-transform: uppercase; color: rgba(250,248,243,.6);
-}
-/* the active state replaces the digits entirely */
-.act-cd.is-live .act-cd-units { display: none; }
-.act-cd.is-live .act-cd-lab {
-  font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.9rem);
-  font-weight: 400; letter-spacing: 0; text-transform: none;
-  color: var(--gold-soft); margin: 0;
-}
-
-@media (max-width: 560px) {
-  .act-cd-units { gap: .9rem; }
-  .act-cd-u + .act-cd-u { padding-left: .9rem; }
-}
-
-
-/* Support band: quieter still. Rush is the page's conversion; these are for
-   people who already know us, so they read as text links with a hairline, not
-   as buttons competing with the gold CTA above. */
-.act-band-btn {
-  background: none !important;
-  border: 0 !important;
-  border-bottom: 1px solid rgba(25, 18, 33, .28) !important;
-  border-radius: 0 !important;
-  padding: .3rem 0 .25rem !important;
-  font-size: .92rem !important;
-  font-weight: 600 !important;
-  color: var(--ink-soft) !important;
-  letter-spacing: 0 !important;
-  /* 44px pointer target without looking like a button */
-  display: inline-flex !important;
-  align-items: center;
-  min-height: 44px;
-}
-.act-band-btn:hover { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }
-
-
-/* ------------------------------------------------------------------
-   ARRIVAL FLARE. The owner liked the glow but not as a permanent state:
-   "it's just supposed to glow when you scroll to it, the button glows real
-   quick." 00-header.js adds .pct-rv-in when this element is first scrolled
-   into view, so the flare hangs off that one class and can only ever fire
-   once. It is an animation, not a transition, so it returns to rest by
-   itself and leaves no lit state behind.
-   ------------------------------------------------------------------ */
-.act-go.pct-rv-in .act-cta-plate{
-  animation:actFlare 1500ms var(--ease) 260ms both;
-}
-@keyframes actFlare{
-  0%   { box-shadow:0 0 0 0 rgba(230,198,91,0); }
-  28%  { box-shadow:0 0 52px 10px rgba(230,198,91,.52); }
-  100% { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+@media (max-width:420px){
+  .act-band-in{align-items:flex-start;flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){
-  .act-go.pct-rv-in .act-cta-plate{animation:none}
+  .act-cta-arrow{transition:none}
+  .act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:none}
 }
 /* ===== 99-footer ===== */
-/* ============================================================
-   99 - FOOTER, mobile touch targets.
-
-   The footer markup is lifted from the live site and is styled by
-   css/styles.css, which build.py links. That stylesheet is shared with the
-   production pages, so nothing here edits it: these rules are additive and
-   scoped to .site-footer inside this page only.
-
-   MEASURED at 520px: every footer link rendered 19px tall and the brand lockup
-   42px, against the 44px minimum a finger needs. Ten links in two columns at
-   19px with the gaps between them is a column of near-misses.
-   ============================================================ */
-
+/* V2 footer, independent of the production footer's display watermark. */
+.v2footer{
+  padding:clamp(2.5rem,5vw,4rem) 0 1rem;
+  background:var(--ink);
+  color:rgba(250,248,243,.75);
+}
+.v2footer-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr));
+  gap:2rem clamp(2rem,5vw,4.5rem);
+}
+.v2footer-about{min-width:0}
+.v2footer-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:.85rem;
+  min-height:48px;
+  text-decoration:none;
+  color:var(--paper);
+}
+.v2footer-brand img{width:auto;height:42px;flex:none}
+.v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
+.v2footer-name{font-family:var(--font-display);font-size:1.55rem;line-height:1.1}
+.v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
+.v2footer-about p{max-width:30ch;margin:1rem 0 0;font-size:.9rem;line-height:1.65}
+.v2footer-nav{min-width:0}
+.v2footer-label{
+  margin:0 0 .55rem;
+  font-family:var(--font-text);
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.5;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gold-soft);
+}
+.v2footer-nav ul{list-style:none;margin:0;padding:0}
+.v2footer-nav li{margin:0;padding:0}
+.v2footer-nav a{
+  display:flex;
+  align-items:center;
+  width:fit-content;
+  min-height:44px;
+  font-size:.875rem;
+  line-height:1.45;
+  color:rgba(250,248,243,.8);
+  text-decoration:none;
+}
+.v2footer a:hover{color:var(--gold-soft)}
+.v2footer-base{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:.25rem 1.5rem;
+  margin-top:2rem;
+  padding-top:.75rem;
+  border-top:1px solid rgba(250,248,243,.15);
+  color:rgba(250,248,243,.65);
+  font-size:.75rem;
+  line-height:1.5;
+}
+.v2footer-base a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none}
 @media (max-width:767px){
-  /* The link itself becomes the target rather than the text inside it, so the
-     tappable area matches what the eye reads as the row. */
-  .site-footer .footer-col a{
-    display:flex;
-    align-items:center;
-    min-height:44px;
-  }
-
-  /* The list rhythm came from margins between 19px items. With 44px rows that
-     doubles the column's height for no gain, so the margins come off and the
-     row height carries the spacing. */
-  .site-footer .footer-col li{margin:0}
-
-  .site-footer .footer-about .brand{
-    display:flex;
-    align-items:center;
-    min-height:48px;
-  }
-
-  /* The base row's links sit inline in a sentence, so they cannot become 44px
-     blocks without breaking the line. Padding buys vertical room instead. */
-  .site-footer .footer-base a{
-    display:inline-block;
-    padding-block:1rem;
-  }
+  .v2footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.5rem}
+  .v2footer-about{grid-column:1/-1}
+  .v2footer-about p{max-width:35ch}
+  .v2footer-nav a{width:100%}
 }
 </style>
 </head>
 <body>
 
-  <a class="skip-link" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="main">
 
     <!-- ===== 00-header ===== -->
-<!-- 00 · HEADER. The site bar. This is a <header>, not a <section>, and it is
-     deliberately NOT position:fixed.
-
-     WHY STATIC: the live site's fixed header depends on js/main.js to add
-     .scrolled and swap to a paper ground once you clear the hero. v2 never loads
-     js/main.js, so a fixed bar here would keep its dark-ground colours (paper
-     text, gold-soft sub) and sit on top of the cream sections as pale-on-pale.
-     A static bar has no scrolled state to get wrong: it scrolls away with the
-     hero and does not come back. Zero JS, nothing to break.
-
-     WHY NO BOTTOM EDGE: the hero directly beneath is the same --purple-deep. A
-     border or shadow here would draw a visible seam across what has to read as
-     one continuous dark field, so the header carries neither, and its background
-     does not change on hover.
-
-     Class names are all v2hd-*. The live css/styles.css is linked by build.py and
-     already owns .site-header / .brand / .nav-links (fixed positioning plus a
-     JS-driven hamburger that hides .nav-links below 900px), so none of those
-     names are reused here. -->
-<header class="v2hd on-dark">
+<!-- One-row sticky header. Native details keeps mobile navigation usable without JavaScript. -->
+<header class="v2hd">
   <div class="v2wrap v2hd-row">
-
     <a class="v2hd-brand" href="index.html">
-      <!-- assets/crest.png is 337x445 intrinsic. The attributes are the real
-           pixel dimensions so the browser knows the aspect ratio before the file
-           arrives; CSS scales it to 42px tall. Above the fold, so not lazy. -->
-      <img class="v2hd-crest" src="../assets/crest.png" alt="Phi Chi Theta crest"
-           width="337" height="445" decoding="async">
-      <span class="v2hd-lock">
-        <span class="v2hd-name">Phi Chi Theta</span>
-        <span class="v2hd-sub">Zeta Rho &middot; USF</span>
-      </span>
+      <img class="v2hd-crest" src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445" decoding="async">
+      <span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho &middot; USF</span></span>
     </a>
-
     <nav class="v2hd-nav" aria-label="Primary">
       <ul class="v2hd-list">
-        <li><a class="v2hd-link" href="index.html" aria-current="page"><span class="v2hd-t">Home</span></a></li>
-        <li><a class="v2hd-link" href="philanthropy.html"><span class="v2hd-t">Philanthropy</span></a></li>
-        <li><a class="v2hd-link" href="apparel.html"><span class="v2hd-t">Apparel</span></a></li>
-        <li><a class="v2hd-link" href="career.html"><span class="v2hd-t">Career</span></a></li>
+        <li><a class="v2hd-link" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="v2hd-link" href="../philanthropy.html">Philanthropy</a></li>
+        <li><a class="v2hd-link" href="../apparel.html">Apparel</a></li>
+        <li><a class="v2hd-link" href="../career.html">Career</a></li>
       </ul>
     </nav>
-
-    <a class="v2hd-rush" href="rush.html">Rush PCT</a>
-
+    <details class="v2hd-menu">
+      <summary><span class="v2-sr-only">Open navigation</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h14M3 10h14M3 14h14"/></svg></summary>
+      <nav class="v2hd-mobile" aria-label="Mobile navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="../philanthropy.html">Philanthropy</a>
+        <a href="../apparel.html">Apparel</a>
+        <a href="../career.html">Career</a>
+      </nav>
+    </details>
+    <a class="v2hd-rush" href="../rush.html">Rush PCT</a>
   </div>
 </header>
 
-    <!-- ===== 01-hero ===== -->
-<!-- 01 · HERO — communication method: ATMOSPHERE
-     Carried over from the live hero: silk-thread canvas, mouse response, the giant
-     outlined greek watermark, minimal copy, one Rush CTA, the scroll hint.
-     The silk sways CONTINUOUSLY and slowly, at the live site's own drift rate, and
-     leans toward the pointer. It never resolves to a straight line: an earlier
-     build eased it to a dead stop after six seconds, which read as broken.
-     The watermark lift on CTA hover is pure CSS (:has), so it survives with JS
-     disabled. -->
-<section class="v2hero on-dark" id="hero">
+  <main id="main">
 
+    <!-- ===== 01-hero ===== -->
+<!-- The existing silk canvas provides one restrained atmospheric interaction. -->
+<section class="v2hero on-dark" id="hero">
   <canvas class="v2hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
   <div class="v2hero-letters" aria-hidden="true">ΦΧΘ</div>
-
   <div class="v2wrap v2hero-stage">
     <div class="v2hero-inner">
+      <p class="v2hero-eyebrow">Professional Business Fraternity</p>
       <h1 class="v2hero-h1">Phi Chi Theta</h1>
       <p class="v2hero-sub">University of South Florida</p>
-
-      <p class="v2hero-claim">
-        Career preparation, leadership, and a business network before you graduate.</p>
-
-      <p class="v2hero-next">
-        <span class="v2hero-next-lab">Next up</span>
-        <span class="v2hero-next-body">Info Night &middot; Wednesday, September&nbsp;2
-          &middot; 7:00&nbsp;PM &middot; BSN&nbsp;225</span>
-      </p>
-
-      <p class="v2hero-cta">
-        <a class="v2hero-btn" data-hero-cta href="rush.html">Rush PCT
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
-      </p>
+      <p class="v2hero-claim">Career preparation, leadership, and a business network before you graduate.</p>
+      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </div>
-
-  <div class="v2hero-foot">
-    <div class="v2wrap v2hero-foot-row">
-      <span class="v2hero-foot-side">Professional Business Fraternity</span>
-      <span class="v2hero-scroll">Scroll</span>
-      <span class="v2hero-foot-side">Founded 1924</span>
-    </div>
-  </div>
-
+  <div class="v2hero-foot"><div class="v2wrap"><span class="v2hero-scroll">Explore membership <span aria-hidden="true">↓</span></span></div></div>
 </section>
 
     <!-- ===== 02-grow ===== -->
-<!-- 02 - Membership.
-     ONE interaction: selecting a row opens it and closes the other two, and the
-     photograph beside it cross-fades. Only one paragraph is ever on screen, so
-     the whole section fits one screen instead of running past two.
-
-     No outbound links here: three of them pulled the reader out of the copy
-     before the page had made its case, and the page already has one job.
-
-     The base markup below is the finished, script-free state: all three rows
-     open with their photographs in the flow. -->
+<!-- Membership: one open accordion panel and its photograph.
+     Without JavaScript, every description and photograph remains visible. -->
 <section class="grow" id="grow" data-grow aria-label="Membership">
   <div class="v2wrap grow__wrap">
-
-    <div class="grow__intro">
-      <p class="grow__lede">Not sure what comes after college? PCT helps you build the experience, network, and confidence to be ready for what&rsquo;s next.</p>
-    </div>
 
     <div class="grow__stage" data-grow-stage></div>
 
     <div class="grow__rows" data-grow-rows role="group" aria-label="The three parts of the chapter">
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
-            <span class="grow__ttl">Connect with people in your field</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
+            <span class="grow__ttl">Professional Connections</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Meet professionals, alumni, and members who can help you understand the path ahead.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
+          <p class="grow__say">Meet professionals, alumni, and fellow members through the chapter.</p>
         </div>
         <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
           <img src="../assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
@@ -2065,13 +614,14 @@
       </div>
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
-            <span class="grow__ttl">Lead before you graduate</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
+            <span class="grow__ttl">Leadership Experience</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Take ownership of real projects, events, and chapter initiatives while you&rsquo;re still in college.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
+          <p class="grow__say">Plan events, lead projects, and take responsibility for chapter initiatives.</p>
         </div>
         <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
           <img src="../assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
@@ -2080,13 +630,14 @@
       </div>
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
-            <span class="grow__ttl">Find your people</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
+            <span class="grow__ttl">Chapter Community</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Build relationships through Formal, Retreat, intramurals, and the everyday chapter experience.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
+          <p class="grow__say">Take part in Formal, Retreat, intramurals, and everyday chapter life.</p>
         </div>
         <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
           <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async"
@@ -2099,115 +650,37 @@
 </section>
 
     <!-- ===== 03-place ===== -->
-<!-- 04 — Where members have placed.  (cream ground)
-     The second half of the proof chapter that opens with the numbers: same
-     ground, same voice, smaller heading, half-section gap above it, so it
-     reads as the numbers' evidence rather than a new idea.
-
-     ONE signature interaction: two logo belts drifting in opposite directions.
-     The markup below is the finished, JS-FREE state — two static wrapped
-     lists, every name readable, nothing clipped. 04-place.js clones each list
-     once and hands the drift to CSS.
-
-     ------------------------------------------------------------------
-     ASSETS THE OWNER STILL OWES.  Drop these into  assets/logos/  :
-
-       goldman-sachs.svg      Goldman Sachs
-       morgan-stanley.svg     Morgan Stanley
-       citi.svg               Citi
-       wells-fargo.svg        Wells Fargo
-       pnc.svg                PNC
-       raymond-james.svg      Raymond James
-       fisher-investments.svg Fisher Investments
-       sp-global.svg          S&P Global
-       kpmg.svg               KPMG
-       deloitte.svg           Deloitte
-       pwc.svg                PwC
-       amazon.svg             Amazon
-       nestle.svg             Nestlé
-       unilever.svg           Unilever
-       nbcuniversal.svg       NBCUniversal
-       lockheed-martin.svg    Lockheed Martin
-       victorias-secret.svg   Victoria's Secret
-       formula-1.svg          Formula 1
-       new-york-jets.svg      New York Jets
-       usf.svg                USF
-
-     MONOCHROME, SINGLE-COLOUR SVGs WORK BEST. Every cell is a fixed-height
-     box with the mark centred in it, and the CSS caps a logo by height (not
-     width) and desaturates it, so full-colour files still sit inside the
-     design system — but a one-colour file will always look cleaner.
-
-     TO DROP ONE IN: replace that cell's <span class="pl-mark"> with
-
-       <img src="../assets/logos/<slug>.svg" alt="<Company name>"
-            width="160" height="40" loading="lazy" decoding="async">
-
-     Keep width/height on the tag (any values in the file's real ratio) so
-     nothing shifts while it loads. No CSS change is needed, and the belts
-     re-time themselves to the new widths on their own.
-     ------------------------------------------------------------------ -->
+<!-- Member placements use actual local logo assets. Source provenance is kept
+     in assets/logos/sources.json. These identify member destinations, not partners. -->
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
-
   <div class="v2wrap">
     <h2 class="pl-h" id="pl-h">Member Success</h2>
-  </div>
+    <p class="pl-kicker" id="pl-companies">Member placements</p>
+    <ul class="pl-grid" aria-labelledby="pl-companies" role="list">
+      <li class="pl-cell pl-cell--goldman"><img src="../assets/logos/goldman-sachs.png" alt="Goldman Sachs" width="1022" height="429" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--citi"><img src="../assets/logos/citi.svg" alt="Citi" width="56" height="33" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/wells-fargo.png" alt="Wells Fargo" width="220" height="23" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--pnc"><img src="../assets/logos/pnc.svg" alt="PNC" width="205" height="62" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/raymond-james.svg" alt="Raymond James" width="300" height="26" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/fisher-investments.svg" alt="Fisher Investments" width="570" height="41" loading="lazy" decoding="async"></li>
+      <li class="pl-cell"><img src="../assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--kpmg"><img src="../assets/logos/kpmg.svg" alt="KPMG" width="173" height="68" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse"><img src="../assets/logos/deloitte.svg" alt="Deloitte" width="182" height="34" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--pwc"><img src="../assets/logos/pwc.svg" alt="PwC" width="359" height="174" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--amazon"><img src="../assets/logos/amazon.svg" alt="Amazon" width="99" height="33" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--nestle"><img src="../assets/logos/nestle.svg" alt="Nestlé" width="311" height="322" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse"><img src="../assets/logos/unilever.svg" alt="Unilever" width="180" height="39" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/nbcuniversal.png" alt="NBCUniversal" width="2000" height="197" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/lockheed-martin.svg" alt="Lockheed Martin" width="2132" height="322" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--victoria"><img src="../assets/logos/victorias-secret.svg" alt="Victoria’s Secret" width="559" height="182" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--formula"><img src="../assets/logos/formula-1.png" alt="Formula 1" width="480" height="120" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--jets"><img src="../assets/logos/new-york-jets.svg" alt="New York Jets" width="500" height="500" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
+    </ul>
 
-  <div class="pl-rows" role="group" aria-label="Companies where members have placed">
-
-    <div class="pl-row" data-pl-row data-pl-dir="-1">
-      <ul class="pl-track" data-pl-track>
-        <li class="pl-cell">
-          <!-- LOGO HOOK: replace the span with
-               <img src="../assets/logos/goldman-sachs.svg" alt="Goldman Sachs"
-                    width="160" height="40" loading="lazy" decoding="async">
-               Same cell, no CSS change needed. -->
-          <span class="pl-mark">Goldman Sachs</span>
-        </li>
-        <li class="pl-cell"><span class="pl-mark">Morgan Stanley</span></li>
-        <li class="pl-cell"><span class="pl-mark">Citi</span></li>
-        <li class="pl-cell"><span class="pl-mark">Wells Fargo</span></li>
-        <li class="pl-cell"><span class="pl-mark">PNC</span></li>
-        <li class="pl-cell"><span class="pl-mark">Raymond James</span></li>
-        <li class="pl-cell"><span class="pl-mark">Fisher Investments</span></li>
-        <li class="pl-cell"><span class="pl-mark">S&amp;P Global</span></li>
-        <li class="pl-cell"><span class="pl-mark">KPMG</span></li>
-        <li class="pl-cell"><span class="pl-mark">Deloitte</span></li>
-      </ul>
-    </div>
-
-    <div class="pl-row" data-pl-row data-pl-dir="1">
-      <ul class="pl-track" data-pl-track>
-        <li class="pl-cell">
-          <!-- LOGO HOOK: replace the span with
-               <img src="../assets/logos/pwc.svg" alt="PwC"
-                    width="120" height="40" loading="lazy" decoding="async">
-               Same cell, no CSS change needed. -->
-          <span class="pl-mark">PwC</span>
-        </li>
-        <li class="pl-cell"><span class="pl-mark">Amazon</span></li>
-        <li class="pl-cell"><span class="pl-mark">Nestl&eacute;</span></li>
-        <li class="pl-cell"><span class="pl-mark">Unilever</span></li>
-        <li class="pl-cell"><span class="pl-mark">NBCUniversal</span></li>
-        <li class="pl-cell"><span class="pl-mark">Lockheed Martin</span></li>
-        <li class="pl-cell"><span class="pl-mark">Victoria&rsquo;s Secret</span></li>
-        <li class="pl-cell"><span class="pl-mark">Formula 1</span></li>
-        <li class="pl-cell"><span class="pl-mark">New York Jets</span></li>
-        <li class="pl-cell"><span class="pl-mark">USF</span></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- All three figures are VERIFIED against the live site (index.html lines 137
-       to 146): 95% placed, 3.60 chapter GPA, 15 "25 Under 25" honorees. Do not add
-       a fourth and do not invent one. The values are printed literally here, so
-       the markup is the single source of truth and the finished state is the only
-       state with JS off or under reduced motion. There is no count-up any more:
-       The finished value is printed in the markup, so with JS off, under reduced
-       motion, or if the observer never fires, the reader simply sees the number.
-       data-count only tells the counter where to start from. -->
-  <div class="v2wrap">
+    <!-- Existing chapter figures are preserved. Repetition elsewhere on the site
+         is not independent verification; the chapter owns their underlying data. -->
     <ul class="pl-nums" role="list">
       <li class="pl-n">
         <p class="pl-n-val"><span data-count="95">95</span><span class="pl-n-u">%</span></p>
@@ -2219,274 +692,134 @@
       </li>
       <li class="pl-n">
         <p class="pl-n-val"><span data-count="15">15</span></p>
-        <p class="pl-n-lab">&ldquo;25 Under 25&rdquo; honorees</p>
+        <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
       </li>
     </ul>
   </div>
 </section>
 
     <!-- ===== 04-national ===== -->
-<!-- 04 · THE NATIONAL FRATERNITY. Communication method: A FULL STOP.
-
-     This section exists to SEPARATE. The logo belt above it drifts and the
-     photograph band drifts, and back to back they read as one long conveyor.
-     (05-howtojoin has since taken the slot below this one, so those two are
-     no longer adjacent; this plate is still the only dark ground in the
-     middle of the page and still the only section with no motion at all.)
-     Nothing in it moves: no interaction, no transition, no animation, no JS.
-     There is deliberately no 04-national.js. If anything here ever starts to
-     move, the section has lost the only reason it is on the page.
-
-     Every figure and every sentence below is verbatim from the live site
-     (index.html, the "07 · National Chapter" section, plus the charter line
-     from the site footer). Nothing here is invented and nothing is rounded.
-
-     NOTE ON "1924": it appears twice, in the heading and inside the body
-     paragraph. The paragraph is quoted copy and was not altered. No third,
-     ornamental 1924 was added. The live site set a giant ghosted "1924"
-     behind the crest here, and that is exactly what is being left out.
-
-     NO CREST. See the head of 04-national.css for the measurement that
-     disqualified it on this ground. -->
+<!-- National context uses independently supported history and chapter scale. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
   <div class="v2wrap v2nat-in">
-
-    <!-- Crest and heading are ONE lockup. Floated off to the left of the whole
-         block it read as a stray graphic parked in the margin. -->
-    <div class="v2nat-lock">
-      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445"
-           loading="lazy" decoding="async" alt="The Phi Chi Theta crest.">
-      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+    <div class="v2nat-emblem"><img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest"></div>
+    <div class="v2nat-copy">
+      <h2 class="v2nat-h" id="v2nat-h">A National Fraternity</h2>
+      <p class="v2nat-say">Zeta Rho is USF&rsquo;s chapter of Phi Chi Theta, a national professional fraternity for business and economics.</p>
+      <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta <span aria-hidden="true">↗</span></a>
     </div>
-
-    <!-- role="list" is required, not decoration: list-style:none strips the list
-         role in WebKit/VoiceOver, and without it these three figures stop being
-         announced as a set of three. Same treatment as .pl-nums in 03-place.html. -->
     <ul class="v2nat-figs" role="list">
-      <li class="v2nat-fig">
-        <span class="v2nat-n">40+</span>
-        <span class="v2nat-k">Chapters</span>
-      </li>
-      <li class="v2nat-fig">
-        <span class="v2nat-n">23,000+</span>
-        <span class="v2nat-k">Members nationwide</span>
-      </li>
-      <li class="v2nat-fig">
-        <span class="v2nat-n">20+</span>
-        <span class="v2nat-k">Chapter awards</span>
-      </li>
+      <li><span class="v2nat-n">1924</span><span class="v2nat-k">Founded</span></li>
+      <li><span class="v2nat-n">40+</span><span class="v2nat-k">Chapters</span></li>
     </ul>
-
-    <div class="v2nat-tail">
-      <!-- This answers the only question a rushee actually has about the national
-           organisation: what does it get ME. The previous version described the
-           institution instead, which nobody reads. -->
-      <!-- Every claim here is supported by the original site's own copy: alumni and
-           chapters in cities across the country, which matters when members recruit,
-           relocate, or need an introduction in a new market. An earlier draft added
-           "national conferences and case competitions", which has no source. -->
-      <p class="v2nat-say">You are not joining one chapter at one school. You are joining
-        an alumni network in the city you move to after graduation, and a name that the
-        person reading your resume in Charlotte or Chicago already recognises.</p>
-
-    </div>
-
   </div>
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- 05 - College should look like this.
-     A WHEEL, built to MEASURED values rather than guessed ones. See 05-mem.css for
-     the numbers taken off the reference and what each one forced.
-     32 slots, four photographs, three of them real. 32 divides by 4 so the wrap
-     never doubles a frame, and a whole circle means no loop point. -->
+<!-- 05 · Chapter Life. Authentic chapter photography, readable without motion. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
-    <h2 class="mem-h" id="mem-h">College should look like this.</h2>
-  </div>
+    <h2 class="mem-h" id="mem-h">Chapter Life</h2>
 
-  <div class="mem-band">
-    <ul class="mem-wheel" aria-label="Chapter photographs">
-      <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="../assets/photo-letters.jpg" alt="Members in chapter Fall Rush shirts writing cards around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/mem/m2.jpg" alt="Members on the Spring Retreat." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="../assets/photo-service.jpg" alt="Members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28"><img src="../assets/photo-fundraiser.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29"><img src="../assets/photo-letters.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30"><img src="../assets/mem/m2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31"><img src="../assets/photo-service.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+    <ul class="mem-gallery" role="list" aria-label="Chapter photographs">
+      <li class="mem-photo mem-photo-lead">
+        <img src="../assets/photo-letters.jpg" width="1300" height="1300"
+             alt="Chapter members writing cards together around a table."
+             loading="lazy" decoding="async">
+      </li>
+      <li class="mem-photo">
+        <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300"
+             alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center."
+             loading="lazy" decoding="async">
+      </li>
+      <li class="mem-photo">
+        <img src="../assets/photo-service.jpg" width="1300" height="1300"
+             alt="Chapter members loading roof shingles at a service project."
+             loading="lazy" decoding="async">
+      </li>
     </ul>
   </div>
 </section>
 
     <!-- ===== 07-act ===== -->
-<!-- ==========================================================================
-     06 — THE ACT  (final CTA)
-     Ground: --purple-deep. After four sections of motion, everything stops.
-     No canvas, no marquee, no counters, no parallax, no image.
-     ONE interaction: hover/focus the CTA cluster -> the gold plate swells and
-     the secondary line rises into view. Always visible under 768px, on
-     :focus-within, and under prefers-reduced-motion.
-     ========================================================================== -->
-
-<section class="act on-dark" id="act">
-  <div class="v2wrap">
-    <div class="act-inner">
-
-      <h2 class="act-title">Your path starts <em>here.</em></h2>
-
-      <p class="act-line">Rush is six events and it costs nothing. Come to one and find out whether this is your chapter.</p>
-
-
-      <!-- COUNTDOWN.
-           PLACEHOLDER DATE. Fall 2026 rush has already begun, so the clock had
-           nothing left to count down to and the section fell back to a single
-           line. These are MOCK Spring 2027 dates so the countdown is visible.
-           REPLACE data-until and data-ends with the real spring rush dates
-           before this goes in front of anyone.
-           data-until is the single source of truth and must stay in sync
-           with assets/rush-events.ics and the Event JSON-LD on fallrush.html.
-           data-ends marks the last event, so the section can switch to the active
-           state during rush. Remove both attributes and the block hides itself. -->
-      <div class="act-cd" data-until="2027-01-13T19:00:00-05:00"
-           data-ends="2027-01-29T21:00:00-05:00" aria-live="off">
-        <span class="act-cd-lab">Spring rush begins in</span>
-        <div class="act-cd-units">
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="d">&ndash;</span><span class="act-cd-k">Days</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="h">&ndash;</span><span class="act-cd-k">Hours</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="m">&ndash;</span><span class="act-cd-k">Minutes</span></div>
-          <div class="act-cd-u"><span class="act-cd-n" data-cd="s">&ndash;</span><span class="act-cd-k">Seconds</span></div>
-        </div>
-      </div>
-
-      <div class="act-go">
-        <a class="act-cta" href="rush.html">
-          <span class="act-cta-plate" aria-hidden="true"></span>
-          <span class="act-cta-label">Rush PCT</span>
-          <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
-               aria-hidden="true" focusable="false">
-            <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
+<!-- A direct route to rush information, without unconfirmed dates. -->
+<section class="act on-dark" id="act" aria-labelledby="act-title">
+  <div class="v2wrap act-inner">
+    <div class="act-copy">
+      <h2 class="act-title" id="act-title">Rush Phi Chi Theta</h2>
+      <p class="act-line">View eligibility and the rush process.</p>
+    </div>
+    <div class="act-go">
+      <a class="act-cta" href="../rush.html">
+        <span>Rush Information</span>
+        <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
+             aria-hidden="true" focusable="false">
+          <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- Subordinate support band. Deliberately small and quiet: it must never
-     compete with the rush CTA above it. -->
 <aside class="act-band" aria-label="Support the chapter">
   <div class="v2wrap act-band-in">
-    <p class="act-band-copy">Already know us? <span class="act-band-em">Support the chapter.</span></p>
+    <p class="act-band-copy">Support the Chapter</p>
     <div class="act-band-acts">
-      <!-- PLACEHOLDER URL: donations still run through the chapter's old Google
-           Site. Swap this href when a real donation page exists. -->
-      <a class="act-band-btn is-primary" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
-         target="_blank" rel="noopener">Donate Today</a>
-      <a class="act-band-btn" href="apparel.html">Apparel</a>
+      <a class="act-band-btn" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
+         target="_blank" rel="noopener">Donate</a>
+      <a class="act-band-btn" href="../apparel.html">Apparel</a>
     </div>
   </div>
 </aside>
+  </main>
+
 
     <!-- ===== 99-footer ===== -->
-<!-- The site footer, lifted verbatim from index.html so the mock is not missing it.
-     Styling comes from the real stylesheet, linked by the assembler. -->
-<footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a class="brand" href="index.html">
-            <img src="../assets/crest.png" alt="Phi Chi Theta crest">
-            <span class="brand-name">Phi Chi Theta<span class="brand-sub">Zeta Rho · USF</span></span>
-          </a>
-          <p>Phi Chi Theta&rsquo;s Zeta Rho Chapter was established at the University of South
-            Florida in September 2018 by 18 founding business students. Since its founding,
-            the chapter has focused on preparing members for internships and full-time roles
-            through structured professional development, service, and chapter standards.
-            Today, PCT continues to grow as a professional organization that balances career
-            outcomes, philanthropy, and an active chapter culture.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Pages</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="rush.html">Rush</a></li>
-            <li><a href="philanthropy.html">Philanthropy</a></li>
-            <li><a href="apparel.html">Apparel</a></li>
-            <li><a href="career.html">Career Navigator</a></li>
-            <li><a href="fallrush.html">Fall Rush 2026</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Connect with us</h4>
-          <ul>
-            <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram · @pctusf</a></li>
-            <li><a href="https://www.linkedin.com/company/usfphichitheta/" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://pctapparel.printful.me/" target="_blank" rel="noopener">Apparel Store</a></li>
-            <li><a href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a></li>
-          </ul>
-        </div>
+<footer class="v2footer on-dark">
+  <div class="v2wrap">
+    <div class="v2footer-grid">
+      <div class="v2footer-about">
+        <a class="v2footer-brand" href="index.html">
+          <img src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445"
+               loading="lazy" decoding="async">
+          <span class="v2footer-lock">
+            <span class="v2footer-name">Phi Chi Theta</span>
+            <span class="v2footer-sub">Zeta Rho · USF</span>
+          </span>
+        </a>
+        <p>A professional business fraternity at the University of South Florida.</p>
       </div>
-      <div class="footer-mark" aria-hidden="true">Zeta Rho</div>
-      <div class="footer-base">
-        <span>© <span id="year"></span> Phi Chi Theta · Zeta Rho Chapter</span>
-        <span>University of South Florida · Tampa, FL · <a href="portal.html" style="color:inherit">Officer Portal</a></span>
-      </div>
+      <nav class="v2footer-nav" aria-label="Footer pages">
+        <h2 class="v2footer-label">Explore</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="../rush.html">Rush</a></li>
+          <li><a href="../philanthropy.html">Philanthropy</a></li>
+          <li><a href="../apparel.html">Apparel</a></li>
+          <li><a href="../career.html">Career Navigator</a></li>
+        </ul>
+      </nav>
+      <nav class="v2footer-nav" aria-label="Connect with Phi Chi Theta">
+        <h2 class="v2footer-label">Connect</h2>
+        <ul>
+          <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/usfphichitheta/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://pctapparel.printful.me/" target="_blank" rel="noopener">Apparel Store</a></li>
+          <li><a href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a></li>
+        </ul>
+      </nav>
     </div>
-  </footer>
-  </main>
+    <div class="v2footer-base">
+      <span>© Phi Chi Theta · Zeta Rho Chapter</span>
+      <a href="../portal.html">Officer Portal</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* ===== 07-act ===== */
-/* ==========================================================================
-   05-act.js
-   1. window.pctMotion  — the shared motion hook every section registers with.
-                          Defined at load time, outside any init, so it exists
-                          before the lead calls the first section init.
-                          (Load this file before the other section scripts.)
-   2. window.pctInitCountdown — the state-aware rush clock. The CTA itself is
-                          pure CSS and needs no JS at all.
-
-   The chapter progress rail that used to live here (a fixed strip of stage
-   labels and ticks in the right gutter) is deleted, markup, CSS and observer.
-   It labelled the page at the reader rather than helping them, and on a site
-   this short it was chrome for its own sake.
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. SHARED MOTION HOOK
-       window.pctMotion.reduced          live boolean
-       window.pctMotion.onReduce(fn)     fn runs when the user turns reduce ON
-   Turning reduce OFF again does not restart anything; a reload does.
-   If reduce is already ON when a section registers, its teardown runs at once,
-   so teardowns must be safe to call even if the section never started.
-   -------------------------------------------------------------------------- */
+/* Shared reduced-motion lifecycle. This must load before section inits. */
 (function () {
   'use strict';
 
@@ -2534,174 +867,48 @@
 
   window.pctMotion = motion;
 }());
-
-
-
-
-/* ---- countdown -----------------------------------------------------------
-   State aware. Before rush: ticking digits. During rush (between data-until and
-   data-ends): a single line, no digits. After, or with the attributes removed:
-   the block hides itself rather than showing a dead clock. ---------------- */
-window.pctInitCountdown = function () {
-  try {
-    var cd = document.querySelector('.act-cd');
-    if (!cd) return;
-    var startAttr = cd.getAttribute('data-until');
-    var endAttr = cd.getAttribute('data-ends');
-    if (!startAttr) { cd.hidden = true; return; }
-    var start = new Date(startAttr).getTime();
-    var end = endAttr ? new Date(endAttr).getTime() : start;
-    if (isNaN(start)) { cd.hidden = true; return; }
-
-    var lab = cd.querySelector('.act-cd-lab');
-    var out = {};
-    ['d','h','m','s'].forEach(function (k) { out[k] = cd.querySelector('[data-cd="' + k + '"]'); });
-    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-    var timer = null;
-
-    function tick () {
-      var now = Date.now();
-      if (now >= start && now <= end) {          /* rush is underway */
-        cd.classList.add('is-live');
-        if (lab) lab.textContent = 'Rush is underway.';
-        return;
-      }
-      if (now > end) { cd.hidden = true; stop(); return; }   /* season over */
-      var diff = start - now;
-      if (out.d) out.d.textContent = Math.floor(diff / 86400000);
-      if (out.h) out.h.textContent = pad(Math.floor(diff / 3600000) % 24);
-      if (out.m) out.m.textContent = pad(Math.floor(diff / 60000) % 60);
-      if (out.s) out.s.textContent = pad(Math.floor(diff / 1000) % 60);
-    }
-    function stop () { if (timer) { clearInterval(timer); timer = null; } }
-    tick();
-    timer = setInterval(tick, 1000);
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stop();
-      else if (!timer && !cd.hidden) { tick(); timer = setInterval(tick, 1000); }
-    });
-  } catch (e) { if (window.console) console.warn('countdown:', e); }
-};
 /* ===== 00-header ===== */
-/* Shared scroll reveal.
-
-   Sections arrive instead of being already there. One IntersectionObserver for
-   the whole page, one class toggle, and the animation itself is a compositor-only
-   opacity + translate. Nothing here reads layout, and nothing runs after an
-   element has arrived: each target is unobserved the moment it fires.
-
-   THE NO-JS AND REDUCED-MOTION CONTRACT: the hidden state is applied by THIS
-   FILE, not by the stylesheet. If the script never runs, or the reader has asked
-   for reduced motion, no element is ever hidden in the first place, so the page
-   is simply the finished page. A stylesheet that ships opacity:0 and waits for a
-   script is how content disappears when the script fails. */
-window.pctInitReveal = function () {
-  try {
-    if (!('IntersectionObserver' in window)) return;
-
-    var reduced = window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
-
-    /* One target per meaningful block. Deliberately coarse: revealing every
-       paragraph individually is the tell of a page that animates because it can. */
-    var targets = Array.prototype.slice.call(document.querySelectorAll(
-      '.grow__intro, .grow__rows, .grow__stage,' +
-      '.pl-h, .pl-rows, .pl-nums,' +
-      '.v2nat-crest, .v2nat-h, .v2nat-figs, .v2nat-tail,' +
-      '.mem-h,' +
-      '.join-h, .join-sub, .join-steps, .join-close, .join-more,' +
-      '.act-title, .act-sub, .act-cd, .act-go'
-    ));
-    if (!targets.length) return;
-
-    targets.forEach(function (el, i) {
-      el.classList.add('pct-rv');
-      /* a short stagger inside a group, capped so nothing ever waits long */
-      el.style.transitionDelay = ((i % 4) * 70) + 'ms';
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add('pct-rv-in');
-        io.unobserve(en.target);
-      });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-
-    targets.forEach(function (el) { io.observe(el); });
-
-    /* Anything already in view at load arrives immediately rather than waiting
-       for a scroll that may never come. */
-    requestAnimationFrame(function () {
-      targets.forEach(function (el) {
-        var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-          el.classList.add('pct-rv-in');
-          io.unobserve(el);
-        }
-      });
-    });
-
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function () {
-        io.disconnect();
-        targets.forEach(function (el) {
-          el.classList.add('pct-rv-in');
-          el.style.transitionDelay = '';
-        });
-      });
-    }
-  } catch (err) {
-    if (window.console && console.warn) console.warn('pctInitReveal:', err);
-  }
-};
-
-/* The header is transparent while the reader is still on the hero, so header and
-   hero read as one dark field. Once the page has scrolled past a threshold the
-   ground fades in and the bar becomes a real sticky header.
-
-   A sentinel element rather than a scroll listener: one IntersectionObserver
-   callback per crossing instead of a handler on every scroll frame, and no layout
-   read at any point. */
+/* The opaque header is the safe base. JavaScript makes it transparent only
+   while the reader is over the top of the hero. Page content stays visible. */
 window.pctInitStick = function () {
   try {
     var hd = document.querySelector('.v2hd');
-    if (!hd) return;
+    if (!hd || hd.dataset.headerReady === '1') return;
+    hd.dataset.headerReady = '1';
 
-    /* PUBLISH THE HEADER'S REAL HEIGHT.
-       The hero pulls itself up under the transparent header by --v2hd-h, and that
-       token used to be two hardcoded guesses. Measured, the header is 77px on
-       desktop but 131px between 560 and 767 where the nav wraps to a second row,
-       and 72px below 560 where the links drop entirely. So the guess was wrong at
-       every mobile width and left a 66px band of the body's cream above the hero.
-       Measuring it is the only thing that is right at every width. */
-    var root = document.documentElement;
     function publishHeight() {
-      var h = hd.getBoundingClientRect().height;
-      if (h > 0) root.style.setProperty('--v2hd-h', h.toFixed(1) + 'px');
+      var height = hd.getBoundingClientRect().height;
+      if (height > 0) document.documentElement.style.setProperty('--v2hd-h', height.toFixed(1) + 'px');
     }
     publishHeight();
     if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(hd);
     else window.addEventListener('resize', publishHeight, { passive: true });
-    /* the brand lockup uses a webfont, so the bar can grow after it swaps in */
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(publishHeight);
 
-    var sentinel = document.createElement('div');
-    sentinel.setAttribute('aria-hidden', 'true');
-    /* 120px down the page: far enough that the bar does not flicker solid on the
-       tiniest scroll, close enough that it is opaque before it overlaps any
-       cream section. */
-    sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
-    document.body.appendChild(sentinel);
+    if ('IntersectionObserver' in window) {
+      var sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
+      document.body.appendChild(sentinel);
+      hd.classList.toggle('is-over-hero', window.scrollY < 120);
+      new IntersectionObserver(function (entries) {
+        hd.classList.toggle('is-over-hero', entries[0].isIntersecting);
+      }).observe(sentinel);
+    }
 
-    if (!('IntersectionObserver' in window)) { hd.classList.add('is-stuck'); return; }
-
-    new IntersectionObserver(function (entries) {
-      hd.classList.toggle('is-stuck', !entries[0].isIntersecting);
-    }, { threshold: 0 }).observe(sentinel);
+    var menu = hd.querySelector('details');
+    if (menu) {
+      hd.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && menu.open) {
+          menu.open = false;
+          menu.querySelector('summary').focus();
+        }
+      });
+      document.addEventListener('click', function (event) {
+        if (!menu.contains(event.target)) menu.open = false;
+      });
+    }
   } catch (err) {
-    /* a header that never goes solid is survivable; one that throws is not */
     if (window.console && console.warn) console.warn('pctInitStick:', err);
   }
 };
@@ -2888,12 +1095,13 @@ window.pctInitGrow = function () {
     var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
     if (!stage || btns.length < 2) return;
 
-    var rows = [], figs = [];
+    var rows = [], figs = [], panels = [];
     var ok = btns.every(function (b) {
       var row = b.closest('.grow__row');
-      var fig = document.getElementById(b.getAttribute('aria-controls'));
-      if (!row || !fig) return false;
-      rows.push(row); figs.push(fig);
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      var fig = document.getElementById(b.getAttribute('data-grow-figure'));
+      if (!row || !panel || !fig) return false;
+      rows.push(row); figs.push(fig); panels.push(panel);
       return true;
     });
     if (!ok) return;                 /* markup drifted: leave the no-JS state alone */
@@ -2910,6 +1118,8 @@ window.pctInitGrow = function () {
         var on = k === i;
         rows[k].classList.toggle('is-open', on);
         figs[k].classList.toggle('is-active', on);
+        figs[k].setAttribute('aria-hidden', on ? 'false' : 'true');
+        panels[k].hidden = !on;
         btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
       }
     }
@@ -2917,6 +1127,16 @@ window.pctInitGrow = function () {
     btns.forEach(function (b, i) {
       b.addEventListener('click', function () { open(i); });
       b.addEventListener('focus', function () { open(i); });
+      b.addEventListener('keydown', function (e) {
+        var next;
+        if (e.key === 'ArrowDown') next = (i + 1) % btns.length;
+        else if (e.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = btns.length - 1;
+        else return;
+        e.preventDefault();
+        btns[next].focus();
+      });
     });
 
     open(0);
@@ -2925,222 +1145,69 @@ window.pctInitGrow = function () {
   }
 };
 /* ===== 03-place ===== */
-/* ==========================================================================
-   04 — the placement belts.
-
-   The section ships as two static wrapped lists. All this does is clone each
-   list once — so a belt can translate by exactly -50% and land on itself —
-   and then hand the drift to CSS. No rAF, no scroll handler: the browser runs
-   the whole thing on the compositor.
-
-   The only measurement is one width read per row, taken on load, on resize and
-   after the webfont swaps, then cached. A belt's DURATION is derived from that
-   width so both rows move at a fixed pixels-per-second no matter how wide the
-   content is — which is what keeps the speed right the day real logo files
-   replace the type-set wordmarks. Nothing is ever measured inside a frame.
-   ========================================================================== */
-window.pctInitPlace = function () {
-  'use strict';
-  try {
-    var root = document.querySelector('[data-place]');
-    if (!root) return;
-
-    var rows = Array.prototype.slice.call(root.querySelectorAll('[data-pl-row]'));
-    if (!rows.length) return;
-
-    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var reduced = (window.pctMotion && window.pctMotion.reduced) || !!(mq && mq.matches);
-    if (reduced) return;          /* the wrapped list already IS the finished state */
-
-    /* pixels per second, [row one, row two]. Row two runs slower so the two
-       belts never look mechanically twinned. Slow enough to read a name. */
-    var SPEED_DESK  = [30, 24];
-    var SPEED_PHONE = [20, 16];
-    var phoneMq = window.matchMedia ? window.matchMedia('(max-width: 767px)') : null;
-
-    /* ---- clone each list once ------------------------------------------ */
-    var belts = [];
-    for (var r = 0; r < rows.length; r++) {
-      var row = rows[r];
-      if (row.dataset.on) continue;                       /* already running */
-      var track = row.querySelector('[data-pl-track]');
-      if (!track || !track.children.length) continue;
-
-      var cells = Array.prototype.slice.call(track.children);
-      var frag = document.createDocumentFragment();
-      for (var c = 0; c < cells.length; c++) {
-        var copy = cells[c].cloneNode(true);
-        copy.setAttribute('aria-hidden', 'true');         /* names are read once */
-        copy.setAttribute('data-pl-clone', '');
-        frag.appendChild(copy);
-      }
-      track.appendChild(frag);
-      row.dataset.on = '1';
-      belts.push({ row: row, track: track, i: belts.length, w: 0 });
-    }
-    if (!belts.length) return;
-
-    /* ---- timing --------------------------------------------------------- */
-    function speed(i) {
-      var set = (phoneMq && phoneMq.matches) ? SPEED_PHONE : SPEED_DESK;
-      return set[i % set.length];
-    }
-
-    /* measure -> cache -> write a custom property. Never called from a loop. */
-    function measure() {
-      for (var k = 0; k < belts.length; k++) {
-        var b = belts[k];
-        var full = b.track.scrollWidth;                   /* both copies, untransformed */
-        if (!full) continue;
-        var one = full / 2;
-        if (Math.abs(one - b.w) < 4) continue;            /* don't restart a belt for a rounding blip */
-        b.w = one;
-        b.track.style.setProperty('--pl-dur', (one / speed(b.i)).toFixed(2) + 's');
-      }
-    }
-    function remeasure() {
-      for (var k = 0; k < belts.length; k++) belts[k].w = 0;
-      measure();
-    }
-    measure();
-
-    /* Re-measure when the belt can actually have changed width: a resize, the
-       webfont swapping in, real logo files finishing their download. Setting a
-       duration cannot change a track's size, so observing it here cannot loop. */
-    var ro = null;
-    if (typeof ResizeObserver === 'function') {
-      ro = new ResizeObserver(measure);
-      for (var o = 0; o < belts.length; o++) ro.observe(belts[o].track);
-    }
-    var timer = 0;
-    function onResize() { clearTimeout(timer); timer = setTimeout(measure, 150); }
-    window.addEventListener('resize', onResize);
-    if (document.readyState !== 'complete') window.addEventListener('load', measure);
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      document.fonts.ready.then(measure).catch(function () {});
-    }
-    if (phoneMq && phoneMq.addEventListener) {
-      phoneMq.addEventListener('change', remeasure);      /* phone speed differs */
-    }
-
-    /* ---- don't animate off screen --------------------------------------- */
-    var io = null;
-    if ('IntersectionObserver' in window) {
-      io = new IntersectionObserver(function (entries) {
-        for (var e = 0; e < entries.length; e++) {
-          entries[e].target.classList.toggle('is-out', !entries[e].isIntersecting);
-        }
-      }, { rootMargin: '160px 0px' });
-      for (var p = 0; p < belts.length; p++) io.observe(belts[p].row);
-    }
-
-    /* ---- reduced motion, mid-session: put the DOM back --------------------
-       Removing the clones and the data-on flag drops every belt rule, which
-       leaves the static wrapped lists the page ships without JS. Safe to run
-       even if nothing ever started. */
-    function settle() {
-      try {
-        if (ro) { ro.disconnect(); ro = null; }
-        if (io) { io.disconnect(); io = null; }
-        clearTimeout(timer);
-        window.removeEventListener('resize', onResize);
-        window.removeEventListener('load', measure);
-        for (var k = 0; k < belts.length; k++) {
-          var b = belts[k];
-          b.row.classList.remove('is-out');
-          delete b.row.dataset.on;
-          b.track.style.removeProperty('--pl-dur');
-          var dead = b.track.querySelectorAll('[data-pl-clone]');
-          for (var d = 0; d < dead.length; d++) {
-            if (dead[d].parentNode) dead[d].parentNode.removeChild(dead[d]);
-          }
-        }
-      } catch (e) {}
-    }
-
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(settle);
-    } else if (mq && mq.addEventListener) {
-      mq.addEventListener('change', function (e) { if (e.matches) settle(); });
-    }
-  } catch (err) {
-    /* one section must never take the page down */
-    if (window.console && console.warn) console.warn('pctInitPlace:', err);
-  }
-};
-
-/* The count-up. The owner asked for it by name: "make every number load, pick a
-   section and just have them come in", on this section.
-
-   It runs ONCE, the first time the figures are scrolled into view, and each target
-   is unobserved the moment it fires. The finished value is already printed in the
-   markup, so this only ever replaces a correct number with the same correct number
-   at the end. With JS off, under reduced motion, or if the observer never fires,
-   the reader sees the real figure and nothing is missing. */
+/* Placement logos stay still. The chapter figures may count into view once;
+   their complete values remain in the source and in the accessible labels. */
 window.pctInitCount = function () {
-  try {
-    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
-    if (!els.length || !('IntersectionObserver' in window)) return;
+  'use strict';
+  var root = document.querySelector('[data-place]');
+  if (!root || root.dataset.countReady) return;
+  root.dataset.countReady = '1';
+  var els = Array.prototype.slice.call(root.querySelectorAll('[data-count]'));
+  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  if (!els.length || !('IntersectionObserver' in window) || (mq && mq.matches)) return;
 
-    var reduced = (window.pctMotion && window.pctMotion.reduced) ||
-      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    if (reduced) return;
-
-    var DUR = 1500;
-
-    function run(el, i) {
-      var to = parseFloat(el.getAttribute('data-count'));
-      var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
-      if (isNaN(to)) return;
-      /* a short stagger so the three read as one gesture rather than a drum roll */
-      var delay = i * 130;
-      var start = 0;
-      /* reserve the finished width BEFORE zeroing the text, or the figure narrows
-         to one character and springs back out as the count runs */
-      el.style.minWidth = el.textContent.trim().length + 'ch';
-      el.textContent = dec ? (0).toFixed(dec) : '0';
-      function step(ts) {
-        if (!start) start = ts;
-        var k = (ts - start - delay) / DUR;
-        if (k < 0) { requestAnimationFrame(step); return; }
-        if (k > 1) k = 1;
-        /* ease-out cubic: quick off the mark, arrives without overshoot */
-        var e = 1 - Math.pow(1 - k, 3);
-        el.textContent = dec ? (to * e).toFixed(dec) : String(Math.round(to * e));
-        if (k < 1) requestAnimationFrame(step);
-        else el.textContent = dec ? to.toFixed(dec) : String(to);   /* exact, never 94.9997 */
-      }
-      requestAnimationFrame(step);
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        run(en.target, els.indexOf(en.target));
-        io.unobserve(en.target);
-      });
-    }, { threshold: 0.5 });
-
-    els.forEach(function (el) { io.observe(el); });
-
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(function () {
-        io.disconnect();
-        els.forEach(function (el) {
-          var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
-          var v = parseFloat(el.getAttribute('data-count'));
-          if (!isNaN(v)) el.textContent = d ? v.toFixed(d) : String(v);
-        });
-      });
-    }
-  } catch (err) {
-    if (window.console && console.warn) console.warn('pctInitCount:', err);
+  var frames = new Map();
+  var settled = false;
+  function value(el) {
+    return Number(el.dataset.count).toFixed(Number(el.dataset.decimals || 0));
   }
+  els.forEach(function (el) {
+    el.style.minWidth = el.textContent.trim().length + 'ch';
+    var line = el.closest('.pl-n-val');
+    var accessible = document.createElement('span');
+    accessible.className = 'pl-number-label';
+    accessible.textContent = line.textContent.trim();
+    Array.prototype.forEach.call(line.children, function (child) {
+      child.setAttribute('aria-hidden', 'true');
+    });
+    line.appendChild(accessible);
+  });
+  function run(el) {
+    var start = null;
+    function step(now) {
+      if (settled) return;
+      if (start === null) start = now;
+      var progress = Math.min((now - start) / 1100, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = (Number(el.dataset.count) * eased).toFixed(Number(el.dataset.decimals || 0));
+      if (progress < 1) frames.set(el, requestAnimationFrame(step));
+      else { el.textContent = value(el); frames.delete(el); }
+    }
+    frames.set(el, requestAnimationFrame(step));
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      run(entry.target);
+    });
+  }, { threshold:0.6 });
+  els.forEach(function (el) { observer.observe(el); });
+
+  function settle() {
+    settled = true;
+    observer.disconnect();
+    frames.forEach(function (frame) { cancelAnimationFrame(frame); });
+    frames.clear();
+    els.forEach(function (el) { el.textContent = value(el); });
+  }
+  if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(settle);
+  if (mq && mq.addEventListener) mq.addEventListener('change', function (event) { if (event.matches) settle(); });
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitCountdown', 'pctInitReveal', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlace', 'pctInitCount'];
+  var inits = ['pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitCount'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

@@ -1,131 +1,47 @@
-/* ============================================================
-   05 - College should look like this.   THE WHEEL.
-
-   MEASURED, not guessed. Off the reference image, in its own 1872px frame:
-
-       card width      538px      = 0.288 of the viewport
-       cards across    3.48
-       card height     >800px cut = h/w of at least 1.49
-       arc drop        115px from the centre card to its neighbour
-
-   The previous build measured 293px wide at 1440, which is 0.203 of the
-   viewport: 1.4x too narrow, 4.9 across instead of 3.5, and h/w 1.66 instead
-   of 1.5. Tall, skinny and too many. Every earlier pass was tuned by eye and
-   every one of them missed on all four numbers at once.
-
-   THE GEOMETRY. Each card sits on a circle of radius R, rotated to its own
-   angular position so it points radially outward:
-
-       w / R  =  k * step / (1 + k * c * step / 2)     [h = c*w, k = overlap]
-
-   Solving for the four measured targets gives 32 slots at an 11.25deg step,
-   c = 1.50, k = 1.15, R = 149vw. At 1440 that lands:
-
-       width 415px (0.288 of viewport)   across 3.47      [ref 0.288, 3.48]
-       h/w 1.50                          drop 120px       [ref 1.49,  115px]
-       edge card 19.5deg off vertical    overlap 54px
-
-   A whole circle means one revolution returns to the identical frame, so the
-   spin has no loop point anywhere.
-   ============================================================ */
-
+/* 05 · Chapter Life. The photographs carry the section; no duplicated rail,
+   autoplay, hidden content, or placeholders. */
 .mem{
   background:var(--paper);
-  /* No bottom padding and a -1px pull, so the purple of the section below lands
-     on the same pixel row as the cut and does the slicing. */
-  /* Deliberately less than --section on top: this is the one section that must
-     land whole on a single screen, heading included. */
-  padding-block:clamp(3rem,5.5vw,4.5rem) 0;
-  margin-bottom:-1px;
+  padding-block:clamp(3.5rem,7vw,6.5rem);
 }
 
 .mem-h{
-  text-align:center;
-  /* Command. This heading sits over the largest photography on the page and was
-     being out-scaled by it. */
-  font-size:clamp(2.6rem,6.4vw,5.4rem);
-  letter-spacing:-.02em;
-  margin:0 0 clamp(1.3rem,2.4vw,1.9rem);
+  margin:0 0 clamp(1.5rem,3vw,2.5rem);
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  line-height:1.05;
+  letter-spacing:-.025em;
 }
 
-/* ---- the band: a window onto the top of the wheel ---------------------- */
-.mem-band{
-  --R:149vw;                            /* 2148px at a 1440 viewport */
-  /* 0.175, down from 0.1932. The section has to fit ONE SCREEN with its heading,
-     and at 0.1932 the card was 622px tall, the band 652, and the whole section
-     952px against an 813px viewport. At 0.175 the card is 376px wide and 564
-     tall. Arc spacing at this step is 366px, so neighbours now sit 10px apart
-     instead of overlapping by 54: they touch rather than pile up. */
-  --w:calc(var(--R) * 0.175);
-  --h:calc(var(--w) * 1.5);             /* the reference's ratio, measured */
-  --step:11.25deg;                      /* 360 / 32 */
-  --inset:.7rem;
-
-  position:relative;
-  /* Tall enough to clear ONE WHOLE CARD plus its inset, and no taller. The card
-     at the top of the arc is therefore fully visible, bottom edge and all, while
-     every card the curve has carried downward runs past the cut. That asymmetry
-     is the reference's silhouette; an earlier height cut all of them equally and
-     lost it. --h is 1.25 * 0.15736 * --R, so this tracks the circle. */
-  height:calc(var(--h) + var(--inset) + 1.1rem);
-  overflow:hidden;                      /* this is the cut */
-  isolation:isolate;                    /* keep cards under the next section's ground */
-}
-
-/* The hub sits below the band by one radius plus half a card, so the topmost
-   card's upper edge lands --inset below the band's top edge. Rotating THIS
-   element carries every card around the circle at once, which is one
-   compositor-only transform rather than 36 per frame. */
-.mem-wheel{
+.mem-gallery{
   list-style:none;
   margin:0;
   padding:0;
-  position:absolute;
-  left:50%;
-  top:calc(var(--R) + var(--h) / 2 + var(--inset));
-  width:0;
-  height:0;
-  /* 150s a revolution: one card advances a slot every 4.7s. 62s read as a
-     conveyor rather than a drift. */
-  animation:memSpin 150s linear infinite;
-  will-change:transform;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(.75rem,1.5vw,1.25rem);
 }
 
-.mem-i{
-  position:absolute;
-  left:0;
-  top:0;
-  width:var(--w);
-  height:var(--h);
-  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
-  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
-  background:var(--paper-deep);
-  /* Rounded, like the reference. Square corners on a tilted card read as a
-     cropped screenshot; a radius reads as a printed card. */
-  border-radius:clamp(10px,1.1vw,18px);
+.mem-photo{
+  min-width:0;
+  aspect-ratio:1;
   overflow:hidden;
-  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
-}
-.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
-
-@keyframes memSpin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(-360deg)}   /* negative: the wheel carries photographs to the right */
+  background:var(--paper-deep);
+  border-radius:2px;
 }
 
-.mem-band:hover .mem-wheel{animation-play-state:running}  /* never pause on hover */
+.mem-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-/* ---- phones: a tighter circle so the cards are not postage stamps ------- */
+/* A complete first photograph anchors the phone composition. Two square
+   supporting images sit beneath it, keeping every photograph visible without
+   a horizontal rail or a lengthy stack of three full-width images. */
 @media (max-width:767px){
-  .mem-band{
-    --R:330vw;        /* same w/R ratio, so the overlap is identical */
-    --inset:.7rem;
-  }
-}
-
-/* ---- reduced motion: the wheel stops. It does not disappear. ------------ */
-/* The composition is the content here, so the finished state is the wheel at
-   rest, not a fallback strip. */
-@media (prefers-reduced-motion:reduce){
-  .mem-wheel{animation:none}
+  .mem{padding-block:3.5rem}
+  .mem-h{font-size:clamp(2.3rem,9vw,3rem);margin-bottom:1.5rem}
+  .mem-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+  .mem-photo-lead{grid-column:1 / -1}
 }

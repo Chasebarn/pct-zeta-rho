@@ -13,12 +13,13 @@ window.pctInitGrow = function () {
     var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
     if (!stage || btns.length < 2) return;
 
-    var rows = [], figs = [];
+    var rows = [], figs = [], panels = [];
     var ok = btns.every(function (b) {
       var row = b.closest('.grow__row');
-      var fig = document.getElementById(b.getAttribute('aria-controls'));
-      if (!row || !fig) return false;
-      rows.push(row); figs.push(fig);
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      var fig = document.getElementById(b.getAttribute('data-grow-figure'));
+      if (!row || !panel || !fig) return false;
+      rows.push(row); figs.push(fig); panels.push(panel);
       return true;
     });
     if (!ok) return;                 /* markup drifted: leave the no-JS state alone */
@@ -35,6 +36,8 @@ window.pctInitGrow = function () {
         var on = k === i;
         rows[k].classList.toggle('is-open', on);
         figs[k].classList.toggle('is-active', on);
+        figs[k].setAttribute('aria-hidden', on ? 'false' : 'true');
+        panels[k].hidden = !on;
         btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
       }
     }
@@ -42,6 +45,16 @@ window.pctInitGrow = function () {
     btns.forEach(function (b, i) {
       b.addEventListener('click', function () { open(i); });
       b.addEventListener('focus', function () { open(i); });
+      b.addEventListener('keydown', function (e) {
+        var next;
+        if (e.key === 'ArrowDown') next = (i + 1) % btns.length;
+        else if (e.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = btns.length - 1;
+        else return;
+        e.preventDefault();
+        btns[next].focus();
+      });
     });
 
     open(0);

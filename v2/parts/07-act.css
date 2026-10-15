@@ -1,412 +1,89 @@
-/* ==========================================================================
-   05 — THE ACT (final CTA)
-   Every selector is scoped to .act*.
-   ========================================================================== */
+/* A compact closing section with one clear action. */
+.act{
+  padding-block:clamp(3.25rem,7vw,5.5rem);
+  background:var(--purple-deep);
+  color:var(--paper);
+}
+.act-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:2rem 3rem;
+}
+.act-copy{min-width:0}
+.act-title{
+  margin:0;
+  font-size:clamp(2.1rem,4.5vw,3.35rem);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  color:var(--paper);
+}
+.act-line{
+  max-width:42ch;
+  margin:1rem 0 0;
+  font-size:1rem;
+  line-height:1.65;
+  color:rgba(250,248,243,.78);
+}
+.act-go{flex:none}
+.act-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9rem;
+  max-width:100%;
+  min-height:48px;
+  padding:.8rem 1.4rem;
+  border:1px solid var(--gold);
+  border-radius:2px;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--font-text);
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.4;
+  text-decoration:none;
+}
+.act-cta-arrow{flex:none;transition:transform 200ms var(--ease)}
+.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
+.act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:translateX(3px)}
+.act-cta:focus-visible{outline-offset:5px}
 
-/* --------------------------------------------------------------------------
-   PART A — THE ACT
-   Flat --purple-deep, no image, no ornament. The move is the empty space:
-   the vertical rhythm is deliberately larger than --section so the page
-   audibly stops here.
-   -------------------------------------------------------------------------- */
-
-.act {
-  position: relative;
-  background: var(--purple-deep);
-  color: rgba(250, 248, 243, 0.78);
-  padding: clamp(6rem, 12vw, 10rem) 0 clamp(5rem, 9vw, 7.5rem);
-  text-align: center;
-  /* .act-title::before is a 150%-wide radial bloom behind the headline. On a
-     390px phone it reached 95px past the viewport and gave the whole document
-     a horizontal scrollbar. Nothing in this section needs to escape it. */
-  overflow: hidden;
-
-  /* ONE light source, not two. The previous version stacked a radial in the upper
-     right and a second in the lower left, and both had a visible edge where they
-     ran out: two blobs dropped on a flat panel. This is a single ellipse centred
-     ABOVE the section's own top edge and wider than the section, so what shows is
-     only its smooth middle. Its falloff runs past the bottom of the panel, so
-     there is nowhere for the reader to see it end.
-
-     Three stops rather than two: a straight two stop radial in sRGB is what
-     produces the grey banded ring that reads as cheap. */
-  background:
-    radial-gradient(135% 118% at 62% -22%,
-      rgba(126, 92, 184, 0.50) 0%,
-      rgba(96, 66, 150, 0.26) 34%,
-      rgba(58, 36, 92, 0.10) 62%,
-      rgba(36, 23, 51, 0) 100%),
-    var(--purple-deep);
+.act-band{
+  padding-block:1rem;
+  border-bottom:1px solid var(--line);
+  background:var(--paper-deep);
 }
-
-.act-inner {
-  max-width: 52rem;
-  margin-inline: auto;
+.act-band-in{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:.25rem 1.5rem;
 }
-
-.act-title {
-  font-size: clamp(3.2rem, 8vw, 6.2rem);
-  letter-spacing: -0.02em;
-  color: var(--paper);
+.act-band-copy{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
+.act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
+.act-band-btn{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  font-size:.9rem;
+  color:var(--ink-soft);
+  text-decoration:underline;
+  text-decoration-color:rgba(25,18,33,.25);
+  text-underline-offset:.3em;
 }
-.act-title em {
-  font-style: italic;
-  color: var(--gold-soft);
+.act-band-btn:hover{color:var(--purple);text-decoration-color:var(--purple)}
+@media (max-width:767px){
+  .act-inner{display:block}
+  .act-title{max-width:15ch}
+  .act-go{margin-top:1.5rem}
+  .act-line{font-size:.95rem;max-width:35ch}
 }
-
-.act-line {
-  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
-  max-width: 33rem;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.5;
-  color: rgba(250, 248, 243, 0.72);
-}
-
-/* ---- the CTA cluster: button, secondary line, term tag ---- */
-
-.act-go {
-  margin-top: clamp(2.75rem, 5.5vw, 3.75rem);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.act-cta {
-  position: relative;
-  isolation: isolate;              /* keeps the -1 plate above the section bg */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  min-height: 52px;
-  padding: 1rem 2.15rem;
-  font-family: var(--font-text);
-  font-size: 0.94rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: var(--ink);
-}
-
-/* The plate is a separate layer so the swell is a pure transform and the
-   label never distorts or reflows. */
-.act-cta-plate {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--gold);
-  border-radius: 2px;
-  transform-origin: 50% 50%;
-  /* the glow is a box-shadow on the plate rather than a filter, so it stays on
-     the compositor and never rasterises the button's text */
-  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
-  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease),
-              background-color 420ms var(--ease);
-}
-
-.act-cta-arrow {
-  flex: none;
-  transition: transform 420ms var(--ease);
-}
-
-/* The secondary line. It is a real link, always in the layout (so revealing it
-   shifts nothing), and it is the second half of the one interaction. */
-.act-more {
-  padding: 0.9rem 0.5rem 0.35rem;  /* padding, not margin: the hover area stays
-                                      contiguous with the button, no flicker */
-  font-size: 0.86rem;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  color: rgba(250, 248, 243, 0.82);
-  /* Always readable. It carries real information (events, eligibility, FAQs), so it
-     must not be hover-gated: keyboard, touch and JS-off visitors never hover.
-     Hover/focus only lifts it from subdued to full. */
-  opacity: 0.72;
-  transform: translateY(2px);
-  transition: opacity 340ms var(--ease), transform 340ms var(--ease);
-  /* 44px minimum pointer target (WCAG 2.5.8) */
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
-.act-more-text {
-  border-bottom: 1px solid rgba(230, 198, 91, 0.4);
-  padding-bottom: 2px;
-}
-.act-more-arrow {
-  display: inline-block;
-  margin-left: 0.3rem;
-}
-
-/* THE ONE INTERACTION — one trigger, two coordinated results. */
-.act-go:hover .act-cta-plate,
-.act-go:focus-within .act-cta-plate {
-  transform: scale(1.05, 1.12);
-  background: var(--gold-soft);
-  box-shadow: 0 0 46px 6px rgba(230, 198, 91, 0.34);
-}
-.act-go:hover .act-cta-arrow,
-.act-go:focus-within .act-cta-arrow {
-  transform: translateX(4px);
-}
-.act-go:hover .act-more,
-.act-go:focus-within .act-more {
-  opacity: 1;
-  transform: none;
-}
-/* The plate swells past the anchor box, and the ring is gold on gold — push the
-   focus ring out far enough to stay legible against the purple. */
-.act-cta:focus-visible { outline-offset: 7px; }
-
-.act-more:hover {
-  color: var(--gold-soft);
-}
-.act-more:hover .act-more-text {
-  border-bottom-color: var(--gold-soft);
-}
-
-/* The sub was set at body size on the page's single most important screen, which
-   is why the whole block read small. */
-.act-sub {
-  margin-top: 1.5rem;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.5;
-}
-
-/* --------------------------------------------------------------------------
-   PART A2 — subordinate support band, on cream.
-   Gold is never used here (--gold on --paper fails contrast); purple carries it.
-   -------------------------------------------------------------------------- */
-
-.act-band {
-  background: var(--paper-deep);
-  border-top: 1px solid var(--line);
-  padding: 1.5rem 0;
-}
-
-.act-band-in {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-}
-
-.act-band-copy {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--ink-mute);
-}
-.act-band-em {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.act-band-acts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.act-band-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.5rem 1.3rem;
-  border: 1px solid rgba(25, 18, 33, 0.5);  /* 3.3:1 on --paper-deep: the border
-                                               is this control's only boundary */
-  border-radius: 2px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: var(--ink);
-  background: transparent;
-  transition: none;
-}
-.act-band-btn:hover {
-  border-color: var(--purple);
-  color: var(--purple);
-}
-.act-band-btn.is-primary {
-  background: var(--purple);
-  border-color: var(--purple);
-  color: var(--paper);
-}
-.act-band-btn.is-primary:hover {
-  background: var(--purple-deep);
-  border-color: var(--purple-deep);
-  color: var(--paper);
-}
-
-/* --------------------------------------------------------------------------
-   MOBILE — different execution, not a shrunken desktop.
-   The hover mechanic does not exist on a phone, so nothing is hidden behind
-   it: the button goes full width for the thumb and the secondary line is
-   simply stated underneath as a second, quieter tap target.
-   -------------------------------------------------------------------------- */
-
-@media (max-width: 767px) {
-  .act {
-    padding: clamp(5.5rem, 18vw, 7.5rem) 0;
-    text-align: left;
-  }
-  .act-inner { max-width: none; }
-  .act-line { margin-inline: 0; }
-
-  .act-go {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    max-width: 22rem;
-  }
-  .act-cta {
-    min-height: 56px;
-    padding-inline: 1.5rem;
-  }
-  /* no swell, no reveal: both are always in their finished state */
-  .act-cta-plate,
-  .act-cta-arrow { transition: none; }
-  .act-go:hover .act-cta-plate,
-  .act-go:focus-within .act-cta-plate,
-  .act-go:hover .act-cta-arrow,
-  .act-go:focus-within .act-cta-arrow { transform: none; }
-  .act-more {
-    align-self: flex-start;
-    padding: 0.95rem 0 0;
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .act-band-in {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .act-band-acts { width: 100%; }
-  .act-band-btn { flex: 1 1 auto; }
-}
-
-/* --------------------------------------------------------------------------
-   REDUCED MOTION — every transition resolves to its finished state.
-   The secondary line is simply always readable; nothing swells, nothing moves.
-   -------------------------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .act-more {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .act-cta-plate,
-  .act-cta-arrow {
-    transition: none;
-  }
-  .act-go:hover .act-cta-plate,
-  .act-go:focus-within .act-cta-plate { transform: none; }
-  .act-go:hover .act-cta-arrow,
-  .act-go:focus-within .act-cta-arrow { transform: none; }
-}
-
-/* ------------------------------------------------------------------
-   COUNTDOWN + headline bloom (added in the final pass)
-   ------------------------------------------------------------------ */
-
-/* A very diffuse white bloom so the headline separates from the ground.
-   Restraint is the point: this must never read as neon. Radial, low alpha,
-   sitting behind the type and nothing else. */
-.act-title { position: relative; }
-.act-title::before {
-  content: "";
-  position: absolute; left: 50%; top: 50%;
-  width: 150%; aspect-ratio: 2 / 1;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side,
-    rgba(250,248,243,.08) 0%, rgba(250,248,243,.03) 45%, rgba(250,248,243,0) 72%);
-  pointer-events: none; z-index: -1;
-}
-
-.act-cd { margin: 2.4rem 0 2.6rem; }
-.act-cd[hidden] { display: none; }
-.act-cd-lab {
-  display: block;
-  font-family: var(--font-text);
-  font-size: .72rem; font-weight: 700; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--gold-soft);
-  margin-bottom: 1rem;
-}
-.act-cd-units {
-  display: flex; justify-content: center;
-  gap: clamp(1.1rem, 3.4vw, 2.6rem);
-}
-.act-cd-u { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
-.act-cd-u + .act-cd-u {
-  border-left: 1px solid var(--line-dark);
-  padding-left: clamp(1.1rem, 3.4vw, 2.6rem);
-}
-.act-cd-n {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1;
-  color: var(--paper); font-variant-numeric: tabular-nums;
-}
-.act-cd-k {
-  font-family: var(--font-text);
-  font-size: .68rem; font-weight: 600; letter-spacing: .16em;
-  text-transform: uppercase; color: rgba(250,248,243,.6);
-}
-/* the active state replaces the digits entirely */
-.act-cd.is-live .act-cd-units { display: none; }
-.act-cd.is-live .act-cd-lab {
-  font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.9rem);
-  font-weight: 400; letter-spacing: 0; text-transform: none;
-  color: var(--gold-soft); margin: 0;
-}
-
-@media (max-width: 560px) {
-  .act-cd-units { gap: .9rem; }
-  .act-cd-u + .act-cd-u { padding-left: .9rem; }
-}
-
-
-/* Support band: quieter still. Rush is the page's conversion; these are for
-   people who already know us, so they read as text links with a hairline, not
-   as buttons competing with the gold CTA above. */
-.act-band-btn {
-  background: none !important;
-  border: 0 !important;
-  border-bottom: 1px solid rgba(25, 18, 33, .28) !important;
-  border-radius: 0 !important;
-  padding: .3rem 0 .25rem !important;
-  font-size: .92rem !important;
-  font-weight: 600 !important;
-  color: var(--ink-soft) !important;
-  letter-spacing: 0 !important;
-  /* 44px pointer target without looking like a button */
-  display: inline-flex !important;
-  align-items: center;
-  min-height: 44px;
-}
-.act-band-btn:hover { color: var(--purple) !important; border-bottom-color: var(--purple) !important; }
-
-
-/* ------------------------------------------------------------------
-   ARRIVAL FLARE. The owner liked the glow but not as a permanent state:
-   "it's just supposed to glow when you scroll to it, the button glows real
-   quick." 00-header.js adds .pct-rv-in when this element is first scrolled
-   into view, so the flare hangs off that one class and can only ever fire
-   once. It is an animation, not a transition, so it returns to rest by
-   itself and leaves no lit state behind.
-   ------------------------------------------------------------------ */
-.act-go.pct-rv-in .act-cta-plate{
-  animation:actFlare 1500ms var(--ease) 260ms both;
-}
-@keyframes actFlare{
-  0%   { box-shadow:0 0 0 0 rgba(230,198,91,0); }
-  28%  { box-shadow:0 0 52px 10px rgba(230,198,91,.52); }
-  100% { box-shadow:0 0 0 0 rgba(230,198,91,0); }
+@media (max-width:420px){
+  .act-band-in{align-items:flex-start;flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){
-  .act-go.pct-rv-in .act-cta-plate{animation:none}
+  .act-cta-arrow{transition:none}
+  .act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:none}
 }

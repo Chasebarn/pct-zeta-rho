@@ -1,83 +1,41 @@
-# PCT homepage v2 — build contract
+# V2 design and implementation requirements
 
-Output goes to `v2/index.html` (assembled by the lead from your parts).
-**You write three files and nothing else.** Do not touch any other file in the repo.
+Maintain the existing GitHub Pages site and the chapter's visual identity.
+Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edits.
 
-  v2/parts/NN-<name>.html   the <section> markup only (no <html>/<head>/<body>)
-  v2/parts/NN-<name>.css    styles for your section only, every selector scoped
-  v2/parts/NN-<name>.js     one global init function, see below
+## Design and copy
 
-## THE ONE HARD RULE
+- Use purple, cream, gold, Instrument Serif at weight 400, and Inter for text.
+- Reuse `tokens.css` for colors, spacing, typography, widths, and easing.
+- Use gold ink on light surfaces and soft gold on dark surfaces for small text.
+- Keep headings short and factual. Membership has no overall visible heading.
+- Preserve Member Success, Chapter Life, and Rush Phi Chi Theta as section names.
+- Use actual employer logos and real chapter photographs. Record new asset sources.
+- Use one clear primary action at each decision point and comfortably sized buttons.
+- Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
+- Use motion only where it serves the page. Static layouts are appropriate.
 
-**Every section has ONE signature interaction and no more than one.**
-Hero = canvas. Graduate Confident = image accordion. Proof = pinned numbers.
-Placements = logo marquee. Experience = 3D photo rail. CTA = restrained.
+## Responsive behavior
 
-Do not add parallax + magnetic cursor + particles + tilt + blobs on top of your one
-move. The flex is "this could only have been built for this chapter", not "look how
-many animations I know".
+- No horizontal page overflow, clipped headings, pinned scrolling, or scroll hijacking.
+- At phone widths, use readable text, consistent gutters, compact section spacing,
+  a one-row header, an accessible disclosure menu, and a compact Rush section.
+- Logos remain still and legible; the gallery keeps all real photos available.
+- Review the whole page visually on phones, tablets, and desktops after integration.
 
-## THE POINT
+## Engineering and accessibility
 
-Scrolling must change HOW information is communicated, not just what:
-atmosphere -> interaction -> scale/proof -> emotion -> action.
-One brand throughout: same type, colour, spacing, easing, border and photo treatment.
-
-## DESIGN TOKENS (already defined in v2/tokens.css, just use them)
-
-  --purple-deep #241733   --purple #4b2e83     --purple-hero #2b1c3d
-  --gold #c9a227          --gold-soft #e6c65b  --gold-ink #8a6d14
-  --paper #faf8f3         --paper-deep #f2eee4
-  --ink #191221           --ink-soft #453a52   --ink-mute #6f6580
-  --line #e8e2d4 (on cream)   --line-dark #3a2b52 (on purple)
-  --wrap 1240px  --gutter clamp(1.25rem,4vw,3rem)  --section clamp(5rem,10vw,9rem)
-  --ease .22,.61,.36,1     --dur 620ms
-
-FONTS: 'Instrument Serif' (display, **weight 400 only**, italic available) and
-'Inter' (text). Never Arial. Never synthetic-bold the serif.
-GOLD RULE: --gold only on dark grounds. On cream use --gold-ink (4.62:1). Never
---gold on --paper (2.28:1, fails contrast).
-
-## NON-NEGOTIABLE ENGINEERING
-
-1. **No JS, no content.** Never ship an element whose readable state depends on JS.
-   Base CSS = the finished, visible state. JS only adds motion. Test by disabling JS:
-   all copy must be on screen and all links clickable.
-2. **prefers-reduced-motion**: every loop, transition and transform must resolve to
-   its FINISHED state (never its start state) under
-   `@media (prefers-reduced-motion: reduce)`.
-3. **Compositor only**: animate `transform` and `opacity`. Never animate width,
-   height, top, left, or `transition: all`. `will-change` only on the 1-3 elements
-   that animate continuously, never on a repeated collection.
-4. **No layout reads inside rAF.** Measure on load and on resize, cache it, then only
-   write transforms in the loop.
-5. **Every <img>** needs width, height, alt, and `loading="lazy"` + `decoding="async"`
-   unless it is above the fold. Images must never cause layout shift.
-6. Vanilla only. No frameworks, no libraries, no new dependencies, no build step.
-7. Touch targets >= 44px. Keyboard reachable. Visible :focus-visible ring
-   (gold-soft on dark, purple on cream).
-
-## MOBILE GETS ITS OWN CHOREOGRAPHY
-
-Do not shrink the desktop version. Under 768px your section must use a different,
-appropriate execution (stated per section below). Nothing may pin, hijack scroll, or
-scroll horizontally on a phone.
-
-## YOUR JS FILE
-
-Export exactly one global init, named for your section, that the lead calls once:
-
-    window.pctInitHero = function () { ... }
-
-It must: no-op safely if its elements are absent; register any teardown on the shared
-`window.pctMotion.onReduce(fn)` hook so reduced-motion can stop it mid-session; and
-never throw (wrap risky work in try/catch so one section cannot kill the page).
-
-## PLACEHOLDER PHOTOGRAPHY (already rendered, use these paths)
-
-  assets/ph/career-1.png  leadership-1.png  social-1.png     1000x1250 (4:5)
-  assets/ph/poly-1..5.png                                     700x700  (1:1)
-  assets/ph/rail-formal|retreat|summit|service|intra|beach|speaker|group.png  1200x800 (3:2)
-
-They are branded purple placeholders. Treat them as real photographs: same rounding
-(none), same 1px --line-dark border treatment, same object-fit: cover.
+1. Base HTML and CSS must show complete content and working links without JavaScript.
+   Scripts progressively enhance membership controls, numbers, header state, and hero.
+2. Respect `prefers-reduced-motion`, including changes during the session. Register
+   teardown work with `window.pctMotion.onReduce` when appropriate.
+3. Animate transforms and opacity; avoid expensive layout work inside animation loops.
+4. Give images accurate dimensions and alternative text; lazy-load below-fold images.
+5. Keep controls keyboard reachable, touch targets at least 44px, and focus rings visible
+   against their actual background. Expanded controls must expose the correct state.
+6. Keep local references and accessible labels valid. The V2 homepage stays in `/v2/`;
+   dedicated pages live at the repository root.
+7. Keep selectors scoped to their part. Use vanilla HTML, CSS, and JavaScript without
+   new runtime dependencies. Initializers must safely tolerate missing markup.
+8. The lead owns integration and generated output. Delegate ownership of specific parts
+   explicitly; do not overwrite another contributor's work.

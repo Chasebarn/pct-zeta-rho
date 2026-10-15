@@ -1,0 +1,210 @@
+{
+  "purpose": "Existing member-placement identities only. Logos do not indicate sponsorship, endorsement, or partnership. Trademark rights remain with their respective owners. Assets rendered in monochrome by CSS; underlying artwork is unchanged.",
+  "assets": [
+    {
+      "file": "amazon.svg",
+      "source_url": "https://www.aboutamazon.com/",
+      "source_page": "https://www.aboutamazon.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Unmodified logo SVG extracted from the official website footer.",
+      "sha256": "99cc06afc2c4461860638918e1129620dd839c4818846a33b3e870485ee86b39",
+      "viewBox": "0 0 99 33",
+      "width": "99",
+      "height": "33"
+    },
+    {
+      "file": "citi.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Citi_logo_March_2023.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:Citi_logo_March_2023.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "cb599b2ea12080cb20c66af5eba4accd5aab90fa28a9d72725cdcff78354f389",
+      "viewBox": "0 0 56 33",
+      "width": "100%",
+      "height": "100%"
+    },
+    {
+      "file": "deloitte.svg",
+      "source_url": "https://www.deloitte.com/content/dam/assets-shared/logos/svg/a-d/deloitte.svg",
+      "source_page": "https://www.deloitte.com/us/en.html",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "5bb42e99345cf26877a6460d85a8c40b2ce85e66d64a00307a9419364939ba08",
+      "viewBox": "0 0 182 34",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "fisher-investments.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Fisher_Investments_Logo.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:Fisher_Investments_Logo.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "686a9e3a29a6ea1603f14fdfcfb641cd6d6c135e50bba4272b3983b3024ff373",
+      "viewBox": "0 0 570 41",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "formula-1.png",
+      "source_url": "https://www.formula1.com/etc/designs/fom-website/images/f1-logo-red.png",
+      "source_page": "https://www.formula1.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded logo asset; no artwork redrawn.",
+      "sha256": "12d6a7e99e94d7191b26b8d97c48b2e6730d1a1eaadbbe4d532db28691b61bb1"
+    },
+    {
+      "file": "goldman-sachs.png",
+      "source_url": "https://www.goldmansachs.com/images/gs-wordmark-black.png",
+      "source_page": "https://www.goldmansachs.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "d0351a6acf2103d4ba8ccf8c281abf91afa67915a4f83a0a7820bd367bc8a806"
+    },
+    {
+      "file": "kpmg.svg",
+      "source_url": "https://kpmg.com/us/en.html",
+      "source_page": "https://kpmg.com/us/en.html",
+      "retrieved": "2026-10-15",
+      "notes": "Unmodified logo SVG extracted from the official website header.",
+      "sha256": "f7a61f627803685c3e93edb9ec12ccb5dac9de7a9cf1cbb21b5415093536e31c",
+      "viewBox": "0 0 173 68",
+      "width": "173",
+      "height": "68"
+    },
+    {
+      "file": "lockheed-martin.svg",
+      "source_url": "https://www.lockheedmartin.com/content/dam/lockheed-martin/general/lm-logo.svg",
+      "source_page": "https://www.lockheedmartin.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "7103bb3a789664b70a123ca5e29ddd35ff34dcee3bfde02003acc61ea186d0c0",
+      "viewBox": "0 0 2131.92 322.04",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "morgan-stanley.png",
+      "source_url": "https://www.morganstanley.com/etc.clientlibs/msdotcomr4/clientlibs/components/site/resources/img/logo-black.png",
+      "source_page": "https://www.morganstanley.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "5e27e942d803e55231e501664599357b3b8d5e721b325743c46f6afa30d3185b"
+    },
+    {
+      "file": "nbcuniversal.png",
+      "source_url": "https://cdn2.nbcuni.com/NBCUniversal/NBCUniversal_H-color-neg.png?VersionId=RWlVD5Y7W1YRiKd4Vf0gb48YdCFdJeob",
+      "source_page": "https://www.nbcuniversal.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "79f462dc1463c32750dec7dff49d9c2534f3c6ba1d8373021c2f0cbd29f6be2c"
+    },
+    {
+      "file": "nestle.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/en/d/d8/Nestl%C3%A9.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:Nestlé.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded logo asset; no artwork redrawn.",
+      "sha256": "c98b79b8fa7bd2a5a0ef17cddd566a7f17d8e3eff35936dd2214990c17049959",
+      "viewBox": "0 0 256.00455 264.58334",
+      "width": "310.958351",
+      "height": "321.586475"
+    },
+    {
+      "file": "new-york-jets.svg",
+      "source_url": "https://static.www.nfl.com/t_q-best/league/api/clubs/logos/NYJ",
+      "source_page": "https://www.newyorkjets.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "d2344e786abe443146caa2780fe3e951ab5c6cb6bd4c685d3c961f87fc17fa6b",
+      "viewBox": "0 0 500 500",
+      "width": "500",
+      "height": "500"
+    },
+    {
+      "file": "pnc.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/PNClogo.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:PNClogo.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "de051e12faa2a1f82baafd0407b34eb06411e13a834f894baa64b76ce67eb5e7",
+      "viewBox": "0 0 54.239584 16.404167",
+      "width": "205",
+      "height": "62"
+    },
+    {
+      "file": "pwc.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/PwC_Company_Logo.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:PwC_Company_Logo.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded logo asset; no artwork redrawn.",
+      "sha256": "9759f9c86121cde01dade72f0495c9ec3024e2009fb8176a9286284b1325a897",
+      "viewBox": "0.54 5.5 359.39 173.84",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "raymond-james.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Raymond_James_wordmark.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:Raymond_James_wordmark.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "bfe0cc6f49a8cda5c35d7eb718b93abc1058449f404beb50e90e2dfba62db7aa",
+      "viewBox": "0 0 300.2 26.1",
+      "width": "300.2px",
+      "height": "26.1px"
+    },
+    {
+      "file": "sp-global.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/S%26P_Global_logo.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:S&P_Global_logo.svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "94d22ed55e08d889152031af4cb663d41434c6f23dfcbb8fabe9bbc5739f916d",
+      "viewBox": "0 0 137.134 29.766",
+      "width": "137.134px",
+      "height": "29.766px"
+    },
+    {
+      "file": "unilever.svg",
+      "source_url": "https://www.unilever.com/core-assets/logos/logo-wordmark.svg",
+      "source_page": "https://www.unilever.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "eeb0e1ee2161f2c02207508ab1a30cbd4322d839efa4a817df543f42bbab8e25",
+      "viewBox": "0 0 180 39",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "usf.svg",
+      "source_url": "https://www.usf.edu/",
+      "source_page": "https://www.usf.edu/",
+      "retrieved": "2026-10-15",
+      "notes": "Unmodified logo SVG extracted from the official website footer.",
+      "sha256": "0fba0f0c0d6657eed19034677799ca1f0d6a2d7ec58bd06ddc718ac4ecd43242",
+      "viewBox": "0 0 884.46 149.99",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "victorias-secret.svg",
+      "source_url": "https://upload.wikimedia.org/wikipedia/en/f/f1/Victoria%E2%80%99s_Secret_%28logo%2C_2021%29.svg",
+      "source_page": "https://en.wikipedia.org/wiki/File:Victoria’s_Secret_(logo,_2021).svg",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "6d464f75ac1ba5b7760beade7b270069138011ae6dae84b0d7f4bbaa6ca66cca",
+      "viewBox": "0 0 558.9344482 181.8198853",
+      "width": null,
+      "height": null
+    },
+    {
+      "file": "wells-fargo.png",
+      "source_url": "https://www17.wellsfargomedia.com/assets/images/rwd/wf_logo_220x23.png",
+      "source_page": "https://www.wellsfargo.com/",
+      "retrieved": "2026-10-15",
+      "notes": "Original downloaded asset; no artwork redrawn.",
+      "sha256": "10c1acb80b088029eab596925f58565e025206d10ef1edded0bf055dac884bbf"
+    }
+  ]
+}

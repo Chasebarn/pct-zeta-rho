@@ -1,32 +1,21 @@
-<!-- 02 - Membership.
-     ONE interaction: selecting a row opens it and closes the other two, and the
-     photograph beside it cross-fades. Only one paragraph is ever on screen, so
-     the whole section fits one screen instead of running past two.
-
-     No outbound links here: three of them pulled the reader out of the copy
-     before the page had made its case, and the page already has one job.
-
-     The base markup below is the finished, script-free state: all three rows
-     open with their photographs in the flow. -->
+<!-- Membership: one open accordion panel and its photograph.
+     Without JavaScript, every description and photograph remains visible. -->
 <section class="grow" id="grow" data-grow aria-label="Membership">
   <div class="v2wrap grow__wrap">
-
-    <div class="grow__intro">
-      <p class="grow__lede">Not sure what comes after college? PCT helps you build the experience, network, and confidence to be ready for what&rsquo;s next.</p>
-    </div>
 
     <div class="grow__stage" data-grow-stage></div>
 
     <div class="grow__rows" data-grow-rows role="group" aria-label="The three parts of the chapter">
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn aria-controls="grow-f1" aria-expanded="true">
-            <span class="grow__ttl">Connect with people in your field</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
+            <span class="grow__ttl">Professional Connections</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Meet professionals, alumni, and members who can help you understand the path ahead.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
+          <p class="grow__say">Meet professionals, alumni, and fellow members through the chapter.</p>
         </div>
         <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
           <img src="assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
@@ -35,13 +24,14 @@
       </div>
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn aria-controls="grow-f2" aria-expanded="true">
-            <span class="grow__ttl">Lead before you graduate</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
+            <span class="grow__ttl">Leadership Experience</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Take ownership of real projects, events, and chapter initiatives while you&rsquo;re still in college.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
+          <p class="grow__say">Plan events, lead projects, and take responsibility for chapter initiatives.</p>
         </div>
         <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
           <img src="assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
@@ -50,13 +40,14 @@
       </div>
 
       <div class="grow__row">
-        <h3 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn aria-controls="grow-f3" aria-expanded="true">
-            <span class="grow__ttl">Find your people</span>
+        <h2 class="grow__rowh">
+          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
+            <span class="grow__ttl">Chapter Community</span>
+            <span class="grow__icon" aria-hidden="true"></span>
           </button>
-        </h3>
-        <div class="grow__panel">
-          <p class="grow__say">Build relationships through Formal, Retreat, intramurals, and the everyday chapter experience.</p>
+        </h2>
+        <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
+          <p class="grow__say">Take part in Formal, Retreat, intramurals, and everyday chapter life.</p>
         </div>
         <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
           <img src="assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async"

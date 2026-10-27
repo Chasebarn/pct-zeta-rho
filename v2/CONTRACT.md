@@ -13,14 +13,19 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - Use actual employer logos and real chapter photographs. Record new asset sources.
 - Use one clear primary action at each decision point and comfortably sized buttons.
 - Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
-- Use motion only where it serves the page. Static layouts are appropriate.
+- Polish the established composition. Preserve the original left-aligned hero,
+  national heading with italic gold 1924, and circular photo carousel.
+- Do not replace the carousel with a static gallery or add stacked hero labels.
+- Use plain text CTA labels without decorative arrows. Keep the authentic crest
+  transparent, without a colored tile.
 
 ## Responsive behavior
 
 - No horizontal page overflow, clipped headings, pinned scrolling, or scroll hijacking.
 - At phone widths, use readable text, consistent gutters, compact section spacing,
-  a one-row header, an accessible disclosure menu, and a compact Rush section.
-- Logos remain still and legible; the gallery keeps all real photos available.
+  a one-row header, an accessible disclosure menu, and a readable display-led Rush section.
+- Logos remain still and legible; preserve the carousel’s original curved geometry
+  and provide a native pause control. Reduced motion holds the wheel still.
 - Review the whole page visually on phones, tablets, and desktops after integration.
 
 ## Engineering and accessibility

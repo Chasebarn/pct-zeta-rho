@@ -2,7 +2,7 @@
 
 Live: https://chasebarn.github.io/pct-zeta-rho/v2/index.html
 
-Current copy and content, updated October 15, 2026. The page uses concise,
+Current copy and content, updated October 26, 2026. The page uses concise,
 factual language. Keep the established chapter colors, typefaces, and real
 photography. Do not add motivational slogans, rhetorical questions, invented
 statistics, event dates, or countdowns.
@@ -16,7 +16,11 @@ statistics, event dates, or countdowns.
 - Professional Business Fraternity
 - University of South Florida
 - Career preparation, leadership, and a business network before you graduate.
-- Desktop scroll cue: Explore membership
+- Footer context: Professional Business Fraternity · Scroll · Founded 1924
+
+The original full-height hero uses one left-aligned reading column. Do not add
+an eyebrow above the title or center each line. Buttons have plain text labels
+without decorative arrows.
 
 ## Membership
 
@@ -50,10 +54,13 @@ These three chapter figures are preserved from the existing site. They have
 not been independently verified. Obtain the chapter's source and reporting
 period before changing them or adding stronger claims.
 
-## A National Fraternity
+## A national fraternity since 1924.
 
-Zeta Rho is USF’s chapter of Phi Chi Theta, a national professional fraternity
-for business and economics.
+Keep the original large heading with the year italic and gold. The transparent
+crest sits beside it without a cream tile.
+
+Phi Chi Theta is a national professional fraternity for business and economics.
+Zeta Rho is its chapter at the University of South Florida.
 
 - About Phi Chi Theta: https://www.phichitheta.org/about
 - 1924: Founded
@@ -67,14 +74,17 @@ employer recognition of the fraternity.
 
 Three existing real photographs, with descriptive alternative text:
 `photo-letters.jpg`, `photo-fundraiser.jpg`, and `photo-service.jpg`.
-A triptych on desktop becomes one large photo and two supporting photos on a
-phone. No placeholder photography or rotating duplicates.
+The original circular carousel repeats these photographs around 32 slots and
+rotates once every 150 seconds. Preserve its curved silhouette and the purple
+cut below it. A native pause control works with touch, keyboard, and no JavaScript.
+Reduced motion holds the carousel still. Duplicate frames are decorative.
 
-## Rush Phi Chi Theta
+## Rush Phi Chi Theta.
 
-View eligibility and the rush process.
+Meet the chapter and learn how to join.
 
-Button: Rush Information. Links to the existing dedicated Rush page.
+Restore the display-led closing composition, with the fraternity name italic
+and gold. Button: Rush PCT. Links to the existing dedicated Rush page.
 No dated event teaser or countdown is displayed on the V2 homepage.
 
 Support the Chapter. Links: Donate, Apparel.

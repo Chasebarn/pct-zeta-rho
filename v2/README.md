@@ -23,16 +23,17 @@ and visual requirements are in `CONTRACT.md`.
 | Section | Treatment |
 |---|---|
 | Header | One row; native mobile disclosure; opaque safe base |
-| Hero | Chapter identity, one value line, Rush button, subtle canvas |
+| Hero | Original full-height left-aligned composition, one value line, plain Rush button, silk canvas |
 | Membership | No intro heading; three rows with matching photos |
 | Member Success | Twenty actual logos in a static grid; three existing chapter figures |
-| National | Concise national context, crest, founded year and chapter count |
-| Chapter Life | Three real photos; responsive gallery |
-| Rush | Compact heading, information link, and support band |
+| National | Original large heading with gold italic 1924, transparent crest and chapter count |
+| Chapter Life | Original continuous circular photo carousel, authentic photos and native pause control |
+| Rush | Display heading, gold italic fraternity name, plain Rush button, support band |
 | Footer | Chapter identity, page links and social links |
 
 Content is visible without JavaScript. Motion respects reduced-motion preferences;
-there is no pinned scrolling, logo marquee, photo autoplay, or mock countdown.
+the original photo carousel has a pause control and a still reduced-motion state.
+There is no pinned scrolling, logo marquee, or mock countdown.
 The company logo provenance is recorded in `assets/logos/sources.json`.
 
 ## Preview and verification

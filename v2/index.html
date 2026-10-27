@@ -14,13 +14,13 @@
 <link rel="stylesheet" href="tokens.css?v=20261015">
 <style>
 /* ===== 00-header ===== */
-:root{--v2hd-h:81px}
+:root{--v2hd-h:77px}
 .v2hd{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line);transition:background-color 220ms ease,border-color 220ms ease}
-.v2hd-row{position:relative;display:flex;align-items:center;gap:1.5rem;min-height:80px;padding-block:12px}
+.v2hd-row{position:relative;display:flex;align-items:center;gap:1.5rem;min-height:76px;padding-block:12px}
 .v2hd-brand{display:flex;align-items:center;gap:.75rem;min-width:0;text-decoration:none;margin-right:auto}
-.v2hd-crest{height:44px;width:auto;flex:none}
+.v2hd-crest{height:42px;width:auto;flex:none}
 .v2hd-lock{display:block;min-width:0}
-.v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.45rem;line-height:1.1;color:var(--ink)}
+.v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.22rem;line-height:1.1;color:var(--ink)}
 .v2hd-sub{display:block;margin-top:.3rem;font-size:.66rem;line-height:1.3;letter-spacing:.13em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
 .v2hd-list{display:flex;align-items:center;gap:1.65rem;list-style:none;margin:0;padding:0}
 .v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
@@ -45,23 +45,80 @@
 @media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
 @media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
 /* ===== 01-hero ===== */
-.v2hero{position:relative;margin-top:calc(var(--v2hd-h,80px) * -1 - 1px);min-height:680px;display:flex;align-items:center;overflow:hidden;padding:calc(var(--v2hd-h,80px) + 6rem) 0 7rem;background:radial-gradient(90% 110% at 75% 0,#3a2751 0,transparent 70%),var(--purple-deep);color:var(--paper)}
-.v2hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7}
-.v2hero-letters{position:absolute;right:-2rem;bottom:-3rem;font-family:var(--font-display);font-size:clamp(18rem,31vw,28rem);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(201,162,39,.12);pointer-events:none;user-select:none}
-.v2hero-stage{position:relative;z-index:2}
-.v2hero-inner{max-width:900px;margin-inline:auto;text-align:center}
-.v2hero-eyebrow{margin:0 0 1.7rem;font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
-.v2hero-h1{margin:0 0 .6rem;font-size:clamp(4rem,8vw,6.75rem);line-height:1.02;letter-spacing:-.025em;color:var(--paper)}
-.v2hero-sub{margin:0 0 1.7rem;font-family:var(--font-display);font-style:italic;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.2;color:var(--gold-soft)}
-.v2hero-claim{max-width:42ch;margin:0 auto 2rem;font-size:1.05rem;line-height:1.75;color:rgba(250,248,243,.8)}
-.v2hero-cta{display:flex;justify-content:center;margin:0}
-.v2hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:1rem;min-height:50px;padding:.85rem 1.6rem;border:1px solid transparent;border-radius:2px;background:var(--gold);color:var(--ink);font-size:.88rem;font-weight:600;line-height:1.4;text-decoration:none;transition:background-color 180ms ease}
+/* The original hero is a left-aligned composition within a centered reading
+   column. The footer carries context instead of another row above the title. */
+.v2hero{
+  position:relative;
+  margin-top:calc(var(--v2hd-h,77px) * -1 - 1px);
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:calc(var(--v2hd-h,77px) + 6rem) 0 7rem;
+  background:radial-gradient(120% 90% at 80% -10%,#3b2559 0%,transparent 55%),var(--purple-deep);
+  color:var(--paper);
+}
+.v2hero::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v2hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.v2hero-letters{
+  position:absolute;right:-4rem;bottom:-6rem;z-index:1;
+  font-family:var(--font-display);font-weight:400;font-size:clamp(16rem,34vw,30rem);
+  line-height:.8;white-space:nowrap;color:transparent;
+  -webkit-text-stroke:1px rgba(201,162,39,.16);opacity:.84;
+  pointer-events:none;user-select:none;
+}
+.v2hero-stage{
+  position:relative;z-index:2;
+  width:fit-content;max-width:min(920px,calc(100% - var(--gutter)*2));
+  margin-inline:auto;
+}
+.v2hero-inner{max-width:920px;text-align:left}
+.v2hero-h1{
+  margin:0 0 1.6rem;font-size:clamp(3.2rem,8.5vw,7rem);
+  font-weight:400;line-height:1.02;letter-spacing:-.01em;color:var(--paper);
+}
+.v2hero-sub{
+  margin:0 0 1.4rem;font-family:var(--font-display);font-style:italic;
+  font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.15;color:var(--gold-soft);
+}
+.v2hero-claim{
+  max-width:34rem;margin:0 0 2rem;font-size:clamp(1.02rem,1.35vw,1.18rem);
+  line-height:1.6;color:rgba(250,248,243,.78);
+}
+.v2hero-cta{margin:0;display:flex;justify-content:flex-start}
+.v2hero-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;min-width:170px;padding:.95rem 1.9rem;
+  border:1px solid transparent;border-radius:2px;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--font-text);font-size:.92rem;font-weight:600;letter-spacing:.04em;
+  line-height:1.4;text-decoration:none;
+}
 .v2hero-btn:hover{background:var(--gold-soft)}
-.v2hero-foot{position:absolute;bottom:1.7rem;left:0;right:0;text-align:center}
-.v2hero-scroll{display:inline-flex;align-items:center;gap:.75rem;font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,248,243,.6)}
-.v2hero-scroll span{font-size:1rem;line-height:1}
-@media(max-width:767px){.v2hero{min-height:0;padding:calc(var(--v2hd-h,72px) + 3.25rem) 0 4.25rem}.v2hero-inner{text-align:left;margin-inline:0}.v2hero-eyebrow{font-size:.66rem;letter-spacing:.13em;margin-bottom:1.4rem}.v2hero-h1{font-size:clamp(3.05rem,13.3vw,4.5rem);letter-spacing:-.02em}.v2hero-sub{font-size:1.55rem;margin-bottom:1.5rem}.v2hero-claim{font-size:.98rem;line-height:1.75;max-width:34ch;margin:0 0 1.8rem}.v2hero-cta{justify-content:flex-start}.v2hero-btn{min-width:170px}.v2hero-letters{display:none}.v2hero-foot{display:none}}
-@media(prefers-reduced-motion:reduce){.v2hero-btn{transition:none}}
+.v2hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;border-top:1px solid var(--line-dark)}
+.v2hero-foot-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-block:1.1rem;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(250,248,243,.62);
+}
+.v2hero-scroll{display:inline-flex;align-items:center;gap:.6rem}
+.v2hero-scroll::after{content:"";width:1px;height:2rem;background:linear-gradient(var(--gold),transparent)}
+@media(max-width:767px){
+  .v2hero{padding:calc(var(--v2hd-h,73px) + 4rem) 0 7rem;min-height:100svh}
+  .v2hero-stage{width:calc(100% - var(--gutter)*2);max-width:none}
+  .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem);margin-bottom:1.2rem}
+  .v2hero-sub{margin-bottom:1.5rem}
+  .v2hero-claim{font-size:1rem;max-width:34ch;margin-bottom:2rem}
+  .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
+  .v2hero-foot-side{display:none}
+  .v2hero-foot-row{justify-content:center;padding-block:.8rem;font-size:.66rem}
+}
+@media(max-height:600px) and (min-width:768px){
+  .v2hero{min-height:660px}
+}
 /* ===== 02-grow ===== */
 /* Membership. The base page shows every description and photograph;
    JavaScript adds the single-open accordion and shared photograph stage. */
@@ -312,156 +369,256 @@
   .pl-n-lab{max-width:16rem;margin-top:.8rem;font-size:.92rem}
 }
 /* ===== 04-national ===== */
-.v2nat{background:var(--purple-deep);color:var(--paper);padding-block:clamp(3.5rem,6vw,5.5rem)}
-.v2nat-in{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:2.25rem;align-items:center}
-.v2nat-emblem{padding:14px;background:var(--paper);border-radius:2px}
-.v2nat-crest{width:100%;height:auto}
-.v2nat-h{font-size:clamp(2.1rem,3.5vw,3rem);line-height:1.15;color:var(--paper);letter-spacing:-.02em}
-.v2nat-say{max-width:49ch;margin:1rem 0;font-size:.95rem;line-height:1.8;color:rgba(250,248,243,.76)}
-.v2nat-link{display:inline-flex;align-items:center;gap:.7rem;min-height:44px;font-size:.8rem;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(230,198,91,.55);color:var(--gold-soft)}
-.v2nat-figs{display:flex;gap:2rem;list-style:none;padding:0 0 0 2.25rem;margin:0;border-left:1px solid var(--line-dark)}
-.v2nat-n{display:block;font-family:var(--font-display);font-size:3.3rem;line-height:1.05;font-weight:400;letter-spacing:-.025em}
-.v2nat-k{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.02em;color:rgba(250,248,243,.72)}
-@media(max-width:999px){.v2nat-in{grid-template-columns:80px minmax(0,1fr);gap:1.5rem 2rem}.v2nat-figs{grid-column:2;padding:1.5rem 0 0;border-left:0;border-top:1px solid var(--line-dark);gap:3.5rem}.v2nat-n{font-size:2.75rem}}
-@media(max-width:559px){.v2nat-in{grid-template-columns:60px minmax(0,1fr);column-gap:1.25rem;align-items:start}.v2nat-emblem{padding:10px}.v2nat-h{font-size:2rem;line-height:1.15}.v2nat-say{font-size:.9rem;line-height:1.75;margin-top:.8rem}.v2nat-figs{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.4rem;padding-top:1.6rem}.v2nat-n{font-size:2.8rem}.v2nat-k{font-size:.75rem}}
-/* ===== 05-mem ===== */
-/* 05 · Chapter Life. The photographs carry the section; no duplicated rail,
-   autoplay, hidden content, or placeholders. */
-.mem{
-  background:var(--paper);
-  padding-block:clamp(3.5rem,7vw,6.5rem);
-}
-
-.mem-h{
-  margin:0 0 clamp(1.5rem,3vw,2.5rem);
-  font-size:clamp(2.5rem,5vw,4.5rem);
-  line-height:1.05;
-  letter-spacing:-.025em;
-}
-
-.mem-gallery{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(.75rem,1.5vw,1.25rem);
-}
-
-.mem-photo{
-  min-width:0;
-  aspect-ratio:1;
-  overflow:hidden;
-  background:var(--paper-deep);
-  border-radius:2px;
-}
-
-.mem-photo img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* A complete first photograph anchors the phone composition. Two square
-   supporting images sit beneath it, keeping every photograph visible without
-   a horizontal rail or a lengthy stack of three full-width images. */
-@media (max-width:767px){
-  .mem{padding-block:3.5rem}
-  .mem-h{font-size:clamp(2.3rem,9vw,3rem);margin-bottom:1.5rem}
-  .mem-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
-  .mem-photo-lead{grid-column:1 / -1}
-}
-/* ===== 07-act ===== */
-/* A compact closing section with one clear action. */
-.act{
-  padding-block:clamp(3.25rem,7vw,5.5rem);
+/* The original still purple band and crest/headline lockup. The founding year
+   remains the heading's gold italic accent; only supported chapter scale is shown. */
+.v2nat{
+  position:relative;
   background:var(--purple-deep);
-  color:var(--paper);
+  color:rgba(250,248,243,.78);
+  padding-block:clamp(6rem,12vw,10rem) clamp(4.5rem,8vw,7rem);
 }
-.act-inner{
+.v2nat::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v2nat-in{position:relative;z-index:1}
+.v2nat-lock{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:2rem 3rem;
+  gap:clamp(1.4rem,3vw,2.5rem);
 }
-.act-copy{min-width:0}
-.act-title{
+.v2nat-crest{
+  flex:none;
+  width:clamp(76px,8vw,112px);
+  height:auto;
+  display:block;
+}
+.v2nat-h{
   margin:0;
-  font-size:clamp(2.1rem,4.5vw,3.35rem);
-  line-height:1.1;
+  max-width:24ch;
+  color:var(--paper);
+  font-size:clamp(2.6rem,6vw,4.6rem);
+  line-height:1.08;
+  letter-spacing:-.015em;
+}
+.v2nat-h em{font-style:italic;color:var(--gold-soft);white-space:nowrap}
+.v2nat-detail{
+  display:grid;
+  grid-template-columns:minmax(0,.7fr) minmax(0,1.8fr);
+  align-items:start;
+  gap:clamp(2rem,6vw,5rem);
+  margin-top:clamp(2.75rem,5.5vw,4.25rem);
+  padding-top:clamp(2rem,4vw,3rem);
+  border-top:1px solid var(--line-dark);
+}
+.v2nat-figs{list-style:none;padding:0;margin:0}
+.v2nat-n{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(3.75rem,7vw,5.5rem);
+  line-height:.95;
   letter-spacing:-.02em;
   color:var(--paper);
 }
-.act-line{
-  max-width:42ch;
-  margin:1rem 0 0;
-  font-size:1rem;
+.v2nat-k{
+  display:block;
+  margin-top:.9rem;
+  font-family:var(--font-text);
+  font-size:.9rem;
+  line-height:1.4;
+  color:rgba(250,248,243,.72);
+}
+.v2nat-tail{min-width:0;padding-left:clamp(1.75rem,4vw,3.5rem);border-left:1px solid var(--line-dark)}
+.v2nat-say{
+  margin:0;
+  max-width:47ch;
+  font-size:clamp(1.1rem,1.75vw,1.4rem);
   line-height:1.65;
   color:rgba(250,248,243,.78);
 }
-.act-go{flex:none}
-.act-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:.9rem;
-  max-width:100%;
-  min-height:48px;
-  padding:.8rem 1.4rem;
-  border:1px solid var(--gold);
-  border-radius:2px;
-  background:var(--gold);
-  color:var(--ink);
-  font-family:var(--font-text);
-  font-size:.9rem;
-  font-weight:600;
-  line-height:1.4;
-  text-decoration:none;
-}
-.act-cta-arrow{flex:none;transition:transform 200ms var(--ease)}
-.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
-.act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:translateX(3px)}
-.act-cta:focus-visible{outline-offset:5px}
-
-.act-band{
-  padding-block:1rem;
-  border-bottom:1px solid var(--line);
-  background:var(--paper-deep);
-}
-.act-band-in{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  gap:.25rem 1.5rem;
-}
-.act-band-copy{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
-.act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
-.act-band-btn{
+.v2nat-link{
   display:inline-flex;
   align-items:center;
   min-height:44px;
-  font-size:.9rem;
-  color:var(--ink-soft);
+  margin-top:.9rem;
+  color:var(--gold-soft);
+  font-size:.85rem;
   text-decoration:underline;
-  text-decoration-color:rgba(25,18,33,.25);
-  text-underline-offset:.3em;
+  text-underline-offset:5px;
+  text-decoration-thickness:1px;
+  text-decoration-color:rgba(230,198,91,.55);
 }
-.act-band-btn:hover{color:var(--purple);text-decoration-color:var(--purple)}
+@media(max-width:767px){
+  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
+  .v2nat-lock{gap:1.4rem}
+  .v2nat-crest{width:72px}
+  .v2nat-h{font-size:clamp(2.3rem,6.5vw,3.25rem)}
+  .v2nat-detail{grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:1.6rem}
+  .v2nat-tail{padding-left:1.6rem}
+  .v2nat-say{font-size:1rem}
+}
+@media(max-width:559px){
+  .v2nat-lock{gap:1.1rem}
+  .v2nat-crest{width:56px}
+  .v2nat-h{font-size:clamp(2rem,7.5vw,2.6rem);line-height:1.12}
+  .v2nat-detail{grid-template-columns:1fr;gap:1.8rem;margin-top:2.4rem;padding-top:1.6rem}
+  .v2nat-fig{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .v2nat-n{font-size:3.6rem}
+  .v2nat-k{margin:0;text-align:right;font-size:.85rem}
+  .v2nat-tail{padding:1.7rem 0 0;border-left:0;border-top:1px solid var(--line-dark)}
+  .v2nat-say{font-size:1rem;line-height:1.7}
+}
+/* ===== 05-mem ===== */
+/* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
+   rotating hub carries them around the arc at one revolution per 150 seconds. */
+.mem{
+  position:relative;
+  background:var(--paper);
+  padding-block:clamp(3rem,5.5vw,4.5rem) 0;
+  margin-bottom:-1px;
+}
+.mem-h{
+  text-align:center;
+  font-size:clamp(2.6rem,6.4vw,5.4rem);
+  letter-spacing:-.02em;
+  margin:0 0 clamp(1.3rem,2.4vw,1.9rem);
+}
+
+/* Keep the original radius and card proportions, including the shallower
+   desktop arc and the tighter mobile circle. The section below cuts the arc. */
+.mem-band{
+  --R:149vw;
+  --w:calc(var(--R) * .175);
+  --h:calc(var(--w) * 1.5);
+  --step:11.25deg;
+  --inset:.7rem;
+  position:relative;
+  height:calc(var(--h) + var(--inset) + 1.1rem);
+  overflow:hidden;
+  isolation:isolate;
+}
+.mem-wheel{
+  list-style:none;
+  margin:0;
+  padding:0;
+  position:absolute;
+  left:50%;
+  top:calc(var(--R) + var(--h) / 2 + var(--inset));
+  width:0;
+  height:0;
+  animation:memSpin 150s linear infinite;
+  will-change:transform;
+}
+.mem-i{
+  position:absolute;
+  left:0;
+  top:0;
+  width:var(--w);
+  height:var(--h);
+  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
+  background:var(--paper-deep);
+  border-radius:clamp(10px,1.1vw,18px);
+  overflow:hidden;
+  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
+}
+.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
+@keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+
+/* A native checkbox makes pause available to touch and keyboard users even
+   without JavaScript. Its label is a 44px target above the outer arc. */
+.mem-pause{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+.mem-toggle{
+  position:absolute;
+  z-index:2;
+  top:0;
+  right:var(--gutter);
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  min-height:44px;
+  padding:.45rem .7rem;
+  background:var(--paper);
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+  border-radius:2px;
+  font-family:var(--font-text);
+  font-size:.72rem;
+  line-height:1.4;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.mem-toggle-icon{
+  display:block;
+  width:10px;
+  height:12px;
+  border-inline:3px solid currentColor;
+}
+.mem-pause:checked ~ .mem-band .mem-wheel{animation-play-state:paused}
+.mem-pause:checked ~ .mem-band .mem-toggle{color:var(--purple);background:var(--paper-deep);border-color:var(--purple)}
+.mem-pause:focus-visible ~ .mem-band .mem-toggle{outline:2px solid var(--purple);outline-offset:3px}
+
 @media (max-width:767px){
-  .act-inner{display:block}
-  .act-title{max-width:15ch}
-  .act-go{margin-top:1.5rem}
-  .act-line{font-size:.95rem;max-width:35ch}
+  .mem-band{--R:330vw;--inset:.7rem}
+  .mem-toggle{font-size:.68rem;padding-inline:.6rem}
 }
-@media (max-width:420px){
-  .act-band-in{align-items:flex-start;flex-direction:column}
-}
+/* The original arc remains visible at rest. No content depends on animation
+   or JavaScript; decorative duplicate frames are hidden from assistive tech. */
 @media (prefers-reduced-motion:reduce){
-  .act-cta-arrow{transition:none}
-  .act-cta:hover .act-cta-arrow,.act-cta:focus-visible .act-cta-arrow{transform:none}
+  .mem-wheel{animation:none;will-change:auto}
+  .mem-pause,.mem-toggle{display:none}
 }
+/* ===== 07-act ===== */
+/* Restore the original display-led closing section and purple light treatment. */
+.act{
+  position:relative;overflow:hidden;
+  padding:clamp(5rem,9vw,8rem) 0;
+  color:var(--paper);text-align:center;
+  background:radial-gradient(135% 118% at 62% -22%,rgba(126,92,184,.5) 0%,rgba(96,66,150,.26) 34%,rgba(58,36,92,.1) 62%,rgba(36,23,51,0) 100%),var(--purple-deep);
+}
+.act-inner{max-width:52rem;margin-inline:auto}
+.act-title{margin:0;font-size:clamp(3rem,7vw,6.2rem);line-height:1.05;letter-spacing:-.02em;color:var(--paper)}
+.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft)}
+.act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.6;color:rgba(250,248,243,.76)}
+.act-go{margin-top:2.5rem}
+.act-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;min-width:170px;max-width:100%;padding:.95rem 2rem;
+  border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
+  font-family:var(--font-text);font-size:.92rem;font-weight:600;line-height:1.4;letter-spacing:.04em;text-decoration:none;
+}
+.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
+.act-cta:focus-visible{outline-offset:6px}
+.act-band{padding-block:1rem;border-bottom:1px solid var(--line);background:var(--paper-deep)}
+.act-band-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.25rem 1.5rem}
+.act-band-copy{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
+.act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
+.act-band-btn{display:inline-flex;align-items:center;min-height:44px;font-size:.9rem;color:var(--ink-soft);text-decoration:underline;text-decoration-color:rgba(25,18,33,.25);text-underline-offset:.3em}
+.act-band-btn:hover{color:var(--purple);text-decoration-color:var(--purple)}
+@media(max-width:767px){
+  .act{padding-block:4.5rem;text-align:left}
+  .act-title{font-size:clamp(2.7rem,11vw,4.2rem)}
+  .act-title em{display:block}
+  .act-line{margin-inline:0;font-size:1rem}
+  .act-go{margin-top:2rem}
+}
+@media(max-width:420px){.act-band-in{align-items:flex-start;flex-direction:column}}
 /* ===== 99-footer ===== */
 /* V2 footer, independent of the production footer's display watermark. */
 .v2footer{
@@ -571,20 +728,25 @@
   <main id="main">
 
     <!-- ===== 01-hero ===== -->
-<!-- The existing silk canvas provides one restrained atmospheric interaction. -->
+<!-- Preserve the original left-aligned hero, silk field, and full-height composition. -->
 <section class="v2hero on-dark" id="hero">
   <canvas class="v2hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
   <div class="v2hero-letters" aria-hidden="true">ΦΧΘ</div>
-  <div class="v2wrap v2hero-stage">
+  <div class="v2hero-stage">
     <div class="v2hero-inner">
-      <p class="v2hero-eyebrow">Professional Business Fraternity</p>
       <h1 class="v2hero-h1">Phi Chi Theta</h1>
       <p class="v2hero-sub">University of South Florida</p>
       <p class="v2hero-claim">Career preparation, leadership, and a business network before you graduate.</p>
-      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT</a></p>
     </div>
   </div>
-  <div class="v2hero-foot"><div class="v2wrap"><span class="v2hero-scroll">Explore membership <span aria-hidden="true">↓</span></span></div></div>
+  <div class="v2hero-foot">
+    <div class="v2wrap v2hero-foot-row">
+      <span class="v2hero-foot-side">Professional Business Fraternity</span>
+      <span class="v2hero-scroll">Scroll</span>
+      <span class="v2hero-foot-side">Founded 1924</span>
+    </div>
+  </div>
 </section>
 
     <!-- ===== 02-grow ===== -->
@@ -699,75 +861,98 @@
 </section>
 
     <!-- ===== 04-national ===== -->
-<!-- National context uses independently supported history and chapter scale. -->
+<!-- National history and chapter scale are supported by Phi Chi Theta's
+     national About page and active chapter directory. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h">
   <div class="v2wrap v2nat-in">
-    <div class="v2nat-emblem"><img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest"></div>
-    <div class="v2nat-copy">
-      <h2 class="v2nat-h" id="v2nat-h">A National Fraternity</h2>
-      <p class="v2nat-say">Zeta Rho is USF&rsquo;s chapter of Phi Chi Theta, a national professional fraternity for business and economics.</p>
-      <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta <span aria-hidden="true">↗</span></a>
+    <div class="v2nat-lock">
+      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445"
+           loading="lazy" decoding="async" alt="Phi Chi Theta crest">
+      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
     </div>
-    <ul class="v2nat-figs" role="list">
-      <li><span class="v2nat-n">1924</span><span class="v2nat-k">Founded</span></li>
-      <li><span class="v2nat-n">40+</span><span class="v2nat-k">Chapters</span></li>
-    </ul>
+
+    <div class="v2nat-detail">
+      <ul class="v2nat-figs" role="list">
+        <li class="v2nat-fig">
+          <span class="v2nat-n">40+</span>
+          <span class="v2nat-k">Chapters nationwide</span>
+        </li>
+      </ul>
+      <div class="v2nat-tail">
+        <p class="v2nat-say">Phi Chi Theta is a national professional fraternity for business and economics. Zeta Rho is its chapter at the University of South Florida.</p>
+        <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
+      </div>
+    </div>
   </div>
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- 05 · Chapter Life. Authentic chapter photography, readable without motion. -->
+<!-- Chapter Life restores the original circular photo wheel. The three authentic
+     photographs repeat around its 32 slots; repeated frames are decorative. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
+  <input class="mem-pause" type="checkbox" id="mem-pause" aria-label="Pause automatic photo movement">
   <div class="v2wrap">
     <h2 class="mem-h" id="mem-h">Chapter Life</h2>
+  </div>
 
-    <ul class="mem-gallery" role="list" aria-label="Chapter photographs">
-      <li class="mem-photo mem-photo-lead">
-        <img src="../assets/photo-letters.jpg" width="1300" height="1300"
-             alt="Chapter members writing cards together around a table."
-             loading="lazy" decoding="async">
-      </li>
-      <li class="mem-photo">
-        <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300"
-             alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center."
-             loading="lazy" decoding="async">
-      </li>
-      <li class="mem-photo">
-        <img src="../assets/photo-service.jpg" width="1300" height="1300"
-             alt="Chapter members loading roof shingles at a service project."
-             loading="lazy" decoding="async">
-      </li>
+  <div class="mem-band">
+    <label class="mem-toggle" for="mem-pause">
+      <span class="mem-toggle-icon" aria-hidden="true"></span>
+      <span>Pause motion</span>
+    </label>
+    <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
+      <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:1"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="Chapter members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:3" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:5" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:6" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:7" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:9" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:11" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:13" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:15" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:17" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:19" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:21" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:23" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:25" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:27" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:29" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:31" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
 
     <!-- ===== 07-act ===== -->
-<!-- A direct route to rush information, without unconfirmed dates. -->
+<!-- A display-led closing invitation, consistent with the original page. -->
 <section class="act on-dark" id="act" aria-labelledby="act-title">
-  <div class="v2wrap act-inner">
-    <div class="act-copy">
-      <h2 class="act-title" id="act-title">Rush Phi Chi Theta</h2>
-      <p class="act-line">View eligibility and the rush process.</p>
-    </div>
-    <div class="act-go">
-      <a class="act-cta" href="../rush.html">
-        <span>Rush Information</span>
-        <svg class="act-cta-arrow" width="17" height="10" viewBox="0 0 17 10" fill="none"
-             aria-hidden="true" focusable="false">
-          <path d="M0 5h15M11.4 1.2 15.2 5l-3.8 3.8" stroke="currentColor" stroke-width="1.4"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+  <div class="v2wrap">
+    <div class="act-inner">
+      <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta.</em></h2>
+      <p class="act-line">Meet the chapter and learn how to join.</p>
+      <div class="act-go"><a class="act-cta" href="../rush.html">Rush PCT</a></div>
     </div>
   </div>
 </section>
-
 <aside class="act-band" aria-label="Support the chapter">
   <div class="v2wrap act-band-in">
     <p class="act-band-copy">Support the Chapter</p>
     <div class="act-band-acts">
-      <a class="act-band-btn" href="https://sites.google.com/view/pct-zeta-rho/philanthropy"
-         target="_blank" rel="noopener">Donate</a>
+      <a class="act-band-btn" href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a>
       <a class="act-band-btn" href="../apparel.html">Apparel</a>
     </div>
   </div>

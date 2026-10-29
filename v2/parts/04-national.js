@@ -70,7 +70,7 @@ window.pctInitNational = function () {
   try {
     observer = new IntersectionObserver(function (entries) {
       if (entries.some(function (entry) { return entry.isIntersecting; })) reveal();
-    }, { threshold:.18 });
+    }, { threshold:.6 });
     observer.observe(figure);
     document.addEventListener('visibilitychange', onVisibility);
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);

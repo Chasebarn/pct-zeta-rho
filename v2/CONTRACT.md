@@ -11,13 +11,14 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - Keep headings short and factual. Membership has no overall visible heading.
 - Preserve Member Success, Chapter Life, and Rush Phi Chi Theta as section names.
 - Use actual employer logos and real chapter photographs. Record new asset sources.
-- Keep company marks subordinate to Member Success outcomes, in a single horizontal
-  strip with manual touch, trackpad, and keyboard scrolling. Do not restore the
-  Member placements label or a multi-row logo grid.
+- Keep Member Success large and prominent. Show company logos in two desktop rows
+  and three phone rows, moving horizontally with normal page scrolling. Alternate
+  row directions, keep endpoints visible, and do not add a manual sideways scroller.
+  Reduced-motion and no-JavaScript layouts must expose every company mark.
 - Map only collegiate campuses listed in the national directory. Use sourced
   coordinates and true geographic outlines; retain provenance and the checked date.
-- National history, identity, and membership information lead the national section;
-  keep its map secondary in size and hierarchy, with a modest chapter-count caption.
+- Preserve the original national headline and use only two short explanatory
+  sentences. Keep its map secondary, with a modest chapter-count caption.
 - Use one clear primary action at each decision point and comfortably sized buttons.
 - Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
 - Polish the established composition. Preserve the original left-aligned hero,
@@ -31,7 +32,7 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - No horizontal page overflow, clipped headings, pinned scrolling, or scroll hijacking.
 - At phone widths, use readable text, consistent gutters, compact section spacing,
   a one-row header, an accessible disclosure menu, and a readable display-led Rush section.
-- Logos remain legible and scroll only on interaction; preserve the carousel’s original curved geometry
+- Logos remain legible and follow page scrolling; preserve the carousel’s original curved geometry
   without a visible pause button. Hover/focus pauses it; reduced motion holds it still.
 - Review the whole page visually on phones, tablets, and desktops after integration.
 

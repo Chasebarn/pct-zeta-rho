@@ -196,8 +196,8 @@
  .grow--desktop .grow__fig img{transform:none}
 }
 /* ===== 03-place ===== */
-/* A compact, plain hierarchy: heading, three outcomes, then one manually
-   scrollable company rail. Real marks keep their individual proportions. */
+/* Strong, direct hierarchy above finite company rows linked to page scroll.
+   Base CSS shows the complete wrapping list, including with reduced motion. */
 .pl{
   padding:0 0 var(--section);
   background:var(--paper);
@@ -206,11 +206,12 @@
 .pl-intro{display:block}
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(1.75rem,3vw,2.25rem);
-  font-size:clamp(2.15rem,4.2vw,2.9rem);
+  margin:0 0 clamp(2rem,3.5vw,3rem);
+  font-size:clamp(4.6rem,7.5vw,6rem);
   line-height:1.1;
   letter-spacing:-.02em;
   text-align:center;
+  white-space:nowrap;
 }
 .pl-nums{
   display:grid;
@@ -226,7 +227,7 @@
   margin:0;
   color:var(--ink);
   font-family:var(--font-text);
-  font-size:clamp(2.8rem,5vw,3.2rem);
+  font-size:clamp(3.2rem,5vw,4rem);
   font-weight:500;
   line-height:1.1;
   letter-spacing:-.04em;
@@ -247,7 +248,7 @@
 .pl-counter{position:relative;display:inline-block}
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label,.pl-rail-hint{
+.pl-stat-label{
   position:absolute;
   width:1px;
   height:1px;
@@ -271,53 +272,25 @@
   position:relative;
   margin-top:clamp(2rem,3.5vw,2.75rem);
   border-top:1px solid var(--line);
-  padding-top:.75rem;
+  padding-top:1rem;
 }
-/* Edge fades hint at the continuation without covering a control or requiring
-   motion. The list retains its native thin scrollbar and scroll behavior. */
-.pl-brands::before,.pl-brands::after{
-  content:"";
-  position:absolute;
-  top:.75rem;
-  bottom:1rem;
-  z-index:1;
-  width:28px;
-  pointer-events:none;
-  transition:opacity 180ms ease;
-}
-.pl-brands::before{left:0;background:linear-gradient(90deg,var(--paper),transparent);opacity:0}
-.pl-brands::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
-.pl-brands.has-scroll-back::before{opacity:1}
-.pl-brands.is-at-end::after{opacity:0}
-.pl-rail{
-  display:flex;
+.pl-logos{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
   align-items:center;
-  gap:clamp(1.5rem,2.5vw,2rem);
-  overflow-x:auto;
-  overflow-y:hidden;
-  overscroll-behavior-x:contain;
-  scroll-snap-type:x proximity;
-  scroll-padding-inline:1rem;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(69,58,82,.35) transparent;
-  -webkit-overflow-scrolling:touch;
+  gap:.5rem 1rem;
   list-style:none;
   margin:0;
-  padding:.5rem 1rem 1rem;
+  padding:0;
 }
-.pl-rail::-webkit-scrollbar{height:4px}
-.pl-rail::-webkit-scrollbar-track{background:transparent}
-.pl-rail::-webkit-scrollbar-thumb{background:rgba(69,58,82,.35);border-radius:2px}
-.pl-rail:focus-visible{outline:2px solid var(--purple);outline-offset:5px}
+.pl-logos[hidden]{display:none}
 .pl-cell{
   display:flex;
   align-items:center;
   justify-content:center;
-  flex:0 0 9rem;
   min-width:0;
-  height:5.5rem;
+  min-height:5.5rem;
   padding:.65rem .5rem;
-  scroll-snap-align:start;
 }
 .pl-cell img{
   display:block;
@@ -329,52 +302,67 @@
   filter:grayscale(1);
   opacity:.85;
 }
-.pl-cell--wide{flex-basis:12rem}
 .pl-cell--wide img{width:10.5rem;max-height:2.2rem}
 .pl-cell--reverse img{filter:brightness(0);opacity:.78}
 .pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
-.pl-cell--citi{flex-basis:6rem}
 .pl-cell--citi img{width:4.3rem;max-height:2.8rem}
 .pl-cell--pnc img{width:6rem}
 .pl-cell--kpmg img{width:6.5rem}
 .pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
 .pl-cell--amazon img{width:6.5rem}
-.pl-cell--nestle{flex-basis:6rem}
 .pl-cell--nestle img{width:3rem;max-height:3.25rem}
 .pl-cell--victoria img{width:8rem;max-height:2.6rem}
 .pl-cell--formula img{width:6.5rem}
-/* This source includes substantial clear space around its horizontal mark. */
 .pl-cell--jets img{width:7.5rem;max-height:5rem}
-@media (max-width:600px){
-  .pl-h{margin-bottom:1.65rem;font-size:2.15rem}
+/* Only enhancement creates clipped finite tracks. No scrollbar, manual rail,
+   duplicated images, pinning, or scroll interception is involved. */
+.pl-rows{display:grid;gap:.75rem}
+.pl-row{min-width:0;overflow:hidden}
+.pl-track{
+  display:flex;
+  align-items:center;
+  gap:2rem;
+  width:max-content;
+  list-style:none;
+  margin:0;
+  padding:0;
+  will-change:transform;
+}
+.pl-track .pl-cell{flex:0 0 9rem;width:9rem;height:5.5rem}
+.pl-track .pl-cell--wide{flex-basis:12rem;width:12rem}
+.pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:6rem;width:6rem}
+@media (max-width:700px){
+  .pl-h{margin-bottom:2rem;font-size:clamp(2.85rem,13.5vw,3.3rem)}
   .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:2.1rem}
+  .pl-n-val{font-size:2.4rem}
   .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
   .pl-brands{margin-top:1.8rem}
-  .pl-rail{gap:1rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
-  .pl-cell{flex-basis:7rem;height:4.75rem;padding:.5rem .35rem}
+  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.25rem .5rem}
+  .pl-logos .pl-cell--wide{grid-column:span 2}
+  .pl-cell{min-height:4.75rem;padding:.5rem .35rem}
   .pl-cell img{width:6.5rem;max-height:2.4rem}
-  .pl-cell--wide{flex-basis:9rem}
-  .pl-cell--wide img{width:8rem;max-height:2rem}
-  .pl-cell--citi,.pl-cell--nestle{flex-basis:5rem}
+  .pl-cell--wide img{width:9rem;max-height:2rem}
   .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
   .pl-cell--goldman img{width:6rem;max-height:2.8rem}
   .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
   .pl-cell--nestle img{width:2.7rem;max-height:3rem}
   .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
+  .pl-rows{gap:.5rem}
+  .pl-track{gap:1.5rem}
+  .pl-track .pl-cell{flex-basis:7.5rem;width:7.5rem;height:4.75rem}
+  .pl-track .pl-cell--wide{flex-basis:10.5rem;width:10.5rem}
+  .pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:5rem;width:5rem}
 }
 @media (max-width:359px){
-  .pl-nums{gap:.65rem}
+  .pl-nums{gap:.55rem}
   .pl-n-lab{font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){
   .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
-  .pl-brands::before,.pl-brands::after{transition:none}
-  .pl-rail{scroll-behavior:auto}
 }
 /* ===== 04-national ===== */
-/* An editorial account of the fraternity leads. Geography supports it in a
-   smaller right-hand column; all chapter pins retain their sourced positions. */
+/* The original chapter statement leads a short account. The map sits beside
+   the story, keeping the whole section compact and easy to scan. */
 .v2nat{
   position:relative;
   padding-block:clamp(4.5rem,7vw,6.5rem);
@@ -383,15 +371,15 @@
 }
 .v2nat-lock{
   display:flex;
-  align-items:center;
-  gap:clamp(1.4rem,2.5vw,2rem);
-  margin-bottom:clamp(2.5rem,4.5vw,3.5rem);
+  align-items:flex-start;
+  gap:clamp(1.1rem,2.2vw,1.6rem);
+  margin-bottom:1.6rem;
 }
-.v2nat-crest{flex:none;width:clamp(64px,6vw,82px);height:auto}
+.v2nat-crest{flex:none;width:64px;height:auto;margin-top:.45rem}
 .v2nat-h{
-  max-width:24ch;
+  max-width:17ch;
   margin:0;
-  font-size:clamp(2.6rem,5.4vw,4.6rem);
+  font-size:clamp(3rem,4.8vw,4.6rem);
   line-height:1.08;
   letter-spacing:-.015em;
   color:var(--paper);
@@ -399,21 +387,20 @@
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);
   gap:clamp(2.5rem,5vw,4rem);
-  align-items:start;
+  align-items:center;
 }
+.v2nat-story{min-width:0}
 .v2nat-copy{
   min-width:0;
-  max-width:60ch;
-  font-size:clamp(1rem,1.3vw,1.1rem);
-  line-height:1.75;
+  max-width:46ch;
+  font-size:clamp(1.05rem,1.6vw,1.2rem);
+  line-height:1.65;
   color:rgba(250,248,243,.76);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy p+p{margin-top:1.25rem}
-.v2nat-copy .v2nat-lede{font-size:clamp(1.1rem,1.55vw,1.24rem);line-height:1.65;color:var(--paper)}
-.v2nat-links{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem;margin-top:1.25rem}
+.v2nat-copy .v2nat-link{margin-top:1rem}
 .v2nat-link,.v2nat-directory{
   display:inline-flex;
   align-items:center;
@@ -428,7 +415,7 @@
   text-underline-offset:5px;
 }
 .v2nat-link:hover,.v2nat-directory:hover{text-decoration-color:currentColor}
-.v2nat-figure{min-width:0;width:100%;max-width:430px;margin:0;justify-self:end}
+.v2nat-figure{min-width:0;width:100%;max-width:360px;margin:0;justify-self:end}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.13);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.5);stroke-width:1.15;stroke-linejoin:round}
@@ -481,20 +468,17 @@
 .v2nat-directory{font-size:.78rem}
 @media(max-width:899px){
   .v2nat-layout{grid-template-columns:1fr;gap:2.5rem}
-  .v2nat-copy{max-width:62ch}
-  .v2nat-figure{max-width:380px;justify-self:start}
+  .v2nat-copy{max-width:50ch}
+  .v2nat-figure{max-width:340px;justify-self:start}
 }
 @media(max-width:559px){
   .v2nat{padding-block:3.75rem}
-  .v2nat-lock{gap:1.1rem;margin-bottom:2rem}
-  .v2nat-crest{width:48px}
-  .v2nat-h{font-size:clamp(2rem,7.5vw,2.6rem);line-height:1.12}
+  .v2nat-lock{gap:1.1rem;margin-bottom:1.4rem}
+  .v2nat-crest{width:48px;margin-top:.25rem}
+  .v2nat-h{font-size:clamp(2.25rem,9vw,3rem);line-height:1.08;max-width:16ch}
   .v2nat-layout{gap:2.2rem}
-  .v2nat-copy{font-size:1rem;line-height:1.7}
-  .v2nat-copy .v2nat-lede{font-size:1.1rem;line-height:1.6}
-  .v2nat-copy p+p{margin-top:1.1rem}
-  .v2nat-links{column-gap:1.4rem;margin-top:1rem}
-  .v2nat-figure{max-width:350px}
+  .v2nat-copy{font-size:1.05rem;line-height:1.65}
+  .v2nat-figure{max-width:320px}
   .v2nat-map-footer{padding-top:.75rem}
   .v2nat-map-scale{font-size:.78rem}
   .v2nat-location{font-size:.76rem}
@@ -838,10 +822,11 @@
       </ul>
     </div>
 
-    <div class="pl-brands" data-pl-rail-wrap>
-      <span class="pl-rail-hint" id="pl-rail-hint">Scroll horizontally to browse the company logos. When the list is focused, use the left and right arrow keys.</span>
-      <ul class="pl-rail" data-pl-rail tabindex="0" role="list"
-          aria-label="Companies where members have been placed" aria-describedby="pl-rail-hint">
+    <div class="pl-brands" data-pl-brands>
+      <!-- This complete wrapping list is the no-JavaScript/reduced-motion view.
+           Enhancement regroups these same twenty nodes into page-linked rows. -->
+      <ul class="pl-logos" data-pl-logos role="list"
+          aria-label="Companies where members have been placed">
       <li class="pl-cell pl-cell--goldman"><img src="../assets/logos/goldman-sachs.png" alt="Goldman Sachs" width="1022" height="429" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide"><img src="../assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--citi"><img src="../assets/logos/citi.svg" alt="Citi" width="56" height="33" loading="lazy" decoding="async"></li>
@@ -868,24 +853,19 @@
 </section>
 
     <!-- ===== 04-national ===== -->
-<!-- Identity, founding, and mission: phichitheta.org/about.
-     National programs and Foundation scholarships: phichitheta.org/become-a-member.
+<!-- Identity and founding: phichitheta.org/about.
      The supporting map retains all sourced collegiate entries from assets/map/. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h" data-national>
   <div class="v2wrap">
-    <div class="v2nat-lock">
-      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
-      <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
-    </div>
-
     <div class="v2nat-layout">
-      <div class="v2nat-copy" data-motion-rise>
-        <p class="v2nat-lede">Founded in Chicago, Phi Chi Theta is a coed professional fraternity for business and economics. Its mission centers on business education, professional leadership, and a local and national network for sharing ideas and resources.</p>
-        <p>Zeta Rho is the fraternity&rsquo;s chapter at the University of South Florida. Members belong to a wider community of students and alumni beyond their own campus.</p>
-        <p>National programs include regional conferences, national mentoring, and stock market competitions. Scholarship opportunities through the Phi Chi Theta Educational Foundation recognize academic achievement, leadership, and commitment to the fraternity.</p>
-        <div class="v2nat-links">
+      <div class="v2nat-story">
+        <div class="v2nat-lock">
+          <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
+          <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
+        </div>
+        <div class="v2nat-copy" data-motion-rise>
+          <p>Phi Chi Theta is a professional fraternity for business and economics. Zeta Rho is its USF chapter, connecting members with students and alumni nationwide.</p>
           <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
-          <a class="v2nat-link" href="https://www.phichitheta.org/become-a-member" target="_blank" rel="noopener">National membership</a>
         </div>
       </div>
 
@@ -1674,48 +1654,146 @@ window.pctInitGrow = function () {
   }
 };
 /* ===== 03-place ===== */
-/* Company logos form a manual native scroll rail. Outcomes count once, while
-   finished source and accessible values remain stable throughout. */
+/* The same twenty logo nodes become finite rows linked to normal page scroll.
+   No continuous loop runs: a visible scroll/resize schedules one frame. */
 window.pctInitPlacements = function () {
   'use strict';
   var root = document.querySelector('[data-place]');
   if (!root || root.dataset.placementsReady) return;
   root.dataset.placementsReady = '1';
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var rail = root.querySelector('[data-pl-rail]');
-  var railWrap = root.querySelector('[data-pl-rail-wrap]');
-  if (rail && railWrap) {
-    var maximum = 0;
-    var keyStep = 160;
-    function updateEdges() {
-      var left = Math.max(0, rail.scrollLeft);
-      railWrap.classList.toggle('has-scroll-back', left > 2);
-      railWrap.classList.toggle('is-at-end', maximum <= 2 || left >= maximum - 2);
-    }
-    function measureRail() {
-      maximum = Math.max(0, rail.scrollWidth - rail.clientWidth);
-      keyStep = Math.max(140, rail.clientWidth * .55);
-      updateEdges();
-    }
-    rail.addEventListener('scroll', updateEdges, { passive:true });
-    rail.addEventListener('keydown', function (event) {
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
-      var destination;
-      if (event.key === 'ArrowRight') destination = rail.scrollLeft + keyStep;
-      else if (event.key === 'ArrowLeft') destination = rail.scrollLeft - keyStep;
-      else if (event.key === 'Home') destination = 0;
-      else if (event.key === 'End') destination = maximum;
-      else return;
-      event.preventDefault();
-      rail.scrollTo({
-        left:Math.max(0, Math.min(maximum, destination)),
-        behavior:reduce && reduce.matches ? 'auto' : 'smooth'
-      });
-    });
-    measureRail();
-    if ('ResizeObserver' in window) new ResizeObserver(measureRail).observe(rail);
-    else window.addEventListener('resize', measureRail, { passive:true });
+  var brands = root.querySelector('[data-pl-brands]');
+  var originalList = root.querySelector('[data-pl-logos]');
+  var logos = originalList ? Array.prototype.slice.call(originalList.children) : [];
+  var rows = [];
+  var rowContainer = null;
+  var rowObserver = null;
+  var resizeObserver = null;
+  var rowFrame = null;
+  var rowsEnabled = false;
+  var rowsVisible = false;
+
+  function cancelRowFrame() {
+    if (rowFrame !== null) window.cancelAnimationFrame(rowFrame);
+    rowFrame = null;
   }
+  function applyRows() {
+    var scroll = window.scrollY || window.pageYOffset || 0;
+    rows.forEach(function (row, index) {
+      var progress = Math.max(0, Math.min((scroll - row.start) / row.distance, 1));
+      var phase = index % 2 ? 1 - progress : progress;
+      row.track.style.transform = 'translate3d(' + (-row.overflow * phase).toFixed(2) + 'px,0,0)';
+    });
+  }
+  function queueRows() {
+    if (!rowsEnabled || !rowsVisible || document.hidden || rowFrame !== null) return;
+    rowFrame = window.requestAnimationFrame(function () {
+      rowFrame = null;
+      if (rowsEnabled && rowsVisible && !document.hidden) applyRows();
+    });
+  }
+  function measureRows() {
+    if (!rowsEnabled) return;
+    var scroll = window.scrollY || window.pageYOffset || 0;
+    var viewport = Math.max(1, window.innerHeight);
+    var header = document.querySelector('.v2hd');
+    var safeTop = header ? header.getBoundingClientRect().height + 12 : 0;
+    rows.forEach(function (row) {
+      var box = row.element.getBoundingClientRect();
+      var top = box.top + scroll;
+      row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
+      /* Hold endpoints while the full row is visible, finishing before the
+         sticky header covers it. First/last marks each receive a complete view. */
+      row.start = top + box.height - viewport;
+      row.distance = Math.max(1, viewport - box.height - safeTop);
+    });
+    applyRows();
+  }
+  function groupRows() {
+    if (!rowsEnabled) return;
+    var count = window.innerWidth <= 700 ? 3 : 2;
+    if (rows.length === count) { measureRows(); return; }
+    if (rowContainer) rowContainer.remove();
+    rowContainer = document.createElement('div');
+    rowContainer.className = 'pl-rows';
+    rows = [];
+    var perRow = Math.ceil(logos.length / count);
+    for (var index = 0; index < count; index++) {
+      var element = document.createElement('div');
+      var track = document.createElement('ul');
+      element.className = 'pl-row';
+      track.className = 'pl-track';
+      track.setAttribute('role', 'list');
+      track.setAttribute('aria-label', 'Companies where members have been placed, row ' + (index + 1) + ' of ' + count);
+      logos.slice(index * perRow, (index + 1) * perRow).forEach(function (logo) { track.appendChild(logo); });
+      element.appendChild(track);
+      rowContainer.appendChild(element);
+      rows.push({ element:element, track:track, start:0, distance:1, overflow:0 });
+    }
+    originalList.hidden = true;
+    brands.appendChild(rowContainer);
+    measureRows();
+  }
+  function onRowResize() {
+    if (!rowsEnabled) return;
+    groupRows();
+    queueRows();
+  }
+  function onRowVisibility() {
+    if (document.hidden) cancelRowFrame();
+    else queueRows();
+  }
+  function stopRows() {
+    rowsEnabled = false;
+    rowsVisible = false;
+    cancelRowFrame();
+    if (rowObserver) rowObserver.disconnect();
+    if (resizeObserver) resizeObserver.disconnect();
+    rowObserver = resizeObserver = null;
+    window.removeEventListener('scroll', queueRows);
+    window.removeEventListener('resize', onRowResize);
+    document.removeEventListener('visibilitychange', onRowVisibility);
+    if (originalList) {
+      logos.forEach(function (logo) { originalList.appendChild(logo); });
+      originalList.hidden = false;
+    }
+    if (rowContainer) rowContainer.remove();
+    rowContainer = null;
+    rows = [];
+  }
+  function startRows() {
+    if (rowsEnabled || !brands || !originalList || !logos.length ||
+        (reduce && reduce.matches) || !window.requestAnimationFrame ||
+        !('IntersectionObserver' in window)) return;
+    try {
+      rowsEnabled = true;
+      groupRows();
+      rowObserver = new IntersectionObserver(function (entries) {
+        rowsVisible = entries.some(function (entry) { return entry.isIntersecting; });
+        if (rowsVisible) queueRows();
+        else cancelRowFrame();
+      });
+      rowObserver.observe(brands);
+      if ('ResizeObserver' in window) {
+        resizeObserver = new ResizeObserver(measureRows);
+        resizeObserver.observe(brands);
+        if (document.body) resizeObserver.observe(document.body);
+      }
+      window.addEventListener('scroll', queueRows, { passive:true });
+      window.addEventListener('resize', onRowResize, { passive:true });
+      document.addEventListener('visibilitychange', onRowVisibility);
+    } catch (error) {
+      stopRows();
+    }
+  }
+  function onRowReduce(event) {
+    if (event.matches) stopRows();
+    else startRows();
+  }
+  if (reduce && reduce.addEventListener) reduce.addEventListener('change', onRowReduce);
+  else if (reduce && reduce.addListener) reduce.addListener(onRowReduce);
+  if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(stopRows);
+  startRows();
 
   var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
   var numbers = root.querySelector('.pl-nums');

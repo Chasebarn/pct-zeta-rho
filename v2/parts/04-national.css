@@ -1,5 +1,5 @@
-/* An editorial account of the fraternity leads. Geography supports it in a
-   smaller right-hand column; all chapter pins retain their sourced positions. */
+/* The original chapter statement leads a short account. The map sits beside
+   the story, keeping the whole section compact and easy to scan. */
 .v2nat{
   position:relative;
   padding-block:clamp(4.5rem,7vw,6.5rem);
@@ -8,15 +8,15 @@
 }
 .v2nat-lock{
   display:flex;
-  align-items:center;
-  gap:clamp(1.4rem,2.5vw,2rem);
-  margin-bottom:clamp(2.5rem,4.5vw,3.5rem);
+  align-items:flex-start;
+  gap:clamp(1.1rem,2.2vw,1.6rem);
+  margin-bottom:1.6rem;
 }
-.v2nat-crest{flex:none;width:clamp(64px,6vw,82px);height:auto}
+.v2nat-crest{flex:none;width:64px;height:auto;margin-top:.45rem}
 .v2nat-h{
-  max-width:24ch;
+  max-width:17ch;
   margin:0;
-  font-size:clamp(2.6rem,5.4vw,4.6rem);
+  font-size:clamp(3rem,4.8vw,4.6rem);
   line-height:1.08;
   letter-spacing:-.015em;
   color:var(--paper);
@@ -24,21 +24,20 @@
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);
   gap:clamp(2.5rem,5vw,4rem);
-  align-items:start;
+  align-items:center;
 }
+.v2nat-story{min-width:0}
 .v2nat-copy{
   min-width:0;
-  max-width:60ch;
-  font-size:clamp(1rem,1.3vw,1.1rem);
-  line-height:1.75;
+  max-width:46ch;
+  font-size:clamp(1.05rem,1.6vw,1.2rem);
+  line-height:1.65;
   color:rgba(250,248,243,.76);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy p+p{margin-top:1.25rem}
-.v2nat-copy .v2nat-lede{font-size:clamp(1.1rem,1.55vw,1.24rem);line-height:1.65;color:var(--paper)}
-.v2nat-links{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem;margin-top:1.25rem}
+.v2nat-copy .v2nat-link{margin-top:1rem}
 .v2nat-link,.v2nat-directory{
   display:inline-flex;
   align-items:center;
@@ -53,7 +52,7 @@
   text-underline-offset:5px;
 }
 .v2nat-link:hover,.v2nat-directory:hover{text-decoration-color:currentColor}
-.v2nat-figure{min-width:0;width:100%;max-width:430px;margin:0;justify-self:end}
+.v2nat-figure{min-width:0;width:100%;max-width:360px;margin:0;justify-self:end}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.13);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.5);stroke-width:1.15;stroke-linejoin:round}
@@ -106,20 +105,17 @@
 .v2nat-directory{font-size:.78rem}
 @media(max-width:899px){
   .v2nat-layout{grid-template-columns:1fr;gap:2.5rem}
-  .v2nat-copy{max-width:62ch}
-  .v2nat-figure{max-width:380px;justify-self:start}
+  .v2nat-copy{max-width:50ch}
+  .v2nat-figure{max-width:340px;justify-self:start}
 }
 @media(max-width:559px){
   .v2nat{padding-block:3.75rem}
-  .v2nat-lock{gap:1.1rem;margin-bottom:2rem}
-  .v2nat-crest{width:48px}
-  .v2nat-h{font-size:clamp(2rem,7.5vw,2.6rem);line-height:1.12}
+  .v2nat-lock{gap:1.1rem;margin-bottom:1.4rem}
+  .v2nat-crest{width:48px;margin-top:.25rem}
+  .v2nat-h{font-size:clamp(2.25rem,9vw,3rem);line-height:1.08;max-width:16ch}
   .v2nat-layout{gap:2.2rem}
-  .v2nat-copy{font-size:1rem;line-height:1.7}
-  .v2nat-copy .v2nat-lede{font-size:1.1rem;line-height:1.6}
-  .v2nat-copy p+p{margin-top:1.1rem}
-  .v2nat-links{column-gap:1.4rem;margin-top:1rem}
-  .v2nat-figure{max-width:350px}
+  .v2nat-copy{font-size:1.05rem;line-height:1.65}
+  .v2nat-figure{max-width:320px}
   .v2nat-map-footer{padding-top:.75rem}
   .v2nat-map-scale{font-size:.78rem}
   .v2nat-location{font-size:.76rem}

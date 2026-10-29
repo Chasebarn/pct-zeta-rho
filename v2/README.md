@@ -25,8 +25,8 @@ and visual requirements are in `CONTRACT.md`.
 | Header | One row; native mobile disclosure; opaque safe base |
 | Hero | Original full-height left-aligned composition, one value line, plain Rush button, silk canvas |
 | Membership | Photo on the left, compact full-phrase titles on the right; phone photo stays inside its category |
-| Member Success | One-line heading, compact outcomes, and one horizontal company-logo strip with touch/trackpad/keyboard scrolling |
-| National | Information leads; original heading, verified national history and membership copy, smaller supporting campus map |
+| Member Success | Large heading and figures; two desktop / three phone logo rows move with page scrolling |
+| National | Original headline and two short sentences beside a compact supporting campus map |
 | Chapter Life | Original circular photo carousel, authentic photos; no visible pause button |
 | Rush | Display heading, gold italic fraternity name, plain Rush button, dark support band continuous with footer |
 | Footer | Chapter identity, page links and social links |
@@ -38,7 +38,9 @@ italic accents and accessible names; membership controls and Member Success use 
 Figures count once without changing column widths, and selecting a campus settles its pin.
 Focused controls immediately settle any entrance animation so they stay visible.
 Button highlights and footer underlines respond to hover and keyboard focus.
-There is no pinned scrolling, automatic logo movement, or mock countdown.
+Logo rows move only with page scrolling, with finite endpoints held while visible.
+Reduced motion and no JavaScript expose every logo in a static wrapping layout.
+There is no pinned scrolling, manual sideways logo control, or mock countdown.
 The company logo provenance is recorded in `assets/logos/sources.json`.
 Chapter locations, federal NCES coordinates, and Census-derived geography are
 recorded in `assets/map/`. The standard-library-only `chapter_map.py` renders

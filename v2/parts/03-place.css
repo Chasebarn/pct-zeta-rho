@@ -1,5 +1,5 @@
-/* A compact, plain hierarchy: heading, three outcomes, then one manually
-   scrollable company rail. Real marks keep their individual proportions. */
+/* Strong, direct hierarchy above finite company rows linked to page scroll.
+   Base CSS shows the complete wrapping list, including with reduced motion. */
 .pl{
   padding:0 0 var(--section);
   background:var(--paper);
@@ -8,11 +8,12 @@
 .pl-intro{display:block}
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(1.75rem,3vw,2.25rem);
-  font-size:clamp(2.15rem,4.2vw,2.9rem);
+  margin:0 0 clamp(2rem,3.5vw,3rem);
+  font-size:clamp(4.6rem,7.5vw,6rem);
   line-height:1.1;
   letter-spacing:-.02em;
   text-align:center;
+  white-space:nowrap;
 }
 .pl-nums{
   display:grid;
@@ -28,7 +29,7 @@
   margin:0;
   color:var(--ink);
   font-family:var(--font-text);
-  font-size:clamp(2.8rem,5vw,3.2rem);
+  font-size:clamp(3.2rem,5vw,4rem);
   font-weight:500;
   line-height:1.1;
   letter-spacing:-.04em;
@@ -49,7 +50,7 @@
 .pl-counter{position:relative;display:inline-block}
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label,.pl-rail-hint{
+.pl-stat-label{
   position:absolute;
   width:1px;
   height:1px;
@@ -73,53 +74,25 @@
   position:relative;
   margin-top:clamp(2rem,3.5vw,2.75rem);
   border-top:1px solid var(--line);
-  padding-top:.75rem;
+  padding-top:1rem;
 }
-/* Edge fades hint at the continuation without covering a control or requiring
-   motion. The list retains its native thin scrollbar and scroll behavior. */
-.pl-brands::before,.pl-brands::after{
-  content:"";
-  position:absolute;
-  top:.75rem;
-  bottom:1rem;
-  z-index:1;
-  width:28px;
-  pointer-events:none;
-  transition:opacity 180ms ease;
-}
-.pl-brands::before{left:0;background:linear-gradient(90deg,var(--paper),transparent);opacity:0}
-.pl-brands::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
-.pl-brands.has-scroll-back::before{opacity:1}
-.pl-brands.is-at-end::after{opacity:0}
-.pl-rail{
-  display:flex;
+.pl-logos{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
   align-items:center;
-  gap:clamp(1.5rem,2.5vw,2rem);
-  overflow-x:auto;
-  overflow-y:hidden;
-  overscroll-behavior-x:contain;
-  scroll-snap-type:x proximity;
-  scroll-padding-inline:1rem;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(69,58,82,.35) transparent;
-  -webkit-overflow-scrolling:touch;
+  gap:.5rem 1rem;
   list-style:none;
   margin:0;
-  padding:.5rem 1rem 1rem;
+  padding:0;
 }
-.pl-rail::-webkit-scrollbar{height:4px}
-.pl-rail::-webkit-scrollbar-track{background:transparent}
-.pl-rail::-webkit-scrollbar-thumb{background:rgba(69,58,82,.35);border-radius:2px}
-.pl-rail:focus-visible{outline:2px solid var(--purple);outline-offset:5px}
+.pl-logos[hidden]{display:none}
 .pl-cell{
   display:flex;
   align-items:center;
   justify-content:center;
-  flex:0 0 9rem;
   min-width:0;
-  height:5.5rem;
+  min-height:5.5rem;
   padding:.65rem .5rem;
-  scroll-snap-align:start;
 }
 .pl-cell img{
   display:block;
@@ -131,46 +104,61 @@
   filter:grayscale(1);
   opacity:.85;
 }
-.pl-cell--wide{flex-basis:12rem}
 .pl-cell--wide img{width:10.5rem;max-height:2.2rem}
 .pl-cell--reverse img{filter:brightness(0);opacity:.78}
 .pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
-.pl-cell--citi{flex-basis:6rem}
 .pl-cell--citi img{width:4.3rem;max-height:2.8rem}
 .pl-cell--pnc img{width:6rem}
 .pl-cell--kpmg img{width:6.5rem}
 .pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
 .pl-cell--amazon img{width:6.5rem}
-.pl-cell--nestle{flex-basis:6rem}
 .pl-cell--nestle img{width:3rem;max-height:3.25rem}
 .pl-cell--victoria img{width:8rem;max-height:2.6rem}
 .pl-cell--formula img{width:6.5rem}
-/* This source includes substantial clear space around its horizontal mark. */
 .pl-cell--jets img{width:7.5rem;max-height:5rem}
-@media (max-width:600px){
-  .pl-h{margin-bottom:1.65rem;font-size:2.15rem}
+/* Only enhancement creates clipped finite tracks. No scrollbar, manual rail,
+   duplicated images, pinning, or scroll interception is involved. */
+.pl-rows{display:grid;gap:.75rem}
+.pl-row{min-width:0;overflow:hidden}
+.pl-track{
+  display:flex;
+  align-items:center;
+  gap:2rem;
+  width:max-content;
+  list-style:none;
+  margin:0;
+  padding:0;
+  will-change:transform;
+}
+.pl-track .pl-cell{flex:0 0 9rem;width:9rem;height:5.5rem}
+.pl-track .pl-cell--wide{flex-basis:12rem;width:12rem}
+.pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:6rem;width:6rem}
+@media (max-width:700px){
+  .pl-h{margin-bottom:2rem;font-size:clamp(2.85rem,13.5vw,3.3rem)}
   .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:2.1rem}
+  .pl-n-val{font-size:2.4rem}
   .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
   .pl-brands{margin-top:1.8rem}
-  .pl-rail{gap:1rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
-  .pl-cell{flex-basis:7rem;height:4.75rem;padding:.5rem .35rem}
+  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.25rem .5rem}
+  .pl-logos .pl-cell--wide{grid-column:span 2}
+  .pl-cell{min-height:4.75rem;padding:.5rem .35rem}
   .pl-cell img{width:6.5rem;max-height:2.4rem}
-  .pl-cell--wide{flex-basis:9rem}
-  .pl-cell--wide img{width:8rem;max-height:2rem}
-  .pl-cell--citi,.pl-cell--nestle{flex-basis:5rem}
+  .pl-cell--wide img{width:9rem;max-height:2rem}
   .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
   .pl-cell--goldman img{width:6rem;max-height:2.8rem}
   .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
   .pl-cell--nestle img{width:2.7rem;max-height:3rem}
   .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
+  .pl-rows{gap:.5rem}
+  .pl-track{gap:1.5rem}
+  .pl-track .pl-cell{flex-basis:7.5rem;width:7.5rem;height:4.75rem}
+  .pl-track .pl-cell--wide{flex-basis:10.5rem;width:10.5rem}
+  .pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:5rem;width:5rem}
 }
 @media (max-width:359px){
-  .pl-nums{gap:.65rem}
+  .pl-nums{gap:.55rem}
   .pl-n-lab{font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){
   .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
-  .pl-brands::before,.pl-brands::after{transition:none}
-  .pl-rail{scroll-behavior:auto}
 }

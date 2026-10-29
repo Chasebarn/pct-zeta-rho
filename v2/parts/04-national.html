@@ -1,20 +1,28 @@
-<!-- Map pins are generated from the national chapter directory and federal
-     NCES campus coordinates. Geometry and sources are kept in assets/map/. -->
+<!-- Identity, founding, and mission: phichitheta.org/about.
+     National programs and Foundation scholarships: phichitheta.org/become-a-member.
+     The supporting map retains all sourced collegiate entries from assets/map/. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h" data-national>
   <div class="v2wrap">
     <div class="v2nat-lock">
       <img class="v2nat-crest" src="assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
       <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
     </div>
+
     <div class="v2nat-layout">
       <div class="v2nat-copy" data-motion-rise>
-        <p class="v2nat-scale"><span class="v2nat-number">{{PCT_CHAPTER_COUNT}}</span><span class="v2nat-number-label">Collegiate chapters</span></p>
-        <p class="v2nat-say">Zeta Rho at USF is part of a national professional fraternity for business and economics.</p>
-        <a class="v2nat-link" href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">National chapter directory</a>
+        <p class="v2nat-lede">Founded in Chicago, Phi Chi Theta is a coed professional fraternity for business and economics. Its mission centers on business education, professional leadership, and a local and national network for sharing ideas and resources.</p>
+        <p>Zeta Rho is the fraternity&rsquo;s chapter at the University of South Florida. Members belong to a wider community of students and alumni beyond their own campus.</p>
+        <p>National programs include regional conferences, national mentoring, and stock market competitions. Scholarship opportunities through the Phi Chi Theta Educational Foundation recognize academic achievement, leadership, and commitment to the fraternity.</p>
+        <div class="v2nat-links">
+          <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
+          <a class="v2nat-link" href="https://www.phichitheta.org/become-a-member" target="_blank" rel="noopener">National membership</a>
+        </div>
       </div>
+
       <figure class="v2nat-figure" data-motion-map>
         <!-- PCT_CHAPTER_MAP -->
         <figcaption class="v2nat-map-footer">
+          <p class="v2nat-map-scale"><strong>{{PCT_CHAPTER_COUNT}}</strong> collegiate chapters. <span>USF highlighted.</span></p>
           <div class="v2nat-controls" data-map-controls hidden>
             <label class="v2-sr-only" for="pct-university">Choose a collegiate chapter</label>
             <select class="v2nat-select" id="pct-university" data-map-select>
@@ -22,7 +30,7 @@
             </select>
             <p class="v2nat-location" data-map-location aria-live="polite">Zeta Rho · Tampa, FL</p>
           </div>
-          <span class="v2nat-legend"><span aria-hidden="true"></span> Collegiate chapters · USF highlighted</span>
+          <a class="v2nat-directory" href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">National chapter directory</a>
         </figcaption>
       </figure>
     </div>

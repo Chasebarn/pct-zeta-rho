@@ -1,5 +1,5 @@
-/* The sourced map is complete in HTML. This enhancement connects native
-   university selection and pointer exploration to a shared campus highlight. */
+/* Geography supports the national account. The native selector and local pin
+   highlights use the same complete, statically generated campus data. */
 window.pctInitNational = function () {
   'use strict';
   try {
@@ -11,7 +11,9 @@ window.pctInitNational = function () {
     var location = root.querySelector('[data-map-location]');
     if (!pins.length || !select || !controls || !location) return;
     var byId = new Map();
+    var currentId = null;
     pins.forEach(function (pin) { byId.set(pin.dataset.chapterPin, pin); });
+
     function choose(id) {
       var pin = byId.get(id);
       if (!pin) return;
@@ -19,7 +21,11 @@ window.pctInitNational = function () {
       if (dot && dot.getAnimations) dot.getAnimations().forEach(function (animation) { animation.cancel(); });
       pins.forEach(function (item) { item.classList.toggle('is-selected', item === pin); });
       select.value = id;
-      location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+      select.title = pin.dataset.school;
+      if (currentId !== id) {
+        location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+        currentId = id;
+      }
     }
     select.addEventListener('change', function () { choose(select.value); });
     pins.forEach(function (pin) {

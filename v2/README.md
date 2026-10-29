@@ -24,20 +24,21 @@ and visual requirements are in `CONTRACT.md`.
 |---|---|
 | Header | One row; native mobile disclosure; opaque safe base |
 | Hero | Original full-height left-aligned composition, one value line, plain Rush button, silk canvas |
-| Membership | Two-line editorial titles, full-height photo stage with mask transitions; phone photo stays inside its category |
-| Member Success | Left-aligned display heading, three animated outcomes, compact logo rows; expandable marks on phones |
-| National | Original heading; coastline entrance and 50 sourced campus pins, USF highlight and university selector |
+| Membership | Photo on the left, compact full-phrase titles on the right; phone photo stays inside its category |
+| Member Success | One-line heading, compact outcomes, and one horizontal company-logo strip with touch/trackpad/keyboard scrolling |
+| National | Information leads; original heading, verified national history and membership copy, smaller supporting campus map |
 | Chapter Life | Original circular photo carousel, authentic photos; no visible pause button |
 | Rush | Display heading, gold italic fraternity name, plain Rush button, dark support band continuous with footer |
 | Footer | Chapter identity, page links and social links |
 
 Content is visible without JavaScript. Motion respects reduced-motion preferences;
 the original photo carousel pauses on hover/focus and has a still reduced-motion state.
-Titles reveal through word masks while preserving italic accents and accessible names.
+The hero, national heading, and closing titles reveal through word masks while preserving
+italic accents and accessible names; membership controls and Member Success use plain text.
 Figures count once without changing column widths, and selecting a campus settles its pin.
 Focused controls immediately settle any entrance animation so they stay visible.
 Button highlights and footer underlines respond to hover and keyboard focus.
-There is no pinned scrolling, logo marquee, or mock countdown.
+There is no pinned scrolling, automatic logo movement, or mock countdown.
 The company logo provenance is recorded in `assets/logos/sources.json`.
 Chapter locations, federal NCES coordinates, and Census-derived geography are
 recorded in `assets/map/`. The standard-library-only `chapter_map.py` renders

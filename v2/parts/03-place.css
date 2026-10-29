@@ -1,60 +1,55 @@
-/* Outcomes lead. The company marks form a secondary, still brand strip rather
-   than twenty large tiles. No information requires motion or JavaScript. */
+/* A compact, plain hierarchy: heading, three outcomes, then one manually
+   scrollable company rail. Real marks keep their individual proportions. */
 .pl{
   padding:0 0 var(--section);
   background:var(--paper);
   color:var(--ink-soft);
 }
-.pl-intro{
-  display:grid;
-  grid-template-columns:minmax(12rem,.8fr) minmax(0,2.2fr);
-  align-items:start;
-  gap:clamp(2rem,4.5vw,4rem);
-}
+.pl-intro{display:block}
 .pl-h{
-  max-width:7ch;
-  margin:0;
-  font-size:clamp(3.5rem,5.6vw,5rem);
-  line-height:.98;
-  letter-spacing:-.035em;
-  text-align:left;
+  max-width:none;
+  margin:0 0 clamp(1.75rem,3vw,2.25rem);
+  font-size:clamp(2.15rem,4.2vw,2.9rem);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  text-align:center;
 }
 .pl-nums{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(1.5rem,3vw,2.75rem);
+  max-width:56rem;
   list-style:none;
-  margin:0;
+  margin:0 auto;
   padding:0;
 }
-.pl-n{min-width:0;text-align:left}
+.pl-n{min-width:0;text-align:center}
 .pl-n-val{
   margin:0;
   color:var(--ink);
-  font-family:var(--font-display);
-  font-size:clamp(4.5rem,7vw,6.75rem);
-  font-weight:400;
-  line-height:.94;
-  letter-spacing:-.035em;
+  font-family:var(--font-text);
+  font-size:clamp(2.8rem,5vw,3.2rem);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-.04em;
   font-variant-numeric:lining-nums tabular-nums;
   white-space:nowrap;
 }
 .pl-n-u{font-size:.48em;letter-spacing:0}
 .pl-n-lab{
-  max-width:22ch;
-  margin:1rem 0 0;
+  max-width:24ch;
+  margin:.8rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.875rem;
   line-height:1.6;
   text-wrap:pretty;
 }
-/* The finished glyphs reserve each counter's exact final width. Animated
-   digits are positioned over them and cannot change the column measure. */
+/* Final-width glyphs reserve the measure while visual digits count over them. */
 .pl-counter{position:relative;display:inline-block}
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label{
+.pl-stat-label,.pl-rail-hint{
   position:absolute;
   width:1px;
   height:1px;
@@ -65,123 +60,117 @@
   white-space:nowrap;
   border:0;
 }
-/* Enhancement alone arms the reveal. Base CSS is the finished visible state. */
 .pl-stats-ready .pl-n{
   opacity:0;
-  transform:translate3d(0,24px,0);
-  transition:opacity 700ms ease,transform 950ms var(--ease);
+  transform:translate3d(0,16px,0);
+  transition:opacity 650ms ease,transform 800ms var(--ease);
 }
-.pl-stats-ready .pl-n:nth-child(2){transition-delay:110ms}
-.pl-stats-ready .pl-n:nth-child(3){transition-delay:220ms}
+.pl-stats-ready .pl-n:nth-child(2){transition-delay:100ms}
+.pl-stats-ready .pl-n:nth-child(3){transition-delay:200ms}
 .pl-stats-visible .pl-n{opacity:1;transform:none}
+
 .pl-brands{
-  margin-top:clamp(2.5rem,4.5vw,3.75rem);
-  padding-top:1.25rem;
+  position:relative;
+  margin-top:clamp(2rem,3.5vw,2.75rem);
   border-top:1px solid var(--line);
+  padding-top:.75rem;
 }
-.pl-grid{
-  display:grid;
-  grid-template-columns:repeat(10,minmax(0,1fr));
-  gap:.25rem .5rem;
+/* Edge fades hint at the continuation without covering a control or requiring
+   motion. The list retains its native thin scrollbar and scroll behavior. */
+.pl-brands::before,.pl-brands::after{
+  content:"";
+  position:absolute;
+  top:.75rem;
+  bottom:1rem;
+  z-index:1;
+  width:28px;
+  pointer-events:none;
+  transition:opacity 180ms ease;
+}
+.pl-brands::before{left:0;background:linear-gradient(90deg,var(--paper),transparent);opacity:0}
+.pl-brands::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
+.pl-brands.has-scroll-back::before{opacity:1}
+.pl-brands.is-at-end::after{opacity:0}
+.pl-rail{
+  display:flex;
+  align-items:center;
+  gap:clamp(1.5rem,2.5vw,2rem);
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:1rem;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(69,58,82,.35) transparent;
+  -webkit-overflow-scrolling:touch;
   list-style:none;
   margin:0;
-  padding:0;
+  padding:.5rem 1rem 1rem;
 }
-.pl-more{display:block;margin-top:.25rem}
+.pl-rail::-webkit-scrollbar{height:4px}
+.pl-rail::-webkit-scrollbar-track{background:transparent}
+.pl-rail::-webkit-scrollbar-thumb{background:rgba(69,58,82,.35);border-radius:2px}
+.pl-rail:focus-visible{outline:2px solid var(--purple);outline-offset:5px}
 .pl-cell{
-  min-width:0;
-  min-height:4rem;
-  padding:.6rem .45rem;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  flex:0 0 9rem;
+  min-width:0;
+  height:5.5rem;
+  padding:.65rem .5rem;
+  scroll-snap-align:start;
 }
 .pl-cell img{
   display:block;
-  width:5.6rem;
+  width:8rem;
   height:auto;
   max-width:100%;
-  max-height:1.9rem;
+  max-height:2.6rem;
   object-fit:contain;
   filter:grayscale(1);
-  opacity:.82;
+  opacity:.85;
 }
-.pl-cell--wide img{width:6.25rem;max-height:1.6rem}
-.pl-cell--reverse img{filter:brightness(0);opacity:.76}
-.pl-cell--goldman img{width:4.8rem;max-height:2.2rem}
-.pl-cell--citi img{width:2.9rem;max-height:1.85rem}
-.pl-cell--pnc img{width:4.2rem}
-.pl-cell--kpmg img{width:4.35rem;max-height:1.9rem}
-.pl-cell--pwc img{width:4rem;max-height:2.2rem}
-.pl-cell--amazon img{width:4.5rem}
-.pl-cell--nestle img{width:2.45rem;max-height:2.5rem}
-.pl-cell--victoria img{width:5.6rem;max-height:1.9rem}
-.pl-cell--formula img{width:4.4rem}
-/* The NFL source includes clear space around its mark. */
-.pl-cell--jets img{width:5.25rem;max-height:3.5rem}
-.pl-more > summary{display:none}
-.pl-show-less{display:none}
-.pl-more[open] .pl-show-all{display:none}
-.pl-more[open] .pl-show-less{display:inline}
-/* If a no-JavaScript visitor closes the disclosure on a phone and later
-   widens their window, keep the native control available to reopen it. */
-.pl-more:not([open]){display:block}
-.pl-more:not([open]) > summary,
-.pl-more > summary{
-  min-height:44px;
-  align-items:center;
-  justify-content:flex-start;
-  list-style:none;
-  font-family:var(--font-text);
-  font-size:.8rem;
-  line-height:1.5;
-  color:var(--ink-soft);
-  text-decoration:underline;
-  text-decoration-color:var(--line);
-  text-underline-offset:5px;
-  cursor:pointer;
-}
-.pl-more:not([open]) > summary{display:flex}
-.pl-more > summary::-webkit-details-marker{display:none}
-.pl-more > summary:hover{color:var(--purple);text-decoration-color:currentColor}
-.pl-more > summary:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
-@media (max-width:899px){
-  .pl-intro{grid-template-columns:1fr;gap:2.1rem}
-  .pl-h{max-width:none;font-size:clamp(3rem,7vw,4.5rem)}
-  .pl-n-val{font-size:clamp(4rem,9vw,5.5rem)}
-}
-@media (min-width:601px) and (max-width:1000px){
-  .pl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:.1rem .5rem}
-  .pl-cell{min-height:3.65rem}
-}
+.pl-cell--wide{flex-basis:12rem}
+.pl-cell--wide img{width:10.5rem;max-height:2.2rem}
+.pl-cell--reverse img{filter:brightness(0);opacity:.78}
+.pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
+.pl-cell--citi{flex-basis:6rem}
+.pl-cell--citi img{width:4.3rem;max-height:2.8rem}
+.pl-cell--pnc img{width:6rem}
+.pl-cell--kpmg img{width:6.5rem}
+.pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
+.pl-cell--amazon img{width:6.5rem}
+.pl-cell--nestle{flex-basis:6rem}
+.pl-cell--nestle img{width:3rem;max-height:3.25rem}
+.pl-cell--victoria img{width:8rem;max-height:2.6rem}
+.pl-cell--formula img{width:6.5rem}
+/* This source includes substantial clear space around its horizontal mark. */
+.pl-cell--jets img{width:7.5rem;max-height:5rem}
 @media (max-width:600px){
-  .pl-intro{gap:1.8rem}
-  .pl-h{font-size:clamp(2.75rem,11.5vw,3.5rem);letter-spacing:-.03em}
+  .pl-h{margin-bottom:1.65rem;font-size:2.15rem}
   .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:clamp(2.85rem,12.3vw,3.5rem)}
-  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.8rem;max-width:14ch}
-  .pl-brands{margin-top:2.1rem;padding-top:1rem}
-  .pl-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:.25rem .5rem}
-  .pl-cell{min-height:3.5rem;padding:.5rem .25rem}
-  .pl-cell img{max-height:1.75rem}
-  .pl-cell--wide img{max-height:1.35rem}
-  .pl-cell--citi img{max-width:2.7rem}
-  .pl-cell--pwc img,.pl-cell--goldman img{max-height:2rem}
-  .pl-cell--nestle img{max-height:2.3rem}
-  .pl-cell--jets img{max-height:3rem}
-  .pl-more{margin-top:.15rem}
-  .pl-more > summary{display:flex;width:100%;padding:.6rem 0}
-  .pl-grid--more{padding-top:.5rem}
-  .pl-grid--more .pl-cell--raymond,
-  .pl-grid--more .pl-cell--fisher{grid-column:span 2}
-  .pl-grid--more .pl-cell--raymond img,
-  .pl-grid--more .pl-cell--fisher img{width:9rem}
+  .pl-n-val{font-size:2.1rem}
+  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
+  .pl-brands{margin-top:1.8rem}
+  .pl-rail{gap:1.25rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
+  .pl-cell{flex-basis:7.5rem;height:4.75rem;padding:.5rem .35rem}
+  .pl-cell img{width:6.5rem;max-height:2.4rem}
+  .pl-cell--wide{flex-basis:10.5rem}
+  .pl-cell--wide img{width:9rem;max-height:2rem}
+  .pl-cell--citi,.pl-cell--nestle{flex-basis:5rem}
+  .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
+  .pl-cell--goldman img{width:6rem;max-height:2.8rem}
+  .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
+  .pl-cell--nestle img{width:2.7rem;max-height:3rem}
+  .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
 }
 @media (max-width:359px){
   .pl-nums{gap:.65rem}
-  .pl-n-val{font-size:2.7rem}
   .pl-n-lab{font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){
   .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
+  .pl-brands::before,.pl-brands::after{transition:none}
+  .pl-rail{scroll-behavior:auto}
 }

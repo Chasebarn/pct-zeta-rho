@@ -139,161 +139,115 @@
   .v2hero{min-height:660px}
 }
 /* ===== 02-grow ===== */
-/* Large two-line editorial titles and a full-height image form one spread.
-   Mobile keeps each image inside its own accordion panel. */
+/* One photograph leads; a compact accordion sits beside it. Category names
+   read as complete phrases rather than a stack of oversized display words. */
 .grow{background:var(--paper);color:var(--ink-soft);padding-block:var(--section)}
 .grow__rows{min-width:0}
 .grow__row{position:relative;border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
-.grow__row::after{
-  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
-  background:var(--gold-ink);transform:scaleX(0);transform-origin:left;
-  transition:transform 650ms var(--ease);pointer-events:none;
-}
+.grow__row::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold-ink);transform:scaleX(0);transform-origin:left;transition:transform 450ms var(--ease);pointer-events:none}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-.grow__btn{
-  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-  width:100%;min-height:76px;margin:0;padding:1.1rem 0 1.15rem;
-  border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default;
-}
-.grow__ttl{
-  display:block;font-family:var(--font-display);font-weight:400;
-  font-size:clamp(2.3rem,3.4vw,3.25rem);line-height:1.04;letter-spacing:-.02em;
-  color:var(--ink-soft);transition:color 300ms ease;
-}
-.grow__stem,.grow__accent{display:block}
-.grow__accent{font-weight:400;font-style:italic;color:var(--ink);transition:color 300ms ease}
-.grow__panel{padding-bottom:1.4rem}
+.grow__btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:80px;margin:0;padding:1.35rem 0;border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default}
+.grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,2.5vw,2.25rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
+.grow__panel{padding-bottom:1.5rem}
 .grow__panel[hidden]{display:none}
-.grow__say{max-width:33ch;margin:0;font-size:1rem;line-height:1.7;color:var(--ink-soft)}
-.grow__fig{aspect-ratio:4/3;margin:1.4rem 0 0;overflow:hidden;background:var(--paper-deep)}
+.grow__say{max-width:41ch;margin:0;font-size:1rem;line-height:1.75;color:var(--ink-soft)}
+.grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
 .grow__stage,.grow__icon{display:none}
-
-/* Content stays visible without scripting. The one active row receives the
-   colour and rule treatment only after the accordion has initialized. */
 .grow--js .grow__btn{cursor:pointer}
 .grow--js .is-open::after{transform:scaleX(1)}
-.grow--js .is-open .grow__ttl{color:var(--ink)}
-.grow--js .is-open .grow__accent{color:var(--purple)}
-.grow--js .grow__icon{position:relative;display:block;flex:none;width:18px;height:18px;color:var(--ink-mute)}
+.grow--js .is-open .grow__ttl{color:var(--purple)}
+.grow--js .grow__icon{position:relative;display:block;flex:none;width:16px;height:16px;color:var(--ink-mute)}
 .grow--js .grow__icon::before,.grow--js .grow__icon::after{content:"";position:absolute;background:currentColor}
-.grow--js .grow__icon::before{left:0;top:8px;width:18px;height:1px}
-.grow--js .grow__icon::after{left:8px;top:0;width:1px;height:18px;transition:transform 350ms var(--ease)}
+.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
+.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px;transition:transform 250ms var(--ease)}
 .grow--js .is-open .grow__icon{color:var(--purple)}
 .grow--js .is-open .grow__icon::after{transform:scaleY(0)}
 .grow__btn:focus-visible{outline-offset:5px}
-@media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--ink)}}
-
-/* Copy arrives with a small lift; the image opens through a mask and settles
-   from a soft scale. These effects run when the selection changes. */
-.grow--js .is-open .grow__say{animation:growCopyIn 620ms var(--ease) both}
-@keyframes growCopyIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.grow--js:not(.grow--desktop) .is-open .grow__fig{animation:growPhotoIn 850ms var(--ease) both}
-.grow--js:not(.grow--desktop) .is-open .grow__fig img{animation:growPhotoSettle 1100ms var(--ease) both}
-@keyframes growPhotoIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
-@keyframes growPhotoSettle{from{transform:scale(1.065)}to{transform:scale(1)}}
-
-.grow--desktop .grow__wrap{
-  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
-  gap:clamp(3rem,6vw,5rem);align-items:stretch;
-}
-.grow--desktop .grow__rows{grid-column:1;grid-row:1;display:flex;flex-direction:column}
-.grow--desktop .grow__row{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
-.grow--desktop .grow__stage{
-  position:relative;display:block;grid-column:2;grid-row:1;width:100%;
-  min-height:30rem;overflow:hidden;background:var(--paper-deep);
-}
-.grow--desktop .grow__fig{
-  position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;
-  opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;
-  transition:clip-path 900ms var(--ease);
-}
-.grow--desktop .grow__fig img{transform:scale(1.065);transition:transform 1200ms var(--ease)}
+@media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
+.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
+.grow--desktop .grow__rows{grid-column:2;grid-row:1}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:1;grid-row:1;width:100%;aspect-ratio:5/4;min-height:23rem;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
+.grow--desktop .grow__fig img{transform:scale(1.035);transition:transform 1000ms var(--ease)}
 .grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
 .grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
 .grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(1)}
 @media(min-width:900px){
-  .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);gap:clamp(3rem,6vw,5rem);align-items:start}
-  .grow:not(.grow--js) .grow__fig{margin:0}
+ .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
+ .grow:not(.grow--js) .grow__fig{margin:0}
 }
 @media(max-width:899px){
-  .grow__btn{padding-block:1.4rem}
-  .grow__ttl{font-size:clamp(2rem,4.6vw,2.7rem);line-height:1.08}
-  .grow__stem,.grow__accent{display:inline}
-  .grow__panel{padding-bottom:1.6rem}
-  .grow__say{max-width:46ch}
-  .grow__fig{aspect-ratio:3/2}
+ .grow__ttl{font-size:2rem}
+ .grow__say{max-width:50ch}
+ .grow__fig{aspect-ratio:3/2}
 }
 @media(max-width:599px){
-  .grow__btn{gap:1rem;padding-block:1.3rem}
-  .grow__ttl{font-size:2rem}
-  .grow__say{font-size:.975rem}
-  .grow__fig{aspect-ratio:4/3;margin-top:1.2rem}
+ .grow__btn{min-height:76px;gap:1rem;padding-block:1.25rem}
+ .grow__ttl{font-size:1.8rem;letter-spacing:-.01em}
+ .grow__say{font-size:.975rem;line-height:1.7}
+ .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
 }
+@media(max-width:359px){.grow__ttl{font-size:1.65rem}}
 @media(prefers-reduced-motion:reduce){
-  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
-  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
-  .grow--desktop .grow__fig img{transform:none}
+ .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
+ .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
+ .grow--desktop .grow__fig img{transform:none}
 }
 /* ===== 03-place ===== */
-/* Outcomes lead. The company marks form a secondary, still brand strip rather
-   than twenty large tiles. No information requires motion or JavaScript. */
+/* A compact, plain hierarchy: heading, three outcomes, then one manually
+   scrollable company rail. Real marks keep their individual proportions. */
 .pl{
   padding:0 0 var(--section);
   background:var(--paper);
   color:var(--ink-soft);
 }
-.pl-intro{
-  display:grid;
-  grid-template-columns:minmax(12rem,.8fr) minmax(0,2.2fr);
-  align-items:start;
-  gap:clamp(2rem,4.5vw,4rem);
-}
+.pl-intro{display:block}
 .pl-h{
-  max-width:7ch;
-  margin:0;
-  font-size:clamp(3.5rem,5.6vw,5rem);
-  line-height:.98;
-  letter-spacing:-.035em;
-  text-align:left;
+  max-width:none;
+  margin:0 0 clamp(1.75rem,3vw,2.25rem);
+  font-size:clamp(2.15rem,4.2vw,2.9rem);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  text-align:center;
 }
 .pl-nums{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(1.5rem,3vw,2.75rem);
+  max-width:56rem;
   list-style:none;
-  margin:0;
+  margin:0 auto;
   padding:0;
 }
-.pl-n{min-width:0;text-align:left}
+.pl-n{min-width:0;text-align:center}
 .pl-n-val{
   margin:0;
   color:var(--ink);
-  font-family:var(--font-display);
-  font-size:clamp(4.5rem,7vw,6.75rem);
-  font-weight:400;
-  line-height:.94;
-  letter-spacing:-.035em;
+  font-family:var(--font-text);
+  font-size:clamp(2.8rem,5vw,3.2rem);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-.04em;
   font-variant-numeric:lining-nums tabular-nums;
   white-space:nowrap;
 }
 .pl-n-u{font-size:.48em;letter-spacing:0}
 .pl-n-lab{
-  max-width:22ch;
-  margin:1rem 0 0;
+  max-width:24ch;
+  margin:.8rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.875rem;
   line-height:1.6;
   text-wrap:pretty;
 }
-/* The finished glyphs reserve each counter's exact final width. Animated
-   digits are positioned over them and cannot change the column measure. */
+/* Final-width glyphs reserve the measure while visual digits count over them. */
 .pl-counter{position:relative;display:inline-block}
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label{
+.pl-stat-label,.pl-rail-hint{
   position:absolute;
   width:1px;
   height:1px;
@@ -304,152 +258,180 @@
   white-space:nowrap;
   border:0;
 }
-/* Enhancement alone arms the reveal. Base CSS is the finished visible state. */
 .pl-stats-ready .pl-n{
   opacity:0;
-  transform:translate3d(0,24px,0);
-  transition:opacity 700ms ease,transform 950ms var(--ease);
+  transform:translate3d(0,16px,0);
+  transition:opacity 650ms ease,transform 800ms var(--ease);
 }
-.pl-stats-ready .pl-n:nth-child(2){transition-delay:110ms}
-.pl-stats-ready .pl-n:nth-child(3){transition-delay:220ms}
+.pl-stats-ready .pl-n:nth-child(2){transition-delay:100ms}
+.pl-stats-ready .pl-n:nth-child(3){transition-delay:200ms}
 .pl-stats-visible .pl-n{opacity:1;transform:none}
+
 .pl-brands{
-  margin-top:clamp(2.5rem,4.5vw,3.75rem);
-  padding-top:1.25rem;
+  position:relative;
+  margin-top:clamp(2rem,3.5vw,2.75rem);
   border-top:1px solid var(--line);
+  padding-top:.75rem;
 }
-.pl-grid{
-  display:grid;
-  grid-template-columns:repeat(10,minmax(0,1fr));
-  gap:.25rem .5rem;
+/* Edge fades hint at the continuation without covering a control or requiring
+   motion. The list retains its native thin scrollbar and scroll behavior. */
+.pl-brands::before,.pl-brands::after{
+  content:"";
+  position:absolute;
+  top:.75rem;
+  bottom:1rem;
+  z-index:1;
+  width:28px;
+  pointer-events:none;
+  transition:opacity 180ms ease;
+}
+.pl-brands::before{left:0;background:linear-gradient(90deg,var(--paper),transparent);opacity:0}
+.pl-brands::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
+.pl-brands.has-scroll-back::before{opacity:1}
+.pl-brands.is-at-end::after{opacity:0}
+.pl-rail{
+  display:flex;
+  align-items:center;
+  gap:clamp(1.5rem,2.5vw,2rem);
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:1rem;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(69,58,82,.35) transparent;
+  -webkit-overflow-scrolling:touch;
   list-style:none;
   margin:0;
-  padding:0;
+  padding:.5rem 1rem 1rem;
 }
-.pl-more{display:block;margin-top:.25rem}
+.pl-rail::-webkit-scrollbar{height:4px}
+.pl-rail::-webkit-scrollbar-track{background:transparent}
+.pl-rail::-webkit-scrollbar-thumb{background:rgba(69,58,82,.35);border-radius:2px}
+.pl-rail:focus-visible{outline:2px solid var(--purple);outline-offset:5px}
 .pl-cell{
-  min-width:0;
-  min-height:4rem;
-  padding:.6rem .45rem;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  flex:0 0 9rem;
+  min-width:0;
+  height:5.5rem;
+  padding:.65rem .5rem;
+  scroll-snap-align:start;
 }
 .pl-cell img{
   display:block;
-  width:5.6rem;
+  width:8rem;
   height:auto;
   max-width:100%;
-  max-height:1.9rem;
+  max-height:2.6rem;
   object-fit:contain;
   filter:grayscale(1);
-  opacity:.82;
+  opacity:.85;
 }
-.pl-cell--wide img{width:6.25rem;max-height:1.6rem}
-.pl-cell--reverse img{filter:brightness(0);opacity:.76}
-.pl-cell--goldman img{width:4.8rem;max-height:2.2rem}
-.pl-cell--citi img{width:2.9rem;max-height:1.85rem}
-.pl-cell--pnc img{width:4.2rem}
-.pl-cell--kpmg img{width:4.35rem;max-height:1.9rem}
-.pl-cell--pwc img{width:4rem;max-height:2.2rem}
-.pl-cell--amazon img{width:4.5rem}
-.pl-cell--nestle img{width:2.45rem;max-height:2.5rem}
-.pl-cell--victoria img{width:5.6rem;max-height:1.9rem}
-.pl-cell--formula img{width:4.4rem}
-/* The NFL source includes clear space around its mark. */
-.pl-cell--jets img{width:5.25rem;max-height:3.5rem}
-.pl-more > summary{display:none}
-.pl-show-less{display:none}
-.pl-more[open] .pl-show-all{display:none}
-.pl-more[open] .pl-show-less{display:inline}
-/* If a no-JavaScript visitor closes the disclosure on a phone and later
-   widens their window, keep the native control available to reopen it. */
-.pl-more:not([open]){display:block}
-.pl-more:not([open]) > summary,
-.pl-more > summary{
-  min-height:44px;
-  align-items:center;
-  justify-content:flex-start;
-  list-style:none;
-  font-family:var(--font-text);
-  font-size:.8rem;
-  line-height:1.5;
-  color:var(--ink-soft);
-  text-decoration:underline;
-  text-decoration-color:var(--line);
-  text-underline-offset:5px;
-  cursor:pointer;
-}
-.pl-more:not([open]) > summary{display:flex}
-.pl-more > summary::-webkit-details-marker{display:none}
-.pl-more > summary:hover{color:var(--purple);text-decoration-color:currentColor}
-.pl-more > summary:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
-@media (max-width:899px){
-  .pl-intro{grid-template-columns:1fr;gap:2.1rem}
-  .pl-h{max-width:none;font-size:clamp(3rem,7vw,4.5rem)}
-  .pl-n-val{font-size:clamp(4rem,9vw,5.5rem)}
-}
-@media (min-width:601px) and (max-width:1000px){
-  .pl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:.1rem .5rem}
-  .pl-cell{min-height:3.65rem}
-}
+.pl-cell--wide{flex-basis:12rem}
+.pl-cell--wide img{width:10.5rem;max-height:2.2rem}
+.pl-cell--reverse img{filter:brightness(0);opacity:.78}
+.pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
+.pl-cell--citi{flex-basis:6rem}
+.pl-cell--citi img{width:4.3rem;max-height:2.8rem}
+.pl-cell--pnc img{width:6rem}
+.pl-cell--kpmg img{width:6.5rem}
+.pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
+.pl-cell--amazon img{width:6.5rem}
+.pl-cell--nestle{flex-basis:6rem}
+.pl-cell--nestle img{width:3rem;max-height:3.25rem}
+.pl-cell--victoria img{width:8rem;max-height:2.6rem}
+.pl-cell--formula img{width:6.5rem}
+/* This source includes substantial clear space around its horizontal mark. */
+.pl-cell--jets img{width:7.5rem;max-height:5rem}
 @media (max-width:600px){
-  .pl-intro{gap:1.8rem}
-  .pl-h{font-size:clamp(2.75rem,11.5vw,3.5rem);letter-spacing:-.03em}
+  .pl-h{margin-bottom:1.65rem;font-size:2.15rem}
   .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:clamp(2.85rem,12.3vw,3.5rem)}
-  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.8rem;max-width:14ch}
-  .pl-brands{margin-top:2.1rem;padding-top:1rem}
-  .pl-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:.25rem .5rem}
-  .pl-cell{min-height:3.5rem;padding:.5rem .25rem}
-  .pl-cell img{max-height:1.75rem}
-  .pl-cell--wide img{max-height:1.35rem}
-  .pl-cell--citi img{max-width:2.7rem}
-  .pl-cell--pwc img,.pl-cell--goldman img{max-height:2rem}
-  .pl-cell--nestle img{max-height:2.3rem}
-  .pl-cell--jets img{max-height:3rem}
-  .pl-more{margin-top:.15rem}
-  .pl-more > summary{display:flex;width:100%;padding:.6rem 0}
-  .pl-grid--more{padding-top:.5rem}
-  .pl-grid--more .pl-cell--raymond,
-  .pl-grid--more .pl-cell--fisher{grid-column:span 2}
-  .pl-grid--more .pl-cell--raymond img,
-  .pl-grid--more .pl-cell--fisher img{width:9rem}
+  .pl-n-val{font-size:2.1rem}
+  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
+  .pl-brands{margin-top:1.8rem}
+  .pl-rail{gap:1.25rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
+  .pl-cell{flex-basis:7.5rem;height:4.75rem;padding:.5rem .35rem}
+  .pl-cell img{width:6.5rem;max-height:2.4rem}
+  .pl-cell--wide{flex-basis:10.5rem}
+  .pl-cell--wide img{width:9rem;max-height:2rem}
+  .pl-cell--citi,.pl-cell--nestle{flex-basis:5rem}
+  .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
+  .pl-cell--goldman img{width:6rem;max-height:2.8rem}
+  .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
+  .pl-cell--nestle img{width:2.7rem;max-height:3rem}
+  .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
 }
 @media (max-width:359px){
   .pl-nums{gap:.65rem}
-  .pl-n-val{font-size:2.7rem}
   .pl-n-lab{font-size:.78rem}
 }
 @media (prefers-reduced-motion:reduce){
   .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
+  .pl-brands::before,.pl-brands::after{transition:none}
+  .pl-rail{scroll-behavior:auto}
 }
 /* ===== 04-national ===== */
-/* National scale is expressed geographically. The established display heading
-   leads; a sourced, locally rendered map gives the section its visual focus. */
+/* An editorial account of the fraternity leads. Geography supports it in a
+   smaller right-hand column; all chapter pins retain their sourced positions. */
 .v2nat{
   position:relative;
-  padding-block:clamp(4.25rem,5vw,5.5rem);
-  overflow:hidden;
-  background:radial-gradient(ellipse at 78% 56%,rgba(92,62,133,.2),transparent 65%),var(--purple-deep);
+  padding-block:clamp(4.5rem,7vw,6.5rem);
+  background:radial-gradient(ellipse at 88% 54%,rgba(92,62,133,.15),transparent 62%),var(--purple-deep);
   color:var(--paper);
 }
-.v2nat-lock{display:flex;align-items:center;gap:clamp(1.4rem,2.5vw,2rem);margin-bottom:2rem}
-.v2nat-crest{flex:none;width:clamp(56px,5vw,68px);height:auto}
-.v2nat-h{max-width:24ch;margin:0;font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:1.08;letter-spacing:-.015em;color:var(--paper)}
+.v2nat-lock{
+  display:flex;
+  align-items:center;
+  gap:clamp(1.4rem,2.5vw,2rem);
+  margin-bottom:clamp(2.5rem,4.5vw,3.5rem);
+}
+.v2nat-crest{flex:none;width:clamp(64px,6vw,82px);height:auto}
+.v2nat-h{
+  max-width:24ch;
+  margin:0;
+  font-size:clamp(2.6rem,5.4vw,4.6rem);
+  line-height:1.08;
+  letter-spacing:-.015em;
+  color:var(--paper);
+}
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
-.v2nat-layout{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.8fr);gap:clamp(1.75rem,4vw,3rem);align-items:center}
-.v2nat-copy{max-width:28ch;padding-bottom:1.5rem}
-.v2nat-scale{margin:0 0 1.7rem}
-.v2nat-number{display:block;font-family:var(--font-display);font-size:clamp(4.6rem,7vw,6.5rem);line-height:1;letter-spacing:-.025em;color:var(--gold-soft)}
-.v2nat-number-label{display:block;margin-top:.65rem;font-size:1rem;line-height:1.45;color:var(--paper)}
-.v2nat-say{margin:0;font-size:.96rem;line-height:1.75;color:rgba(250,248,243,.72)}
-.v2nat-link{display:inline-flex;align-items:center;min-height:44px;margin-top:1.2rem;color:var(--gold-soft);font-size:.83rem;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(230,198,91,.4);text-underline-offset:5px}
-.v2nat-link:hover{text-decoration-color:currentColor}
-.v2nat-figure{min-width:0;margin:0}
+.v2nat-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
+  gap:clamp(2.5rem,5vw,4rem);
+  align-items:start;
+}
+.v2nat-copy{
+  min-width:0;
+  max-width:60ch;
+  font-size:clamp(1rem,1.3vw,1.1rem);
+  line-height:1.75;
+  color:rgba(250,248,243,.76);
+}
+.v2nat-copy p{margin:0}
+.v2nat-copy p+p{margin-top:1.25rem}
+.v2nat-copy .v2nat-lede{font-size:clamp(1.1rem,1.55vw,1.24rem);line-height:1.65;color:var(--paper)}
+.v2nat-links{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem;margin-top:1.25rem}
+.v2nat-link,.v2nat-directory{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  max-width:100%;
+  color:var(--gold-soft);
+  font-size:.85rem;
+  line-height:1.5;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:rgba(230,198,91,.4);
+  text-underline-offset:5px;
+}
+.v2nat-link:hover,.v2nat-directory:hover{text-decoration-color:currentColor}
+.v2nat-figure{min-width:0;width:100%;max-width:430px;margin:0;justify-self:end}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
-.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.11);stroke-width:.65;stroke-linejoin:round}
-.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
+.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.13);stroke-width:.65;stroke-linejoin:round}
+.v2nat-coast{fill:none;stroke:rgba(250,248,243,.5);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin{cursor:pointer}
 .v2nat-pin-hit{fill:transparent;stroke:none}
 .v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
@@ -458,45 +440,67 @@
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
 .v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
 .v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
-.v2nat-usf-label{fill:var(--gold-soft);font-family:var(--font-text);font-size:19px;font-weight:600;paint-order:stroke;stroke:var(--purple-deep);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
-.v2nat-map-footer{margin-top:.5rem;padding-top:1rem;border-top:1px solid var(--line-dark)}
-.v2nat-controls{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:.5rem 1.5rem;align-items:center}
+.v2nat-usf-label{
+  fill:var(--gold-soft);
+  font-family:var(--font-text);
+  font-size:23px;
+  font-weight:600;
+  paint-order:stroke;
+  stroke:var(--purple-deep);
+  stroke-width:5px;
+  stroke-linejoin:round;
+  pointer-events:none;
+}
+.v2nat-map-footer{margin-top:.25rem;padding-top:.9rem;border-top:1px solid var(--line-dark)}
+.v2nat-map-scale{margin:0 0 .6rem;font-size:.8rem;line-height:1.6;color:rgba(250,248,243,.75)}
+.v2nat-map-scale strong{font-weight:600;color:var(--paper)}
+.v2nat-map-scale span{white-space:nowrap;color:rgba(250,248,243,.6)}
+.v2nat-controls{display:block}
 .v2nat-controls[hidden]{display:none}
-.v2nat-select{display:block;min-width:0;width:100%;min-height:44px;margin:0;padding:.65rem 1.8rem .65rem 0;border:0;border-radius:0;background:transparent;color:var(--paper);font-family:var(--font-text);font-size:.9rem;line-height:1.45;text-overflow:ellipsis;cursor:pointer;color-scheme:dark}
+.v2nat-select{
+  display:block;
+  min-width:0;
+  width:100%;
+  min-height:44px;
+  margin:0;
+  padding:.5rem 1.8rem .5rem 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--paper);
+  font-family:var(--font-text);
+  font-size:1rem;
+  line-height:1.5;
+  text-overflow:ellipsis;
+  cursor:pointer;
+  color-scheme:dark;
+}
 .v2nat-select option{background:var(--purple-deep);color:var(--paper)}
 .v2nat-select:focus-visible{outline-offset:2px}
-.v2nat-location{min-width:0;margin:0;font-size:.8rem;line-height:1.5;text-align:right;color:rgba(250,248,243,.7)}
-.v2nat-legend{display:flex;align-items:center;gap:.55rem;margin-top:.65rem;font-size:.72rem;line-height:1.5;color:rgba(250,248,243,.58)}
-.v2nat-legend>span{width:5px;height:5px;border-radius:50%;background:var(--gold-soft);flex:none}
+.v2nat-location{margin:.1rem 0 .35rem;font-size:.78rem;line-height:1.6;color:rgba(250,248,243,.66)}
+.v2nat-directory{font-size:.78rem}
 @media(max-width:899px){
-  .v2nat-layout{grid-template-columns:1fr;gap:1.5rem}
-  .v2nat-copy{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:2rem;max-width:none;align-items:center;padding:0}
-  .v2nat-scale{grid-row:1/3;margin:0}
-  .v2nat-number{font-size:4.8rem}
-  .v2nat-number-label{font-size:.9rem}
-  .v2nat-say{max-width:48ch}
-  .v2nat-link{margin-top:.3rem;justify-self:start}
-  .v2nat-map{max-width:760px;margin-inline:auto}
+  .v2nat-layout{grid-template-columns:1fr;gap:2.5rem}
+  .v2nat-copy{max-width:62ch}
+  .v2nat-figure{max-width:380px;justify-self:start}
 }
 @media(max-width:559px){
   .v2nat{padding-block:3.75rem}
-  .v2nat-lock{align-items:center;gap:1.1rem;margin-bottom:2rem}
+  .v2nat-lock{gap:1.1rem;margin-bottom:2rem}
   .v2nat-crest{width:48px}
   .v2nat-h{font-size:clamp(2rem,7.5vw,2.6rem);line-height:1.12}
-  .v2nat-layout{gap:1.3rem}
-  .v2nat-copy{grid-template-columns:1fr;gap:0}
-  .v2nat-scale{grid-row:auto;display:flex;align-items:baseline;gap:.85rem;margin-bottom:1.05rem}
-  .v2nat-number{font-size:3.75rem}
-  .v2nat-number-label{font-size:.9rem;margin:0}
-  .v2nat-say{font-size:.9rem;line-height:1.7;max-width:38ch}
-  .v2nat-link{margin-top:.45rem;font-size:.8rem}
-  .v2nat-figure{margin-inline:-.5rem}
-  .v2nat-map-footer{margin-inline:.5rem;padding-top:.7rem}
-  .v2nat-controls{grid-template-columns:minmax(0,1fr);gap:0}
-  .v2nat-select{font-size:.85rem}
-  .v2nat-location{text-align:left;font-size:.75rem}
-  .v2nat-legend{font-size:.65rem;margin-top:1rem}
-  .v2nat-usf-label{font-size:23px}
+  .v2nat-layout{gap:2.2rem}
+  .v2nat-copy{font-size:1rem;line-height:1.7}
+  .v2nat-copy .v2nat-lede{font-size:1.1rem;line-height:1.6}
+  .v2nat-copy p+p{margin-top:1.1rem}
+  .v2nat-links{column-gap:1.4rem;margin-top:1rem}
+  .v2nat-figure{max-width:350px}
+  .v2nat-map-footer{padding-top:.75rem}
+  .v2nat-map-scale{font-size:.78rem}
+  .v2nat-location{font-size:.76rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .v2nat-map,.v2nat-coast,.v2nat-pin,.v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important}
 }
 /* ===== 05-mem ===== */
 /* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
@@ -750,7 +754,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
-            <span class="grow__ttl" data-motion-words><span class="grow__stem">Professional</span> <em class="grow__accent">Connections</em></span>
+            <span class="grow__ttl">Professional Connections</span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -766,7 +770,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
-            <span class="grow__ttl" data-motion-words><span class="grow__stem">Leadership</span> <em class="grow__accent">Experience</em></span>
+            <span class="grow__ttl">Leadership Experience</span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -782,7 +786,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
-            <span class="grow__ttl" data-motion-words><span class="grow__stem">Chapter</span> <em class="grow__accent">Community</em></span>
+            <span class="grow__ttl">Chapter Community</span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -805,7 +809,7 @@
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
   <div class="v2wrap">
     <div class="pl-intro">
-      <h2 class="pl-h" id="pl-h" data-motion-words>Member Success</h2>
+      <h2 class="pl-h" id="pl-h">Member Success</h2>
 
       <!-- Final values are always available to assistive technology and remain
            in the source. Only the aria-hidden visual digits animate. -->
@@ -834,8 +838,10 @@
       </ul>
     </div>
 
-    <div class="pl-brands">
-      <ul class="pl-grid" data-pl-primary aria-label="Companies where members have been placed" role="list">
+    <div class="pl-brands" data-pl-rail-wrap>
+      <span class="pl-rail-hint" id="pl-rail-hint">Scroll horizontally to browse the company logos. When the list is focused, use the left and right arrow keys.</span>
+      <ul class="pl-rail" data-pl-rail tabindex="0" role="list"
+          aria-label="Companies where members have been placed" aria-describedby="pl-rail-hint">
       <li class="pl-cell pl-cell--goldman"><img src="../assets/logos/goldman-sachs.png" alt="Goldman Sachs" width="1022" height="429" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide"><img src="../assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--citi"><img src="../assets/logos/citi.svg" alt="Citi" width="56" height="33" loading="lazy" decoding="async"></li>
@@ -846,15 +852,6 @@
       <li class="pl-cell pl-cell--reverse pl-cell--amazon"><img src="../assets/logos/amazon.svg" alt="Amazon" width="99" height="33" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--pnc"><img src="../assets/logos/pnc.svg" alt="PNC" width="205" height="62" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide pl-cell--raymond"><img src="../assets/logos/raymond-james.svg" alt="Raymond James" width="300" height="26" loading="lazy" decoding="async"></li>
-      </ul>
-      <!-- Open is the no-JavaScript fallback. Enhancement collapses only the
-           additional marks on phones; native details remains keyboard usable. -->
-      <details class="pl-more" data-pl-more open>
-        <summary>
-          <span class="pl-show-all">View all companies</span>
-          <span class="pl-show-less">Show fewer companies</span>
-        </summary>
-        <ul class="pl-grid pl-grid--more" data-pl-extra aria-label="Additional companies where members have been placed" role="list">
       <li class="pl-cell pl-cell--wide pl-cell--fisher"><img src="../assets/logos/fisher-investments.svg" alt="Fisher Investments" width="570" height="41" loading="lazy" decoding="async"></li>
       <li class="pl-cell"><img src="../assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--nestle"><img src="../assets/logos/nestle.svg" alt="Nestlé" width="311" height="322" loading="lazy" decoding="async"></li>
@@ -865,27 +862,33 @@
       <li class="pl-cell pl-cell--formula"><img src="../assets/logos/formula-1.png" alt="Formula 1" width="480" height="120" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--jets"><img src="../assets/logos/new-york-jets.svg" alt="New York Jets" width="500" height="500" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
-        </ul>
-      </details>
+      </ul>
     </div>
   </div>
 </section>
 
     <!-- ===== 04-national ===== -->
-<!-- Map pins are generated from the national chapter directory and federal
-     NCES campus coordinates. Geometry and sources are kept in assets/map/. -->
+<!-- Identity, founding, and mission: phichitheta.org/about.
+     National programs and Foundation scholarships: phichitheta.org/become-a-member.
+     The supporting map retains all sourced collegiate entries from assets/map/. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h" data-national>
   <div class="v2wrap">
     <div class="v2nat-lock">
       <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
       <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
     </div>
+
     <div class="v2nat-layout">
       <div class="v2nat-copy" data-motion-rise>
-        <p class="v2nat-scale"><span class="v2nat-number">50</span><span class="v2nat-number-label">Collegiate chapters</span></p>
-        <p class="v2nat-say">Zeta Rho at USF is part of a national professional fraternity for business and economics.</p>
-        <a class="v2nat-link" href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">National chapter directory</a>
+        <p class="v2nat-lede">Founded in Chicago, Phi Chi Theta is a coed professional fraternity for business and economics. Its mission centers on business education, professional leadership, and a local and national network for sharing ideas and resources.</p>
+        <p>Zeta Rho is the fraternity&rsquo;s chapter at the University of South Florida. Members belong to a wider community of students and alumni beyond their own campus.</p>
+        <p>National programs include regional conferences, national mentoring, and stock market competitions. Scholarship opportunities through the Phi Chi Theta Educational Foundation recognize academic achievement, leadership, and commitment to the fraternity.</p>
+        <div class="v2nat-links">
+          <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
+          <a class="v2nat-link" href="https://www.phichitheta.org/become-a-member" target="_blank" rel="noopener">National membership</a>
+        </div>
       </div>
+
       <figure class="v2nat-figure" data-motion-map>
         <svg class="v2nat-map" viewBox="0 0 960 600" role="img" aria-labelledby="pct-map-title pct-map-desc" data-chapter-map>
 <title id="pct-map-title">Phi Chi Theta collegiate chapters across the United States</title>
@@ -997,6 +1000,7 @@
 </g>
 </svg>
         <figcaption class="v2nat-map-footer">
+          <p class="v2nat-map-scale"><strong>50</strong> collegiate chapters. <span>USF highlighted.</span></p>
           <div class="v2nat-controls" data-map-controls hidden>
             <label class="v2-sr-only" for="pct-university">Choose a collegiate chapter</label>
             <select class="v2nat-select" id="pct-university" data-map-select>
@@ -1053,7 +1057,7 @@
             </select>
             <p class="v2nat-location" data-map-location aria-live="polite">Zeta Rho · Tampa, FL</p>
           </div>
-          <span class="v2nat-legend"><span aria-hidden="true"></span> Collegiate chapters · USF highlighted</span>
+          <a class="v2nat-directory" href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">National chapter directory</a>
         </figcaption>
       </figure>
     </div>
@@ -1670,46 +1674,52 @@ window.pctInitGrow = function () {
   }
 };
 /* ===== 03-place ===== */
-/* Native details keeps the secondary company marks compact on phones.
-   Outcomes enter and count once; source and accessible values remain final. */
+/* Company logos form a manual native scroll rail. Outcomes count once, while
+   finished source and accessible values remain stable throughout. */
 window.pctInitPlacements = function () {
   'use strict';
   var root = document.querySelector('[data-place]');
   if (!root || root.dataset.placementsReady) return;
-  var more = root.querySelector('[data-pl-more]');
-  var primary = root.querySelector('[data-pl-primary]');
-  var extra = root.querySelector('[data-pl-extra]');
-  if (!more || !primary || !extra || !window.matchMedia) return;
   root.dataset.placementsReady = '1';
-  var phone = window.matchMedia('(max-width: 600px)');
-  var expandedOnPhone = false;
-  /* Move the same two nodes, rather than duplicating logos or hiding them.
-     Desktop shows two rows of ten; phones show two rows of four plus details. */
-  var overflow = Array.prototype.slice.call(primary.children, 8);
-  function sync() {
-    if (phone.matches) {
-      for (var i = overflow.length - 1; i >= 0; i--) {
-        if (overflow[i].parentNode !== extra) extra.insertBefore(overflow[i], extra.firstChild);
-      }
-    } else {
-      overflow.forEach(function (item) {
-        if (item.parentNode !== primary) primary.appendChild(item);
-      });
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var rail = root.querySelector('[data-pl-rail]');
+  var railWrap = root.querySelector('[data-pl-rail-wrap]');
+  if (rail && railWrap) {
+    var maximum = 0;
+    var keyStep = 160;
+    function updateEdges() {
+      var left = Math.max(0, rail.scrollLeft);
+      railWrap.classList.toggle('has-scroll-back', left > 2);
+      railWrap.classList.toggle('is-at-end', maximum <= 2 || left >= maximum - 2);
     }
-    more.open = !phone.matches || expandedOnPhone;
+    function measureRail() {
+      maximum = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      keyStep = Math.max(140, rail.clientWidth * .55);
+      updateEdges();
+    }
+    rail.addEventListener('scroll', updateEdges, { passive:true });
+    rail.addEventListener('keydown', function (event) {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      var destination;
+      if (event.key === 'ArrowRight') destination = rail.scrollLeft + keyStep;
+      else if (event.key === 'ArrowLeft') destination = rail.scrollLeft - keyStep;
+      else if (event.key === 'Home') destination = 0;
+      else if (event.key === 'End') destination = maximum;
+      else return;
+      event.preventDefault();
+      rail.scrollTo({
+        left:Math.max(0, Math.min(maximum, destination)),
+        behavior:reduce && reduce.matches ? 'auto' : 'smooth'
+      });
+    });
+    measureRail();
+    if ('ResizeObserver' in window) new ResizeObserver(measureRail).observe(rail);
+    else window.addEventListener('resize', measureRail, { passive:true });
   }
-  more.addEventListener('toggle', function () {
-    if (phone.matches) expandedOnPhone = more.open;
-  });
-  if (phone.addEventListener) phone.addEventListener('change', sync);
-  else if (phone.addListener) phone.addListener(sync);
-  sync();
-
 
   var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
   var numbers = root.querySelector('.pl-nums');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!numbers || !digits.length || reduce.matches ||
+  if (!numbers || !digits.length || (reduce && reduce.matches) ||
       !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
 
   var values = digits.map(function (element) {
@@ -1730,8 +1740,8 @@ window.pctInitPlacements = function () {
 
   function unlisten() {
     document.removeEventListener('visibilitychange', onVisibility);
-    if (reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
-    else if (reduce.removeListener) reduce.removeListener(onReduce);
+    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
+    else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
   }
   function finish() {
     if (stopped) return;
@@ -1774,8 +1784,8 @@ window.pctInitPlacements = function () {
     root.classList.add('pl-stats-ready');
     observer.observe(numbers);
     document.addEventListener('visibilitychange', onVisibility);
-    if (reduce.addEventListener) reduce.addEventListener('change', onReduce);
-    else if (reduce.addListener) reduce.addListener(onReduce);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
+    else if (reduce && reduce.addListener) reduce.addListener(onReduce);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
       window.pctMotion.onReduce(finish);
     }
@@ -1784,8 +1794,8 @@ window.pctInitPlacements = function () {
   }
 };
 /* ===== 04-national ===== */
-/* The sourced map is complete in HTML. This enhancement connects native
-   university selection and pointer exploration to a shared campus highlight. */
+/* Geography supports the national account. The native selector and local pin
+   highlights use the same complete, statically generated campus data. */
 window.pctInitNational = function () {
   'use strict';
   try {
@@ -1797,7 +1807,9 @@ window.pctInitNational = function () {
     var location = root.querySelector('[data-map-location]');
     if (!pins.length || !select || !controls || !location) return;
     var byId = new Map();
+    var currentId = null;
     pins.forEach(function (pin) { byId.set(pin.dataset.chapterPin, pin); });
+
     function choose(id) {
       var pin = byId.get(id);
       if (!pin) return;
@@ -1805,7 +1817,11 @@ window.pctInitNational = function () {
       if (dot && dot.getAnimations) dot.getAnimations().forEach(function (animation) { animation.cancel(); });
       pins.forEach(function (item) { item.classList.toggle('is-selected', item === pin); });
       select.value = id;
-      location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+      select.title = pin.dataset.school;
+      if (currentId !== id) {
+        location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+        currentId = id;
+      }
     }
     select.addEventListener('change', function () { choose(select.value); });
     pins.forEach(function (pin) {

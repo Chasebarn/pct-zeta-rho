@@ -1,43 +1,49 @@
-/* Native details keeps the secondary company marks compact on phones.
-   Outcomes enter and count once; source and accessible values remain final. */
+/* Company logos form a manual native scroll rail. Outcomes count once, while
+   finished source and accessible values remain stable throughout. */
 window.pctInitPlacements = function () {
   'use strict';
   var root = document.querySelector('[data-place]');
   if (!root || root.dataset.placementsReady) return;
-  var more = root.querySelector('[data-pl-more]');
-  var primary = root.querySelector('[data-pl-primary]');
-  var extra = root.querySelector('[data-pl-extra]');
-  if (!more || !primary || !extra || !window.matchMedia) return;
   root.dataset.placementsReady = '1';
-  var phone = window.matchMedia('(max-width: 600px)');
-  var expandedOnPhone = false;
-  /* Move the same two nodes, rather than duplicating logos or hiding them.
-     Desktop shows two rows of ten; phones show two rows of four plus details. */
-  var overflow = Array.prototype.slice.call(primary.children, 8);
-  function sync() {
-    if (phone.matches) {
-      for (var i = overflow.length - 1; i >= 0; i--) {
-        if (overflow[i].parentNode !== extra) extra.insertBefore(overflow[i], extra.firstChild);
-      }
-    } else {
-      overflow.forEach(function (item) {
-        if (item.parentNode !== primary) primary.appendChild(item);
-      });
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var rail = root.querySelector('[data-pl-rail]');
+  var railWrap = root.querySelector('[data-pl-rail-wrap]');
+  if (rail && railWrap) {
+    var maximum = 0;
+    var keyStep = 160;
+    function updateEdges() {
+      var left = Math.max(0, rail.scrollLeft);
+      railWrap.classList.toggle('has-scroll-back', left > 2);
+      railWrap.classList.toggle('is-at-end', maximum <= 2 || left >= maximum - 2);
     }
-    more.open = !phone.matches || expandedOnPhone;
+    function measureRail() {
+      maximum = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      keyStep = Math.max(140, rail.clientWidth * .55);
+      updateEdges();
+    }
+    rail.addEventListener('scroll', updateEdges, { passive:true });
+    rail.addEventListener('keydown', function (event) {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      var destination;
+      if (event.key === 'ArrowRight') destination = rail.scrollLeft + keyStep;
+      else if (event.key === 'ArrowLeft') destination = rail.scrollLeft - keyStep;
+      else if (event.key === 'Home') destination = 0;
+      else if (event.key === 'End') destination = maximum;
+      else return;
+      event.preventDefault();
+      rail.scrollTo({
+        left:Math.max(0, Math.min(maximum, destination)),
+        behavior:reduce && reduce.matches ? 'auto' : 'smooth'
+      });
+    });
+    measureRail();
+    if ('ResizeObserver' in window) new ResizeObserver(measureRail).observe(rail);
+    else window.addEventListener('resize', measureRail, { passive:true });
   }
-  more.addEventListener('toggle', function () {
-    if (phone.matches) expandedOnPhone = more.open;
-  });
-  if (phone.addEventListener) phone.addEventListener('change', sync);
-  else if (phone.addListener) phone.addListener(sync);
-  sync();
-
 
   var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
   var numbers = root.querySelector('.pl-nums');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!numbers || !digits.length || reduce.matches ||
+  if (!numbers || !digits.length || (reduce && reduce.matches) ||
       !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
 
   var values = digits.map(function (element) {
@@ -58,8 +64,8 @@ window.pctInitPlacements = function () {
 
   function unlisten() {
     document.removeEventListener('visibilitychange', onVisibility);
-    if (reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
-    else if (reduce.removeListener) reduce.removeListener(onReduce);
+    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
+    else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
   }
   function finish() {
     if (stopped) return;
@@ -102,8 +108,8 @@ window.pctInitPlacements = function () {
     root.classList.add('pl-stats-ready');
     observer.observe(numbers);
     document.addEventListener('visibilitychange', onVisibility);
-    if (reduce.addEventListener) reduce.addEventListener('change', onReduce);
-    else if (reduce.addListener) reduce.addListener(onReduce);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
+    else if (reduce && reduce.addListener) reduce.addListener(onReduce);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
       window.pctMotion.onReduce(finish);
     }

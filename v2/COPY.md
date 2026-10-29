@@ -26,7 +26,7 @@ without decorative arrows.
 
 No overall heading or introductory paragraph. The region has an accessible
 Membership label. Each row opens its description and corresponding photograph.
-Desktop balances larger serif category titles against a landscape image; on
+Desktop places the photograph on the left and compact, complete category titles on the right; on
 phones the image belongs inside its active category panel, immediately after copy.
 
 | Row | Description |
@@ -38,8 +38,8 @@ phones the image belongs inside its active category panel, immediately after cop
 ## Member Success
 
 No placements eyebrow or secondary title. Member Success leads directly into
-the three outcomes. Logos are secondary: two short desktop rows, with eight marks
-and a native View all companies disclosure on phones.
+the three outcomes. Logos are secondary: all twenty sit in one horizontal strip
+that scrolls naturally with touch, a trackpad, or keyboard controls.
 
 Twenty actual local logo assets identify member destinations. They do not imply
 sponsorship or partnership: Goldman Sachs, Morgan Stanley, Citi, Wells Fargo,
@@ -63,11 +63,25 @@ period before changing them or adding stronger claims.
 Keep the original large heading with the year italic and gold. The transparent
 crest sits beside it without a cream tile.
 
-50. Collegiate chapters.
+Founded in Chicago, Phi Chi Theta is a coed professional fraternity for business
+and economics. Its mission centers on business education, professional leadership,
+and a local and national network for sharing ideas and resources.
 
-Zeta Rho at USF is part of a national professional fraternity for business and economics.
+Zeta Rho is the fraternity’s chapter at the University of South Florida. Members
+belong to a wider community of students and alumni beyond their own campus.
 
-National chapter directory: https://www.phichitheta.org/find-a-chapter
+National programs include regional conferences, national mentoring, and stock
+market competitions. Scholarship opportunities through the Phi Chi Theta
+Educational Foundation recognize academic achievement, leadership, and commitment
+to the fraternity.
+
+Official sources and plain-text links:
+- About Phi Chi Theta: https://www.phichitheta.org/about
+- National membership: https://www.phichitheta.org/become-a-member
+- National chapter directory: https://www.phichitheta.org/find-a-chapter
+
+The account leads the composition. The map is a smaller supporting column on
+desktop and follows the copy on phones. The chapter count is a modest map caption.
 
 A U.S. outline shows all 50 collegiate campuses listed by the national directory
 as active on October 28, 2026. Its six alumni listings are excluded. The number
@@ -81,8 +95,9 @@ university selector provides the same access for keyboard and touch users.
 The selection displays the chapter and campus city/state. The map is still and
 fully present without JavaScript; the selector progressively enhances it.
 
-National history is supported by https://www.phichitheta.org/about. No claim is
-made about employer recognition of the fraternity.
+National identity, history, and mission are supported by the official About page;
+programs and scholarship descriptions by the official membership page. No claim
+is made about employer recognition of the fraternity.
 
 ## Chapter Life
 

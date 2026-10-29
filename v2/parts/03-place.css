@@ -153,11 +153,11 @@
   .pl-n-val{font-size:2.1rem}
   .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
   .pl-brands{margin-top:1.8rem}
-  .pl-rail{gap:1.25rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
-  .pl-cell{flex-basis:7.5rem;height:4.75rem;padding:.5rem .35rem}
+  .pl-rail{gap:1rem;padding-inline:.75rem;scroll-padding-inline:.75rem}
+  .pl-cell{flex-basis:7rem;height:4.75rem;padding:.5rem .35rem}
   .pl-cell img{width:6.5rem;max-height:2.4rem}
-  .pl-cell--wide{flex-basis:10.5rem}
-  .pl-cell--wide img{width:9rem;max-height:2rem}
+  .pl-cell--wide{flex-basis:9rem}
+  .pl-cell--wide img{width:8rem;max-height:2rem}
   .pl-cell--citi,.pl-cell--nestle{flex-basis:5rem}
   .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
   .pl-cell--goldman img{width:6rem;max-height:2.8rem}

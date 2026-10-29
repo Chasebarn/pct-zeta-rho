@@ -1,104 +1,73 @@
-/* The original still purple band and crest/headline lockup. The founding year
-   remains the heading's gold italic accent; only supported chapter scale is shown. */
+/* National scale is expressed geographically. The established display heading
+   leads; a sourced, locally rendered map gives the section its visual focus. */
 .v2nat{
   position:relative;
-  background:var(--purple-deep);
-  color:rgba(250,248,243,.78);
-  padding-block:clamp(6rem,12vw,10rem) clamp(4.5rem,8vw,7rem);
-}
-.v2nat::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.v2nat-in{position:relative;z-index:1}
-.v2nat-lock{
-  display:flex;
-  align-items:center;
-  gap:clamp(1.4rem,3vw,2.5rem);
-}
-.v2nat-crest{
-  flex:none;
-  width:clamp(76px,8vw,112px);
-  height:auto;
-  display:block;
-}
-.v2nat-h{
-  margin:0;
-  max-width:24ch;
-  color:var(--paper);
-  font-size:clamp(2.6rem,6vw,4.6rem);
-  line-height:1.08;
-  letter-spacing:-.015em;
-}
-.v2nat-h em{font-style:italic;color:var(--gold-soft);white-space:nowrap}
-.v2nat-detail{
-  display:grid;
-  grid-template-columns:minmax(0,.7fr) minmax(0,1.8fr);
-  align-items:start;
-  gap:clamp(2rem,6vw,5rem);
-  margin-top:clamp(2.75rem,5.5vw,4.25rem);
-  padding-top:clamp(2rem,4vw,3rem);
-  border-top:1px solid var(--line-dark);
-}
-.v2nat-figs{list-style:none;padding:0;margin:0}
-.v2nat-n{
-  display:block;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:clamp(3.75rem,7vw,5.5rem);
-  line-height:.95;
-  letter-spacing:-.02em;
+  padding-block:clamp(4.25rem,5vw,5.5rem);
+  overflow:hidden;
+  background:radial-gradient(ellipse at 78% 56%,rgba(92,62,133,.2),transparent 65%),var(--purple-deep);
   color:var(--paper);
 }
-.v2nat-k{
-  display:block;
-  margin-top:.9rem;
-  font-family:var(--font-text);
-  font-size:.9rem;
-  line-height:1.4;
-  color:rgba(250,248,243,.72);
-}
-.v2nat-tail{min-width:0;padding-left:clamp(1.75rem,4vw,3.5rem);border-left:1px solid var(--line-dark)}
-.v2nat-say{
-  margin:0;
-  max-width:47ch;
-  font-size:clamp(1.1rem,1.75vw,1.4rem);
-  line-height:1.65;
-  color:rgba(250,248,243,.78);
-}
-.v2nat-link{
-  display:inline-flex;
-  align-items:center;
-  min-height:44px;
-  margin-top:.9rem;
-  color:var(--gold-soft);
-  font-size:.85rem;
-  text-decoration:underline;
-  text-underline-offset:5px;
-  text-decoration-thickness:1px;
-  text-decoration-color:rgba(230,198,91,.55);
-}
-@media(max-width:767px){
-  .v2nat{padding-block:clamp(4.5rem,14vw,6.5rem)}
-  .v2nat-lock{gap:1.4rem}
-  .v2nat-crest{width:72px}
-  .v2nat-h{font-size:clamp(2.3rem,6.5vw,3.25rem)}
-  .v2nat-detail{grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:1.6rem}
-  .v2nat-tail{padding-left:1.6rem}
-  .v2nat-say{font-size:1rem}
+.v2nat-lock{display:flex;align-items:center;gap:clamp(1.4rem,2.5vw,2rem);margin-bottom:2rem}
+.v2nat-crest{flex:none;width:clamp(56px,5vw,68px);height:auto}
+.v2nat-h{max-width:24ch;margin:0;font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:1.08;letter-spacing:-.015em;color:var(--paper)}
+.v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
+.v2nat-layout{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.8fr);gap:clamp(1.75rem,4vw,3rem);align-items:center}
+.v2nat-copy{max-width:28ch;padding-bottom:1.5rem}
+.v2nat-scale{margin:0 0 1.7rem}
+.v2nat-number{display:block;font-family:var(--font-display);font-size:clamp(4.6rem,7vw,6.5rem);line-height:1;letter-spacing:-.025em;color:var(--gold-soft)}
+.v2nat-number-label{display:block;margin-top:.65rem;font-size:1rem;line-height:1.45;color:var(--paper)}
+.v2nat-say{margin:0;font-size:.96rem;line-height:1.75;color:rgba(250,248,243,.72)}
+.v2nat-link{display:inline-flex;align-items:center;min-height:44px;margin-top:1.2rem;color:var(--gold-soft);font-size:.83rem;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(230,198,91,.4);text-underline-offset:5px}
+.v2nat-link:hover{text-decoration-color:currentColor}
+.v2nat-figure{min-width:0;margin:0}
+.v2nat-map{display:block;width:100%;height:auto;overflow:visible}
+.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.11);stroke-width:.65;stroke-linejoin:round}
+.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
+.v2nat-pin{cursor:pointer}
+.v2nat-pin-hit{fill:transparent;stroke:none}
+.v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
+.v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
+.v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
+.v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
+.v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
+.v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
+.v2nat-usf-label{fill:var(--gold-soft);font-family:var(--font-text);font-size:19px;font-weight:600;paint-order:stroke;stroke:var(--purple-deep);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.v2nat-map-footer{margin-top:.5rem;padding-top:1rem;border-top:1px solid var(--line-dark)}
+.v2nat-controls{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:.5rem 1.5rem;align-items:center}
+.v2nat-controls[hidden]{display:none}
+.v2nat-select{display:block;min-width:0;width:100%;min-height:44px;margin:0;padding:.65rem 1.8rem .65rem 0;border:0;border-radius:0;background:transparent;color:var(--paper);font-family:var(--font-text);font-size:.9rem;line-height:1.45;text-overflow:ellipsis;cursor:pointer;color-scheme:dark}
+.v2nat-select option{background:var(--purple-deep);color:var(--paper)}
+.v2nat-select:focus-visible{outline-offset:2px}
+.v2nat-location{min-width:0;margin:0;font-size:.8rem;line-height:1.5;text-align:right;color:rgba(250,248,243,.7)}
+.v2nat-legend{display:flex;align-items:center;gap:.55rem;margin-top:.65rem;font-size:.72rem;line-height:1.5;color:rgba(250,248,243,.58)}
+.v2nat-legend>span{width:5px;height:5px;border-radius:50%;background:var(--gold-soft);flex:none}
+@media(max-width:899px){
+  .v2nat-layout{grid-template-columns:1fr;gap:1.5rem}
+  .v2nat-copy{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:2rem;max-width:none;align-items:center;padding:0}
+  .v2nat-scale{grid-row:1/3;margin:0}
+  .v2nat-number{font-size:4.8rem}
+  .v2nat-number-label{font-size:.9rem}
+  .v2nat-say{max-width:48ch}
+  .v2nat-link{margin-top:.3rem;justify-self:start}
+  .v2nat-map{max-width:760px;margin-inline:auto}
 }
 @media(max-width:559px){
-  .v2nat-lock{gap:1.1rem}
-  .v2nat-crest{width:56px}
+  .v2nat{padding-block:3.75rem}
+  .v2nat-lock{align-items:center;gap:1.1rem;margin-bottom:2rem}
+  .v2nat-crest{width:48px}
   .v2nat-h{font-size:clamp(2rem,7.5vw,2.6rem);line-height:1.12}
-  .v2nat-detail{grid-template-columns:1fr;gap:1.8rem;margin-top:2.4rem;padding-top:1.6rem}
-  .v2nat-fig{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
-  .v2nat-n{font-size:3.6rem}
-  .v2nat-k{margin:0;text-align:right;font-size:.85rem}
-  .v2nat-tail{padding:1.7rem 0 0;border-left:0;border-top:1px solid var(--line-dark)}
-  .v2nat-say{font-size:1rem;line-height:1.7}
+  .v2nat-layout{gap:1.3rem}
+  .v2nat-copy{grid-template-columns:1fr;gap:0}
+  .v2nat-scale{grid-row:auto;display:flex;align-items:baseline;gap:.85rem;margin-bottom:1.05rem}
+  .v2nat-number{font-size:3.75rem}
+  .v2nat-number-label{font-size:.9rem;margin:0}
+  .v2nat-say{font-size:.9rem;line-height:1.7;max-width:38ch}
+  .v2nat-link{margin-top:.45rem;font-size:.8rem}
+  .v2nat-figure{margin-inline:-.5rem}
+  .v2nat-map-footer{margin-inline:.5rem;padding-top:.7rem}
+  .v2nat-controls{grid-template-columns:minmax(0,1fr);gap:0}
+  .v2nat-select{font-size:.85rem}
+  .v2nat-location{text-align:left;font-size:.75rem}
+  .v2nat-legend{font-size:.65rem;margin-top:1rem}
+  .v2nat-usf-label{font-size:23px}
 }

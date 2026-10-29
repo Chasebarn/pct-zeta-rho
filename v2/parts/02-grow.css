@@ -1,16 +1,11 @@
-/* Membership. The base page shows every description and photograph;
-   JavaScript adds the single-open accordion and shared photograph stage. */
+/* One editorial composition: category titles and copy balance a landscape
+   photograph on desktop. Mobile keeps the selected photo inside its panel. */
 .grow{
   background:var(--paper);
   color:var(--ink-soft);
   padding-block:var(--section);
 }
-.grow__wrap{
-  display:grid;
-  grid-template-areas:"rows";
-  gap:1.75rem;
-}
-.grow__rows{grid-area:rows;min-width:0}
+.grow__rows{min-width:0}
 .grow__row{border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
@@ -18,11 +13,11 @@
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:1rem;
+  gap:1.25rem;
   width:100%;
-  min-height:64px;
+  min-height:76px;
   margin:0;
-  padding:1.25rem 0;
+  padding:1.55rem 0;
   border:0;
   background:none;
   color:inherit;
@@ -32,93 +27,104 @@
 }
 .grow__ttl{
   font-family:var(--font-display);
-  font-size:clamp(1.4rem,2.3vw,1.85rem);
+  font-size:clamp(1.9rem,2.5vw,2.125rem);
   font-weight:400;
-  line-height:1.15;
+  line-height:1.12;
+  letter-spacing:-.01em;
   color:var(--ink);
 }
+.grow__panel{padding-bottom:1.55rem}
+.grow__panel[hidden]{display:none}
 .grow__say{
-  max-width:34rem;
+  max-width:43ch;
   margin:0;
-  padding:0 0 1.4rem;
-  font-size:.95rem;
+  font-size:1rem;
   line-height:1.65;
   color:var(--ink-soft);
 }
-.grow__panel[hidden]{display:none}
 .grow__fig{
-  aspect-ratio:1;
-  max-width:32rem;
-  margin:0 0 1.5rem;
+  aspect-ratio:4/3;
+  margin:1.25rem 0 0;
   overflow:hidden;
   background:var(--paper-deep);
 }
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
-.grow__stage{grid-area:stage;display:none}
-.grow__icon{display:none}
+.grow__stage,.grow__icon{display:none}
 
-/* The stage keeps a stable position and size as panels change. */
-.grow--js .grow__wrap{grid-template-areas:"stage" "rows"}
-.grow--js .grow__stage{
-  display:block;
+/* The accordion remains a single-open control. Only its active photograph
+   moves to the shared desktop position; no content is duplicated. */
+.grow--js .grow__btn{cursor:pointer}
+.grow--js .grow__icon{
   position:relative;
+  display:block;
+  flex:none;
+  width:16px;
+  height:16px;
+  color:var(--ink-mute);
+}
+.grow--js .grow__icon::before,
+.grow--js .grow__icon::after{
+  content:"";
+  position:absolute;
+  background:currentColor;
+}
+.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
+.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px}
+.grow--js .is-open .grow__icon::after{display:none}
+.grow--js .is-open .grow__ttl{color:var(--purple)}
+.grow--js .is-open .grow__icon{color:var(--purple)}
+.grow__btn:focus-visible{outline-offset:5px}
+@media (hover:hover){
+  .grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}
+}
+.grow--desktop .grow__wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:clamp(2.25rem,5vw,4rem);
+  align-items:start;
+}
+.grow--desktop .grow__rows{grid-column:1;grid-row:1}
+.grow--desktop .grow__stage{
+  position:relative;
+  display:block;
+  grid-column:2;
+  grid-row:1;
   width:100%;
   aspect-ratio:4/3;
+  margin-top:1px;
   overflow:hidden;
   background:var(--paper-deep);
 }
-.grow--js .grow__fig{
+.grow--desktop .grow__fig{
   position:absolute;
   inset:0;
-  max-width:none;
   margin:0;
   aspect-ratio:auto;
   opacity:0;
   pointer-events:none;
   transition:opacity 300ms var(--ease);
 }
-.grow--js .grow__fig.is-active{opacity:1}
-.grow--js .grow__btn{cursor:pointer}
-.grow--js .grow__icon{
-  display:block;
-  flex:none;
-  width:1.25rem;
-  font-family:var(--font-text);
-  font-size:1.25rem;
-  font-weight:400;
-  line-height:1;
-  text-align:center;
-  color:var(--gold-ink);
-}
-.grow--js .grow__icon::before{content:"+"}
-.grow--js .is-open .grow__icon::before{content:"−"}
-.grow--js .grow__row:not(.is-open) .grow__ttl{color:var(--ink-mute)}
-.grow__btn:focus-visible{outline-offset:5px}
-@media (hover:hover){
-  .grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}
-}
+.grow--desktop .grow__fig.is-active{opacity:1}
 @media (min-width:900px){
-  .grow--js .grow__wrap{
+  .grow:not(.grow--js) .grow__panel{
+    display:grid;
     grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-    grid-template-areas:"rows stage";
-    column-gap:clamp(2.5rem,5vw,4.5rem);
+    gap:clamp(2.25rem,5vw,4rem);
     align-items:start;
   }
-  .grow--js .grow__stage{
-    aspect-ratio:1;
-    align-self:start;
-    justify-self:end;
-    max-width:30rem;
-  }
+  .grow:not(.grow--js) .grow__fig{margin:0}
 }
 @media (max-width:899px){
-  .grow__fig,.grow--js .grow__stage{max-width:36rem;margin-inline:auto}
+  .grow__btn{padding-block:1.35rem}
+  .grow__panel{padding-bottom:1.5rem}
+  .grow__say{max-width:50ch}
+  .grow__fig{aspect-ratio:3/2}
 }
-@media (max-width:600px){
-  .grow__wrap{gap:1.25rem}
-  .grow__fig{aspect-ratio:4/3}
-  .grow__btn{padding-block:1.05rem}
-  .grow__say{padding-bottom:1.15rem;font-size:.925rem}
+@media (max-width:599px){
+  .grow__btn{gap:1rem;padding-block:1.3rem}
+  .grow__ttl{font-size:1.9rem}
+  .grow__say{font-size:.975rem}
+  .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
 }
 @media (prefers-reduced-motion:reduce){
   .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}

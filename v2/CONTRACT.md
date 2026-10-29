@@ -11,6 +11,10 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - Keep headings short and factual. Membership has no overall visible heading.
 - Preserve Member Success, Chapter Life, and Rush Phi Chi Theta as section names.
 - Use actual employer logos and real chapter photographs. Record new asset sources.
+- Keep company marks subordinate to Member Success outcomes, with compact layouts
+  and a native disclosure on phones. Do not restore the Member placements label.
+- Map only collegiate campuses listed in the national directory. Use sourced
+  coordinates and true geographic outlines; retain provenance and the checked date.
 - Use one clear primary action at each decision point and comfortably sized buttons.
 - Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
 - Polish the established composition. Preserve the original left-aligned hero,
@@ -25,7 +29,7 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - At phone widths, use readable text, consistent gutters, compact section spacing,
   a one-row header, an accessible disclosure menu, and a readable display-led Rush section.
 - Logos remain still and legible; preserve the carousel’s original curved geometry
-  and provide a native pause control. Reduced motion holds the wheel still.
+  without a visible pause button. Hover/focus pauses it; reduced motion holds it still.
 - Review the whole page visually on phones, tablets, and desktops after integration.
 
 ## Engineering and accessibility

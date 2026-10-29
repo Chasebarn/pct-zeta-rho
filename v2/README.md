@@ -24,17 +24,21 @@ and visual requirements are in `CONTRACT.md`.
 |---|---|
 | Header | One row; native mobile disclosure; opaque safe base |
 | Hero | Original full-height left-aligned composition, one value line, plain Rush button, silk canvas |
-| Membership | No intro heading; three rows with matching photos |
-| Member Success | Twenty actual logos in a static grid; three existing chapter figures |
-| National | Original large heading with gold italic 1924, transparent crest and chapter count |
-| Chapter Life | Original continuous circular photo carousel, authentic photos and native pause control |
+| Membership | Balanced landscape photo/accordion; active phone photo appears inside its category |
+| Member Success | Compact outcomes, two short logo rows; expandable company marks on phones |
+| National | Original heading; U.S. map with50 sourced collegiate campuses, USF highlight and university selector |
+| Chapter Life | Original circular photo carousel, authentic photos; no visible pause button |
 | Rush | Display heading, gold italic fraternity name, plain Rush button, support band |
 | Footer | Chapter identity, page links and social links |
 
 Content is visible without JavaScript. Motion respects reduced-motion preferences;
-the original photo carousel has a pause control and a still reduced-motion state.
+the original photo carousel pauses on hover/focus and has a still reduced-motion state.
 There is no pinned scrolling, logo marquee, or mock countdown.
 The company logo provenance is recorded in `assets/logos/sources.json`.
+Chapter locations, federal NCES coordinates, and Census-derived geography are
+recorded in `assets/map/`. The standard-library-only `chapter_map.py` renders
+the map and selector into national-section markers during the ordinary build;
+no external map scripts, runtime requests, or new dependencies are needed.
 
 ## Preview and verification
 

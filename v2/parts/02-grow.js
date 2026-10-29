@@ -1,63 +1,72 @@
-/* 02 - the accordion. Moves each <figure> (the same node, so nothing downloads
-   twice) into a persistent stage, then runs a single-open accordion: opening one
-   row closes the other two. That is the whole interaction.
-
-   Without this file the base CSS leaves all three rows open with their
-   photographs in the flow, so nothing is ever hidden by a script that failed. */
+/* Keep the accordion and its photograph connected at every width. Desktop
+   shares a photo stage; mobile returns each figure to its own content panel. */
 window.pctInitGrow = function () {
   try {
     var root = document.querySelector('[data-grow]');
     if (!root || root.dataset.growReady === '1') return;
-
     var stage = root.querySelector('[data-grow-stage]');
     var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
     if (!stage || btns.length < 2) return;
 
     var rows = [], figs = [], panels = [];
-    var ok = btns.every(function (b) {
-      var row = b.closest('.grow__row');
-      var panel = document.getElementById(b.getAttribute('aria-controls'));
-      var fig = document.getElementById(b.getAttribute('data-grow-figure'));
-      if (!row || !panel || !fig) return false;
-      rows.push(row); figs.push(fig); panels.push(panel);
+    var valid = btns.every(function (button) {
+      var row = button.closest('.grow__row');
+      var panel = document.getElementById(button.getAttribute('aria-controls'));
+      var figure = document.getElementById(button.getAttribute('data-grow-figure'));
+      if (!row || !panel || !figure) return false;
+      rows.push(row); panels.push(panel); figs.push(figure);
       return true;
     });
-    if (!ok) return;                 /* markup drifted: leave the no-JS state alone */
+    if (!valid) return;
 
-    root.dataset.growReady = '1';
-    root.classList.add('grow--js');
-    figs.forEach(function (f) { stage.appendChild(f); });
-
-    var current = -1;
-    function open(i) {
-      if (i === current) return;
-      current = i;
-      for (var k = 0; k < rows.length; k++) {
-        var on = k === i;
-        rows[k].classList.toggle('is-open', on);
-        figs[k].classList.toggle('is-active', on);
-        figs[k].setAttribute('aria-hidden', on ? 'false' : 'true');
-        panels[k].hidden = !on;
-        btns[k].setAttribute('aria-expanded', on ? 'true' : 'false');
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
+    var current = 0;
+    var wide = false;
+    function sync() {
+      for (var i = 0; i < rows.length; i++) {
+        var active = i === current;
+        rows[i].classList.toggle('is-open', active);
+        panels[i].hidden = !active;
+        btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
+        figs[i].classList.toggle('is-active', active);
+        figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
       }
     }
+    function open(index) {
+      if (index === current) return;
+      current = index;
+      sync();
+    }
+    function layout() {
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
+      root.classList.toggle('grow--desktop', wide);
+      figs.forEach(function (figure, i) {
+        var destination = wide ? stage : panels[i];
+        if (figure.parentNode !== destination) destination.appendChild(figure);
+      });
+      sync();
+    }
 
-    btns.forEach(function (b, i) {
-      b.addEventListener('click', function () { open(i); });
-      b.addEventListener('focus', function () { open(i); });
-      b.addEventListener('keydown', function (e) {
+    root.classList.add('grow--js');
+    layout();
+    btns.forEach(function (button, i) {
+      button.addEventListener('click', function () { open(i); });
+      button.addEventListener('focus', function () { open(i); });
+      button.addEventListener('keydown', function (event) {
         var next;
-        if (e.key === 'ArrowDown') next = (i + 1) % btns.length;
-        else if (e.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
-        else if (e.key === 'Home') next = 0;
-        else if (e.key === 'End') next = btns.length - 1;
+        if (event.key === 'ArrowDown') next = (i + 1) % btns.length;
+        else if (event.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = btns.length - 1;
         else return;
-        e.preventDefault();
+        event.preventDefault();
         btns[next].focus();
       });
     });
-
-    open(0);
+    if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
+    else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
+    else window.addEventListener('resize', layout, { passive:true });
+    root.dataset.growReady = '1';
   } catch (err) {
     if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }

@@ -1,0 +1,61 @@
+{
+  "retrieved": "2026-10-28",
+  "chapters": {
+    "url": "https://www.phichitheta.org/find-a-chapter",
+    "title": "Phi Chi Theta — Find A Chapter",
+    "responseSha256": "4c674a8e5476ae4e2a06dab2747a32ec42711b5b8eaa3414f2d3dbab2ff1cb93",
+    "method": "All 50 collegiate listings transcribed from the national directory; 6 explicit alumni listings excluded. Chapter URLs extracted from that page; null means the national listing did not link the chapter. Standard university names normalized; corrections documented per record.",
+    "regions": {
+      "Central-Southern": 14,
+      "Eastern": 14,
+      "Great Lakes": 8,
+      "Western": 14
+    }
+  },
+  "coordinates": {
+    "publisher": "U.S. Department of Education, National Center for Education Statistics",
+    "dataset": "IPEDS Institutional Characteristics, Directory information, HD2024",
+    "sourceUrl": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
+    "catalogUrl": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&rtid=1&year=2024",
+    "downloadSha256": "d98425c123d7c0e872aec6e83960dfb501884818bf17385c340790f3d1f28345",
+    "fields": [
+      "UNITID",
+      "INSTNM",
+      "ADDR",
+      "CITY",
+      "STABBR",
+      "LATITUDE",
+      "LONGITUD"
+    ],
+    "method": "Exact campus-level UNITID matches; use federal published latitude/longitude without geocoding or manual coordinate estimates. University/campus correspondence and state checked for each record.",
+    "precision": "Institution locations are approximate main-campus points and do not identify chapter meeting rooms or private residences.",
+    "license": "U.S. federal statistical data; public-domain factual coordinates."
+  },
+  "states": {
+    "file": "states.geojson",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json",
+    "upstream": "https://github.com/topojson/us-atlas",
+    "upstreamDescription": "us-atlas 3.0.1 redistribution of U.S. Census Bureau 2017 cartographic state boundaries at 1:10 million resolution.",
+    "downloadSha256": "d76b391ccfa8bff601d51e3e3da5d43a89fa46cd5caca72ce731b383be5596d0",
+    "method": "Decoded original quantized delta arcs to WGS84 longitude/latitude GeoJSON; coordinates rounded to 5 decimal places; retained 48 contiguous states plus the District of Columbia; excluded Alaska, Hawaii, and territories. No additional simplification. One zero-area Delaware island component collapsed to two distinct points in the upstream quantized topology and was omitted to keep GeoJSON rings valid.",
+    "features": 49,
+    "licenseUrl": "https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/LICENSE",
+    "licenseFile": "US-ATLAS-LICENSE.txt",
+    "license": "Census boundaries are U.S. government public data; us-atlas distribution carries ISC license retained alongside the derivative.",
+    "invalidUpstreamComponentsOmitted": 1
+  },
+  "normalizations": [
+    {
+      "chapter": "Eta Iota",
+      "sourceIssue": "National directory names “University of Washington, St. Louis, MO.”",
+      "resolution": "Washington University in St. Louis; the national chapter social handle pctwashu and official Olin undergraduate organization list confirm Phi Chi Theta.",
+      "verificationSource": "https://olin.washu.edu/student-resources/student-organizations.php"
+    },
+    {
+      "chapter": "Zeta Pi",
+      "sourceIssue": "National directory typography reads “ZETA Pl”.",
+      "resolution": "Normalized to Zeta Pi per the official chapter website.",
+      "verificationSource": "https://www.uwpct.com/"
+    }
+  ]
+}

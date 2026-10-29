@@ -2,7 +2,7 @@
 
 Live: https://chasebarn.github.io/pct-zeta-rho/v2/index.html
 
-Current copy and content, updated October 26, 2026. The page uses concise,
+Current copy and content, updated October 28, 2026. The page uses concise,
 factual language. Keep the established chapter colors, typefaces, and real
 photography. Do not add motivational slogans, rhetorical questions, invented
 statistics, event dates, or countdowns.
@@ -26,6 +26,8 @@ without decorative arrows.
 
 No overall heading or introductory paragraph. The region has an accessible
 Membership label. Each row opens its description and corresponding photograph.
+Desktop balances larger serif category titles against a landscape image; on
+phones the image belongs inside its active category panel, immediately after copy.
 
 | Row | Description |
 |---|---|
@@ -35,7 +37,9 @@ Membership label. Each row opens its description and corresponding photograph.
 
 ## Member Success
 
-Label: Member placements.
+No placements eyebrow or secondary title. Member Success leads directly into
+the three outcomes. Logos are secondary: two short desktop rows, with eight marks
+and a native View all companies disclosure on phones.
 
 Twenty actual local logo assets identify member destinations. They do not imply
 sponsorship or partnership: Goldman Sachs, Morgan Stanley, Citi, Wells Fargo,
@@ -59,16 +63,26 @@ period before changing them or adding stronger claims.
 Keep the original large heading with the year italic and gold. The transparent
 crest sits beside it without a cream tile.
 
-Phi Chi Theta is a national professional fraternity for business and economics.
-Zeta Rho is its chapter at the University of South Florida.
+50. Collegiate chapters.
 
-- About Phi Chi Theta: https://www.phichitheta.org/about
-- 1924: Founded
-- 40+: Chapters
+Zeta Rho at USF is part of a national professional fraternity for business and economics.
 
-National history and scale are supported by the national About page and chapter
-directory: https://www.phichitheta.org/find-a-chapter. No claim is made about
-employer recognition of the fraternity.
+National chapter directory: https://www.phichitheta.org/find-a-chapter
+
+A U.S. outline shows all 50 collegiate campuses listed by the national directory
+as active on October 28, 2026. Its six alumni listings are excluded. The number
+and pins are built from `assets/map/chapters.json`. Do not add guessed campuses.
+Campus coordinates come from federal NCES/IPEDS main-campus records. Geographic
+boundaries are Census-derived. Full provenance and name corrections are in
+`assets/map/sources.json`.
+
+USF is highlighted. Hovering or tapping a pin selects its school, and a native
+university selector provides the same access for keyboard and touch users.
+The selection displays the chapter and campus city/state. The map is still and
+fully present without JavaScript; the selector progressively enhances it.
+
+National history is supported by https://www.phichitheta.org/about. No claim is
+made about employer recognition of the fraternity.
 
 ## Chapter Life
 
@@ -76,8 +90,8 @@ Three existing real photographs, with descriptive alternative text:
 `photo-letters.jpg`, `photo-fundraiser.jpg`, and `photo-service.jpg`.
 The original circular carousel repeats these photographs around 32 slots and
 rotates once every 150 seconds. Preserve its curved silhouette and the purple
-cut below it. A native pause control works with touch, keyboard, and no JavaScript.
-Reduced motion holds the carousel still. Duplicate frames are decorative.
+cut below it. There is no visible pause control. Hover or keyboard focus pauses the wheel.
+Reduced motion holds it still. Duplicate frames are decorative.
 
 ## Rush Phi Chi Theta.
 

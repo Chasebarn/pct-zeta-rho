@@ -1,22 +1,48 @@
-<!-- Member placements use actual local logo assets. Source provenance is kept
-     in assets/logos/sources.json. These identify member destinations, not partners. -->
+<!-- Existing member destinations use authentic local logo artwork.
+     Source provenance is recorded in assets/logos/sources.json. -->
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
   <div class="v2wrap">
     <h2 class="pl-h" id="pl-h">Member Success</h2>
-    <p class="pl-kicker" id="pl-companies">Member placements</p>
-    <ul class="pl-grid" aria-labelledby="pl-companies" role="list">
+
+    <!-- Existing chapter figures, with their original labels. -->
+    <ul class="pl-nums" role="list">
+      <li class="pl-n">
+        <p class="pl-n-val"><span>95</span><span class="pl-n-u">%</span></p>
+        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val"><span>3.60</span></p>
+        <p class="pl-n-lab">Chapter average GPA</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val"><span>15</span></p>
+        <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
+      </li>
+    </ul>
+
+    <div class="pl-brands">
+      <ul class="pl-grid" data-pl-primary aria-label="Companies where members have been placed" role="list">
       <li class="pl-cell pl-cell--goldman"><img src="assets/logos/goldman-sachs.png" alt="Goldman Sachs" width="1022" height="429" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide"><img src="assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--citi"><img src="assets/logos/citi.svg" alt="Citi" width="56" height="33" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="assets/logos/wells-fargo.png" alt="Wells Fargo" width="220" height="23" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--pnc"><img src="assets/logos/pnc.svg" alt="PNC" width="205" height="62" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--wide"><img src="assets/logos/raymond-james.svg" alt="Raymond James" width="300" height="26" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--wide"><img src="assets/logos/fisher-investments.svg" alt="Fisher Investments" width="570" height="41" loading="lazy" decoding="async"></li>
-      <li class="pl-cell"><img src="assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--kpmg"><img src="assets/logos/kpmg.svg" alt="KPMG" width="173" height="68" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse"><img src="assets/logos/deloitte.svg" alt="Deloitte" width="182" height="34" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--pwc"><img src="assets/logos/pwc.svg" alt="PwC" width="359" height="174" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--amazon"><img src="assets/logos/amazon.svg" alt="Amazon" width="99" height="33" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--pnc"><img src="assets/logos/pnc.svg" alt="PNC" width="205" height="62" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide pl-cell--raymond"><img src="assets/logos/raymond-james.svg" alt="Raymond James" width="300" height="26" loading="lazy" decoding="async"></li>
+      </ul>
+      <!-- Open is the no-JavaScript fallback. Enhancement collapses only the
+           additional marks on phones; native details remains keyboard usable. -->
+      <details class="pl-more" data-pl-more open>
+        <summary>
+          <span class="pl-show-all">View all companies</span>
+          <span class="pl-show-less">Show fewer companies</span>
+        </summary>
+        <ul class="pl-grid pl-grid--more" data-pl-extra aria-label="Additional companies where members have been placed" role="list">
+      <li class="pl-cell pl-cell--wide pl-cell--fisher"><img src="assets/logos/fisher-investments.svg" alt="Fisher Investments" width="570" height="41" loading="lazy" decoding="async"></li>
+      <li class="pl-cell"><img src="assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--nestle"><img src="assets/logos/nestle.svg" alt="Nestlé" width="311" height="322" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse"><img src="assets/logos/unilever.svg" alt="Unilever" width="180" height="39" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="assets/logos/nbcuniversal.png" alt="NBCUniversal" width="2000" height="197" loading="lazy" decoding="async"></li>
@@ -25,23 +51,8 @@
       <li class="pl-cell pl-cell--formula"><img src="assets/logos/formula-1.png" alt="Formula 1" width="480" height="120" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--jets"><img src="assets/logos/new-york-jets.svg" alt="New York Jets" width="500" height="500" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
-    </ul>
-
-    <!-- Existing chapter figures are preserved. Repetition elsewhere on the site
-         is not independent verification; the chapter owns their underlying data. -->
-    <ul class="pl-nums" role="list">
-      <li class="pl-n">
-        <p class="pl-n-val"><span data-count="95">95</span><span class="pl-n-u">%</span></p>
-        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
-      </li>
-      <li class="pl-n">
-        <p class="pl-n-val"><span data-count="3.6" data-decimals="2">3.60</span></p>
-        <p class="pl-n-lab">Chapter average GPA</p>
-      </li>
-      <li class="pl-n">
-        <p class="pl-n-val"><span data-count="15">15</span></p>
-        <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
-      </li>
-    </ul>
+        </ul>
+      </details>
+    </div>
   </div>
 </section>

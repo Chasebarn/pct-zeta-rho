@@ -19,7 +19,7 @@ window.pctInitGrow = function () {
     });
     if (!valid) return;
 
-    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
     var current = 0;
     var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -40,6 +40,7 @@ window.pctInitGrow = function () {
     }
     function open(index) {
       if (index === current) return;
+      var before = btns[index].getBoundingClientRect().top;
       clearLeaving();
       if (wide && !(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
@@ -47,10 +48,18 @@ window.pctInitGrow = function () {
       }
       current = index;
       sync();
+      /* Closing a preceding phone panel removes its photograph above the
+         selected control. Keep that control in the same viewport position. */
+      if (!wide && before >= 0 && before < window.innerHeight) {
+        var shift = btns[index].getBoundingClientRect().top - before;
+        if (Math.abs(shift) > 1) window.scrollTo({
+          top:Math.max(0, window.scrollY + shift), behavior:'instant'
+        });
+      }
     }
     function layout() {
       clearLeaving();
-      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 760;
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
         var destination = wide ? stage : panels[i];

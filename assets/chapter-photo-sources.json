@@ -1,0 +1,38 @@
+[
+  {
+    "file": "assets/chapter-careers.jpg",
+    "source_page": "https://sites.google.com/view/pct-zeta-rho",
+    "source_image": "https://sites.google.com/sitesv-images-rt/AMxu72uYzOM4QmVXhinhZ6U6mCcbCBKt7IifuLW57icpP8-4dUoyfsm44Wg58LJCl4Mqie3pW51CrOhpU9dh-wBLS5VMOJhIv9FToKUOCYaVFkK58VmdkhuvUuKG47uRGbWS6XZUQPx9edF-fGVtF7gfQBitzuL6FA6OpT4XKPQwFzuF0XjDDDHNpMtltZn79PTUOIvUy-NUz4AF7xxRfGI-EYFtbWe1ku2tJV3rVCh919w=w720",
+    "retrieved": "2026-10-29",
+    "dimensions": [
+      720,
+      717
+    ],
+    "sha256": "8a3da8d75d37d67cd42fd28fa9187f9e47aac11226a5ec8353d6f83fef44b2ac",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+  },
+  {
+    "file": "assets/chapter-members.jpg",
+    "source_page": "https://sites.google.com/view/pct-zeta-rho",
+    "source_image": "https://sites.google.com/sitesv-images-rt/AMxu72sYGy2btafdXyyDUTEIPNcNhEE_XP5sRBafnNr0MUdIeEj6Zcu3qnNbzdsZ9y4tv2Fgq6UjBbnL9H6oFjrjOxAouxyhK-BXY3tqceBtCHIvoUheyu9k2OmYjuKdPwtDBg0byRPW7VQqvFkHNWvVLOLtFgA7iHHyVqHxH9xfiVFpsm0p6nfDHH1UvDCr=w720",
+    "retrieved": "2026-10-29",
+    "dimensions": [
+      720,
+      720
+    ],
+    "sha256": "e23540ceedac534182fa21c9818233c8bb5a66cd096512eef1e34f01d4109499",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+  },
+  {
+    "file": "assets/chapter-community.jpg",
+    "source_page": "https://sites.google.com/view/pct-zeta-rho",
+    "source_image": "https://sites.google.com/sitesv-images-rt/AMxu72v-Dt31EdqEVtxzdg9fgY7dqCb0FHTXeJPHmadhl7DZlbcI6dqx2Ygo-R7KQysay_SPguHntLOBhaA4LrqcV8Wog82cnsPZCde-Ji_HSPvoLhd-wapQXU5biKr6O6CiJBeW5pdG9G-TInvSMlA-fXfFzl0ZI1iRk1uX1xXrsYkH4FQaQoC4XIueZTLIfW0=w720",
+    "retrieved": "2026-10-29",
+    "dimensions": [
+      720,
+      720
+    ],
+    "sha256": "1a9bce15d7b872cfc3a64a1d67714a46a3286d01e66af1c2be845b875994e461",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+  }
+]

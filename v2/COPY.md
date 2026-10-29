@@ -2,7 +2,7 @@
 
 Live: https://chasebarn.github.io/pct-zeta-rho/v2/index.html
 
-Current copy and content, updated October 28, 2026. The page uses concise,
+Current copy and content, updated October 29, 2026. The page uses concise,
 factual language. Keep the established chapter colors, typefaces, and real
 photography. Do not add motivational slogans, rhetorical questions, invented
 statistics, event dates, or countdowns.
@@ -11,7 +11,7 @@ statistics, event dates, or countdowns.
 
 - Phi Chi Theta
 - Zeta Rho · USF
-- Navigation: Home, Philanthropy, Apparel, Career
+- Navigation: The Chapter, Member Success, Chapter Life; resources in the footer
 - Rush PCT
 - Professional Business Fraternity
 - University of South Florida
@@ -26,14 +26,14 @@ without decorative arrows.
 
 No overall heading or introductory paragraph. The region has an accessible
 Membership label. Each row opens its description and corresponding photograph.
-Desktop places the photograph on the left and compact, complete category titles on the right; on
-phones the image belongs inside its active category panel, immediately after copy.
+Desktop places compact, complete category titles on the left and the photograph on the right.
+On phones the image belongs inside its active category panel, immediately after copy.
 
 | Row | Description |
 |---|---|
-| Professional Connections | Meet professionals, alumni, and fellow members through the chapter. |
-| Leadership Experience | Plan events, lead projects, and take responsibility for chapter initiatives. |
-| Chapter Community | Take part in Formal, Retreat, intramurals, and everyday chapter life. |
+| Professional Connections | Connect with members, alumni, and professionals through chapter events. |
+| Leadership Experience | Organize events, lead projects, and take responsibility in the chapter. |
+| Chapter Community | Formal, Retreat, intramurals, and service with the chapter. |
 
 ## Member Success
 
@@ -66,8 +66,9 @@ period before changing them or adding stronger claims.
 Keep the original large heading with the year italic and gold. The transparent
 crest sits beside it without a cream tile.
 
-Phi Chi Theta is a professional fraternity for business and economics. Zeta Rho
-is its USF chapter, connecting members with students and alumni nationwide.
+Phi Chi Theta is a national professional fraternity for business and economics.
+At the University of South Florida, Zeta Rho connects members with a wider
+community of students, chapters, and alumni.
 
 The original headline and these two short sentences sit beside the supporting
 map. Do not restore the longer mission, program, or scholarship paragraphs.
@@ -93,8 +94,10 @@ is made about employer recognition of the fraternity.
 
 ## Chapter Life
 
-Three existing real photographs, with descriptive alternative text:
-`photo-letters.jpg`, `photo-fundraiser.jpg`, and `photo-service.jpg`.
+Six real photographs, with descriptive alternative text: the existing
+`photo-letters.jpg`, `photo-fundraiser.jpg`, and `photo-service.jpg`, plus
+`chapter-careers.jpg`, `chapter-members.jpg`, and `chapter-community.jpg`
+from the original chapter website. Provenance is in `assets/chapter-photo-sources.json`.
 The original circular carousel repeats these photographs around 32 slots and
 rotates once every 150 seconds. Preserve its curved silhouette and the purple
 cut below it. There is no visible pause control. Hover or keyboard focus pauses the wheel.
@@ -105,10 +108,10 @@ Reduced motion holds it still. Duplicate frames are decorative.
 Meet the chapter and learn how to join.
 
 Restore the display-led closing composition, with the fraternity name italic
-and gold. Button: Rush PCT. Links to the existing dedicated Rush page.
+and gold. Button: Rush PCT. Links to the matching V2 Rush page.
 No dated event teaser or countdown is displayed on the V2 homepage.
 
-Support the Chapter. Links: Donate, Apparel.
+Donate and Apparel Store appear once each in the footer.
 
 ## Footer
 
@@ -116,14 +119,16 @@ Phi Chi Theta. Zeta Rho · USF.
 
 A professional business fraternity at the University of South Florida.
 
-Explore: Home, Rush, Philanthropy, Apparel, Career Navigator.
+Explore: Home, Rush, Philanthropy, Career Navigator.
 Connect: Instagram, LinkedIn, Apparel Store, Donate.
 
 © Phi Chi Theta · Zeta Rho Chapter. Officer Portal.
 
 ## Content follow-ups
 
-The separate, existing Rush page still contains Fall 2026 dates. Confirm the
-next actual schedule before adding events or a countdown to this homepage.
+The V2 Rush page preserves existing eligibility, six-event process, free Rush,
+listed $235 semester dues, and schedule delivery through the interest form.
+It omits the expired countdown. Confirm the chapter’s next schedule and current
+dues before changing those facts. The separate legacy Rush page remains unchanged.
 Confirm the three chapter figures and the current interest/donation destinations
 with chapter officers before making new factual claims or changing those URLs.

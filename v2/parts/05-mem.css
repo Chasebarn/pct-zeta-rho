@@ -58,10 +58,16 @@
 .mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
 
 @media (max-width:767px){
-  .mem-band{--R:330vw;--inset:.7rem}
+  /* Keep the original phone circle through 390px, then taper toward the
+     desktop radius instead of doubling card height on wider tablets. */
+  .mem-band{--R:min(330vw,calc(1435px - 37.8vw));--inset:.7rem}
 }
 /* The original arc remains visible at rest. No content depends on animation
    or JavaScript; decorative duplicate frames are hidden from assistive tech. */
 @media (prefers-reduced-motion:reduce){
   .mem-wheel{animation:none;will-change:auto}
 }
+
+/* The additional chapter photographs retain their original website frame in
+   the source asset; the image crop keeps it outside the visible photograph. */
+.mem-i--framed img{transform:scale(1.12)}

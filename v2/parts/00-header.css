@@ -7,7 +7,7 @@
 .v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.22rem;line-height:1.1;color:var(--ink)}
 .v2hd-sub{display:block;margin-top:.3rem;font-size:.66rem;line-height:1.3;letter-spacing:.13em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
 .v2hd-list{display:flex;align-items:center;gap:1.65rem;list-style:none;margin:0;padding:0}
-.v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
+.v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
 .v2hd-link:hover,.v2hd-link[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--gold-ink);color:var(--ink)}
 .v2hd-rush{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;padding:.65rem 1.2rem;background:var(--gold);color:var(--ink);font-size:.82rem;font-weight:600;line-height:1.3;text-decoration:none;white-space:nowrap;border-radius:2px;transition:background-color 180ms ease}
 .v2hd-rush:hover{background:var(--gold-soft)}
@@ -35,15 +35,7 @@
 .motion-word-inner{display:inline-block;transform-origin:0 100%}
 [data-motion-words] em .motion-word{padding-right:.08em;margin-right:-.08em}
 
-/* A light pass and measured lift give the primary controls a tactile response. */
-.v2hero-btn,.v2hd-rush,.act-cta{position:relative;isolation:isolate;overflow:hidden;transition:background-color 220ms ease,transform 220ms var(--ease),box-shadow 220ms ease}
-.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.27) 50%,transparent 75%);transform:translateX(-150%) skewX(-14deg);transition:transform 700ms cubic-bezier(.16,1,.3,1)}
-@media(hover:hover){
-  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,162,39,.14)}
-  .v2hero-btn:hover::before,.v2hd-rush:hover::before,.act-cta:hover::before{transform:translateX(150%) skewX(-14deg)}
-}
-.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:translateY(0) scale(.98)}
-@media(prefers-reduced-motion:reduce){
-  .v2hero-btn,.v2hd-rush,.act-cta,.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{transition:none!important}
-  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover,.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:none}
-}
+/* One quiet control system: stable geometry, clear contrast, no decorative sweep. */
+.v2hero-btn,.v2hd-rush,.act-cta{font-size:.9375rem;letter-spacing:.015em;transition:background-color 180ms ease,border-color 180ms ease}
+.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{background:var(--gold-soft)}
+@media(prefers-reduced-motion:reduce){.v2hero-btn,.v2hd-rush,.act-cta{transition:none}}

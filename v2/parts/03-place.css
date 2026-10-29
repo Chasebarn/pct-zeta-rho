@@ -1,25 +1,28 @@
-/* Strong, direct hierarchy above finite company rows linked to page scroll.
-   Base CSS shows the complete wrapping list, including with reduced motion. */
+/* A complete results chapter: a deeper paper field, generous display title,
+   readable outcomes, then a full-width company stage tied to page scrolling. */
 .pl{
-  padding:0 0 var(--section);
-  background:var(--paper);
+  padding-block:clamp(4.5rem,7.5vw,7rem);
+  border-top:1px solid var(--line);
+  background:var(--paper-deep);
   color:var(--ink-soft);
 }
-.pl-intro{display:block}
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(2rem,3.5vw,3rem);
+  margin:0 0 clamp(2.5rem,4vw,3.5rem);
+  color:var(--ink);
+  font-family:var(--font-display);
   font-size:clamp(4.6rem,7.5vw,6rem);
-  line-height:1.1;
-  letter-spacing:-.02em;
+  font-weight:400;
+  line-height:1.05;
+  letter-spacing:-.025em;
   text-align:center;
   white-space:nowrap;
 }
 .pl-nums{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(1.5rem,3vw,2.75rem);
-  max-width:56rem;
+  gap:clamp(2rem,4vw,4rem);
+  max-width:58rem;
   list-style:none;
   margin:0 auto;
   padding:0;
@@ -32,133 +35,156 @@
   font-size:clamp(3.2rem,5vw,4rem);
   font-weight:500;
   line-height:1.1;
-  letter-spacing:-.04em;
+  letter-spacing:-.045em;
   font-variant-numeric:lining-nums tabular-nums;
   white-space:nowrap;
 }
-.pl-n-u{font-size:.48em;letter-spacing:0}
+.pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
-  max-width:24ch;
-  margin:.8rem auto 0;
+  max-width:25ch;
+  margin:1rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
-  font-size:.875rem;
+  font-size:.9375rem;
   line-height:1.6;
   text-wrap:pretty;
 }
-/* Final-width glyphs reserve the measure while visual digits count over them. */
-.pl-counter{position:relative;display:inline-block}
-.pl-counter-space{visibility:hidden}
-.pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip-path:inset(50%);
-  white-space:nowrap;
-  border:0;
-}
-.pl-stats-ready .pl-n{
-  opacity:0;
-  transform:translate3d(0,16px,0);
-  transition:opacity 650ms ease,transform 800ms var(--ease);
-}
-.pl-stats-ready .pl-n:nth-child(2){transition-delay:100ms}
-.pl-stats-ready .pl-n:nth-child(3){transition-delay:200ms}
-.pl-stats-visible .pl-n{opacity:1;transform:none}
-
+/* Outside the inner reading column, this stage spans the viewport itself.
+   Crops and fades consequently occur at screen edges, not inside the page. */
 .pl-brands{
   position:relative;
-  margin-top:clamp(2rem,3.5vw,2.75rem);
-  border-top:1px solid var(--line);
-  padding-top:1rem;
+  width:100%;
+  margin-top:clamp(3rem,5vw,4.5rem);
 }
+/* Complete, unclipped source list for no-JavaScript/reduced-motion visitors. */
 .pl-logos{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   align-items:center;
-  gap:.5rem 1rem;
+  gap:.75rem 1.5rem;
+  width:min(var(--wrap),calc(100% - var(--gutter)*2));
   list-style:none;
-  margin:0;
+  margin:0 auto;
   padding:0;
 }
 .pl-logos[hidden]{display:none}
 .pl-cell{
+  --pl-slot:11rem;
+  --pl-mark:8.5rem;
+  --pl-mark-max:2.75rem;
   display:flex;
   align-items:center;
   justify-content:center;
   min-width:0;
-  min-height:5.5rem;
-  padding:.65rem .5rem;
+  min-height:5.75rem;
+  padding:.6rem .5rem;
 }
 .pl-cell img{
   display:block;
-  width:8rem;
+  width:var(--pl-mark);
   height:auto;
   max-width:100%;
-  max-height:2.6rem;
+  max-height:var(--pl-mark-max);
   object-fit:contain;
-  filter:grayscale(1);
-  opacity:.85;
+  filter:grayscale(1) contrast(1.12);
+  opacity:.88;
 }
-.pl-cell--wide img{width:10.5rem;max-height:2.2rem}
-.pl-cell--reverse img{filter:brightness(0);opacity:.78}
-.pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
-.pl-cell--citi img{width:4.3rem;max-height:2.8rem}
-.pl-cell--pnc img{width:6rem}
-.pl-cell--kpmg img{width:6.5rem}
-.pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
-.pl-cell--amazon img{width:6.5rem}
-.pl-cell--nestle img{width:3rem;max-height:3.25rem}
-.pl-cell--victoria img{width:8rem;max-height:2.6rem}
-.pl-cell--formula img{width:6.5rem}
-.pl-cell--jets img{width:7.5rem;max-height:5rem}
-/* Only enhancement creates clipped finite tracks. No scrollbar, manual rail,
-   duplicated images, pinning, or scroll interception is involved. */
-.pl-rows{display:grid;gap:.75rem}
-.pl-row{min-width:0;overflow:hidden}
+.pl-cell--reverse img{filter:brightness(0);opacity:.84}
+/* Optical measures follow the artwork: long, thin wordmarks receive wider
+   slots; stacked marks remain compact; clear space is allowed for in sizing. */
+.pl-cell--goldman{--pl-slot:10rem;--pl-mark:6.75rem;--pl-mark-max:2.8rem}
+.pl-cell--morgan{--pl-slot:14rem;--pl-mark:11.5rem;--pl-mark-max:2.1rem}
+.pl-cell--citi{--pl-slot:7rem;--pl-mark:4.4rem;--pl-mark-max:2.8rem}
+.pl-cell--wells{--pl-slot:18rem;--pl-mark:16rem;--pl-mark-max:1.8rem}
+.pl-cell--kpmg{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.8rem}
+.pl-cell--deloitte{--pl-slot:12rem;--pl-mark:9.5rem;--pl-mark-max:2rem}
+.pl-cell--pwc{--pl-slot:9rem;--pl-mark:6rem;--pl-mark-max:3rem}
+.pl-cell--amazon{--pl-slot:11rem;--pl-mark:8rem;--pl-mark-max:2.8rem}
+.pl-cell--pnc{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.3rem}
+.pl-cell--raymond{--pl-slot:19rem;--pl-mark:16rem;--pl-mark-max:1.7rem}
+.pl-cell--fisher{--pl-slot:22rem;--pl-mark:19rem;--pl-mark-max:1.7rem}
+.pl-cell--fisher img{opacity:1}
+.pl-cell--sp{--pl-slot:11rem;--pl-mark:8.5rem;--pl-mark-max:2rem}
+.pl-cell--nestle{--pl-slot:8rem;--pl-mark:3.75rem;--pl-mark-max:4rem}
+.pl-cell--unilever{--pl-slot:12rem;--pl-mark:9rem;--pl-mark-max:2.1rem}
+.pl-cell--nbc{--pl-slot:18rem;--pl-mark:15rem;--pl-mark-max:1.8rem}
+.pl-cell--lockheed{--pl-slot:16rem;--pl-mark:13rem;--pl-mark-max:2.3rem}
+.pl-cell--victoria{--pl-slot:11rem;--pl-mark:8.5rem;--pl-mark-max:2.8rem}
+.pl-cell--formula{--pl-slot:11rem;--pl-mark:8rem;--pl-mark-max:2.2rem}
+/* The Jets artwork occupies only the middle 57% of its square viewBox. */
+.pl-cell--jets{--pl-slot:11rem;--pl-mark:6.75rem;--pl-mark-max:none}
+.pl-cell--usf{--pl-slot:15rem;--pl-mark:12rem;--pl-mark-max:2.3rem}
+.pl-rows{display:grid;gap:1.25rem}
+.pl-row{
+  --pl-edge:64px;
+  min-width:0;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
+}
 .pl-track{
+  --pl-inset:72px;
   display:flex;
   align-items:center;
   gap:2rem;
   width:max-content;
   list-style:none;
   margin:0;
-  padding:0;
+  /* scrollWidth includes padding, keeping endpoint logos inside opaque space. */
+  padding:0 var(--pl-inset);
   will-change:transform;
 }
-.pl-track .pl-cell{flex:0 0 9rem;width:9rem;height:5.5rem}
-.pl-track .pl-cell--wide{flex-basis:12rem;width:12rem}
-.pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:6rem;width:6rem}
+.pl-track .pl-cell{
+  flex:0 0 var(--pl-slot);
+  width:var(--pl-slot);
+  max-width:calc(100vw - var(--pl-inset)*2);
+  height:5.75rem;
+}
 @media (max-width:700px){
-  .pl-h{margin-bottom:2rem;font-size:clamp(2.85rem,13.5vw,3.3rem)}
-  .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:2.4rem}
-  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
-  .pl-brands{margin-top:1.8rem}
-  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.25rem .5rem}
+  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem)}
+  .pl-nums{gap:1.5rem}
+  .pl-brands{margin-top:2.75rem}
+  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
-  .pl-cell{min-height:4.75rem;padding:.5rem .35rem}
-  .pl-cell img{width:6.5rem;max-height:2.4rem}
-  .pl-cell--wide img{width:9rem;max-height:2rem}
-  .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
-  .pl-cell--goldman img{width:6rem;max-height:2.8rem}
-  .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
-  .pl-cell--nestle img{width:2.7rem;max-height:3rem}
-  .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
-  .pl-rows{gap:.5rem}
-  .pl-track{gap:1.5rem}
-  .pl-track .pl-cell{flex-basis:7.5rem;width:7.5rem;height:4.75rem}
-  .pl-track .pl-cell--wide{flex-basis:10.5rem;width:10.5rem}
-  .pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:5rem;width:5rem}
+  .pl-cell{min-height:5.25rem}
+  .pl-cell--goldman{--pl-slot:9rem;--pl-mark:6rem;--pl-mark-max:2.6rem}
+  .pl-cell--morgan{--pl-slot:12rem;--pl-mark:10rem}
+  .pl-cell--citi{--pl-slot:6rem;--pl-mark:4rem;--pl-mark-max:2.6rem}
+  .pl-cell--wells{--pl-slot:15rem;--pl-mark:13rem;--pl-mark-max:1.6rem}
+  .pl-cell--kpmg{--pl-slot:9rem;--pl-mark:6.3rem;--pl-mark-max:2.6rem}
+  .pl-cell--deloitte{--pl-slot:11rem;--pl-mark:8.5rem}
+  .pl-cell--pwc{--pl-slot:8rem;--pl-mark:5.25rem;--pl-mark-max:2.7rem}
+  .pl-cell--amazon{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.6rem}
+  .pl-cell--pnc{--pl-slot:9rem;--pl-mark:6.25rem;--pl-mark-max:2.1rem}
+  .pl-cell--raymond{--pl-slot:16rem;--pl-mark:13.5rem;--pl-mark-max:1.55rem}
+  .pl-cell--fisher{--pl-slot:18rem;--pl-mark:15.5rem;--pl-mark-max:1.55rem}
+  .pl-cell--sp{--pl-slot:10rem;--pl-mark:7.5rem}
+  .pl-cell--nestle{--pl-slot:7rem;--pl-mark:3.3rem;--pl-mark-max:3.6rem}
+  .pl-cell--unilever{--pl-slot:11rem;--pl-mark:8rem}
+  .pl-cell--nbc{--pl-slot:16rem;--pl-mark:13rem;--pl-mark-max:1.6rem}
+  .pl-cell--lockheed{--pl-slot:14rem;--pl-mark:11.5rem;--pl-mark-max:2.1rem}
+  .pl-cell--victoria{--pl-slot:10rem;--pl-mark:7.5rem;--pl-mark-max:2.5rem}
+  .pl-cell--formula{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2rem}
+  .pl-cell--jets{--pl-slot:10rem;--pl-mark:6rem}
+  .pl-cell--usf{--pl-slot:13rem;--pl-mark:10.5rem;--pl-mark-max:2.1rem}
+  .pl-rows{gap:.75rem}
+  .pl-row{--pl-edge:28px}
+  .pl-track{--pl-inset:36px;gap:1.5rem}
+  .pl-track .pl-cell{height:5.25rem}
 }
-@media (max-width:359px){
-  .pl-nums{gap:.55rem}
-  .pl-n-lab{font-size:.78rem}
-}
-@media (prefers-reduced-motion:reduce){
-  .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
+@media (max-width:600px){
+  .pl{padding-block:4rem}
+  .pl-h{margin-bottom:2rem}
+  .pl-nums{display:block;max-width:none;border-top:1px solid var(--line)}
+  .pl-n{
+    display:grid;
+    grid-template-columns:6.75rem minmax(0,1fr);
+    align-items:center;
+    gap:1.25rem;
+    padding:.85rem 0;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+  }
+  .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
+  .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
 }

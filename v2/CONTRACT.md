@@ -17,8 +17,8 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
   Reduced-motion and no-JavaScript layouts must expose every company mark.
 - Map only collegiate campuses listed in the national directory. Use sourced
   coordinates and true geographic outlines; retain provenance and the checked date.
-- Preserve the original national headline and use only two short explanatory
-  sentences. Keep its map secondary, with one compact caption row and directory
+- Preserve the original national headline and use concise factual
+  copy. Keep its map secondary, with a compact readable caption and directory
   link. Do not restore the large university picker, location text, or map-control panel.
 - Use one clear primary action at each decision point and comfortably sized buttons.
 - Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
@@ -31,6 +31,8 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 ## Responsive behavior
 
 - No horizontal page overflow, clipped headings, pinned scrolling, or scroll hijacking.
+- Membership uses text on the left and a supporting photo on the right from 760px.
+  Phone category changes retain the chosen control’s screen position. Align national copy with the full-width headline; keep the crest secondary and untiled.
 - At phone widths, use readable text, consistent gutters, compact section spacing,
   a one-row header, an accessible disclosure menu, and a readable display-led Rush section.
 - Logos remain legible and follow page scrolling; preserve the carousel’s original curved geometry
@@ -40,18 +42,18 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 ## Engineering and accessibility
 
 1. Base HTML and CSS must show complete content and working links without JavaScript.
-   Scripts progressively enhance membership controls, numbers, header state, and hero.
+   Scripts progressively enhance membership controls, logo rows, header state, and hero.
 2. Respect `prefers-reduced-motion`, including changes during the session. Register
    teardown work with `window.pctMotion.onReduce` when appropriate.
 3. Animate transforms and opacity; avoid expensive layout work inside animation loops.
-   Keep heading accents and accessible names intact during word reveals. Use one-time
-   entrances, photo masks, and a coastline trace; settle entrances when controls gain focus.
-   Preserve final number widths and expose final figures to screen readers while counting.
+   Restrict the typographic entrance to the hero. Body copy, statistics, map, and
+   closing actions remain readable immediately. No counting figures, traced geography,
+   button light sweeps, or generic rising blocks. Preserve accents and accessible names.
 4. Give images accurate dimensions and alternative text; lazy-load below-fold images.
 5. Keep controls keyboard reachable, touch targets at least 44px, and focus rings visible
    against their actual background. Expanded controls must expose the correct state.
 6. Keep local references and accessible labels valid. The V2 homepage stays in `/v2/`;
-   dedicated pages live at the repository root.
+   V2 Rush stays in `/v2/`; legacy resource pages live at the repository root.
 7. Keep selectors scoped to their part. Use vanilla HTML, CSS, and JavaScript without
    new runtime dependencies. Initializers must safely tolerate missing markup.
 8. The lead owns integration and generated output. Delegate ownership of specific parts

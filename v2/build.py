@@ -23,11 +23,11 @@ for p in parts:
         h = h.replace('{{PCT_CHAPTER_COUNT}}', str(len(CHAPTERS)))
     # parts are authored with repo-root-relative asset paths; the page lives in /v2/
     h = re.sub(r'(src|href)="assets/', r'\1="../assets/', h)
-    # Homepage links stay inside /v2/; dedicated pages live at the repo root.
+    # Prefer a V2 destination when present; retained dedicated pages live at the repo root.
     def page_href(match):
         target = match.group(1)
         page = re.split(r'[?#]', target, maxsplit=1)[0]
-        if page != 'index.html' and os.path.isfile(os.path.join(ROOT, '..', page)):
+        if not os.path.isfile(os.path.join(ROOT, page)) and os.path.isfile(os.path.join(ROOT, '..', page)):
             return 'href="../' + target + '"'
         return match.group(0)
     h = re.sub(r'href="([a-zA-Z0-9-]+\.html(?:[?#][^\"]*)?)"', page_href, h)
@@ -44,6 +44,9 @@ for p in parts:
 # The shared reduced-motion lifecycle must be evaluated before section inits
 js.sort(key=lambda s: 0 if 'pctMotion' in s[:400] else 1)
 inits = re.findall(r'window\.(pctInit\w+)\s*=', '\n'.join(js))
+# The recruitment page consumes the same frame styles as the homepage.
+frame_css = read(os.path.join(ROOT, 'parts', '00-header.css')) + '\n' + read(os.path.join(ROOT, 'parts', '99-footer.css'))
+open(os.path.join(ROOT, 'site-frame.css'), 'w', encoding='utf-8').write(frame_css + '\n')
 header_html = html[names.index('00-header')] if '00-header' in names else ''
 footer_html = html[names.index('99-footer')] if '99-footer' in names else ''
 main_html = '\n'.join(part for name, part in zip(names, html)
@@ -62,7 +65,7 @@ doc = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css?v=20261015">
+<link rel="stylesheet" href="tokens.css?v=20261029">
 <style>
 {chr(10).join(css)}
 </style>

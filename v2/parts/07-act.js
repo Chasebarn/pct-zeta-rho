@@ -51,6 +51,8 @@
 window.pctInitAct = function () {
   var section = document.querySelector('.act');
   if (!section || section.dataset.arrivalReady) return;
+  var button = section.querySelector('.act-cta');
+  if (!button) return;
   section.dataset.arrivalReady = '1';
   var observer;
   function arrive() {
@@ -61,8 +63,8 @@ window.pctInitAct = function () {
     arrive(); return;
   }
   observer = new IntersectionObserver(function (entries) {
-    if (entries.some(function (entry) { return entry.isIntersecting; })) arrive();
-  }, { threshold: .35 });
-  observer.observe(section);
+    if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .6; })) arrive();
+  }, { threshold: .6 });
+  observer.observe(button);
   if (window.pctMotion) window.pctMotion.onReduce(arrive);
 };

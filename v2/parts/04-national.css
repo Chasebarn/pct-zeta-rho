@@ -34,6 +34,7 @@
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
 .v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
+.v2nat.is-map-pending .v2nat-pins{opacity:0}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
@@ -66,5 +67,6 @@
   .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
+  .v2nat.is-map-pending .v2nat-pins{opacity:1}
   .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }

@@ -437,6 +437,7 @@
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
 .v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
+.v2nat.is-map-pending .v2nat-pins{opacity:0}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
@@ -469,6 +470,7 @@
   .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
+  .v2nat.is-map-pending .v2nat-pins{opacity:1}
   .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }
 /* ===== 07-act ===== */
@@ -994,6 +996,8 @@
 window.pctInitAct = function () {
   var section = document.querySelector('.act');
   if (!section || section.dataset.arrivalReady) return;
+  var button = section.querySelector('.act-cta');
+  if (!button) return;
   section.dataset.arrivalReady = '1';
   var observer;
   function arrive() {
@@ -1004,9 +1008,9 @@ window.pctInitAct = function () {
     arrive(); return;
   }
   observer = new IntersectionObserver(function (entries) {
-    if (entries.some(function (entry) { return entry.isIntersecting; })) arrive();
-  }, { threshold: .35 });
-  observer.observe(section);
+    if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .6; })) arrive();
+  }, { threshold: .6 });
+  observer.observe(button);
   if (window.pctMotion) window.pctMotion.onReduce(arrive);
 };
 /* ===== 00-header ===== */
@@ -1538,22 +1542,26 @@ window.pctInitPlacements = function () {
   try {
     countObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting || entry.intersectionRatio < .6) return;
         var item = values.find(function (value) { return value.row === entry.target; });
         if (!item || item.active || item.done) return;
         item.active = true;
-        item.element.textContent = (1).toFixed(item.decimals);
         countObserver.unobserve(item.row);
       });
       if (values.some(function (item) { return item.active; }) && countFrame === null && !countsStopped) {
         countFrame = window.requestAnimationFrame(countStep);
       }
     }, { threshold:.6 });
-    values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
     document.addEventListener('visibilitychange', onCountVisibility);
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', onCountReduce);
     else if (reduce && reduce.addListener) reduce.addListener(onCountReduce);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(finishCounts);
+    if (!countsStopped) {
+      /* Arm visual digits before observation so entering rows never flash their
+         final value and then jump back to one. Accessible finals stay intact. */
+      values.forEach(function (item) { item.element.textContent = (1).toFixed(item.decimals); });
+      values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
+    }
   } catch (error) { finishCounts(); }
 };
 /* ===== 04-national ===== */
@@ -1575,17 +1583,23 @@ window.pctInitNational = function () {
   var started = false;
 
   function finish() {
+    root.classList.remove('is-map-pending');
     if (stopped) return;
     stopped = true;
     if (observer) observer.disconnect();
     animations.forEach(function (animation) { animation.cancel(); });
     animations = [];
     document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('resize', onResize);
     if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
     else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
   }
   function onVisibility() { if (document.hidden) finish(); }
   function onReduce(event) { if (event.matches) finish(); }
+  function fitsEntryThreshold() {
+    return !window.innerHeight || figure.getBoundingClientRect().height * .6 <= window.innerHeight;
+  }
+  function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
   function hash(pin) {
     var value = 2166136261;
     var id = pin.getAttribute('data-chapter-pin');
@@ -1609,7 +1623,7 @@ window.pctInitNational = function () {
       var order = pins.slice().sort(function (a,b) { return hash(a) - hash(b); });
       order.forEach(function (pin,index) {
         var delay = order.length > 1 ? index * 1300 / (order.length - 1) : 0;
-        var options = { duration:650, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'backwards' };
+        var options = { duration:650, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
         animate(pin.querySelector('.v2nat-pin-dot'), [
           { opacity:0, transform:'scale(.2)', transformOrigin:'0px 0px' },
           { opacity:1, transform:'scale(1.3)', transformOrigin:'0px 0px', offset:.65 },
@@ -1623,15 +1637,19 @@ window.pctInitNational = function () {
           { opacity:restingOpacity, transform:'scale(1)', transformOrigin:'0px 0px' }
         ], options);
       });
+      root.classList.remove('is-map-pending');
       Promise.all(animations.map(function (animation) { return animation.finished.catch(function () {}); })).then(finish);
     } catch (error) { finish(); }
   }
   try {
     observer = new IntersectionObserver(function (entries) {
-      if (entries.some(function (entry) { return entry.isIntersecting; })) reveal();
+      if (!fitsEntryThreshold()) { finish(); return; }
+      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .6; })) reveal();
     }, { threshold:.6 });
     observer.observe(figure);
+    root.classList.add('is-map-pending');
     document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('resize', onResize, { passive:true });
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
     else if (reduce && reduce.addListener) reduce.addListener(onReduce);
     if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);

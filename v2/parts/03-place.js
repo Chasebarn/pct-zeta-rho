@@ -217,21 +217,25 @@ window.pctInitPlacements = function () {
   try {
     countObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting || entry.intersectionRatio < .6) return;
         var item = values.find(function (value) { return value.row === entry.target; });
         if (!item || item.active || item.done) return;
         item.active = true;
-        item.element.textContent = (1).toFixed(item.decimals);
         countObserver.unobserve(item.row);
       });
       if (values.some(function (item) { return item.active; }) && countFrame === null && !countsStopped) {
         countFrame = window.requestAnimationFrame(countStep);
       }
     }, { threshold:.6 });
-    values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
     document.addEventListener('visibilitychange', onCountVisibility);
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', onCountReduce);
     else if (reduce && reduce.addListener) reduce.addListener(onCountReduce);
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(finishCounts);
+    if (!countsStopped) {
+      /* Arm visual digits before observation so entering rows never flash their
+         final value and then jump back to one. Accessible finals stay intact. */
+      values.forEach(function (item) { item.element.textContent = (1).toFixed(item.decimals); });
+      values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
+    }
   } catch (error) { finishCounts(); }
 };

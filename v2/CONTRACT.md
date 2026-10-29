@@ -39,6 +39,9 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 2. Respect `prefers-reduced-motion`, including changes during the session. Register
    teardown work with `window.pctMotion.onReduce` when appropriate.
 3. Animate transforms and opacity; avoid expensive layout work inside animation loops.
+   Keep heading accents and accessible names intact during word reveals. Use one-time
+   entrances, photo masks, and a coastline trace; settle entrances when controls gain focus.
+   Preserve final number widths and expose final figures to screen readers while counting.
 4. Give images accurate dimensions and alternative text; lazy-load below-fold images.
 5. Keep controls keyboard reachable, touch targets at least 44px, and focus rings visible
    against their actual background. Expanded controls must expose the correct state.

@@ -28,3 +28,22 @@
 @media(max-width:899px){:root{--v2hd-h:73px}.v2hd-row{min-height:72px;gap:.65rem}.v2hd-nav{display:none}.v2hd-menu{display:block}.v2hd-crest{height:38px}.v2hd-name{font-size:1.2rem}.v2hd-sub{font-size:.6rem;letter-spacing:.1em}.v2hd-brand{gap:.55rem}.v2hd-rush{padding:.65rem .95rem}}
 @media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
 @media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
+
+/* Serif word masks preserve complete visible source content. The temporary
+   transform exists only in the JavaScript animation effect, never in base CSS. */
+.motion-word{display:inline-block;overflow:clip;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
+.motion-word-inner{display:inline-block;transform-origin:0 100%}
+[data-motion-words] em .motion-word{padding-right:.08em;margin-right:-.08em}
+
+/* A light pass and measured lift give the primary controls a tactile response. */
+.v2hero-btn,.v2hd-rush,.act-cta{position:relative;isolation:isolate;overflow:hidden;transition:background-color 220ms ease,transform 220ms var(--ease),box-shadow 220ms ease}
+.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.27) 50%,transparent 75%);transform:translateX(-150%) skewX(-14deg);transition:transform 700ms cubic-bezier(.16,1,.3,1)}
+@media(hover:hover){
+  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,162,39,.14)}
+  .v2hero-btn:hover::before,.v2hd-rush:hover::before,.act-cta:hover::before{transform:translateX(150%) skewX(-14deg)}
+}
+.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:translateY(0) scale(.98)}
+@media(prefers-reduced-motion:reduce){
+  .v2hero-btn,.v2hd-rush,.act-cta,.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{transition:none!important}
+  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover,.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:none}
+}

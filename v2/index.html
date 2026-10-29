@@ -44,6 +44,25 @@
 @media(max-width:899px){:root{--v2hd-h:73px}.v2hd-row{min-height:72px;gap:.65rem}.v2hd-nav{display:none}.v2hd-menu{display:block}.v2hd-crest{height:38px}.v2hd-name{font-size:1.2rem}.v2hd-sub{font-size:.6rem;letter-spacing:.1em}.v2hd-brand{gap:.55rem}.v2hd-rush{padding:.65rem .95rem}}
 @media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
 @media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
+
+/* Serif word masks preserve complete visible source content. The temporary
+   transform exists only in the JavaScript animation effect, never in base CSS. */
+.motion-word{display:inline-block;overflow:clip;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
+.motion-word-inner{display:inline-block;transform-origin:0 100%}
+[data-motion-words] em .motion-word{padding-right:.08em;margin-right:-.08em}
+
+/* A light pass and measured lift give the primary controls a tactile response. */
+.v2hero-btn,.v2hd-rush,.act-cta{position:relative;isolation:isolate;overflow:hidden;transition:background-color 220ms ease,transform 220ms var(--ease),box-shadow 220ms ease}
+.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.27) 50%,transparent 75%);transform:translateX(-150%) skewX(-14deg);transition:transform 700ms cubic-bezier(.16,1,.3,1)}
+@media(hover:hover){
+  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,162,39,.14)}
+  .v2hero-btn:hover::before,.v2hd-rush:hover::before,.act-cta:hover::before{transform:translateX(150%) skewX(-14deg)}
+}
+.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:translateY(0) scale(.98)}
+@media(prefers-reduced-motion:reduce){
+  .v2hero-btn,.v2hd-rush,.act-cta,.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{transition:none!important}
+  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover,.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:none}
+}
 /* ===== 01-hero ===== */
 /* The original hero is a left-aligned composition within a centered reading
    column. The footer carries context instead of another row above the title. */
@@ -120,136 +139,102 @@
   .v2hero{min-height:660px}
 }
 /* ===== 02-grow ===== */
-/* One editorial composition: category titles and copy balance a landscape
-   photograph on desktop. Mobile keeps the selected photo inside its panel. */
-.grow{
-  background:var(--paper);
-  color:var(--ink-soft);
-  padding-block:var(--section);
-}
+/* Large two-line editorial titles and a full-height image form one spread.
+   Mobile keeps each image inside its own accordion panel. */
+.grow{background:var(--paper);color:var(--ink-soft);padding-block:var(--section)}
 .grow__rows{min-width:0}
-.grow__row{border-bottom:1px solid var(--line)}
+.grow__row{position:relative;border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
+.grow__row::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:var(--gold-ink);transform:scaleX(0);transform-origin:left;
+  transition:transform 650ms var(--ease);pointer-events:none;
+}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
 .grow__btn{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1.25rem;
-  width:100%;
-  min-height:76px;
-  margin:0;
-  padding:1.55rem 0;
-  border:0;
-  background:none;
-  color:inherit;
-  text-align:left;
-  font-family:inherit;
-  cursor:default;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  width:100%;min-height:76px;margin:0;padding:1.1rem 0 1.15rem;
+  border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default;
 }
 .grow__ttl{
-  font-family:var(--font-display);
-  font-size:clamp(1.9rem,2.5vw,2.125rem);
-  font-weight:400;
-  line-height:1.12;
-  letter-spacing:-.01em;
-  color:var(--ink);
+  display:block;font-family:var(--font-display);font-weight:400;
+  font-size:clamp(2.3rem,3.4vw,3.25rem);line-height:1.04;letter-spacing:-.02em;
+  color:var(--ink-soft);transition:color 300ms ease;
 }
-.grow__panel{padding-bottom:1.55rem}
+.grow__stem,.grow__accent{display:block}
+.grow__accent{font-weight:400;font-style:italic;color:var(--ink);transition:color 300ms ease}
+.grow__panel{padding-bottom:1.4rem}
 .grow__panel[hidden]{display:none}
-.grow__say{
-  max-width:43ch;
-  margin:0;
-  font-size:1rem;
-  line-height:1.65;
-  color:var(--ink-soft);
-}
-.grow__fig{
-  aspect-ratio:4/3;
-  margin:1.25rem 0 0;
-  overflow:hidden;
-  background:var(--paper-deep);
-}
+.grow__say{max-width:33ch;margin:0;font-size:1rem;line-height:1.7;color:var(--ink-soft)}
+.grow__fig{aspect-ratio:4/3;margin:1.4rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
 .grow__stage,.grow__icon{display:none}
 
-/* The accordion remains a single-open control. Only its active photograph
-   moves to the shared desktop position; no content is duplicated. */
+/* Content stays visible without scripting. The one active row receives the
+   colour and rule treatment only after the accordion has initialized. */
 .grow--js .grow__btn{cursor:pointer}
-.grow--js .grow__icon{
-  position:relative;
-  display:block;
-  flex:none;
-  width:16px;
-  height:16px;
-  color:var(--ink-mute);
-}
-.grow--js .grow__icon::before,
-.grow--js .grow__icon::after{
-  content:"";
-  position:absolute;
-  background:currentColor;
-}
-.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
-.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px}
-.grow--js .is-open .grow__icon::after{display:none}
-.grow--js .is-open .grow__ttl{color:var(--purple)}
+.grow--js .is-open::after{transform:scaleX(1)}
+.grow--js .is-open .grow__ttl{color:var(--ink)}
+.grow--js .is-open .grow__accent{color:var(--purple)}
+.grow--js .grow__icon{position:relative;display:block;flex:none;width:18px;height:18px;color:var(--ink-mute)}
+.grow--js .grow__icon::before,.grow--js .grow__icon::after{content:"";position:absolute;background:currentColor}
+.grow--js .grow__icon::before{left:0;top:8px;width:18px;height:1px}
+.grow--js .grow__icon::after{left:8px;top:0;width:1px;height:18px;transition:transform 350ms var(--ease)}
 .grow--js .is-open .grow__icon{color:var(--purple)}
+.grow--js .is-open .grow__icon::after{transform:scaleY(0)}
 .grow__btn:focus-visible{outline-offset:5px}
-@media (hover:hover){
-  .grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}
-}
+@media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--ink)}}
+
+/* Copy arrives with a small lift; the image opens through a mask and settles
+   from a soft scale. These effects run when the selection changes. */
+.grow--js .is-open .grow__say{animation:growCopyIn 620ms var(--ease) both}
+@keyframes growCopyIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.grow--js:not(.grow--desktop) .is-open .grow__fig{animation:growPhotoIn 850ms var(--ease) both}
+.grow--js:not(.grow--desktop) .is-open .grow__fig img{animation:growPhotoSettle 1100ms var(--ease) both}
+@keyframes growPhotoIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes growPhotoSettle{from{transform:scale(1.065)}to{transform:scale(1)}}
+
 .grow--desktop .grow__wrap{
-  display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-  gap:clamp(2.25rem,5vw,4rem);
-  align-items:start;
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
+  gap:clamp(3rem,6vw,5rem);align-items:stretch;
 }
-.grow--desktop .grow__rows{grid-column:1;grid-row:1}
+.grow--desktop .grow__rows{grid-column:1;grid-row:1;display:flex;flex-direction:column}
+.grow--desktop .grow__row{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
 .grow--desktop .grow__stage{
-  position:relative;
-  display:block;
-  grid-column:2;
-  grid-row:1;
-  width:100%;
-  aspect-ratio:4/3;
-  margin-top:1px;
-  overflow:hidden;
-  background:var(--paper-deep);
+  position:relative;display:block;grid-column:2;grid-row:1;width:100%;
+  min-height:30rem;overflow:hidden;background:var(--paper-deep);
 }
 .grow--desktop .grow__fig{
-  position:absolute;
-  inset:0;
-  margin:0;
-  aspect-ratio:auto;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 300ms var(--ease);
+  position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;
+  opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;
+  transition:clip-path 900ms var(--ease);
 }
-.grow--desktop .grow__fig.is-active{opacity:1}
-@media (min-width:900px){
-  .grow:not(.grow--js) .grow__panel{
-    display:grid;
-    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-    gap:clamp(2.25rem,5vw,4rem);
-    align-items:start;
-  }
+.grow--desktop .grow__fig img{transform:scale(1.065);transition:transform 1200ms var(--ease)}
+.grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
+.grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
+.grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(1)}
+@media(min-width:900px){
+  .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);gap:clamp(3rem,6vw,5rem);align-items:start}
   .grow:not(.grow--js) .grow__fig{margin:0}
 }
-@media (max-width:899px){
-  .grow__btn{padding-block:1.35rem}
-  .grow__panel{padding-bottom:1.5rem}
-  .grow__say{max-width:50ch}
+@media(max-width:899px){
+  .grow__btn{padding-block:1.4rem}
+  .grow__ttl{font-size:clamp(2rem,4.6vw,2.7rem);line-height:1.08}
+  .grow__stem,.grow__accent{display:inline}
+  .grow__panel{padding-bottom:1.6rem}
+  .grow__say{max-width:46ch}
   .grow__fig{aspect-ratio:3/2}
 }
-@media (max-width:599px){
+@media(max-width:599px){
   .grow__btn{gap:1rem;padding-block:1.3rem}
-  .grow__ttl{font-size:1.9rem}
+  .grow__ttl{font-size:2rem}
   .grow__say{font-size:.975rem}
-  .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
+  .grow__fig{aspect-ratio:4/3;margin-top:1.2rem}
 }
-@media (prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce){
   .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
+  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
+  .grow--desktop .grow__fig img{transform:none}
 }
 /* ===== 03-place ===== */
 /* Outcomes lead. The company marks form a secondary, still brand strip rather
@@ -259,48 +244,77 @@
   background:var(--paper);
   color:var(--ink-soft);
 }
+.pl-intro{
+  display:grid;
+  grid-template-columns:minmax(12rem,.8fr) minmax(0,2.2fr);
+  align-items:start;
+  gap:clamp(2rem,4.5vw,4rem);
+}
 .pl-h{
-  text-align:center;
-  font-size:clamp(2.9rem,7vw,6rem);
-  line-height:1.08;
-  letter-spacing:-.025em;
-  margin:0 0 clamp(1.8rem,3.5vw,2.75rem);
+  max-width:7ch;
+  margin:0;
+  font-size:clamp(3.5rem,5.6vw,5rem);
+  line-height:.98;
+  letter-spacing:-.035em;
+  text-align:left;
 }
 .pl-nums{
-  list-style:none;
-  margin:0 0 clamp(2rem,4vw,3rem);
-  padding:0;
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1.5rem,3vw,2.75rem);
+  list-style:none;
+  margin:0;
+  padding:0;
 }
-.pl-n{
-  min-width:0;
-  padding:0 clamp(1rem,3vw,2.5rem);
-  text-align:center;
-}
-.pl-n + .pl-n{border-left:1px solid var(--line)}
+.pl-n{min-width:0;text-align:left}
 .pl-n-val{
   margin:0;
-  font-family:var(--font-display);
-  font-size:clamp(3.25rem,6vw,5rem);
-  font-weight:400;
-  line-height:1;
-  letter-spacing:-.025em;
   color:var(--ink);
+  font-family:var(--font-display);
+  font-size:clamp(4.5rem,7vw,6.75rem);
+  font-weight:400;
+  line-height:.94;
+  letter-spacing:-.035em;
   font-variant-numeric:lining-nums tabular-nums;
   white-space:nowrap;
 }
 .pl-n-u{font-size:.48em;letter-spacing:0}
 .pl-n-lab{
-  max-width:24ch;
-  margin:.8rem auto 0;
+  max-width:22ch;
+  margin:1rem 0 0;
+  color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.875rem;
-  line-height:1.55;
-  color:var(--ink-soft);
-  text-wrap:balance;
+  line-height:1.6;
+  text-wrap:pretty;
 }
+/* The finished glyphs reserve each counter's exact final width. Animated
+   digits are positioned over them and cannot change the column measure. */
+.pl-counter{position:relative;display:inline-block}
+.pl-counter-space{visibility:hidden}
+.pl-counter-digits{position:absolute;inset:0;text-align:left}
+.pl-stat-label{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+/* Enhancement alone arms the reveal. Base CSS is the finished visible state. */
+.pl-stats-ready .pl-n{
+  opacity:0;
+  transform:translate3d(0,24px,0);
+  transition:opacity 700ms ease,transform 950ms var(--ease);
+}
+.pl-stats-ready .pl-n:nth-child(2){transition-delay:110ms}
+.pl-stats-ready .pl-n:nth-child(3){transition-delay:220ms}
+.pl-stats-visible .pl-n{opacity:1;transform:none}
 .pl-brands{
+  margin-top:clamp(2.5rem,4.5vw,3.75rem);
   padding-top:1.25rem;
   border-top:1px solid var(--line);
 }
@@ -355,7 +369,7 @@
 .pl-more > summary{
   min-height:44px;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   list-style:none;
   font-family:var(--font-text);
   font-size:.8rem;
@@ -370,17 +384,22 @@
 .pl-more > summary::-webkit-details-marker{display:none}
 .pl-more > summary:hover{color:var(--purple);text-decoration-color:currentColor}
 .pl-more > summary:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
+@media (max-width:899px){
+  .pl-intro{grid-template-columns:1fr;gap:2.1rem}
+  .pl-h{max-width:none;font-size:clamp(3rem,7vw,4.5rem)}
+  .pl-n-val{font-size:clamp(4rem,9vw,5.5rem)}
+}
 @media (min-width:601px) and (max-width:1000px){
   .pl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:.1rem .5rem}
   .pl-cell{min-height:3.65rem}
 }
 @media (max-width:600px){
-  .pl-h{margin-bottom:1.75rem;font-size:clamp(2.75rem,10.8vw,3.5rem)}
-  .pl-nums{margin-bottom:1.75rem}
-  .pl-n{padding:0 .6rem}
-  .pl-n-val{font-size:clamp(2.75rem,10.5vw,3.5rem)}
-  .pl-n-lab{font-size:.78rem;line-height:1.5;margin-top:.7rem;max-width:14ch}
-  .pl-brands{padding-top:1rem}
+  .pl-intro{gap:1.8rem}
+  .pl-h{font-size:clamp(2.75rem,11.5vw,3.5rem);letter-spacing:-.03em}
+  .pl-nums{gap:.9rem}
+  .pl-n-val{font-size:clamp(2.85rem,12.3vw,3.5rem)}
+  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.8rem;max-width:14ch}
+  .pl-brands{margin-top:2.1rem;padding-top:1rem}
   .pl-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:.25rem .5rem}
   .pl-cell{min-height:3.5rem;padding:.5rem .25rem}
   .pl-cell img{max-height:1.75rem}
@@ -390,7 +409,7 @@
   .pl-cell--nestle img{max-height:2.3rem}
   .pl-cell--jets img{max-height:3rem}
   .pl-more{margin-top:.15rem}
-  .pl-more > summary{display:flex;width:100%;padding:.6rem 1rem}
+  .pl-more > summary{display:flex;width:100%;padding:.6rem 0}
   .pl-grid--more{padding-top:.5rem}
   .pl-grid--more .pl-cell--raymond,
   .pl-grid--more .pl-cell--fisher{grid-column:span 2}
@@ -398,8 +417,12 @@
   .pl-grid--more .pl-cell--fisher img{width:9rem}
 }
 @media (max-width:359px){
-  .pl-n{padding-inline:.4rem}
-  .pl-n-lab{font-size:.75rem}
+  .pl-nums{gap:.65rem}
+  .pl-n-val{font-size:2.7rem}
+  .pl-n-lab{font-size:.78rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
 }
 /* ===== 04-national ===== */
 /* National scale is expressed geographically. The established display heading
@@ -564,12 +587,12 @@
 }
 .act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
-.act-band{padding-block:1rem;border-bottom:1px solid var(--line);background:var(--paper-deep)}
+.act-band{padding-block:1.3rem;border-top:1px solid rgba(250,248,243,.12);border-bottom:1px solid rgba(250,248,243,.12);background:var(--ink);color:var(--paper)}
 .act-band-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.25rem 1.5rem}
-.act-band-copy{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
+.act-band-copy{margin:0;font-size:.95rem;font-weight:500;color:var(--paper)}
 .act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
-.act-band-btn{display:inline-flex;align-items:center;min-height:44px;font-size:.9rem;color:var(--ink-soft);text-decoration:underline;text-decoration-color:rgba(25,18,33,.25);text-underline-offset:.3em}
-.act-band-btn:hover{color:var(--purple);text-decoration-color:var(--purple)}
+.act-band-btn{display:inline-flex;align-items:center;min-height:44px;font-size:.9rem;color:rgba(250,248,243,.75);text-decoration:underline;text-decoration-color:rgba(250,248,243,.25);text-underline-offset:.3em}
+.act-band-btn:hover{color:var(--gold-soft);text-decoration-color:var(--gold-soft)}
 @media(max-width:767px){
   .act{padding-block:4.5rem;text-align:left}
   .act-title{font-size:clamp(2.7rem,11vw,4.2rem)}
@@ -601,7 +624,7 @@
 }
 .v2footer-brand img{width:auto;height:42px;flex:none}
 .v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
-.v2footer-name{font-family:var(--font-display);font-size:1.55rem;line-height:1.1}
+.v2footer-name{font-family:var(--font-display);font-size:1.85rem;line-height:1.1}
 .v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
 .v2footer-about p{max-width:30ch;margin:1rem 0 0;font-size:.9rem;line-height:1.65}
 .v2footer-nav{min-width:0}
@@ -611,8 +634,8 @@
   font-size:.72rem;
   font-weight:600;
   line-height:1.5;
-  letter-spacing:.12em;
-  text-transform:uppercase;
+  letter-spacing:.02em;
+  text-transform:none;
   color:var(--gold-soft);
 }
 .v2footer-nav ul{list-style:none;margin:0;padding:0}
@@ -648,6 +671,11 @@
   .v2footer-about p{max-width:35ch}
   .v2footer-nav a{width:100%}
 }
+
+.v2footer-nav a{position:relative;transition:color 200ms ease}
+.v2footer-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--gold-soft);transform:scaleX(0);transform-origin:left;transition:transform 260ms var(--ease)}
+.v2footer-nav a:hover::after,.v2footer-nav a:focus-visible::after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){.v2footer-nav a,.v2footer-nav a::after{transition:none}}
 </style>
 </head>
 <body>
@@ -693,10 +721,10 @@
   <div class="v2hero-letters" aria-hidden="true">ΦΧΘ</div>
   <div class="v2hero-stage">
     <div class="v2hero-inner">
-      <h1 class="v2hero-h1">Phi Chi Theta</h1>
-      <p class="v2hero-sub">University of South Florida</p>
-      <p class="v2hero-claim">Career preparation, leadership, and a business network before you graduate.</p>
-      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT</a></p>
+      <h1 class="v2hero-h1" data-motion-words>Phi Chi Theta</h1>
+      <p class="v2hero-sub" data-motion-words data-motion-delay="300">University of South Florida</p>
+      <p class="v2hero-claim" data-motion-rise data-motion-delay="560">Career preparation, leadership, and a business network before you graduate.</p>
+      <p class="v2hero-cta" data-motion-rise data-motion-delay="700"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT</a></p>
     </div>
   </div>
   <div class="v2hero-foot">
@@ -722,7 +750,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
-            <span class="grow__ttl">Professional Connections</span>
+            <span class="grow__ttl" data-motion-words><span class="grow__stem">Professional</span> <em class="grow__accent">Connections</em></span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -738,7 +766,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
-            <span class="grow__ttl">Leadership Experience</span>
+            <span class="grow__ttl" data-motion-words><span class="grow__stem">Leadership</span> <em class="grow__accent">Experience</em></span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -754,7 +782,7 @@
       <div class="grow__row">
         <h2 class="grow__rowh">
           <button class="grow__btn" type="button" id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
-            <span class="grow__ttl">Chapter Community</span>
+            <span class="grow__ttl" data-motion-words><span class="grow__stem">Chapter</span> <em class="grow__accent">Community</em></span>
             <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
@@ -776,23 +804,35 @@
      Source provenance is recorded in assets/logos/sources.json. -->
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
   <div class="v2wrap">
-    <h2 class="pl-h" id="pl-h">Member Success</h2>
+    <div class="pl-intro">
+      <h2 class="pl-h" id="pl-h" data-motion-words>Member Success</h2>
 
-    <!-- Existing chapter figures, with their original labels. -->
-    <ul class="pl-nums" role="list">
-      <li class="pl-n">
-        <p class="pl-n-val"><span>95</span><span class="pl-n-u">%</span></p>
-        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
-      </li>
-      <li class="pl-n">
-        <p class="pl-n-val"><span>3.60</span></p>
-        <p class="pl-n-lab">Chapter average GPA</p>
-      </li>
-      <li class="pl-n">
-        <p class="pl-n-val"><span>15</span></p>
-        <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
-      </li>
-    </ul>
+      <!-- Final values are always available to assistive technology and remain
+           in the source. Only the aria-hidden visual digits animate. -->
+      <ul class="pl-nums" role="list">
+        <li class="pl-n">
+          <p class="pl-n-val">
+            <span class="pl-stat-label">95%</span>
+            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">95</span><span class="pl-counter-digits" data-pl-count="95">95</span></span><span class="pl-n-u">%</span></span>
+          </p>
+          <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+        </li>
+        <li class="pl-n">
+          <p class="pl-n-val">
+            <span class="pl-stat-label">3.60</span>
+            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">3.60</span><span class="pl-counter-digits" data-pl-count="3.60" data-pl-decimals="2">3.60</span></span></span>
+          </p>
+          <p class="pl-n-lab">Chapter average GPA</p>
+        </li>
+        <li class="pl-n">
+          <p class="pl-n-val">
+            <span class="pl-stat-label">15</span>
+            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">15</span><span class="pl-counter-digits" data-pl-count="15">15</span></span></span>
+          </p>
+          <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
+        </li>
+      </ul>
+    </div>
 
     <div class="pl-brands">
       <ul class="pl-grid" data-pl-primary aria-label="Companies where members have been placed" role="list">
@@ -838,15 +878,15 @@
   <div class="v2wrap">
     <div class="v2nat-lock">
       <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
-      <h2 class="v2nat-h" id="v2nat-h">A national fraternity since <em>1924.</em></h2>
+      <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
     </div>
     <div class="v2nat-layout">
-      <div class="v2nat-copy">
+      <div class="v2nat-copy" data-motion-rise>
         <p class="v2nat-scale"><span class="v2nat-number">50</span><span class="v2nat-number-label">Collegiate chapters</span></p>
         <p class="v2nat-say">Zeta Rho at USF is part of a national professional fraternity for business and economics.</p>
         <a class="v2nat-link" href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">National chapter directory</a>
       </div>
-      <figure class="v2nat-figure">
+      <figure class="v2nat-figure" data-motion-map>
         <svg class="v2nat-map" viewBox="0 0 960 600" role="img" aria-labelledby="pct-map-title pct-map-desc" data-chapter-map>
 <title id="pct-map-title">Phi Chi Theta collegiate chapters across the United States</title>
 <desc id="pct-map-desc">50 collegiate campuses from the national chapter directory. Gold pins identify the campuses, with University of South Florida in Tampa highlighted.</desc>
@@ -1025,7 +1065,7 @@
      photographs repeat around its 32 slots; repeated frames are decorative. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
-    <h2 class="mem-h" id="mem-h">Chapter Life</h2>
+    <h2 class="mem-h" id="mem-h" data-motion-words>Chapter Life</h2>
   </div>
 
   <div class="mem-band" tabindex="0" role="group" aria-label="Chapter photo carousel. Focus or hover to pause movement.">
@@ -1071,9 +1111,9 @@
 <section class="act on-dark" id="act" aria-labelledby="act-title">
   <div class="v2wrap">
     <div class="act-inner">
-      <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta.</em></h2>
-      <p class="act-line">Meet the chapter and learn how to join.</p>
-      <div class="act-go"><a class="act-cta" href="../rush.html">Rush PCT</a></div>
+      <h2 class="act-title" id="act-title" data-motion-words>Rush <em>Phi Chi Theta.</em></h2>
+      <p class="act-line" data-motion-rise data-motion-delay="180">Meet the chapter and learn how to join.</p>
+      <div class="act-go" data-motion-rise data-motion-delay="320"><a class="act-cta" href="../rush.html">Rush PCT</a></div>
     </div>
   </div>
 </section>
@@ -1224,6 +1264,154 @@ window.pctInitStick = function () {
     }
   } catch (err) {
     if (window.console && console.warn) console.warn('pctInitStick:', err);
+  }
+};
+
+/* One entrance language for the page. Base styles never hide content: Web
+   Animations supplies temporary starting states only when a block enters view. */
+window.pctInitPageMotion = function () {
+  'use strict';
+  try {
+    if (document.documentElement.dataset.pageMotionReady) return;
+    document.documentElement.dataset.pageMotionReady = '1';
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    if ((mq && mq.matches) || !Element.prototype.animate || !window.IntersectionObserver) return;
+    var reduced = false;
+    var animations = new Set();
+    var targets = new Map();
+    var observer;
+    var easing = 'cubic-bezier(.16,1,.3,1)';
+
+    function play(element, frames, options) {
+      if (reduced) return Promise.resolve();
+      var animation = element.animate(frames, Object.assign({ duration:850, easing:easing, fill:'backwards' }, options || {}));
+      animations.add(animation);
+      return animation.finished.catch(function () {}).then(function () { animations.delete(animation); });
+    }
+    function watch(element, action) {
+      if (!element) return;
+      element.dataset.motionState = 'ready';
+      targets.set(element, action);
+      observer.observe(element);
+    }
+    function ownsFocus(element) {
+      var focused = document.activeElement;
+      return focused && focused !== document.body &&
+        (element.contains(focused) || focused.contains(element));
+    }
+    function settle(element) {
+      observer.unobserve(element);
+      animations.forEach(function (animation) {
+        var target = animation.effect && animation.effect.target;
+        if (target && (target === element || element.contains(target))) animation.cancel();
+      });
+      element.dataset.motionState = 'done';
+    }
+    function onFocus() {
+      targets.forEach(function (_, element) { if (ownsFocus(element)) settle(element); });
+    }
+    function wordMasks(element) {
+      if (element.dataset.wordsReady) return Array.prototype.slice.call(element.querySelectorAll('.motion-word-inner'));
+      var heading = /^H[1-6]$/.test(element.tagName);
+      var label = element.textContent.replace(/\s+/g, ' ').trim();
+      var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      var nodes = [];
+      while (walker.nextNode()) if (walker.currentNode.nodeValue.trim()) nodes.push(walker.currentNode);
+      nodes.forEach(function (node) {
+        var fragment = document.createDocumentFragment();
+        node.nodeValue.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(part)); return; }
+          var mask = document.createElement('span');
+          var inner = document.createElement('span');
+          mask.className = 'motion-word';
+          inner.className = 'motion-word-inner';
+          inner.textContent = part;
+          if (heading) mask.setAttribute('aria-hidden', 'true');
+          mask.appendChild(inner);
+          fragment.appendChild(mask);
+        });
+        node.parentNode.replaceChild(fragment, node);
+      });
+      if (heading && !element.hasAttribute('aria-label')) element.setAttribute('aria-label', label);
+      element.dataset.wordsReady = '1';
+      return Array.prototype.slice.call(element.querySelectorAll('.motion-word-inner'));
+    }
+    observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var element = entry.target;
+        if (element.dataset.motionState === 'done' || ownsFocus(element)) { settle(element); return; }
+        observer.unobserve(element);
+        element.dataset.motionState = 'running';
+        var action = targets.get(element);
+        try {
+          Promise.resolve(action()).catch(function () {}).then(function () { element.dataset.motionState = 'done'; });
+        } catch (error) { element.dataset.motionState = 'done'; }
+      });
+    /* Start below the viewport, before readable text crosses its edge. */
+    }, { threshold:0, rootMargin:'0px 0px 120px 0px' });
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-words]'), function (element) {
+      var words = wordMasks(element);
+      var hero = element.closest('.v2hero');
+      watch(element, function () {
+        var base = Number(element.dataset.motionDelay || (hero ? 120 : 0));
+        return Promise.all(words.map(function (word, index) {
+          return play(word, [
+            { transform:'translate3d(0,110%,0) rotate(2deg)', opacity:.12 },
+            { transform:'translate3d(0,0,0) rotate(0deg)', opacity:1 }
+          ], { duration:hero ? 1100 : 900, delay:base + Math.min(index * (hero ? 85 : 65), 480) });
+        }));
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-rise]'), function (element) {
+      watch(element, function () {
+        return play(element, [{ opacity:0, transform:'translate3d(0,18px,0)' }, { opacity:1, transform:'translate3d(0,0,0)' }], { duration:850, delay:Number(element.dataset.motionDelay || 0) });
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-map]'), function (element) {
+      watch(element, function () {
+        var jobs = [];
+        var outline = element.querySelector('.v2nat-coast');
+        if (outline && outline.getTotalLength) {
+          var length = outline.getTotalLength();
+          jobs.push(play(outline, [
+            { strokeDasharray:length + ' ' + length, strokeDashoffset:length, opacity:.3 },
+            { strokeDasharray:length + ' ' + length, strokeDashoffset:0, opacity:1 }
+          ], { duration:1900, delay:120, easing:'cubic-bezier(.45,0,.2,1)' }));
+        }
+        var pins = Array.prototype.slice.call(element.querySelectorAll('[data-chapter-pin]'));
+        function horizontal(pin) { return Number((pin.getAttribute('transform').match(/translate\(([-\d.]+)/) || [0,0])[1]); }
+        pins.sort(function (a,b) { return horizontal(a) - horizontal(b); });
+        pins.forEach(function (pin, index) {
+          var dot = pin.querySelector('.v2nat-pin-dot');
+          /* The outer SVG group owns its geographic translation. Only the dot
+             scales, so the real campus coordinate can never be displaced. */
+          var selected = pin.classList.contains('is-selected');
+          if (dot && !selected) jobs.push(play(dot, [
+            { opacity:0, transform:'scale(.25)', transformOrigin:'0px 0px' },
+            { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
+          ], { duration:620, delay:400 + index * 19 }));
+        });
+        return Promise.all(jobs);
+      });
+    });
+
+    document.addEventListener('focusin', onFocus);
+
+    function finish() {
+      reduced = true;
+      observer.disconnect();
+      animations.forEach(function (animation) { animation.cancel(); });
+      animations.clear();
+      document.removeEventListener('focusin', onFocus);
+      targets.forEach(function (_, element) { element.dataset.motionState = 'done'; });
+    }
+    if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);
+    else if (mq && mq.addEventListener) mq.addEventListener('change', function (event) { if (event.matches) finish(); });
+  } catch (error) {
+    if (window.console && console.warn) console.warn('pctInitPageMotion:', error);
   }
 };
 /* ===== 01-hero ===== */
@@ -1418,6 +1606,12 @@ window.pctInitGrow = function () {
     var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
     var current = 0;
     var wide = false;
+    var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var exitTimer = null;
+    function clearLeaving() {
+      if (exitTimer !== null) { clearTimeout(exitTimer); exitTimer = null; }
+      figs.forEach(function (figure) { figure.classList.remove('is-leaving'); });
+    }
     function sync() {
       for (var i = 0; i < rows.length; i++) {
         var active = i === current;
@@ -1430,10 +1624,16 @@ window.pctInitGrow = function () {
     }
     function open(index) {
       if (index === current) return;
+      clearLeaving();
+      if (wide && !(reduce && reduce.matches)) {
+        figs[current].classList.add('is-leaving');
+        exitTimer = setTimeout(clearLeaving, 950);
+      }
       current = index;
       sync();
     }
     function layout() {
+      clearLeaving();
       wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
@@ -1462,14 +1662,16 @@ window.pctInitGrow = function () {
     if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
     else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
     else window.addEventListener('resize', layout, { passive:true });
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
     root.dataset.growReady = '1';
   } catch (err) {
     if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }
 };
 /* ===== 03-place ===== */
-/* Figures and company marks stay still. Native details makes additional marks
-   optional on phones; without JavaScript it starts fully open. */
+/* Native details keeps the secondary company marks compact on phones.
+   Outcomes enter and count once; source and accessible values remain final. */
 window.pctInitPlacements = function () {
   'use strict';
   var root = document.querySelector('[data-place]');
@@ -1502,6 +1704,84 @@ window.pctInitPlacements = function () {
   if (phone.addEventListener) phone.addEventListener('change', sync);
   else if (phone.addListener) phone.addListener(sync);
   sync();
+
+
+  var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
+  var numbers = root.querySelector('.pl-nums');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!numbers || !digits.length || reduce.matches ||
+      !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+
+  var values = digits.map(function (element) {
+    return {
+      element:element,
+      target:Number(element.getAttribute('data-pl-count')),
+      decimals:Number(element.getAttribute('data-pl-decimals') || 0),
+      final:element.textContent
+    };
+  });
+  if (values.some(function (item) { return !isFinite(item.target); })) return;
+
+  var observer = null;
+  var frame = null;
+  var stopped = false;
+  var started = false;
+  var began = null;
+
+  function unlisten() {
+    document.removeEventListener('visibilitychange', onVisibility);
+    if (reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
+    else if (reduce.removeListener) reduce.removeListener(onReduce);
+  }
+  function finish() {
+    if (stopped) return;
+    stopped = true;
+    if (observer) observer.disconnect();
+    if (frame !== null) window.cancelAnimationFrame(frame);
+    frame = null;
+    values.forEach(function (item) { item.element.textContent = item.final; });
+    root.classList.remove('pl-stats-ready');
+    root.classList.add('pl-stats-visible');
+    unlisten();
+  }
+  function onReduce(event) {
+    if (event.matches) finish();
+  }
+  function onVisibility() {
+    if (document.hidden && started) finish();
+  }
+  function step(now) {
+    if (stopped) return;
+    if (began === null) began = now;
+    var complete = true;
+    values.forEach(function (item, index) {
+      var progress = Math.max(0, Math.min((now - began - index * 110) / 1100, 1));
+      var eased = 1 - Math.pow(1 - progress, 4);
+      item.element.textContent = (item.target * eased).toFixed(item.decimals);
+      if (progress < 1) complete = false;
+    });
+    if (complete) finish();
+    else frame = window.requestAnimationFrame(step);
+  }
+  try {
+    observer = new IntersectionObserver(function (entries) {
+      if (started || stopped || !entries.some(function (entry) { return entry.isIntersecting; })) return;
+      started = true;
+      observer.disconnect();
+      root.classList.add('pl-stats-visible');
+      frame = window.requestAnimationFrame(step);
+    }, { threshold:.35 });
+    root.classList.add('pl-stats-ready');
+    observer.observe(numbers);
+    document.addEventListener('visibilitychange', onVisibility);
+    if (reduce.addEventListener) reduce.addEventListener('change', onReduce);
+    else if (reduce.addListener) reduce.addListener(onReduce);
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+      window.pctMotion.onReduce(finish);
+    }
+  } catch (error) {
+    finish();
+  }
 };
 /* ===== 04-national ===== */
 /* The sourced map is complete in HTML. This enhancement connects native
@@ -1521,6 +1801,8 @@ window.pctInitNational = function () {
     function choose(id) {
       var pin = byId.get(id);
       if (!pin) return;
+      var dot = pin.querySelector('.v2nat-pin-dot');
+      if (dot && dot.getAnimations) dot.getAnimations().forEach(function (animation) { animation.cancel(); });
       pins.forEach(function (item) { item.classList.toggle('is-selected', item === pin); });
       select.value = id;
       location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
@@ -1542,7 +1824,7 @@ window.pctInitNational = function () {
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational'];
+  var inits = ['pctInitStick', 'pctInitPageMotion', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

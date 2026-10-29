@@ -15,6 +15,8 @@ window.pctInitNational = function () {
     function choose(id) {
       var pin = byId.get(id);
       if (!pin) return;
+      var dot = pin.querySelector('.v2nat-pin-dot');
+      if (dot && dot.getAnimations) dot.getAnimations().forEach(function (animation) { animation.cancel(); });
       pins.forEach(function (item) { item.classList.toggle('is-selected', item === pin); });
       select.value = id;
       location.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;

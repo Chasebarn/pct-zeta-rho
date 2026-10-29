@@ -22,6 +22,12 @@ window.pctInitGrow = function () {
     var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
     var current = 0;
     var wide = false;
+    var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var exitTimer = null;
+    function clearLeaving() {
+      if (exitTimer !== null) { clearTimeout(exitTimer); exitTimer = null; }
+      figs.forEach(function (figure) { figure.classList.remove('is-leaving'); });
+    }
     function sync() {
       for (var i = 0; i < rows.length; i++) {
         var active = i === current;
@@ -34,10 +40,16 @@ window.pctInitGrow = function () {
     }
     function open(index) {
       if (index === current) return;
+      clearLeaving();
+      if (wide && !(reduce && reduce.matches)) {
+        figs[current].classList.add('is-leaving');
+        exitTimer = setTimeout(clearLeaving, 950);
+      }
       current = index;
       sync();
     }
     function layout() {
+      clearLeaving();
       wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
@@ -66,6 +78,8 @@ window.pctInitGrow = function () {
     if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
     else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
     else window.addEventListener('resize', layout, { passive:true });
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
     root.dataset.growReady = '1';
   } catch (err) {
     if (window.console && console.warn) console.warn('pctInitGrow:', err);

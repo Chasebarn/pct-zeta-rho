@@ -20,7 +20,7 @@
 }
 .v2footer-brand img{width:auto;height:42px;flex:none}
 .v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
-.v2footer-name{font-family:var(--font-display);font-size:1.55rem;line-height:1.1}
+.v2footer-name{font-family:var(--font-display);font-size:1.85rem;line-height:1.1}
 .v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
 .v2footer-about p{max-width:30ch;margin:1rem 0 0;font-size:.9rem;line-height:1.65}
 .v2footer-nav{min-width:0}
@@ -30,8 +30,8 @@
   font-size:.72rem;
   font-weight:600;
   line-height:1.5;
-  letter-spacing:.12em;
-  text-transform:uppercase;
+  letter-spacing:.02em;
+  text-transform:none;
   color:var(--gold-soft);
 }
 .v2footer-nav ul{list-style:none;margin:0;padding:0}
@@ -67,3 +67,8 @@
   .v2footer-about p{max-width:35ch}
   .v2footer-nav a{width:100%}
 }
+
+.v2footer-nav a{position:relative;transition:color 200ms ease}
+.v2footer-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--gold-soft);transform:scaleX(0);transform-origin:left;transition:transform 260ms var(--ease)}
+.v2footer-nav a:hover::after,.v2footer-nav a:focus-visible::after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){.v2footer-nav a,.v2footer-nav a::after{transition:none}}

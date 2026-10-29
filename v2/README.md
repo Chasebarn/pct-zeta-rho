@@ -35,7 +35,8 @@ Content is visible without JavaScript. Motion respects reduced-motion preference
 the original photo carousel pauses on hover/focus and has a still reduced-motion state.
 The hero, national heading, and closing titles reveal through word masks while preserving
 italic accents and accessible names; membership controls and Member Success use plain text.
-Figures count once without changing column widths, and selecting a campus settles its pin.
+Figures count once without changing column widths. The campus map is illustrative;
+a compact caption links to the official chapter directory.
 Focused controls immediately settle any entrance animation so they stay visible.
 Button highlights and footer underlines respond to hover and keyboard focus.
 Logo rows move only with page scrolling, with finite endpoints held while visible.
@@ -44,7 +45,7 @@ There is no pinned scrolling, manual sideways logo control, or mock countdown.
 The company logo provenance is recorded in `assets/logos/sources.json`.
 Chapter locations, federal NCES coordinates, and Census-derived geography are
 recorded in `assets/map/`. The standard-library-only `chapter_map.py` renders
-the map and selector into national-section markers during the ordinary build;
+the map into national-section markers during the ordinary build;
 no external map scripts, runtime requests, or new dependencies are needed.
 
 ## Preview and verification

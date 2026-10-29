@@ -83,10 +83,10 @@ Campus coordinates come from federal NCES/IPEDS main-campus records. Geographic
 boundaries are Census-derived. Full provenance and name corrections are in
 `assets/map/sources.json`.
 
-USF is highlighted. Hovering or tapping a pin selects its school, and a native
-university selector provides the same access for keyboard and touch users.
-The selection displays the chapter and campus city/state. The map is still and
-fully present without JavaScript; the selector progressively enhances it.
+USF remains highlighted. The map is an illustration, with native school-name
+hover titles and an accessible geographic description. Its only caption row is
+“50 collegiate chapters” and the Chapter directory link. The official directory
+provides chapter details; do not restore the university picker or location panel.
 
 National identity and history are supported by the official About page. No claim
 is made about employer recognition of the fraternity.

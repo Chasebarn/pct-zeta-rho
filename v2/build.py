@@ -2,7 +2,7 @@
 """Assemble v2/parts/*.{html,css,js} into v2/index.html.
 Order is fixed by the leading number in each filename."""
 import glob, os, re, sys
-from chapter_map import CHAPTERS, render_svg, render_options
+from chapter_map import CHAPTERS, render_svg
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 parts = sorted(glob.glob(os.path.join(ROOT, 'parts', '*.html')))
@@ -20,7 +20,6 @@ for p in parts:
     h = read(p)
     if slug == '04-national':
         h = h.replace('<!-- PCT_CHAPTER_MAP -->', render_svg())
-        h = h.replace('<!-- PCT_CHAPTER_OPTIONS -->', render_options())
         h = h.replace('{{PCT_CHAPTER_COUNT}}', str(len(CHAPTERS)))
     # parts are authored with repo-root-relative asset paths; the page lives in /v2/
     h = re.sub(r'(src|href)="assets/', r'\1="../assets/', h)

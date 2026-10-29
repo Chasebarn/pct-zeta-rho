@@ -18,7 +18,8 @@ Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edit
 - Map only collegiate campuses listed in the national directory. Use sourced
   coordinates and true geographic outlines; retain provenance and the checked date.
 - Preserve the original national headline and use only two short explanatory
-  sentences. Keep its map secondary, with a modest chapter-count caption.
+  sentences. Keep its map secondary, with one compact caption row and directory
+  link. Do not restore the large university picker, location text, or map-control panel.
 - Use one clear primary action at each decision point and comfortably sized buttons.
 - Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
 - Polish the established composition. Preserve the original left-aligned hero,

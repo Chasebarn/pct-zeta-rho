@@ -128,7 +128,3 @@ def render_svg():
             lines.append(f'<text class="v2nat-usf-label" x="{x + 15:.1f}" y="{y + 6:.1f}" aria-hidden="true">USF</text>')
     lines.extend(['</g>', '</svg>'])
     return '\n'.join(lines)
-
-
-def render_options():
-    return '\n'.join(f'<option value="{escape(c["id"], quote=True)}"' + (' selected' if c.get('featured') else '') + f'>{escape(c["school"])}</option>' for c in sorted(CHAPTERS, key=lambda c: c['school'].casefold()))

@@ -8,8 +8,10 @@
       720,
       717
     ],
-    "sha256": "8a3da8d75d37d67cd42fd28fa9187f9e47aac11226a5ec8353d6f83fef44b2ac",
-    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+    "sha256": "5aea1d9362a97c4f25ba5769618943ebda1d82b7b8d2943d23f085c792c749eb",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame.",
+    "source_sha256": "8a3da8d75d37d67cd42fd28fa9187f9e47aac11226a5ec8353d6f83fef44b2ac",
+    "processing": "JPEG compression at quality 88; no crop, retouching, or content changes."
   },
   {
     "file": "assets/chapter-members.jpg",
@@ -20,8 +22,10 @@
       720,
       720
     ],
-    "sha256": "e23540ceedac534182fa21c9818233c8bb5a66cd096512eef1e34f01d4109499",
-    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+    "sha256": "76b41caf604ae3698a5ec04b8bde34871b0fa3e9dd1daf436281138e64e536dc",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame.",
+    "source_sha256": "e23540ceedac534182fa21c9818233c8bb5a66cd096512eef1e34f01d4109499",
+    "processing": "JPEG compression at quality 88; no crop, retouching, or content changes."
   },
   {
     "file": "assets/chapter-community.jpg",
@@ -32,7 +36,9 @@
       720,
       720
     ],
-    "sha256": "1a9bce15d7b872cfc3a64a1d67714a46a3286d01e66af1c2be845b875994e461",
-    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame."
+    "sha256": "dae8ece9977d3d2ba416c6c5918053fde457fe64c1fd959d2f6f863437177457",
+    "note": "Authentic chapter image from the existing chapter website. Original frame retained in source; presentation CSS crops the frame.",
+    "source_sha256": "1a9bce15d7b872cfc3a64a1d67714a46a3286d01e66af1c2be845b875994e461",
+    "processing": "JPEG compression at quality 88; no crop, retouching, or content changes."
   }
 ]

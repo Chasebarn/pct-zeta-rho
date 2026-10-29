@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css?v=20261015">
+<link rel="stylesheet" href="tokens.css?v=20261029">
 <style>
 /* ===== 00-header ===== */
 :root{--v2hd-h:77px}
@@ -23,7 +23,7 @@
 .v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.22rem;line-height:1.1;color:var(--ink)}
 .v2hd-sub{display:block;margin-top:.3rem;font-size:.66rem;line-height:1.3;letter-spacing:.13em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
 .v2hd-list{display:flex;align-items:center;gap:1.65rem;list-style:none;margin:0;padding:0}
-.v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
+.v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
 .v2hd-link:hover,.v2hd-link[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--gold-ink);color:var(--ink)}
 .v2hd-rush{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;padding:.65rem 1.2rem;background:var(--gold);color:var(--ink);font-size:.82rem;font-weight:600;line-height:1.3;text-decoration:none;white-space:nowrap;border-radius:2px;transition:background-color 180ms ease}
 .v2hd-rush:hover{background:var(--gold-soft)}
@@ -51,18 +51,10 @@
 .motion-word-inner{display:inline-block;transform-origin:0 100%}
 [data-motion-words] em .motion-word{padding-right:.08em;margin-right:-.08em}
 
-/* A light pass and measured lift give the primary controls a tactile response. */
-.v2hero-btn,.v2hd-rush,.act-cta{position:relative;isolation:isolate;overflow:hidden;transition:background-color 220ms ease,transform 220ms var(--ease),box-shadow 220ms ease}
-.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.27) 50%,transparent 75%);transform:translateX(-150%) skewX(-14deg);transition:transform 700ms cubic-bezier(.16,1,.3,1)}
-@media(hover:hover){
-  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,162,39,.14)}
-  .v2hero-btn:hover::before,.v2hd-rush:hover::before,.act-cta:hover::before{transform:translateX(150%) skewX(-14deg)}
-}
-.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:translateY(0) scale(.98)}
-@media(prefers-reduced-motion:reduce){
-  .v2hero-btn,.v2hd-rush,.act-cta,.v2hero-btn::before,.v2hd-rush::before,.act-cta::before{transition:none!important}
-  .v2hero-btn:hover,.v2hd-rush:hover,.act-cta:hover,.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{transform:none}
-}
+/* One quiet control system: stable geometry, clear contrast, no decorative sweep. */
+.v2hero-btn,.v2hd-rush,.act-cta{font-size:.9375rem;letter-spacing:.015em;transition:background-color 180ms ease,border-color 180ms ease}
+.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{background:var(--gold-soft)}
+@media(prefers-reduced-motion:reduce){.v2hero-btn,.v2hd-rush,.act-cta{transition:none}}
 /* ===== 01-hero ===== */
 /* The original hero is a left-aligned composition within a centered reading
    column. The footer carries context instead of another row above the title. */
@@ -126,7 +118,7 @@
 .v2hero-scroll{display:inline-flex;align-items:center;gap:.6rem}
 .v2hero-scroll::after{content:"";width:1px;height:2rem;background:linear-gradient(var(--gold),transparent)}
 @media(max-width:767px){
-  .v2hero{padding:calc(var(--v2hd-h,73px) + 4rem) 0 7rem;min-height:100svh}
+  .v2hero{padding:calc(var(--v2hd-h,73px) + 6rem) 0 8rem;min-height:100svh;align-items:flex-start}
   .v2hero-stage{width:calc(100% - var(--gutter)*2);max-width:none}
   .v2hero-h1{font-size:clamp(2.9rem,13vw,4.2rem);margin-bottom:1.2rem}
   .v2hero-sub{margin-bottom:1.5rem}
@@ -139,8 +131,9 @@
   .v2hero{min-height:660px}
 }
 /* ===== 02-grow ===== */
-/* One photograph leads; a compact accordion sits beside it. Category names
-   read as complete phrases rather than a stack of oversized display words. */
+/* Complete category names lead into a stable photograph on the right.
+   Narrow desktops retain the two-column composition; phones pair each image
+   with its open category. */
 .grow{background:var(--paper);color:var(--ink-soft);padding-block:var(--section)}
 .grow__rows{min-width:0}
 .grow__row{position:relative;border-bottom:1px solid var(--line)}
@@ -153,7 +146,8 @@
 .grow__panel[hidden]{display:none}
 .grow__say{max-width:41ch;margin:0;font-size:1rem;line-height:1.75;color:var(--ink-soft)}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
-.grow__fig img{display:block;width:100%;height:100%;object-fit:cover}
+.grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
+.grow__fig--framed{--photo-scale:1.12}
 .grow__stage,.grow__icon{display:none}
 .grow--js .grow__btn{cursor:pointer}
 .grow--js .is-open::after{transform:scaleX(1)}
@@ -166,19 +160,19 @@
 .grow--js .is-open .grow__icon::after{transform:scaleY(0)}
 .grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
-.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
-.grow--desktop .grow__rows{grid-column:2;grid-row:1}
-.grow--desktop .grow__stage{position:relative;display:block;grid-column:1;grid-row:1;width:100%;aspect-ratio:5/4;min-height:23rem;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:center}
+.grow--desktop .grow__rows{grid-column:1;grid-row:1}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-deep)}
 .grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
-.grow--desktop .grow__fig img{transform:scale(1.035);transition:transform 1000ms var(--ease)}
+.grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
 .grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
 .grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
-.grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(1)}
-@media(min-width:900px){
- .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
+.grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(var(--photo-scale,1))}
+@media(min-width:760px){
+ .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:start}
  .grow:not(.grow--js) .grow__fig{margin:0}
 }
-@media(max-width:899px){
+@media(max-width:759px){
  .grow__ttl{font-size:2rem}
  .grow__say{max-width:50ch}
  .grow__fig{aspect-ratio:3/2}
@@ -193,31 +187,34 @@
 @media(prefers-reduced-motion:reduce){
  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
- .grow--desktop .grow__fig img{transform:none}
+ .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
 }
 /* ===== 03-place ===== */
-/* Strong, direct hierarchy above finite company rows linked to page scroll.
-   Base CSS shows the complete wrapping list, including with reduced motion. */
+/* A complete results chapter: a deeper paper field, generous display title,
+   readable outcomes, then a full-width company stage tied to page scrolling. */
 .pl{
-  padding:0 0 var(--section);
-  background:var(--paper);
+  padding-block:clamp(4.5rem,7.5vw,7rem);
+  border-top:1px solid var(--line);
+  background:var(--paper-deep);
   color:var(--ink-soft);
 }
-.pl-intro{display:block}
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(2rem,3.5vw,3rem);
+  margin:0 0 clamp(2.5rem,4vw,3.5rem);
+  color:var(--ink);
+  font-family:var(--font-display);
   font-size:clamp(4.6rem,7.5vw,6rem);
-  line-height:1.1;
-  letter-spacing:-.02em;
+  font-weight:400;
+  line-height:1.05;
+  letter-spacing:-.025em;
   text-align:center;
   white-space:nowrap;
 }
 .pl-nums{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(1.5rem,3vw,2.75rem);
-  max-width:56rem;
+  gap:clamp(2rem,4vw,4rem);
+  max-width:58rem;
   list-style:none;
   margin:0 auto;
   padding:0;
@@ -230,139 +227,162 @@
   font-size:clamp(3.2rem,5vw,4rem);
   font-weight:500;
   line-height:1.1;
-  letter-spacing:-.04em;
+  letter-spacing:-.045em;
   font-variant-numeric:lining-nums tabular-nums;
   white-space:nowrap;
 }
-.pl-n-u{font-size:.48em;letter-spacing:0}
+.pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
-  max-width:24ch;
-  margin:.8rem auto 0;
+  max-width:25ch;
+  margin:1rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
-  font-size:.875rem;
+  font-size:.9375rem;
   line-height:1.6;
   text-wrap:pretty;
 }
-/* Final-width glyphs reserve the measure while visual digits count over them. */
-.pl-counter{position:relative;display:inline-block}
-.pl-counter-space{visibility:hidden}
-.pl-counter-digits{position:absolute;inset:0;text-align:left}
-.pl-stat-label{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip-path:inset(50%);
-  white-space:nowrap;
-  border:0;
-}
-.pl-stats-ready .pl-n{
-  opacity:0;
-  transform:translate3d(0,16px,0);
-  transition:opacity 650ms ease,transform 800ms var(--ease);
-}
-.pl-stats-ready .pl-n:nth-child(2){transition-delay:100ms}
-.pl-stats-ready .pl-n:nth-child(3){transition-delay:200ms}
-.pl-stats-visible .pl-n{opacity:1;transform:none}
-
+/* Outside the inner reading column, this stage spans the viewport itself.
+   Crops and fades consequently occur at screen edges, not inside the page. */
 .pl-brands{
   position:relative;
-  margin-top:clamp(2rem,3.5vw,2.75rem);
-  border-top:1px solid var(--line);
-  padding-top:1rem;
+  width:100%;
+  margin-top:clamp(3rem,5vw,4.5rem);
 }
+/* Complete, unclipped source list for no-JavaScript/reduced-motion visitors. */
 .pl-logos{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   align-items:center;
-  gap:.5rem 1rem;
+  gap:.75rem 1.5rem;
+  width:min(var(--wrap),calc(100% - var(--gutter)*2));
   list-style:none;
-  margin:0;
+  margin:0 auto;
   padding:0;
 }
 .pl-logos[hidden]{display:none}
 .pl-cell{
+  --pl-slot:11rem;
+  --pl-mark:8.5rem;
+  --pl-mark-max:2.75rem;
   display:flex;
   align-items:center;
   justify-content:center;
   min-width:0;
-  min-height:5.5rem;
-  padding:.65rem .5rem;
+  min-height:5.75rem;
+  padding:.6rem .5rem;
 }
 .pl-cell img{
   display:block;
-  width:8rem;
+  width:var(--pl-mark);
   height:auto;
   max-width:100%;
-  max-height:2.6rem;
+  max-height:var(--pl-mark-max);
   object-fit:contain;
-  filter:grayscale(1);
-  opacity:.85;
+  filter:grayscale(1) contrast(1.12);
+  opacity:.88;
 }
-.pl-cell--wide img{width:10.5rem;max-height:2.2rem}
-.pl-cell--reverse img{filter:brightness(0);opacity:.78}
-.pl-cell--goldman img{width:7.25rem;max-height:3.1rem}
-.pl-cell--citi img{width:4.3rem;max-height:2.8rem}
-.pl-cell--pnc img{width:6rem}
-.pl-cell--kpmg img{width:6.5rem}
-.pl-cell--pwc img{width:5.4rem;max-height:2.7rem}
-.pl-cell--amazon img{width:6.5rem}
-.pl-cell--nestle img{width:3rem;max-height:3.25rem}
-.pl-cell--victoria img{width:8rem;max-height:2.6rem}
-.pl-cell--formula img{width:6.5rem}
-.pl-cell--jets img{width:7.5rem;max-height:5rem}
-/* Only enhancement creates clipped finite tracks. No scrollbar, manual rail,
-   duplicated images, pinning, or scroll interception is involved. */
-.pl-rows{display:grid;gap:.75rem}
-.pl-row{min-width:0;overflow:hidden}
+.pl-cell--reverse img{filter:brightness(0);opacity:.84}
+/* Optical measures follow the artwork: long, thin wordmarks receive wider
+   slots; stacked marks remain compact; clear space is allowed for in sizing. */
+.pl-cell--goldman{--pl-slot:10rem;--pl-mark:6.75rem;--pl-mark-max:2.8rem}
+.pl-cell--morgan{--pl-slot:14rem;--pl-mark:11.5rem;--pl-mark-max:2.1rem}
+.pl-cell--citi{--pl-slot:7rem;--pl-mark:4.4rem;--pl-mark-max:2.8rem}
+.pl-cell--wells{--pl-slot:18rem;--pl-mark:16rem;--pl-mark-max:1.8rem}
+.pl-cell--kpmg{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.8rem}
+.pl-cell--deloitte{--pl-slot:12rem;--pl-mark:9.5rem;--pl-mark-max:2rem}
+.pl-cell--pwc{--pl-slot:9rem;--pl-mark:6rem;--pl-mark-max:3rem}
+.pl-cell--amazon{--pl-slot:11rem;--pl-mark:8rem;--pl-mark-max:2.8rem}
+.pl-cell--pnc{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.3rem}
+.pl-cell--raymond{--pl-slot:19rem;--pl-mark:16rem;--pl-mark-max:1.7rem}
+.pl-cell--fisher{--pl-slot:22rem;--pl-mark:19rem;--pl-mark-max:1.7rem}
+.pl-cell--fisher img{opacity:1}
+.pl-cell--sp{--pl-slot:11rem;--pl-mark:8.5rem;--pl-mark-max:2rem}
+.pl-cell--nestle{--pl-slot:8rem;--pl-mark:3.75rem;--pl-mark-max:4rem}
+.pl-cell--unilever{--pl-slot:12rem;--pl-mark:9rem;--pl-mark-max:2.1rem}
+.pl-cell--nbc{--pl-slot:18rem;--pl-mark:15rem;--pl-mark-max:1.8rem}
+.pl-cell--lockheed{--pl-slot:16rem;--pl-mark:13rem;--pl-mark-max:2.3rem}
+.pl-cell--victoria{--pl-slot:11rem;--pl-mark:8.5rem;--pl-mark-max:2.8rem}
+.pl-cell--formula{--pl-slot:11rem;--pl-mark:8rem;--pl-mark-max:2.2rem}
+/* The Jets artwork occupies only the middle 57% of its square viewBox. */
+.pl-cell--jets{--pl-slot:11rem;--pl-mark:6.75rem;--pl-mark-max:none}
+.pl-cell--usf{--pl-slot:15rem;--pl-mark:12rem;--pl-mark-max:2.3rem}
+.pl-rows{display:grid;gap:1.25rem}
+.pl-row{
+  --pl-edge:64px;
+  min-width:0;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
+}
 .pl-track{
+  --pl-inset:72px;
   display:flex;
   align-items:center;
   gap:2rem;
   width:max-content;
   list-style:none;
   margin:0;
-  padding:0;
+  /* scrollWidth includes padding, keeping endpoint logos inside opaque space. */
+  padding:0 var(--pl-inset);
   will-change:transform;
 }
-.pl-track .pl-cell{flex:0 0 9rem;width:9rem;height:5.5rem}
-.pl-track .pl-cell--wide{flex-basis:12rem;width:12rem}
-.pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:6rem;width:6rem}
+.pl-track .pl-cell{
+  flex:0 0 var(--pl-slot);
+  width:var(--pl-slot);
+  max-width:calc(100vw - var(--pl-inset)*2);
+  height:5.75rem;
+}
 @media (max-width:700px){
-  .pl-h{margin-bottom:2rem;font-size:clamp(2.85rem,13.5vw,3.3rem)}
-  .pl-nums{gap:.9rem}
-  .pl-n-val{font-size:2.4rem}
-  .pl-n-lab{font-size:.8rem;line-height:1.55;margin-top:.75rem;max-width:14ch}
-  .pl-brands{margin-top:1.8rem}
-  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.25rem .5rem}
+  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem)}
+  .pl-nums{gap:1.5rem}
+  .pl-brands{margin-top:2.75rem}
+  .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
-  .pl-cell{min-height:4.75rem;padding:.5rem .35rem}
-  .pl-cell img{width:6.5rem;max-height:2.4rem}
-  .pl-cell--wide img{width:9rem;max-height:2rem}
-  .pl-cell--citi img{width:3.8rem;max-height:2.6rem}
-  .pl-cell--goldman img{width:6rem;max-height:2.8rem}
-  .pl-cell--pwc img{width:4.5rem;max-height:2.5rem}
-  .pl-cell--nestle img{width:2.7rem;max-height:3rem}
-  .pl-cell--jets img{width:6.5rem;max-height:4.1rem}
-  .pl-rows{gap:.5rem}
-  .pl-track{gap:1.5rem}
-  .pl-track .pl-cell{flex-basis:7.5rem;width:7.5rem;height:4.75rem}
-  .pl-track .pl-cell--wide{flex-basis:10.5rem;width:10.5rem}
-  .pl-track .pl-cell--citi,.pl-track .pl-cell--nestle{flex-basis:5rem;width:5rem}
+  .pl-cell{min-height:5.25rem}
+  .pl-cell--goldman{--pl-slot:9rem;--pl-mark:6rem;--pl-mark-max:2.6rem}
+  .pl-cell--morgan{--pl-slot:12rem;--pl-mark:10rem}
+  .pl-cell--citi{--pl-slot:6rem;--pl-mark:4rem;--pl-mark-max:2.6rem}
+  .pl-cell--wells{--pl-slot:15rem;--pl-mark:13rem;--pl-mark-max:1.6rem}
+  .pl-cell--kpmg{--pl-slot:9rem;--pl-mark:6.3rem;--pl-mark-max:2.6rem}
+  .pl-cell--deloitte{--pl-slot:11rem;--pl-mark:8.5rem}
+  .pl-cell--pwc{--pl-slot:8rem;--pl-mark:5.25rem;--pl-mark-max:2.7rem}
+  .pl-cell--amazon{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2.6rem}
+  .pl-cell--pnc{--pl-slot:9rem;--pl-mark:6.25rem;--pl-mark-max:2.1rem}
+  .pl-cell--raymond{--pl-slot:16rem;--pl-mark:13.5rem;--pl-mark-max:1.55rem}
+  .pl-cell--fisher{--pl-slot:18rem;--pl-mark:15.5rem;--pl-mark-max:1.55rem}
+  .pl-cell--sp{--pl-slot:10rem;--pl-mark:7.5rem}
+  .pl-cell--nestle{--pl-slot:7rem;--pl-mark:3.3rem;--pl-mark-max:3.6rem}
+  .pl-cell--unilever{--pl-slot:11rem;--pl-mark:8rem}
+  .pl-cell--nbc{--pl-slot:16rem;--pl-mark:13rem;--pl-mark-max:1.6rem}
+  .pl-cell--lockheed{--pl-slot:14rem;--pl-mark:11.5rem;--pl-mark-max:2.1rem}
+  .pl-cell--victoria{--pl-slot:10rem;--pl-mark:7.5rem;--pl-mark-max:2.5rem}
+  .pl-cell--formula{--pl-slot:10rem;--pl-mark:7rem;--pl-mark-max:2rem}
+  .pl-cell--jets{--pl-slot:10rem;--pl-mark:6rem}
+  .pl-cell--usf{--pl-slot:13rem;--pl-mark:10.5rem;--pl-mark-max:2.1rem}
+  .pl-rows{gap:.75rem}
+  .pl-row{--pl-edge:28px}
+  .pl-track{--pl-inset:36px;gap:1.5rem}
+  .pl-track .pl-cell{height:5.25rem}
 }
-@media (max-width:359px){
-  .pl-nums{gap:.55rem}
-  .pl-n-lab{font-size:.78rem}
-}
-@media (prefers-reduced-motion:reduce){
-  .pl-stats-ready .pl-n{opacity:1;transform:none;transition:none}
+@media (max-width:600px){
+  .pl{padding-block:4rem}
+  .pl-h{margin-bottom:2rem}
+  .pl-nums{display:block;max-width:none;border-top:1px solid var(--line)}
+  .pl-n{
+    display:grid;
+    grid-template-columns:6.75rem minmax(0,1fr);
+    align-items:center;
+    gap:1.25rem;
+    padding:.85rem 0;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+  }
+  .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
+  .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
 }
 /* ===== 04-national ===== */
-/* The original chapter statement leads a short account. The map sits beside
-   the story, keeping the whole section compact and easy to scan. */
+/* The national statement owns the full reading width. A short account and
+   supporting map share the row below it; the crest never indents the copy. */
 .v2nat{
   position:relative;
   padding-block:clamp(3.75rem,6vw,5rem);
@@ -370,44 +390,45 @@
   color:var(--paper);
 }
 .v2nat-lock{
-  display:flex;
-  align-items:flex-start;
-  gap:clamp(1.1rem,2.2vw,1.6rem);
-  margin-bottom:1.6rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 64px;
+  align-items:start;
+  gap:1.5rem;
+  margin-bottom:clamp(1.75rem,3vw,2.5rem);
 }
-.v2nat-crest{flex:none;width:64px;height:auto;margin-top:.45rem}
+.v2nat-crest{width:64px;height:auto;margin-top:.6rem}
 .v2nat-h{
-  max-width:17ch;
+  min-width:0;
   margin:0;
-  font-size:clamp(2.6rem,4.8vw,4.6rem);
-  line-height:1.08;
-  letter-spacing:-.015em;
+  font-size:clamp(2.75rem,calc(1rem + 8vw),5.5rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
   color:var(--paper);
 }
+.v2nat-heading-line{display:block}
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);
-  gap:clamp(2.5rem,5vw,4rem);
-  align-items:center;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);
+  gap:clamp(2rem,5vw,4.5rem);
+  align-items:start;
 }
-.v2nat-story{min-width:0}
 .v2nat-copy{
   min-width:0;
-  max-width:46ch;
-  font-size:clamp(1.05rem,1.6vw,1.2rem);
+  max-width:44ch;
+  font-size:clamp(1.0625rem,1.55vw,1.2rem);
   line-height:1.65;
-  color:rgba(250,248,243,.76);
+  color:rgba(250,248,243,.8);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy .v2nat-link{margin-top:1rem}
+.v2nat-copy .v2nat-link{margin-top:1.1rem}
 .v2nat-link{
   display:inline-flex;
   align-items:center;
   min-height:44px;
   max-width:100%;
   color:var(--gold-soft);
-  font-size:.85rem;
+  font-size:.875rem;
   line-height:1.5;
   text-decoration:underline;
   text-decoration-thickness:1px;
@@ -415,7 +436,7 @@
   text-underline-offset:5px;
 }
 .v2nat-link:hover{text-decoration-color:currentColor}
-.v2nat-figure{min-width:0;width:100%;max-width:360px;margin:0;justify-self:end}
+.v2nat-figure{min-width:0;width:100%;max-width:380px;margin:0;justify-self:end}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.13);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.5);stroke-width:1.15;stroke-linejoin:round}
@@ -426,28 +447,22 @@
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
 .v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
 .v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
-.v2nat-usf-label{
-  fill:var(--gold-soft);
-  font-family:var(--font-text);
-  font-size:23px;
-  font-weight:600;
-  paint-order:stroke;
-  stroke:var(--purple-deep);
-  stroke-width:5px;
-  stroke-linejoin:round;
-  pointer-events:none;
-}
+/* Keep the USF label in the unscaled caption instead of shrinking SVG text. */
+.v2nat-usf-label{display:none}
 .v2nat-caption{
   display:flex;
+  flex-wrap:wrap;
   align-items:center;
   justify-content:space-between;
-  gap:1rem;
-  margin-top:.6rem;
-  font-size:.75rem;
+  gap:.25rem 1rem;
+  margin-top:.75rem;
+  font-size:.8125rem;
   line-height:1.5;
-  color:rgba(250,248,243,.62);
+  color:rgba(250,248,243,.74);
 }
-.v2nat-caption strong{font-weight:500;color:var(--paper)}
+.v2nat-map-facts{display:flex;flex-direction:column;gap:.1rem;margin:0}
+.v2nat-caption strong{font-weight:600;color:var(--paper)}
+.v2nat-map-key{color:rgba(250,248,243,.62)}
 .v2nat-caption a{
   display:inline-flex;
   align-items:center;
@@ -457,22 +472,15 @@
   text-decoration:underline;
   text-decoration-color:rgba(230,198,91,.35);
   text-underline-offset:4px;
+  white-space:nowrap;
 }
 .v2nat-caption a:hover{text-decoration-color:currentColor}
 @media(max-width:759px){
-  .v2nat-layout{grid-template-columns:1fr;gap:2.5rem}
-  .v2nat-copy{max-width:50ch}
-  .v2nat-figure{max-width:340px;justify-self:start}
-}
-@media(max-width:559px){
-  .v2nat{padding-block:3.75rem}
-  .v2nat-lock{gap:1.1rem;margin-bottom:1.4rem}
-  .v2nat-crest{width:48px;margin-top:.25rem}
-  .v2nat-h{font-size:clamp(2.25rem,9vw,3rem);line-height:1.08;max-width:16ch}
-  .v2nat-layout{gap:2.2rem}
-  .v2nat-copy{font-size:1.05rem;line-height:1.65}
-  .v2nat-figure{max-width:320px}
-  .v2nat-caption{gap:.75rem;font-size:.7rem}
+  .v2nat-lock{grid-template-columns:minmax(0,1fr) 56px;gap:1.25rem;margin-bottom:1.75rem}
+  .v2nat-crest{width:56px;margin-top:.35rem}
+  .v2nat-layout{grid-template-columns:1fr;gap:1.5rem}
+  .v2nat-copy{max-width:44ch}
+  .v2nat-figure{max-width:360px;justify-self:start}
 }
 @media(prefers-reduced-motion:reduce){
   .v2nat-map,.v2nat-coast,.v2nat-pin,.v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important}
@@ -538,13 +546,19 @@
 .mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
 
 @media (max-width:767px){
-  .mem-band{--R:330vw;--inset:.7rem}
+  /* Keep the original phone circle through 390px, then taper toward the
+     desktop radius instead of doubling card height on wider tablets. */
+  .mem-band{--R:min(330vw,calc(1435px - 37.8vw));--inset:.7rem}
 }
 /* The original arc remains visible at rest. No content depends on animation
    or JavaScript; decorative duplicate frames are hidden from assistive tech. */
 @media (prefers-reduced-motion:reduce){
   .mem-wheel{animation:none;will-change:auto}
 }
+
+/* The additional chapter photographs retain their original website frame in
+   the source asset; the image crop keeps it outside the visible photograph. */
+.mem-i--framed img{transform:scale(1.12)}
 /* ===== 07-act ===== */
 /* Restore the original display-led closing section and purple light treatment. */
 .act{
@@ -566,20 +580,20 @@
 }
 .act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
-.act-band{padding-block:1.3rem;border-top:1px solid rgba(250,248,243,.12);border-bottom:1px solid rgba(250,248,243,.12);background:var(--ink);color:var(--paper)}
-.act-band-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.25rem 1.5rem}
-.act-band-copy{margin:0;font-size:.95rem;font-weight:500;color:var(--paper)}
-.act-band-acts{display:flex;flex-wrap:wrap;gap:1.5rem}
-.act-band-btn{display:inline-flex;align-items:center;min-height:44px;font-size:.9rem;color:rgba(250,248,243,.75);text-decoration:underline;text-decoration-color:rgba(250,248,243,.25);text-underline-offset:.3em}
-.act-band-btn:hover{color:var(--gold-soft);text-decoration-color:var(--gold-soft)}
-@media(max-width:767px){
-  .act{padding-block:4.5rem;text-align:left}
-  .act-title{font-size:clamp(2.7rem,11vw,4.2rem)}
-  .act-title em{display:block}
-  .act-line{margin-inline:0;font-size:1rem}
-  .act-go{margin-top:2rem}
+@media(min-width:768px){
+ .act-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 4rem;max-width:none;text-align:left;align-items:center}
+ .act-title{grid-column:1;font-size:clamp(3rem,5.8vw,5.7rem)}
+ .act-line{grid-column:1;margin:1.4rem 0 0;max-width:42ch}
+ .act-go{grid-column:2;grid-row:1/span 2;margin:0}
 }
-@media(max-width:420px){.act-band-in{align-items:flex-start;flex-direction:column}}
+@media(max-width:767px){
+ .act{padding-block:4.5rem;text-align:left}
+ .act-title{font-size:clamp(2.7rem,11vw,4.2rem)}
+ .act-title em{display:block}
+ .act-line{margin-inline:0;font-size:1rem}
+ .act-go{margin-top:2rem}
+ .act-cta{min-width:190px}
+}
 /* ===== 99-footer ===== */
 /* V2 footer, independent of the production footer's display watermark. */
 .v2footer{
@@ -672,22 +686,22 @@
     </a>
     <nav class="v2hd-nav" aria-label="Primary">
       <ul class="v2hd-list">
-        <li><a class="v2hd-link" href="index.html" aria-current="page">Home</a></li>
-        <li><a class="v2hd-link" href="../philanthropy.html">Philanthropy</a></li>
-        <li><a class="v2hd-link" href="../apparel.html">Apparel</a></li>
-        <li><a class="v2hd-link" href="../career.html">Career</a></li>
+        <li><a class="v2hd-link" href="#grow">The Chapter</a></li>
+        <li><a class="v2hd-link" href="#placements">Member Success</a></li>
+        <li><a class="v2hd-link" href="#life">Chapter Life</a></li>
       </ul>
     </nav>
     <details class="v2hd-menu">
       <summary><span class="v2-sr-only">Open navigation</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h14M3 10h14M3 14h14"/></svg></summary>
       <nav class="v2hd-mobile" aria-label="Mobile navigation">
-        <a href="index.html" aria-current="page">Home</a>
+        <a href="#grow">The Chapter</a>
+        <a href="#placements">Member Success</a>
+        <a href="#national">About Phi Chi Theta</a>
+        <a href="#life">Chapter Life</a>
         <a href="../philanthropy.html">Philanthropy</a>
-        <a href="../apparel.html">Apparel</a>
-        <a href="../career.html">Career</a>
       </nav>
     </details>
-    <a class="v2hd-rush" href="../rush.html">Rush PCT</a>
+    <a class="v2hd-rush" href="rush.html">Rush PCT</a>
   </div>
 </header>
 
@@ -703,7 +717,7 @@
       <h1 class="v2hero-h1" data-motion-words>Phi Chi Theta</h1>
       <p class="v2hero-sub" data-motion-words data-motion-delay="300">University of South Florida</p>
       <p class="v2hero-claim" data-motion-rise data-motion-delay="560">Career preparation, leadership, and a business network before you graduate.</p>
-      <p class="v2hero-cta" data-motion-rise data-motion-delay="700"><a class="v2hero-btn" data-hero-cta href="../rush.html">Rush PCT</a></p>
+      <p class="v2hero-cta" data-motion-rise data-motion-delay="700"><a class="v2hero-btn" data-hero-cta href="rush.html">Rush PCT</a></p>
     </div>
   </div>
   <div class="v2hero-foot">
@@ -722,8 +736,6 @@
 <section class="grow" id="grow" data-grow aria-label="Membership">
   <div class="v2wrap grow__wrap">
 
-    <div class="grow__stage" data-grow-stage></div>
-
     <div class="grow__rows" data-grow-rows role="group" aria-label="The three parts of the chapter">
 
       <div class="grow__row">
@@ -734,10 +746,10 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
-          <p class="grow__say">Meet professionals, alumni, and fellow members through the chapter.</p>
-          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
-            <img src="../assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
-                 alt="Members in chapter Fall Rush shirts working around a table.">
+          <p class="grow__say">Connect with members, alumni, and professionals through chapter events.</p>
+          <figure class="grow__fig grow__fig--framed" id="grow-f1" aria-labelledby="grow-b1">
+            <img src="../assets/chapter-members.jpg" width="720" height="720" loading="lazy" decoding="async"
+                 alt="Four chapter members in professional attire at a chapter event.">
           </figure>
         </div>
       </div>
@@ -750,10 +762,10 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
-          <p class="grow__say">Plan events, lead projects, and take responsibility for chapter initiatives.</p>
-          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-            <img src="../assets/photo-service.jpg" width="1300" height="1300" loading="lazy" decoding="async"
-                 alt="Three members in chapter shirts loading roof shingles onto a utility vehicle at a service project.">
+          <p class="grow__say">Organize events, lead projects, and take responsibility in the chapter.</p>
+          <figure class="grow__fig grow__fig--framed" id="grow-f2" aria-labelledby="grow-b2">
+            <img src="../assets/chapter-careers.jpg" width="720" height="717" loading="lazy" decoding="async"
+                 alt="Chapter members talking and working together around a table with laptops.">
           </figure>
         </div>
       </div>
@@ -766,15 +778,17 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
-          <p class="grow__say">Take part in Formal, Retreat, intramurals, and everyday chapter life.</p>
-          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
-            <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async"
-                 alt="A member holding a hand lettered Pie a Phi Chi sign at a campus fundraiser for Moffitt Cancer Center.">
+          <p class="grow__say">Formal, Retreat, intramurals, and service with the chapter.</p>
+          <figure class="grow__fig grow__fig--framed" id="grow-f3" aria-labelledby="grow-b3">
+            <img src="../assets/chapter-community.jpg" width="720" height="720" loading="lazy" decoding="async"
+                 alt="A group of chapter members together at an evening event.">
           </figure>
         </div>
       </div>
 
     </div>
+
+    <div class="grow__stage" data-grow-stage></div>
   </div>
 </section>
 
@@ -782,36 +796,23 @@
 <!-- Existing member destinations use authentic local logo artwork.
      Source provenance is recorded in assets/logos/sources.json. -->
 <section class="pl" id="placements" aria-labelledby="pl-h" data-place>
-  <div class="v2wrap">
-    <div class="pl-intro">
-      <h2 class="pl-h" id="pl-h">Member Success</h2>
-
-      <!-- Final values are always available to assistive technology and remain
-           in the source. Only the aria-hidden visual digits animate. -->
-      <ul class="pl-nums" role="list">
-        <li class="pl-n">
-          <p class="pl-n-val">
-            <span class="pl-stat-label">95%</span>
-            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">95</span><span class="pl-counter-digits" data-pl-count="95">95</span></span><span class="pl-n-u">%</span></span>
-          </p>
-          <p class="pl-n-lab">Members placed in internships or full-time roles</p>
-        </li>
-        <li class="pl-n">
-          <p class="pl-n-val">
-            <span class="pl-stat-label">3.60</span>
-            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">3.60</span><span class="pl-counter-digits" data-pl-count="3.60" data-pl-decimals="2">3.60</span></span></span>
-          </p>
-          <p class="pl-n-lab">Chapter average GPA</p>
-        </li>
-        <li class="pl-n">
-          <p class="pl-n-val">
-            <span class="pl-stat-label">15</span>
-            <span class="pl-value-visual" aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">15</span><span class="pl-counter-digits" data-pl-count="15">15</span></span></span>
-          </p>
-          <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
-        </li>
-      </ul>
-    </div>
+  <div class="v2wrap pl-intro">
+    <h2 class="pl-h" id="pl-h">Member Success</h2>
+    <ul class="pl-nums" role="list">
+      <li class="pl-n">
+        <p class="pl-n-val">95<span class="pl-n-u">%</span></p>
+        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">3.60</p>
+        <p class="pl-n-lab">Chapter average GPA</p>
+      </li>
+      <li class="pl-n">
+        <p class="pl-n-val">15</p>
+        <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
+      </li>
+    </ul>
+  </div>
 
     <div class="pl-brands" data-pl-brands>
       <!-- This complete wrapping list is the no-JavaScript/reduced-motion view.
@@ -819,28 +820,27 @@
       <ul class="pl-logos" data-pl-logos role="list"
           aria-label="Companies where members have been placed">
       <li class="pl-cell pl-cell--goldman"><img src="../assets/logos/goldman-sachs.png" alt="Goldman Sachs" width="1022" height="429" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide pl-cell--morgan"><img src="../assets/logos/morgan-stanley.png" alt="Morgan Stanley" width="1000" height="144" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--citi"><img src="../assets/logos/citi.svg" alt="Citi" width="56" height="33" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/wells-fargo.png" alt="Wells Fargo" width="220" height="23" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide pl-cell--wells"><img src="../assets/logos/wells-fargo.png" alt="Wells Fargo" width="220" height="23" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--kpmg"><img src="../assets/logos/kpmg.svg" alt="KPMG" width="173" height="68" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--reverse"><img src="../assets/logos/deloitte.svg" alt="Deloitte" width="182" height="34" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--deloitte"><img src="../assets/logos/deloitte.svg" alt="Deloitte" width="182" height="34" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--pwc"><img src="../assets/logos/pwc.svg" alt="PwC" width="359" height="174" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--reverse pl-cell--amazon"><img src="../assets/logos/amazon.svg" alt="Amazon" width="99" height="33" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--pnc"><img src="../assets/logos/pnc.svg" alt="PNC" width="205" height="62" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide pl-cell--raymond"><img src="../assets/logos/raymond-james.svg" alt="Raymond James" width="300" height="26" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--wide pl-cell--fisher"><img src="../assets/logos/fisher-investments.svg" alt="Fisher Investments" width="570" height="41" loading="lazy" decoding="async"></li>
-      <li class="pl-cell"><img src="../assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--sp"><img src="../assets/logos/sp-global.svg" alt="S&amp;P Global" width="137" height="30" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--nestle"><img src="../assets/logos/nestle.svg" alt="Nestlé" width="311" height="322" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--reverse"><img src="../assets/logos/unilever.svg" alt="Unilever" width="180" height="39" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/nbcuniversal.png" alt="NBCUniversal" width="2000" height="197" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--wide"><img src="../assets/logos/lockheed-martin.svg" alt="Lockheed Martin" width="2132" height="322" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--unilever"><img src="../assets/logos/unilever.svg" alt="Unilever" width="180" height="39" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide pl-cell--nbc"><img src="../assets/logos/nbcuniversal.png" alt="NBCUniversal" width="2000" height="197" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--wide pl-cell--lockheed"><img src="../assets/logos/lockheed-martin.svg" alt="Lockheed Martin" width="2132" height="322" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--victoria"><img src="../assets/logos/victorias-secret.svg" alt="Victoria’s Secret" width="559" height="182" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--formula"><img src="../assets/logos/formula-1.png" alt="Formula 1" width="480" height="120" loading="lazy" decoding="async"></li>
       <li class="pl-cell pl-cell--jets"><img src="../assets/logos/new-york-jets.svg" alt="New York Jets" width="500" height="500" loading="lazy" decoding="async"></li>
-      <li class="pl-cell pl-cell--reverse pl-cell--wide"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
+      <li class="pl-cell pl-cell--reverse pl-cell--wide pl-cell--usf"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
       </ul>
     </div>
-  </div>
 </section>
 
     <!-- ===== 04-national ===== -->
@@ -848,16 +848,18 @@
      The supporting map retains all sourced collegiate entries from assets/map/. -->
 <section class="v2nat on-dark" id="national" aria-labelledby="v2nat-h" data-national>
   <div class="v2wrap">
+    <div class="v2nat-lock">
+      <h2 class="v2nat-h" id="v2nat-h" data-motion-words>
+        <span class="v2nat-heading-line">A national fraternity</span>
+        <span class="v2nat-heading-line">since <em>1924.</em></span>
+      </h2>
+      <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
+    </div>
+
     <div class="v2nat-layout">
-      <div class="v2nat-story">
-        <div class="v2nat-lock">
-          <img class="v2nat-crest" src="../assets/crest.png" width="337" height="445" loading="lazy" decoding="async" alt="Phi Chi Theta crest">
-          <h2 class="v2nat-h" id="v2nat-h" data-motion-words>A national fraternity since <em>1924.</em></h2>
-        </div>
-        <div class="v2nat-copy" data-motion-rise>
-          <p>Phi Chi Theta is a professional fraternity for business and economics. Zeta Rho is its USF chapter, connecting members with students and alumni nationwide.</p>
-          <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
-        </div>
+      <div class="v2nat-copy" data-motion-rise>
+        <p>Phi Chi Theta is a national professional fraternity for business and economics. At the University of South Florida, Zeta Rho connects members with a wider community of students, chapters, and alumni.</p>
+        <a class="v2nat-link" href="https://www.phichitheta.org/about" target="_blank" rel="noopener">About Phi Chi Theta</a>
       </div>
 
       <figure class="v2nat-figure" data-motion-map>
@@ -971,7 +973,10 @@
 </g>
 </svg>
         <figcaption class="v2nat-caption">
-          <span><strong>50</strong> collegiate chapters</span>
+          <p class="v2nat-map-facts">
+            <span><strong>50</strong> collegiate chapters</span>
+            <span class="v2nat-map-key">USF highlighted</span>
+          </p>
           <a href="https://www.phichitheta.org/find-a-chapter" target="_blank" rel="noopener">Chapter directory</a>
         </figcaption>
       </figure>
@@ -980,7 +985,7 @@
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- Chapter Life restores the original circular photo wheel. The three authentic
+<!-- Chapter Life restores the original circular photo wheel. The six authentic
      photographs repeat around its 32 slots; repeated frames are decorative. -->
 <section class="mem" id="life" aria-labelledby="mem-h">
   <div class="v2wrap">
@@ -990,37 +995,37 @@
   <div class="mem-band" tabindex="0" role="group" aria-label="Chapter photo carousel. Focus or hover to pause movement.">
     <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
       <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:1"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="Chapter members in professional attire at a chapter event." loading="lazy" decoding="async"></li>
       <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="Chapter members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:3"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="Chapter members together at an evening event." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:5"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="Chapter members talking and working together with laptops." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:6" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:7" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:9" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:11" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:13" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:15" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:17" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:19" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:21" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:23" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:25" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:27" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:29" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:31" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -1030,21 +1035,12 @@
 <section class="act on-dark" id="act" aria-labelledby="act-title">
   <div class="v2wrap">
     <div class="act-inner">
-      <h2 class="act-title" id="act-title" data-motion-words>Rush <em>Phi Chi Theta.</em></h2>
-      <p class="act-line" data-motion-rise data-motion-delay="180">Meet the chapter and learn how to join.</p>
-      <div class="act-go" data-motion-rise data-motion-delay="320"><a class="act-cta" href="../rush.html">Rush PCT</a></div>
+      <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta.</em></h2>
+      <p class="act-line">Meet the chapter and learn how to join.</p>
+      <div class="act-go"><a class="act-cta" href="rush.html">Rush PCT</a></div>
     </div>
   </div>
 </section>
-<aside class="act-band" aria-label="Support the chapter">
-  <div class="v2wrap act-band-in">
-    <p class="act-band-copy">Support the Chapter</p>
-    <div class="act-band-acts">
-      <a class="act-band-btn" href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a>
-      <a class="act-band-btn" href="../apparel.html">Apparel</a>
-    </div>
-  </div>
-</aside>
   </main>
 
 
@@ -1067,9 +1063,8 @@
         <h2 class="v2footer-label">Explore</h2>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="../rush.html">Rush</a></li>
+          <li><a href="rush.html">Rush</a></li>
           <li><a href="../philanthropy.html">Philanthropy</a></li>
-          <li><a href="../apparel.html">Apparel</a></li>
           <li><a href="../career.html">Career Navigator</a></li>
         </ul>
       </nav>
@@ -1178,7 +1173,7 @@ window.pctInitStick = function () {
         }
       });
       document.addEventListener('click', function (event) {
-        if (!menu.contains(event.target)) menu.open = false;
+        if (!menu.contains(event.target) || event.target.closest('a')) menu.open = false;
       });
     }
   } catch (err) {
@@ -1186,147 +1181,48 @@ window.pctInitStick = function () {
   }
 };
 
-/* One entrance language for the page. Base styles never hide content: Web
-   Animations supplies temporary starting states only when a block enters view. */
+/* A single typographic entrance belongs to the hero. The rest of the page is
+   readable immediately; the logo rows, photo selection and wheel own motion. */
 window.pctInitPageMotion = function () {
-  'use strict';
   try {
     if (document.documentElement.dataset.pageMotionReady) return;
     document.documentElement.dataset.pageMotionReady = '1';
     var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    if ((mq && mq.matches) || !Element.prototype.animate || !window.IntersectionObserver) return;
-    var reduced = false;
-    var animations = new Set();
-    var targets = new Map();
+    var stage = document.querySelector('.v2hero-stage');
+    if (!stage || (mq && mq.matches) || !Element.prototype.animate || !window.IntersectionObserver) return;
+    var animations = [];
+    var stopped = false;
     var observer;
-    var easing = 'cubic-bezier(.16,1,.3,1)';
-
-    function play(element, frames, options) {
-      if (reduced) return Promise.resolve();
-      var animation = element.animate(frames, Object.assign({ duration:850, easing:easing, fill:'backwards' }, options || {}));
-      animations.add(animation);
-      return animation.finished.catch(function () {}).then(function () { animations.delete(animation); });
+    function finish() {
+      stopped = true;
+      if (observer) observer.disconnect();
+      animations.forEach(function (animation) { animation.cancel(); });
     }
-    function watch(element, action) {
-      if (!element) return;
-      element.dataset.motionState = 'ready';
-      targets.set(element, action);
-      observer.observe(element);
-    }
-    function ownsFocus(element) {
-      var focused = document.activeElement;
-      return focused && focused !== document.body &&
-        (element.contains(focused) || focused.contains(element));
-    }
-    function settle(element) {
-      observer.unobserve(element);
-      animations.forEach(function (animation) {
-        var target = animation.effect && animation.effect.target;
-        if (target && (target === element || element.contains(target))) animation.cancel();
-      });
-      element.dataset.motionState = 'done';
-    }
-    function onFocus() {
-      targets.forEach(function (_, element) { if (ownsFocus(element)) settle(element); });
-    }
-    function wordMasks(element) {
-      if (element.dataset.wordsReady) return Array.prototype.slice.call(element.querySelectorAll('.motion-word-inner'));
-      var heading = /^H[1-6]$/.test(element.tagName);
-      var label = element.textContent.replace(/\s+/g, ' ').trim();
-      var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-      var nodes = [];
-      while (walker.nextNode()) if (walker.currentNode.nodeValue.trim()) nodes.push(walker.currentNode);
-      nodes.forEach(function (node) {
+    function reveal() {
+      if (stopped) return;
+      Array.prototype.forEach.call(stage.querySelectorAll('[data-motion-words]'), function (element, line) {
+        var text = element.textContent.trim();
         var fragment = document.createDocumentFragment();
-        node.nodeValue.split(/(\s+)/).forEach(function (part) {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(part)); return; }
+        text.split(/(\s+)/).forEach(function (word, index) {
+          if (/^\s+$/.test(word)) { fragment.appendChild(document.createTextNode(word)); return; }
           var mask = document.createElement('span');
           var inner = document.createElement('span');
-          mask.className = 'motion-word';
-          inner.className = 'motion-word-inner';
-          inner.textContent = part;
-          if (heading) mask.setAttribute('aria-hidden', 'true');
-          mask.appendChild(inner);
-          fragment.appendChild(mask);
+          mask.className = 'motion-word'; inner.className = 'motion-word-inner';
+          inner.textContent = word; mask.appendChild(inner); fragment.appendChild(mask);
+          animations.push(inner.animate([
+            { transform:'translate3d(0,100%,0)' },
+            { transform:'translate3d(0,0,0)' }
+          ], { duration:720, delay:line * 100 + index * 28, easing:'cubic-bezier(.16,1,.3,1)', fill:'backwards' }));
         });
-        node.parentNode.replaceChild(fragment, node);
+        element.textContent = ''; element.appendChild(fragment);
       });
-      if (heading && !element.hasAttribute('aria-label')) element.setAttribute('aria-label', label);
-      element.dataset.wordsReady = '1';
-      return Array.prototype.slice.call(element.querySelectorAll('.motion-word-inner'));
     }
     observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var element = entry.target;
-        if (element.dataset.motionState === 'done' || ownsFocus(element)) { settle(element); return; }
-        observer.unobserve(element);
-        element.dataset.motionState = 'running';
-        var action = targets.get(element);
-        try {
-          Promise.resolve(action()).catch(function () {}).then(function () { element.dataset.motionState = 'done'; });
-        } catch (error) { element.dataset.motionState = 'done'; }
-      });
-    /* Start below the viewport, before readable text crosses its edge. */
-    }, { threshold:0, rootMargin:'0px 0px 120px 0px' });
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-words]'), function (element) {
-      var words = wordMasks(element);
-      var hero = element.closest('.v2hero');
-      watch(element, function () {
-        var base = Number(element.dataset.motionDelay || (hero ? 120 : 0));
-        return Promise.all(words.map(function (word, index) {
-          return play(word, [
-            { transform:'translate3d(0,110%,0) rotate(2deg)', opacity:.12 },
-            { transform:'translate3d(0,0,0) rotate(0deg)', opacity:1 }
-          ], { duration:hero ? 1100 : 900, delay:base + Math.min(index * (hero ? 85 : 65), 480) });
-        }));
-      });
+      if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+      observer.disconnect(); reveal();
     });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-rise]'), function (element) {
-      watch(element, function () {
-        return play(element, [{ opacity:0, transform:'translate3d(0,18px,0)' }, { opacity:1, transform:'translate3d(0,0,0)' }], { duration:850, delay:Number(element.dataset.motionDelay || 0) });
-      });
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-motion-map]'), function (element) {
-      watch(element, function () {
-        var jobs = [];
-        var outline = element.querySelector('.v2nat-coast');
-        if (outline && outline.getTotalLength) {
-          var length = outline.getTotalLength();
-          jobs.push(play(outline, [
-            { strokeDasharray:length + ' ' + length, strokeDashoffset:length, opacity:.3 },
-            { strokeDasharray:length + ' ' + length, strokeDashoffset:0, opacity:1 }
-          ], { duration:1900, delay:120, easing:'cubic-bezier(.45,0,.2,1)' }));
-        }
-        var pins = Array.prototype.slice.call(element.querySelectorAll('[data-chapter-pin]'));
-        function horizontal(pin) { return Number((pin.getAttribute('transform').match(/translate\(([-\d.]+)/) || [0,0])[1]); }
-        pins.sort(function (a,b) { return horizontal(a) - horizontal(b); });
-        pins.forEach(function (pin, index) {
-          var dot = pin.querySelector('.v2nat-pin-dot');
-          /* The outer SVG group owns its geographic translation. Only the dot
-             scales, so the real campus coordinate can never be displaced. */
-          var selected = pin.classList.contains('is-selected');
-          if (dot && !selected) jobs.push(play(dot, [
-            { opacity:0, transform:'scale(.25)', transformOrigin:'0px 0px' },
-            { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
-          ], { duration:620, delay:400 + index * 19 }));
-        });
-        return Promise.all(jobs);
-      });
-    });
-
-    document.addEventListener('focusin', onFocus);
-
-    function finish() {
-      reduced = true;
-      observer.disconnect();
-      animations.forEach(function (animation) { animation.cancel(); });
-      animations.clear();
-      document.removeEventListener('focusin', onFocus);
-      targets.forEach(function (_, element) { element.dataset.motionState = 'done'; });
-    }
+    observer.observe(stage);
+    stage.addEventListener('focusin', finish, { once:true });
     if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);
     else if (mq && mq.addEventListener) mq.addEventListener('change', function (event) { if (event.matches) finish(); });
   } catch (error) {
@@ -1522,7 +1418,7 @@ window.pctInitGrow = function () {
     });
     if (!valid) return;
 
-    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
     var current = 0;
     var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -1543,6 +1439,7 @@ window.pctInitGrow = function () {
     }
     function open(index) {
       if (index === current) return;
+      var before = btns[index].getBoundingClientRect().top;
       clearLeaving();
       if (wide && !(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
@@ -1550,10 +1447,18 @@ window.pctInitGrow = function () {
       }
       current = index;
       sync();
+      /* Closing a preceding phone panel removes its photograph above the
+         selected control. Keep that control in the same viewport position. */
+      if (!wide && before >= 0 && before < window.innerHeight) {
+        var shift = btns[index].getBoundingClientRect().top - before;
+        if (Math.abs(shift) > 1) window.scrollTo({
+          top:Math.max(0, window.scrollY + shift), behavior:'instant'
+        });
+      }
     }
     function layout() {
       clearLeaving();
-      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 760;
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
         var destination = wide ? stage : panels[i];
@@ -1729,82 +1634,6 @@ window.pctInitPlacements = function () {
   else if (reduce && reduce.addListener) reduce.addListener(onRowReduce);
   if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(stopRows);
   startRows();
-
-  var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
-  var numbers = root.querySelector('.pl-nums');
-  if (!numbers || !digits.length || (reduce && reduce.matches) ||
-      !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
-
-  var values = digits.map(function (element) {
-    return {
-      element:element,
-      target:Number(element.getAttribute('data-pl-count')),
-      decimals:Number(element.getAttribute('data-pl-decimals') || 0),
-      final:element.textContent
-    };
-  });
-  if (values.some(function (item) { return !isFinite(item.target); })) return;
-
-  var observer = null;
-  var frame = null;
-  var stopped = false;
-  var started = false;
-  var began = null;
-
-  function unlisten() {
-    document.removeEventListener('visibilitychange', onVisibility);
-    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
-    else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
-  }
-  function finish() {
-    if (stopped) return;
-    stopped = true;
-    if (observer) observer.disconnect();
-    if (frame !== null) window.cancelAnimationFrame(frame);
-    frame = null;
-    values.forEach(function (item) { item.element.textContent = item.final; });
-    root.classList.remove('pl-stats-ready');
-    root.classList.add('pl-stats-visible');
-    unlisten();
-  }
-  function onReduce(event) {
-    if (event.matches) finish();
-  }
-  function onVisibility() {
-    if (document.hidden && started) finish();
-  }
-  function step(now) {
-    if (stopped) return;
-    if (began === null) began = now;
-    var complete = true;
-    values.forEach(function (item, index) {
-      var progress = Math.max(0, Math.min((now - began - index * 110) / 1100, 1));
-      var eased = 1 - Math.pow(1 - progress, 4);
-      item.element.textContent = (item.target * eased).toFixed(item.decimals);
-      if (progress < 1) complete = false;
-    });
-    if (complete) finish();
-    else frame = window.requestAnimationFrame(step);
-  }
-  try {
-    observer = new IntersectionObserver(function (entries) {
-      if (started || stopped || !entries.some(function (entry) { return entry.isIntersecting; })) return;
-      started = true;
-      observer.disconnect();
-      root.classList.add('pl-stats-visible');
-      frame = window.requestAnimationFrame(step);
-    }, { threshold:.35 });
-    root.classList.add('pl-stats-ready');
-    observer.observe(numbers);
-    document.addEventListener('visibilitychange', onVisibility);
-    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
-    else if (reduce && reduce.addListener) reduce.addListener(onReduce);
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
-      window.pctMotion.onReduce(finish);
-    }
-  } catch (error) {
-    finish();
-  }
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */

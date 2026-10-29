@@ -1,34 +1,33 @@
-/* Restore the original display-led closing section and purple light treatment. */
+/* The national network and closing invitation share one continuous field. */
 .act{
-  position:relative;overflow:hidden;
-  padding:clamp(5rem,9vw,8rem) 0;
-  color:var(--paper);text-align:center;
-  background:radial-gradient(135% 118% at 62% -22%,rgba(126,92,184,.5) 0%,rgba(96,66,150,.26) 34%,rgba(58,36,92,.1) 62%,rgba(36,23,51,0) 100%),var(--purple-deep);
+  position:relative;overflow:hidden;padding:clamp(4.75rem,8vw,7.5rem) 0;
+  color:var(--paper);text-align:center;background:var(--purple-deep);
 }
-.act-inner{max-width:52rem;margin-inline:auto}
-.act-title{margin:0;font-size:clamp(3rem,7vw,6.2rem);line-height:1.05;letter-spacing:-.02em;color:var(--paper)}
-.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft)}
-.act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.6;color:rgba(250,248,243,.76)}
-.act-go{margin-top:2.5rem}
+.act::before{content:"";position:absolute;top:0;left:50%;width:min(var(--wrap),calc(100% - var(--gutter)*2));height:1px;transform:translateX(-50%);background:rgba(250,248,243,.17)}
+.act-inner{max-width:58rem;margin-inline:auto;text-align:center}
+.act-title{margin:0;font-size:clamp(3.5rem,7.5vw,6.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--paper)}
+.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
+.act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.6;color:rgba(250,248,243,.76)}
+.act-go{margin-top:2.25rem}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;
-  min-height:52px;min-width:170px;max-width:100%;padding:.95rem 2rem;
+  min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
   border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
-  font-family:var(--font-text);font-size:.92rem;font-weight:600;line-height:1.4;letter-spacing:.04em;text-decoration:none;
+  font-family:var(--font-text);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:.01em;text-decoration:none;
+}
+.act.is-arrived .act-cta{box-shadow:0 0 32px rgba(230,198,91,.18);animation:pct-invitation-glow 1900ms ease-out both}
+@keyframes pct-invitation-glow{
+  0%{box-shadow:0 0 0 rgba(230,198,91,0)}
+  45%{box-shadow:0 0 42px rgba(230,198,91,.38),0 0 0 7px rgba(230,198,91,.05)}
+  100%{box-shadow:0 0 32px rgba(230,198,91,.18)}
 }
 .act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
-@media(min-width:768px){
- .act-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 4rem;max-width:none;text-align:left;align-items:center}
- .act-title{grid-column:1;font-size:clamp(3rem,5.8vw,5.7rem)}
- .act-line{grid-column:1;margin:1.4rem 0 0;max-width:42ch}
- .act-go{grid-column:2;grid-row:1/span 2;margin:0}
-}
 @media(max-width:767px){
- .act{padding-block:4.5rem;text-align:left}
- .act-title{font-size:clamp(2.7rem,11vw,4.2rem)}
+ .act{padding-block:4.5rem}
+ .act-title{font-size:clamp(3.1rem,12vw,4.8rem)}
  .act-title em{display:block}
- .act-line{margin-inline:0;font-size:1rem}
+ .act-line{font-size:1.05rem}
  .act-go{margin-top:2rem}
- .act-cta{min-width:190px}
 }
+@media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}

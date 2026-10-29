@@ -6,7 +6,7 @@
   --line:#e8e2d4; --line-dark:#3a2b52;
   --font-display:'Instrument Serif',Georgia,serif;
   --font-text:'Inter','Helvetica Neue',Helvetica,'Segoe UI',sans-serif;
-  --wrap:1160px; --gutter:clamp(1.25rem,4vw,3.5rem);
+  --wrap:1240px; --gutter:clamp(1.25rem,4vw,3.5rem);
   --section:clamp(3.75rem,7vw,6rem);
   --ease:cubic-bezier(.22,.61,.36,1); --dur:360ms;
 }

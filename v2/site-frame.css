@@ -29,16 +29,13 @@
 @media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
 @media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
 
-/* Serif word masks preserve complete visible source content. The temporary
-   transform exists only in the JavaScript animation effect, never in base CSS. */
-.motion-word{display:inline-block;overflow:clip;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
-.motion-word-inner{display:inline-block;transform-origin:0 100%}
-[data-motion-words] em .motion-word{padding-right:.08em;margin-right:-.08em}
-
 /* One quiet control system: stable geometry, clear contrast, no decorative sweep. */
-.v2hero-btn,.v2hd-rush,.act-cta{font-size:.9375rem;letter-spacing:.015em;transition:background-color 180ms ease,border-color 180ms ease}
+.v2hero-btn,.act-cta{font-size:1.125rem;letter-spacing:.01em;transition:background-color 180ms ease,border-color 180ms ease}
 .v2hero-btn:active,.v2hd-rush:active,.act-cta:active{background:var(--gold-soft)}
 @media(prefers-reduced-motion:reduce){.v2hero-btn,.v2hd-rush,.act-cta{transition:none}}
+
+.v2hd-rush{font-size:1rem;letter-spacing:.01em}
+@media(max-width:359px){.v2hd-rush{font-size:.875rem}}
 /* V2 footer, independent of the production footer's display watermark. */
 .v2footer{
   padding:clamp(2.5rem,5vw,4rem) 0 1rem;

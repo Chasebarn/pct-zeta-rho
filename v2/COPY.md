@@ -11,7 +11,7 @@ statistics, event dates, or countdowns.
 
 - Phi Chi Theta
 - Zeta Rho · USF
-- Navigation: The Chapter, Member Success, Chapter Life; resources in the footer
+- Navigation: The Chapter, Member Success, National Network; resources in the footer
 - Rush PCT
 - Professional Business Fraternity
 - University of South Florida
@@ -26,7 +26,7 @@ without decorative arrows.
 
 No overall heading or introductory paragraph. The region has an accessible
 Membership label. Each row opens its description and corresponding photograph.
-Desktop places compact, complete category titles on the left and the photograph on the right.
+Desktop places larger, complete category titles on the left and the photograph on the right.
 On phones the image belongs inside its active category panel, immediately after copy.
 
 | Row | Description |
@@ -38,7 +38,8 @@ On phones the image belongs inside its active category panel, immediately after 
 ## Member Success
 
 No placements eyebrow or secondary title. Member Success leads directly into
-the three outcomes. The heading is large and prominent. All twenty logos form
+the three outcomes. The heading is large and prominent. The gold figures count from 1 to their final
+values once on entry; reduced motion shows the final values. All twenty logos form
 two rows on desktop and three on phones. Their horizontal position follows normal
 page scrolling, with alternate rows moving in opposite directions. There is no
 manual horizontal scrolling. Reduced motion and no JavaScript show every logo
@@ -63,52 +64,44 @@ period before changing them or adding stronger claims.
 
 ## A national fraternity since 1924.
 
-Keep the original large heading with the year italic and gold. The transparent
-crest sits beside it without a cream tile.
+Keep the original large heading with the year italic and gold. No crest, About
+button, directory link, caption, picker, or location panel appears in this section.
+The map is larger and its pins appear once across the country on entry.
 
-Phi Chi Theta is a national professional fraternity for business and economics.
-At the University of South Florida, Zeta Rho connects members with a wider
-community of students, chapters, and alumni.
+Your network extends beyond USF: **50 collegiate chapters**, alumni across the
+country, and national mentoring programs.
 
-The original headline and these two short sentences sit beside the supporting
-map. Do not restore the longer mission, program, or scholarship paragraphs.
+Build professional connections, attend regional conferences, and apply for member
+scholarships.
 
-Official links:
-- About Phi Chi Theta: https://www.phichitheta.org/about
-- National chapter directory: https://www.phichitheta.org/find-a-chapter
+Verified October 29, 2026 against primary national sources:
 
-A U.S. outline shows all 50 collegiate campuses listed by the national directory
-as active on October 28, 2026. Its six alumni listings are excluded. The number
-and pins are built from `assets/map/chapters.json`. Do not add guessed campuses.
-Campus coordinates come from federal NCES/IPEDS main-campus records. Geographic
-boundaries are Census-derived. Full provenance and name corrections are in
-`assets/map/sources.json`.
+- Current active directory: https://www.phichitheta.org/find-a-chapter
+- Nationwide alumni networking, mentoring, regional conferences, scholarships:
+  https://www.phichitheta.org/become-a-member
+- Membership continues after graduation: https://www.phichitheta.org/membership
 
-USF remains highlighted. The map is an illustration, with native school-name
-hover titles and an accessible geographic description. Its only caption row is
-“50 collegiate chapters” and the Chapter directory link. The official directory
-provides chapter details; do not restore the university picker or location panel.
-
-National identity and history are supported by the official About page. No claim
-is made about employer recognition of the fraternity.
+No supported current total of 50,000 members was found. Do not publish an
+unsourced membership total or guarantee jobs, referrals, or scholarship awards.
+The 50 campuses exclude the six separate alumni-chapter listings. The count and
+pins come from `assets/map/chapters.json`; never add guessed campuses. NCES/IPEDS
+main-campus coordinates and Census-derived outlines retain provenance in
+`assets/map/sources.json`. USF remains visually highlighted, with native school-name
+hover titles and an accessible geographic description.
 
 ## Chapter Life
 
-Six real photographs, with descriptive alternative text: the existing
-`photo-letters.jpg`, `photo-fundraiser.jpg`, and `photo-service.jpg`, plus
-`chapter-careers.jpg`, `chapter-members.jpg`, and `chapter-community.jpg`
-from the original chapter website. Provenance is in `assets/chapter-photo-sources.json`.
-The original circular carousel repeats these photographs around 32 slots and
-rotates once every 150 seconds. Preserve its curved silhouette and the purple
-cut below it. There is no visible pause control. Hover or keyboard focus pauses the wheel.
-Reduced motion holds it still. Duplicate frames are decorative.
+Removed from the published homepage at the user's explicit request on October 29.
+Its original circular carousel source and real photographs remain in the repository
+for recovery. No Chapter Life navigation link remains on V2 pages.
 
 ## Rush Phi Chi Theta.
 
 Meet the chapter and learn how to join.
 
-Restore the display-led closing composition, with the fraternity name italic
-and gold. Button: Rush PCT. Links to the matching V2 Rush page.
+Center the display heading, supporting line, and button at every width. The
+fraternity name is italic and gold. Button: Rush PCT, with a single soft glow on
+arrival. Links to the matching V2 Rush page.
 No dated event teaser or countdown is displayed on the V2 homepage.
 
 Donate and Apparel Store appear once each in the footer.

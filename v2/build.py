@@ -5,7 +5,9 @@ import glob, os, re, sys
 from chapter_map import CHAPTERS, render_svg
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-parts = sorted(glob.glob(os.path.join(ROOT, 'parts', '*.html')))
+# Chapter Life is retained in source for recovery, excluded from the published page.
+parts = sorted(p for p in glob.glob(os.path.join(ROOT, 'parts', '*.html'))
+               if os.path.basename(p) != '05-mem.html')
 if not parts:
     sys.exit('no parts found')
 
@@ -65,7 +67,7 @@ doc = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css?v=20261029">
+<link rel="stylesheet" href="tokens.css?v=20261029b">
 <style>
 {chr(10).join(css)}
 </style>

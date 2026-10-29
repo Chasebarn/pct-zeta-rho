@@ -1,21 +1,19 @@
-/* The national statement owns the full reading width. A short account and
-   supporting map share the row below it; the crest never indents the copy. */
+/* The national network is the visual evidence; the statement and two short
+   benefit paragraphs keep one reading edge beside it on wide screens. */
 .v2nat{
   position:relative;
   padding-block:clamp(3.75rem,6vw,5rem);
-  background:radial-gradient(ellipse at 88% 54%,rgba(92,62,133,.15),transparent 62%),var(--purple-deep);
+  background:var(--purple-deep);
   color:var(--paper);
 }
-.v2nat-lock{
+.v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 64px;
-  align-items:start;
-  gap:1.5rem;
-  margin-bottom:clamp(1.75rem,3vw,2.5rem);
+  grid-template-columns:minmax(0,1fr) clamp(560px,45vw,640px);
+  align-items:center;
+  gap:clamp(2.5rem,4.5vw,4.5rem);
 }
-.v2nat-crest{width:64px;height:auto;margin-top:.6rem}
+.v2nat-story{min-width:0}
 .v2nat-h{
-  min-width:0;
   margin:0;
   font-size:clamp(2.75rem,calc(1rem + 8vw),5.5rem);
   line-height:1.02;
@@ -24,39 +22,20 @@
 }
 .v2nat-heading-line{display:block}
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
-.v2nat-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);
-  gap:clamp(2rem,5vw,4.5rem);
-  align-items:start;
-}
 .v2nat-copy{
-  min-width:0;
   max-width:44ch;
+  margin-top:1.5rem;
   font-size:clamp(1.0625rem,1.55vw,1.2rem);
-  line-height:1.65;
+  line-height:1.7;
   color:rgba(250,248,243,.8);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy .v2nat-link{margin-top:1.1rem}
-.v2nat-link{
-  display:inline-flex;
-  align-items:center;
-  min-height:44px;
-  max-width:100%;
-  color:var(--gold-soft);
-  font-size:.875rem;
-  line-height:1.5;
-  text-decoration:underline;
-  text-decoration-thickness:1px;
-  text-decoration-color:rgba(230,198,91,.4);
-  text-underline-offset:5px;
-}
-.v2nat-link:hover{text-decoration-color:currentColor}
-.v2nat-figure{min-width:0;width:100%;max-width:380px;margin:0;justify-self:end}
+.v2nat-copy p+p{margin-top:1rem}
+.v2nat-copy strong{font-weight:600;color:var(--paper)}
+.v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
-.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.13);stroke-width:.65;stroke-linejoin:round}
-.v2nat-coast{fill:none;stroke:rgba(250,248,243,.5);stroke-width:1.15;stroke-linejoin:round}
+.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
+.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
 .v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
 .v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
@@ -64,41 +43,28 @@
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
 .v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
 .v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
-/* Keep the USF label in the unscaled caption instead of shrinking SVG text. */
-.v2nat-usf-label{display:none}
-.v2nat-caption{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  gap:.25rem 1rem;
-  margin-top:.75rem;
-  font-size:.8125rem;
-  line-height:1.5;
-  color:rgba(250,248,243,.74);
+.v2nat-usf-label{
+  fill:var(--gold-soft);
+  font-family:var(--font-text);
+  font-size:25px;
+  font-weight:600;
+  paint-order:stroke;
+  stroke:var(--purple-deep);
+  stroke-width:5px;
+  stroke-linejoin:round;
+  pointer-events:none;
 }
-.v2nat-map-facts{display:flex;flex-direction:column;gap:.1rem;margin:0}
-.v2nat-caption strong{font-weight:600;color:var(--paper)}
-.v2nat-map-key{color:rgba(250,248,243,.62)}
-.v2nat-caption a{
-  display:inline-flex;
-  align-items:center;
-  min-height:44px;
-  color:var(--gold-soft);
-  font-size:inherit;
-  text-decoration:underline;
-  text-decoration-color:rgba(230,198,91,.35);
-  text-underline-offset:4px;
-  white-space:nowrap;
+@media(max-width:1099px){
+  .v2nat-layout{grid-template-columns:1fr;gap:2rem}
+  .v2nat-copy{max-width:60ch}
+  .v2nat-figure{max-width:640px;justify-self:center}
 }
-.v2nat-caption a:hover{text-decoration-color:currentColor}
 @media(max-width:759px){
-  .v2nat-lock{grid-template-columns:minmax(0,1fr) 56px;gap:1.25rem;margin-bottom:1.75rem}
-  .v2nat-crest{width:56px;margin-top:.35rem}
-  .v2nat-layout{grid-template-columns:1fr;gap:1.5rem}
+  .v2nat-layout{gap:1.75rem}
   .v2nat-copy{max-width:44ch}
-  .v2nat-figure{max-width:360px;justify-self:start}
+  .v2nat-figure{max-width:none}
+  .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
-  .v2nat-map,.v2nat-coast,.v2nat-pin,.v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important}
+  .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }

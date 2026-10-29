@@ -23,31 +23,32 @@ and visual requirements are in `CONTRACT.md`.
 
 | Section | Treatment |
 |---|---|
-| Header | Chapter-focused navigation; native mobile disclosure; plain gold Rush action |
-| Hero | Original full-height left-aligned composition, one value line, plain Rush button, silk canvas |
-| Membership | Compact full-phrase titles on the left, supporting photo on the right; phone photo stays inside its category |
-| Member Success | Separate paper-deep band; phone outcome ledger; two desktop / three phone full-width logo rows |
-| National | Full-width original statement above concise factual copy and a secondary campus map |
-| Chapter Life | Original circular photo carousel with six authentic photos; no visible pause button |
-| Rush | Display heading paired with a plain action; links to the matching V2 recruitment page |
+| Header | Chapter-focused navigation; native mobile disclosure; legible gold Rush action |
+| Hero | Larger static identity in the original left-reading composition; stronger context bar; silk canvas |
+| Membership | Larger complete category titles at left, supporting photo at right; phone photo inside its category |
+| Member Success | Same cream field, inset divider, gold figures that count once on entry; two desktop / three phone logo rows |
+| National | Large headline and benefit-led copy beside a larger U.S. map; campus dots appear across the country on entry |
+| Rush | Centered invitation and action, with one soft arrival glow; continuous purple field with an inset divider |
 | Footer | Chapter identity, page links and social links |
 
-Content is visible without JavaScript. Motion respects reduced-motion preferences;
-the original photo carousel pauses on hover/focus and has a still reduced-motion state.
-Only the hero identity uses a typographic entrance. Figures, national geography,
-body copy, and the closing action are readable immediately. Category photos
-transition to explain selection; the company rows follow page scrolling; the
-original wheel retains its slow circular movement. Buttons use quiet color feedback.
-Logo rows have finite endpoints, full-width soft edges, and optical sizing per asset.
+The Chapter Life section is excluded from the build at the user's request; its source
+and photographs remain available for recovery. Primary navigation now links to the
+National Network instead. Hero text is static and has no word clipping masks.
+
+Content is visible without JavaScript. Motion respects reduced-motion preferences,
+including changes during a session. Count-up figures have stable final accessible
+names. Pin animation leaves geographic placement intact. The company rows follow
+normal page scrolling in opposite directions with compact optical sizing, slower
+travel and earlier soft edges. There is no clock-driven logo marquee, pinned
+scrolling, manual sideways control, or mock countdown.
+
 Membership stays in two columns from 760px; phone category changes retain the
-selected control’s screen position. The carousel radius tapers through tablet widths.
-Reduced motion and no JavaScript expose every logo in a static wrapping layout.
-There is no pinned scrolling, manual sideways logo control, or mock countdown.
-The company logo provenance is recorded in `assets/logos/sources.json`.
-Chapter locations, federal NCES coordinates, and Census-derived geography are
-recorded in `assets/map/`. The standard-library-only `chapter_map.py` renders
-the map into national-section markers during the ordinary build;
-no external map scripts, runtime requests, or new dependencies are needed.
+selected control's screen position. Reduced motion and no JavaScript expose every
+logo in a static wrapping layout. Logo provenance is in `assets/logos/sources.json`.
+National facts and sources are documented in `COPY.md`. Chapter locations, federal
+NCES coordinates, and Census-derived geography are recorded in `assets/map/`.
+The standard-library-only `chapter_map.py` renders the map during the build;
+no external map scripts or runtime dependencies are needed.
 
 ## Preview and verification
 

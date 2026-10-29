@@ -1,60 +1,62 @@
 # V2 design and implementation requirements
 
-Maintain the existing GitHub Pages site and the chapter's visual identity.
-Build the V2 homepage from scoped parts and run `python3 v2/build.py` after edits.
+Maintain the GitHub Pages site and the chapter's visual identity. Edit scoped
+parts and run `python3 v2/build.py`; commit source and generated output together.
+Root V1 and legacy resource pages remain separate.
 
 ## Design and copy
 
 - Use purple, cream, gold, Instrument Serif at weight 400, and Inter for text.
-- Reuse `tokens.css` for colors, spacing, typography, widths, and easing.
-- Use gold ink on light surfaces and soft gold on dark surfaces for small text.
-- Keep headings short and factual. Membership has no overall visible heading.
-- Preserve Member Success, Chapter Life, and Rush Phi Chi Theta as section names.
-- Use actual employer logos and real chapter photographs. Record new asset sources.
-- Keep Member Success large and prominent. Show company logos in two desktop rows
-  and three phone rows, moving horizontally with normal page scrolling. Alternate
-  row directions, keep endpoints visible, and do not add a manual sideways scroller.
-  Reduced-motion and no-JavaScript layouts must expose every company mark.
-- Map only collegiate campuses listed in the national directory. Use sourced
-  coordinates and true geographic outlines; retain provenance and the checked date.
-- Preserve the original national headline and use concise factual
-  copy. Keep its map secondary, with a compact readable caption and directory
-  link. Do not restore the large university picker, location text, or map-control panel.
-- Use one clear primary action at each decision point and comfortably sized buttons.
-- Do not invent statistics, event dates, deadlines, countdowns, or recognition claims.
-- Polish the established composition. Preserve the original left-aligned hero,
-  national heading with italic gold 1924, and circular photo carousel.
-- Do not replace the carousel with a static gallery or add stacked hero labels.
-- Use plain text CTA labels without decorative arrows. Keep the authentic crest
-  transparent, without a colored tile.
+- Reuse tokens for colors, spacing, typography, widths, and easing. Use gold ink
+  on cream and soft gold on dark surfaces for small text.
+- Preserve the original left-reading hero, its large static identity, and its
+  italic university line. No word clipping masks or entrance effect on hero text.
+- Give the hero context bar enough contrast and size to read. Primary Rush labels
+  are 18px; button proportions must be balanced with their type.
+- Membership has no overall visible heading. Keep complete category titles and
+  supporting real photography, with larger type and generous selection targets.
+- Membership and Member Success share cream, separated by an inset rule.
+  National and closing Rush share deep purple, separated by an inset rule.
+- Member Success remains large and prominent. Gold figures count once on entry
+  from 1 to 95%, 1 to 3.60, and 1 to 15. Keep accessible final values and stable widths.
+- All twenty actual logos appear in two desktop / three phone rows. Alternate
+  row directions and follow normal page scrolling at a measured, readable pace.
+  Fade before the hard edge, pad endpoints, and expose every mark. No manual
+  sideways control, clock-driven marquee, scroll pinning, or oversized empty stage.
+- Preserve the national headline with italic gold 1924. Pair benefit-led copy with
+  a larger map. Bold the verified collegiate-chapter count within the copy.
+  No redundant map caption, crest, About action, directory link, or campus picker.
+- Map only sourced national collegiate campuses. Pop dots once across the country
+  on entry, animating dot/ring children without moving geographic group transforms.
+- Exclude Chapter Life from the published homepage; retain its source for recovery.
+- Center all closing invitation content at every width. Use one restrained arrival
+  glow on Rush PCT, with a static reduced-motion treatment.
+- Keep CTA labels plain, without decorative arrows. Header crest remains transparent.
+- Do not invent statistics, dates, deadlines, countdowns, or recognition claims.
+  Preserve the existing chapter figures with their verification limitation in COPY.md.
 
 ## Responsive behavior
 
-- No horizontal page overflow, clipped headings, pinned scrolling, or scroll hijacking.
-- Membership uses text on the left and a supporting photo on the right from 760px.
-  Phone category changes retain the chosen control’s screen position. Align national copy with the full-width headline; keep the crest secondary and untiled.
-- At phone widths, use readable text, consistent gutters, compact section spacing,
-  a one-row header, an accessible disclosure menu, and a readable display-led Rush section.
-- Logos remain legible and follow page scrolling; preserve the carousel’s original curved geometry
-  without a visible pause button. Hover/focus pauses it; reduced motion holds it still.
-- Review the whole page visually on phones, tablets, and desktops after integration.
+- No horizontal page overflow, clipped headings, scroll hijacking, or hidden logos.
+- Membership remains two columns from 760px, with copy left and photo right. Phone
+  category changes retain the selected control's screen position.
+- Use consistent gutters, readable text, a one-row mobile header, accessible mobile
+  navigation, and a centered display-led Rush section.
+- Review the whole page on small phones, tablets, narrow desktops, and wide desktops.
 
 ## Engineering and accessibility
 
-1. Base HTML and CSS must show complete content and working links without JavaScript.
-   Scripts progressively enhance membership controls, logo rows, header state, and hero.
-2. Respect `prefers-reduced-motion`, including changes during the session. Register
-   teardown work with `window.pctMotion.onReduce` when appropriate.
-3. Animate transforms and opacity; avoid expensive layout work inside animation loops.
-   Restrict the typographic entrance to the hero. Body copy, statistics, map, and
-   closing actions remain readable immediately. No counting figures, traced geography,
-   button light sweeps, or generic rising blocks. Preserve accents and accessible names.
-4. Give images accurate dimensions and alternative text; lazy-load below-fold images.
-5. Keep controls keyboard reachable, touch targets at least 44px, and focus rings visible
-   against their actual background. Expanded controls must expose the correct state.
-6. Keep local references and accessible labels valid. The V2 homepage stays in `/v2/`;
-   V2 Rush stays in `/v2/`; legacy resource pages live at the repository root.
-7. Keep selectors scoped to their part. Use vanilla HTML, CSS, and JavaScript without
-   new runtime dependencies. Initializers must safely tolerate missing markup.
-8. The lead owns integration and generated output. Delegate ownership of specific parts
-   explicitly; do not overwrite another contributor's work.
+1. Base HTML/CSS show complete content and working links without JavaScript. Reduced
+   motion and no JavaScript expose every company in a static wrapping layout.
+2. Respect reduced-motion preferences, including live changes, through pctMotion.
+3. Animate transforms and opacity for graphic motion. Count-up text updates run only
+   for their short entry interval. No generic rising blocks or text splitting masks.
+4. Images have dimensions, descriptive alternative text, and lazy loading below fold.
+5. Controls are keyboard reachable with 44px touch targets and visible focus rings.
+   Disclosure state must match expanded content.
+6. Keep local references, IDs, labels, and links valid. V2 homepage and Rush remain
+   in /v2/; retained legacy resource pages live at the repository root.
+7. Scope selectors to parts. Use vanilla HTML/CSS/JS without runtime dependencies.
+   Initializers safely tolerate absent markup and repeated calls.
+8. The lead owns integration and generated output. Delegate specific source parts
+   explicitly and do not overwrite another contributor's work.

@@ -7,11 +7,11 @@
 .grow__row:first-child{border-top:1px solid var(--line)}
 .grow__row::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold-ink);transform:scaleX(0);transform-origin:left;transition:transform 450ms var(--ease);pointer-events:none}
 .grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
-.grow__btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:80px;margin:0;padding:1.35rem 0;border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default}
-.grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,2.5vw,2.25rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
+.grow__btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:92px;margin:0;padding:1.55rem 0;border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default}
+.grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
 .grow__panel{padding-bottom:1.5rem}
 .grow__panel[hidden]{display:none}
-.grow__say{max-width:41ch;margin:0;font-size:1rem;line-height:1.75;color:var(--ink-soft)}
+.grow__say{max-width:41ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
 .grow__fig--framed{--photo-scale:1.12}
@@ -46,13 +46,15 @@
 }
 @media(max-width:599px){
  .grow__btn{min-height:76px;gap:1rem;padding-block:1.25rem}
- .grow__ttl{font-size:1.8rem;letter-spacing:-.01em}
- .grow__say{font-size:.975rem;line-height:1.7}
+ .grow__ttl{font-size:2rem;letter-spacing:-.01em}
+ .grow__say{font-size:1.025rem;line-height:1.7}
  .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
 }
-@media(max-width:359px){.grow__ttl{font-size:1.65rem}}
+@media(max-width:359px){.grow__ttl{font-size:1.8rem}}
 @media(prefers-reduced-motion:reduce){
  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
  .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
 }
+
+@media(min-width:1000px){.grow--desktop .grow__stage{aspect-ratio:5/4}}

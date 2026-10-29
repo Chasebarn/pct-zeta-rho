@@ -53,15 +53,44 @@ window.pctInitPlacements = function () {
     });
     applyRows();
   }
+  function balancedLogoGroups(count) {
+    var style = window.getComputedStyle(brands);
+    var scale = Number(style.getPropertyValue('--pl-scale')) || 1;
+    var gap = parseFloat(style.getPropertyValue('--pl-gap')) || 0;
+    var perRow = Math.ceil(logos.length / count);
+    var groups = [], loads = [], capacities = [];
+    for (var i = 0; i < count; i++) {
+      groups.push([]);
+      loads.push(0);
+      capacities.push(Math.min(perRow, logos.length - i * perRow));
+    }
+    var weighted = logos.map(function (logo, index) {
+      var width = parseFloat(window.getComputedStyle(logo).getPropertyValue('--pl-slot')) || 136;
+      return { logo:logo, index:index, width:width * scale };
+    }).sort(function (a, b) { return b.width - a.width || a.index - b.index; });
+    weighted.forEach(function (item) {
+      var best = -1;
+      for (var row = 0; row < count; row++) {
+        if (groups[row].length >= capacities[row]) continue;
+        if (best === -1 || loads[row] < loads[best]) best = row;
+      }
+      if (groups[best].length) loads[best] += gap;
+      groups[best].push(item);
+      loads[best] += item.width;
+    });
+    return groups.map(function (group) {
+      return group.sort(function (a, b) { return a.index - b.index; }).map(function (item) { return item.logo; });
+    });
+  }
   function groupRows() {
     if (!rowsEnabled) return;
     var count = window.innerWidth <= 700 ? 3 : 2;
     if (rows.length === count) { measureRows(); return; }
+    var groups = balancedLogoGroups(count);
     if (rowContainer) rowContainer.remove();
     rowContainer = document.createElement('div');
     rowContainer.className = 'pl-rows';
     rows = [];
-    var perRow = Math.ceil(logos.length / count);
     for (var index = 0; index < count; index++) {
       var element = document.createElement('div');
       var track = document.createElement('ul');
@@ -69,7 +98,7 @@ window.pctInitPlacements = function () {
       track.className = 'pl-track';
       track.setAttribute('role', 'list');
       track.setAttribute('aria-label', 'Companies where members have been placed, row ' + (index + 1) + ' of ' + count);
-      logos.slice(index * perRow, (index + 1) * perRow).forEach(function (logo) { track.appendChild(logo); });
+      groups[index].forEach(function (logo) { track.appendChild(logo); });
       element.appendChild(track);
       rowContainer.appendChild(element);
       rows.push({ element:element, track:track, start:0, distance:1, overflow:0 });
@@ -138,4 +167,71 @@ window.pctInitPlacements = function () {
   else if (reduce && reduce.addListener) reduce.addListener(onRowReduce);
   if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(stopRows);
   startRows();
+
+
+  /* Each result counts once when its own row enters. Final source values and
+     accessible names remain unchanged; only overlaid aria-hidden digits move. */
+  var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
+  if (!digits.length || (reduce && reduce.matches) || !window.requestAnimationFrame ||
+      !('IntersectionObserver' in window)) return;
+  var values = digits.map(function (element) {
+    return { element:element, row:element.closest('.pl-n'), target:Number(element.getAttribute('data-pl-count')),
+      decimals:Number(element.getAttribute('data-pl-decimals') || 0), final:element.textContent,
+      active:false, done:false, began:null };
+  });
+  var countFrame = null;
+  var countsStopped = false;
+  var countObserver;
+  function finishCounts() {
+    if (countsStopped) return;
+    countsStopped = true;
+    if (countObserver) countObserver.disconnect();
+    if (countFrame !== null) window.cancelAnimationFrame(countFrame);
+    countFrame = null;
+    values.forEach(function (item) { item.element.textContent = item.final; item.active = false; });
+    document.removeEventListener('visibilitychange', onCountVisibility);
+    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onCountReduce);
+    else if (reduce && reduce.removeListener) reduce.removeListener(onCountReduce);
+  }
+  function onCountReduce(event) { if (event.matches) finishCounts(); }
+  function onCountVisibility() { if (document.hidden) finishCounts(); }
+  function countStep(now) {
+    countFrame = null;
+    if (countsStopped) return;
+    var running = false;
+    values.forEach(function (item) {
+      if (!item.active) return;
+      if (item.began === null) item.began = now;
+      var progress = Math.max(0, Math.min((now - item.began) / 2000, 1));
+      var eased = 1 - Math.pow(1 - progress, 3);
+      item.element.textContent = (1 + (item.target - 1) * eased).toFixed(item.decimals);
+      if (progress === 1) {
+        item.element.textContent = item.final;
+        item.active = false;
+        item.done = true;
+      } else running = true;
+    });
+    if (running) countFrame = window.requestAnimationFrame(countStep);
+    else if (values.every(function (item) { return item.done; })) finishCounts();
+  }
+  try {
+    countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var item = values.find(function (value) { return value.row === entry.target; });
+        if (!item || item.active || item.done) return;
+        item.active = true;
+        item.element.textContent = (1).toFixed(item.decimals);
+        countObserver.unobserve(item.row);
+      });
+      if (values.some(function (item) { return item.active; }) && countFrame === null && !countsStopped) {
+        countFrame = window.requestAnimationFrame(countStep);
+      }
+    }, { threshold:.6 });
+    values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
+    document.addEventListener('visibilitychange', onCountVisibility);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onCountReduce);
+    else if (reduce && reduce.addListener) reduce.addListener(onCountReduce);
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(finishCounts);
+  } catch (error) { finishCounts(); }
 };

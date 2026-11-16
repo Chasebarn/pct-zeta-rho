@@ -29,11 +29,11 @@ and visual requirements are in `CONTRACT.md`.
 | Member Success | Same cream field, inset divider, gold figures that count once on entry; two desktop / three phone logo rows |
 | National | Large headline and benefit-led copy beside a larger U.S. map; campus dots appear across the country on entry |
 | Chapter photos | The original circular carousel on cream, without a visible heading |
-| Rush | Centered purple panel layered over the bottom of the photo arc, with one soft arrival glow |
+| Rush | Full-width purple section layered over the bottom of the photo arc, with one soft arrival glow |
 | Footer | Chapter identity, page links and social links |
 
 The original photo carousel appears immediately before Rush without a visible
-heading or introduction. The cream background sets off the purple Rush panel,
+heading or introduction. The cream background sets off the full-width purple Rush section,
 which overlaps the bottom of the arc. It rotates through pointer hover; keyboard focus pauses
 it, and reduced motion keeps it still. Hero text is static and has no word clipping masks.
 

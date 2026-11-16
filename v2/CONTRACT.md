@@ -29,7 +29,7 @@ Root V1 and legacy resource pages remain separate.
 - Map only sourced national collegiate campuses. Pop dots once across the country
   on entry, animating dot/ring children without moving geographic group transforms.
 - Keep the original chapter photo carousel between National and Rush. Use a cream
-  photo field and overlap the bottom of the arc with the purple Rush panel. Omit
+  photo field and overlap the bottom of the arc with the full-width purple Rush section. Omit
   the visible heading and intro. Do not pause on mouse hover;
   retain a keyboard focus pause and honor reduced motion.
 - Center all closing invitation content at every width. Use one restrained arrival

@@ -1,44 +1,26 @@
-/* The opaque header is the safe base. JavaScript makes it transparent only
-   while the reader is over the top of the hero. Page content stays visible. */
+/* One resilient disclosure for the sticky header. */
 window.pctInitStick = function () {
-  try {
-    var hd = document.querySelector('.v2hd');
-    if (!hd || hd.dataset.headerReady === '1') return;
-    hd.dataset.headerReady = '1';
-
-    function publishHeight() {
-      var height = hd.getBoundingClientRect().height;
-      if (height > 0) document.documentElement.style.setProperty('--v2hd-h', height.toFixed(1) + 'px');
-    }
-    publishHeight();
-    if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(hd);
-    else window.addEventListener('resize', publishHeight, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(publishHeight);
-
-    if ('IntersectionObserver' in window) {
-      var sentinel = document.createElement('div');
-      sentinel.setAttribute('aria-hidden', 'true');
-      sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
-      document.body.appendChild(sentinel);
-      hd.classList.toggle('is-over-hero', window.scrollY < 120);
-      new IntersectionObserver(function (entries) {
-        hd.classList.toggle('is-over-hero', entries[0].isIntersecting);
-      }).observe(sentinel);
-    }
-
-    var menu = hd.querySelector('details');
-    if (menu) {
-      hd.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && menu.open) {
-          menu.open = false;
-          menu.querySelector('summary').focus();
-        }
-      });
-      document.addEventListener('click', function (event) {
-        if (!menu.contains(event.target) || event.target.closest('a')) menu.open = false;
-      });
-    }
-  } catch (err) {
-    if (window.console && console.warn) console.warn('pctInitStick:', err);
+  var header = document.querySelector('.v2hd');
+  if (!header || header.dataset.ready) return;
+  header.dataset.ready = '1';
+  function measure() {
+    document.documentElement.style.setProperty('--v2hd-h', header.offsetHeight + 'px');
   }
+  measure();
+  if (window.ResizeObserver) new ResizeObserver(measure).observe(header);
+  else window.addEventListener('resize', measure);
+  var menu = header.querySelector('details');
+  if (!menu) return;
+  var toggle = menu.querySelector('summary');
+  header.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && menu.open) {
+      menu.open = false;
+      toggle.focus();
+    }
+  });
+  document.addEventListener('click', function (event) {
+    if (menu.open && (!menu.contains(event.target) || event.target.closest('.v2hd-mobile a'))) {
+      menu.open = false;
+    }
+  });
 };

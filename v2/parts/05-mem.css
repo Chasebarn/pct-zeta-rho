@@ -1,63 +1,59 @@
-/* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
-   rotating hub carries them around the arc at one revolution per 150 seconds. */
-/* A cream field frames the photographs. Rush covers the bottom of the arc. */
-.mem{padding:clamp(1.5rem,3.5vw,3.5rem) 0 0;background:var(--paper)}
-
-/* Keep the original radius and card proportions, including the shallower
-   desktop arc and the tighter mobile circle. The section below cuts the arc. */
-.mem-band{
-  --R:149vw;
-  --w:calc(var(--R) * .175);
-  --h:calc(var(--w) * 1.5);
-  --step:11.25deg;
-  --inset:.7rem;
-  position:relative;
-  height:calc(var(--h) + var(--inset) + 1.1rem);
-  overflow:hidden;
-  isolation:isolate;
-}
+/* Keep the cream field and the circular composition, with wider crops so group
+   photos can keep faces in frame. The full-width Rush section masks the arc. */
+.mem{padding-block:clamp(1.75rem,4vw,3.75rem) var(--photo-overlap);background:var(--paper)}
+.mem-band{position:relative}
 .mem-wheel{
-  list-style:none;
-  margin:0;
-  padding:0;
-  position:absolute;
-  left:50%;
-  top:calc(var(--R) + var(--h) / 2 + var(--inset));
-  width:0;
-  height:0;
-  animation:memSpin 150s linear infinite;
-  will-change:transform;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;
+  width:min(var(--wrap),calc(100% - var(--gutter)*2));margin:0 auto;padding:0;list-style:none;
 }
 .mem-i{
-  position:absolute;
-  left:0;
-  top:0;
-  width:var(--w);
-  height:var(--h);
-  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
-  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
-  background:var(--paper-deep);
-  border-radius:clamp(10px,1.1vw,18px);
-  overflow:hidden;
-  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
+  aspect-ratio:5/4;overflow:hidden;background:var(--paper-deep);
+  border-radius:clamp(6px,.8vw,12px);
 }
-.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
-@keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-
-.mem-band:focus-visible .mem-wheel{animation-play-state:paused}
-.mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
-
-@media (max-width:767px){
-  /* Keep the original phone circle through 390px, then taper toward the
-     desktop radius instead of doubling card height on wider tablets. */
-  .mem-band{--R:min(330vw,calc(1435px - 37.8vw));--inset:.7rem}
+.mem-i img{width:100%;height:100%;object-fit:cover;object-position:center var(--photo-y,45%)}
+.mem-i--framed img{transform:scale(1.11)}
+.mem-i--group{--photo-y:38%}
+.mem-i--community{--photo-y:30%}
+.mem-i--service{--photo-y:38%}
+.mem-i--letters{--photo-y:38%}
+.mem-i--fundraiser{--photo-y:30%}
+.mem-i--careers{--photo-y:38%}
+.mem-controls[hidden]{display:none}
+.mem.is-wheel{padding-bottom:0}
+.is-wheel .mem-band{
+  --card-w:clamp(17rem,30vw,27rem);
+  --card-h:calc(var(--card-w)*.8);
+  --radius:calc(var(--card-w)*5.1);
+  --inset:.4rem;
+  height:calc(var(--card-h) + var(--inset) + var(--photo-overlap)*.68);
+  overflow:hidden;isolation:isolate;touch-action:pan-y pinch-zoom;
 }
-/* The original arc remains visible at rest. No content depends on animation
-   or JavaScript; decorative duplicate frames are hidden from assistive tech. */
-@media (prefers-reduced-motion:reduce){
-  .mem-wheel{animation:none;will-change:auto}
+.is-wheel .mem-wheel{
+  display:block;position:absolute;left:50%;top:calc(var(--radius) + var(--card-h)/2 + var(--inset));
+  width:0;height:0;margin:0;transform:rotate(var(--turn,0deg));
+  transition:transform 440ms cubic-bezier(.22,.7,.35,1);
 }
-
-/* The additional chapter photographs retain their original website frame in
-   the source asset; the image crop keeps it outside the visible photograph. */
-.mem-i--framed img{transform:scale(1.12)}
+.is-wheel .mem-i{
+  position:absolute;left:0;top:0;
+  width:var(--card-w);height:var(--card-h);
+  margin:calc(var(--card-h)/-2) 0 0 calc(var(--card-w)/-2);
+  transform:rotate(calc(var(--slot)*12deg)) translateY(calc(-1*var(--radius)));
+}
+.mem-controls{
+  position:absolute;inset:56% var(--gutter) auto;
+  display:flex;justify-content:space-between;pointer-events:none;
+}
+.mem-controls button{
+  display:grid;place-items:center;width:46px;height:46px;padding:0;
+  border:1px solid #d9d0c1;border-radius:50%;
+  color:var(--ink);background:var(--paper);cursor:pointer;pointer-events:auto;
+  box-shadow:0 2px 8px rgba(25,18,33,.14);
+}
+.mem-controls button:hover{background:var(--paper-deep)}
+.mem-controls svg{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:759px){
+  .mem-wheel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .is-wheel .mem-band{--card-w:min(72vw,26rem)}
+  .mem-controls{inset-inline:max(.55rem,env(safe-area-inset-left)) max(.55rem,env(safe-area-inset-right))}
+}
+@media(prefers-reduced-motion:reduce){.is-wheel .mem-wheel{transition:none}}

@@ -60,12 +60,17 @@ doc = f'''<!DOCTYPE html>
 <meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
-<link rel="icon" type="image/png" href="../assets/crest.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/styles.css?v=24">
-<link rel="stylesheet" href="tokens.css?v=20261029b">
+<link rel="canonical" href="https://chasebarn.github.io/pct-zeta-rho/v2/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Phi Chi Theta at USF">
+<meta property="og:description" content="Career preparation, leadership, and a business network before you graduate.">
+<meta property="og:image" content="https://chasebarn.github.io/pct-zeta-rho/assets/chapter-members.jpg">
+<meta property="og:image:alt" content="Four Zeta Rho members in professional attire at a chapter event.">
+<meta property="og:url" content="https://chasebarn.github.io/pct-zeta-rho/v2/index.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../assets/pct-crest-official.png">
+<link rel="preload" href="../assets/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css?v=20261116">
 <style>
 {chr(10).join(css)}
 </style>

@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-10-28",
-  "count": 50,
+  "checkedAt": "2026-11-16",
+  "count": 46,
   "scope": "Collegiate chapters listed in the current national active chapter directory. Alumni chapters are excluded. No chapter not present in that directory has been inferred active.",
   "alumniExcluded": [
     {
@@ -35,9 +35,9 @@
     }
   ],
   "countBasis": {
-    "collegiate": 50,
+    "collegiate": 46,
     "alumni": 6,
-    "totalDirectoryEntries": 56
+    "totalDirectoryEntries": 52
   },
   "directorySource": "https://www.phichitheta.org/find-a-chapter",
   "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
@@ -65,44 +65,24 @@
       "directoryCity": "Madison"
     },
     {
-      "id": "bradley-university",
-      "school": "Bradley University",
-      "chapter": "Alpha Upsilon",
-      "city": "Peoria",
-      "state": "IL",
-      "lat": 40.696896,
-      "lon": -89.616786,
+      "id": "university-of-georgia",
+      "school": "University of Georgia",
+      "chapter": "Alpha Epsilon",
+      "city": "Athens",
+      "state": "GA",
+      "lat": 33.956262,
+      "lon": -83.374039,
       "region": "Central-Southern",
       "status": "listed-active",
       "type": "collegiate",
-      "chapterUrl": null,
+      "chapterUrl": "http://instagram.com/pct_uga",
       "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "143358",
+      "unitid": "139959",
       "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
       "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "Bradley University",
-      "coordinateAddress": "1501 W BRADLEY AVE",
-      "directoryCity": "Peoria"
-    },
-    {
-      "id": "tulane-university",
-      "school": "Tulane University",
-      "chapter": "Alpha Xi",
-      "city": "New Orleans",
-      "state": "LA",
-      "lat": 29.940069,
-      "lon": -90.122144,
-      "region": "Central-Southern",
-      "status": "listed-active",
-      "type": "collegiate",
-      "chapterUrl": null,
-      "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "160755",
-      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
-      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "Tulane University of Louisiana",
-      "coordinateAddress": "6823 St. Charles Avenue",
-      "directoryCity": "New Orleans"
+      "coordinateInstitution": "University of Georgia",
+      "coordinateAddress": "Administration Building",
+      "directoryCity": "Athens"
     },
     {
       "id": "university-of-tennessee-at-martin",
@@ -123,26 +103,6 @@
       "coordinateInstitution": "The University of Tennessee-Martin",
       "coordinateAddress": "554 University Street",
       "directoryCity": "Martin"
-    },
-    {
-      "id": "university-of-montevallo",
-      "school": "University of Montevallo",
-      "chapter": "Gamma Tau",
-      "city": "Montevallo",
-      "state": "AL",
-      "lat": 33.10625,
-      "lon": -86.865099,
-      "region": "Central-Southern",
-      "status": "listed-active",
-      "type": "collegiate",
-      "chapterUrl": null,
-      "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "101709",
-      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
-      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "University of Montevallo",
-      "coordinateAddress": "Station 6001",
-      "directoryCity": "Montevallo"
     },
     {
       "id": "university-of-miami",
@@ -488,26 +448,6 @@
       "directoryCity": "Harrisonburg"
     },
     {
-      "id": "cornell-university",
-      "school": "Cornell University",
-      "chapter": "Zeta Zeta",
-      "city": "Ithaca",
-      "state": "NY",
-      "lat": 42.4472,
-      "lon": -76.483084,
-      "region": "Eastern",
-      "status": "listed-active",
-      "type": "collegiate",
-      "chapterUrl": "https://www.instagram.com/pctcornell/",
-      "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "190415",
-      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
-      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "Cornell University",
-      "coordinateAddress": "300 Day Hall",
-      "directoryCity": "Ithaca"
-    },
-    {
       "id": "binghamton-university",
       "school": "Binghamton University",
       "chapter": "Zeta Kappa",
@@ -526,26 +466,6 @@
       "coordinateInstitution": "Binghamton University",
       "coordinateAddress": "4400 Vestal Parkway East",
       "directoryCity": "Binghamton"
-    },
-    {
-      "id": "university-of-pennsylvania",
-      "school": "University of Pennsylvania",
-      "chapter": "Zeta Tau",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.950929,
-      "lon": -75.19391,
-      "region": "Eastern",
-      "status": "listed-active",
-      "type": "collegiate",
-      "chapterUrl": null,
-      "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "215062",
-      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
-      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "University of Pennsylvania",
-      "coordinateAddress": "34th & Spruce Street",
-      "directoryCity": "Philadelphia"
     },
     {
       "id": "university-of-delaware",
@@ -606,6 +526,26 @@
       "coordinateInstitution": "Rowan University",
       "coordinateAddress": "201 Mullica Hill Road",
       "directoryCity": "Glassboro"
+    },
+    {
+      "id": "virginia-tech",
+      "school": "Virginia Tech",
+      "chapter": "Eta Kappa",
+      "city": "Blacksburg",
+      "state": "VA",
+      "lat": 37.229012,
+      "lon": -80.423675,
+      "region": "Eastern",
+      "status": "listed-active",
+      "type": "collegiate",
+      "chapterUrl": "http://instagram.com/vtphichitheta",
+      "source": "https://www.phichitheta.org/find-a-chapter",
+      "unitid": "233921",
+      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
+      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
+      "coordinateInstitution": "Virginia Polytechnic Institute and State University",
+      "coordinateAddress": "210 Burruss Hall, 800 Drillfield Dr.",
+      "directoryCity": null
     },
     {
       "id": "michigan-state-university",
@@ -1028,26 +968,6 @@
       "coordinateInstitution": "University of California-Davis",
       "coordinateAddress": "One Shields Avenue",
       "directoryCity": "Davis"
-    },
-    {
-      "id": "university-of-texas-at-dallas",
-      "school": "University of Texas at Dallas",
-      "chapter": "Eta Zeta",
-      "city": "Richardson",
-      "state": "TX",
-      "lat": 32.984673,
-      "lon": -96.749702,
-      "region": "Western",
-      "status": "listed-active",
-      "type": "collegiate",
-      "chapterUrl": "https://www.instagram.com/pct.utd/",
-      "source": "https://www.phichitheta.org/find-a-chapter",
-      "unitid": "228787",
-      "coordinateSource": "https://nces.ed.gov/ipeds/datacenter/data/HD2024.zip",
-      "coordinateBasis": "IPEDS HD2024 LATITUDE/LONGITUD institutional main-campus point; approximate public campus location, not chapter premises.",
-      "coordinateInstitution": "The University of Texas at Dallas",
-      "coordinateAddress": "800 West Campbell  Road",
-      "directoryCity": "Dallas"
     }
   ]
 }

@@ -1,7 +1,7 @@
 /* A complete results chapter: the shared paper field, generous display title,
    readable outcomes, then a full-width company stage tied to page scrolling. */
 .pl{
-  padding-block:clamp(4.5rem,7.5vw,7rem);
+  padding-block:clamp(4rem,7vw,6.5rem);
   position:relative;
   background:var(--paper);
   color:var(--ink-soft);
@@ -18,7 +18,7 @@
 }
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(2.5rem,4vw,3.5rem);
+  margin:0 0 clamp(2rem,3.5vw,3.25rem);
   color:var(--ink);
   font-family:var(--font-display);
   font-size:clamp(4.6rem,7.5vw,6rem);
@@ -26,7 +26,7 @@
   line-height:1.05;
   letter-spacing:-.025em;
   text-align:center;
-  white-space:nowrap;
+  text-wrap:balance;
 }
 .pl-nums{
   display:grid;
@@ -52,7 +52,7 @@
 .pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
   max-width:25ch;
-  margin:1rem auto 0;
+  margin:.7rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.9375rem;
@@ -64,16 +64,17 @@
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
 .pl-stat-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-/* Outside the inner reading column, this stage spans the viewport itself.
-   Crops and fades consequently occur at screen edges, not inside the page. */
+/* Short feathered edges leave most of the viewport fully legible. Endpoint
+   insets are slightly wider than the feather, not part of the artwork. */
 .pl-brands{
-  --pl-edge:144px;
-  --pl-inset:152px;
-  --pl-gap:24px;
+  --pl-edge:24px;
+  --pl-inset:44px;
+  --pl-gap:18px;
+  --pl-row-size:4.75rem;
   --pl-scale:1;
   position:relative;
   width:100%;
-  margin-top:clamp(3rem,5vw,4.5rem);
+  margin-top:clamp(2.5rem,4.5vw,4rem);
 }
 /* Complete, unclipped source list for no-JavaScript/reduced-motion visitors. */
 .pl-logos{
@@ -88,8 +89,8 @@
 }
 .pl-logos[hidden]{display:none}
 .pl-cell{
-  --pl-slot:136px;
-  --pl-mark:128px;
+  --pl-slot:120px;
+  --pl-mark:116px;
   --pl-mark-max:2.75rem;
   display:flex;
   align-items:center;
@@ -111,99 +112,90 @@
 .pl-cell--reverse img{filter:brightness(0);opacity:.84}
 /* Optical measures follow the artwork: long, thin wordmarks receive wider
    slots; stacked marks remain compact; clear space is allowed for in sizing. */
-.pl-cell--goldman{--pl-slot:90px;--pl-mark:86px;--pl-mark-max:2.8rem}
-.pl-cell--morgan{--pl-slot:160px;--pl-mark:158px;--pl-mark-max:2.1rem}
-.pl-cell--citi{--pl-slot:70px;--pl-mark:66px;--pl-mark-max:2.8rem}
-.pl-cell--wells{--pl-slot:180px;--pl-mark:176px;--pl-mark-max:1.8rem}
-.pl-cell--kpmg{--pl-slot:112px;--pl-mark:106px;--pl-mark-max:2.8rem}
-.pl-cell--deloitte{--pl-slot:160px;--pl-mark:152px;--pl-mark-max:2rem}
-.pl-cell--pwc{--pl-slot:84px;--pl-mark:80px;--pl-mark-max:3rem}
-.pl-cell--amazon{--pl-slot:128px;--pl-mark:120px;--pl-mark-max:2.8rem}
-.pl-cell--pnc{--pl-slot:112px;--pl-mark:106px;--pl-mark-max:2.3rem}
-.pl-cell--raymond{--pl-slot:184px;--pl-mark:180px;--pl-mark-max:1.7rem}
-.pl-cell--fisher{--pl-slot:224px;--pl-mark:220px;--pl-mark-max:1.7rem}
+.pl-cell--goldman{--pl-slot:86px;--pl-mark:82px;--pl-mark-max:2.65rem}
+.pl-cell--morgan{--pl-slot:150px;--pl-mark:146px;--pl-mark-max:2rem}
+.pl-cell--citi{--pl-slot:65px;--pl-mark:61px;--pl-mark-max:2.6rem}
+.pl-cell--wells{--pl-slot:164px;--pl-mark:160px;--pl-mark-max:1.75rem}
+.pl-cell--kpmg{--pl-slot:104px;--pl-mark:100px;--pl-mark-max:2.65rem}
+.pl-cell--deloitte{--pl-slot:145px;--pl-mark:141px;--pl-mark-max:2rem}
+.pl-cell--pwc{--pl-slot:78px;--pl-mark:74px;--pl-mark-max:2.75rem}
+.pl-cell--amazon{--pl-slot:115px;--pl-mark:111px;--pl-mark-max:2.6rem}
+.pl-cell--pnc{--pl-slot:100px;--pl-mark:96px;--pl-mark-max:2.15rem}
+.pl-cell--raymond{--pl-slot:170px;--pl-mark:166px;--pl-mark-max:1.65rem}
+.pl-cell--fisher{--pl-slot:200px;--pl-mark:196px;--pl-mark-max:1.65rem}
 .pl-cell--fisher img{opacity:1}
-.pl-cell--sp{--pl-slot:144px;--pl-mark:132px;--pl-mark-max:2rem}
-.pl-cell--nestle{--pl-slot:56px;--pl-mark:52px;--pl-mark-max:4rem}
-.pl-cell--unilever{--pl-slot:144px;--pl-mark:136px;--pl-mark-max:2.1rem}
-.pl-cell--nbc{--pl-slot:180px;--pl-mark:176px;--pl-mark-max:1.8rem}
-.pl-cell--lockheed{--pl-slot:168px;--pl-mark:160px;--pl-mark-max:2.3rem}
-.pl-cell--victoria{--pl-slot:128px;--pl-mark:118px;--pl-mark-max:2.8rem}
-.pl-cell--formula{--pl-slot:128px;--pl-mark:116px;--pl-mark-max:2.2rem}
+.pl-cell--sp{--pl-slot:130px;--pl-mark:126px;--pl-mark-max:2rem}
+.pl-cell--nestle{--pl-slot:54px;--pl-mark:50px;--pl-mark-max:3.3rem}
+.pl-cell--unilever{--pl-slot:129px;--pl-mark:125px;--pl-mark-max:2.1rem}
+.pl-cell--nbc{--pl-slot:162px;--pl-mark:158px;--pl-mark-max:1.75rem}
+.pl-cell--lockheed{--pl-slot:145px;--pl-mark:141px;--pl-mark-max:2.2rem}
+.pl-cell--victoria{--pl-slot:114px;--pl-mark:110px;--pl-mark-max:2.65rem}
+.pl-cell--formula{--pl-slot:110px;--pl-mark:106px;--pl-mark-max:2.2rem}
 /* The Jets artwork occupies only the middle 57% of its square viewBox. */
-.pl-cell--jets{--pl-slot:112px;--pl-mark:96px;--pl-mark-max:none}
-.pl-cell--usf{--pl-slot:168px;--pl-mark:152px;--pl-mark-max:2.3rem}
-.pl-rows{display:grid;gap:1.25rem}
+.pl-cell--jets{--pl-slot:90px;--pl-mark:86px;--pl-mark-max:none}
+.pl-cell--usf{--pl-slot:150px;--pl-mark:146px;--pl-mark-max:2.3rem}
+.pl-rows{display:grid;gap:.45rem}
 .pl-row{
   min-width:0;
   overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
 }
+
 .pl-track{
   display:flex;
   align-items:center;
   gap:var(--pl-gap);
   width:max-content;
   list-style:none;
-  margin:0;
+  margin:0 auto;
   /* scrollWidth includes padding, keeping endpoint logos inside opaque space. */
   padding:0 var(--pl-inset);
-  will-change:transform;
 }
+.pl-row.is-drifting .pl-track{will-change:transform}
 .pl-track .pl-cell{
   flex:0 0 calc(var(--pl-slot)*var(--pl-scale,1));
   width:calc(var(--pl-slot)*var(--pl-scale,1));
   max-width:calc(100vw - var(--pl-inset)*2);
-  height:5.75rem;
-  padding-inline:0;
-}
-@media (min-width:701px) and (max-width:1100px){
-  .pl-brands{--pl-edge:120px;--pl-inset:128px;--pl-gap:20px;--pl-scale:.8}
+  min-height:0;
+  height:var(--pl-row-size);
+  padding:0;
 }
 @media (max-width:700px){
-  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem)}
-  .pl-nums{gap:1.5rem}
-  .pl-brands{--pl-edge:48px;--pl-inset:56px;--pl-gap:16px;--pl-scale:1;margin-top:2.75rem}
+  .pl{padding-block:3.5rem}
+  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem);margin-bottom:1.65rem}
+  .pl-brands{--pl-edge:14px;--pl-inset:24px;--pl-gap:12px;--pl-row-size:3.75rem;margin-top:2rem}
   .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
   .pl-cell{min-height:5.25rem}
-  .pl-cell--goldman{--pl-slot:72px;--pl-mark:70px;--pl-mark-max:2.6rem}
-  .pl-cell--morgan{--pl-slot:120px;--pl-mark:118px}
-  .pl-cell--citi{--pl-slot:52px;--pl-mark:50px;--pl-mark-max:2.6rem}
-  .pl-cell--wells{--pl-slot:136px;--pl-mark:134px;--pl-mark-max:1.6rem}
-  .pl-cell--kpmg{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.6rem}
-  .pl-cell--deloitte{--pl-slot:120px;--pl-mark:118px}
-  .pl-cell--pwc{--pl-slot:64px;--pl-mark:62px;--pl-mark-max:2.7rem}
-  .pl-cell--amazon{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2.6rem}
-  .pl-cell--pnc{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.1rem}
-  .pl-cell--raymond{--pl-slot:148px;--pl-mark:146px;--pl-mark-max:1.55rem}
-  .pl-cell--fisher{--pl-slot:184px;--pl-mark:182px;--pl-mark-max:1.55rem}
-  .pl-cell--sp{--pl-slot:104px;--pl-mark:102px}
-  .pl-cell--nestle{--pl-slot:42px;--pl-mark:40px;--pl-mark-max:3.6rem}
-  .pl-cell--unilever{--pl-slot:104px;--pl-mark:102px}
-  .pl-cell--nbc{--pl-slot:136px;--pl-mark:134px;--pl-mark-max:1.6rem}
-  .pl-cell--lockheed{--pl-slot:128px;--pl-mark:126px;--pl-mark-max:2.1rem}
-  .pl-cell--victoria{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2.5rem}
-  .pl-cell--formula{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2rem}
-  .pl-cell--jets{--pl-slot:80px;--pl-mark:78px}
-  .pl-cell--usf{--pl-slot:120px;--pl-mark:118px;--pl-mark-max:2.1rem}
-  .pl-rows{gap:.75rem}
-  .pl-track .pl-cell{height:5.25rem}
-}
-@media (max-width:600px){
-  .pl{padding-block:4rem}
-  .pl-h{margin-bottom:2rem}
-  .pl-nums{display:block;max-width:none;border-top:1px solid var(--line)}
+  .pl-cell--goldman{--pl-slot:68px;--pl-mark:66px;--pl-mark-max:2.5rem}
+  .pl-cell--morgan{--pl-slot:109px;--pl-mark:107px}
+  .pl-cell--citi{--pl-slot:50px;--pl-mark:48px;--pl-mark-max:2.5rem}
+  .pl-cell--wells{--pl-slot:124px;--pl-mark:122px;--pl-mark-max:1.6rem}
+  .pl-cell--kpmg{--pl-slot:82px;--pl-mark:80px;--pl-mark-max:2.5rem}
+  .pl-cell--deloitte{--pl-slot:106px;--pl-mark:104px}
+  .pl-cell--pwc{--pl-slot:60px;--pl-mark:58px;--pl-mark-max:2.6rem}
+  .pl-cell--amazon{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.5rem}
+  .pl-cell--pnc{--pl-slot:84px;--pl-mark:82px;--pl-mark-max:2.1rem}
+  .pl-cell--raymond{--pl-slot:132px;--pl-mark:130px;--pl-mark-max:1.55rem}
+  .pl-cell--fisher{--pl-slot:162px;--pl-mark:160px;--pl-mark-max:1.55rem}
+  .pl-cell--sp{--pl-slot:97px;--pl-mark:95px}
+  .pl-cell--nestle{--pl-slot:40px;--pl-mark:38px;--pl-mark-max:3rem}
+  .pl-cell--unilever{--pl-slot:98px;--pl-mark:96px}
+  .pl-cell--nbc{--pl-slot:121px;--pl-mark:119px;--pl-mark-max:1.6rem}
+  .pl-cell--lockheed{--pl-slot:115px;--pl-mark:113px;--pl-mark-max:2.1rem}
+  .pl-cell--victoria{--pl-slot:90px;--pl-mark:88px;--pl-mark-max:2.5rem}
+  .pl-cell--formula{--pl-slot:84px;--pl-mark:82px;--pl-mark-max:2rem}
+  .pl-cell--jets{--pl-slot:66px;--pl-mark:64px}
+  .pl-cell--usf{--pl-slot:105px;--pl-mark:103px;--pl-mark-max:2.1rem}
+  .pl-nums{display:block;max-width:30rem;border-top:1px solid var(--line)}
   .pl-n{
     display:grid;
-    grid-template-columns:6.75rem minmax(0,1fr);
+    grid-template-columns:clamp(5.7rem,22vw,6.75rem) minmax(0,1fr);
     align-items:center;
-    gap:1.25rem;
-    padding:.85rem 0;
+    gap:1rem;
+    padding:.7rem 0;
     border-bottom:1px solid var(--line);
     text-align:left;
   }
-  .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
-  .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
+  .pl-n-val{font-size:clamp(2.45rem,10vw,3.25rem);line-height:1.08;text-align:left}
+  .pl-n-lab{max-width:none;margin:0;font-size:.9375rem;line-height:1.5;text-align:left}
 }

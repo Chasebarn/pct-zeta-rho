@@ -1,15 +1,30 @@
 {
-  "retrieved": "2026-10-28",
+  "retrieved": "2026-11-16",
   "chapters": {
     "url": "https://www.phichitheta.org/find-a-chapter",
     "title": "Phi Chi Theta — Find A Chapter",
-    "responseSha256": "4c674a8e5476ae4e2a06dab2747a32ec42711b5b8eaa3414f2d3dbab2ff1cb93",
-    "method": "All 50 collegiate listings transcribed from the national directory; 6 explicit alumni listings excluded. Chapter URLs extracted from that page; null means the national listing did not link the chapter. Standard university names normalized; corrections documented per record.",
+    "responseSha256": "1fc175bf51c630c1ef57da1c99d9c12e6d86cc97bc11b3da93b7c44ceee8ab6a",
+    "method": "All 46 collegiate listings transcribed from the national directory; 6 explicit alumni listings excluded. Chapter URLs taken from the same directory response. Institution names are normalized where needed; campus city and coordinates are from NCES IPEDS.",
     "regions": {
-      "Central-Southern": 14,
-      "Eastern": 14,
+      "Central-Southern": 12,
+      "Eastern": 13,
       "Great Lakes": 8,
-      "Western": 14
+      "Western": 13
+    },
+    "changesFromPreviousSnapshot": {
+      "previousSnapshot": "2026-10-28",
+      "added": [
+        "University of Georgia",
+        "Virginia Tech"
+      ],
+      "noLongerListed": [
+        "Bradley University",
+        "Cornell University",
+        "Tulane University",
+        "University of Montevallo",
+        "University of Pennsylvania",
+        "University of Texas at Dallas"
+      ]
     }
   },
   "coordinates": {

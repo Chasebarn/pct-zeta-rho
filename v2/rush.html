@@ -4,21 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rush Phi Chi Theta at USF</title>
-  <meta name="description" content="Learn about Phi Chi Theta’s six-event recruitment process at USF, eligibility, chapter dues, and how to receive the Rush schedule.">
+  <meta name="description" content="Find out who can rush Phi Chi Theta at USF, what to expect at recruitment events, and where to find Rush updates.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rush Phi Chi Theta at USF">
-  <meta property="og:description" content="Eligibility, chapter dues, and what to expect from Phi Chi Theta’s six-event recruitment process at USF.">
+  <meta property="og:description" content="Eligibility, recruitment events, and Rush updates from Phi Chi Theta at USF.">
   <meta property="og:url" content="https://chasebarn.github.io/pct-zeta-rho/v2/rush.html">
   <meta property="og:image" content="https://chasebarn.github.io/pct-zeta-rho/assets/photo-letters.jpg">
   <meta property="og:image:alt" content="Phi Chi Theta members working together at a chapter event">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://chasebarn.github.io/pct-zeta-rho/v2/rush.html">
-  <link rel="icon" type="image/png" href="../assets/crest.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tokens.css?v=20261029b">
-  <link rel="stylesheet" href="site-frame.css?v=20261029b">
+  <link rel="icon" type="image/png" href="../assets/pct-crest-official.png">
+  <link rel="preload" href="../assets/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="tokens.css?v=20261116">
+  <link rel="stylesheet" href="site-frame.css?v=20261116">
   <style>
     .rush-hero{padding:clamp(3rem,6vw,5.5rem) 0;background:var(--purple-hero);color:var(--paper)}
     .rush-hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:clamp(2rem,6vw,5rem)}
@@ -27,16 +25,15 @@
     .rush-hero h1{font-size:clamp(5rem,9vw,8rem);line-height:.9;color:var(--paper);letter-spacing:-.035em}
     .rush-intro{max-width:47ch;margin:1.5rem 0 0;color:rgba(250,248,243,.84);font-size:clamp(1rem,1.4vw,1.125rem);line-height:1.7}
     .rush-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.5rem;margin-top:1.8rem}
-    .rush-primary{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:.85rem 1.65rem;border-radius:2px;background:var(--gold);color:var(--ink);font-size:.9375rem;font-weight:600;line-height:1.35;letter-spacing:.015em;text-decoration:none;transition:background-color 180ms ease}
-    .rush-primary:hover,.rush-primary:active{background:var(--gold-soft)}
+    .rush-primary{--v2-button-text:.9375rem}
     .rush-secondary{display:inline-flex;align-items:center;min-height:44px;color:var(--paper);font-size:.875rem;text-decoration-thickness:1px;text-underline-offset:5px}
+    .rush-update-note{margin:.7rem 0 0;color:rgba(250,248,243,.78);font-size:.875rem;line-height:1.55}
     .rush-hero-media{margin:0;min-width:0}
     .rush-hero-media img{width:100%;aspect-ratio:1.12;object-fit:cover;object-position:center 58%}
     .rush-hero-media figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.8rem;color:rgba(250,248,243,.64);font-size:.8125rem;line-height:1.5;letter-spacing:.025em}
     .rush-section{padding:var(--section) 0}
     .rush-section h2{font-size:clamp(2.6rem,4.6vw,4.2rem);letter-spacing:-.025em}
     .rush-split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(2rem,6vw,6rem);align-items:start}
-    .rush-section-intro{max-width:33ch;margin:1.2rem 0 0;font-size:.95rem;line-height:1.75}
     .rush-facts{margin:0;border-top:1px solid var(--line)}
     .rush-fact{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:1rem 1.75rem;padding:1.35rem 0;border-bottom:1px solid var(--line)}
     .rush-fact dt{font-weight:600;font-size:.9rem;line-height:1.65;color:var(--ink)}
@@ -49,41 +46,38 @@
     .rush-skills li{padding-top:1.3rem;border-top:1px solid #d8d0bd;min-width:0}
     .rush-skills h3{max-width:20ch;font-family:var(--font-text);font-size:.9375rem;font-weight:600;line-height:1.5;color:var(--ink)}
     .rush-skills p{max-width:34ch;margin:.65rem 0 0;font-size:.9rem;line-height:1.75}
-    .rush-schedule{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:1rem clamp(2rem,6vw,6rem);align-items:start;margin-top:3rem;padding-top:1.6rem;border-top:1px solid #d8d0bd}
-    .rush-schedule h3{font-family:var(--font-text);font-size:.9375rem;font-weight:600;line-height:1.65;color:var(--ink)}
-    .rush-schedule p{max-width:61ch;margin:0;font-size:.9375rem;line-height:1.8}
     .rush-text-link{color:var(--purple);text-decoration-thickness:1px;text-underline-offset:4px}
     .rush-faq{border-top:1px solid var(--line)}
     .rush-faq details{border-bottom:1px solid var(--line)}
     .rush-faq summary{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:76px;padding:1.2rem 0;list-style:none;cursor:pointer;color:var(--ink);font-size:.9375rem;font-weight:600;line-height:1.6}
     .rush-faq summary::-webkit-details-marker{display:none}
-    .rush-faq summary::after{content:"+";flex:none;width:1.1rem;color:var(--gold-ink);font-size:1.4rem;font-weight:400;line-height:1;text-align:center}
-    .rush-faq details[open] summary::after{content:"−"}
+    .rush-faq summary::after{content:"";flex:none;width:1rem;height:1rem;color:var(--gold-ink);background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,linear-gradient(currentColor,currentColor) center/1px 100% no-repeat}
+    .rush-faq details[open] summary::after{background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat}
     .rush-faq summary:hover{color:var(--purple)}
     .rush-faq details p{max-width:62ch;margin:0;padding:0 2.5rem 1.4rem 0;font-size:.9375rem;line-height:1.8}
     @media(max-width:899px){
       .rush-hero-grid{gap:2.5rem}
-      .rush-split,.rush-process-head,.rush-schedule{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:2rem}
+      .rush-split,.rush-process-head{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:2rem}
       .rush-fact{grid-template-columns:1fr;gap:.35rem}
       .rush-skills{gap:1.5rem}
     }
     @media(max-width:680px){
-      .rush-hero{padding:2.75rem 0 2rem}
-      .rush-hero-grid,.rush-split,.rush-process-head,.rush-schedule{grid-template-columns:1fr;gap:1.8rem}
-      .rush-hero h1{font-size:5.5rem}
-      .rush-hero .v2-label{margin-bottom:1rem}
-      .rush-intro{margin-top:1.3rem;max-width:44ch}
-      .rush-actions{margin-top:1.4rem;gap:.6rem 1.2rem}
-      .rush-hero-media img{aspect-ratio:1.45;object-position:center 58%}
-      .rush-hero-media figcaption{font-size:.8125rem}
-      .rush-section h2{font-size:2.9rem}
-      .rush-section-intro{max-width:44ch;margin-top:1rem}
-      .rush-fact{padding:1.1rem 0}
-      .rush-skills{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
-      .rush-skills li{padding-top:1.1rem}
+      .rush-hero{padding:2.25rem 0 1.5rem}
+      .rush-hero-grid,.rush-split,.rush-process-head{grid-template-columns:minmax(0,1fr);gap:1.4rem}
+      .rush-hero h1{font-size:clamp(4.5rem,19vw,5.5rem)}
+      .rush-hero .v2-label{margin-bottom:.8rem}
+      .rush-intro{margin-top:1rem;max-width:44ch}
+      .rush-actions{margin-top:1.15rem;gap:.45rem 1rem}
+      .rush-primary{--v2-button-px:1.2rem}
+      .rush-hero-media img{aspect-ratio:1.6}
+      .rush-hero-media figcaption{margin-top:.6rem}
+      .rush-section{padding-block:clamp(2.6rem,8vw,3.5rem)}
+      .rush-section h2{font-size:clamp(2.5rem,10vw,2.9rem)}
+      .rush-fact{padding:.95rem 0}
+      .rush-skills{grid-template-columns:minmax(0,1fr);gap:1.15rem;margin-top:1.5rem}
+      .rush-skills li{padding-top:.95rem}
       .rush-skills h3,.rush-skills p{max-width:100%}
-      .rush-schedule{gap:.65rem;margin-top:2rem;padding-top:1.4rem}
-      .rush-faq summary{min-height:72px;gap:1rem}
+      .rush-faq summary{min-height:64px;padding-block:.9rem;gap:1rem}
       .rush-faq details p{padding-right:1.5rem}
     }
     @media(prefers-reduced-motion:reduce){.rush-primary{transition:none}}
@@ -94,7 +88,7 @@
   <header class="v2hd">
     <div class="v2wrap v2hd-row">
       <a class="v2hd-brand" href="index.html">
-        <img class="v2hd-crest" src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445" decoding="async">
+        <img class="v2hd-crest" src="../assets/pct-crest-official.png" alt="" width="300" height="339" decoding="async">
         <span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho &middot; USF</span></span>
       </a>
       <nav class="v2hd-nav" aria-label="Primary">
@@ -104,6 +98,7 @@
           <li><a class="v2hd-link" href="index.html#national">National Network</a></li>
         </ul>
       </nav>
+      <a class="v2hd-rush v2-button" href="rush.html" aria-current="page">Rush PCT</a>
       <details class="v2hd-menu">
         <summary><span class="v2-sr-only">Open navigation</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h14M3 10h14M3 14h14"/></svg></summary>
         <nav class="v2hd-mobile" aria-label="Mobile navigation">
@@ -113,7 +108,6 @@
           <a href="../philanthropy.html">Philanthropy</a>
         </nav>
       </details>
-      <a class="v2hd-rush" href="rush.html" aria-current="page">Rush PCT</a>
     </div>
   </header>
 
@@ -123,11 +117,12 @@
         <div class="rush-hero-copy">
           <p class="v2-label">Phi Chi Theta at USF</p>
           <h1 id="rush-title">Rush</h1>
-          <p class="rush-intro">Meet the chapter through six Rush events. Get the schedule, learn about membership, and see how to join.</p>
+          <p class="rush-intro">Meet the members, get a feel for chapter events, and see if Phi Chi Theta is a good fit for you.</p>
           <div class="rush-actions">
-            <a class="rush-primary" id="interest-form" href="https://sites.google.com/view/pct-zeta-rho/rush" target="_blank" rel="noopener">Interest Form<span class="v2-sr-only"> (opens in a new tab)</span></a>
-            <a class="rush-secondary" href="#eligibility">Eligibility and details</a>
+            <a class="v2-button rush-primary" id="rush-updates" href="https://www.instagram.com/pctusf/" aria-describedby="rush-update-note">Rush Updates</a>
+            <a class="rush-secondary" href="#eligibility">Check eligibility</a>
           </div>
+          <p class="rush-update-note" id="rush-update-note">Follow @pctusf on Instagram for Rush dates and how to sign up.</p>
         </div>
         <figure class="rush-hero-media">
           <img src="../assets/photo-letters.jpg" alt="Phi Chi Theta members working together at a chapter event" width="1300" height="1300" fetchpriority="high" decoding="async">
@@ -138,10 +133,7 @@
 
     <section class="rush-section" id="eligibility" aria-labelledby="eligibility-title">
       <div class="v2wrap rush-split">
-        <div>
-          <h2 id="eligibility-title">Who can rush?</h2>
-          <p class="rush-section-intro">Rush is open to USF students pursuing business and economics, from their first year through their last.</p>
-        </div>
+        <h2 id="eligibility-title">Who can rush?</h2>
         <dl class="rush-facts">
           <div class="rush-fact">
             <dt>Academic path</dt>
@@ -149,15 +141,11 @@
           </div>
           <div class="rush-fact">
             <dt>Class year</dt>
-            <dd>All class years are welcome, whether you are a first-year student or preparing to graduate.</dd>
+            <dd>USF students in every class year, from first-year students to seniors.</dd>
           </div>
           <div class="rush-fact">
             <dt>Experience</dt>
             <dd>No prior Greek or professional organization experience is required. You do not need to know anyone in the chapter.</dd>
-          </div>
-          <div class="rush-fact">
-            <dt>Cost</dt>
-            <dd><strong>Rush is free.</strong> There is no charge to attend any of the six events. Chapter dues are listed at <strong>$235 per semester</strong>.</dd>
           </div>
         </dl>
       </div>
@@ -167,7 +155,7 @@
       <div class="v2wrap">
         <div class="rush-process-head">
           <h2 id="expect-title">What to expect.</h2>
-          <p class="rush-process-copy">Six organized events introduce you to the chapter’s culture and standards, with opportunities to speak directly with members and leadership. The process is about mutual fit: getting to know the chapter as the chapter gets to know you.</p>
+          <p class="rush-process-copy">At recruitment events, you can talk with chapter leaders and current members about what they work on and what’s expected of new members.</p>
         </div>
         <ul class="rush-skills">
           <li>
@@ -183,10 +171,6 @@
             <p>Structured opportunities to strengthen public speaking and communication.</p>
           </li>
         </ul>
-        <div class="rush-schedule">
-          <h3>Getting the schedule</h3>
-          <p>Complete the interest form to receive the full Rush schedule by email, along with a calendar file for the events. Follow <a class="rush-text-link" href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">@pctusf on Instagram</a> for dates, locations, and semester details.</p>
-        </div>
       </div>
     </section>
 
@@ -195,20 +179,20 @@
         <h2 id="faq-title">Common questions.</h2>
         <div class="rush-faq">
           <details>
-            <summary>Do I need to be a business major?</summary>
-            <p>Business and economics minors are eligible too. Rush is open to majors and minors in these fields who are in good academic standing.</p>
+            <summary>Can I rush with a business or economics minor?</summary>
+            <p>Yes. USF students with a business or economics minor can rush if they’re in good academic standing.</p>
           </details>
           <details>
-            <summary>Is it too early or too late to rush?</summary>
-            <p>Rush is open to all class years, including first-year students and seniors.</p>
+            <summary>Where can I ask about dues?</summary>
+            <p>Message <a class="rush-text-link" href="https://www.instagram.com/pctusf/">@pctusf on Instagram</a> to ask about current dues before joining.</p>
           </details>
           <details>
             <summary>Is Rush a high-pressure evaluation?</summary>
-            <p>The process is designed around mutual fit. Across six structured events, you get to know the chapter and its members as they get to know you. No prior experience with Greek or professional organizations is required.</p>
+            <p>Rush gives you and the chapter a chance to get to know each other. No prior fraternity or professional organization experience is required.</p>
           </details>
           <details>
-            <summary>How do I start?</summary>
-            <p>Complete the interest form to receive the schedule and event information by email. Semester dates, locations, and updates are also announced on <a class="rush-text-link" href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">@pctusf on Instagram</a>.</p>
+            <summary>How do I find out when Rush starts?</summary>
+            <p>Follow <a class="rush-text-link" href="https://www.instagram.com/pctusf/">@pctusf on Instagram</a> for dates, locations, and sign-up details. You can also message the chapter there with questions.</p>
           </details>
         </div>
       </div>
@@ -220,7 +204,6 @@
       <div class="v2footer-grid">
         <div class="v2footer-about">
           <a class="v2footer-brand" href="index.html">
-            <img src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445" loading="lazy" decoding="async">
             <span class="v2footer-lock"><span class="v2footer-name">Phi Chi Theta</span><span class="v2footer-sub">Zeta Rho · USF</span></span>
           </a>
           <p>A professional business fraternity at the University of South Florida.</p>

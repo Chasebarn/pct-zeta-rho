@@ -16,7 +16,7 @@ Root V1 and legacy resource pages remain separate.
 - Membership has no overall visible heading. Keep complete category titles and
   supporting real photography, with larger type and generous selection targets.
 - Membership and Member Success share cream, separated by an inset rule.
-  National and closing Rush share deep purple, separated by an inset rule.
+  The national network uses deep purple before the cream photo field.
 - Member Success remains large and prominent. Gold figures count once on entry
   from 1 to 95%, 1 to 3.60, and 1 to 15. Keep accessible final values and stable widths.
 - All twenty actual logos appear in two desktop / three phone rows. Alternate
@@ -28,8 +28,9 @@ Root V1 and legacy resource pages remain separate.
   No redundant map caption, crest, About action, directory link, or campus picker.
 - Map only sourced national collegiate campuses. Pop dots once across the country
   on entry, animating dot/ring children without moving geographic group transforms.
-- Keep the original chapter photo carousel between National and Rush, on the same
-  purple surface. Omit the visible heading and intro. Do not pause on mouse hover;
+- Keep the original chapter photo carousel between National and Rush. Use a cream
+  photo field and overlap the bottom of the arc with the purple Rush panel. Omit
+  the visible heading and intro. Do not pause on mouse hover;
   retain a keyboard focus pause and honor reduced motion.
 - Center all closing invitation content at every width. Use one restrained arrival
   glow on Rush PCT, with a static reduced-motion treatment.

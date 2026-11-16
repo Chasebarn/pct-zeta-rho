@@ -476,8 +476,8 @@
 /* ===== 05-mem ===== */
 /* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
    rotating hub carries them around the arc at one revolution per 150 seconds. */
-/* The carousel continues the national section's purple field into Rush. */
-.mem{padding:0;background:var(--purple-deep)}
+/* A cream field frames the photographs. Rush covers the bottom of the arc. */
+.mem{padding:clamp(1.5rem,3.5vw,3.5rem) 0 0;background:var(--paper)}
 
 /* Keep the original radius and card proportions, including the shallower
    desktop arc and the tighter mobile circle. The section below cuts the arc. */
@@ -491,6 +491,13 @@
   height:calc(var(--h) + var(--inset) + 1.1rem);
   overflow:hidden;
   isolation:isolate;
+}
+/* Soften the part of the crop still visible beside the overlaid panel. */
+.mem-band::after{
+  content:"";position:absolute;inset:auto 0 0;z-index:1;
+  height:clamp(.75rem,1.75vw,1.5rem);
+  background:linear-gradient(to bottom,transparent,var(--paper));
+  pointer-events:none;
 }
 .mem-wheel{
   list-style:none;
@@ -521,7 +528,7 @@
 @keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 
 .mem-band:focus-visible .mem-wheel{animation-play-state:paused}
-.mem-band:focus-visible{outline:2px solid var(--gold-soft);outline-offset:-4px}
+.mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
 
 @media (max-width:767px){
   /* Keep the original phone circle through 390px, then taper toward the
@@ -538,13 +545,20 @@
    the source asset; the image crop keeps it outside the visible photograph. */
 .mem-i--framed img{transform:scale(1.12)}
 /* ===== 07-act ===== */
-/* The national network and closing invitation share one continuous field. */
+/* Rush is a foreground panel: the arc continues behind it at both sides. */
 .act{
-  position:relative;overflow:hidden;padding:clamp(4.75rem,8vw,7.5rem) 0;
-  color:var(--paper);text-align:center;background:var(--purple-deep);
+  position:relative;z-index:1;
+  margin-top:calc(-1 * clamp(4.25rem,9vw,8.75rem));
+  padding:0 0 clamp(1.25rem,4vw,4rem);
+  color:var(--paper);text-align:center;background:transparent;
 }
-.act::before{content:"";position:absolute;top:0;left:50%;width:min(var(--wrap),calc(100% - var(--gutter)*2));height:1px;transform:translateX(-50%);background:rgba(250,248,243,.17)}
-.act-inner{max-width:58rem;margin-inline:auto;text-align:center}
+.act-inner{
+  padding:clamp(4.25rem,7.5vw,7rem) clamp(1rem,5vw,4rem);
+  border:1px solid #48345c;border-radius:clamp(10px,1.35vw,20px);
+  background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
+  box-shadow:0 10px 28px rgba(25,18,33,.12);
+  text-align:center;
+}
 .act-title{margin:0;font-size:clamp(3.5rem,7.5vw,6.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
 .act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.6;color:rgba(250,248,243,.76)}
@@ -564,7 +578,7 @@
 .act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
 @media(max-width:767px){
- .act{padding-block:4.5rem}
+ .act-inner{padding-block:3.5rem}
  .act-title{font-size:clamp(3.1rem,12vw,4.8rem)}
  .act-title em{display:block}
  .act-line{font-size:1.05rem}
@@ -952,7 +966,7 @@
 
     <!-- ===== 05-mem ===== -->
 <!-- Original 32-slot photo wheel with six real chapter photographs. -->
-<section class="mem on-dark" id="life" aria-label="Chapter life">
+<section class="mem" id="life" aria-label="Chapter life">
   <div class="mem-band" tabindex="0" role="group" aria-label="Chapter photo carousel. Keyboard focus pauses movement.">
     <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
       <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>

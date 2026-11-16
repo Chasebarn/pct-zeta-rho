@@ -28,7 +28,9 @@ Root V1 and legacy resource pages remain separate.
   No redundant map caption, crest, About action, directory link, or campus picker.
 - Map only sourced national collegiate campuses. Pop dots once across the country
   on entry, animating dot/ring children without moving geographic group transforms.
-- Exclude Chapter Life from the published homepage; retain its source for recovery.
+- Keep the original chapter photo carousel between National and Rush, on the same
+  purple surface. Omit the visible heading and intro. Do not pause on mouse hover;
+  retain a keyboard focus pause and honor reduced motion.
 - Center all closing invitation content at every width. Use one restrained arrival
   glow on Rush PCT, with a static reduced-motion treatment.
 - Keep CTA labels plain, without decorative arrows. Header crest remains transparent.

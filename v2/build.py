@@ -5,9 +5,7 @@ import glob, os, re, sys
 from chapter_map import CHAPTERS, render_svg
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-# Chapter Life is retained in source for recovery, excluded from the published page.
-parts = sorted(p for p in glob.glob(os.path.join(ROOT, 'parts', '*.html'))
-               if os.path.basename(p) != '05-mem.html')
+parts = sorted(glob.glob(os.path.join(ROOT, 'parts', '*.html')))
 if not parts:
     sys.exit('no parts found')
 

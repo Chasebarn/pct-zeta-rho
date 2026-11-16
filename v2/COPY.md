@@ -91,9 +91,8 @@ hover titles and an accessible geographic description.
 
 ## Chapter Life
 
-Removed from the published homepage at the user's explicit request on October 29.
-Its original circular carousel source and real photographs remain in the repository
-for recovery. No Chapter Life navigation link remains on V2 pages.
+The original circular carousel and real chapter photographs appear without a visible
+heading or introductory copy. There is no Chapter Life navigation link on V2 pages.
 
 ## Rush Phi Chi Theta.
 

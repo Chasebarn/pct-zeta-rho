@@ -1,17 +1,7 @@
 /* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
    rotating hub carries them around the arc at one revolution per 150 seconds. */
-.mem{
-  position:relative;
-  background:var(--paper);
-  padding-block:clamp(3rem,5.5vw,4.5rem) 0;
-  margin-bottom:-1px;
-}
-.mem-h{
-  text-align:center;
-  font-size:clamp(2.6rem,6.4vw,5.4rem);
-  letter-spacing:-.02em;
-  margin:0 0 clamp(1.3rem,2.4vw,1.9rem);
-}
+/* The carousel continues the national section's purple field into Rush. */
+.mem{background:var(--purple-deep)}
 
 /* Keep the original radius and card proportions, including the shallower
    desktop arc and the tighter mobile circle. The section below cuts the arc. */
@@ -54,8 +44,8 @@
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 @keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 
-.mem-band:hover .mem-wheel,.mem-band:focus-within .mem-wheel{animation-play-state:paused}
-.mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
+.mem-band:focus-visible .mem-wheel{animation-play-state:paused}
+.mem-band:focus-visible{outline:2px solid var(--gold-soft);outline-offset:-4px}
 
 @media (max-width:767px){
   /* Keep the original phone circle through 390px, then taper toward the

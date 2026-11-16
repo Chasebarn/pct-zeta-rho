@@ -28,12 +28,13 @@ and visual requirements are in `CONTRACT.md`.
 | Membership | Larger complete category titles at left, supporting photo at right; phone photo inside its category |
 | Member Success | Same cream field, inset divider, gold figures that count once on entry; two desktop / three phone logo rows |
 | National | Large headline and benefit-led copy beside a larger U.S. map; campus dots appear across the country on entry |
+| Chapter photos | The original circular carousel between National and Rush, without a visible heading |
 | Rush | Centered invitation and action, with one soft arrival glow; continuous purple field with an inset divider |
 | Footer | Chapter identity, page links and social links |
 
-The Chapter Life section is excluded from the build at the user's request; its source
-and photographs remain available for recovery. Primary navigation now links to the
-National Network instead. Hero text is static and has no word clipping masks.
+The original photo carousel appears immediately before Rush without a visible
+heading or introduction. It rotates through pointer hover; keyboard focus pauses
+it, and reduced motion keeps it still. Hero text is static and has no word clipping masks.
 
 Content is visible without JavaScript. Motion respects reduced-motion preferences,
 including changes during a session. Count-up figures have stable final accessible

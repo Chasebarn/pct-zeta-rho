@@ -41,8 +41,9 @@ Root V1 and legacy resource pages remain separate.
 ## Responsive behavior
 
 - No horizontal page overflow, clipped headings, scroll hijacking, or hidden logos.
-- Membership remains two columns from 760px, with copy left and photo right. Phone
-  category changes retain the selected control's screen position.
+- Membership remains two columns from 760px, with copy left and photo right. Tapping
+  a phone category leaves the page scroll position alone. Keyboard activation
+  keeps the focused control in view.
 - Use consistent gutters, readable text, a one-row mobile header, accessible mobile
   navigation, and a centered display-led Rush section.
 - Review the whole page on small phones, tablets, narrow desktops, and wide desktops.

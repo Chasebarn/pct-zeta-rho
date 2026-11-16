@@ -44,8 +44,8 @@ normal page scrolling in opposite directions with compact optical sizing, slower
 travel and earlier soft edges. There is no clock-driven logo marquee, pinned
 scrolling, manual sideways control, or mock countdown.
 
-Membership stays in two columns from 760px; phone category changes retain the
-selected control's screen position. Reduced motion and no JavaScript expose every
+Membership stays in two columns from 760px. Tapping a phone category leaves the
+page scroll position alone. Keyboard activation keeps the focused control in view. Reduced motion and no JavaScript expose every
 logo in a static wrapping layout. Logo provenance is in `assets/logos/sources.json`.
 National facts and sources are documented in `COPY.md`. Chapter locations, federal
 NCES coordinates, and Census-derived geography are recorded in `assets/map/`.

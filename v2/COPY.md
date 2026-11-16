@@ -2,7 +2,7 @@
 
 Live: https://chasebarn.github.io/pct-zeta-rho/v2/index.html
 
-Current copy and content, updated November 16, 2026. The page uses concise,
+Current copy and content, updated October 29, 2026. The page uses concise,
 factual language. Keep the established chapter colors, typefaces, and real
 photography. Do not add motivational slogans, rhetorical questions, invented
 statistics, event dates, or countdowns.
@@ -16,11 +16,10 @@ statistics, event dates, or countdowns.
 - Professional Business Fraternity
 - University of South Florida
 - Career preparation, leadership, and a business network before you graduate.
-- Footer context: Professional Business Fraternity · Founded 1924
+- Footer context: Professional Business Fraternity · Scroll · Founded 1924
 
-Use a left-aligned reading column next to a chapter portrait on desktop. On
-phones the portrait follows the primary action. Do not add an eyebrow above the
-title or center each line. Buttons have plain text labels
+The original full-height hero uses one left-aligned reading column. Do not add
+an eyebrow above the title or center each line. Buttons have plain text labels
 without decorative arrows.
 
 ## Membership
@@ -28,7 +27,7 @@ without decorative arrows.
 No overall heading or introductory paragraph. The region has an accessible
 Membership label. Each row opens its description and corresponding photograph.
 Desktop places larger, complete category titles on the left and the photograph on the right.
-On phones the shared photo sits below the three topic controls.
+On phones the image belongs inside its active category panel, immediately after copy.
 
 | Row | Description |
 |---|---|
@@ -67,7 +66,7 @@ period before changing them or adding stronger claims.
 
 Keep the original large heading with the year italic and gold. No crest, About
 button, directory link, caption, picker, or location panel appears in this section.
-The larger map shows all campus pins immediately, with one quiet emphasis on USF.
+The map is larger and its pins appear once across the country on entry.
 
 Your network extends beyond USF: **46 collegiate chapters**, alumni across the
 country, and national mentoring programs.
@@ -75,7 +74,7 @@ country, and national mentoring programs.
 Build professional connections, attend regional conferences, and apply for member
 scholarships.
 
-Verified November 16, 2026 against primary national sources:
+Membership benefits verified October 29, 2026; the collegiate directory count was refreshed November 16, 2026:
 
 - Current active directory: https://www.phichitheta.org/find-a-chapter
 - Nationwide alumni networking, mentoring, regional conferences, scholarships:
@@ -93,7 +92,7 @@ hover titles and an accessible geographic description.
 ## Chapter Life
 
 The original circular carousel and real chapter photographs appear without a visible
-heading or introductory copy. The photos rotate on request behind the full-width purple Rush section.
+heading or introductory copy. The circular photos turn behind the full-width purple Rush section.
 There is no Chapter Life navigation link on V2 pages.
 
 ## Rush Phi Chi Theta.
@@ -120,10 +119,8 @@ Connect: Instagram, LinkedIn, Apparel Store, Donate.
 
 ## Content follow-ups
 
-The V2 Rush page links to the chapter's official Instagram for updates.
-The older Google Sites buttons resolve to incomplete destinations, and the Fall
-form listed by the chapter's Linktree requires sign-in. Replace the update link
-with a direct form action only after confirming a live public destination.
-Confirm any recruitment schedule or dues before publishing them.
-The three existing chapter outcome figures still need a reporting period and
-primary documentation from chapter officers.
+The V2 Rush page links to the official chapter Instagram for current updates.
+No public signup form has been verified; the old form destination is broken.
+Confirm the chapter’s next schedule and current dues before publishing those facts.
+The separate legacy Rush page remains unchanged. Confirm the three chapter figures
+with chapter officers before making new factual claims.

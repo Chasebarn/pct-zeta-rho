@@ -1,46 +1,96 @@
-/* Button activation changes the chapter detail. Focus and page scroll stay put. */
+/* Keep the accordion and its photograph connected at every width. Desktop
+   shares a photo stage; mobile returns each figure to its own content panel. */
 window.pctInitGrow = function () {
-  var root = document.querySelector('[data-grow]');
-  if (!root || root.dataset.growReady) return;
-  var stage = root.querySelector('[data-grow-stage]');
-  var buttons = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
-  if (!stage || !buttons.length) return;
-  var items = buttons.map(function (button) {
-    return {
-      button:button,
-      row:button.closest('.grow__row'),
-      panel:document.getElementById(button.getAttribute('aria-controls')),
-      figure:document.getElementById(button.getAttribute('data-grow-figure'))
-    };
-  });
-  if (!items.every(function (item) { return item.row && item.panel && item.figure; })) return;
-  root.dataset.growReady = '1';
-  items.forEach(function (item) {
-    /* The image remains described after it moves into the common photo stage. */
-    stage.appendChild(item.figure);
-  });
-  function select(index) {
-    items.forEach(function (item,i) {
-      var active = i === index;
-      item.row.classList.toggle('is-open', active);
-      item.button.setAttribute('aria-expanded', String(active));
-      item.panel.hidden = !active;
-      item.figure.hidden = !active;
+  try {
+    var root = document.querySelector('[data-grow]');
+    if (!root || root.dataset.growReady === '1') return;
+    var stage = root.querySelector('[data-grow-stage]');
+    var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
+    if (!stage || btns.length < 2) return;
+
+    var rows = [], figs = [], panels = [];
+    var valid = btns.every(function (button) {
+      var row = button.closest('.grow__row');
+      var panel = document.getElementById(button.getAttribute('aria-controls'));
+      var figure = document.getElementById(button.getAttribute('data-grow-figure'));
+      if (!row || !panel || !figure) return false;
+      rows.push(row); panels.push(panel); figs.push(figure);
+      return true;
     });
+    if (!valid) return;
+
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
+    var current = 0;
+    var wide = false;
+    var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var exitTimer = null;
+    function clearLeaving() {
+      if (exitTimer !== null) { clearTimeout(exitTimer); exitTimer = null; }
+      figs.forEach(function (figure) { figure.classList.remove('is-leaving'); });
+    }
+    function sync() {
+      for (var i = 0; i < rows.length; i++) {
+        var active = i === current;
+        rows[i].classList.toggle('is-open', active);
+        panels[i].hidden = !active;
+        btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
+        figs[i].classList.toggle('is-active', active);
+        figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
+      }
+    }
+    function open(index) {
+      if (index === current) return;
+      var before = btns[index].getBoundingClientRect().top;
+      clearLeaving();
+      if (wide && !(reduce && reduce.matches)) {
+        figs[current].classList.add('is-leaving');
+        exitTimer = setTimeout(clearLeaving, 950);
+      }
+      current = index;
+      sync();
+      /* Closing a preceding phone panel removes its photograph above the
+         selected control. Keep that control in the same viewport position. */
+      if (!wide && before >= 0 && before < window.innerHeight) {
+        var shift = btns[index].getBoundingClientRect().top - before;
+        if (Math.abs(shift) > 1) window.scrollTo({
+          top:Math.max(0, window.scrollY + shift), behavior:'instant'
+        });
+      }
+    }
+    function layout() {
+      clearLeaving();
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 760;
+      root.classList.toggle('grow--desktop', wide);
+      figs.forEach(function (figure, i) {
+        var destination = wide ? stage : panels[i];
+        if (figure.parentNode !== destination) destination.appendChild(figure);
+      });
+      sync();
+    }
+
+    root.classList.add('grow--js');
+    layout();
+    btns.forEach(function (button, i) {
+      button.addEventListener('click', function () { open(i); });
+      button.addEventListener('focus', function () { open(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowDown') next = (i + 1) % btns.length;
+        else if (event.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = btns.length - 1;
+        else return;
+        event.preventDefault();
+        btns[next].focus();
+      });
+    });
+    if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
+    else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
+    else window.addEventListener('resize', layout, { passive:true });
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
+    root.dataset.growReady = '1';
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }
-  select(0);
-  root.classList.add('grow--js');
-  items.forEach(function (item,i) {
-    item.button.addEventListener('click', function () { select(i); });
-    item.button.addEventListener('keydown', function (event) {
-      var next;
-      if (event.key === 'ArrowDown') next = (i + 1) % items.length;
-      else if (event.key === 'ArrowUp') next = (i + items.length - 1) % items.length;
-      else if (event.key === 'Home') next = 0;
-      else if (event.key === 'End') next = items.length - 1;
-      else return;
-      event.preventDefault();
-      items[next].button.focus();
-    });
-  });
 };

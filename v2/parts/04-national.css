@@ -1,100 +1,72 @@
-/* A quiet atlas: place, network and history share one reading edge. */
+/* The national network is the visual evidence; the statement and two short
+   benefit paragraphs keep one reading edge beside it on wide screens. */
 .v2nat{
   position:relative;
-  padding-block:clamp(3.75rem,7vw,6.5rem);
+  padding-block:clamp(3.75rem,6vw,5rem);
   background:var(--purple-deep);
   color:var(--paper);
 }
-.v2nat-layout{display:grid;gap:clamp(1.25rem,4vw,3rem)}
-.v2nat-story{min-width:0;container-type:inline-size}
+.v2nat-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(560px,45vw,640px);
+  align-items:center;
+  gap:clamp(2.5rem,4.5vw,4.5rem);
+}
+.v2nat-story{min-width:0}
 .v2nat-h{
   margin:0;
-  font-size:clamp(2.625rem,6vw,4.5rem);
-  font-size:clamp(2.625rem,14.5cqi,4.5rem);
-  line-height:1.04;
+  font-size:clamp(2.75rem,calc(1rem + 8vw),5.5rem);
+  line-height:1.02;
   letter-spacing:-.02em;
-  text-wrap:balance;
   color:var(--paper);
 }
 .v2nat-heading-line{display:block}
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
 .v2nat-copy{
-  max-width:47ch;
-  margin-top:clamp(1rem,2.2vw,1.5rem);
-  font-size:clamp(1rem,1.55vw,1.1875rem);
-  line-height:1.65;
-  color:rgba(250,248,243,.82);
+  max-width:44ch;
+  margin-top:1.5rem;
+  font-size:clamp(1.0625rem,1.55vw,1.2rem);
+  line-height:1.7;
+  color:rgba(250,248,243,.8);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy p+p{margin-top:.7em}
+.v2nat-copy p+p{margin-top:1rem}
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
-.v2nat-figure{min-width:0;width:100%;max-width:43rem;margin:0}
+.v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
-.v2nat-states path,.v2nat-coast{
-  vector-effect:non-scaling-stroke;
-  stroke-linejoin:round;
-}
-.v2nat-states path{
-  fill:rgba(250,248,243,.038);
-  stroke:rgba(250,248,243,.2);
-  stroke-width:.5px;
-}
-.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:.8px}
+.v2nat.is-map-pending .v2nat-pins{opacity:0}
+.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
+.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
-.v2nat-pin-dot{
-  r:4.15px;
-  fill:var(--gold-soft);
-  stroke:var(--purple-deep);
-  stroke-width:.5px;
-  vector-effect:non-scaling-stroke;
-}
-.v2nat-pin-ring{fill:none;opacity:0}
-.v2nat-pin.is-usf .v2nat-pin-dot{
-  r:5.7px;
-  fill:var(--paper);
-  stroke:var(--purple-deep);
-  stroke-width:.65px;
-}
-.v2nat-pin.is-usf .v2nat-pin-ring{
-  r:10.5px;
-  stroke:var(--gold-soft);
-  stroke-width:1px;
-  opacity:.8;
-  vector-effect:non-scaling-stroke;
-}
+.v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
+.v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
+.v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
+.v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
+.v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
+.v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
 .v2nat-usf-label{
   fill:var(--gold-soft);
   font-family:var(--font-text);
-  font-size:24px;
+  font-size:25px;
   font-weight:600;
-  letter-spacing:.045em;
   paint-order:stroke;
   stroke:var(--purple-deep);
-  stroke-width:2px;
+  stroke-width:5px;
   stroke-linejoin:round;
-  vector-effect:non-scaling-stroke;
   pointer-events:none;
 }
-@media(min-width:980px){
-  .v2nat-layout{
-    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
-    align-items:center;
-    gap:clamp(2rem,5vw,4.5rem);
-  }
-  .v2nat-figure{justify-self:end}
+@media(max-width:1099px){
+  .v2nat-layout{grid-template-columns:1fr;gap:2rem}
+  .v2nat-copy{max-width:60ch}
+  .v2nat-figure{max-width:640px;justify-self:center}
 }
-@media(max-width:599px){
-  .v2nat-pin-dot{r:5px}
-  .v2nat-pin.is-usf .v2nat-pin-dot{r:6.2px}
-  .v2nat-pin.is-usf .v2nat-pin-ring{r:11.5px}
-  .v2nat-usf-label{font-size:43px}
+@media(max-width:759px){
+  .v2nat-layout{gap:1.75rem}
+  .v2nat-copy{max-width:44ch}
+  .v2nat-figure{max-width:none}
+  .v2nat-usf-label{font-size:44px}
 }
-@media(prefers-reduced-motion:no-preference){
-  .v2nat.is-map-focused .v2nat-pin.is-usf .v2nat-pin-ring{
-    animation:v2nat-focus 900ms ease-in-out;
-  }
-}
-@keyframes v2nat-focus{
-  0%,100%{opacity:.8}
-  45%{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .v2nat.is-map-pending .v2nat-pins{opacity:1}
+  .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }

@@ -1,25 +1,29 @@
 /* The full-width Rush section cuts across the bottom of the photo arc. */
 .act{
   position:relative;z-index:1;
-  margin-top:calc(-1 * var(--photo-overlap));
+  margin-top:calc(-1 * clamp(2.75rem,6.5vw,6.5rem));
   padding:clamp(4.75rem,8vw,7.5rem) 0;
   color:var(--paper);text-align:center;
-  background:var(--purple-deep);
+  background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
 }
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
 .act-title{margin:0;font-size:clamp(3.5rem,7.5vw,6.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
 .act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.6;color:rgba(250,248,243,.76)}
 .act-go{margin-top:2.25rem}
-.act-cta{min-width:10.75rem}
-.act.is-arrived .act-cta::after{animation:pct-invitation-glow 820ms ease-out both}
-.act-cta{position:relative}
-.act-cta::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;
-  box-shadow:0 0 20px 4px rgba(230,198,91,.25);opacity:0;pointer-events:none;
+.act-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
+  border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
+  font-family:var(--font-text);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:.01em;text-decoration:none;
 }
-@keyframes pct-invitation-glow{0%,100%{opacity:0}35%{opacity:1}}
-.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
+.act.is-arrived .act-cta{box-shadow:0 0 32px rgba(230,198,91,.18);animation:pct-invitation-glow 1900ms ease-out both}
+@keyframes pct-invitation-glow{
+  0%{box-shadow:0 0 0 rgba(230,198,91,0)}
+  45%{box-shadow:0 0 42px rgba(230,198,91,.38),0 0 0 7px rgba(230,198,91,.05)}
+  100%{box-shadow:0 0 32px rgba(230,198,91,.18)}
+}
+.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
 @media(max-width:767px){
  .act{padding-block:4.5rem}
@@ -28,4 +32,4 @@
  .act-line{font-size:1.05rem}
  .act-go{margin-top:2rem}
 }
-@media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}

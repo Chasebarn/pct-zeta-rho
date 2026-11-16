@@ -6,147 +6,195 @@
 <meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
-<link rel="canonical" href="https://chasebarn.github.io/pct-zeta-rho/v2/index.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Phi Chi Theta at USF">
-<meta property="og:description" content="Career preparation, leadership, and a business network before you graduate.">
-<meta property="og:image" content="https://chasebarn.github.io/pct-zeta-rho/assets/chapter-members.jpg">
-<meta property="og:image:alt" content="Four Zeta Rho members in professional attire at a chapter event.">
-<meta property="og:url" content="https://chasebarn.github.io/pct-zeta-rho/v2/index.html">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="../assets/pct-crest-official.png">
-<link rel="preload" href="../assets/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="tokens.css?v=20261116">
+<link rel="icon" type="image/png" href="../assets/crest.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css?v=24">
+<link rel="stylesheet" href="tokens.css?v=20261029b">
 <style>
 /* ===== 00-header ===== */
 :root{--v2hd-h:77px}
-.v2hd{
-  position:sticky;top:0;z-index:60;background:var(--paper);
-  border-bottom:1px solid var(--line);color:var(--ink);
-}
-.v2hd-row{position:relative;display:flex;align-items:center;gap:1.5rem;min-height:76px;padding-block:10px}
-.v2hd-brand{display:flex;align-items:center;gap:.65rem;min-width:0;text-decoration:none;margin-right:auto}
+.v2hd{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line);transition:background-color 220ms ease,border-color 220ms ease}
+.v2hd-row{position:relative;display:flex;align-items:center;gap:1.5rem;min-height:76px;padding-block:12px}
+.v2hd-brand{display:flex;align-items:center;gap:.75rem;min-width:0;text-decoration:none;margin-right:auto}
 .v2hd-crest{height:42px;width:auto;flex:none}
 .v2hd-lock{display:block;min-width:0}
-.v2hd-name{display:block;font-family:var(--font-display);font-size:1.5rem;line-height:1.05;color:var(--ink)}
-.v2hd-sub{display:block;margin-top:.28rem;font-size:.65rem;line-height:1.2;letter-spacing:.105em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
-.v2hd-list{display:flex;align-items:center;gap:clamp(1rem,2.3vw,2rem);list-style:none;margin:0;padding:0}
+.v2hd-name{display:block;font-family:var(--font-display);font-weight:400;font-size:1.22rem;line-height:1.1;color:var(--ink)}
+.v2hd-sub{display:block;margin-top:.3rem;font-size:.66rem;line-height:1.3;letter-spacing:.13em;font-weight:600;text-transform:uppercase;color:var(--gold-ink)}
+.v2hd-list{display:flex;align-items:center;gap:1.65rem;list-style:none;margin:0;padding:0}
 .v2hd-link{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:500;text-decoration:none;color:var(--ink);text-underline-offset:7px;text-decoration-thickness:1px}
-.v2hd-link:hover,.v2hd-link[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--gold-ink)}
-.v2hd-rush{--v2-button-height:44px;--v2-button-px:1.1rem;--v2-button-text:.9375rem;flex:none;white-space:nowrap}
-.v2hd-menu{display:none;flex:none}
-.v2hd-menu summary{display:grid;place-items:center;list-style:none;cursor:pointer;width:44px;height:44px;color:var(--ink);border:1px solid var(--line);border-radius:var(--control-radius)}
+.v2hd-link:hover,.v2hd-link[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--gold-ink);color:var(--ink)}
+.v2hd-rush{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;padding:.65rem 1.2rem;background:var(--gold);color:var(--ink);font-size:.82rem;font-weight:600;line-height:1.3;text-decoration:none;white-space:nowrap;border-radius:2px;transition:background-color 180ms ease}
+.v2hd-rush:hover{background:var(--gold-soft)}
+.v2hd.is-over-hero{background:transparent;border-color:transparent}
+.v2hd.is-over-hero .v2hd-name{color:var(--paper)}
+.v2hd.is-over-hero .v2hd-link{color:rgba(250,248,243,.85)}
+.v2hd.is-over-hero .v2hd-sub{color:var(--gold-soft)}
+.v2hd.is-over-hero .v2hd-link:hover,.v2hd.is-over-hero .v2hd-link[aria-current="page"]{text-decoration-color:var(--gold-soft);color:var(--paper)}
+.v2hd.is-over-hero a:focus-visible,.v2hd.is-over-hero summary:focus-visible{outline-color:var(--gold-soft)}
+.v2hd .v2hd-mobile a:focus-visible{outline-color:var(--purple)}
+.v2hd-menu{display:none;position:relative;flex:none}
+.v2hd-menu summary{display:flex;align-items:center;justify-content:center;list-style:none;cursor:pointer;width:44px;height:44px;color:var(--ink);border:1px solid var(--line);border-radius:2px}
 .v2hd-menu summary::-webkit-details-marker{display:none}
-.v2hd-menu[open] summary{background:var(--paper-deep);border-color:#bfb3a1}
-.v2hd-mobile{position:absolute;inset:100% 0 auto;padding:.5rem .8rem .65rem;background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold-ink);box-shadow:0 12px 24px rgba(25,18,33,.10);color:var(--ink)}
-.v2hd-mobile a{display:flex;align-items:center;min-height:48px;padding:.6rem .5rem;font-size:.95rem;text-decoration:none}
-.v2hd-mobile a+a{border-top:1px solid var(--line)}
-.v2hd-mobile a:hover,.v2hd-mobile a[aria-current="page"]{color:var(--purple)}
-@media(max-width:899px){
-  :root{--v2hd-h:69px}
-  .v2hd-row{min-height:68px;gap:.65rem}
-  .v2hd-nav{display:none}
-  .v2hd-menu{display:block}
-  .v2hd-crest{height:36px}
-  .v2hd-brand{gap:.5rem}
-  .v2hd-name{font-size:1.29rem}
-  .v2hd-sub{font-size:.59rem;letter-spacing:.075em}
-  .v2hd-rush{--v2-button-px:.85rem}
-}
-@media(max-width:359px){
-  .v2hd-row{gap:.45rem}
-  .v2hd-name{font-size:1.16rem}
-  .v2hd-crest{height:32px}
-  .v2hd-sub{font-size:.55rem}
-  .v2hd-rush{--v2-button-px:.65rem;--v2-button-text:.875rem}
-}
+.v2hd.is-over-hero .v2hd-menu summary{color:var(--paper);border-color:rgba(250,248,243,.24)}
+.v2hd-mobile{position:absolute;top:calc(100% + 14px);right:0;width:230px;padding:.5rem;background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 30px rgba(25,18,33,.1);color:var(--ink)}
+.v2hd-mobile a{display:flex;align-items:center;min-height:46px;padding:.65rem .9rem;font-size:.9rem;text-decoration:none;border-radius:2px}
+.v2hd-mobile a:hover,.v2hd-mobile a[aria-current="page"]{background:var(--paper-deep)}
+@media(max-width:899px){:root{--v2hd-h:73px}.v2hd-row{min-height:72px;gap:.65rem}.v2hd-nav{display:none}.v2hd-menu{display:block}.v2hd-crest{height:38px}.v2hd-name{font-size:1.2rem}.v2hd-sub{font-size:.6rem;letter-spacing:.1em}.v2hd-brand{gap:.55rem}.v2hd-rush{padding:.65rem .95rem}}
+@media(max-width:359px){.v2hd-name{font-size:1.05rem}.v2hd-crest{height:32px}.v2hd-sub{font-size:.56rem}.v2hd-row{gap:.45rem}.v2hd-rush{padding:.65rem .7rem;font-size:.75rem}.v2hd-brand{gap:.4rem}.v2hd-mobile{right:-90px}}
+@media(prefers-reduced-motion:reduce){.v2hd,.v2hd-rush{transition:none}}
+
+/* One quiet control system: stable geometry, clear contrast, no decorative sweep. */
+.v2hero-btn,.act-cta{font-size:1.125rem;letter-spacing:.01em;transition:background-color 180ms ease,border-color 180ms ease}
+.v2hero-btn:active,.v2hd-rush:active,.act-cta:active{background:var(--gold-soft)}
+@media(prefers-reduced-motion:reduce){.v2hero-btn,.v2hd-rush,.act-cta{transition:none}}
+
+.v2hd-rush{font-size:1rem;letter-spacing:.01em}
+@media(max-width:359px){.v2hd-rush{font-size:.875rem}}
 /* ===== 01-hero ===== */
-/* A real chapter portrait carries the identity; the type never waits to render. */
-.v2hero{background:var(--purple-deep);color:var(--paper)}
+/* The original hero is a left-aligned composition within a centered reading
+   column. The footer carries context instead of another row above the title. */
+.v2hero{
+  position:relative;
+  margin-top:calc(var(--v2hd-h,77px) * -1 - 1px);
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:calc(var(--v2hd-h,77px) + 4rem) 0 8rem;
+  background:radial-gradient(120% 90% at 80% -10%,#3b2559 0%,transparent 55%),var(--purple-deep);
+  color:var(--paper);
+}
+.v2hero::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v2hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.v2hero-letters{
+  position:absolute;right:-4rem;bottom:-6rem;z-index:1;
+  font-family:var(--font-display);font-weight:400;font-size:clamp(16rem,34vw,30rem);
+  line-height:.8;white-space:nowrap;color:transparent;
+  -webkit-text-stroke:1px rgba(201,162,39,.16);opacity:.84;
+  pointer-events:none;user-select:none;
+}
 .v2hero-stage{
-  display:grid;grid-template-columns:minmax(0,1.21fr) minmax(0,1fr);
-  gap:clamp(1.75rem,5.5vw,5.5rem);align-items:center;
-  padding-block:clamp(3.5rem,7vw,6.75rem) clamp(2.75rem,6vw,5rem);
+  position:relative;z-index:2;
+  width:fit-content;max-width:min(1040px,calc(100% - var(--gutter)*2));
+  margin-inline:auto;
 }
-.v2hero-inner{min-width:0}
-.v2hero-h1{margin:0;font-size:clamp(4.2rem,8.15vw,7.3rem);line-height:1.02;letter-spacing:-.025em;color:var(--paper);text-wrap:pretty}
+.v2hero-inner{max-width:1040px;text-align:left}
+.v2hero-h1{
+  margin:0 0 1.6rem;font-size:clamp(4rem,10.8vw,9rem);
+  font-weight:400;line-height:1.02;letter-spacing:-.01em;color:var(--paper);
+}
 .v2hero-sub{
-  margin:.75rem 0 0;font-family:var(--font-display);font-style:italic;
-  font-size:clamp(1.9rem,3.25vw,3rem);line-height:1.18;color:var(--gold-soft);
-  padding-inline-end:.16em;
+  margin:0 0 1.4rem;font-family:var(--font-display);font-style:italic;
+  font-size:clamp(1.7rem,3.5vw,2.9rem);line-height:1.25;color:var(--gold-soft);padding-right:.16em;overflow:visible;
 }
-.v2hero-claim{max-width:31rem;margin:1.5rem 0 0;font-size:clamp(1.03rem,1.55vw,1.25rem);line-height:1.55;color:#e3dce9}
-.v2hero-cta{margin:1.8rem 0 0}
-.v2hero-btn{min-width:10.75rem}
-.v2hero-photo{min-width:0;margin:0;padding-top:.5rem;border-top:1px solid rgba(230,198,91,.45)}
-.v2hero-image{aspect-ratio:5/4;overflow:hidden;background:#362941}
-.v2hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%;transform:scale(1.105)}
-.v2hero-photo figcaption{
-  display:flex;gap:.55rem;align-items:baseline;
-  margin-top:.7rem;color:#dfd5e7;font-size:.73rem;font-weight:500;letter-spacing:.085em;text-transform:uppercase;
+.v2hero-claim{
+  max-width:34rem;margin:0 0 2rem;font-size:clamp(1.1rem,1.5vw,1.25rem);
+  line-height:1.6;color:rgba(250,248,243,.78);
 }
-.v2hero-photo figcaption span{color:var(--gold-soft)}
-.v2hero-foot{border-top:1px solid rgba(250,248,243,.18)}
-.v2hero-foot-row{display:flex;justify-content:space-between;align-items:center;gap:1.1rem;padding-block:.95rem;font-size:.75rem;line-height:1.35;letter-spacing:.085em;text-transform:uppercase;color:#ded3e6}
-.v2hero-foot-row span:last-child{flex:none;text-align:right}
-@media(max-width:759px){
-  .v2hero-stage{grid-template-columns:minmax(0,1fr);gap:1.55rem;padding-block:clamp(2.35rem,8vw,4rem) 1.6rem}
-  .v2hero-h1{font-size:clamp(3.6rem,16vw,5.6rem)}
-  .v2hero-sub{margin-top:.55rem;font-size:clamp(1.7rem,7vw,2.5rem)}
-  .v2hero-claim{margin-top:1rem;max-width:35ch}
-  .v2hero-cta{margin-top:1.25rem}
-  .v2hero-photo{max-width:34rem}
-  .v2hero-image{aspect-ratio:1.5}
-  .v2hero-photo figcaption{margin-top:.55rem;font-size:.675rem}
-  .v2hero-foot-row{font-size:.675rem;letter-spacing:.06em}
+.v2hero-cta{margin:0;display:flex;justify-content:flex-start}
+.v2hero-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:58px;min-width:194px;padding:1rem 2.1rem;
+  border:1px solid transparent;border-radius:2px;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--font-text);font-size:1.125rem;font-weight:600;letter-spacing:.01em;
+  line-height:1.4;text-decoration:none;
 }
-@media(max-width:359px){.v2hero-h1{font-size:clamp(3rem,17.2vw,3.6rem)}}
+.v2hero-btn:hover{background:var(--gold-soft)}
+.v2hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;border-top:1px solid rgba(230,198,91,.3);background:rgba(19,11,31,.16)}
+.v2hero-foot-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-block:1.25rem;font-size:.8125rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(250,248,243,.8);
+}
+.v2hero-scroll{display:inline-flex;align-items:center;gap:.6rem}
+.v2hero-scroll::after{content:"";width:1px;height:2rem;background:linear-gradient(var(--gold),transparent)}
+@media(max-width:767px){
+  .v2hero{padding:calc(var(--v2hd-h,73px) + 3rem) 0 7rem;min-height:100svh;align-items:center}
+  .v2hero-stage{width:calc(100% - var(--gutter)*2);max-width:none}
+  .v2hero-h1{font-size:clamp(3.4rem,16.5vw,4.6rem);margin-bottom:1.2rem}
+  .v2hero-sub{margin-bottom:1.5rem}
+  .v2hero-claim{font-size:1.05rem;max-width:34ch;margin-bottom:2rem}
+  .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
+  .v2hero-foot-side{display:block;max-width:23ch}
+  .v2hero-foot-side:last-child{max-width:10ch;text-align:right}
+  .v2hero-scroll{display:none}
+  .v2hero-foot-row{gap:2rem;padding-block:1.1rem;font-size:.7rem;line-height:1.4;letter-spacing:.09em}
+}
+@media(max-height:600px) and (min-width:768px){
+  .v2hero{min-height:660px}
+}
 /* ===== 02-grow ===== */
-/* The buttons and the photograph share one grid. Keeping all three controls
-   above the photo on phones prevents focus changes from moving the page. */
+/* Complete category names lead into a stable photograph on the right.
+   Narrow desktops retain the two-column composition; phones pair each image
+   with its open category. */
 .grow{background:var(--paper);color:var(--ink-soft);padding-block:var(--section)}
-.grow__rows,.grow__stage{min-width:0}
-.grow__row{border-bottom:1px solid var(--line)}
+.grow__rows{min-width:0}
+.grow__row{position:relative;border-bottom:1px solid var(--line)}
 .grow__row:first-child{border-top:1px solid var(--line)}
-.grow__rowh{margin:0;font:inherit;color:inherit}
-.grow__btn{
-  display:flex;align-items:center;justify-content:space-between;gap:.75rem;width:100%;
-  min-height:72px;margin:0;padding:1rem 0;border:0;background:none;color:inherit;text-align:left;font-family:inherit;
-}
-.grow__btn:focus-visible{outline-offset:3px}
-.grow__ttl{font-family:var(--font-display);font-size:clamp(1.95rem,3.35vw,2.85rem);line-height:1.12;letter-spacing:-.018em;color:var(--ink)}
-.grow__panel{padding-bottom:1.2rem}
-.grow [hidden]{display:none!important}
-.grow__say{max-width:44ch;margin:0;font-size:clamp(1rem,1.35vw,1.11rem);line-height:1.62;color:var(--ink-soft)}
-.grow__fig{aspect-ratio:5/4;margin:1rem 0 0;overflow:hidden;background:var(--paper-deep)}
-.grow__fig img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
-.grow__fig--framed img{transform:scale(1.11)}
+.grow__row::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold-ink);transform:scaleX(0);transform-origin:left;transition:transform 450ms var(--ease);pointer-events:none}
+.grow__rowh{margin:0;font:inherit;color:inherit;letter-spacing:normal}
+.grow__btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:92px;margin:0;padding:1.55rem 0;border:0;background:none;color:inherit;text-align:left;font-family:inherit;cursor:default}
+.grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
+.grow__panel{padding-bottom:1.5rem}
+.grow__panel[hidden]{display:none}
+.grow__say{max-width:41ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
+.grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
+.grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
+.grow__fig--framed{--photo-scale:1.12}
 .grow__stage,.grow__icon{display:none}
-.grow--js .grow__stage{display:block}
-.grow--js .grow__stage .grow__fig{margin:0}
 .grow--js .grow__btn{cursor:pointer}
+.grow--js .is-open::after{transform:scaleX(1)}
 .grow--js .is-open .grow__ttl{color:var(--purple)}
-.grow--js .grow__icon{position:relative;display:block;flex:none;width:15px;height:15px;color:var(--ink-mute)}
+.grow--js .grow__icon{position:relative;display:block;flex:none;width:16px;height:16px;color:var(--ink-mute)}
 .grow--js .grow__icon::before,.grow--js .grow__icon::after{content:"";position:absolute;background:currentColor}
-.grow--js .grow__icon::before{left:0;top:7px;width:15px;height:1px}
-.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:15px}
+.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
+.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px;transition:transform 250ms var(--ease)}
 .grow--js .is-open .grow__icon{color:var(--purple)}
-.grow--js .is-open .grow__icon::after{display:none}
+.grow--js .is-open .grow__icon::after{transform:scaleY(0)}
+.grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
+.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:center}
+.grow--desktop .grow__rows{grid-column:1;grid-row:1}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
+.grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
+.grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
+.grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
+.grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(var(--photo-scale,1))}
 @media(min-width:760px){
- .grow--js .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,5rem);align-items:center}
- .grow__btn{min-height:88px}
+ .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+ .grow:not(.grow--js) .grow__fig{margin:0}
 }
 @media(max-width:759px){
+ .grow__ttl{font-size:2rem}
+ .grow__say{max-width:50ch}
  .grow__fig{aspect-ratio:3/2}
- .grow--js .grow__stage{margin-top:1.35rem}
 }
-@media(max-width:359px){.grow__ttl{font-size:1.75rem}}
+@media(max-width:599px){
+ .grow__btn{min-height:76px;gap:1rem;padding-block:1.25rem}
+ .grow__ttl{font-size:2rem;letter-spacing:-.01em}
+ .grow__say{font-size:1.025rem;line-height:1.7}
+ .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
+}
+@media(max-width:359px){.grow__ttl{font-size:1.8rem}}
+@media(prefers-reduced-motion:reduce){
+ .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
+ .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
+ .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
+}
+
+@media(min-width:1000px){.grow--desktop .grow__stage{aspect-ratio:5/4}}
 /* ===== 03-place ===== */
 /* A complete results chapter: the shared paper field, generous display title,
    readable outcomes, then a full-width company stage tied to page scrolling. */
 .pl{
-  padding-block:clamp(4rem,7vw,6.5rem);
+  padding-block:clamp(4.5rem,7.5vw,7rem);
   position:relative;
   background:var(--paper);
   color:var(--ink-soft);
@@ -163,7 +211,7 @@
 }
 .pl-h{
   max-width:none;
-  margin:0 0 clamp(2rem,3.5vw,3.25rem);
+  margin:0 0 clamp(2.5rem,4vw,3.5rem);
   color:var(--ink);
   font-family:var(--font-display);
   font-size:clamp(4.6rem,7.5vw,6rem);
@@ -171,7 +219,7 @@
   line-height:1.05;
   letter-spacing:-.025em;
   text-align:center;
-  text-wrap:balance;
+  white-space:nowrap;
 }
 .pl-nums{
   display:grid;
@@ -197,7 +245,7 @@
 .pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
   max-width:25ch;
-  margin:.7rem auto 0;
+  margin:1rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.9375rem;
@@ -209,17 +257,16 @@
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
 .pl-stat-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-/* Short feathered edges leave most of the viewport fully legible. Endpoint
-   insets are slightly wider than the feather, not part of the artwork. */
+/* Outside the inner reading column, this stage spans the viewport itself.
+   Crops and fades consequently occur at screen edges, not inside the page. */
 .pl-brands{
-  --pl-edge:24px;
-  --pl-inset:44px;
-  --pl-gap:18px;
-  --pl-row-size:4.75rem;
+  --pl-edge:144px;
+  --pl-inset:152px;
+  --pl-gap:24px;
   --pl-scale:1;
   position:relative;
   width:100%;
-  margin-top:clamp(2.5rem,4.5vw,4rem);
+  margin-top:clamp(3rem,5vw,4.5rem);
 }
 /* Complete, unclipped source list for no-JavaScript/reduced-motion visitors. */
 .pl-logos{
@@ -234,8 +281,8 @@
 }
 .pl-logos[hidden]{display:none}
 .pl-cell{
-  --pl-slot:120px;
-  --pl-mark:116px;
+  --pl-slot:136px;
+  --pl-mark:128px;
   --pl-mark-max:2.75rem;
   display:flex;
   align-items:center;
@@ -257,277 +304,266 @@
 .pl-cell--reverse img{filter:brightness(0);opacity:.84}
 /* Optical measures follow the artwork: long, thin wordmarks receive wider
    slots; stacked marks remain compact; clear space is allowed for in sizing. */
-.pl-cell--goldman{--pl-slot:86px;--pl-mark:82px;--pl-mark-max:2.65rem}
-.pl-cell--morgan{--pl-slot:150px;--pl-mark:146px;--pl-mark-max:2rem}
-.pl-cell--citi{--pl-slot:65px;--pl-mark:61px;--pl-mark-max:2.6rem}
-.pl-cell--wells{--pl-slot:164px;--pl-mark:160px;--pl-mark-max:1.75rem}
-.pl-cell--kpmg{--pl-slot:104px;--pl-mark:100px;--pl-mark-max:2.65rem}
-.pl-cell--deloitte{--pl-slot:145px;--pl-mark:141px;--pl-mark-max:2rem}
-.pl-cell--pwc{--pl-slot:78px;--pl-mark:74px;--pl-mark-max:2.75rem}
-.pl-cell--amazon{--pl-slot:115px;--pl-mark:111px;--pl-mark-max:2.6rem}
-.pl-cell--pnc{--pl-slot:100px;--pl-mark:96px;--pl-mark-max:2.15rem}
-.pl-cell--raymond{--pl-slot:170px;--pl-mark:166px;--pl-mark-max:1.65rem}
-.pl-cell--fisher{--pl-slot:200px;--pl-mark:196px;--pl-mark-max:1.65rem}
+.pl-cell--goldman{--pl-slot:90px;--pl-mark:86px;--pl-mark-max:2.8rem}
+.pl-cell--morgan{--pl-slot:160px;--pl-mark:158px;--pl-mark-max:2.1rem}
+.pl-cell--citi{--pl-slot:70px;--pl-mark:66px;--pl-mark-max:2.8rem}
+.pl-cell--wells{--pl-slot:180px;--pl-mark:176px;--pl-mark-max:1.8rem}
+.pl-cell--kpmg{--pl-slot:112px;--pl-mark:106px;--pl-mark-max:2.8rem}
+.pl-cell--deloitte{--pl-slot:160px;--pl-mark:152px;--pl-mark-max:2rem}
+.pl-cell--pwc{--pl-slot:84px;--pl-mark:80px;--pl-mark-max:3rem}
+.pl-cell--amazon{--pl-slot:128px;--pl-mark:120px;--pl-mark-max:2.8rem}
+.pl-cell--pnc{--pl-slot:112px;--pl-mark:106px;--pl-mark-max:2.3rem}
+.pl-cell--raymond{--pl-slot:184px;--pl-mark:180px;--pl-mark-max:1.7rem}
+.pl-cell--fisher{--pl-slot:224px;--pl-mark:220px;--pl-mark-max:1.7rem}
 .pl-cell--fisher img{opacity:1}
-.pl-cell--sp{--pl-slot:130px;--pl-mark:126px;--pl-mark-max:2rem}
-.pl-cell--nestle{--pl-slot:54px;--pl-mark:50px;--pl-mark-max:3.3rem}
-.pl-cell--unilever{--pl-slot:129px;--pl-mark:125px;--pl-mark-max:2.1rem}
-.pl-cell--nbc{--pl-slot:162px;--pl-mark:158px;--pl-mark-max:1.75rem}
-.pl-cell--lockheed{--pl-slot:145px;--pl-mark:141px;--pl-mark-max:2.2rem}
-.pl-cell--victoria{--pl-slot:114px;--pl-mark:110px;--pl-mark-max:2.65rem}
-.pl-cell--formula{--pl-slot:110px;--pl-mark:106px;--pl-mark-max:2.2rem}
+.pl-cell--sp{--pl-slot:144px;--pl-mark:132px;--pl-mark-max:2rem}
+.pl-cell--nestle{--pl-slot:56px;--pl-mark:52px;--pl-mark-max:4rem}
+.pl-cell--unilever{--pl-slot:144px;--pl-mark:136px;--pl-mark-max:2.1rem}
+.pl-cell--nbc{--pl-slot:180px;--pl-mark:176px;--pl-mark-max:1.8rem}
+.pl-cell--lockheed{--pl-slot:168px;--pl-mark:160px;--pl-mark-max:2.3rem}
+.pl-cell--victoria{--pl-slot:128px;--pl-mark:118px;--pl-mark-max:2.8rem}
+.pl-cell--formula{--pl-slot:128px;--pl-mark:116px;--pl-mark-max:2.2rem}
 /* The Jets artwork occupies only the middle 57% of its square viewBox. */
-.pl-cell--jets{--pl-slot:90px;--pl-mark:86px;--pl-mark-max:none}
-.pl-cell--usf{--pl-slot:150px;--pl-mark:146px;--pl-mark-max:2.3rem}
-.pl-rows{display:grid;gap:.45rem}
+.pl-cell--jets{--pl-slot:112px;--pl-mark:96px;--pl-mark-max:none}
+.pl-cell--usf{--pl-slot:168px;--pl-mark:152px;--pl-mark-max:2.3rem}
+.pl-rows{display:grid;gap:1.25rem}
 .pl-row{
   min-width:0;
   overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
 }
-
 .pl-track{
   display:flex;
   align-items:center;
   gap:var(--pl-gap);
   width:max-content;
   list-style:none;
-  margin:0 auto;
+  margin:0;
   /* scrollWidth includes padding, keeping endpoint logos inside opaque space. */
   padding:0 var(--pl-inset);
+  will-change:transform;
 }
-.pl-row.is-drifting .pl-track{will-change:transform}
 .pl-track .pl-cell{
   flex:0 0 calc(var(--pl-slot)*var(--pl-scale,1));
   width:calc(var(--pl-slot)*var(--pl-scale,1));
   max-width:calc(100vw - var(--pl-inset)*2);
-  min-height:0;
-  height:var(--pl-row-size);
-  padding:0;
+  height:5.75rem;
+  padding-inline:0;
+}
+@media (min-width:701px) and (max-width:1100px){
+  .pl-brands{--pl-edge:120px;--pl-inset:128px;--pl-gap:20px;--pl-scale:.8}
 }
 @media (max-width:700px){
-  .pl{padding-block:3.5rem}
-  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem);margin-bottom:1.65rem}
-  .pl-brands{--pl-edge:14px;--pl-inset:24px;--pl-gap:12px;--pl-row-size:3.75rem;margin-top:2rem}
+  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem)}
+  .pl-nums{gap:1.5rem}
+  .pl-brands{--pl-edge:48px;--pl-inset:56px;--pl-gap:16px;--pl-scale:1;margin-top:2.75rem}
   .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
   .pl-cell{min-height:5.25rem}
-  .pl-cell--goldman{--pl-slot:68px;--pl-mark:66px;--pl-mark-max:2.5rem}
-  .pl-cell--morgan{--pl-slot:109px;--pl-mark:107px}
-  .pl-cell--citi{--pl-slot:50px;--pl-mark:48px;--pl-mark-max:2.5rem}
-  .pl-cell--wells{--pl-slot:124px;--pl-mark:122px;--pl-mark-max:1.6rem}
-  .pl-cell--kpmg{--pl-slot:82px;--pl-mark:80px;--pl-mark-max:2.5rem}
-  .pl-cell--deloitte{--pl-slot:106px;--pl-mark:104px}
-  .pl-cell--pwc{--pl-slot:60px;--pl-mark:58px;--pl-mark-max:2.6rem}
-  .pl-cell--amazon{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.5rem}
-  .pl-cell--pnc{--pl-slot:84px;--pl-mark:82px;--pl-mark-max:2.1rem}
-  .pl-cell--raymond{--pl-slot:132px;--pl-mark:130px;--pl-mark-max:1.55rem}
-  .pl-cell--fisher{--pl-slot:162px;--pl-mark:160px;--pl-mark-max:1.55rem}
-  .pl-cell--sp{--pl-slot:97px;--pl-mark:95px}
-  .pl-cell--nestle{--pl-slot:40px;--pl-mark:38px;--pl-mark-max:3rem}
-  .pl-cell--unilever{--pl-slot:98px;--pl-mark:96px}
-  .pl-cell--nbc{--pl-slot:121px;--pl-mark:119px;--pl-mark-max:1.6rem}
-  .pl-cell--lockheed{--pl-slot:115px;--pl-mark:113px;--pl-mark-max:2.1rem}
-  .pl-cell--victoria{--pl-slot:90px;--pl-mark:88px;--pl-mark-max:2.5rem}
-  .pl-cell--formula{--pl-slot:84px;--pl-mark:82px;--pl-mark-max:2rem}
-  .pl-cell--jets{--pl-slot:66px;--pl-mark:64px}
-  .pl-cell--usf{--pl-slot:105px;--pl-mark:103px;--pl-mark-max:2.1rem}
-  .pl-nums{display:block;max-width:30rem;border-top:1px solid var(--line)}
+  .pl-cell--goldman{--pl-slot:72px;--pl-mark:70px;--pl-mark-max:2.6rem}
+  .pl-cell--morgan{--pl-slot:120px;--pl-mark:118px}
+  .pl-cell--citi{--pl-slot:52px;--pl-mark:50px;--pl-mark-max:2.6rem}
+  .pl-cell--wells{--pl-slot:136px;--pl-mark:134px;--pl-mark-max:1.6rem}
+  .pl-cell--kpmg{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.6rem}
+  .pl-cell--deloitte{--pl-slot:120px;--pl-mark:118px}
+  .pl-cell--pwc{--pl-slot:64px;--pl-mark:62px;--pl-mark-max:2.7rem}
+  .pl-cell--amazon{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2.6rem}
+  .pl-cell--pnc{--pl-slot:88px;--pl-mark:86px;--pl-mark-max:2.1rem}
+  .pl-cell--raymond{--pl-slot:148px;--pl-mark:146px;--pl-mark-max:1.55rem}
+  .pl-cell--fisher{--pl-slot:184px;--pl-mark:182px;--pl-mark-max:1.55rem}
+  .pl-cell--sp{--pl-slot:104px;--pl-mark:102px}
+  .pl-cell--nestle{--pl-slot:42px;--pl-mark:40px;--pl-mark-max:3.6rem}
+  .pl-cell--unilever{--pl-slot:104px;--pl-mark:102px}
+  .pl-cell--nbc{--pl-slot:136px;--pl-mark:134px;--pl-mark-max:1.6rem}
+  .pl-cell--lockheed{--pl-slot:128px;--pl-mark:126px;--pl-mark-max:2.1rem}
+  .pl-cell--victoria{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2.5rem}
+  .pl-cell--formula{--pl-slot:96px;--pl-mark:94px;--pl-mark-max:2rem}
+  .pl-cell--jets{--pl-slot:80px;--pl-mark:78px}
+  .pl-cell--usf{--pl-slot:120px;--pl-mark:118px;--pl-mark-max:2.1rem}
+  .pl-rows{gap:.75rem}
+  .pl-track .pl-cell{height:5.25rem}
+}
+@media (max-width:600px){
+  .pl{padding-block:4rem}
+  .pl-h{margin-bottom:2rem}
+  .pl-nums{display:block;max-width:none;border-top:1px solid var(--line)}
   .pl-n{
     display:grid;
-    grid-template-columns:clamp(5.7rem,22vw,6.75rem) minmax(0,1fr);
+    grid-template-columns:6.75rem minmax(0,1fr);
     align-items:center;
-    gap:1rem;
-    padding:.7rem 0;
+    gap:1.25rem;
+    padding:.85rem 0;
     border-bottom:1px solid var(--line);
     text-align:left;
   }
-  .pl-n-val{font-size:clamp(2.45rem,10vw,3.25rem);line-height:1.08;text-align:left}
-  .pl-n-lab{max-width:none;margin:0;font-size:.9375rem;line-height:1.5;text-align:left}
+  .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
+  .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
 }
 /* ===== 04-national ===== */
-/* A quiet atlas: place, network and history share one reading edge. */
+/* The national network is the visual evidence; the statement and two short
+   benefit paragraphs keep one reading edge beside it on wide screens. */
 .v2nat{
   position:relative;
-  padding-block:clamp(3.75rem,7vw,6.5rem);
+  padding-block:clamp(3.75rem,6vw,5rem);
   background:var(--purple-deep);
   color:var(--paper);
 }
-.v2nat-layout{display:grid;gap:clamp(1.25rem,4vw,3rem)}
-.v2nat-story{min-width:0;container-type:inline-size}
+.v2nat-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(560px,45vw,640px);
+  align-items:center;
+  gap:clamp(2.5rem,4.5vw,4.5rem);
+}
+.v2nat-story{min-width:0}
 .v2nat-h{
   margin:0;
-  font-size:clamp(2.625rem,6vw,4.5rem);
-  font-size:clamp(2.625rem,14.5cqi,4.5rem);
-  line-height:1.04;
+  font-size:clamp(2.75rem,calc(1rem + 8vw),5.5rem);
+  line-height:1.02;
   letter-spacing:-.02em;
-  text-wrap:balance;
   color:var(--paper);
 }
 .v2nat-heading-line{display:block}
 .v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
 .v2nat-copy{
-  max-width:47ch;
-  margin-top:clamp(1rem,2.2vw,1.5rem);
-  font-size:clamp(1rem,1.55vw,1.1875rem);
-  line-height:1.65;
-  color:rgba(250,248,243,.82);
+  max-width:44ch;
+  margin-top:1.5rem;
+  font-size:clamp(1.0625rem,1.55vw,1.2rem);
+  line-height:1.7;
+  color:rgba(250,248,243,.8);
 }
 .v2nat-copy p{margin:0}
-.v2nat-copy p+p{margin-top:.7em}
+.v2nat-copy p+p{margin-top:1rem}
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
-.v2nat-figure{min-width:0;width:100%;max-width:43rem;margin:0}
+.v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
-.v2nat-states path,.v2nat-coast{
-  vector-effect:non-scaling-stroke;
-  stroke-linejoin:round;
-}
-.v2nat-states path{
-  fill:rgba(250,248,243,.038);
-  stroke:rgba(250,248,243,.2);
-  stroke-width:.5px;
-}
-.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:.8px}
+.v2nat.is-map-pending .v2nat-pins{opacity:0}
+.v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
+.v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
-.v2nat-pin-dot{
-  r:4.15px;
-  fill:var(--gold-soft);
-  stroke:var(--purple-deep);
-  stroke-width:.5px;
-  vector-effect:non-scaling-stroke;
-}
-.v2nat-pin-ring{fill:none;opacity:0}
-.v2nat-pin.is-usf .v2nat-pin-dot{
-  r:5.7px;
-  fill:var(--paper);
-  stroke:var(--purple-deep);
-  stroke-width:.65px;
-}
-.v2nat-pin.is-usf .v2nat-pin-ring{
-  r:10.5px;
-  stroke:var(--gold-soft);
-  stroke-width:1px;
-  opacity:.8;
-  vector-effect:non-scaling-stroke;
-}
+.v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
+.v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
+.v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
+.v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
+.v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
+.v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
 .v2nat-usf-label{
   fill:var(--gold-soft);
   font-family:var(--font-text);
-  font-size:24px;
+  font-size:25px;
   font-weight:600;
-  letter-spacing:.045em;
   paint-order:stroke;
   stroke:var(--purple-deep);
-  stroke-width:2px;
+  stroke-width:5px;
   stroke-linejoin:round;
-  vector-effect:non-scaling-stroke;
   pointer-events:none;
 }
-@media(min-width:980px){
-  .v2nat-layout{
-    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
-    align-items:center;
-    gap:clamp(2rem,5vw,4.5rem);
-  }
-  .v2nat-figure{justify-self:end}
+@media(max-width:1099px){
+  .v2nat-layout{grid-template-columns:1fr;gap:2rem}
+  .v2nat-copy{max-width:60ch}
+  .v2nat-figure{max-width:640px;justify-self:center}
 }
-@media(max-width:599px){
-  .v2nat-pin-dot{r:5px}
-  .v2nat-pin.is-usf .v2nat-pin-dot{r:6.2px}
-  .v2nat-pin.is-usf .v2nat-pin-ring{r:11.5px}
-  .v2nat-usf-label{font-size:43px}
+@media(max-width:759px){
+  .v2nat-layout{gap:1.75rem}
+  .v2nat-copy{max-width:44ch}
+  .v2nat-figure{max-width:none}
+  .v2nat-usf-label{font-size:44px}
 }
-@media(prefers-reduced-motion:no-preference){
-  .v2nat.is-map-focused .v2nat-pin.is-usf .v2nat-pin-ring{
-    animation:v2nat-focus 900ms ease-in-out;
-  }
-}
-@keyframes v2nat-focus{
-  0%,100%{opacity:.8}
-  45%{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .v2nat.is-map-pending .v2nat-pins{opacity:1}
+  .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }
 /* ===== 05-mem ===== */
-/* Keep the cream field and the circular composition, with wider crops so group
-   photos can keep faces in frame. The full-width Rush section masks the arc. */
-.mem{padding-block:clamp(1.75rem,4vw,3.75rem) var(--photo-overlap);background:var(--paper)}
-.mem-band{position:relative}
+/* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
+   rotating hub carries them around the arc at one revolution per 150 seconds. */
+/* A cream field frames the photographs. Rush covers the bottom of the arc. */
+.mem{padding:clamp(1.5rem,3.5vw,3.5rem) 0 0;background:var(--paper)}
+
+/* Keep the original radius and card proportions, including the shallower
+   desktop arc and the tighter mobile circle. The section below cuts the arc. */
+.mem-band{
+  --R:149vw;
+  --w:calc(var(--R) * .175);
+  --h:calc(var(--w) * 1.5);
+  --step:11.25deg;
+  --inset:.7rem;
+  position:relative;
+  height:calc(var(--h) + var(--inset) + 1.1rem);
+  overflow:hidden;
+  isolation:isolate;
+}
 .mem-wheel{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;
-  width:min(var(--wrap),calc(100% - var(--gutter)*2));margin:0 auto;padding:0;list-style:none;
+  list-style:none;
+  margin:0;
+  padding:0;
+  position:absolute;
+  left:50%;
+  top:calc(var(--R) + var(--h) / 2 + var(--inset));
+  width:0;
+  height:0;
+  animation:memSpin 150s linear infinite;
+  will-change:transform;
 }
 .mem-i{
-  aspect-ratio:5/4;overflow:hidden;background:var(--paper-deep);
-  border-radius:clamp(6px,.8vw,12px);
+  position:absolute;
+  left:0;
+  top:0;
+  width:var(--w);
+  height:var(--h);
+  margin:calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform:rotate(calc(var(--i) * var(--step))) translateY(calc(var(--R) * -1));
+  background:var(--paper-deep);
+  border-radius:clamp(10px,1.1vw,18px);
+  overflow:hidden;
+  box-shadow:0 18px 40px -30px rgba(25,18,33,.5);
 }
-.mem-i img{width:100%;height:100%;object-fit:cover;object-position:center var(--photo-y,45%)}
-.mem-i--framed img{transform:scale(1.11)}
-.mem-i--group{--photo-y:38%}
-.mem-i--community{--photo-y:30%}
-.mem-i--service{--photo-y:38%}
-.mem-i--letters{--photo-y:38%}
-.mem-i--fundraiser{--photo-y:30%}
-.mem-i--careers{--photo-y:38%}
-.mem-controls[hidden]{display:none}
-.mem.is-wheel{padding-bottom:0}
-.is-wheel .mem-band{
-  --card-w:clamp(17rem,30vw,27rem);
-  --card-h:calc(var(--card-w)*.8);
-  --radius:calc(var(--card-w)*5.1);
-  --inset:.4rem;
-  height:calc(var(--card-h) + var(--inset) + var(--photo-overlap)*.68);
-  overflow:hidden;isolation:isolate;touch-action:pan-y pinch-zoom;
+.mem-i img{width:100%;height:100%;display:block;object-fit:cover}
+@keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+
+.mem-band:focus-visible .mem-wheel{animation-play-state:paused}
+.mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
+
+@media (max-width:767px){
+  /* Keep the original phone circle through 390px, then taper toward the
+     desktop radius instead of doubling card height on wider tablets. */
+  .mem-band{--R:min(330vw,calc(1435px - 37.8vw));--inset:.7rem}
 }
-.is-wheel .mem-wheel{
-  display:block;position:absolute;left:50%;top:calc(var(--radius) + var(--card-h)/2 + var(--inset));
-  width:0;height:0;margin:0;transform:rotate(var(--turn,0deg));
-  transition:transform 440ms cubic-bezier(.22,.7,.35,1);
+/* The original arc remains visible at rest. No content depends on animation
+   or JavaScript; decorative duplicate frames are hidden from assistive tech. */
+@media (prefers-reduced-motion:reduce){
+  .mem-wheel{animation:none;will-change:auto}
 }
-.is-wheel .mem-i{
-  position:absolute;left:0;top:0;
-  width:var(--card-w);height:var(--card-h);
-  margin:calc(var(--card-h)/-2) 0 0 calc(var(--card-w)/-2);
-  transform:rotate(calc(var(--slot)*12deg)) translateY(calc(-1*var(--radius)));
-}
-.mem-controls{
-  position:absolute;inset:56% var(--gutter) auto;
-  display:flex;justify-content:space-between;pointer-events:none;
-}
-.mem-controls button{
-  display:grid;place-items:center;width:46px;height:46px;padding:0;
-  border:1px solid #d9d0c1;border-radius:50%;
-  color:var(--ink);background:var(--paper);cursor:pointer;pointer-events:auto;
-  box-shadow:0 2px 8px rgba(25,18,33,.14);
-}
-.mem-controls button:hover{background:var(--paper-deep)}
-.mem-controls svg{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:759px){
-  .mem-wheel{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .is-wheel .mem-band{--card-w:min(72vw,26rem)}
-  .mem-controls{inset-inline:max(.55rem,env(safe-area-inset-left)) max(.55rem,env(safe-area-inset-right))}
-}
-@media(prefers-reduced-motion:reduce){.is-wheel .mem-wheel{transition:none}}
+
+/* The additional chapter photographs retain their original website frame in
+   the source asset; the image crop keeps it outside the visible photograph. */
+.mem-i--framed img{transform:scale(1.12)}
 /* ===== 07-act ===== */
 /* The full-width Rush section cuts across the bottom of the photo arc. */
 .act{
   position:relative;z-index:1;
-  margin-top:calc(-1 * var(--photo-overlap));
+  margin-top:calc(-1 * clamp(2.75rem,6.5vw,6.5rem));
   padding:clamp(4.75rem,8vw,7.5rem) 0;
   color:var(--paper);text-align:center;
-  background:var(--purple-deep);
+  background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
 }
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
 .act-title{margin:0;font-size:clamp(3.5rem,7.5vw,6.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
 .act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.6;color:rgba(250,248,243,.76)}
 .act-go{margin-top:2.25rem}
-.act-cta{min-width:10.75rem}
-.act.is-arrived .act-cta::after{animation:pct-invitation-glow 820ms ease-out both}
-.act-cta{position:relative}
-.act-cta::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;
-  box-shadow:0 0 20px 4px rgba(230,198,91,.25);opacity:0;pointer-events:none;
+.act-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
+  border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
+  font-family:var(--font-text);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:.01em;text-decoration:none;
 }
-@keyframes pct-invitation-glow{0%,100%{opacity:0}35%{opacity:1}}
-.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
+.act.is-arrived .act-cta{box-shadow:0 0 32px rgba(230,198,91,.18);animation:pct-invitation-glow 1900ms ease-out both}
+@keyframes pct-invitation-glow{
+  0%{box-shadow:0 0 0 rgba(230,198,91,0)}
+  45%{box-shadow:0 0 42px rgba(230,198,91,.38),0 0 0 7px rgba(230,198,91,.05)}
+  100%{box-shadow:0 0 32px rgba(230,198,91,.18)}
+}
+.act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
 @media(max-width:767px){
  .act{padding-block:4.5rem}
@@ -536,7 +572,7 @@
  .act-line{font-size:1.05rem}
  .act-go{margin-top:2rem}
 }
-@media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}
 /* ===== 99-footer ===== */
 /* V2 footer, independent of the production footer's display watermark. */
 .v2footer{
@@ -558,6 +594,7 @@
   text-decoration:none;
   color:var(--paper);
 }
+.v2footer-brand img{width:auto;height:42px;flex:none}
 .v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
 .v2footer-name{font-family:var(--font-display);font-size:1.85rem;line-height:1.1}
 .v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
@@ -623,7 +660,7 @@
 <header class="v2hd">
   <div class="v2wrap v2hd-row">
     <a class="v2hd-brand" href="index.html">
-      <img class="v2hd-crest" src="../assets/pct-crest-official.png" alt="" width="300" height="339" decoding="async">
+      <img class="v2hd-crest" src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445" decoding="async">
       <span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho &middot; USF</span></span>
     </a>
     <nav class="v2hd-nav" aria-label="Primary">
@@ -633,7 +670,6 @@
         <li><a class="v2hd-link" href="#national">National Network</a></li>
       </ul>
     </nav>
-    <a class="v2hd-rush v2-button" href="rush.html">Rush PCT</a>
     <details class="v2hd-menu">
       <summary><span class="v2-sr-only">Open navigation</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h14M3 10h14M3 14h14"/></svg></summary>
       <nav class="v2hd-mobile" aria-label="Mobile navigation">
@@ -643,35 +679,38 @@
         <a href="../philanthropy.html">Philanthropy</a>
       </nav>
     </details>
+    <a class="v2hd-rush" href="rush.html">Rush PCT</a>
   </div>
 </header>
 
   <main id="main">
 
     <!-- ===== 01-hero ===== -->
-<section class="v2hero on-dark" id="hero" aria-labelledby="hero-title">
-  <div class="v2wrap v2hero-stage">
+<!-- Preserve the original left-aligned hero, silk field, and full-height composition. -->
+<section class="v2hero on-dark" id="hero">
+  <canvas class="v2hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+  <div class="v2hero-letters" aria-hidden="true">ΦΧΘ</div>
+  <div class="v2hero-stage">
     <div class="v2hero-inner">
-      <h1 class="v2hero-h1" id="hero-title">Phi Chi Theta</h1>
+      <h1 class="v2hero-h1">Phi Chi Theta</h1>
       <p class="v2hero-sub">University of South Florida</p>
       <p class="v2hero-claim">Career preparation, leadership, and a business network before you graduate.</p>
-      <p class="v2hero-cta"><a class="v2hero-btn v2-button" href="rush.html">Rush PCT</a></p>
+      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="rush.html">Rush PCT</a></p>
     </div>
-    <figure class="v2hero-photo">
-      <div class="v2hero-image"><img src="../assets/chapter-members.jpg" alt="Four Zeta Rho members in professional attire at a chapter event." width="720" height="720" fetchpriority="high"></div>
-      <figcaption>Zeta Rho Chapter <span aria-hidden="true">/</span> Tampa, FL</figcaption>
-    </figure>
   </div>
   <div class="v2hero-foot">
     <div class="v2wrap v2hero-foot-row">
-      <span>Professional Business Fraternity</span>
-      <span>Founded 1924</span>
+      <span class="v2hero-foot-side">Professional Business Fraternity</span>
+      <span class="v2hero-scroll">Scroll</span>
+      <span class="v2hero-foot-side">Founded 1924</span>
     </div>
   </div>
 </section>
 
     <!-- ===== 02-grow ===== -->
-<!-- The chapter’s three membership topics and matching photos. -->
+<!-- Membership retains one open panel and photo selection. On narrow screens,
+     each photo stays with its category; the desktop view uses a shared stage.
+     Without JavaScript, every description and photograph remains visible. -->
 <section class="grow" id="grow" data-grow aria-label="Membership">
   <div class="v2wrap grow__wrap">
 
@@ -687,8 +726,8 @@
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
           <p class="grow__say">Connect with members, alumni, and professionals through chapter events.</p>
           <figure class="grow__fig grow__fig--framed" id="grow-f1" aria-labelledby="grow-b1">
-            <img src="../assets/chapter-careers.jpg" width="720" height="717" loading="lazy" decoding="async"
-                 alt="Chapter members working together around a table with laptops.">
+            <img src="../assets/chapter-members.jpg" width="720" height="720" loading="lazy" decoding="async"
+                 alt="Four chapter members in professional attire at a chapter event.">
           </figure>
         </div>
       </div>
@@ -702,9 +741,9 @@
         </h2>
         <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
           <p class="grow__say">Organize events, lead projects, and take responsibility in the chapter.</p>
-          <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-            <img src="../assets/photo-letters.jpg" width="1300" height="1300" loading="lazy" decoding="async"
-                 alt="Chapter members writing cards together at a chapter service event.">
+          <figure class="grow__fig grow__fig--framed" id="grow-f2" aria-labelledby="grow-b2">
+            <img src="../assets/chapter-careers.jpg" width="720" height="717" loading="lazy" decoding="async"
+                 alt="Chapter members talking and working together around a table with laptops.">
           </figure>
         </div>
       </div>
@@ -910,25 +949,43 @@
 </section>
 
     <!-- ===== 05-mem ===== -->
-<section class="mem" id="life" aria-label="Chapter photographs">
-  <div class="mem-band" data-mem-band>
-    <ul class="mem-wheel" role="list">
-      <li class="mem-i mem-i--letters"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed mem-i--group"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="Chapter members in professional attire at a chapter event." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed mem-i--community"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="Chapter members together at an evening event." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--service"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="Chapter members volunteering at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--fundraiser"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed mem-i--careers"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="Chapter members talking and working together with laptops." loading="lazy" decoding="async"></li>
+<!-- Original 32-slot photo wheel with six real chapter photographs. -->
+<section class="mem" id="life" aria-label="Chapter life">
+  <div class="mem-band" tabindex="0" role="group" aria-label="Chapter photo carousel. Keyboard focus pauses movement.">
+    <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
+      <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:1"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="Chapter members in professional attire at a chapter event." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="Chapter members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:3"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="Chapter members together at an evening event." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:5"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="Chapter members talking and working together with laptops." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:6" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:7" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:9" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:11" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:13" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:15" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:17" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:19" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:21" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:23" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:25" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:27" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:29" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i mem-i--framed" style="--i:31" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
     </ul>
-    <div class="mem-controls" hidden>
-      <button class="mem-prev" type="button" aria-label="Previous photo">
-        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg>
-      </button>
-      <button class="mem-next" type="button" aria-label="Next photo">
-        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg>
-      </button>
-      <span class="v2-sr-only mem-status" aria-live="polite"></span>
-    </div>
   </div>
 </section>
 
@@ -939,7 +996,7 @@
     <div class="act-inner">
       <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta.</em></h2>
       <p class="act-line">Meet the chapter and learn how to join.</p>
-      <div class="act-go"><a class="act-cta v2-button" href="rush.html">Rush PCT</a></div>
+      <div class="act-go"><a class="act-cta" href="rush.html">Rush PCT</a></div>
     </div>
   </div>
 </section>
@@ -952,6 +1009,8 @@
     <div class="v2footer-grid">
       <div class="v2footer-about">
         <a class="v2footer-brand" href="index.html">
+          <img src="../assets/crest.png" alt="Phi Chi Theta crest" width="337" height="445"
+               loading="lazy" decoding="async">
           <span class="v2footer-lock">
             <span class="v2footer-name">Phi Chi Theta</span>
             <span class="v2footer-sub">Zeta Rho · USF</span>
@@ -1058,78 +1117,313 @@ window.pctInitAct = function () {
   if (window.pctMotion) window.pctMotion.onReduce(arrive);
 };
 /* ===== 00-header ===== */
-/* One resilient disclosure for the sticky header. */
+/* The opaque header is the safe base. JavaScript makes it transparent only
+   while the reader is over the top of the hero. Page content stays visible. */
 window.pctInitStick = function () {
-  var header = document.querySelector('.v2hd');
-  if (!header || header.dataset.ready) return;
-  header.dataset.ready = '1';
-  function measure() {
-    document.documentElement.style.setProperty('--v2hd-h', header.offsetHeight + 'px');
+  try {
+    var hd = document.querySelector('.v2hd');
+    if (!hd || hd.dataset.headerReady === '1') return;
+    hd.dataset.headerReady = '1';
+
+    function publishHeight() {
+      var height = hd.getBoundingClientRect().height;
+      if (height > 0) document.documentElement.style.setProperty('--v2hd-h', height.toFixed(1) + 'px');
+    }
+    publishHeight();
+    if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(hd);
+    else window.addEventListener('resize', publishHeight, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(publishHeight);
+
+    if ('IntersectionObserver' in window) {
+      var sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;top:120px;left:0;width:1px;height:1px;pointer-events:none';
+      document.body.appendChild(sentinel);
+      hd.classList.toggle('is-over-hero', window.scrollY < 120);
+      new IntersectionObserver(function (entries) {
+        hd.classList.toggle('is-over-hero', entries[0].isIntersecting);
+      }).observe(sentinel);
+    }
+
+    var menu = hd.querySelector('details');
+    if (menu) {
+      hd.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && menu.open) {
+          menu.open = false;
+          menu.querySelector('summary').focus();
+        }
+      });
+      document.addEventListener('click', function (event) {
+        if (!menu.contains(event.target) || event.target.closest('a')) menu.open = false;
+      });
+    }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitStick:', err);
   }
-  measure();
-  if (window.ResizeObserver) new ResizeObserver(measure).observe(header);
-  else window.addEventListener('resize', measure);
-  var menu = header.querySelector('details');
-  if (!menu) return;
-  var toggle = menu.querySelector('summary');
-  header.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && menu.open) {
-      menu.open = false;
-      toggle.focus();
+};
+/* ===== 01-hero ===== */
+/* 01 · HERO — the silk field.
+ *
+ * This is atmosphere, not an event. The threads sway CONTINUOUSLY, slowly, and
+ * they never resolve to a dead straight line. An earlier build eased the motion
+ * envelope to zero over ~6s and cancelled the loop; the field then hung
+ * perfectly parallel and stopped responding to anything, which read as broken
+ * rather than as arrival. That behaviour is gone.
+ *
+ * MOUSE: the pointer's position over the hero eases two scalars (mx, my) that
+ * bend the wave. It is a lean, not a chase — the threads never snap toward the
+ * cursor. Touch does nothing; a tap must not make the page jump.
+ *
+ * COST CONTROL: the loop is gated on IntersectionObserver, so it stops dead the
+ * moment the hero leaves the viewport. prefers-reduced-motion paints one static
+ * frame and never starts. Nothing here reads layout inside rAF.
+ */
+window.pctInitHero = function () {
+  try {
+    var root = document.querySelector('.v2hero');
+    if (!root || root.dataset.heroReady === '1') return;
+
+    var canvas = root.querySelector('[data-hero-canvas]');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    root.dataset.heroReady = '1';
+
+    var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var mqSmall = window.matchMedia('(max-width: 767px)');
+    var reduced = mqReduce.matches;
+
+    /* ---- geometry, measured on load + resize only, never inside the loop ---- */
+    var W = 0, H = 0, dpr = 1, LINES = 26;
+
+    function measure() {
+      var small = mqSmall.matches;
+      dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
+      LINES = small ? 14 : 26;
+      W = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * dpr));
+      H = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * dpr));
     }
-  });
-  document.addEventListener('click', function (event) {
-    if (menu.open && (!menu.contains(event.target) || event.target.closest('.v2hd-mobile a'))) {
-      menu.open = false;
+
+    /* pointer lean: target is set by the event, current eases toward it in the
+       loop, so a fast flick across the hero produces a swell, not a snap */
+    var mxT = 0.5, myT = 0.5, mx = 0.5, my = 0.5;
+
+    var t = 0;
+
+    function paint() {
+      ctx.clearRect(0, 0, W, H);
+      var step = Math.max(8 * dpr, W / 150);
+      var i, x, u;
+
+      for (i = 0; i < LINES; i++) {
+        var p = i / LINES;
+        var yBase = H * (0.16 + p * 0.76);
+        /* amplitude grows toward the bottom of the field and leans with my */
+        var amp = H * 0.052 * (0.35 + p) * (0.72 + 0.56 * my);
+        var lateral = Math.sin(t * 0.4 + i * 2.1) * 6 * dpr;
+
+        ctx.beginPath();
+        for (x = 0; x <= W + step; x += step) {
+          u = x / dpr;
+          var wave =
+            Math.sin(u * 0.0016 + t * 0.7 + i * 0.42) *
+            Math.cos(u * 0.0006 - t * 0.32 + i * 1.7);
+          var y = yBase + wave * amp * (0.62 + 0.76 * mx) + lateral;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+
+        var gold = i % 4 === 0;
+        ctx.strokeStyle = gold
+          ? 'rgba(201,162,39,' + (0.06 + 0.11 * p).toFixed(3) + ')'
+          : 'rgba(150,118,215,' + (0.04 + 0.08 * p).toFixed(3) + ')';
+        ctx.lineWidth = (gold ? 1.2 : 0.8) * dpr;
+        ctx.stroke();
+      }
     }
-  });
+
+    /* ---- loop ----
+       Everything advances on ELAPSED TIME, not on frame count. A per-frame
+       increment makes the sway run at the refresh rate: the same page drifts
+       twice as fast on a 120Hz laptop as on a 60Hz monitor. dt is clamped so a
+       backgrounded tab returning after ten seconds resumes rather than jumping. */
+    var raf = null, visible = true, last = 0;
+    /* 0.48 rad/s is exactly the live site's drift (js/main.js ran ht += 0.008 a
+       frame at 60Hz), which is the pace the owner signed off on. One full pass
+       of the wave across the hero takes about 19 seconds. */
+    var RATE = 0.48;
+    var LEAN = 2.8;    /* pointer lean convergence, per second */
+
+    function frame(ts) {
+      raf = requestAnimationFrame(frame);
+      var dt = last ? Math.min((ts - last) / 1000, 0.05) : 1 / 60;
+      last = ts;
+
+      t += dt * RATE;
+      var k = Math.min(1, dt * LEAN);
+      mx += (mxT - mx) * k;
+      my += (myT - my) * k;
+      paint();
+    }
+
+    function start() {
+      if (raf !== null || reduced || !visible) return;
+      last = 0;                   /* resume without a jump */
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() {
+      if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    }
+
+    /* ---- teardown for a mid-session reduce toggle ---- */
+    function teardown() {
+      reduced = true;
+      stop();
+      mx = my = 0.5;
+      paint();   /* one still frame, still a wave, just not moving */
+    }
+
+    /* ---- events ---- */
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        measure();               /* resizing the backing store clears it */
+        paint();
+      }, 120);
+    }, { passive: true });
+
+    root.addEventListener('pointermove', function (e) {
+      if (reduced || !mqFine.matches) return;
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      /* clientX/Y against a rect cached per event, not per frame */
+      var r = canvas.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      mxT = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      myT = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+    }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) start(); else stop();
+      }).observe(canvas);
+    }
+
+    /* ---- go ---- */
+    measure();
+
+    if (reduced) {
+      paint();
+    } else {
+      start();
+      if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') {
+        window.pctMotion.onReduce(teardown);
+      }
+      var onMq = function () { if (mqReduce.matches) teardown(); };
+      if (mqReduce.addEventListener) mqReduce.addEventListener('change', onMq);
+      else if (mqReduce.addListener) mqReduce.addListener(onMq);
+    }
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitHero:', err);
+  }
 };
 /* ===== 02-grow ===== */
-/* Button activation changes the chapter detail. Focus and page scroll stay put. */
+/* Keep the accordion and its photograph connected at every width. Desktop
+   shares a photo stage; mobile returns each figure to its own content panel. */
 window.pctInitGrow = function () {
-  var root = document.querySelector('[data-grow]');
-  if (!root || root.dataset.growReady) return;
-  var stage = root.querySelector('[data-grow-stage]');
-  var buttons = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
-  if (!stage || !buttons.length) return;
-  var items = buttons.map(function (button) {
-    return {
-      button:button,
-      row:button.closest('.grow__row'),
-      panel:document.getElementById(button.getAttribute('aria-controls')),
-      figure:document.getElementById(button.getAttribute('data-grow-figure'))
-    };
-  });
-  if (!items.every(function (item) { return item.row && item.panel && item.figure; })) return;
-  root.dataset.growReady = '1';
-  items.forEach(function (item) {
-    /* The image remains described after it moves into the common photo stage. */
-    stage.appendChild(item.figure);
-  });
-  function select(index) {
-    items.forEach(function (item,i) {
-      var active = i === index;
-      item.row.classList.toggle('is-open', active);
-      item.button.setAttribute('aria-expanded', String(active));
-      item.panel.hidden = !active;
-      item.figure.hidden = !active;
+  try {
+    var root = document.querySelector('[data-grow]');
+    if (!root || root.dataset.growReady === '1') return;
+    var stage = root.querySelector('[data-grow-stage]');
+    var btns = Array.prototype.slice.call(root.querySelectorAll('[data-grow-btn]'));
+    if (!stage || btns.length < 2) return;
+
+    var rows = [], figs = [], panels = [];
+    var valid = btns.every(function (button) {
+      var row = button.closest('.grow__row');
+      var panel = document.getElementById(button.getAttribute('aria-controls'));
+      var figure = document.getElementById(button.getAttribute('data-grow-figure'));
+      if (!row || !panel || !figure) return false;
+      rows.push(row); panels.push(panel); figs.push(figure);
+      return true;
     });
+    if (!valid) return;
+
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
+    var current = 0;
+    var wide = false;
+    var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var exitTimer = null;
+    function clearLeaving() {
+      if (exitTimer !== null) { clearTimeout(exitTimer); exitTimer = null; }
+      figs.forEach(function (figure) { figure.classList.remove('is-leaving'); });
+    }
+    function sync() {
+      for (var i = 0; i < rows.length; i++) {
+        var active = i === current;
+        rows[i].classList.toggle('is-open', active);
+        panels[i].hidden = !active;
+        btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
+        figs[i].classList.toggle('is-active', active);
+        figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
+      }
+    }
+    function open(index) {
+      if (index === current) return;
+      var before = btns[index].getBoundingClientRect().top;
+      clearLeaving();
+      if (wide && !(reduce && reduce.matches)) {
+        figs[current].classList.add('is-leaving');
+        exitTimer = setTimeout(clearLeaving, 950);
+      }
+      current = index;
+      sync();
+      /* Closing a preceding phone panel removes its photograph above the
+         selected control. Keep that control in the same viewport position. */
+      if (!wide && before >= 0 && before < window.innerHeight) {
+        var shift = btns[index].getBoundingClientRect().top - before;
+        if (Math.abs(shift) > 1) window.scrollTo({
+          top:Math.max(0, window.scrollY + shift), behavior:'instant'
+        });
+      }
+    }
+    function layout() {
+      clearLeaving();
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 760;
+      root.classList.toggle('grow--desktop', wide);
+      figs.forEach(function (figure, i) {
+        var destination = wide ? stage : panels[i];
+        if (figure.parentNode !== destination) destination.appendChild(figure);
+      });
+      sync();
+    }
+
+    root.classList.add('grow--js');
+    layout();
+    btns.forEach(function (button, i) {
+      button.addEventListener('click', function () { open(i); });
+      button.addEventListener('focus', function () { open(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowDown') next = (i + 1) % btns.length;
+        else if (event.key === 'ArrowUp') next = (i + btns.length - 1) % btns.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = btns.length - 1;
+        else return;
+        event.preventDefault();
+        btns[next].focus();
+      });
+    });
+    if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
+    else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
+    else window.addEventListener('resize', layout, { passive:true });
+    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
+    root.dataset.growReady = '1';
+  } catch (err) {
+    if (window.console && console.warn) console.warn('pctInitGrow:', err);
   }
-  select(0);
-  root.classList.add('grow--js');
-  items.forEach(function (item,i) {
-    item.button.addEventListener('click', function () { select(i); });
-    item.button.addEventListener('keydown', function (event) {
-      var next;
-      if (event.key === 'ArrowDown') next = (i + 1) % items.length;
-      else if (event.key === 'ArrowUp') next = (i + items.length - 1) % items.length;
-      else if (event.key === 'Home') next = 0;
-      else if (event.key === 'End') next = items.length - 1;
-      else return;
-      event.preventDefault();
-      items[next].button.focus();
-    });
-  });
 };
 /* ===== 03-place ===== */
 /* The same twenty logo nodes become finite rows linked to normal page scroll.
@@ -1140,7 +1434,6 @@ window.pctInitPlacements = function () {
   if (!root || root.dataset.placementsReady) return;
   root.dataset.placementsReady = '1';
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var phone = window.matchMedia ? window.matchMedia('(max-width: 700px)') : null;
   var brands = root.querySelector('[data-pl-brands]');
   var originalList = root.querySelector('[data-pl-logos]');
   var logos = originalList ? Array.prototype.slice.call(originalList.children) : [];
@@ -1159,20 +1452,9 @@ window.pctInitPlacements = function () {
   function applyRows() {
     var scroll = window.scrollY || window.pageYOffset || 0;
     rows.forEach(function (row, index) {
-      if (!row.overflow) return;
       var progress = Math.max(0, Math.min((scroll - row.start) / row.distance, 1));
       var phase = index % 2 ? 1 - progress : progress;
-      var offset = -row.overflow * phase;
-      row.track.style.transform = 'translate3d(' + offset.toFixed(2) + 'px,0,0)';
-      /* Fade the whole wordmark before the viewport can slice any letters. */
-      row.marks.forEach(function (mark) {
-        var clearance = Math.min(mark.left + offset, row.width - mark.right - offset);
-        var opacity = Math.round(Math.max(0, Math.min(clearance / row.feather, 1)) * 100) / 100;
-        if (opacity !== mark.opacity) {
-          mark.node.style.opacity = opacity === 1 ? '' : String(opacity);
-          mark.opacity = opacity;
-        }
-      });
+      row.track.style.transform = 'translate3d(' + (-row.overflow * phase).toFixed(2) + 'px,0,0)';
     });
   }
   function queueRows() {
@@ -1187,33 +1469,21 @@ window.pctInitPlacements = function () {
     var scroll = window.scrollY || window.pageYOffset || 0;
     var viewport = Math.max(1, window.innerHeight);
     var header = document.querySelector('.v2hd');
-    var safeTop = header ? header.getBoundingClientRect().height + 8 : 0;
+    var safeTop = header ? header.getBoundingClientRect().height + 12 : 0;
     rows.forEach(function (row) {
       var box = row.element.getBoundingClientRect();
       var top = box.top + scroll;
-      var overflow = row.track.scrollWidth - row.element.clientWidth;
-      row.overflow = overflow > 1 ? overflow : 0;
-      row.element.classList.toggle('is-drifting', !!row.overflow);
-      row.width = row.element.clientWidth;
-      row.feather = parseFloat(window.getComputedStyle(brands).getPropertyValue('--pl-edge')) || 16;
-      var trackLeft = row.track.getBoundingClientRect().left;
-      row.marks = Array.prototype.map.call(row.track.children, function (node) {
-        var rect = node.getBoundingClientRect();
-        if (!row.overflow) node.style.removeProperty('opacity');
-        return { node:node, left:rect.left-trackLeft, right:rect.right-trackLeft, opacity:null };
-      });
-      if (!row.overflow) row.track.style.removeProperty('transform');
-      /* Logo artwork sits inside the row, so use a little of its top/bottom
-         whitespace as travel time. At either end the artwork is already clear
-         of the viewport edge or sticky header, and there is no scroll pin. */
-      var markInset = box.height * .12;
-      row.start = top + box.height - markInset - viewport;
-      row.distance = Math.max(1, viewport - box.height - safeTop + markInset * 2);
+      row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
+      /* Hold endpoints while the full row is visible, finishing before the
+         sticky header covers it. First/last marks each receive a complete view. */
+      row.start = top + box.height - viewport;
+      row.distance = Math.max(1, viewport - box.height - safeTop);
     });
     applyRows();
   }
-  function balancedLogoGroups(count, scale) {
+  function balancedLogoGroups(count) {
     var style = window.getComputedStyle(brands);
+    var scale = Number(style.getPropertyValue('--pl-scale')) || 1;
     var gap = parseFloat(style.getPropertyValue('--pl-gap')) || 0;
     var perRow = Math.ceil(logos.length / count);
     var groups = [], loads = [], capacities = [];
@@ -1242,14 +1512,9 @@ window.pctInitPlacements = function () {
   }
   function groupRows() {
     if (!rowsEnabled) return;
-    var count = (phone ? phone.matches : window.innerWidth <= 700) ? 3 : 2;
-    /* The three-row composition has its own optical sizes. For two rows,
-       graduate continuously from narrow to wide layouts to avoid a sudden
-       track jump when resizing or rotating the device. */
-    var scale = count === 3 ? 1 : Math.max(.72, Math.min(1.075, .72 + (brands.clientWidth - 700) * .00043));
-    brands.style.setProperty('--pl-scale', scale.toFixed(4));
+    var count = window.innerWidth <= 700 ? 3 : 2;
     if (rows.length === count) { measureRows(); return; }
-    var groups = balancedLogoGroups(count, scale);
+    var groups = balancedLogoGroups(count);
     if (rowContainer) rowContainer.remove();
     rowContainer = document.createElement('div');
     rowContainer.className = 'pl-rows';
@@ -1290,13 +1555,9 @@ window.pctInitPlacements = function () {
     window.removeEventListener('resize', onRowResize);
     document.removeEventListener('visibilitychange', onRowVisibility);
     if (originalList) {
-      logos.forEach(function (logo) {
-        logo.style.removeProperty('opacity');
-        originalList.appendChild(logo);
-      });
+      logos.forEach(function (logo) { originalList.appendChild(logo); });
       originalList.hidden = false;
     }
-    if (brands) brands.style.removeProperty('--pl-scale');
     if (rowContainer) rowContainer.remove();
     rowContainer = null;
     rows = [];
@@ -1407,83 +1668,100 @@ window.pctInitPlacements = function () {
   } catch (error) { finishCounts(); }
 };
 /* ===== 04-national ===== */
-/* Every campus is visible at rest. On entry, only the Tampa ring brightens
-   briefly; the coordinates and the rest of the map stay still. */
+/* A single scattered wave introduces the real campus locations. Geographic
+   translations belong to the outer groups and are never animated or changed. */
 window.pctInitNational = function () {
   'use strict';
   var root = document.querySelector('[data-national]');
-  if (!root || root.dataset.nationalMotionReady || !window.IntersectionObserver) return;
-  var map = root.querySelector('[data-chapter-map]');
+  if (!root || root.dataset.nationalMotionReady) return;
+  var figure = root.querySelector('.v2nat-figure');
+  var pins = Array.prototype.slice.call(root.querySelectorAll('[data-chapter-pin]'));
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  if (!map || (reduce && reduce.matches)) return;
-
+  if (!figure || !pins.length || (reduce && reduce.matches) ||
+      !window.IntersectionObserver || !Element.prototype.animate) return;
   root.dataset.nationalMotionReady = '1';
-  var threshold = .45;
-  var observer = new IntersectionObserver(function (entries) {
-    if (!entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= threshold; })) return;
+  var observer = null;
+  var animations = [];
+  var stopped = false;
+  var started = false;
+
+  function finish() {
+    root.classList.remove('is-map-pending');
+    if (stopped) return;
+    stopped = true;
+    if (observer) observer.disconnect();
+    animations.forEach(function (animation) { animation.cancel(); });
+    animations = [];
+    document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('resize', onResize);
+    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
+    else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
+  }
+  function onVisibility() { if (document.hidden) finish(); }
+  function onReduce(event) { if (event.matches) finish(); }
+  function fitsEntryThreshold() {
+    return !window.innerHeight || figure.getBoundingClientRect().height * .6 <= window.innerHeight;
+  }
+  function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
+  function hash(pin) {
+    var value = 2166136261;
+    var id = pin.getAttribute('data-chapter-pin');
+    for (var i = 0; i < id.length; i++) value = Math.imul(value ^ id.charCodeAt(i), 16777619);
+    return value >>> 0;
+  }
+  function animate(element, frames, options) {
+    if (!element) return;
+    var animation = element.animate(frames, options);
+    animations.push(animation);
+    animation.finished.catch(function () {});
+  }
+  function reveal() {
+    if (stopped || started) return;
+    started = true;
+    if (document.hidden) { finish(); return; }
     observer.disconnect();
-    if (!document.hidden && !(reduce && reduce.matches)) root.classList.add('is-map-focused');
-  }, { threshold:threshold });
-  observer.observe(map);
-};
-/* ===== 05-mem ===== */
-/* The photo arc moves only when requested by a button, key, or horizontal swipe. */
-window.pctInitMem = function () {
-  var section = document.querySelector('#life');
-  if (!section || section.dataset.ready) return;
-  var band = section.querySelector('[data-mem-band]');
-  var wheel = section.querySelector('.mem-wheel');
-  var controls = section.querySelector('.mem-controls');
-  var status = section.querySelector('.mem-status');
-  if (!band || !wheel || !controls || !status || wheel.children.length !== 6) return;
-  section.dataset.ready = '1';
-  var originals = Array.prototype.slice.call(wheel.children);
-  var copies = document.createDocumentFragment();
-  for (var slot = 0; slot < 30; slot++) {
-    var card = slot < originals.length ? originals[slot] : originals[slot % originals.length].cloneNode(true);
-    card.style.setProperty('--slot', slot);
-    if (slot >= originals.length) {
-      card.setAttribute('aria-hidden', 'true');
-      card.querySelector('img').alt = '';
-      copies.appendChild(card);
-    }
+    try {
+      /* Stable ID hashes scatter the order across regions instead of sweeping
+         west-to-east or moving pins away from their campus coordinates. */
+      var order = pins.slice().sort(function (a,b) { return hash(a) - hash(b); });
+      order.forEach(function (pin,index) {
+        var delay = order.length > 1 ? index * 1300 / (order.length - 1) : 0;
+        var options = { duration:650, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
+        animate(pin.querySelector('.v2nat-pin-dot'), [
+          { opacity:0, transform:'scale(.2)', transformOrigin:'0px 0px' },
+          { opacity:1, transform:'scale(1.3)', transformOrigin:'0px 0px', offset:.65 },
+          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
+        ], options);
+        var ring = pin.querySelector('.v2nat-pin-ring');
+        var restingOpacity = ring ? window.getComputedStyle(ring).opacity : '0';
+        animate(ring, [
+          { opacity:0, transform:'scale(.35)', transformOrigin:'0px 0px' },
+          { opacity:.65, transform:'scale(1.15)', transformOrigin:'0px 0px', offset:.5 },
+          { opacity:restingOpacity, transform:'scale(1)', transformOrigin:'0px 0px' }
+        ], options);
+      });
+      root.classList.remove('is-map-pending');
+      Promise.all(animations.map(function (animation) { return animation.finished.catch(function () {}); })).then(finish);
+    } catch (error) { finish(); }
   }
-  wheel.appendChild(copies);
-  section.classList.add('is-wheel');
-  controls.hidden = false;
-  var turn = 0;
-  function move(amount) {
-    turn += amount;
-    wheel.style.setProperty('--turn', -turn * 12 + 'deg');
-    var current = ((turn % originals.length) + originals.length) % originals.length;
-    status.textContent = 'Photo ' + (current + 1) + ' of ' + originals.length + '. ' +
-      originals[current].querySelector('img').alt;
-  }
-  controls.querySelector('.mem-prev').addEventListener('click', function () { move(-1); });
-  controls.querySelector('.mem-next').addEventListener('click', function () { move(1); });
-  controls.addEventListener('keydown', function (event) {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    event.preventDefault();
-    move(event.key === 'ArrowLeft' ? -1 : 1);
-  });
-  var touch = null;
-  band.addEventListener('pointerdown', function (event) {
-    if (event.pointerType !== 'touch' || !event.isPrimary || event.target.closest('button')) return;
-    touch = { id:event.pointerId, x:event.clientX, y:event.clientY };
-  }, { passive:true });
-  band.addEventListener('pointercancel', function () { touch = null; });
-  band.addEventListener('pointerup', function (event) {
-    if (!touch || touch.id !== event.pointerId) return;
-    var dx = event.clientX - touch.x;
-    var dy = event.clientY - touch.y;
-    touch = null;
-    if (Math.abs(dx) >= 38 && Math.abs(dx) > Math.abs(dy) * 1.35) move(dx < 0 ? 1 : -1);
-  }, { passive:true });
+  try {
+    observer = new IntersectionObserver(function (entries) {
+      if (!fitsEntryThreshold()) { finish(); return; }
+      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .6; })) reveal();
+    }, { threshold:.6 });
+    observer.observe(figure);
+    root.classList.add('is-map-pending');
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('resize', onResize, { passive:true });
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
+    else if (reduce && reduce.addListener) reduce.addListener(onReduce);
+    if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);
+  } catch (error) { finish(); }
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitAct', 'pctInitStick', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational', 'pctInitMem'];
+  var inits = ['pctInitAct', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

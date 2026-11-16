@@ -6,7 +6,6 @@ window.pctInitPlacements = function () {
   if (!root || root.dataset.placementsReady) return;
   root.dataset.placementsReady = '1';
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var phone = window.matchMedia ? window.matchMedia('(max-width: 700px)') : null;
   var brands = root.querySelector('[data-pl-brands]');
   var originalList = root.querySelector('[data-pl-logos]');
   var logos = originalList ? Array.prototype.slice.call(originalList.children) : [];
@@ -25,20 +24,9 @@ window.pctInitPlacements = function () {
   function applyRows() {
     var scroll = window.scrollY || window.pageYOffset || 0;
     rows.forEach(function (row, index) {
-      if (!row.overflow) return;
       var progress = Math.max(0, Math.min((scroll - row.start) / row.distance, 1));
       var phase = index % 2 ? 1 - progress : progress;
-      var offset = -row.overflow * phase;
-      row.track.style.transform = 'translate3d(' + offset.toFixed(2) + 'px,0,0)';
-      /* Fade the whole wordmark before the viewport can slice any letters. */
-      row.marks.forEach(function (mark) {
-        var clearance = Math.min(mark.left + offset, row.width - mark.right - offset);
-        var opacity = Math.round(Math.max(0, Math.min(clearance / row.feather, 1)) * 100) / 100;
-        if (opacity !== mark.opacity) {
-          mark.node.style.opacity = opacity === 1 ? '' : String(opacity);
-          mark.opacity = opacity;
-        }
-      });
+      row.track.style.transform = 'translate3d(' + (-row.overflow * phase).toFixed(2) + 'px,0,0)';
     });
   }
   function queueRows() {
@@ -53,33 +41,21 @@ window.pctInitPlacements = function () {
     var scroll = window.scrollY || window.pageYOffset || 0;
     var viewport = Math.max(1, window.innerHeight);
     var header = document.querySelector('.v2hd');
-    var safeTop = header ? header.getBoundingClientRect().height + 8 : 0;
+    var safeTop = header ? header.getBoundingClientRect().height + 12 : 0;
     rows.forEach(function (row) {
       var box = row.element.getBoundingClientRect();
       var top = box.top + scroll;
-      var overflow = row.track.scrollWidth - row.element.clientWidth;
-      row.overflow = overflow > 1 ? overflow : 0;
-      row.element.classList.toggle('is-drifting', !!row.overflow);
-      row.width = row.element.clientWidth;
-      row.feather = parseFloat(window.getComputedStyle(brands).getPropertyValue('--pl-edge')) || 16;
-      var trackLeft = row.track.getBoundingClientRect().left;
-      row.marks = Array.prototype.map.call(row.track.children, function (node) {
-        var rect = node.getBoundingClientRect();
-        if (!row.overflow) node.style.removeProperty('opacity');
-        return { node:node, left:rect.left-trackLeft, right:rect.right-trackLeft, opacity:null };
-      });
-      if (!row.overflow) row.track.style.removeProperty('transform');
-      /* Logo artwork sits inside the row, so use a little of its top/bottom
-         whitespace as travel time. At either end the artwork is already clear
-         of the viewport edge or sticky header, and there is no scroll pin. */
-      var markInset = box.height * .12;
-      row.start = top + box.height - markInset - viewport;
-      row.distance = Math.max(1, viewport - box.height - safeTop + markInset * 2);
+      row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
+      /* Hold endpoints while the full row is visible, finishing before the
+         sticky header covers it. First/last marks each receive a complete view. */
+      row.start = top + box.height - viewport;
+      row.distance = Math.max(1, viewport - box.height - safeTop);
     });
     applyRows();
   }
-  function balancedLogoGroups(count, scale) {
+  function balancedLogoGroups(count) {
     var style = window.getComputedStyle(brands);
+    var scale = Number(style.getPropertyValue('--pl-scale')) || 1;
     var gap = parseFloat(style.getPropertyValue('--pl-gap')) || 0;
     var perRow = Math.ceil(logos.length / count);
     var groups = [], loads = [], capacities = [];
@@ -108,14 +84,9 @@ window.pctInitPlacements = function () {
   }
   function groupRows() {
     if (!rowsEnabled) return;
-    var count = (phone ? phone.matches : window.innerWidth <= 700) ? 3 : 2;
-    /* The three-row composition has its own optical sizes. For two rows,
-       graduate continuously from narrow to wide layouts to avoid a sudden
-       track jump when resizing or rotating the device. */
-    var scale = count === 3 ? 1 : Math.max(.72, Math.min(1.075, .72 + (brands.clientWidth - 700) * .00043));
-    brands.style.setProperty('--pl-scale', scale.toFixed(4));
+    var count = window.innerWidth <= 700 ? 3 : 2;
     if (rows.length === count) { measureRows(); return; }
-    var groups = balancedLogoGroups(count, scale);
+    var groups = balancedLogoGroups(count);
     if (rowContainer) rowContainer.remove();
     rowContainer = document.createElement('div');
     rowContainer.className = 'pl-rows';
@@ -156,13 +127,9 @@ window.pctInitPlacements = function () {
     window.removeEventListener('resize', onRowResize);
     document.removeEventListener('visibilitychange', onRowVisibility);
     if (originalList) {
-      logos.forEach(function (logo) {
-        logo.style.removeProperty('opacity');
-        originalList.appendChild(logo);
-      });
+      logos.forEach(function (logo) { originalList.appendChild(logo); });
       originalList.hidden = false;
     }
-    if (brands) brands.style.removeProperty('--pl-scale');
     if (rowContainer) rowContainer.remove();
     rowContainer = null;
     rows = [];

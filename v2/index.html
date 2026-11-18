@@ -134,7 +134,15 @@
 .grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
 .grow__panel{padding-bottom:1.5rem}
 .grow__panel[hidden]{display:none}
-.grow__say{max-width:41ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
+.grow__say{max-width:46ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
+.grow__record{
+  max-width:none;
+  margin-block:clamp(1.5rem,3vw,2.75rem) 0;
+  color:var(--ink-soft);
+  font-size:clamp(.9375rem,1.25vw,1.05rem);
+  line-height:1.65;
+}
+.grow__record strong{color:var(--purple);font-weight:600}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
 .grow__stage{display:none}
@@ -155,6 +163,9 @@
  .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:1rem clamp(2rem,5vw,4rem);align-items:start}
  .grow:not(.grow--js) .grow__fig{grid-column:2;grid-row:1 / span 2;margin:0}
  .grow--desktop .grow__panel{min-height:6.5rem;padding-bottom:1.2rem}
+}
+@media(min-width:900px) and (max-width:1023px){
+ .grow--desktop .grow__panel{min-height:13rem}
 }
 @media(max-width:899px){
  .grow__ttl{font-size:2rem}
@@ -196,6 +207,7 @@
   color: var(--ink);
   font: 400 clamp(3.65rem, 8vw, 7.5rem)/.95 var(--font-display);
   letter-spacing: -.035em;
+  text-align: center;
 }
 .pl-nums {
   display: grid;
@@ -207,9 +219,9 @@
 }
 .pl-n {
   min-width: 0;
-  padding: clamp(1.35rem, 3.75vw, 3rem) clamp(1.1rem, 4.25vw, 3.8rem);
+  padding: clamp(1.35rem, 3.75vw, 3rem) clamp(.65rem, 2.5vw, 2.1rem);
+  text-align: center;
 }
-.pl-n:first-child { padding-inline-start: 0; }
 .pl-n + .pl-n { border-inline-start: 1px solid var(--line); }
 .pl-n-val {
   margin: 0;
@@ -219,11 +231,10 @@
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
 }
-.pl-n:first-child .pl-n-val { color: var(--purple); }
 .pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
   max-width:25ch;
-  margin:.8rem 0 0;
+  margin:.8rem auto 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.9375rem;
@@ -236,8 +247,7 @@
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
 .pl-stat-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 .pl-brands {
-  --pl-edge: clamp(16px, 3.5vw, 48px);
-  --pl-inset: calc(var(--pl-edge) + 6px);
+  --pl-edge: clamp(18px, 2.8vw, 35px);
   --pl-gap: 27px;
   --pl-scale: 1;
   position: relative;
@@ -274,10 +284,8 @@
   max-width:100%;
   max-height:var(--pl-mark-max);
   object-fit:contain;
-  filter:grayscale(1) contrast(1.12);
-  opacity:.88;
+  filter:brightness(0);
 }
-.pl-cell--reverse img{filter:brightness(0);opacity:.84}
 /* Optical measures follow the artwork: long, thin wordmarks receive wider
    slots; stacked marks remain compact; clear space is allowed for in sizing. */
 .pl-cell--goldman{--pl-slot:90px;--pl-mark:86px;--pl-mark-max:2.8rem}
@@ -291,7 +299,6 @@
 .pl-cell--pnc{--pl-slot:112px;--pl-mark:106px;--pl-mark-max:2.3rem}
 .pl-cell--raymond{--pl-slot:184px;--pl-mark:180px;--pl-mark-max:1.7rem}
 .pl-cell--fisher{--pl-slot:224px;--pl-mark:220px;--pl-mark-max:1.7rem}
-.pl-cell--fisher img{opacity:1}
 .pl-cell--sp{--pl-slot:144px;--pl-mark:132px;--pl-mark-max:2rem}
 .pl-cell--nestle{--pl-slot:56px;--pl-mark:52px;--pl-mark-max:4rem}
 .pl-cell--unilever{--pl-slot:144px;--pl-mark:136px;--pl-mark-max:2.1rem}
@@ -301,6 +308,7 @@
 .pl-cell--formula{--pl-slot:128px;--pl-mark:116px;--pl-mark-max:2.2rem}
 /* The Jets artwork occupies only the middle 57% of its square viewBox. */
 .pl-cell--jets{--pl-slot:112px;--pl-mark:96px;--pl-mark-max:none}
+.pl-cell--jets img{filter:grayscale(1) contrast(2.25)}
 .pl-cell--usf{--pl-slot:168px;--pl-mark:152px;--pl-mark-max:2.3rem}
 .pl-rows{display:grid;gap:.55rem}
 .pl-row{
@@ -309,6 +317,15 @@
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
   mask-image:linear-gradient(90deg,transparent,#000 var(--pl-edge),#000 calc(100% - var(--pl-edge)),transparent);
 }
+.pl-belt {
+  display:flex;
+  width:max-content;
+  animation: pl-loop var(--pl-duration) linear var(--pl-phase) infinite;
+  animation-play-state: paused;
+}
+.pl-row:nth-child(even) .pl-belt { animation-direction: reverse; }
+.is-running .pl-belt { animation-play-state: running; }
+@keyframes pl-loop { to { transform: translate3d(-50%,0,0); } }
 .pl-track{
   display:flex;
   align-items:center;
@@ -316,14 +333,11 @@
   width:max-content;
   list-style:none;
   margin:0;
-  /* scrollWidth includes padding, keeping endpoint logos inside opaque space. */
-  padding:0 var(--pl-inset);
-  will-change:transform;
+  padding:0 var(--pl-gap) 0 0;
 }
 .pl-track .pl-cell{
   flex:0 0 calc(var(--pl-slot)*var(--pl-scale,1));
   width:calc(var(--pl-slot)*var(--pl-scale,1));
-  max-width:calc(100vw - var(--pl-inset)*2);
   height:4.75rem;
   padding-inline:0;
 }
@@ -331,7 +345,7 @@
   .pl-brands{--pl-gap:21px;--pl-scale:.85}
 }
 @media (max-width:700px){
-  .pl-brands{--pl-edge:24px;--pl-gap:20px;--pl-scale:.93}
+  .pl-brands{--pl-edge:19px;--pl-gap:22px;--pl-scale:1}
   .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
   .pl-cell{min-height:5.25rem}
@@ -361,21 +375,22 @@
 @media (max-width:600px) {
   .pl {padding-block:3.65rem;}
   .pl-h {font-size:clamp(3.1rem, 12vw, 4.45rem);}
-  .pl-nums {display:block;}
-  .pl-n {
-    display:grid;
-    grid-template-columns: minmax(7.25rem, 38%) minmax(0, 1fr);
-    align-items:center;
-    gap:.85rem;
-    padding:.85rem 0;
-  }
-  .pl-n + .pl-n {border-inline-start:0;border-top:1px solid var(--line);}
-  .pl-n-val {font-size:clamp(3.15rem, 11vw, 4.4rem);}
-  .pl-n-lab {margin:0;font-size:.9rem;line-height:1.45;}
-  .pl-rows {gap:.2rem;}
+  .pl-n { padding:.9rem .4rem; }
+  .pl-n-val {font-size:clamp(2.1rem,8.7vw,3.4rem);}
+  .pl-n-lab {margin:.45rem auto 0;font-size:.84rem;line-height:1.35;}
+  .pl-rows {gap:.3rem;}
 }
-.pl-row .pl-track {min-width:100%;justify-content:center;}
 .pl-row .pl-track .pl-cell {min-height:0;}
+.pl-controls {display:flex;justify-content:end;}
+@container chapter-content (max-width:18rem) {
+  .pl-nums {grid-template-columns:1fr;}
+  .pl-n + .pl-n {border-inline-start:0;border-block-start:1px solid var(--line);}
+  .pl-n-val {font-size:2.35rem;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .pl-belt {animation:none;}
+  [data-pl-toggle] {display:none;}
+}
 /* ===== 04-national ===== */
 .v2nat{
   position:relative;
@@ -398,7 +413,7 @@
   color:var(--paper);
 }
 .v2nat-heading-line{display:block}
-.v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
+.v2nat-h em{color:var(--gold-soft);font-size:1.13em;font-style:italic;white-space:nowrap}
 .v2nat-copy{
   max-width:44ch;
   margin-top:1.5rem;
@@ -409,15 +424,16 @@
 .v2nat-copy p{margin:0}
 .v2nat-copy p+p{margin-top:1rem}
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
-.v2nat-figure{min-width:0;width:100%;margin:0}
+.v2nat-figure{position:relative;min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
 .v2nat-pin[role="button"]{cursor:pointer}
+.v2nat-map.is-over-pin{cursor:pointer}
 .v2nat-pin:focus-visible{outline:none}
 .v2nat-pin:focus-visible .v2nat-pin-ring{stroke:var(--gold-soft);stroke-width:2.5;opacity:1}
-.v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
+.v2nat-pin-dot{r:5.2px;fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
 .v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
 .v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
@@ -444,7 +460,7 @@
   .v2nat-layout{gap:1.75rem}
   .v2nat-copy{max-width:44ch}
   .v2nat-figure{max-width:none}
-  .v2nat-pin-dot{r:6px}
+  .v2nat-pin-dot{r:7px}
   .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -455,20 +471,26 @@
 
 
 .v2nat-caption {
-  min-block-size: 4.25rem;
-  padding: .7rem 0 0;
-  border-top: 1px solid rgb(230 198 91 / 38%);
+  position: absolute;
+  inset: 100% 0 auto;
+  margin: .2rem 0 0;
   line-height: 1.45;
+  pointer-events: none;
 }
 .v2nat-caption-school { display: block; color: var(--paper); font-size: 1rem; font-weight: 600; }
 .v2nat-caption-detail { display: block; color: var(--gold-soft); font-size: .875rem; margin-top: .18rem; }
 
 @media (prefers-reduced-motion: no-preference) {
+  .v2nat-caption:not([hidden]) { animation: chapter-caption-in 180ms ease-out both; }
   .v2nat.pins-arrived .v2nat-pin:not(.is-usf) .v2nat-pin-dot {
     animation: chapter-marker-arrive 440ms cubic-bezier(.19,.73,.35,1) var(--pin-delay,0ms) both;
     transform-box: fill-box;
     transform-origin: center;
   }
+}
+@keyframes chapter-caption-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes chapter-marker-arrive {
   from { transform: translateY(-12px) scale(.52); opacity: .12; }
@@ -477,27 +499,20 @@
 }
 /* ===== 05-mem ===== */
 .chapter-finish {
-  --arc-card-height: clamp(19rem, 36vw, 32rem);
-  --arc-inset: clamp(.7rem, 1.6vw, 1.5rem);
-  --arc-outlet: clamp(5.5rem, 9vw, 8rem);
+  --arc-card-height: clamp(10rem, min(30vw, calc(100svh - var(--v2hd-h) - 14rem)), 23rem);
+  --arc-inset: clamp(.75rem, 1.8vw, 1.4rem);
   position: relative;
-  display: grid;
-  grid-template-rows: minmax(7rem, 1fr) auto var(--arc-outlet);
-  min-block-size: calc(var(--arc-card-height) + var(--arc-inset) + 2.7rem);
-  isolation: isolate;
-  background: var(--paper);
+  max-width: 1440px;
+  margin: 0 auto;
+  background: var(--paper-deep);
 }
-.mem {
-  position: absolute;
-  inset: 0;
-  padding: 0;
-  overflow: hidden;
-}
+.mem { padding: 0; }
 .mem-band {
-  --arc-radius: calc(var(--arc-card-height) / .2625);
+  --arc-radius: calc(var(--arc-card-height) / .29);
   --arc-card-width: calc(var(--arc-card-height) / 1.5);
   position: relative;
-  block-size: 100%;
+  height: calc(var(--arc-card-height) + var(--arc-inset) + 2.6rem);
+  overflow: hidden;
 }
 .mem-wheel {
   position: absolute;
@@ -508,8 +523,11 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  transform: rotate(var(--arc-travel, 0deg));
+  animation: photo-orbit 204s linear -9s infinite;
+  animation-play-state: paused;
 }
+.mem.is-running .mem-wheel { animation-play-state: running; }
+@keyframes photo-orbit { to { transform: rotate(-360deg); } }
 .mem-i {
   position: absolute;
   inset: 0 auto auto 0;
@@ -518,41 +536,60 @@
   margin: calc(var(--arc-card-height) / -2) 0 0 calc(var(--arc-card-width) / -2);
   transform: rotate(calc(var(--i) * 11.25deg)) translateY(calc(var(--arc-radius) * -1));
   overflow: hidden;
-  border-radius: clamp(8px, .85vw, 14px);
-  background: var(--paper-deep);
-  box-shadow: 0 12px 30px -22px rgb(25 18 33 / 65%);
+  border: 1px solid rgb(36 23 51 / 12%);
+  border-radius: clamp(6px, .65vw, 12px);
+  background: var(--paper);
 }
-.mem-i img {width: 100%; height: 100%; display: block; object-fit: cover;}
+.mem-i img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: .15rem .2rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font: 500 .82rem/1.25 var(--font-text);
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+.motion-toggle:hover, .motion-toggle:focus-visible { text-decoration: underline; }
+.motion-toggle[hidden] { display: none; }
+.mem > .motion-toggle {
+  position: absolute;
+  z-index: 2;
+  inset: .35rem clamp(.7rem, 2.5vw, 2rem) auto auto;
+  padding-inline: .75rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+@media (min-width: 1441px) {
+  .chapter-finish { border-inline: 1px solid var(--line); }
+}
 @media (max-width: 599px) {
-  .chapter-finish {
-    --arc-card-height: clamp(24rem, 108vw, 30rem);
-    --arc-outlet: 5.25rem;
-  }
+  .chapter-finish { --arc-card-height: clamp(9.75rem, min(66vw, calc(100svh - var(--v2hd-h) - 13.75rem)), 17rem); }
+  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 2rem); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
-  .chapter-finish {
-    --arc-card-height: 18.5rem;
-    --arc-outlet: 4.85rem;
-    grid-template-rows: minmax(5rem, 1fr) auto var(--arc-outlet);
-  }
+  .chapter-finish { --arc-card-height: clamp(7.25rem, 32svh, 10.5rem); }
+  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 1.45rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mem-wheel {transform: none;}
+  .mem-wheel { animation: none; }
+  [data-mem-toggle] { display: none; }
 }
 /* ===== 07-act ===== */
-/* The invitation overlays the arc. The photo edges emerge below it. */
+/* One invitation beneath the chapter photographs. */
 .act{
-  position:relative;z-index:1;
-  grid-row:2;
-  padding:clamp(1.45rem,3vw,2.5rem) 0;
-  border-block:1px solid rgb(230 198 91 / 24%);
-  color:var(--paper);text-align:center;
-  background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
+  position:relative;
+  padding:clamp(.65rem,1.5vw,1.5rem) 0 clamp(1.8rem,3.4vw,3.1rem);
+  color:var(--ink);text-align:center;
 }
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
-.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--paper)}
-.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
+.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--ink)}
+.act-title em{font-weight:400;font-style:italic;color:var(--purple);padding-right:.08em}
 .act-go{margin-top:clamp(1rem,2.6vw,1.9rem)}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;
@@ -580,9 +617,23 @@
 @media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}
 /* ===== 99-footer ===== */
 .v2footer{
-  padding:clamp(2.5rem,5vw,4rem) 0 1rem;
-  background:radial-gradient(ellipse at 12% 0%, #2d2039, transparent 65%), var(--ink);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  padding:clamp(2.5rem,6vw,5rem) 0 1rem;
+  background:radial-gradient(ellipse at 12% 0%, #382749, transparent 62%), var(--ink);
+  border-top:1px solid rgb(230 198 91 / 26%);
   color:rgba(250,248,243,.75);
+}
+.v2footer::before {
+  content:"ΦΧΘ";
+  position:absolute;
+  inset:auto auto -.34em -.08em;
+  z-index:-1;
+  font:400 clamp(8rem,25vw,25rem)/1 var(--font-display);
+  color:transparent;
+  -webkit-text-stroke:1px rgb(230 198 91 / 16%);
+  pointer-events:none;
 }
 .v2footer-grid{
   display:grid;
@@ -719,7 +770,7 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
-          <p class="grow__say">Go on company visits like the chapter’s trip to Jabil. At alumni panels, ask graduates what helped them land their first jobs.</p>
+          <p class="grow__say">Prepare for your first internship interview with members who have been through recruiting. Practice your answers, get alumni feedback on your résumé and visit employers to see what a job looks like beyond the posting.</p>
           <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
             <img src="../assets/chapter/jabil-company-visit-720.webp"
                  srcset="../assets/chapter/jabil-company-visit-480.webp 480w, ../assets/chapter/jabil-company-visit-720.webp 720w"
@@ -736,7 +787,7 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
-          <p class="grow__say">Host a speaker conversation at the Fall Summit or help organize Pie a Phi Chi, the chapter’s fundraiser for Moffitt Cancer Center.</p>
+          <p class="grow__say">Run a speaker panel, from inviting the guest to asking the first question onstage. Or coordinate volunteers for a campus fundraiser. When an interviewer asks about a time you led a team, you’ll have a project of your own to discuss.</p>
           <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
             <img src="../assets/chapter/speaker-conversation-800.webp"
                  srcset="../assets/chapter/speaker-conversation-480.webp 480w, ../assets/chapter/speaker-conversation-800.webp 800w, ../assets/chapter/speaker-conversation-1200.webp 1200w"
@@ -753,7 +804,7 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
-          <p class="grow__say">Get to know students outside your major through intramurals, fall formal and the chapter’s spring retreat.</p>
+          <p class="grow__say">Play a round of golf with people outside your major at a chapter tournament. Get to know them better at socials, volunteer together at the Community Food Pantry and celebrate the semester at formal.</p>
           <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
             <img src="../assets/chapter/chapter-formal-800.webp"
                  srcset="../assets/chapter/chapter-formal-480.webp 480w, ../assets/chapter/chapter-formal-800.webp 800w, ../assets/chapter/chapter-formal-1200.webp 1200w"
@@ -767,6 +818,7 @@
 
     <div class="grow__stage" data-grow-stage></div>
   </div>
+  <p class="v2wrap grow__record">More than <strong>500 members</strong> have graduated from USF. Zeta Rho has earned <strong>20+ awards</strong> and raised <strong>over $10,000</strong> for local causes.</p>
 </section>
 
     <!-- ===== 03-place ===== -->
@@ -819,6 +871,7 @@
       <li class="pl-cell pl-cell--reverse pl-cell--wide pl-cell--usf"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
       </ul>
     </div>
+  <div class="v2wrap pl-controls"><button class="motion-toggle" type="button" data-pl-toggle hidden>Pause logos</button></div>
 </section>
 
     <!-- ===== 04-national ===== -->
@@ -938,13 +991,13 @@
 <g class="v2nat-pin" transform="translate(64.0 266.0)" data-chapter-pin="santa-clara-university" data-school="Santa Clara University" data-city="Santa Clara" data-state="CA" data-chapter="Zeta Psi"><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/><circle class="v2nat-pin-dot" r="4.5"/></g>
 <g class="v2nat-pin" transform="translate(112.0 359.6)" data-chapter-pin="university-of-california-irvine" data-school="University of California, Irvine" data-city="Irvine" data-state="CA" data-chapter="Zeta Omega"><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/><circle class="v2nat-pin-dot" r="4.5"/></g>
 <g class="v2nat-pin" transform="translate(73.8 242.3)" data-chapter-pin="university-of-california-davis" data-school="University of California, Davis" data-city="Davis" data-state="CA" data-chapter="Eta Epsilon"><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/><circle class="v2nat-pin-dot" r="4.5"/></g>
-<g class="v2nat-pin is-usf is-selected" transform="translate(742.5 503.2)" data-chapter-pin="university-of-south-florida" data-school="University of South Florida" data-city="Tampa" data-state="FL" data-chapter="Zeta Rho"><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/><circle class="v2nat-pin-dot" r="4.5"/></g>
+<g class="v2nat-pin is-usf" transform="translate(742.5 503.2)" data-chapter-pin="university-of-south-florida" data-school="University of South Florida" data-city="Tampa" data-state="FL" data-chapter="Zeta Rho"><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/><circle class="v2nat-pin-dot" r="4.5"/></g>
 <text class="v2nat-usf-label" x="757.5" y="509.2" aria-hidden="true">USF</text>
 </g>
 </svg>
-        <figcaption class="v2nat-caption">
-          <span class="v2nat-caption-school" data-map-school>University of South Florida</span>
-          <span class="v2nat-caption-detail" data-map-detail>Zeta Rho · Tampa, FL</span>
+        <figcaption class="v2nat-caption" hidden>
+          <span class="v2nat-caption-school" data-map-school></span>
+          <span class="v2nat-caption-detail" data-map-detail></span>
         </figcaption>
         <p id="pct-map-keys" class="v2-sr-only">Use the arrow keys to browse chapters. Press Enter or Space to select a chapter.</p>
       </figure>
@@ -955,6 +1008,7 @@
     <!-- ===== 05-mem ===== -->
 <div class="chapter-finish">
 <section class="mem" id="life" aria-label="Chapter life">
+  <button class="motion-toggle" type="button" data-mem-toggle hidden>Pause photos</button>
   <div class="mem-band">
     <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
       <li class="mem-i" style="--i:0"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
@@ -995,11 +1049,11 @@
 
     <!-- ===== 07-act ===== -->
 <!-- A display-led closing invitation, consistent with the original page. -->
-<section class="act on-dark" id="act" aria-labelledby="act-title">
+<section class="act" id="act" aria-labelledby="act-title">
   <div class="v2wrap">
     <div class="act-inner">
       <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta</em></h2>
-      <div class="act-go"><a class="act-cta" href="/rush#interest">Get Rush updates</a></div>
+      <div class="act-go"><a class="act-cta" href="rush.html">Learn about Rush</a></div>
     </div>
   </div>
 </section>
@@ -1020,14 +1074,15 @@
             <span class="v2footer-sub">Zeta Rho · USF</span>
           </span>
         </a>
-        <p>The University of South Florida chapter of Phi Chi Theta, founded in 2018.</p>
+        <p>Professional business fraternity<br>University of South Florida · Tampa</p>
       </div>
       <nav class="v2footer-nav" aria-label="Footer pages">
         <h2 class="v2footer-label">The Chapter</h2>
         <ul>
           <li><a href="index.html#national">About Zeta Rho</a></li>
+          <li><a href="index.html#placements">Member Success</a></li>
           <li><a href="index.html#life">Chapter life</a></li>
-          <li><a href="rush.html">Rush PCT</a></li>
+          <li><a href="rush.html">How Rush works</a></li>
         </ul>
       </nav>
       <nav class="v2footer-nav" aria-label="Connect with Phi Chi Theta">
@@ -1439,177 +1494,104 @@ window.pctInitGrow = function () {
   }
 };
 /* ===== 03-place ===== */
-/* The same twenty logo nodes become finite rows linked to normal page scroll.
-   No continuous loop runs: a visible scroll/resize schedules one frame. */
+/* The two copies in each belt meet at the same position when the loop repeats. */
 window.pctInitPlacements = function () {
   'use strict';
-  var root = document.querySelector('[data-place]');
+  const root = document.querySelector('[data-place]');
   if (!root || root.dataset.placementsReady) return;
   root.dataset.placementsReady = '1';
-  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var brands = root.querySelector('[data-pl-brands]');
-  var originalList = root.querySelector('[data-pl-logos]');
-  var logos = originalList ? Array.prototype.slice.call(originalList.children) : [];
-  var rows = [];
-  var rowContainer = null;
-  var rowObserver = null;
-  var resizeObserver = null;
-  var rowFrame = null;
-  var rowsEnabled = false;
-  var rowsVisible = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width:700px)');
+  const brands = root.querySelector('[data-pl-brands]');
+  const originalList = root.querySelector('[data-pl-logos]');
+  const control = root.querySelector('[data-pl-toggle]');
+  const logos = [...originalList.children];
+  let rows;
+  let nearby = false;
+  let paused = false;
 
-  function cancelRowFrame() {
-    if (rowFrame !== null) window.cancelAnimationFrame(rowFrame);
-    rowFrame = null;
+  function setRunning() {
+    brands.classList.toggle('is-running', nearby && !paused && !document.hidden);
   }
-  function applyRows() {
-    var scroll = window.scrollY || window.pageYOffset || 0;
-    rows.forEach(function (row, index) {
-      var progress = Math.max(0, Math.min((scroll - row.start) / row.distance, 1));
-      var phase = index % 2 ? 1 - progress : progress;
-      row.track.style.transform = 'translate3d(' + (-row.overflow * phase).toFixed(2) + 'px,0,0)';
-    });
-  }
-  function queueRows() {
-    if (!rowsEnabled || !rowsVisible || document.hidden || rowFrame !== null) return;
-    rowFrame = window.requestAnimationFrame(function () {
-      rowFrame = null;
-      if (rowsEnabled && rowsVisible && !document.hidden) applyRows();
-    });
-  }
-  function measureRows() {
-    if (!rowsEnabled) return;
-    var scroll = window.scrollY || window.pageYOffset || 0;
-    var viewport = Math.max(1, window.innerHeight);
-    var header = document.querySelector('.v2hd');
-    var safeTop = header ? header.getBoundingClientRect().height + 12 : 0;
-    rows.forEach(function (row) {
-      var box = row.element.getBoundingClientRect();
-      var top = box.top + scroll;
-      row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
-      /* Hold endpoints while the full row is visible, finishing before the
-         sticky header covers it. First/last marks each receive a complete view. */
-      var endpointHold = 16;
-      row.start = top + box.height - viewport + endpointHold;
-      row.distance = Math.max(1, viewport - box.height - safeTop - endpointHold * 2);
-    });
-    applyRows();
-  }
-  function balancedLogoGroups(count) {
-    var style = window.getComputedStyle(brands);
-    var scale = Number(style.getPropertyValue('--pl-scale')) || 1;
-    var gap = parseFloat(style.getPropertyValue('--pl-gap')) || 0;
-    var perRow = Math.ceil(logos.length / count);
-    var groups = [], loads = [], capacities = [];
-    for (var i = 0; i < count; i++) {
-      groups.push([]);
-      loads.push(0);
-      capacities.push(Math.min(perRow, logos.length - i * perRow));
+
+  function formRows() {
+    rows?.remove();
+    const count = compact.matches ? 3 : 2;
+    const groups = Array.from({length: count}, () => ({logos: [], width: 0}));
+    const scale = Number(getComputedStyle(brands).getPropertyValue('--pl-scale')) || 1;
+    const gap = parseFloat(getComputedStyle(brands).getPropertyValue('--pl-gap')) || 0;
+    const maxPerRow = Math.ceil(logos.length / count);
+    const weighted = logos.map((logo, index) => ({
+      logo, index, width: parseFloat(getComputedStyle(logo).getPropertyValue('--pl-slot')) * scale + gap,
+    })).sort((a, b) => b.width - a.width);
+
+    for (const entry of weighted) {
+      const group = groups.filter(item => item.logos.length < maxPerRow)
+        .reduce((shortest, item) => shortest.width <= item.width ? shortest : item);
+      group.logos.push(entry);
+      group.width += entry.width;
     }
-    var weighted = logos.map(function (logo, index) {
-      var width = parseFloat(window.getComputedStyle(logo).getPropertyValue('--pl-slot')) || 136;
-      return { logo:logo, index:index, width:width * scale };
-    }).sort(function (a, b) { return b.width - a.width || a.index - b.index; });
-    weighted.forEach(function (item) {
-      var best = -1;
-      for (var row = 0; row < count; row++) {
-        if (groups[row].length >= capacities[row]) continue;
-        if (best === -1 || loads[row] < loads[best]) best = row;
-      }
-      if (groups[best].length) loads[best] += gap;
-      groups[best].push(item);
-      loads[best] += item.width;
-    });
-    return groups.map(function (group) {
-      return group.sort(function (a, b) { return a.index - b.index; }).map(function (item) { return item.logo; });
-    });
-  }
-  function groupRows() {
-    if (!rowsEnabled) return;
-    var count = window.innerWidth <= 700 ? 3 : 2;
-    if (rows.length === count) { measureRows(); return; }
-    var groups = balancedLogoGroups(count);
-    if (rowContainer) rowContainer.remove();
-    rowContainer = document.createElement('div');
-    rowContainer.className = 'pl-rows';
-    rows = [];
-    for (var index = 0; index < count; index++) {
-      var element = document.createElement('div');
-      var track = document.createElement('ul');
-      element.className = 'pl-row';
+
+    rows = document.createElement('div');
+    rows.className = 'pl-rows';
+    groups.forEach((group, index) => {
+      const row = document.createElement('div');
+      row.className = 'pl-row';
+      const belt = document.createElement('div');
+      belt.className = 'pl-belt';
+      belt.style.setProperty('--pl-duration', Math.round(group.width / (compact.matches ? 23 : 29)) + 's');
+      belt.style.setProperty('--pl-phase', -(3 + index * 4) + 's');
+      const track = document.createElement('ul');
       track.className = 'pl-track';
       track.setAttribute('role', 'list');
-      track.setAttribute('aria-label', 'Companies where members have been placed, row ' + (index + 1) + ' of ' + count);
-      groups[index].forEach(function (logo) { track.appendChild(logo); });
-      element.appendChild(track);
-      rowContainer.appendChild(element);
-      rows.push({ element:element, track:track, start:0, distance:1, overflow:0 });
-    }
+      track.setAttribute('aria-label', 'Employers, row ' + (index + 1));
+      group.logos.sort((a,b) => a.index - b.index).forEach(({logo}) => track.append(logo));
+      const copy = track.cloneNode(true);
+      copy.removeAttribute('aria-label');
+      copy.setAttribute('aria-hidden', 'true');
+      belt.append(track, copy);
+      row.append(belt);
+      rows.append(row);
+    });
     originalList.hidden = true;
-    brands.appendChild(rowContainer);
-    measureRows();
+    brands.append(rows);
+    control.hidden = false;
+    if (nearby) loadRowImages();
   }
-  function onRowResize() {
-    if (!rowsEnabled) return;
-    groupRows();
-    queueRows();
-  }
-  function onRowVisibility() {
-    if (document.hidden) cancelRowFrame();
-    else queueRows();
-  }
-  function stopRows() {
-    rowsEnabled = false;
-    rowsVisible = false;
-    cancelRowFrame();
-    if (rowObserver) rowObserver.disconnect();
-    if (resizeObserver) resizeObserver.disconnect();
-    rowObserver = resizeObserver = null;
-    window.removeEventListener('scroll', queueRows);
-    window.removeEventListener('resize', onRowResize);
-    document.removeEventListener('visibilitychange', onRowVisibility);
-    if (originalList) {
-      logos.forEach(function (logo) { originalList.appendChild(logo); });
-      originalList.hidden = false;
-    }
-    if (rowContainer) rowContainer.remove();
-    rowContainer = null;
-    rows = [];
-  }
-  function startRows() {
-    if (rowsEnabled || !brands || !originalList || !logos.length ||
-        (reduce && reduce.matches) || !window.requestAnimationFrame ||
-        !('IntersectionObserver' in window)) return;
-    try {
-      rowsEnabled = true;
-      groupRows();
-      rowObserver = new IntersectionObserver(function (entries) {
-        rowsVisible = entries.some(function (entry) { return entry.isIntersecting; });
-        if (rowsVisible) queueRows();
-        else cancelRowFrame();
-      });
-      rowObserver.observe(brands);
-      if ('ResizeObserver' in window) {
-        resizeObserver = new ResizeObserver(measureRows);
-        resizeObserver.observe(brands);
-        if (document.body) resizeObserver.observe(document.body);
-      }
-      window.addEventListener('scroll', queueRows, { passive:true });
-      window.addEventListener('resize', onRowResize, { passive:true });
-      document.addEventListener('visibilitychange', onRowVisibility);
-    } catch (error) {
-      stopRows();
-    }
-  }
-  function onRowReduce(event) {
-    if (event.matches) stopRows();
-    else startRows();
-  }
-  if (reduce && reduce.addEventListener) reduce.addEventListener('change', onRowReduce);
-  else if (reduce && reduce.addListener) reduce.addListener(onRowReduce);
-  if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(stopRows);
-  startRows();
 
+  function loadRowImages() {
+    rows?.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
+  }
+
+  function syncPreference() {
+    if (!reduce.matches) {
+      if (!rows) formRows();
+      return;
+    }
+    rows?.remove();
+    rows = null;
+    originalList.append(...logos);
+    originalList.hidden = false;
+    control.hidden = true;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      nearby = entry.isIntersecting;
+      if (nearby) loadRowImages();
+      setRunning();
+    }, {rootMargin: '160px 0px'});
+    observer.observe(brands);
+    control.addEventListener('click', () => {
+      paused = !paused;
+      control.textContent = paused ? 'Play logos' : 'Pause logos';
+      setRunning();
+    });
+    compact.addEventListener('change', () => { if (rows) formRows(); });
+    reduce.addEventListener('change', syncPreference);
+    document.addEventListener('visibilitychange', setRunning);
+    syncPreference();
+  }
 
   /* Each result counts once when its own row enters. Final source values and
      accessible names remain unchanged; only overlaid aria-hidden digits move. */
@@ -1689,10 +1671,11 @@ window.pctInitNational = function () {
   const map = root.querySelector('[data-chapter-map]');
   const pins = [...map.querySelectorAll('[data-chapter-pin]')];
   const home = pins.find(pin => pin.classList.contains('is-usf'));
+  const caption = root.querySelector('.v2nat-caption');
   const school = root.querySelector('[data-map-school]');
   const detail = root.querySelector('[data-map-detail]');
-  let selected = home;
-  let visible = home;
+  let selected = null;
+  let visible = null;
   let tabStop = home;
   root.dataset.nationalReady = '1';
   map.setAttribute('role', 'group');
@@ -1702,16 +1685,19 @@ window.pctInitNational = function () {
     const {school: name, city, state} = pin.dataset;
     pin.setAttribute('role', 'button');
     pin.setAttribute('aria-label', name + ', ' + city + ', ' + state);
-    pin.setAttribute('aria-pressed', String(pin === home));
+    pin.setAttribute('aria-pressed', 'false');
     pin.setAttribute('tabindex', pin === home ? '0' : '-1');
   }
 
   function show(pin) {
     if (pin === visible) return;
-    visible.classList.remove('is-selected');
-    pin.classList.add('is-selected');
-    school.textContent = pin.dataset.school;
-    detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+    visible?.classList.remove('is-selected');
+    if (pin) {
+      pin.classList.add('is-selected');
+      school.textContent = pin.dataset.school;
+      detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+    }
+    caption.hidden = !pin;
     visible = pin;
   }
 
@@ -1722,10 +1708,10 @@ window.pctInitNational = function () {
   }
 
   function select(pin) {
-    selected.setAttribute('aria-pressed', 'false');
-    pin.setAttribute('aria-pressed', 'true');
+    selected?.setAttribute('aria-pressed', 'false');
+    pin?.setAttribute('aria-pressed', 'true');
     selected = pin;
-    setTabStop(pin);
+    if (pin) setTabStop(pin);
     show(pin);
   }
 
@@ -1747,15 +1733,20 @@ window.pctInitNational = function () {
   }
 
   map.addEventListener('pointermove', event => {
-    if (event.pointerType === 'mouse' || event.pointerType === 'pen') show(nearestPin(event, 13) || selected);
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+      const pin = nearestPin(event, 13);
+      map.classList.toggle('is-over-pin', Boolean(pin));
+      show(pin || selected);
+    }
   });
   map.addEventListener('pointerleave', () => {
+    map.classList.remove('is-over-pin');
     const focusedPin = map.contains(document.activeElement) && document.activeElement.closest('[data-chapter-pin]');
     show(focusedPin || selected);
   });
   map.addEventListener('click', event => {
     const pin = event.detail ? nearestPin(event, 23) : event.target.closest('[data-chapter-pin]');
-    if (pin) select(pin);
+    select(pin);
   });
   map.addEventListener('focusin', event => {
     const pin = event.target.closest('[data-chapter-pin]');
@@ -1772,6 +1763,7 @@ window.pctInitNational = function () {
     switch (event.key) {
       case 'Enter':
       case ' ': select(pin); break;
+      case 'Escape': select(null); break;
       case 'ArrowRight':
       case 'ArrowDown': next = pins[(index + 1) % pins.length]; break;
       case 'ArrowLeft':
@@ -1808,46 +1800,37 @@ window.pctInitNational = function () {
 };
 /* ===== 05-mem ===== */
 window.pctInitPhotoArc = function () {
-  const wheel = document.querySelector('.mem-wheel');
-  if (!wheel || !window.IntersectionObserver) return;
-  const finish = wheel.closest('.chapter-finish');
-  let inView = false;
-  let frame = 0;
+  const band = document.querySelector('.mem');
+  if (!band || !window.IntersectionObserver) return;
+  const control = band.querySelector('[data-mem-toggle]');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let nearby = false;
+  let paused = false;
 
-  function draw() {
-    frame = 0;
-    const section = finish.getBoundingClientRect();
-    const travel = innerHeight + section.height;
-    const progress = Math.max(0, Math.min(1, (innerHeight - section.top) / travel));
-    wheel.style.setProperty('--arc-travel', (-78 * progress).toFixed(2) + 'deg');
-  }
-
-  function schedule() {
-    if (inView && !document.hidden && !frame) frame = requestAnimationFrame(draw);
+  function sync() {
+    control.hidden = motion.matches;
+    band.classList.toggle('is-running', nearby && !paused && !motion.matches && !document.hidden);
   }
 
   const images = new IntersectionObserver(([entry]) => {
     if (!entry.isIntersecting) return;
-    wheel.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
+    band.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
     images.disconnect();
   }, {rootMargin: '680px 0px'});
-  images.observe(finish);
-  if (window.pctMotion?.reduced) return;
-
+  images.observe(band);
   const observer = new IntersectionObserver(([entry]) => {
-    inView = entry.isIntersecting;
-    if (inView) schedule();
+    nearby = entry.isIntersecting;
+    sync();
+  }, {rootMargin: '150px 0px'});
+  observer.observe(band);
+  control.addEventListener('click', () => {
+    paused = !paused;
+    control.textContent = paused ? 'Play photos' : 'Pause photos';
+    sync();
   });
-  observer.observe(finish);
-  window.addEventListener('scroll', schedule, {passive: true});
-  window.addEventListener('resize', schedule, {passive: true});
-  window.pctMotion?.onReduce(() => {
-    observer.disconnect();
-    window.removeEventListener('scroll', schedule);
-    window.removeEventListener('resize', schedule);
-    if (frame) cancelAnimationFrame(frame);
-    wheel.style.removeProperty('--arc-travel');
-  });
+  motion.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  sync();
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */

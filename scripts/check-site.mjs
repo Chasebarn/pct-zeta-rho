@@ -24,9 +24,10 @@ class Document(HTMLParser):
         if tag=='link' and a.get('rel') in ('stylesheet','icon','apple-touch-icon'):self.refs.append(a['href'])
         if tag=='img':self.images.append(a)
 documents={}
-for path in root.glob('*.html'):
-    if path.stem=='404':continue
-    doc=Document();doc.feed(path.read_text());documents[path.stem]=doc
+for path in root.rglob('*.html'):
+    route=path.relative_to(root)
+    if path.stem=='404' or route.parts[0]=='assets':continue
+    doc=Document();doc.feed(path.read_text());documents[route]=doc
     assert doc.h1==1, f'{path}: expected one H1'
     assert len(doc.ids)==len(set(doc.ids)), f'{path}: duplicate IDs'
     assert all('alt' in image for image in doc.images), f'{path}: image missing alt'
@@ -37,12 +38,13 @@ for key,doc in documents.items():
         if url.scheme or url.netloc:continue
         route=unquote(url.path)
         if route.startswith('/api/'):continue
-        path=root / route.lstrip('/') if route else root / ('index.html' if key=='index' else key+'.html')
+        path=root / route.lstrip('/') if route else root / key
         if path==root:path=root/'index.html'
         if not path.suffix:path=path.with_suffix('.html')
         assert path.is_file(),f'{key}: missing {href}'
-        if url.fragment and path.stem in documents:
-            assert unquote(url.fragment) in documents[path.stem].ids,f'{key}: missing anchor {href}'
+        target=documents.get(path.relative_to(root))
+        if url.fragment and target:
+            assert unquote(url.fragment) in target.ids,f'{key}: missing anchor {href}'
 print(f'Validated {len(documents)} pages, links, IDs, headings, image labels, responsive images and share images.')
 `], {stdio:'inherit'});
 if (verification.status !== 0) process.exit(verification.status || 1);

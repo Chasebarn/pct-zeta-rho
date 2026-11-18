@@ -6,30 +6,28 @@ USF Muma College of Business profiles. Structured source records are in
 [content/about-sources.json](content/about-sources.json) and
 [content/rush-sources.json](content/rush-sources.json).
 
-## This revision
+## Full site audit
 
-| Page | What changed after the walkthrough |
+| Section | Change |
 | --- | --- |
-| Home opening | The purple hero fills the opening viewport. The footer rail and “Explore membership” are gone. “Rush PCT” is the primary action. |
-| Membership | Professional Connections, Leadership Experience and Chapter Community show what a USF student gains. Each has chapter photography. Only one panel opens at a time on phones, and selecting a lower row keeps that row in view. There are no links inside these panels. |
-| Member Success | Enlarged and aligned the figures with the logo rows. Removed the member anecdote and old-site link. The employer rows follow vertical page scroll in opposite directions. The first and last marks reach the readable area before each row leaves view. All 20 marks remain available with scripts disabled or reduced motion enabled. |
-| National | Brief copy names the national membership program, mentoring and scholarships. The custom map uses sourced school coordinates. It starts in Tampa, and hover, tap or keyboard selection updates the school caption underneath. |
-| Chapter Life and Rush | The original photo arc uses Johnny’s archive and moves with page scroll. Image edges are visible above and below the invitation. One button opens the form on Rush. |
-| Rush | Rebuilt from the original V2 layout. The opening explains what to ask at Info Night. Eligibility, events and common questions lead to the dedicated form. The previous schedule can be opened separately. Sharing uses the live Rush link, with a copy fallback. |
-| About | Leads with Johnny’s full-chapter photo and the Chicago and Tampa founding stories. Selected projects and awards precede the officer directory. The old Service URL goes to the service section on About. |
-| Site frame | Updated the footer, browser favicon and link preview artwork. Privacy is linked from the footer. |
+| Navigation | Home, About and Rush stay in the navigation. The gold Rush PCT action appears once the hero has cleared. On phones the visible Rush link becomes the action. |
+| Membership | The panels give students concrete examples of interview practice, alumni feedback, running events, volunteering and spending time together. The existing photographs stay with those stories. The 500+ graduates, 20+ awards and over $10,000 raised are figures supplied by the chapter. |
+| Member Success | The title, figures and labels are centered. All three figures use the same color. Dark employer logos loop in opposite directions and keep moving through the visible part of the page. |
+| National map | The italic 1924 and map pins are larger. The line beneath the map is gone. A school caption appears when someone points to, taps or focuses a pin. |
+| Chapter Life | The photos autoplay in their own arc above the compact Rush invitation. “Learn about Rush” opens the Rush page. Pause controls and reduced-motion support keep the section usable. |
+| Rush | A single heading leads into an illustrated journey from the first event to the invitation to apply. The old schedule lives in a disclosure. “Fill out interest form” at the end opens the separate form. The dues question was removed at the chapter’s request. |
+| Rush interest form | The form has its own address. Existing saved submissions and validation use the same Neon-backed endpoint. Previous Rush signup links forward to the new page. |
+| About | Johnny’s ProVise discussion photograph opens the page. Portraits of the six national founders illustrate a short timeline. Executive Board, Cabinet and the faculty advisor sit in one indexed directory. |
+| Footer | A chapter wordmark carries through the deeper purple footer. Direct links cover the story, outcomes, photos, Rush and chapter contact information. |
 
 ## Verification
 
-- The Home, Rush, About and Privacy pages pass the build and local link, image, heading and anchor checks.
-- Nine backend tests cover validation, failed saves, rate limiting and duplicate handling.
-- WebKit and Chrome browser runs check the hero, membership panel selection, logo movement, map hover and tap, keyboard map selection, photo overlap, sharing fallback, form correction and the recruitment officer link.
-- Phone portrait, landscape, desktop, reduced motion and enlarged text are tested in browser emulation.
+The build validates five pages, links, anchors and images. Nine backend tests cover validation, failed saves, rate limiting and duplicate handling. WebKit and Chrome checks cover portrait and landscape layouts, 200% text, keyboard navigation, the map, photos, logo motion and the separate signup flow.
 
-## Recruitment details
+## Recruitment dates
 
-The chapter’s latest schedule covers Fall 2026. Spring 2027 dates, locations, attire and dues await the next chapter announcement. About preserves the roster as supplied by the chapter.
+The latest chapter schedule covers Fall 2026. The next event dates are pending. About preserves the officer roster as supplied by the chapter.
 
 ## Hosting
 
-The production site is [pct-zeta-rho.vercel.app](https://pct-zeta-rho.vercel.app). Vercel handles deployment and the Rush API. Neon stores the consented submissions by recruitment cycle.
+The production site is [pct-zeta-rho.vercel.app](https://pct-zeta-rho.vercel.app). Vercel serves the site and the Rush API. Neon stores consented submissions by recruitment cycle.

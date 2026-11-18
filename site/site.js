@@ -26,13 +26,24 @@ if (menu) {
   window.addEventListener('pageshow', () => { menu.open = false; });
 }
 
-const headerAction = header?.querySelector('.v2hd-rush');
-const heroAction = document.querySelector('.rush-hero .page-actions a[href="#interest"], .home-page [data-hero-cta]');
-if (headerAction && heroAction && headerAction.href === heroAction.href && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(([entry]) => {
-    headerAction.classList.toggle('is-repeated', entry.intersectionRatio >= .5);
-  }, {rootMargin: '-' + header.offsetHeight + 'px 0px 0px', threshold: .5});
-  observer.observe(heroAction);
+const leadHero = document.querySelector('.v2hero, .rush-hero, .chapter-cover');
+if (header && leadHero && 'IntersectionObserver' in window) {
+  const updateRushAction = () => {
+    const heroHasPassed = leadHero.getBoundingClientRect().bottom <= header.offsetHeight + 1;
+    header.classList.toggle('is-hero-nav', !heroHasPassed);
+  };
+  updateRushAction();
+  const observer = new IntersectionObserver(updateRushAction, {
+    rootMargin: '-' + header.offsetHeight + 'px 0px 0px',
+  });
+  observer.observe(leadHero);
+  window.addEventListener('pageshow', updateRushAction);
+}
+
+if (document.body.classList.contains('rush-page') && window.location.hash === '#interest') {
+  const destination = new URL('/rush/interest', window.location.origin);
+  destination.search = window.location.search;
+  window.location.replace(destination);
 }
 
 document.querySelectorAll('[data-interest]').forEach(form => {

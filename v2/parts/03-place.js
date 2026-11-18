@@ -1,174 +1,101 @@
-/* The same twenty logo nodes become finite rows linked to normal page scroll.
-   No continuous loop runs: a visible scroll/resize schedules one frame. */
+/* The two copies in each belt meet at the same position when the loop repeats. */
 window.pctInitPlacements = function () {
   'use strict';
-  var root = document.querySelector('[data-place]');
+  const root = document.querySelector('[data-place]');
   if (!root || root.dataset.placementsReady) return;
   root.dataset.placementsReady = '1';
-  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var brands = root.querySelector('[data-pl-brands]');
-  var originalList = root.querySelector('[data-pl-logos]');
-  var logos = originalList ? Array.prototype.slice.call(originalList.children) : [];
-  var rows = [];
-  var rowContainer = null;
-  var rowObserver = null;
-  var resizeObserver = null;
-  var rowFrame = null;
-  var rowsEnabled = false;
-  var rowsVisible = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width:700px)');
+  const brands = root.querySelector('[data-pl-brands]');
+  const originalList = root.querySelector('[data-pl-logos]');
+  const control = root.querySelector('[data-pl-toggle]');
+  const logos = [...originalList.children];
+  let rows;
+  let nearby = false;
+  let paused = false;
 
-  function cancelRowFrame() {
-    if (rowFrame !== null) window.cancelAnimationFrame(rowFrame);
-    rowFrame = null;
+  function setRunning() {
+    brands.classList.toggle('is-running', nearby && !paused && !document.hidden);
   }
-  function applyRows() {
-    var scroll = window.scrollY || window.pageYOffset || 0;
-    rows.forEach(function (row, index) {
-      var progress = Math.max(0, Math.min((scroll - row.start) / row.distance, 1));
-      var phase = index % 2 ? 1 - progress : progress;
-      row.track.style.transform = 'translate3d(' + (-row.overflow * phase).toFixed(2) + 'px,0,0)';
-    });
-  }
-  function queueRows() {
-    if (!rowsEnabled || !rowsVisible || document.hidden || rowFrame !== null) return;
-    rowFrame = window.requestAnimationFrame(function () {
-      rowFrame = null;
-      if (rowsEnabled && rowsVisible && !document.hidden) applyRows();
-    });
-  }
-  function measureRows() {
-    if (!rowsEnabled) return;
-    var scroll = window.scrollY || window.pageYOffset || 0;
-    var viewport = Math.max(1, window.innerHeight);
-    var header = document.querySelector('.v2hd');
-    var safeTop = header ? header.getBoundingClientRect().height + 12 : 0;
-    rows.forEach(function (row) {
-      var box = row.element.getBoundingClientRect();
-      var top = box.top + scroll;
-      row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
-      /* Hold endpoints while the full row is visible, finishing before the
-         sticky header covers it. First/last marks each receive a complete view. */
-      var endpointHold = 16;
-      row.start = top + box.height - viewport + endpointHold;
-      row.distance = Math.max(1, viewport - box.height - safeTop - endpointHold * 2);
-    });
-    applyRows();
-  }
-  function balancedLogoGroups(count) {
-    var style = window.getComputedStyle(brands);
-    var scale = Number(style.getPropertyValue('--pl-scale')) || 1;
-    var gap = parseFloat(style.getPropertyValue('--pl-gap')) || 0;
-    var perRow = Math.ceil(logos.length / count);
-    var groups = [], loads = [], capacities = [];
-    for (var i = 0; i < count; i++) {
-      groups.push([]);
-      loads.push(0);
-      capacities.push(Math.min(perRow, logos.length - i * perRow));
+
+  function formRows() {
+    rows?.remove();
+    const count = compact.matches ? 3 : 2;
+    const groups = Array.from({length: count}, () => ({logos: [], width: 0}));
+    const scale = Number(getComputedStyle(brands).getPropertyValue('--pl-scale')) || 1;
+    const gap = parseFloat(getComputedStyle(brands).getPropertyValue('--pl-gap')) || 0;
+    const maxPerRow = Math.ceil(logos.length / count);
+    const weighted = logos.map((logo, index) => ({
+      logo, index, width: parseFloat(getComputedStyle(logo).getPropertyValue('--pl-slot')) * scale + gap,
+    })).sort((a, b) => b.width - a.width);
+
+    for (const entry of weighted) {
+      const group = groups.filter(item => item.logos.length < maxPerRow)
+        .reduce((shortest, item) => shortest.width <= item.width ? shortest : item);
+      group.logos.push(entry);
+      group.width += entry.width;
     }
-    var weighted = logos.map(function (logo, index) {
-      var width = parseFloat(window.getComputedStyle(logo).getPropertyValue('--pl-slot')) || 136;
-      return { logo:logo, index:index, width:width * scale };
-    }).sort(function (a, b) { return b.width - a.width || a.index - b.index; });
-    weighted.forEach(function (item) {
-      var best = -1;
-      for (var row = 0; row < count; row++) {
-        if (groups[row].length >= capacities[row]) continue;
-        if (best === -1 || loads[row] < loads[best]) best = row;
-      }
-      if (groups[best].length) loads[best] += gap;
-      groups[best].push(item);
-      loads[best] += item.width;
-    });
-    return groups.map(function (group) {
-      return group.sort(function (a, b) { return a.index - b.index; }).map(function (item) { return item.logo; });
-    });
-  }
-  function groupRows() {
-    if (!rowsEnabled) return;
-    var count = window.innerWidth <= 700 ? 3 : 2;
-    if (rows.length === count) { measureRows(); return; }
-    var groups = balancedLogoGroups(count);
-    if (rowContainer) rowContainer.remove();
-    rowContainer = document.createElement('div');
-    rowContainer.className = 'pl-rows';
-    rows = [];
-    for (var index = 0; index < count; index++) {
-      var element = document.createElement('div');
-      var track = document.createElement('ul');
-      element.className = 'pl-row';
+
+    rows = document.createElement('div');
+    rows.className = 'pl-rows';
+    groups.forEach((group, index) => {
+      const row = document.createElement('div');
+      row.className = 'pl-row';
+      const belt = document.createElement('div');
+      belt.className = 'pl-belt';
+      belt.style.setProperty('--pl-duration', Math.round(group.width / (compact.matches ? 23 : 29)) + 's');
+      belt.style.setProperty('--pl-phase', -(3 + index * 4) + 's');
+      const track = document.createElement('ul');
       track.className = 'pl-track';
       track.setAttribute('role', 'list');
-      track.setAttribute('aria-label', 'Companies where members have been placed, row ' + (index + 1) + ' of ' + count);
-      groups[index].forEach(function (logo) { track.appendChild(logo); });
-      element.appendChild(track);
-      rowContainer.appendChild(element);
-      rows.push({ element:element, track:track, start:0, distance:1, overflow:0 });
-    }
+      track.setAttribute('aria-label', 'Employers, row ' + (index + 1));
+      group.logos.sort((a,b) => a.index - b.index).forEach(({logo}) => track.append(logo));
+      const copy = track.cloneNode(true);
+      copy.removeAttribute('aria-label');
+      copy.setAttribute('aria-hidden', 'true');
+      belt.append(track, copy);
+      row.append(belt);
+      rows.append(row);
+    });
     originalList.hidden = true;
-    brands.appendChild(rowContainer);
-    measureRows();
+    brands.append(rows);
+    control.hidden = false;
+    if (nearby) loadRowImages();
   }
-  function onRowResize() {
-    if (!rowsEnabled) return;
-    groupRows();
-    queueRows();
-  }
-  function onRowVisibility() {
-    if (document.hidden) cancelRowFrame();
-    else queueRows();
-  }
-  function stopRows() {
-    rowsEnabled = false;
-    rowsVisible = false;
-    cancelRowFrame();
-    if (rowObserver) rowObserver.disconnect();
-    if (resizeObserver) resizeObserver.disconnect();
-    rowObserver = resizeObserver = null;
-    window.removeEventListener('scroll', queueRows);
-    window.removeEventListener('resize', onRowResize);
-    document.removeEventListener('visibilitychange', onRowVisibility);
-    if (originalList) {
-      logos.forEach(function (logo) { originalList.appendChild(logo); });
-      originalList.hidden = false;
-    }
-    if (rowContainer) rowContainer.remove();
-    rowContainer = null;
-    rows = [];
-  }
-  function startRows() {
-    if (rowsEnabled || !brands || !originalList || !logos.length ||
-        (reduce && reduce.matches) || !window.requestAnimationFrame ||
-        !('IntersectionObserver' in window)) return;
-    try {
-      rowsEnabled = true;
-      groupRows();
-      rowObserver = new IntersectionObserver(function (entries) {
-        rowsVisible = entries.some(function (entry) { return entry.isIntersecting; });
-        if (rowsVisible) queueRows();
-        else cancelRowFrame();
-      });
-      rowObserver.observe(brands);
-      if ('ResizeObserver' in window) {
-        resizeObserver = new ResizeObserver(measureRows);
-        resizeObserver.observe(brands);
-        if (document.body) resizeObserver.observe(document.body);
-      }
-      window.addEventListener('scroll', queueRows, { passive:true });
-      window.addEventListener('resize', onRowResize, { passive:true });
-      document.addEventListener('visibilitychange', onRowVisibility);
-    } catch (error) {
-      stopRows();
-    }
-  }
-  function onRowReduce(event) {
-    if (event.matches) stopRows();
-    else startRows();
-  }
-  if (reduce && reduce.addEventListener) reduce.addEventListener('change', onRowReduce);
-  else if (reduce && reduce.addListener) reduce.addListener(onRowReduce);
-  if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(stopRows);
-  startRows();
 
+  function loadRowImages() {
+    rows?.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
+  }
+
+  function syncPreference() {
+    if (!reduce.matches) {
+      if (!rows) formRows();
+      return;
+    }
+    rows?.remove();
+    rows = null;
+    originalList.append(...logos);
+    originalList.hidden = false;
+    control.hidden = true;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      nearby = entry.isIntersecting;
+      if (nearby) loadRowImages();
+      setRunning();
+    }, {rootMargin: '160px 0px'});
+    observer.observe(brands);
+    control.addEventListener('click', () => {
+      paused = !paused;
+      control.textContent = paused ? 'Play logos' : 'Pause logos';
+      setRunning();
+    });
+    compact.addEventListener('change', () => { if (rows) formRows(); });
+    reduce.addEventListener('change', syncPreference);
+    document.addEventListener('visibilitychange', setRunning);
+    syncPreference();
+  }
 
   /* Each result counts once when its own row enters. Final source values and
      accessible names remain unchanged; only overlaid aria-hidden digits move. */

@@ -118,7 +118,7 @@ def render_svg():
     for school in sorted(CHAPTERS, key=lambda c: bool(c.get('featured'))):
         x, y = project((school['lon'], school['lat']))
         featured = bool(school.get('featured'))
-        classes = 'v2nat-pin' + (' is-usf is-selected' if featured else '')
+        classes = 'v2nat-pin' + (' is-usf' if featured else '')
         attrs = {'data-chapter-pin': school['id'], 'data-school': school['school'],
                  'data-city': school['city'], 'data-state': school['state'], 'data-chapter': school['chapter']}
         attrs = ' '.join(f'{key}="{escape(str(value), quote=True)}"' for key, value in attrs.items())

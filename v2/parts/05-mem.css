@@ -1,25 +1,18 @@
 .chapter-finish {
-  --arc-card-height: clamp(19rem, 36vw, 32rem);
-  --arc-inset: clamp(.7rem, 1.6vw, 1.5rem);
-  --arc-outlet: clamp(5.5rem, 9vw, 8rem);
+  --arc-card-height: clamp(10rem, min(30vw, calc(100svh - var(--v2hd-h) - 14rem)), 23rem);
+  --arc-inset: clamp(.75rem, 1.8vw, 1.4rem);
   position: relative;
-  display: grid;
-  grid-template-rows: minmax(7rem, 1fr) auto var(--arc-outlet);
-  min-block-size: calc(var(--arc-card-height) + var(--arc-inset) + 2.7rem);
-  isolation: isolate;
-  background: var(--paper);
+  max-width: 1440px;
+  margin: 0 auto;
+  background: var(--paper-deep);
 }
-.mem {
-  position: absolute;
-  inset: 0;
-  padding: 0;
-  overflow: hidden;
-}
+.mem { padding: 0; }
 .mem-band {
-  --arc-radius: calc(var(--arc-card-height) / .2625);
+  --arc-radius: calc(var(--arc-card-height) / .29);
   --arc-card-width: calc(var(--arc-card-height) / 1.5);
   position: relative;
-  block-size: 100%;
+  height: calc(var(--arc-card-height) + var(--arc-inset) + 2.6rem);
+  overflow: hidden;
 }
 .mem-wheel {
   position: absolute;
@@ -30,8 +23,11 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  transform: rotate(var(--arc-travel, 0deg));
+  animation: photo-orbit 204s linear -9s infinite;
+  animation-play-state: paused;
 }
+.mem.is-running .mem-wheel { animation-play-state: running; }
+@keyframes photo-orbit { to { transform: rotate(-360deg); } }
 .mem-i {
   position: absolute;
   inset: 0 auto auto 0;
@@ -40,25 +36,47 @@
   margin: calc(var(--arc-card-height) / -2) 0 0 calc(var(--arc-card-width) / -2);
   transform: rotate(calc(var(--i) * 11.25deg)) translateY(calc(var(--arc-radius) * -1));
   overflow: hidden;
-  border-radius: clamp(8px, .85vw, 14px);
-  background: var(--paper-deep);
-  box-shadow: 0 12px 30px -22px rgb(25 18 33 / 65%);
+  border: 1px solid rgb(36 23 51 / 12%);
+  border-radius: clamp(6px, .65vw, 12px);
+  background: var(--paper);
 }
-.mem-i img {width: 100%; height: 100%; display: block; object-fit: cover;}
+.mem-i img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: .15rem .2rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font: 500 .82rem/1.25 var(--font-text);
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+.motion-toggle:hover, .motion-toggle:focus-visible { text-decoration: underline; }
+.motion-toggle[hidden] { display: none; }
+.mem > .motion-toggle {
+  position: absolute;
+  z-index: 2;
+  inset: .35rem clamp(.7rem, 2.5vw, 2rem) auto auto;
+  padding-inline: .75rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+@media (min-width: 1441px) {
+  .chapter-finish { border-inline: 1px solid var(--line); }
+}
 @media (max-width: 599px) {
-  .chapter-finish {
-    --arc-card-height: clamp(24rem, 108vw, 30rem);
-    --arc-outlet: 5.25rem;
-  }
+  .chapter-finish { --arc-card-height: clamp(9.75rem, min(66vw, calc(100svh - var(--v2hd-h) - 13.75rem)), 17rem); }
+  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 2rem); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
-  .chapter-finish {
-    --arc-card-height: 18.5rem;
-    --arc-outlet: 4.85rem;
-    grid-template-rows: minmax(5rem, 1fr) auto var(--arc-outlet);
-  }
+  .chapter-finish { --arc-card-height: clamp(7.25rem, 32svh, 10.5rem); }
+  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 1.45rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mem-wheel {transform: none;}
+  .mem-wheel { animation: none; }
+  [data-mem-toggle] { display: none; }
 }

@@ -5,10 +5,11 @@ window.pctInitNational = function () {
   const map = root.querySelector('[data-chapter-map]');
   const pins = [...map.querySelectorAll('[data-chapter-pin]')];
   const home = pins.find(pin => pin.classList.contains('is-usf'));
+  const caption = root.querySelector('.v2nat-caption');
   const school = root.querySelector('[data-map-school]');
   const detail = root.querySelector('[data-map-detail]');
-  let selected = home;
-  let visible = home;
+  let selected = null;
+  let visible = null;
   let tabStop = home;
   root.dataset.nationalReady = '1';
   map.setAttribute('role', 'group');
@@ -18,16 +19,19 @@ window.pctInitNational = function () {
     const {school: name, city, state} = pin.dataset;
     pin.setAttribute('role', 'button');
     pin.setAttribute('aria-label', name + ', ' + city + ', ' + state);
-    pin.setAttribute('aria-pressed', String(pin === home));
+    pin.setAttribute('aria-pressed', 'false');
     pin.setAttribute('tabindex', pin === home ? '0' : '-1');
   }
 
   function show(pin) {
     if (pin === visible) return;
-    visible.classList.remove('is-selected');
-    pin.classList.add('is-selected');
-    school.textContent = pin.dataset.school;
-    detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+    visible?.classList.remove('is-selected');
+    if (pin) {
+      pin.classList.add('is-selected');
+      school.textContent = pin.dataset.school;
+      detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+    }
+    caption.hidden = !pin;
     visible = pin;
   }
 
@@ -38,10 +42,10 @@ window.pctInitNational = function () {
   }
 
   function select(pin) {
-    selected.setAttribute('aria-pressed', 'false');
-    pin.setAttribute('aria-pressed', 'true');
+    selected?.setAttribute('aria-pressed', 'false');
+    pin?.setAttribute('aria-pressed', 'true');
     selected = pin;
-    setTabStop(pin);
+    if (pin) setTabStop(pin);
     show(pin);
   }
 
@@ -63,15 +67,20 @@ window.pctInitNational = function () {
   }
 
   map.addEventListener('pointermove', event => {
-    if (event.pointerType === 'mouse' || event.pointerType === 'pen') show(nearestPin(event, 13) || selected);
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+      const pin = nearestPin(event, 13);
+      map.classList.toggle('is-over-pin', Boolean(pin));
+      show(pin || selected);
+    }
   });
   map.addEventListener('pointerleave', () => {
+    map.classList.remove('is-over-pin');
     const focusedPin = map.contains(document.activeElement) && document.activeElement.closest('[data-chapter-pin]');
     show(focusedPin || selected);
   });
   map.addEventListener('click', event => {
     const pin = event.detail ? nearestPin(event, 23) : event.target.closest('[data-chapter-pin]');
-    if (pin) select(pin);
+    select(pin);
   });
   map.addEventListener('focusin', event => {
     const pin = event.target.closest('[data-chapter-pin]');
@@ -88,6 +97,7 @@ window.pctInitNational = function () {
     switch (event.key) {
       case 'Enter':
       case ' ': select(pin); break;
+      case 'Escape': select(null); break;
       case 'ArrowRight':
       case 'ArrowDown': next = pins[(index + 1) % pins.length]; break;
       case 'ArrowLeft':

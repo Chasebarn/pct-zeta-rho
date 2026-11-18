@@ -20,7 +20,7 @@
   color:var(--paper);
 }
 .v2nat-heading-line{display:block}
-.v2nat-h em{color:var(--gold-soft);font-style:italic;white-space:nowrap}
+.v2nat-h em{color:var(--gold-soft);font-size:1.13em;font-style:italic;white-space:nowrap}
 .v2nat-copy{
   max-width:44ch;
   margin-top:1.5rem;
@@ -31,15 +31,16 @@
 .v2nat-copy p{margin:0}
 .v2nat-copy p+p{margin-top:1rem}
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
-.v2nat-figure{min-width:0;width:100%;margin:0}
+.v2nat-figure{position:relative;min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
 .v2nat-pin[role="button"]{cursor:pointer}
+.v2nat-map.is-over-pin{cursor:pointer}
 .v2nat-pin:focus-visible{outline:none}
 .v2nat-pin:focus-visible .v2nat-pin-ring{stroke:var(--gold-soft);stroke-width:2.5;opacity:1}
-.v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
+.v2nat-pin-dot{r:5.2px;fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
 .v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
 .v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
@@ -66,7 +67,7 @@
   .v2nat-layout{gap:1.75rem}
   .v2nat-copy{max-width:44ch}
   .v2nat-figure{max-width:none}
-  .v2nat-pin-dot{r:6px}
+  .v2nat-pin-dot{r:7px}
   .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -77,20 +78,26 @@
 
 
 .v2nat-caption {
-  min-block-size: 4.25rem;
-  padding: .7rem 0 0;
-  border-top: 1px solid rgb(230 198 91 / 38%);
+  position: absolute;
+  inset: 100% 0 auto;
+  margin: .2rem 0 0;
   line-height: 1.45;
+  pointer-events: none;
 }
 .v2nat-caption-school { display: block; color: var(--paper); font-size: 1rem; font-weight: 600; }
 .v2nat-caption-detail { display: block; color: var(--gold-soft); font-size: .875rem; margin-top: .18rem; }
 
 @media (prefers-reduced-motion: no-preference) {
+  .v2nat-caption:not([hidden]) { animation: chapter-caption-in 180ms ease-out both; }
   .v2nat.pins-arrived .v2nat-pin:not(.is-usf) .v2nat-pin-dot {
     animation: chapter-marker-arrive 440ms cubic-bezier(.19,.73,.35,1) var(--pin-delay,0ms) both;
     transform-box: fill-box;
     transform-origin: center;
   }
+}
+@keyframes chapter-caption-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes chapter-marker-arrive {
   from { transform: translateY(-12px) scale(.52); opacity: .12; }

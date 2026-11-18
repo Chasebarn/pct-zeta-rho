@@ -1,15 +1,12 @@
-/* The invitation overlays the arc. The photo edges emerge below it. */
+/* One invitation beneath the chapter photographs. */
 .act{
-  position:relative;z-index:1;
-  grid-row:2;
-  padding:clamp(1.45rem,3vw,2.5rem) 0;
-  border-block:1px solid rgb(230 198 91 / 24%);
-  color:var(--paper);text-align:center;
-  background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
+  position:relative;
+  padding:clamp(.65rem,1.5vw,1.5rem) 0 clamp(1.8rem,3.4vw,3.1rem);
+  color:var(--ink);text-align:center;
 }
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
-.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--paper)}
-.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
+.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--ink)}
+.act-title em{font-weight:400;font-style:italic;color:var(--purple);padding-right:.08em}
 .act-go{margin-top:clamp(1rem,2.6vw,1.9rem)}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;

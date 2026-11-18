@@ -33,6 +33,7 @@ home_js = re.search(r"<script>(.*?)</script>", original, re.S)[1]
 footer = re.search(r'(<footer\b.*?</footer>)', original, re.S)[1]
 for original_link, public_link in {
     "index.html": "/", "index.html#life": "/#life", "index.html#national": "/about",
+    "index.html#placements": "/#placements",
     "rush.html": "/rush", "../portal.html": "/about#contact",
     "privacy.html": "/privacy",
 }.items():
@@ -42,40 +43,45 @@ footer = footer.replace("../assets/", "/assets/")
 titles = {
     "home": ("Phi Chi Theta at USF", "Zeta Rho is USF’s professional business fraternity. Explore the chapter, member outcomes, and the Rush process."),
     "rush": ("Rush Phi Chi Theta", "Thinking about joining Phi Chi Theta at USF? Find out what happens at Rush and sign up for the next schedule."),
+    "interest": ("Rush interest form", "Leave your details to hear from Zeta Rho about the next round of recruitment at USF."),
     "about": ("About Zeta Rho", "The story of Phi Chi Theta at USF, from its founding by 18 students to the chapter leading it today."),
     "privacy": ("Interest Form Privacy", "How Phi Chi Theta Zeta Rho uses and stores details submitted through its Rush interest form."),
 }
+routes = {"home": "/", "interest": "/rush/interest"}
 
 def header(active):
-    destinations = (("home", "/", "Home"), ("about", "/about", "About"))
+    destinations = (("home", "/", "Home"), ("about", "/about", "About"), ("rush", "/rush", "Rush"))
     def link(item, *, desktop=False):
         key, href, label = item
         current = ' aria-current="page"' if key == active else ''
         css = ' class="v2hd-link"' if desktop else ''
         return f'<a{css} href="{href}"{current}>{label}</a>'
     links = "".join(f"<li>{link(item, desktop=True)}</li>" for item in destinations)
-    mobile = "".join(link(item) for item in (*destinations, ("rush", "/rush", "Rush")))
-    action, action_label = ("#interest", "Interest form") if active == "rush" else ("/rush", "Rush PCT")
+    mobile = "".join(link(item) for item in destinations)
+    action = "#next-step" if active == "rush" else "/rush"
     header_class = "v2hd is-over-hero" if active == "home" else "v2hd"
+    if active in ("home", "rush", "about", "interest"):
+        header_class += " is-hero-nav"
     return f'''<header class="{header_class}">
       <div class="v2wrap v2hd-row">
         <a class="v2hd-brand" href="/"><img class="v2hd-crest" src="/assets/crest.png" alt="" width="337" height="445"><span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho · USF</span></span></a>
         <nav class="v2hd-nav" aria-label="Primary"><ul class="v2hd-list">{links}</ul></nav>
-        <a class="v2hd-rush" href="{action}">{action_label}</a>
+        <a class="v2hd-rush" href="{action}"><span class="rush-short">Rush</span><span class="rush-action-label">Rush PCT</span></a>
         <details class="v2hd-menu"><summary><span class="v2-sr-only">Navigation menu</span><span class="menu-bars" aria-hidden="true"></span></summary><nav class="v2hd-mobile" aria-label="Mobile navigation">{mobile}</nav></details>
       </div>
     </header>'''
 
 def render(key, body, scripts=""):
     title, description = titles[key]
-    path = "/" if key == "home" else "/" + key
+    path = routes.get(key, "/" + key)
     origin = os.environ.get("SITE_URL", "").rstrip("/") or "https://pct-zeta-rho.vercel.app"
     canonical = f'<link rel="canonical" href="{escape(origin + path, quote=True)}">' if origin else ""
     if origin:
         public_url = escape(origin + path, quote=True)
         share_images = {
             "rush": ("chapter-session", "Phi Chi Theta members gathered for a professional event"),
-            "about": ("zeta-rho-gathering", "Zeta Rho members together on a beach at dusk"),
+            "interest": ("chapter-session", "Phi Chi Theta members gathered for a professional event"),
+            "about": ("provise-conversation", "A Zeta Rho member speaks with ProVise founder Ray Ferrara"),
         }
         image, image_alt = share_images.get(key, ("chapter-gathering", "Zeta Rho members at a chapter event"))
         photo = f"{escape(origin, quote=True)}/assets/chapter/{image}-share.jpg"
@@ -83,7 +89,8 @@ def render(key, body, scripts=""):
         canonical += f'<meta property="og:image:alt" content="{escape(image_alt, quote=True)}">'
         canonical += '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">'
     section_styles = f"<style>{home_style}</style>" if key == "home" else '<link rel="stylesheet" href="/v2/site-frame.css">'
-    page_styles = f'<link rel="stylesheet" href="/{key}.css">' if key in ("about", "rush") else ""
+    stylesheet = {"about": "about", "rush": "rush", "interest": "rush"}.get(key)
+    page_styles = f'<link rel="stylesheet" href="/{stylesheet}.css">' if stylesheet else ""
     source = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -105,15 +112,17 @@ def render(key, body, scripts=""):
 </body></html>'''
     source = source.replace("../assets/", "/assets/").replace('href="rush.html"', 'href="/rush"')
     source = source.replace('href="../philanthropy.html"', 'href="/philanthropy"')
-    (OUTPUT / ("index.html" if key == "home" else key + ".html")).write_text(source)
+    page_file = OUTPUT / ("index.html" if key == "home" else path.lstrip("/") + ".html")
+    page_file.parent.mkdir(parents=True, exist_ok=True)
+    page_file.write_text(source)
 
 render("home", home_main, f"<script>{home_js}</script>")
-for key in ("rush", "about", "privacy"):
+for key in ("rush", "interest", "about", "privacy"):
     render(key, (ROOT / "site/pages" / (key + ".html")).read_text())
 (OUTPUT / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found · Phi Chi Theta</title><body style="margin:0;padding:12vh 8vw;background:#f8f6ef;color:#241733;font:20px/1.6 Georgia,serif"><h1>Page not found.</h1><p>Explore Phi Chi Theta at USF from the homepage.</p><a href="/">Return home</a></body></html>''')
 (OUTPUT / "robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /api/\n")
 if os.environ.get("SITE_URL"):
     from xml.sax.saxutils import escape as xml_escape
-    urls = "".join(f"<url><loc>{xml_escape(origin.rstrip('/') + ('/' if key == 'home' else '/' + key))}</loc></url>" for key in titles for origin in [os.environ["SITE_URL"]])
+    urls = "".join(f"<url><loc>{xml_escape(os.environ['SITE_URL'].rstrip('/') + routes.get(key, '/' + key))}</loc></url>" for key in titles)
     (OUTPUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + urls + '</urlset>')
-print("Built Home, Rush, About, Privacy, and 404 in dist/")
+print("Built Home, Rush, Rush interest form, About, Privacy, and 404 in dist/")

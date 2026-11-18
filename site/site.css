@@ -235,7 +235,21 @@ body:not(.home-page) { overflow-anchor: auto; }
 .privacy-content h2 { margin: 1.5rem 0 .5rem; font-size: clamp(1.6rem,3vw,2.15rem); }
 .privacy-page .privacy-content .text-link { display: inline-flex; align-items: center; min-height: 44px; }
 
-.v2hd-rush.is-repeated:not(:focus-visible) { visibility: hidden; }
+.rush-short { display: none; }
+@media (min-width: 900px) {
+  .v2hd.is-hero-nav .v2hd-rush:not(:focus-visible) { visibility: hidden; }
+}
+@media (max-width: 899px) {
+  .v2hd.is-hero-nav .v2hd-rush {
+    background: transparent;
+    color: var(--ink);
+    padding-inline: .65rem;
+  }
+  .v2hd.is-hero-nav.is-over-hero .v2hd-rush { color: var(--paper); }
+  .v2hd.is-hero-nav .v2hd-rush:hover { text-decoration: underline; text-underline-offset: .3em; }
+  .v2hd.is-hero-nav .rush-action-label { display: none; }
+  .v2hd.is-hero-nav .rush-short { display: inline; }
+}
 
 html:has(.about-page), html:has(.rush-page) { scroll-behavior: auto; }
 main, .v2footer { container: chapter-content / inline-size; }

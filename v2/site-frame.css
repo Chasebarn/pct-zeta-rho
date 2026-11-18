@@ -37,9 +37,23 @@
 .v2hd-rush{font-size:1rem;letter-spacing:.01em}
 @media(max-width:359px){.v2hd-rush{font-size:.875rem}}
 .v2footer{
-  padding:clamp(2.5rem,5vw,4rem) 0 1rem;
-  background:radial-gradient(ellipse at 12% 0%, #2d2039, transparent 65%), var(--ink);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  padding:clamp(2.5rem,6vw,5rem) 0 1rem;
+  background:radial-gradient(ellipse at 12% 0%, #382749, transparent 62%), var(--ink);
+  border-top:1px solid rgb(230 198 91 / 26%);
   color:rgba(250,248,243,.75);
+}
+.v2footer::before {
+  content:"ΦΧΘ";
+  position:absolute;
+  inset:auto auto -.34em -.08em;
+  z-index:-1;
+  font:400 clamp(8rem,25vw,25rem)/1 var(--font-display);
+  color:transparent;
+  -webkit-text-stroke:1px rgb(230 198 91 / 16%);
+  pointer-events:none;
 }
 .v2footer-grid{
   display:grid;

@@ -83,21 +83,33 @@
   margin: .2rem 0 0;
   line-height: 1.45;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+}
+.v2nat-caption[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 .v2nat-caption-school { display: block; color: var(--paper); font-size: 1rem; font-weight: 600; }
 .v2nat-caption-detail { display: block; color: var(--gold-soft); font-size: .875rem; margin-top: .18rem; }
 
+@media (prefers-reduced-motion: reduce) {
+  .v2nat-caption { transition-property: none; transform: none; }
+}
 @media (prefers-reduced-motion: no-preference) {
-  .v2nat-caption:not([hidden]) { animation: chapter-caption-in 180ms ease-out both; }
+  .v2nat-caption {
+    transition: opacity 175ms ease, transform 175ms ease, visibility 0s linear 175ms;
+  }
+  .v2nat-caption[aria-hidden="false"] { transition-delay: 0s; }
+  .v2nat-pin-ring { transition: opacity 175ms ease, stroke 175ms ease; }
+  .v2nat-pin-dot { transition: fill 175ms ease; }
   .v2nat.pins-arrived .v2nat-pin:not(.is-usf) .v2nat-pin-dot {
     animation: chapter-marker-arrive 440ms cubic-bezier(.19,.73,.35,1) var(--pin-delay,0ms) both;
     transform-box: fill-box;
     transform-origin: center;
   }
-}
-@keyframes chapter-caption-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes chapter-marker-arrive {
   from { transform: translateY(-12px) scale(.52); opacity: .12; }

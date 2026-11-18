@@ -37,23 +37,9 @@
 .v2hd-rush{font-size:1rem;letter-spacing:.01em}
 @media(max-width:359px){.v2hd-rush{font-size:.875rem}}
 .v2footer{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  padding:clamp(2.5rem,6vw,5rem) 0 1rem;
-  background:radial-gradient(ellipse at 12% 0%, #382749, transparent 62%), var(--ink);
-  border-top:1px solid rgb(230 198 91 / 26%);
-  color:rgba(250,248,243,.75);
-}
-.v2footer::before {
-  content:"ΦΧΘ";
-  position:absolute;
-  inset:auto auto -.34em -.08em;
-  z-index:-1;
-  font:400 clamp(8rem,25vw,25rem)/1 var(--font-display);
-  color:transparent;
-  -webkit-text-stroke:1px rgb(230 198 91 / 16%);
-  pointer-events:none;
+  padding:clamp(2.5rem,4.8vw,4.25rem) 0 max(.9rem,env(safe-area-inset-bottom));
+  background:var(--purple-deep);
+  color:rgba(250,248,243,.8);
 }
 .v2footer-grid{
   display:grid;
@@ -104,11 +90,9 @@
   align-items:center;
   justify-content:space-between;
   gap:.25rem 1.5rem;
-  margin-top:clamp(1.65rem,4.5vw,3.25rem);
-  padding-top:.75rem;
-  border-top:1px solid rgba(250,248,243,.15);
-  color:rgba(250,248,243,.65);
-  font-size:.75rem;
+  margin-top:clamp(1.35rem,3.2vw,2.75rem);
+  color:rgba(250,248,243,.72);
+  font-size:.8125rem;
   line-height:1.5;
 }
 .v2footer-base a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none}
@@ -116,10 +100,11 @@
   .v2footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.5rem}
   .v2footer-about{grid-column:1/-1}
   .v2footer-about p{max-width:35ch}
-  .v2footer-nav a{width:100%}
+  .v2footer-nav a{max-width:100%}
 }
 
-.v2footer-nav a{position:relative;transition:color 200ms ease}
-.v2footer-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--gold-soft);transform:scaleX(0);transform-origin:left;transition:transform 260ms var(--ease)}
-.v2footer-nav a:hover::after,.v2footer-nav a:focus-visible::after{transform:scaleX(1)}
-@media(prefers-reduced-motion:reduce){.v2footer-nav a,.v2footer-nav a::after{transition:none}}
+.v2footer-nav a:hover,.v2footer-base a:hover,
+.v2footer-nav a:focus-visible,.v2footer-base a:focus-visible{
+  text-decoration:underline;
+  text-underline-offset:.25em;
+}

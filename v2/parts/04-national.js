@@ -9,6 +9,7 @@ window.pctInitNational = function () {
   const school = root.querySelector('[data-map-school]');
   const detail = root.querySelector('[data-map-detail]');
   let selected = null;
+  let focused = null;
   let visible = null;
   let tabStop = home;
   root.dataset.nationalReady = '1';
@@ -31,7 +32,7 @@ window.pctInitNational = function () {
       school.textContent = pin.dataset.school;
       detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
     }
-    caption.hidden = !pin;
+    caption.setAttribute('aria-hidden', String(!pin));
     visible = pin;
   }
 
@@ -46,6 +47,7 @@ window.pctInitNational = function () {
     pin?.setAttribute('aria-pressed', 'true');
     selected = pin;
     if (pin) setTabStop(pin);
+    else focused = null;
     show(pin);
   }
 
@@ -70,23 +72,23 @@ window.pctInitNational = function () {
     if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
       const pin = nearestPin(event, 13);
       map.classList.toggle('is-over-pin', Boolean(pin));
-      show(pin || selected);
+      show(pin || focused || selected);
     }
   });
   map.addEventListener('pointerleave', () => {
     map.classList.remove('is-over-pin');
-    const focusedPin = map.contains(document.activeElement) && document.activeElement.closest('[data-chapter-pin]');
-    show(focusedPin || selected);
+    show(focused || selected);
   });
   map.addEventListener('click', event => {
     const pin = event.detail ? nearestPin(event, 23) : event.target.closest('[data-chapter-pin]');
     select(pin);
   });
   map.addEventListener('focusin', event => {
-    const pin = event.target.closest('[data-chapter-pin]');
-    if (pin) show(pin);
+    focused = event.target.closest('[data-chapter-pin]');
+    if (focused) show(focused);
   });
   map.addEventListener('focusout', event => {
+    focused = null;
     if (!map.contains(event.relatedTarget)) show(selected);
   });
   map.addEventListener('keydown', event => {

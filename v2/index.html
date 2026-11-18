@@ -461,21 +461,33 @@
   margin: .2rem 0 0;
   line-height: 1.45;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+}
+.v2nat-caption[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 .v2nat-caption-school { display: block; color: var(--paper); font-size: 1rem; font-weight: 600; }
 .v2nat-caption-detail { display: block; color: var(--gold-soft); font-size: .875rem; margin-top: .18rem; }
 
+@media (prefers-reduced-motion: reduce) {
+  .v2nat-caption { transition-property: none; transform: none; }
+}
 @media (prefers-reduced-motion: no-preference) {
-  .v2nat-caption:not([hidden]) { animation: chapter-caption-in 180ms ease-out both; }
+  .v2nat-caption {
+    transition: opacity 175ms ease, transform 175ms ease, visibility 0s linear 175ms;
+  }
+  .v2nat-caption[aria-hidden="false"] { transition-delay: 0s; }
+  .v2nat-pin-ring { transition: opacity 175ms ease, stroke 175ms ease; }
+  .v2nat-pin-dot { transition: fill 175ms ease; }
   .v2nat.pins-arrived .v2nat-pin:not(.is-usf) .v2nat-pin-dot {
     animation: chapter-marker-arrive 440ms cubic-bezier(.19,.73,.35,1) var(--pin-delay,0ms) both;
     transform-box: fill-box;
     transform-origin: center;
   }
-}
-@keyframes chapter-caption-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes chapter-marker-arrive {
   from { transform: translateY(-12px) scale(.52); opacity: .12; }
@@ -485,85 +497,58 @@
 /* ===== 05-mem ===== */
 .chapter-finish {
   --arc-card-height: clamp(10rem, min(30vw, calc(100svh - var(--v2hd-h) - 14rem)), 23rem);
-  --arc-inset: clamp(.75rem, 1.8vw, 1.4rem);
+  --arc-depth: clamp(1.2rem, 3.1vw, 2.5rem);
+  --arc-inset: clamp(.85rem, 2vw, 1.65rem);
+  --arc-gap: clamp(.55rem, 2vw, 1.5rem);
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
   background: var(--paper-deep);
 }
 .mem { padding: 0; }
-.mem-band {
-  --arc-radius: calc(var(--arc-card-height) / .29);
-  --arc-card-width: calc(var(--arc-card-height) / 1.5);
-  position: relative;
-  height: calc(var(--arc-card-height) + var(--arc-inset) + 2.6rem);
-  overflow: hidden;
-}
+.mem-band { container-type: inline-size; }
 .mem-wheel {
-  position: absolute;
-  top: calc(var(--arc-radius) + var(--arc-card-height) / 2 + var(--arc-inset));
-  left: 50%;
-  width: 0;
-  height: 0;
+  position: relative;
+  display: flex;
+  gap: var(--arc-gap);
+  align-items: start;
+  height: calc(var(--arc-card-height) + var(--arc-depth) + var(--arc-inset) * 2);
   margin: 0;
-  padding: 0;
+  padding: var(--arc-inset) var(--arc-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--arc-gap);
   list-style: none;
-  animation: photo-orbit 204s linear -9s infinite;
-  animation-play-state: paused;
 }
-.mem.is-running .mem-wheel { animation-play-state: running; }
-@keyframes photo-orbit { to { transform: rotate(-360deg); } }
 .mem-i {
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: var(--arc-card-width);
-  height: var(--arc-card-height);
-  margin: calc(var(--arc-card-height) / -2) 0 0 calc(var(--arc-card-width) / -2);
-  transform: rotate(calc(var(--i) * 11.25deg)) translateY(calc(var(--arc-radius) * -1));
+  flex: none;
+  width: min(calc(var(--arc-card-height) * 2 / 3), 41cqw);
+  aspect-ratio: 2 / 3;
+  scroll-snap-align: start;
   overflow: hidden;
-  border: 1px solid rgb(36 23 51 / 12%);
   border-radius: clamp(6px, .65vw, 12px);
   background: var(--paper);
 }
-.mem-i img { width: 100%; height: 100%; display: block; object-fit: cover; }
-
-.motion-toggle {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin: 0;
-  padding: .15rem .2rem;
-  border: 0;
-  background: transparent;
-  color: var(--ink-soft);
-  font: 500 .82rem/1.25 var(--font-text);
-  text-underline-offset: .2em;
-  cursor: pointer;
-}
-.motion-toggle:hover, .motion-toggle:focus-visible { text-decoration: underline; }
-.motion-toggle[hidden] { display: none; }
-.mem > .motion-toggle {
+.mem-i img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.mem.is-enhanced .mem-wheel { padding: 0; overflow: hidden; }
+.mem.is-enhanced .mem-i {
   position: absolute;
-  z-index: 2;
-  inset: .35rem clamp(.7rem, 2.5vw, 2rem) auto auto;
-  padding-inline: .75rem;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  inset: 0 auto auto 0;
+  opacity: 0;
 }
 @media (min-width: 1441px) {
   .chapter-finish { border-inline: 1px solid var(--line); }
 }
 @media (max-width: 599px) {
-  .chapter-finish { --arc-card-height: clamp(9.75rem, min(66vw, calc(100svh - var(--v2hd-h) - 13.75rem)), 17rem); }
-  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 2rem); }
+  .chapter-finish { --arc-card-height: clamp(7.25rem, min(42vw, calc(100svh - var(--v2hd-h) - 13.75rem)), 15.75rem); }
+  .mem-i { width: min(calc(var(--arc-card-height) * 2 / 3), 27.5cqw); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
-  .chapter-finish { --arc-card-height: clamp(7.25rem, 32svh, 10.5rem); }
-  .mem-band { height: calc(var(--arc-card-height) + var(--arc-inset) + 1.45rem); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mem-wheel { animation: none; }
-  [data-mem-toggle] { display: none; }
+  .chapter-finish {
+    --arc-card-height: clamp(7.25rem, 32svh, 10.5rem);
+    --arc-depth: .95rem;
+    --arc-inset: .65rem;
+  }
 }
 /* ===== 07-act ===== */
 /* One invitation beneath the chapter photographs. */
@@ -602,23 +587,9 @@
 @media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}
 /* ===== 99-footer ===== */
 .v2footer{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  padding:clamp(2.5rem,6vw,5rem) 0 1rem;
-  background:radial-gradient(ellipse at 12% 0%, #382749, transparent 62%), var(--ink);
-  border-top:1px solid rgb(230 198 91 / 26%);
-  color:rgba(250,248,243,.75);
-}
-.v2footer::before {
-  content:"ΦΧΘ";
-  position:absolute;
-  inset:auto auto -.34em -.08em;
-  z-index:-1;
-  font:400 clamp(8rem,25vw,25rem)/1 var(--font-display);
-  color:transparent;
-  -webkit-text-stroke:1px rgb(230 198 91 / 16%);
-  pointer-events:none;
+  padding:clamp(2.5rem,4.8vw,4.25rem) 0 max(.9rem,env(safe-area-inset-bottom));
+  background:var(--purple-deep);
+  color:rgba(250,248,243,.8);
 }
 .v2footer-grid{
   display:grid;
@@ -669,11 +640,9 @@
   align-items:center;
   justify-content:space-between;
   gap:.25rem 1.5rem;
-  margin-top:clamp(1.65rem,4.5vw,3.25rem);
-  padding-top:.75rem;
-  border-top:1px solid rgba(250,248,243,.15);
-  color:rgba(250,248,243,.65);
-  font-size:.75rem;
+  margin-top:clamp(1.35rem,3.2vw,2.75rem);
+  color:rgba(250,248,243,.72);
+  font-size:.8125rem;
   line-height:1.5;
 }
 .v2footer-base a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none}
@@ -681,13 +650,14 @@
   .v2footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.5rem}
   .v2footer-about{grid-column:1/-1}
   .v2footer-about p{max-width:35ch}
-  .v2footer-nav a{width:100%}
+  .v2footer-nav a{max-width:100%}
 }
 
-.v2footer-nav a{position:relative;transition:color 200ms ease}
-.v2footer-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--gold-soft);transform:scaleX(0);transform-origin:left;transition:transform 260ms var(--ease)}
-.v2footer-nav a:hover::after,.v2footer-nav a:focus-visible::after{transform:scaleX(1)}
-@media(prefers-reduced-motion:reduce){.v2footer-nav a,.v2footer-nav a::after{transition:none}}
+.v2footer-nav a:hover,.v2footer-base a:hover,
+.v2footer-nav a:focus-visible,.v2footer-base a:focus-visible{
+  text-decoration:underline;
+  text-underline-offset:.25em;
+}
 </style>
 </head>
 <body>
@@ -987,7 +957,7 @@
 <text class="v2nat-usf-label" x="757.5" y="509.2" aria-hidden="true">USF</text>
 </g>
 </svg>
-        <figcaption class="v2nat-caption" hidden>
+        <figcaption class="v2nat-caption" aria-hidden="true">
           <span class="v2nat-caption-school" data-map-school></span>
           <span class="v2nat-caption-detail" data-map-detail></span>
         </figcaption>
@@ -1000,41 +970,16 @@
     <!-- ===== 05-mem ===== -->
 <div class="chapter-finish">
 <section class="mem" id="life" aria-label="Chapter life">
-  <button class="motion-toggle" type="button" data-mem-toggle hidden>Pause photos</button>
   <div class="mem-band">
-    <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
-      <li class="mem-i" style="--i:0"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:1"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="Chapter members stand together on an outdoor court." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="Members stand among shelves of supplies during a volunteer visit." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:3"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="Members sit on the beach as the sun sets over the Gulf." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="Two members speak with a reporter beside a tent at a community event." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:5"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="Members gather for a photo on a floodlit field after dark." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="Members walk along a ridge on the golf course." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:7"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="Members get ready to head out in golf carts." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:9" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:11" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:13" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:27" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:29" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:31" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+    <ul class="mem-wheel" role="list" aria-label="Chapter photographs" tabindex="0">
+      <li class="mem-i"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="Chapter members stand together on an outdoor court." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="Members stand among shelves of supplies during a volunteer visit." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="Members sit on the beach as the sun sets over the Gulf." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="Two members speak with a reporter beside a tent at a community event." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="Members gather for a photo on a floodlit field after dark." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="Members walk along a ridge on the golf course." loading="lazy" decoding="async"></li>
+      <li class="mem-i"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="Members get ready to head out in golf carts." loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -1681,6 +1626,7 @@ window.pctInitNational = function () {
   const school = root.querySelector('[data-map-school]');
   const detail = root.querySelector('[data-map-detail]');
   let selected = null;
+  let focused = null;
   let visible = null;
   let tabStop = home;
   root.dataset.nationalReady = '1';
@@ -1703,7 +1649,7 @@ window.pctInitNational = function () {
       school.textContent = pin.dataset.school;
       detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
     }
-    caption.hidden = !pin;
+    caption.setAttribute('aria-hidden', String(!pin));
     visible = pin;
   }
 
@@ -1718,6 +1664,7 @@ window.pctInitNational = function () {
     pin?.setAttribute('aria-pressed', 'true');
     selected = pin;
     if (pin) setTabStop(pin);
+    else focused = null;
     show(pin);
   }
 
@@ -1742,23 +1689,23 @@ window.pctInitNational = function () {
     if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
       const pin = nearestPin(event, 13);
       map.classList.toggle('is-over-pin', Boolean(pin));
-      show(pin || selected);
+      show(pin || focused || selected);
     }
   });
   map.addEventListener('pointerleave', () => {
     map.classList.remove('is-over-pin');
-    const focusedPin = map.contains(document.activeElement) && document.activeElement.closest('[data-chapter-pin]');
-    show(focusedPin || selected);
+    show(focused || selected);
   });
   map.addEventListener('click', event => {
     const pin = event.detail ? nearestPin(event, 23) : event.target.closest('[data-chapter-pin]');
     select(pin);
   });
   map.addEventListener('focusin', event => {
-    const pin = event.target.closest('[data-chapter-pin]');
-    if (pin) show(pin);
+    focused = event.target.closest('[data-chapter-pin]');
+    if (focused) show(focused);
   });
   map.addEventListener('focusout', event => {
+    focused = null;
     if (!map.contains(event.relatedTarget)) show(selected);
   });
   map.addEventListener('keydown', event => {
@@ -1808,32 +1755,98 @@ window.pctInitNational = function () {
 window.pctInitPhotoArc = function () {
   const band = document.querySelector('.mem');
   if (!band || !window.IntersectionObserver) return;
-  const control = band.querySelector('[data-mem-toggle]');
+  const list = band.querySelector('.mem-wheel');
+  const cards = [...list.children];
+  if (cards.length < 3) return;
+
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let nearby = false;
-  let paused = false;
+  let frame = 0;
+  let previousTime;
+  let phase = 1.3;
+  let geometry;
+
+  function measure() {
+    const width = list.clientWidth;
+    const cardWidth = cards[0].offsetWidth;
+    const cardHeight = cards[0].offsetHeight;
+    const sideInset = Math.max(8, width * .018);
+    const pitch = cardWidth + Math.min(24, Math.max(10, width * .02));
+    geometry = {
+      center: width / 2, cardWidth, cardHeight, pitch,
+      edge: Math.min(width / 2 - sideInset, pitch * (cards.length / 2 - .2)),
+      room: list.clientHeight - cardHeight,
+      tilt: width < 600 ? 9 : 13,
+      fade: Math.min(32, Math.max(14, width * .035)),
+    };
+  }
+
+  function paint() {
+    const {center, cardWidth, cardHeight, pitch, edge, room, tilt, fade} = geometry;
+    if (edge <= 0) return;
+    const full = cards.length;
+    cards.forEach((card, index) => {
+      const column = ((index - phase + full * 2.5) % full) - full / 2;
+      const x = column * pitch;
+      const progress = Math.max(-1, Math.min(1, x / edge));
+      const angle = progress * tilt;
+      const radians = Math.abs(angle) * Math.PI / 180;
+      const halfWidth = (cardWidth * Math.cos(radians) + cardHeight * Math.sin(radians)) / 2;
+      const tiltDepth = Math.max(0, (cardHeight * (Math.cos(radians) - 1) + cardWidth * Math.sin(radians)) / 2);
+      const y = room * (.19 + .59 * progress * progress) - tiltDepth * progress * progress;
+      // A photo is already transparent by the time its rotated edge can leave the stage.
+      const opacity = Math.max(0, Math.min(1, (edge - Math.abs(x) - halfWidth) / fade));
+      card.style.transform = `translate3d(${center + x - cardWidth / 2}px, ${y}px, 0) rotate(${angle}deg)`;
+      card.style.opacity = opacity;
+    });
+  }
+
+  function tick(time) {
+    if (previousTime !== undefined) phase = (phase + Math.min(75, time - previousTime) / 8000) % cards.length;
+    previousTime = time;
+    paint();
+    frame = requestAnimationFrame(tick);
+  }
 
   function sync() {
-    control.hidden = motion.matches;
-    band.classList.toggle('is-running', nearby && !paused && !motion.matches && !document.hidden);
+    const enhanced = !motion.matches;
+    band.classList.toggle('is-enhanced', enhanced);
+    if (enhanced) {
+      list.removeAttribute('tabindex');
+      list.scrollLeft = 0;
+      measure();
+      paint();
+    } else {
+      list.setAttribute('tabindex', '0');
+      cards.forEach(card => {
+        card.style.removeProperty('transform');
+        card.style.removeProperty('opacity');
+      });
+    }
+
+    const running = enhanced && nearby && !document.hidden;
+    if (running && !frame) {
+      previousTime = undefined;
+      frame = requestAnimationFrame(tick);
+    } else if (!running && frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    }
   }
 
   const images = new IntersectionObserver(([entry]) => {
     if (!entry.isIntersecting) return;
-    band.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
+    list.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
     images.disconnect();
   }, {rootMargin: '680px 0px'});
   images.observe(band);
-  const observer = new IntersectionObserver(([entry]) => {
+
+  new IntersectionObserver(([entry]) => {
     nearby = entry.isIntersecting;
     sync();
-  }, {rootMargin: '150px 0px'});
-  observer.observe(band);
-  control.addEventListener('click', () => {
-    paused = !paused;
-    control.textContent = paused ? 'Play photos' : 'Pause photos';
-    sync();
-  });
+  }, {rootMargin: '150px 0px'}).observe(band);
+  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(list);
+  else window.addEventListener('resize', sync, {passive: true});
   motion.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   sync();

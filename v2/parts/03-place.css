@@ -132,12 +132,7 @@
 .pl-belt {
   display:flex;
   width:max-content;
-  animation: pl-loop var(--pl-duration) linear var(--pl-phase) infinite;
-  animation-play-state: paused;
 }
-.pl-row:nth-child(even) .pl-belt { animation-direction: reverse; }
-.is-running .pl-belt { animation-play-state: running; }
-@keyframes pl-loop { to { transform: translate3d(-50%,0,0); } }
 .pl-track{
   display:flex;
   align-items:center;
@@ -193,13 +188,8 @@
   .pl-rows {gap:.3rem;}
 }
 .pl-row .pl-track .pl-cell {min-height:0;}
-.pl-controls {display:flex;justify-content:end;}
 @container chapter-content (max-width:18rem) {
   .pl-nums {grid-template-columns:1fr;}
   .pl-n + .pl-n {border-inline-start:0;border-block-start:1px solid var(--line);}
   .pl-n-val {font-size:2.35rem;}
-}
-@media (prefers-reduced-motion:reduce) {
-  .pl-belt {animation:none;}
-  [data-pl-toggle] {display:none;}
 }

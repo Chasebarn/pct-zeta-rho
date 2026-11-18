@@ -8,14 +8,28 @@ window.pctInitPlacements = function () {
   const compact = matchMedia('(max-width:700px)');
   const brands = root.querySelector('[data-pl-brands]');
   const originalList = root.querySelector('[data-pl-logos]');
-  const control = root.querySelector('[data-pl-toggle]');
   const logos = [...originalList.children];
   let rows;
+  let belts = [];
   let nearby = false;
-  let paused = false;
+  let frame = 0;
 
-  function setRunning() {
-    brands.classList.toggle('is-running', nearby && !paused && !document.hidden);
+  function positionRows() {
+    frame = 0;
+    if (!nearby || document.hidden) return;
+    const travel = (innerHeight * .65 - brands.getBoundingClientRect().top) * 1.4;
+    const widths = belts.map(({track}) => track.getBoundingClientRect().width);
+    belts.forEach(({belt}, index) => {
+      const width = widths[index];
+      if (!width) return;
+      const distance = travel * (index % 2 ? -1 : 1) + width * (.12 + index * .17);
+      const offset = ((distance % width) + width) % width;
+      belt.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    });
+  }
+
+  function queuePosition() {
+    if (rows && nearby && !frame && !document.hidden) frame = requestAnimationFrame(positionRows);
   }
 
   function formRows() {
@@ -38,13 +52,12 @@ window.pctInitPlacements = function () {
 
     rows = document.createElement('div');
     rows.className = 'pl-rows';
+    belts = [];
     groups.forEach((group, index) => {
       const row = document.createElement('div');
       row.className = 'pl-row';
       const belt = document.createElement('div');
       belt.className = 'pl-belt';
-      belt.style.setProperty('--pl-duration', Math.round(group.width / (compact.matches ? 23 : 29)) + 's');
-      belt.style.setProperty('--pl-phase', -(3 + index * 4) + 's');
       const track = document.createElement('ul');
       track.className = 'pl-track';
       track.setAttribute('role', 'list');
@@ -56,11 +69,12 @@ window.pctInitPlacements = function () {
       belt.append(track, copy);
       row.append(belt);
       rows.append(row);
+      belts.push({belt, track});
     });
     originalList.hidden = true;
     brands.append(rows);
-    control.hidden = false;
     if (nearby) loadRowImages();
+    queuePosition();
   }
 
   function loadRowImages() {
@@ -74,26 +88,26 @@ window.pctInitPlacements = function () {
     }
     rows?.remove();
     rows = null;
+    belts = [];
     originalList.append(...logos);
     originalList.hidden = false;
-    control.hidden = true;
   }
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(([entry]) => {
       nearby = entry.isIntersecting;
       if (nearby) loadRowImages();
-      setRunning();
+      queuePosition();
     }, {rootMargin: '160px 0px'});
     observer.observe(brands);
-    control.addEventListener('click', () => {
-      paused = !paused;
-      control.textContent = paused ? 'Play logos' : 'Pause logos';
-      setRunning();
-    });
     compact.addEventListener('change', () => { if (rows) formRows(); });
     reduce.addEventListener('change', syncPreference);
-    document.addEventListener('visibilitychange', setRunning);
+    window.addEventListener('scroll', queuePosition, {passive: true});
+    window.addEventListener('resize', queuePosition, {passive: true});
+    document.addEventListener('visibilitychange', queuePosition);
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(queuePosition).observe(brands);
+    }
     syncPreference();
   }
 

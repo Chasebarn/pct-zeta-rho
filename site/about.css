@@ -231,3 +231,11 @@
   }
   .about-page .honoree-cohort { grid-template-columns: minmax(0, 1fr); }
 }
+
+@media (min-width: 851px) {
+  @container chapter-content (max-width: 48rem) {
+    .about-page .cabinet-directory {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    }
+  }
+}

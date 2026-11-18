@@ -10,7 +10,7 @@ USF Muma College of Business profiles. Structured source records are in
 
 | What a prospective member experienced | Released change |
 | --- | --- |
-| At 390px wide, the Rush interest form started 4,032px down the page. Readers passed a full past schedule before they could act. | The first screen offers signup and events. The schedule shows what students do at Rush, with Fall 2026 dates available on demand. Spring 2027 dates are pending. |
+| At 390px wide, the Rush interest form started 4,032px down the page. Readers passed a full past schedule before they could act. | The signup section now starts 2,017px down, with a direct link in the first screen. The guide shows what students do at Rush, with Fall 2026 dates available on demand. Spring 2027 dates are pending. |
 | Gold buttons with the same wording could lead to either the Rush introduction or the form. | “Explore Rush” opens the guide. “Get Rush updates” opens signup. On phones the header shortcut appears when the hero action scrolls away. |
 | Membership panels made general claims and changed photos. | Each panel now pairs an activity with its photograph and a relevant next step. Visitors can meet a USF honoree, find a Cabinet officer or go to chapter life. Phone panels open in place. |
 | The employer wall gave readers twenty names without anyone’s story. | The figures and the two desktop or three phone logo rows lead into Eric Torres’s two PwC internships and Dallas offer. The member’s USF profile and the chapter’s figures are linked separately. |
@@ -20,7 +20,7 @@ USF Muma College of Business profiles. Structured source records are in
 | A recruitment form error could survive correction. A successful save left a blank form in view. | Errors identify and focus the field. Answers survive a failed save. A successful save displays a single confirmation with a link to the recruitment officer. |
 | The footer invited donations through a chapter page whose donation buttons pointed to a placeholder. | The dead link was removed. The footer still reaches the chapter contact, apparel store, and USF career resources. |
 
-The review covers browser testing with touch, keyboard, reduced motion, disabled scripts, phone landscape, and 200% browser text. Native share outcomes and connection failures were simulated. Physical iPhone hardware was outside this test.
+Checked the five published pages in WebKit and Chrome across eight viewports from 320px to 1,440px, including phone landscape. At 390px wide, the Rush page fell from 5,776px to 3,430px tall. Leadership moved from 1,960px to 1,255px down About. Keyboard and touch journeys cover membership, opposite-moving employer rows, the past schedule, Rush signup, the confirmation and the recruitment officer link. Reduced motion, disabled scripts and 200% browser text were checked separately. Native share outcomes and connection failures were simulated. Physical iPhone hardware was outside this test.
 
 ## Earlier source and content audit
 

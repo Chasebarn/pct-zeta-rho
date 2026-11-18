@@ -1,0 +1,125 @@
+{
+  "verified_on": "2026-11-17",
+  "primary_source": "https://sites.google.com/view/pct-zeta-rho/rush",
+  "full_scrape": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-rush-scrape/source-pages.json",
+  "rush": {
+    "what_it_is": {
+      "value": "A structured six-event recruitment process introducing students to the chapter, members, expectations and professional development.",
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    "eligibility": {
+      "value": [
+        "USF business or economics majors and minors",
+        "All class years",
+        "No prior experience required"
+      ],
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    "experience": {
+      "value": [
+        "Professional organized events",
+        "Direct conversations with current members and leadership",
+        "Mutual fit process",
+        "Resume and LinkedIn development",
+        "Networking with alumni, guest speakers and industry leaders",
+        "Public speaking and communication practice"
+      ],
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    "schedule": {
+      "status": "No current dates, times, rooms or event-specific titles published on original Rush page. Three images are photos, not schedule posters.",
+      "upcoming_semester": "unconfirmed",
+      "last_semester_reference": "Original page says Fall Rush without year; visible photo shirts say Fall Rush 2025.",
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    "attire": {
+      "status": "No published requirements in official Rush text. Do not assert business casual or business professional as a rule. A photo of suits is visual context, not evidence of a requirement.",
+      "suggested_copy": "Attire will be listed with each event. Ask the chapter if a dress code is not specified."
+    },
+    "selection_bid_process": {
+      "confirmed": "Mutual fit: both students and chapter assess alignment.",
+      "unconfirmed": [
+        "Attendance minimum",
+        "Interview schedule",
+        "Invitation-only events",
+        "GPA threshold",
+        "Bid criteria or decision timeline",
+        "Pledging duration"
+      ],
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    "cost": {
+      "status": "No official original-source dues or Rush fee specified. Local old rush.html claims $235 per semester and free Rush, but this is unverified and should not be republished as current."
+    },
+    "interest_form": {
+      "official_linktree_label": "PCT Interest Form Fall",
+      "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=3vcbdOXi30aNZ4JgffneqlTqFKR40kpOlbDjMzhPKqdUQ1ZYREQ3MkFWU0w4RjdXWVAwQkxWTldLWC4u&origin=QRCode",
+      "status": "Linktree current link. Loads Microsoft Forms JavaScript shell and redirects to forms.cloud.microsoft; form content and acceptance status not verified.",
+      "semester": "Fall, year not specified",
+      "source": "https://linktr.ee/usfpct"
+    },
+    "share": {
+      "suggestion": "Use native Web Share with clipboard fallback for new Rush page URL. No extra scraped content required."
+    },
+    "contacts": {
+      "instagram": "https://www.instagram.com/pctusf/",
+      "linkedin": "https://www.linkedin.com/company/usfphichitheta/",
+      "linktree": "https://linktr.ee/usfpct",
+      "remind": "https://www.remind.com/join/pctrush25",
+      "official_domain": "https://www.usfpct.org/"
+    }
+  },
+  "bugs": [
+    {
+      "page": "https://sites.google.com/view/pct-zeta-rho/rush",
+      "issue": "First Submit Intrest Form button decodes to http://s; closing Submit Interest Form decodes to http://d. Both are broken placeholder destinations."
+    },
+    {
+      "page": "https://www.usfpct.org/",
+      "issue": "Domain is linked from official Linktree but HTTPS retrieval fails with SSL EOF and web timeout."
+    },
+    {
+      "page": "https://www.remind.com/join/pctrush25",
+      "issue": "Official Linktree Remind room includes 25 in identifier. Do not promise it is the current recruiting channel without officer verification."
+    },
+    {
+      "page": "local fallrush.html",
+      "issue": "Structured event metadata still says 2026-09-02 19:00 BSN225 as EventScheduled, already past on verification date, without official source."
+    },
+    {
+      "page": "local rush.html",
+      "issue": "Contains $235 dues/free Rush and email response commitments not backed by current original source."
+    }
+  ],
+  "fresh_assets": [
+    {
+      "file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-rush-scrape/rush-source-1.jpg",
+      "description": "Four chapter members in white Fall Rush 2025 shirts. Baked gold frame.",
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    {
+      "file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-rush-scrape/rush-source-2.jpg",
+      "description": "Members around laptops, large foreground back. Baked gold frame.",
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    },
+    {
+      "file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-rush-scrape/rush-source-3.jpg",
+      "description": "Three suited chapter members collaborating over laptops. Good authentic professional image. Baked gold frame.",
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+    }
+  ],
+  "implementation_guidance": [
+    "Make schedule status explicit and support publishing dates when confirmed. Do not label empty invented calendar entries as scheduled events.",
+    "Offer the working new database-backed interest form as the primary action once tested. Existing Microsoft form can be secondary if verified.",
+    "FAQ answers may use exact eligibility, no prior experience and mutual-fit facts. Treat dues, dress code, GPA and attendance as questions for current chapter officers.",
+    "Event descriptions may explain learning about the chapter, meeting members and professional skills, but no official six named event lineup can be recovered from current source."
+  ],
+  "implemented_asset": {
+    "file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/work/pct-vercel-site/assets/chapter-rush-professional.jpg",
+    "source_page": "https://sites.google.com/view/pct-zeta-rho/rush",
+    "source_image": "https://sites.google.com/sitesv-images-rt/APXyLQd7FooTPMSC3eHUwsRoS8XFRwUBTQEVYSb3QyctJ2QooWz1t884_-Ewh5rISU2J19IElwnRC1sczrNKjXQBJfHrvmZBlGOpKY0z6IkzH6rMsfDjr8txytb2BeltW4rNJ28utdJFUAUDAB_uk1T0CrG26TYCTxWAve-OFhI-JgzNQpdNRSWRS-FOJivKLj0=w1280",
+    "retrieved_on": "2026-11-17",
+    "sha256": "dc4541785cc37098ba00a228e253888498baa547a7c15c6173e53dcfbde47178",
+    "processing": "Original bytes retained. Presentation uses CSS cropping to remove baked gold frame."
+  }
+}

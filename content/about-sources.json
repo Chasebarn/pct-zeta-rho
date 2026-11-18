@@ -1,0 +1,182 @@
+{
+  "verified_at": "2026-11-17",
+  "official_chapter_site": "https://sites.google.com/view/pct-zeta-rho",
+  "scrape_file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-original-home-scrape.txt",
+  "history": {
+    "established": "2018-09",
+    "founding_students": 18,
+    "source_url": "https://sites.google.com/view/pct-zeta-rho",
+    "source_kind": "chapter-authored original site",
+    "summary": "Established at the University of South Florida in September 2018 by 18 founding business students."
+  },
+  "national": {
+    "name": "Phi Chi Theta",
+    "founded": "1924-06-16",
+    "founding_place": "Chicago, Illinois",
+    "founding_group": "Six women from Phi Theta Kappa and Phi Kappa Epsilon",
+    "collegiate_chapter_count": 46,
+    "count_method": "Counted collegiate entries excluding alumni in current official directory: Central-Southern 12, Eastern 13, Great Lakes 8, Western 13.",
+    "region": "Central-Southern",
+    "chapter_name": "Zeta Rho",
+    "school": "University of South Florida",
+    "city": "Tampa, FL",
+    "about_url": "https://www.phichitheta.org/about",
+    "directory_url": "https://www.phichitheta.org/find-a-chapter",
+    "foundation_url": "https://www.phichitheta.org/foundation",
+    "member_benefits": [
+      "local and national professional network",
+      "leadership practice",
+      "scholarship opportunities through Educational Foundation",
+      "regional conferences and national meetings"
+    ]
+  },
+  "leadership": {
+    "current_roster_verified": false,
+    "last_official_profile": {
+      "name": "Sebastian Castro",
+      "role": "President of Phi Chi Theta",
+      "reported_date": "2026-04-08",
+      "reported_member_count": "more than 100",
+      "reported_exec_count": 17,
+      "source_url": "https://www.usf.edu/business/news/2026/04-08-deans-advisory-board-leadership-award.aspx",
+      "caution": "Source dates role to April 2026, not an explicit Fall 2026 officer roster."
+    },
+    "cab": {
+      "verified": false,
+      "names": [],
+      "caution": "No current CAB roster on original Google site or official USF listing found. Do not expand CAB acronym without chapter confirmation."
+    },
+    "advisor": {
+      "verified": false,
+      "name": null,
+      "caution": "No official current named faculty/chapter advisor found. Official public chapter routes can provide an introduction."
+    },
+    "contact_routes": [
+      "https://www.instagram.com/pctusf/",
+      "https://www.linkedin.com/company/usfphichitheta/",
+      "https://linktr.ee/usfpct"
+    ]
+  },
+  "awards": [
+    {
+      "recipient": "Sebastian Castro",
+      "award": "Dean’s Advisory Board Leadership Award",
+      "year": 2026,
+      "awarder": "USF Kate Tiedemann School of Business and Finance",
+      "scope": "individual award to PCT member/president",
+      "source_url": "https://www.usf.edu/business/news/2026/04-08-deans-advisory-board-leadership-award.aspx"
+    },
+    {
+      "recipient": "Brandon Meade",
+      "award": "Dean’s Advisory Board Leadership Award",
+      "year": 2023,
+      "awarder": "USF Kate Tiedemann School of Business and Finance",
+      "scope": "individual award to PCT member",
+      "source_url": "https://www.usf.edu/business/news/2023/5-8-deans-advisory-leadership-award.aspx"
+    }
+  ],
+  "award_archive_unavailable": [
+    {
+      "chapter": "Zeta Rho",
+      "year": 2025,
+      "award": "Fraternity Spirit & Cooperation regional Excellence Award",
+      "region": "Central-Southern",
+      "points": 180,
+      "source_url": "https://phichitheta.org/common/Uploaded%20files/Leadership/PCT%202025%20National%20Chapter%20Award%20Winners.pdf",
+      "verification": "Indexed primary source text verified via search. Current site redirect is broken (404). Keep out of public page until working primary archive is available."
+    }
+  ],
+  "honorees_25_under_25": [
+    {
+      "name": "Humberto Campos",
+      "year": 2026,
+      "field": "Finance and accounting",
+      "pct_connection": "Professional development chair; led seven-week career-readiness program reaching more than 200 students",
+      "source_url": "https://www.usf.edu/business/news/2026/04-02-humberto-campos-named-muma-25under25-award-honoree.aspx",
+      "photo_url": "https://www.usf.edu/business/news/images/2026/04-02-humberto-campos-hero-1col-1000x688.jpg"
+    },
+    {
+      "name": "Eric Torres",
+      "year": 2025,
+      "field": "Personal financial planning",
+      "pct_connection": "PCT member; business fraternity supported professional development. PwC Start internship came through ALPFA convention, so avoid crediting PCT alone.",
+      "source_url": "https://www.usf.edu/business/25-under-25/honorees-2025/torres-eric.aspx"
+    },
+    {
+      "name": "Justin Kwitchoff",
+      "year": 2024,
+      "field": "Finance",
+      "pct_connection": "PCT member and leadership; Sixth Street internship through PCT and Investment Club relationships. Full-time offer followed.",
+      "source_url": "https://www.usf.edu/business/schools/business-finance/alumni/board.aspx",
+      "story_url": "https://www.usf.edu/business/news/2024/10-16-justin-kwitchoff.aspx"
+    }
+  ],
+  "chapter_claims_not_independently_verified": [
+    {
+      "claim": "20+ awards",
+      "source_url": "https://sites.google.com/view/pct-zeta-rho"
+    },
+    {
+      "claim": "$10,000+ raised",
+      "source_url": "https://sites.google.com/view/pct-zeta-rho"
+    },
+    {
+      "claim": "500+ graduates supported",
+      "source_url": "https://sites.google.com/view/pct-zeta-rho"
+    },
+    {
+      "claim": "Ranked #3 nationally through Next National Chapter evaluation",
+      "source_url": "https://sites.google.com/view/pct-zeta-rho"
+    },
+    {
+      "claim": "15 Muma 25 Under 25 honorees",
+      "source_url": "local existing V2 only; original Google site measures likely embedded image so not accessible as text",
+      "caution": "Do not call newly independently verified."
+    }
+  ],
+  "basic_contact": {
+    "chapter": "Zeta Rho",
+    "university": "University of South Florida",
+    "campus": "Tampa",
+    "social_instagram": "https://www.instagram.com/pctusf/",
+    "social_linkedin": "https://www.linkedin.com/company/usfphichitheta/",
+    "linktree": "https://linktr.ee/usfpct",
+    "public_chapter_email": null,
+    "campus_listing": "https://www.usf.edu/business/undergraduate/student-organizations.aspx"
+  },
+  "assets": {
+    "authentic_local": [
+      "/assets/chapter-members.jpg",
+      "/assets/chapter-careers.jpg",
+      "/assets/chapter-community.jpg",
+      "/assets/photo-fundraiser.jpg",
+      "/assets/photo-service.jpg",
+      "/assets/photo-letters.jpg",
+      "/assets/crest.png"
+    ],
+    "local_headshots": [],
+    "placeholder_directories": [
+      "/assets/ph",
+      "/assets/mem"
+    ]
+  },
+  "chapter_published_metrics": {
+    "verification": "Parent verified all three metrics in live original Google site screenshot on2026-11-17; image numbers are chapter-reported, no reporting period/cohort independently available.",
+    "evidence_file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-vercel-proof/original-published-stats.png",
+    "source_url": "https://sites.google.com/view/pct-zeta-rho",
+    "metrics": [
+      {
+        "value": "95%",
+        "label": "Internship & Full-time"
+      },
+      {
+        "value": "3.60",
+        "label": "Average GPA"
+      },
+      {
+        "value": "15",
+        "label": "25 under25"
+      }
+    ]
+  }
+}

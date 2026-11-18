@@ -21,6 +21,7 @@ window.pctInitGrow = function () {
 
     var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
     var current = 0;
+    var phoneOpen = btns.map(function (_, index) { return index === 0; });
     var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var exitTimer = null;
@@ -30,7 +31,7 @@ window.pctInitGrow = function () {
     }
     function sync() {
       for (var i = 0; i < rows.length; i++) {
-        var active = i === current;
+        var active = wide ? i === current : phoneOpen[i];
         rows[i].classList.toggle('is-open', active);
         panels[i].hidden = !active;
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
@@ -39,14 +40,21 @@ window.pctInitGrow = function () {
       }
     }
     function open(index) {
-      if (index === current) return;
+      if (wide && index === current) return;
+      if (!wide) phoneOpen[index] = !phoneOpen[index];
       clearLeaving();
       if (wide && !(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
-        exitTimer = setTimeout(clearLeaving, 950);
+        exitTimer = setTimeout(clearLeaving, 260);
       }
       current = index;
       sync();
+      if (!wide && phoneOpen[index] && !(reduce && reduce.matches) && panels[index].animate) {
+        panels[index].animate([
+          { opacity:0, transform:'translateY(6px)' },
+          { opacity:1, transform:'translateY(0)' }
+        ], { duration:220, easing:'ease-out' });
+      }
     }
     function layout() {
       clearLeaving();
@@ -62,14 +70,7 @@ window.pctInitGrow = function () {
     root.classList.add('grow--js');
     layout();
     btns.forEach(function (button, i) {
-      button.addEventListener('click', function (event) {
-        if (i === current) return;
-        open(i);
-        // Reflow can hide the focused row under the sticky header.
-        if (!wide && event.detail === 0 && document.activeElement === button) {
-          button.scrollIntoView({ block:'nearest', behavior:'instant' });
-        }
-      });
+      button.addEventListener('click', function () { open(i); });
       button.addEventListener('focus', function () {
         if (wide) open(i);
       });

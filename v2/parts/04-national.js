@@ -30,7 +30,7 @@ window.pctInitNational = function () {
   function onVisibility() { if (document.hidden) finish(); }
   function onReduce(event) { if (event.matches) finish(); }
   function fitsEntryThreshold() {
-    return !window.innerHeight || figure.getBoundingClientRect().height * .6 <= window.innerHeight;
+    return !window.innerHeight || figure.getBoundingClientRect().height * .2 <= window.innerHeight;
   }
   function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
   function hash(pin) {
@@ -53,13 +53,13 @@ window.pctInitNational = function () {
     try {
       /* Stable ID hashes scatter the order across regions instead of sweeping
          west-to-east or moving pins away from their campus coordinates. */
-      var order = pins.slice().sort(function (a,b) { return hash(a) - hash(b); });
+      var order = pins.filter(function (pin) { return !pin.classList.contains('is-usf'); }).sort(function (a,b) { return hash(a) - hash(b); });
       order.forEach(function (pin,index) {
-        var delay = order.length > 1 ? index * 1300 / (order.length - 1) : 0;
-        var options = { duration:650, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
+        var delay = order.length > 1 ? index * 420 / (order.length - 1) : 0;
+        var options = { duration:420, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
         animate(pin.querySelector('.v2nat-pin-dot'), [
-          { opacity:0, transform:'scale(.2)', transformOrigin:'0px 0px' },
-          { opacity:1, transform:'scale(1.3)', transformOrigin:'0px 0px', offset:.65 },
+          { opacity:0, transform:'scale(.7)', transformOrigin:'0px 0px' },
+          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px', offset:.65 },
           { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
         ], options);
         var ring = pin.querySelector('.v2nat-pin-ring');
@@ -77,8 +77,8 @@ window.pctInitNational = function () {
   try {
     observer = new IntersectionObserver(function (entries) {
       if (!fitsEntryThreshold()) { finish(); return; }
-      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .6; })) reveal();
-    }, { threshold:.6 });
+      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .2; })) reveal();
+    }, { threshold:.2 });
     observer.observe(figure);
     root.classList.add('is-map-pending');
     document.addEventListener('visibilitychange', onVisibility);

@@ -48,8 +48,8 @@ window.pctInitPlacements = function () {
       row.overflow = Math.max(0, row.track.scrollWidth - row.element.clientWidth);
       /* Hold endpoints while the full row is visible, finishing before the
          sticky header covers it. First/last marks each receive a complete view. */
-      row.start = top + box.height - viewport;
-      row.distance = Math.max(1, viewport - box.height - safeTop);
+      row.start = top - viewport;
+      row.distance = Math.max(1, viewport + box.height - safeTop);
     });
     applyRows();
   }

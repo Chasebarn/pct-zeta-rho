@@ -1,85 +1,124 @@
-/* A single scattered wave introduces the real campus locations. Geographic
-   translations belong to the outer groups and are never animated or changed. */
 window.pctInitNational = function () {
   'use strict';
-  var root = document.querySelector('[data-national]');
-  if (!root || root.dataset.nationalMotionReady) return;
-  var figure = root.querySelector('.v2nat-figure');
-  var pins = Array.prototype.slice.call(root.querySelectorAll('[data-chapter-pin]'));
-  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  if (!figure || !pins.length || (reduce && reduce.matches) ||
-      !window.IntersectionObserver || !Element.prototype.animate) return;
-  root.dataset.nationalMotionReady = '1';
-  var observer = null;
-  var animations = [];
-  var stopped = false;
-  var started = false;
+  const root = document.querySelector('[data-national]');
+  if (!root || root.dataset.nationalReady) return;
+  const map = root.querySelector('[data-chapter-map]');
+  const pins = [...map.querySelectorAll('[data-chapter-pin]')];
+  const home = pins.find(pin => pin.classList.contains('is-usf'));
+  const school = root.querySelector('[data-map-school]');
+  const detail = root.querySelector('[data-map-detail]');
+  let selected = home;
+  let visible = home;
+  let tabStop = home;
+  root.dataset.nationalReady = '1';
+  map.setAttribute('role', 'group');
+  map.setAttribute('aria-describedby', 'pct-map-keys');
 
-  function finish() {
-    root.classList.remove('is-map-pending');
-    if (stopped) return;
-    stopped = true;
-    if (observer) observer.disconnect();
-    animations.forEach(function (animation) { animation.cancel(); });
-    animations = [];
-    document.removeEventListener('visibilitychange', onVisibility);
-    window.removeEventListener('resize', onResize);
-    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onReduce);
-    else if (reduce && reduce.removeListener) reduce.removeListener(onReduce);
+  for (const pin of pins) {
+    const {school: name, city, state} = pin.dataset;
+    pin.setAttribute('role', 'button');
+    pin.setAttribute('aria-label', name + ', ' + city + ', ' + state);
+    pin.setAttribute('aria-pressed', String(pin === home));
+    pin.setAttribute('tabindex', pin === home ? '0' : '-1');
   }
-  function onVisibility() { if (document.hidden) finish(); }
-  function onReduce(event) { if (event.matches) finish(); }
-  function fitsEntryThreshold() {
-    return !window.innerHeight || figure.getBoundingClientRect().height * .2 <= window.innerHeight;
+
+  function show(pin) {
+    if (pin === visible) return;
+    visible.classList.remove('is-selected');
+    pin.classList.add('is-selected');
+    school.textContent = pin.dataset.school;
+    detail.textContent = pin.dataset.chapter + ' · ' + pin.dataset.city + ', ' + pin.dataset.state;
+    visible = pin;
   }
-  function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
-  function reveal() {
-    if (stopped || started) return;
-    started = true;
-    if (document.hidden) { finish(); return; }
-    observer.disconnect();
-    try {
-      /* Start in Tampa. Recruiters can follow the same geographic network
-         from nearby chapters to the opposite coast in one short wave. */
-      function position(pin) {
-        return pin.transform.baseVal.getItem(0).matrix;
+
+  function setTabStop(pin) {
+    tabStop.setAttribute('tabindex', '-1');
+    pin.setAttribute('tabindex', '0');
+    tabStop = pin;
+  }
+
+  function select(pin) {
+    selected.setAttribute('aria-pressed', 'false');
+    pin.setAttribute('aria-pressed', 'true');
+    selected = pin;
+    setTabStop(pin);
+    show(pin);
+  }
+
+  function nearestPin(event, hitRadius) {
+    const matrix = map.getScreenCTM();
+    if (!matrix) return null;
+    let nearest = null;
+    let bestDistance = hitRadius;
+    for (const pin of pins) {
+      const transform = pin.transform.baseVal.getItem(0).matrix;
+      const point = new DOMPoint(transform.e, transform.f).matrixTransform(matrix);
+      const distance = Math.hypot(event.clientX - point.x, event.clientY - point.y);
+      if (distance < bestDistance) {
+        nearest = pin;
+        bestDistance = distance;
       }
-      var localPin = root.querySelector('.v2nat-pin.is-usf');
-      if (!localPin) { finish(); return; }
-      var origin = position(localPin);
-      var locations = pins.filter(function (pin) { return pin !== localPin; }).map(function (pin) {
-        var point = position(pin);
-        return { pin:pin, distance:Math.hypot(point.e - origin.e, point.f - origin.f) };
-      });
-      var farthest = Math.max(1, ...locations.map(function (location) { return location.distance; }));
-      locations.forEach(function (location) {
-        var dot = location.pin.querySelector('.v2nat-pin-dot');
-        var animation = dot.animate([
-          { opacity:.3, transform:'scale(.75)' },
-          { opacity:1, transform:'scale(1)' }
-        ], {
-          duration:260,
-          delay:480 * location.distance / farthest,
-          easing:'ease-out',
-          fill:'both'
-        });
-        animations.push(animation);
-      });
-      root.classList.remove('is-map-pending');
-      Promise.all(animations.map(function (animation) { return animation.finished.catch(function () {}); })).then(finish);
-    } catch (error) { finish(); }
+    }
+    return nearest;
   }
-  try {
-    observer = new IntersectionObserver(function (entries) {
-      if (!fitsEntryThreshold()) { finish(); return; }
-      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= .2; })) reveal();
-    }, { threshold:.2 });
-    observer.observe(figure);
-    root.classList.add('is-map-pending');
-    document.addEventListener('visibilitychange', onVisibility);
-    window.addEventListener('resize', onResize, { passive:true });
-    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onReduce);
-    else if (reduce && reduce.addListener) reduce.addListener(onReduce);
-    if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);
-  } catch (error) { finish(); }
+
+  map.addEventListener('pointermove', event => {
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') show(nearestPin(event, 13) || selected);
+  });
+  map.addEventListener('pointerleave', () => {
+    const focusedPin = map.contains(document.activeElement) && document.activeElement.closest('[data-chapter-pin]');
+    show(focusedPin || selected);
+  });
+  map.addEventListener('click', event => {
+    const pin = event.detail ? nearestPin(event, 23) : event.target.closest('[data-chapter-pin]');
+    if (pin) select(pin);
+  });
+  map.addEventListener('focusin', event => {
+    const pin = event.target.closest('[data-chapter-pin]');
+    if (pin) show(pin);
+  });
+  map.addEventListener('focusout', event => {
+    if (!map.contains(event.relatedTarget)) show(selected);
+  });
+  map.addEventListener('keydown', event => {
+    const pin = event.target.closest('[data-chapter-pin]');
+    if (!pin) return;
+    const index = pins.indexOf(pin);
+    let next;
+    switch (event.key) {
+      case 'Enter':
+      case ' ': select(pin); break;
+      case 'ArrowRight':
+      case 'ArrowDown': next = pins[(index + 1) % pins.length]; break;
+      case 'ArrowLeft':
+      case 'ArrowUp': next = pins[(index + pins.length - 1) % pins.length]; break;
+      case 'Home': next = pins[0]; break;
+      case 'End': next = pins[pins.length - 1]; break;
+      default: return;
+    }
+    event.preventDefault();
+    if (next) {
+      setTabStop(next);
+      next.focus({preventScroll: true});
+    }
+  });
+
+  if (!window.IntersectionObserver || window.pctMotion?.reduced) return;
+  const position = pin => pin.transform.baseVal.getItem(0).matrix;
+  const origin = position(home);
+  const distances = pins.map(pin => Math.hypot(position(pin).e - origin.e, position(pin).f - origin.f));
+  const maxDistance = Math.max(...distances);
+  pins.forEach((pin, index) => pin.style.setProperty('--pin-delay', Math.round(350 * distances[index] / maxDistance) + 'ms'));
+
+  let observer;
+  function reveal() {
+    root.classList.add('pins-arrived');
+    observer?.disconnect();
+  }
+  observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) reveal();
+  }, {rootMargin: '0px 0px -12% 0px'});
+  observer.observe(map);
+  map.addEventListener('focusin', reveal, {once: true});
+  window.pctMotion?.onReduce(reveal);
 };

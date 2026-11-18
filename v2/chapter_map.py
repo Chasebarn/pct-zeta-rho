@@ -122,8 +122,9 @@ def render_svg():
         attrs = {'data-chapter-pin': school['id'], 'data-school': school['school'],
                  'data-city': school['city'], 'data-state': school['state'], 'data-chapter': school['chapter']}
         attrs = ' '.join(f'{key}="{escape(str(value), quote=True)}"' for key, value in attrs.items())
-        title = escape(f"{school['school']} · {school['chapter']} · {school['city']}, {school['state']}")
-        lines.append(f'<g class="{classes}" transform="translate({x:.1f} {y:.1f})" {attrs}><title>{title}</title><circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="11"/><circle class="v2nat-pin-dot" r="4"/></g>')
+        lines.append(f'<g class="{classes}" transform="translate({x:.1f} {y:.1f})" {attrs}>'
+                     '<circle class="v2nat-pin-hit" r="16"/><circle class="v2nat-pin-ring" r="10"/>'
+                     '<circle class="v2nat-pin-dot" r="4.5"/></g>')
         if featured:
             lines.append(f'<text class="v2nat-usf-label" x="{x + 15:.1f}" y="{y + 6:.1f}" aria-hidden="true">USF</text>')
     lines.extend(['</g>', '</svg>'])

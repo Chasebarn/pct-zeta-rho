@@ -1,241 +1,179 @@
-.about-page {
-  --about-space: clamp(2.9rem, 5.8vw, 5rem);
-}
+.about-page { --about-space: clamp(3rem, 5.5vw, 5.5rem); }
 .about-page .section {
   padding-block: var(--about-space);
-  /* The document already reserves the sticky header. Align the section's
-     first heading with that inset when following a deep link. */
   scroll-margin-top: calc(0px - var(--about-space));
 }
-.about-hero {
-  padding-block: var(--about-space);
+.about-page .section-heading { margin: 0; max-width: none; }
+.chapter-cover {
+  padding: 0;
+  background: #141512;
+  color: var(--paper);
 }
-.about-hero h1 {
-  font-size: clamp(4rem, 7.8vw, 7.1rem);
-  line-height: .99;
+.chapter-cover-inner {
+  position: relative;
+  max-width: 96rem;
+  margin: 0 auto;
+  isolation: isolate;
 }
-.chapter-intro .chapter-lede {
-  margin: 1.5rem 0 .95rem;
-  max-width: 32ch;
-  color: var(--ink);
-  font-size: clamp(1.16rem, 1.65vw, 1.5rem);
-  line-height: 1.42;
+.chapter-cover-title {
+  position: absolute;
+  z-index: 1;
+  inset: clamp(1.5rem, 3.6vw, 3.8rem) 0 auto;
+  color: var(--paper);
 }
-.chapter-today {
-  line-height: 1.67;
-  max-width: 47ch;
-  color: var(--ink-soft);
+.chapter-cover-title h1 {
+  margin: 0;
+  font: 400 clamp(4.5rem, 8.4vw, 8.4rem)/.94 var(--font-display);
+  letter-spacing: -.035em;
+  color: inherit;
 }
-.about-photo {
-  aspect-ratio: 1.35;
+.chapter-cover-title p {
+  margin: .65rem 0 0;
+  font: 500 clamp(1rem, 1.4vw, 1.25rem)/1.45 var(--font-text);
 }
-.about-photo img {
-  object-position: center 62%;
+.chapter-cover-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.1;
+  object-fit: cover;
+  object-position: 50% 58%;
 }
 .chapter-index {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 1.6rem;
-  margin-top: 1.3rem;
-  border-top: 1px solid var(--line);
-  max-width: 31rem;
+  gap: 0 clamp(.95rem, 3vw, 2.5rem);
+  padding-block: .48rem;
+  border-bottom: 1px solid var(--line);
 }
-.chapter-index a,
-.about-network .text-link,
-.about-page .contact-section .link-group a {
+.chapter-index a, .contact-actions .text-link {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-}
-.chapter-index a,
-.about-network p a {
+  font-size: 1rem;
+  font-weight: 550;
   color: var(--purple);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
-  text-underline-offset: .24em;
+  text-decoration-color: color-mix(in srgb, currentColor 42%, transparent);
+  text-underline-offset: .25em;
 }
-.chapter-index a {
-  font-size: .94rem;
-  font-weight: 550;
+.about-page main a:hover { text-decoration-color: currentColor; }
+.chapter-origins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.6rem, 7vw, 6rem);
+  margin-top: clamp(1.55rem, 3.2vw, 3rem);
 }
-.chapter-index a:hover,
-.about-network p a:hover {
-  text-decoration-color: currentColor;
+.chapter-origins article { border-top: 1px solid var(--line); padding-top: 1.15rem; }
+.chapter-origins h3, .project-awards dt {
+  font: 400 clamp(1.7rem, 2.6vw, 2.6rem)/1.12 var(--font-display);
+  color: var(--ink);
 }
-.about-network {
-  background: var(--paper-deep);
+.chapter-origins h3 { margin: 0 0 .75rem; }
+.chapter-origins p, .chapter-service p, .award-intro p, .member-honors > p, .contact-section p {
+  line-height: 1.65;
+  max-width: 49ch;
 }
-.about-network p {
-  line-height: 1.63;
+.chapter-origins p:last-child, .chapter-service p:last-child { margin-bottom: 0; }
+.chapter-origins a, .member-honors a { color: var(--purple); text-underline-offset: .22em; }
+.about-page .chapter-service { background: var(--paper-deep); }
+.about-page .chapter-service::before, .about-page .chapter-service + .section::before { content: none; }
+.service-story {
+  display: grid;
+  grid-template-columns: minmax(0,.84fr) minmax(0,1.16fr);
+  gap: clamp(2rem,5.8vw,5.5rem);
+  align-items: center;
 }
-.about-network p:last-of-type {
-  margin-bottom: .1rem;
+.about-page .service-story-copy h2, .about-page .award-intro h2 { margin-bottom: .95rem; }
+.service-story figure { margin: 0; }
+.service-story img { width: 100%; height: auto; aspect-ratio: 1.59; object-fit: cover; object-position: 50% 57%; }
+.service-story figcaption { margin-top: .65rem; font-size: .88rem; line-height: 1.5; color: var(--ink-soft); }
+.chapter-award-spread {
+  display: grid;
+  grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr);
+  gap: clamp(2rem,6.5vw,6rem);
 }
-.about-page .cabinet-title {
-  padding-top: clamp(1.75rem, 4vw, 3rem);
-  margin-top: clamp(2.2rem, 5vw, 4.5rem);
+.project-awards, .award-archive { margin: 0; }
+.project-awards > div {
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  align-items: baseline;
+  gap: .2rem 1.35rem;
+  padding: 1.05rem 0;
   border-top: 1px solid var(--line);
 }
-.about-page #cabinet {
-  scroll-margin-top: -1.75rem;
+.project-awards dd, .award-archive dd { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.52; }
+.chapter-disclosure { border-top: 1px solid var(--line); }
+.chapter-disclosure summary {
+  display: list-item;
+  min-height: 48px;
+  padding-block: .85rem;
+  font: 550 1rem/1.5 var(--font-text);
+  color: var(--purple);
+  cursor: pointer;
+  list-style-position: inside;
 }
-.about-page #recruitment-chair {
-  scroll-margin-top: 0;
+.chapter-disclosure summary::marker { font-size: .73em; }
+.chapter-disclosure summary:hover { text-decoration: underline; text-underline-offset: .24em; }
+.chapter-disclosure[open] { padding-bottom: .65rem; }
+.award-archive > div { padding: .72rem 0; }
+.award-archive dt, .about-page .award-year, .about-page .honoree-cohort h3 {
+  margin: 0 0 .3rem;
+  font: 600 .9rem/1.45 var(--font-text);
+  color: var(--ink);
 }
-.about-page .roster-name {
-  text-wrap: pretty;
-}
-.about-page .award-list li {
+.about-page .award-list li, .about-page .honoree-cohort {
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-columns: 4.65rem minmax(0, 1fr);
   gap: 1rem;
 }
-.about-page .award-year,
-.about-page .honoree-cohort h3 {
-  font: 600 .86rem/1.5 var(--font-text);
-  letter-spacing: .02em;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-soft);
-  margin: .23rem 0 0;
+.about-page .award-list h4, .about-page .award-list li p:last-child { margin: 0; }
+.about-page .award-list a, .about-page .honoree-cohort a { font-size: 1.08rem; line-height: 1.45; font-weight: 550; }
+.about-page .honoree-cohort a { display: inline; }
+.about-page .award-school { font-size: .96rem; }
+.about-page .cabinet-title { padding-top: clamp(2rem, 4vw, 3.5rem); margin-top: clamp(2.2rem, 5vw, 4.5rem); border-top: 1px solid var(--line); }
+.about-page #cabinet { scroll-margin-top: -1.75rem; }
+.about-page #recruitment-chair { scroll-margin-top: 0; }
+.about-page .roster-name { text-wrap: pretty; }
+.contact-actions { display: flex; gap: .7rem 1.5rem; flex-wrap: wrap; align-items: center; }
+
+@container chapter-content (max-width: 46rem) {
+  .chapter-cover-inner { display: flex; flex-direction: column; background: var(--ink); }
+  .chapter-cover-title { position: static; padding-block: 1.45rem 1.55rem; }
+  .chapter-cover-title h1 { font-size: clamp(3.5rem, 13.2vw, 5.4rem); }
+  .chapter-cover-title p { font-size: 1rem; max-width: 34ch; margin-top: .6rem; }
+  .chapter-cover-photo { aspect-ratio: 2.26; object-position: 50% 77%; }
+  .chapter-index { gap: 0 1.05rem; padding-block: .24rem; }
+  .chapter-index a { font-size: .95rem; }
+  .chapter-origins, .service-story, .chapter-award-spread, .about-page .section .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .chapter-origins { margin-top: 1.25rem; gap: 1.45rem; }
+  .chapter-origins article { padding-top: 1rem; }
+  .service-story img { aspect-ratio: 1.46; }
+  .about-page .cabinet-directory { margin-top: .7rem; }
+  .about-page .cabinet-directory li { padding-block: .72rem; }
+  .about-page .advisor-profile { display: grid; grid-template-columns: 5.5rem minmax(0,1fr); align-items: center; gap: .9rem; }
+  .about-page .advisor-profile img { width: 100%; }
+  .about-page .advisor-profile > div { display: contents; }
+  .about-page .advisor-profile h3 { margin: 0; }
+  .about-page .advisor-profile p { grid-column: 1/-1; }
 }
-.about-page .award-list h4,
-.about-page .award-list li p:last-child {
-  margin: 0;
-}
-.about-page .award-list h4,
-.about-page .honoree-cohort a {
-  margin-bottom: .32rem;
-}
-.about-page .award-list a,
-.about-page .honoree-cohort a {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: clamp(1.55rem, 2.2vw, 2rem);
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .16em;
-}
-.about-page .award-school {
-  font-size: .93rem;
-  line-height: 1.5;
-}
-.about-page .contact-section .link-group {
-  margin: .6rem 0 0;
-}
-@media (max-width: 749px) {
-  .about-hero .split {
-    grid-template-areas: "title" "origin" "index" "photo" "life";
-    gap: 0;
-  }
-  .about-hero .chapter-intro {
-    display: contents;
-  }
-  .about-hero h1 {
-    grid-area: title;
-  }
-  .about-hero .chapter-lede {
-    grid-area: origin;
-  }
-  .about-hero .chapter-index {
-    grid-area: index;
-    margin: .55rem 0 .75rem;
-  }
-  .about-hero .about-photo {
-    grid-area: photo;
-  }
-  .about-hero .chapter-today {
-    grid-area: life;
-    margin: 1.1rem 0 0;
-  }
-  .about-hero h1 {
-    font-size: clamp(3.5rem, 13.5vw, 5.25rem);
-  }
-  .chapter-intro .chapter-lede {
-    margin: .95rem 0 .7rem;
-    line-height: 1.45;
-  }
-  .chapter-today {
-    font-size: 1rem;
-    line-height: 1.55;
-  }
-  .chapter-index {
-    margin-top: 1rem;
-  }
-  .about-photo {
-    aspect-ratio: 1.68;
-  }
-  .about-page .section .split {
-    gap: 1.15rem;
-  }
-  .about-page .section-heading {
-    max-width: none;
-  }
-  .about-page .section-heading h2 {
-    margin-bottom: .6rem;
-  }
-  .about-page .section-heading p:last-child {
-    margin-bottom: 0;
-  }
-  .about-page .cabinet-directory {
-    margin-top: .8rem;
-  }
-  .about-page .cabinet-directory li {
-    padding-block: .72rem;
-  }
-  .about-page .advisor-profile {
-    display: grid;
-    grid-template-columns: 5.5rem minmax(0, 1fr);
-    gap: .85rem 1rem;
-    align-items: center;
-  }
-  .about-page .advisor-profile img {
-    width: 100%;
-  }
-  .about-page .advisor-profile > div {
-    display: contents;
-  }
-  .about-page .advisor-profile h3 {
-    margin: 0;
-  }
-  .about-page .advisor-profile p {
-    grid-column: 1 / -1;
-  }
-}
-@media (max-width: 480px) {
-  .about-page .award-list li {
-    grid-template-columns: 1fr;
-    gap: .25rem;
-  }
+@container chapter-content (max-width: 30rem) {
+  .project-awards > div, .about-page .award-list li, .about-page .honoree-cohort { grid-template-columns: minmax(0,1fr); gap: .25rem; }
 }
 @media (min-width: 641px) and (max-width: 899px) {
-  .about-page .roster-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  .about-page .roster-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
 }
-@media (min-width: 750px) and (max-width: 1023px) {
-  .about-photo {
-    aspect-ratio: 1;
-  }
-}
-
 @container chapter-content (max-width: 18rem) {
-  .about-page .roster-grid, .about-page .advisor-profile {
-    grid-template-columns: minmax(0, 1fr);
-  }
+  .about-page .roster-grid, .about-page .advisor-profile { grid-template-columns: minmax(0,1fr); }
   .about-page .advisor-profile img { width: 4rem; }
-  .about-page .cabinet-directory li {
-    grid-template-columns: min(16vw, 4rem) minmax(0, 1fr);
-    gap: .5rem;
-  }
-  .about-page .honoree-cohort { grid-template-columns: minmax(0, 1fr); }
+  .about-page .cabinet-directory li { grid-template-columns: min(16vw,4rem) minmax(0,1fr); gap: .5rem; }
 }
-
 @media (min-width: 851px) {
   @container chapter-content (max-width: 48rem) {
-    .about-page .cabinet-directory {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-    }
+    .about-page .cabinet-directory { grid-template-columns: repeat(auto-fit, minmax(min(100%,16rem),1fr)); }
   }
 }

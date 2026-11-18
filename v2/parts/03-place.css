@@ -1,5 +1,3 @@
-/* A complete results chapter: the shared paper field, generous display title,
-   readable outcomes, then a full-width company stage tied to page scrolling. */
 .pl{
   padding-block:clamp(4.5rem,7.5vw,7rem);
   position:relative;
@@ -16,43 +14,39 @@
   background:var(--line);
   transform:translateX(-50%);
 }
-.pl-h{
-  max-width:none;
-  margin:0 0 clamp(2.5rem,4vw,3.5rem);
-  color:var(--ink);
-  font-family:var(--font-display);
-  font-size:clamp(4.6rem,7.5vw,6rem);
-  font-weight:400;
-  line-height:1.05;
-  letter-spacing:-.025em;
-  text-align:center;
-  white-space:nowrap;
+.pl-h {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.75rem);
+  color: var(--ink);
+  font: 400 clamp(3.65rem, 8vw, 7.5rem)/.95 var(--font-display);
+  letter-spacing: -.035em;
 }
-.pl-nums{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(2rem,4vw,4rem);
-  max-width:58rem;
-  list-style:none;
-  margin:0 auto;
-  padding:0;
+.pl-nums {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-block: 1px solid var(--line);
 }
-.pl-n{min-width:0;text-align:center}
-.pl-n-val{
-  margin:0;
-  color:var(--gold-ink);
-  font-family:var(--font-text);
-  font-size:clamp(3.2rem,5vw,4rem);
-  font-weight:500;
-  line-height:1.1;
-  letter-spacing:-.045em;
-  font-variant-numeric:lining-nums tabular-nums;
-  white-space:nowrap;
+.pl-n {
+  min-width: 0;
+  padding: clamp(1.35rem, 3.75vw, 3rem) clamp(1.1rem, 4.25vw, 3.8rem);
 }
+.pl-n:first-child { padding-inline-start: 0; }
+.pl-n + .pl-n { border-inline-start: 1px solid var(--line); }
+.pl-n-val {
+  margin: 0;
+  color: var(--ink);
+  font: 500 clamp(3.55rem, 6.5vw, 6.2rem)/1 var(--font-text);
+  letter-spacing: -.065em;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+.pl-n:first-child .pl-n-val { color: var(--purple); }
 .pl-n-u{font-size:.5em;letter-spacing:0}
 .pl-n-lab{
   max-width:25ch;
-  margin:1rem auto 0;
+  margin:.8rem 0 0;
   color:var(--ink-soft);
   font-family:var(--font-text);
   font-size:.9375rem;
@@ -64,24 +58,22 @@
 .pl-counter-space{visibility:hidden}
 .pl-counter-digits{position:absolute;inset:0;text-align:left}
 .pl-stat-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-/* Outside the inner reading column, this stage spans the viewport itself.
-   Crops and fades consequently occur at screen edges, not inside the page. */
-.pl-brands{
-  --pl-edge:144px;
-  --pl-inset:152px;
-  --pl-gap:24px;
-  --pl-scale:1;
-  position:relative;
-  width:100%;
-  margin-top:clamp(3rem,5vw,4.5rem);
+.pl-brands {
+  --pl-edge: clamp(16px, 3.5vw, 48px);
+  --pl-inset: calc(var(--pl-edge) + 6px);
+  --pl-gap: 27px;
+  --pl-scale: 1;
+  position: relative;
+  margin-top: clamp(1.4rem, 3.6vw, 3rem);
 }
+.pl-brands.v2wrap { padding: 0; }
 /* Complete, unclipped source list for no-JavaScript/reduced-motion visitors. */
 .pl-logos{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   align-items:center;
   gap:.75rem 1.5rem;
-  width:min(var(--wrap),calc(100% - var(--gutter)*2));
+  width:100%;
   list-style:none;
   margin:0 auto;
   padding:0;
@@ -133,7 +125,7 @@
 /* The Jets artwork occupies only the middle 57% of its square viewBox. */
 .pl-cell--jets{--pl-slot:112px;--pl-mark:96px;--pl-mark-max:none}
 .pl-cell--usf{--pl-slot:168px;--pl-mark:152px;--pl-mark-max:2.3rem}
-.pl-rows{display:grid;gap:1.25rem}
+.pl-rows{display:grid;gap:.55rem}
 .pl-row{
   min-width:0;
   overflow:hidden;
@@ -155,16 +147,14 @@
   flex:0 0 calc(var(--pl-slot)*var(--pl-scale,1));
   width:calc(var(--pl-slot)*var(--pl-scale,1));
   max-width:calc(100vw - var(--pl-inset)*2);
-  height:5.75rem;
+  height:4.75rem;
   padding-inline:0;
 }
 @media (min-width:701px) and (max-width:1100px){
-  .pl-brands{--pl-edge:120px;--pl-inset:128px;--pl-gap:20px;--pl-scale:.8}
+  .pl-brands{--pl-gap:21px;--pl-scale:.85}
 }
 @media (max-width:700px){
-  .pl-h{font-size:clamp(2.85rem,13.5vw,3.3rem)}
-  .pl-nums{gap:1.5rem}
-  .pl-brands{--pl-edge:48px;--pl-inset:56px;--pl-gap:16px;--pl-scale:1;margin-top:2.75rem}
+  .pl-brands{--pl-edge:24px;--pl-gap:20px;--pl-scale:.93}
   .pl-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .75rem}
   .pl-logos .pl-cell--wide{grid-column:span 2}
   .pl-cell{min-height:5.25rem}
@@ -189,42 +179,23 @@
   .pl-cell--jets{--pl-slot:80px;--pl-mark:78px}
   .pl-cell--usf{--pl-slot:120px;--pl-mark:118px;--pl-mark-max:2.1rem}
   .pl-rows{gap:.75rem}
-  .pl-track .pl-cell{height:5.25rem}
+  .pl-track .pl-cell{height:4rem}
 }
-@media (max-width:600px){
-  .pl{padding-block:4rem}
-  .pl-h{margin-bottom:2rem}
-  .pl-nums{display:block;max-width:none;border-top:1px solid var(--line)}
-  .pl-n{
+@media (max-width:600px) {
+  .pl {padding-block:3.65rem;}
+  .pl-h {font-size:clamp(3.1rem, 12vw, 4.45rem);}
+  .pl-nums {display:block;}
+  .pl-n {
     display:grid;
-    grid-template-columns:6.75rem minmax(0,1fr);
+    grid-template-columns: minmax(7.25rem, 38%) minmax(0, 1fr);
     align-items:center;
-    gap:1.25rem;
+    gap:.85rem;
     padding:.85rem 0;
-    border-bottom:1px solid var(--line);
-    text-align:left;
   }
-  .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
-  .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
+  .pl-n + .pl-n {border-inline-start:0;border-top:1px solid var(--line);}
+  .pl-n-val {font-size:clamp(3.15rem, 11vw, 4.4rem);}
+  .pl-n-lab {margin:0;font-size:.9rem;line-height:1.45;}
+  .pl-rows {gap:.2rem;}
 }
-
-.pl-brands[data-pl-brands]{
-  --pl-edge:clamp(3rem,8vw,8rem);
-  --pl-inset:calc(var(--pl-edge) + .5rem);
-  max-width:100rem;margin-inline:auto;
-}
-.pl-row .pl-track{min-width:100%;justify-content:center}
-.pl-row .pl-track .pl-cell{min-height:0}
-.pl-rows .pl-row{min-height:0}
-.pl-afterword{
-  display:flex;align-items:baseline;justify-content:space-between;
-  gap:1rem 2rem;padding-top:1.2rem;margin-top:1.8rem;border-top:1px solid var(--line);
-}
-.pl-member-proof{margin:0;color:var(--ink-soft);font-size:1rem;line-height:1.55}
-.pl-member-proof a,.pl-figure-source{color:var(--purple);text-underline-offset:.23em}
-.pl-figure-source{display:inline-flex;align-items:center;min-height:44px;flex-shrink:0;font-size:.8rem}
-@media(max-width:700px){
- .pl-afterword{display:block;margin-top:1.45rem}
- .pl-member-proof{max-width:40ch}
- .pl-figure-source{margin-top:.2rem}
-}
+.pl-row .pl-track {min-width:100%;justify-content:center;}
+.pl-row .pl-track .pl-cell {min-height:0;}

@@ -19,9 +19,8 @@ window.pctInitGrow = function () {
     });
     if (!valid) return;
 
-    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:760px)') : null;
+    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
     var current = 0;
-    var phoneOpen = btns.map(function (_, index) { return index === 0; });
     var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var exitTimer = null;
@@ -31,10 +30,10 @@ window.pctInitGrow = function () {
     }
     function sync() {
       for (var i = 0; i < rows.length; i++) {
-        var active = wide ? i === current : phoneOpen[i];
+        var active = i === current;
         rows[i].classList.toggle('is-open', active);
         panels[i].hidden = !active;
-        if (wide && active) btns[i].setAttribute('aria-disabled', 'true');
+        if (active) btns[i].setAttribute('aria-disabled', 'true');
         else btns[i].removeAttribute('aria-disabled');
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
         figs[i].classList.toggle('is-active', active);
@@ -42,8 +41,11 @@ window.pctInitGrow = function () {
       }
     }
     function open(index) {
-      if (wide && index === current) return;
-      if (!wide) phoneOpen[index] = !phoneOpen[index];
+      if (index === current) return;
+      // A preceding mobile panel can be a full photograph tall. Keep the row
+      // under the pointer when closing it would otherwise move the tapped title.
+      var topBefore = !wide && index > current
+        ? btns[index].getBoundingClientRect().top : null;
       clearLeaving();
       if (wide && !(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
@@ -51,7 +53,11 @@ window.pctInitGrow = function () {
       }
       current = index;
       sync();
-      if (!wide && phoneOpen[index] && !(reduce && reduce.matches) && panels[index].animate) {
+      if (topBefore !== null) {
+        var shift = btns[index].getBoundingClientRect().top - topBefore;
+        if (Math.abs(shift) > 1) window.scrollBy({top:shift, behavior:'instant'});
+      }
+      if (!wide && !(reduce && reduce.matches) && panels[index].animate) {
         panels[index].animate([
           { opacity:0, transform:'translateY(6px)' },
           { opacity:1, transform:'translateY(0)' }
@@ -60,13 +66,13 @@ window.pctInitGrow = function () {
     }
     function layout() {
       clearLeaving();
-      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 760;
+      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
         var destination = wide ? stage : panels[i];
         if (figure.parentNode !== destination) {
           if (wide) destination.appendChild(figure);
-          else destination.insertBefore(figure, destination.querySelector('.grow__link'));
+          else destination.insertBefore(figure, destination.firstChild);
         }
       });
       sync();

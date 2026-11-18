@@ -1,14 +1,13 @@
-/* The national network is the visual evidence; the statement and two short
-   benefit paragraphs keep one reading edge beside it on wide screens. */
+
 .v2nat{
   position:relative;
-  padding-block:clamp(3.75rem,6vw,5rem);
-  background:var(--purple-deep);
+  padding-block:clamp(3.75rem,6.75vw,6rem);
+  background:radial-gradient(ellipse at 82% 44%,#312243 0%,transparent 58%),var(--purple-deep);
   color:var(--paper);
 }
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
   align-items:center;
   gap:clamp(2.5rem,4.5vw,4.5rem);
 }
@@ -34,16 +33,19 @@
 .v2nat-copy strong{font-weight:600;color:var(--paper)}
 .v2nat-figure{min-width:0;width:100%;margin:0}
 .v2nat-map{display:block;width:100%;height:auto;overflow:visible}
-.v2nat.is-map-pending .v2nat-pins{opacity:0}
 .v2nat-states path{fill:rgba(250,248,243,.025);stroke:rgba(250,248,243,.14);stroke-width:.65;stroke-linejoin:round}
 .v2nat-coast{fill:none;stroke:rgba(250,248,243,.52);stroke-width:1.15;stroke-linejoin:round}
 .v2nat-pin-hit{fill:transparent;stroke:none}
+.v2nat-pin[role="button"]{cursor:pointer}
+.v2nat-pin:focus-visible{outline:none}
+.v2nat-pin:focus-visible .v2nat-pin-ring{stroke:var(--gold-soft);stroke-width:2.5;opacity:1}
 .v2nat-pin-dot{fill:var(--gold-soft);stroke:var(--purple-deep);stroke-width:1.3}
 .v2nat-pin-ring{fill:none;stroke:var(--gold-soft);stroke-width:1.3;opacity:0}
 .v2nat-pin.is-usf .v2nat-pin-dot{fill:var(--paper);stroke:var(--gold-soft);stroke-width:2}
 .v2nat-pin.is-usf .v2nat-pin-ring{opacity:.65}
 .v2nat-pin.is-selected .v2nat-pin-ring{opacity:1;stroke:var(--paper);stroke-width:1.75}
 .v2nat-pin.is-selected .v2nat-pin-dot{fill:var(--paper)}
+.v2nat-pin.is-selected .v2nat-pin-ring,.v2nat-pin.is-usf .v2nat-pin-ring{vector-effect:non-scaling-stroke}
 .v2nat-usf-label{
   fill:var(--gold-soft);
   font-family:var(--font-text);
@@ -64,11 +66,34 @@
   .v2nat-layout{gap:1.75rem}
   .v2nat-copy{max-width:44ch}
   .v2nat-figure{max-width:none}
+  .v2nat-pin-dot{r:6px}
   .v2nat-usf-label{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
-  .v2nat.is-map-pending .v2nat-pins{opacity:1}
   .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }
 
 @media(min-width:900px) and (max-width:1160px){.v2nat-h{font-size:clamp(3.25rem,5.8vw,4.4rem)}}
+
+
+.v2nat-caption {
+  min-block-size: 4.25rem;
+  padding: .7rem 0 0;
+  border-top: 1px solid rgb(230 198 91 / 38%);
+  line-height: 1.45;
+}
+.v2nat-caption-school { display: block; color: var(--paper); font-size: 1rem; font-weight: 600; }
+.v2nat-caption-detail { display: block; color: var(--gold-soft); font-size: .875rem; margin-top: .18rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .v2nat.pins-arrived .v2nat-pin:not(.is-usf) .v2nat-pin-dot {
+    animation: chapter-marker-arrive 440ms cubic-bezier(.19,.73,.35,1) var(--pin-delay,0ms) both;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+}
+@keyframes chapter-marker-arrive {
+  from { transform: translateY(-12px) scale(.52); opacity: .12; }
+  70% { transform: translateY(0) scale(1.28); opacity: 1; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}

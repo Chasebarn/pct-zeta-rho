@@ -6,9 +6,16 @@ import {spawnSync} from 'node:child_process';
 const built = spawnSync('python3', ['scripts/build_site.py'], {stdio: 'inherit'});
 if (built.status !== 0) process.exit(built.status || 1);
 const root = resolve('dist');
+const config = JSON.parse(await readFile('vercel.json', 'utf8'));
+const redirects = new Map(config.redirects.map(rule => [rule.source, rule]));
 const mime = {'.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'application/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.json':'application/json', '.webp':'image/webp', '.ico':'image/x-icon'};
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, 'http://localhost');
+  const redirect = redirects.get(url.pathname);
+  if (redirect) {
+    response.writeHead(redirect.permanent ? 308 : 307, {Location: redirect.destination});
+    return response.end();
+  }
   if (url.pathname === '/api/interest' || url.pathname === '/api/health') {
     try {
       const handler = (await import('../api/' + url.pathname.split('/').pop() + '.js')).default;

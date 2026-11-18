@@ -1,16 +1,16 @@
-/* The full-width Rush section cuts across the bottom of the photo arc. */
+/* The invitation overlays the arc. The photo edges emerge below it. */
 .act{
   position:relative;z-index:1;
-  margin-top:calc(-1 * clamp(2.75rem,6.5vw,6.5rem));
-  padding:clamp(4.75rem,8vw,7.5rem) 0;
+  grid-row:2;
+  padding:clamp(1.45rem,3vw,2.5rem) 0;
+  border-block:1px solid rgb(230 198 91 / 24%);
   color:var(--paper);text-align:center;
   background:radial-gradient(ellipse at 50% 0,#362346 0%,transparent 72%),var(--purple-deep);
 }
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
-.act-title{margin:0;font-size:clamp(3.5rem,7.5vw,6.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--paper)}
+.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
-.act-line{max-width:36ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.6;color:rgba(250,248,243,.76)}
-.act-go{margin-top:2.25rem}
+.act-go{margin-top:clamp(1rem,2.6vw,1.9rem)}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;
   min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
@@ -25,11 +25,13 @@
 }
 .act-cta:hover,.act-cta:focus-visible{background:var(--gold-soft);border-color:var(--gold-soft)}
 .act-cta:focus-visible{outline-offset:6px}
-@media(max-width:767px){
- .act{padding-block:4.5rem}
- .act-title{font-size:clamp(3.1rem,12vw,4.8rem)}
- .act-title em{display:block}
- .act-line{font-size:1.05rem}
- .act-go{margin-top:2rem}
+@media(max-width:599px){
+ .act-title{font-size:clamp(2.55rem,11.3vw,4rem);text-wrap:balance}
+ .act-cta{min-height:50px;padding:.65rem 1.35rem;font-size:1rem}
+}
+@media(max-height:530px) and (orientation:landscape){
+ .act{padding-block:1rem}
+ .act-title{font-size:3.2rem}
+ .act-go{margin-top:.7rem}
 }
 @media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}

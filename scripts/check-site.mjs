@@ -21,7 +21,7 @@ class Document(HTMLParser):
                 self.refs.append(candidate.strip().split()[0])
         if tag=='meta' and a.get('property')=='og:image':
             self.refs.append(urlsplit(a['content']).path)
-        if tag=='link' and a.get('rel') in ('stylesheet','icon'):self.refs.append(a['href'])
+        if tag=='link' and a.get('rel') in ('stylesheet','icon','apple-touch-icon'):self.refs.append(a['href'])
         if tag=='img':self.images.append(a)
 documents={}
 for path in root.glob('*.html'):

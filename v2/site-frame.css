@@ -36,15 +36,14 @@
 
 .v2hd-rush{font-size:1rem;letter-spacing:.01em}
 @media(max-width:359px){.v2hd-rush{font-size:.875rem}}
-/* V2 footer, independent of the production footer's display watermark. */
 .v2footer{
   padding:clamp(2.5rem,5vw,4rem) 0 1rem;
-  background:var(--ink);
+  background:radial-gradient(ellipse at 12% 0%, #2d2039, transparent 65%), var(--ink);
   color:rgba(250,248,243,.75);
 }
 .v2footer-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr));
+  grid-template-columns:minmax(0,1.8fr) repeat(2,minmax(0,1fr));
   gap:2rem clamp(2rem,5vw,4.5rem);
 }
 .v2footer-about{min-width:0}
@@ -56,16 +55,16 @@
   text-decoration:none;
   color:var(--paper);
 }
-.v2footer-brand img{width:auto;height:42px;flex:none}
+.v2footer-brand img{width:auto;height:54px;flex:none}
 .v2footer-lock{display:flex;flex-direction:column;gap:.25rem}
-.v2footer-name{font-family:var(--font-display);font-size:1.85rem;line-height:1.1}
-.v2footer-sub{font-size:.68rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
+.v2footer-name{font-family:var(--font-display);font-size:clamp(1.85rem,3.65vw,3.35rem);line-height:1.03}
+.v2footer-sub{font-size:.76rem;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
 .v2footer-about p{max-width:30ch;margin:1rem 0 0;font-size:.9rem;line-height:1.65}
 .v2footer-nav{min-width:0}
 .v2footer-label{
   margin:0 0 .55rem;
   font-family:var(--font-text);
-  font-size:.72rem;
+  font-size:.875rem;
   font-weight:600;
   line-height:1.5;
   letter-spacing:.02em;
@@ -91,7 +90,7 @@
   align-items:center;
   justify-content:space-between;
   gap:.25rem 1.5rem;
-  margin-top:2rem;
+  margin-top:clamp(1.65rem,4.5vw,3.25rem);
   padding-top:.75rem;
   border-top:1px solid rgba(250,248,243,.15);
   color:rgba(250,248,243,.65);

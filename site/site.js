@@ -29,20 +29,10 @@ if (menu) {
 const headerAction = header?.querySelector('.v2hd-rush');
 const heroAction = document.querySelector('.rush-hero .page-actions a[href="#interest"], .home-page [data-hero-cta]');
 if (headerAction && heroAction && headerAction.href === heroAction.href && 'IntersectionObserver' in window) {
-  const mobileNav = matchMedia('(max-width:899px)');
-  const home = document.body.classList.contains('home-page');
-  let heroActionVisible = false;
-
-  function updateHeaderAction() {
-    headerAction.classList.toggle('is-repeated', heroActionVisible && (!home || mobileNav.matches));
-  }
-
   const observer = new IntersectionObserver(([entry]) => {
-    heroActionVisible = entry.intersectionRatio >= .5;
-    updateHeaderAction();
+    headerAction.classList.toggle('is-repeated', entry.intersectionRatio >= .5);
   }, {rootMargin: '-' + header.offsetHeight + 'px 0px 0px', threshold: .5});
   observer.observe(heroAction);
-  if (home) mobileNav.addEventListener('change', updateHeaderAction);
 }
 
 document.querySelectorAll('[data-interest]').forEach(form => {
@@ -143,11 +133,11 @@ document.querySelectorAll('[data-share]').forEach(button => {
     if (sharing) return;
     sharing = true;
     status.replaceChildren();
-    const url = new URL('/rush', window.location.origin).href;
+    const url = document.querySelector('link[rel="canonical"]')?.href || new URL('/rush', window.location.origin).href;
     try {
       if (typeof navigator.share === 'function') {
         try {
-          await navigator.share({title: 'Rush Phi Chi Theta at USF', url});
+          await navigator.share({title: 'Rush Phi Chi Theta at USF', text: 'Explore Rush at USF and get the next schedule.', url});
           return;
         } catch (error) {
           if (error.name === 'AbortError') return;

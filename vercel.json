@@ -12,6 +12,16 @@
   },
   "redirects": [
     {
+      "source": "/philanthropy",
+      "destination": "/about#service",
+      "permanent": true
+    },
+    {
+      "source": "/philanthropy.html",
+      "destination": "/about#service",
+      "permanent": true
+    },
+    {
       "source": "/v2/index.html",
       "destination": "/",
       "permanent": true

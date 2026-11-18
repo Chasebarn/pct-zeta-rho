@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-11-17",
+  "verified_at": "2026-11-18",
   "official_chapter_site": "https://sites.google.com/view/pct-zeta-rho",
   "scrape_file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-original-home-scrape.txt",
   "history": {
@@ -31,31 +31,106 @@
     ]
   },
   "leadership": {
-    "current_roster_verified": false,
-    "last_official_profile": {
-      "name": "Sebastian Castro",
-      "role": "President of Phi Chi Theta",
-      "reported_date": "2026-04-08",
-      "reported_member_count": "more than 100",
-      "reported_exec_count": 17,
-      "source_url": "https://www.usf.edu/business/news/2026/04-08-deans-advisory-board-leadership-award.aspx",
-      "caution": "Source dates role to April 2026, not an explicit Fall 2026 officer roster."
+    "source_reviewed_on": "2026-11-18",
+    "term": null,
+    "source_note": "The chapter names seven executive officers, nine Cabinet chairs and its faculty advisor. The chapter roster pages do not give a semester. Each downloaded photograph was matched to its own adjacent name and role in the source page.",
+    "executive": {
+      "source_url": "https://sites.google.com/view/pctusf/board/executive",
+      "members": [
+        {
+          "name": "Sebastian Castro",
+          "role": "President",
+          "portrait": "/assets/leadership/sebastian-castro.webp"
+        },
+        {
+          "name": "Jonathan Pasquini",
+          "role": "VP of Internal",
+          "portrait": "/assets/leadership/jonathan-pasquini.webp"
+        },
+        {
+          "name": "Anthony Auteri",
+          "role": "Chaplain",
+          "portrait": "/assets/leadership/anthony-auteri.webp"
+        },
+        {
+          "name": "Casey Chamelin",
+          "role": "VP of Recruitment",
+          "portrait": "/assets/leadership/casey-chamelin.webp"
+        },
+        {
+          "name": "Ryan Goldsmith",
+          "role": "VP of Finance",
+          "portrait": "/assets/leadership/ryan-goldsmith.webp"
+        },
+        {
+          "name": "Austin Wankel",
+          "role": "VP of Membership",
+          "portrait": "/assets/leadership/austin-wankel.webp"
+        },
+        {
+          "name": "Frida Fulgencio",
+          "role": "Secretary",
+          "portrait": "/assets/leadership/frida-fulgencio.webp"
+        }
+      ]
     },
-    "cab": {
-      "verified": false,
-      "names": [],
-      "caution": "No current CAB roster on original Google site or official USF listing found. Do not expand CAB acronym without chapter confirmation."
+    "cabinet": {
+      "source_url": "https://sites.google.com/view/pctusf/board/cabinet",
+      "members": [
+        {
+          "name": "Mercedes Newland Cespedes",
+          "role": "Professional Development Chair",
+          "portrait": "/assets/leadership/mercedes-newland-cespedes.webp"
+        },
+        {
+          "name": "Andrew Goldsmith",
+          "role": "Social Chair",
+          "portrait": "/assets/leadership/andrew-goldsmith.webp"
+        },
+        {
+          "name": "Ella Ferguson",
+          "role": "Philanthropy Chair",
+          "portrait": "/assets/leadership/ella-ferguson.webp"
+        },
+        {
+          "name": "Madison Wright",
+          "role": "Scholarship Chair",
+          "portrait": "/assets/leadership/madison-wright.webp"
+        },
+        {
+          "name": "Catherine Adkins",
+          "role": "Marketing Chair",
+          "portrait": "/assets/leadership/catherine-adkins.webp"
+        },
+        {
+          "name": "Matthew Swain",
+          "role": "Fundraising Chair",
+          "portrait": "/assets/leadership/matthew-swain.webp"
+        },
+        {
+          "name": "Juan Lanzas",
+          "role": "Merch Chair",
+          "portrait": "/assets/leadership/juan-lanzas.webp"
+        },
+        {
+          "name": "Leo Tartaglione",
+          "role": "Alumni Chair",
+          "portrait": "/assets/leadership/leo-tartaglione.webp"
+        },
+        {
+          "name": "Chase Barnett",
+          "role": "IT Chair",
+          "portrait": "/assets/leadership/chase-barnett.webp"
+        }
+      ]
     },
     "advisor": {
-      "verified": false,
-      "name": null,
-      "caution": "No official current named faculty/chapter advisor found. Official public chapter routes can provide an introduction."
-    },
-    "contact_routes": [
-      "https://www.instagram.com/pctusf/",
-      "https://www.linkedin.com/company/usfphichitheta/",
-      "https://linktr.ee/usfpct"
-    ]
+      "name": "Carrington Price Jr.",
+      "role": "Faculty advisor",
+      "portrait": "/assets/leadership/carrington-price-jr.webp",
+      "source_url": "https://sites.google.com/view/pctusf/about_1/our-advisor",
+      "chapter_connection": "Graduate assistant in the Bulls Business Community at the chapter’s founding; mentors members and supports the executive board."
+    }
   },
   "awards": [
     {
@@ -127,11 +202,6 @@
     {
       "claim": "Ranked #3 nationally through Next National Chapter evaluation",
       "source_url": "https://sites.google.com/view/pct-zeta-rho"
-    },
-    {
-      "claim": "15 Muma 25 Under 25 honorees",
-      "source_url": "local existing V2 only; original Google site measures likely embedded image so not accessible as text",
-      "caution": "Do not call newly independently verified."
     }
   ],
   "basic_contact": {
@@ -154,16 +224,33 @@
       "/assets/photo-letters.jpg",
       "/assets/crest.png"
     ],
-    "local_headshots": [],
+    "local_headshots": [
+      "/assets/leadership/sebastian-castro.webp",
+      "/assets/leadership/jonathan-pasquini.webp",
+      "/assets/leadership/anthony-auteri.webp",
+      "/assets/leadership/casey-chamelin.webp",
+      "/assets/leadership/ryan-goldsmith.webp",
+      "/assets/leadership/austin-wankel.webp",
+      "/assets/leadership/frida-fulgencio.webp",
+      "/assets/leadership/mercedes-newland-cespedes.webp",
+      "/assets/leadership/andrew-goldsmith.webp",
+      "/assets/leadership/ella-ferguson.webp",
+      "/assets/leadership/madison-wright.webp",
+      "/assets/leadership/catherine-adkins.webp",
+      "/assets/leadership/matthew-swain.webp",
+      "/assets/leadership/juan-lanzas.webp",
+      "/assets/leadership/leo-tartaglione.webp",
+      "/assets/leadership/chase-barnett.webp",
+      "/assets/leadership/carrington-price-jr.webp"
+    ],
     "placeholder_directories": [
       "/assets/ph",
       "/assets/mem"
     ]
   },
   "chapter_published_metrics": {
-    "verification": "Parent verified all three metrics in live original Google site screenshot on2026-11-17; image numbers are chapter-reported, no reporting period/cohort independently available.",
-    "evidence_file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-vercel-proof/original-published-stats.png",
-    "source_url": "https://sites.google.com/view/pct-zeta-rho",
+    "verification": "The chapter’s Zeta Rho page lists all three values in text and identifies the GPA as approximate. Neither published site specifies a cohort or reporting period.",
+    "source_url": "https://sites.google.com/view/pctusf/about_1/zeta-rho-chapter",
     "metrics": [
       {
         "value": "95%",
@@ -177,6 +264,102 @@
         "value": "15",
         "label": "25 under25"
       }
+    ]
+  },
+  "official_chapter_directory_site": "https://sites.google.com/view/pctusf",
+  "chapter_award_source": "https://sites.google.com/view/pctusf/about_1/chapter-awards",
+  "chapter_awards": {
+    "national": {
+      "projects": {
+        "Community Service Award": "Camp Kesem",
+        "Philanthropy Award": "A Kid’s Place",
+        "Professional Development Award": "Fall Summit"
+      },
+      "spring_2024": [
+        "Fundraising Event Award",
+        "Community Service Award"
+      ],
+      "spring_2023": [
+        "Professional Award",
+        "Community Service Award"
+      ],
+      "fall_2022": [
+        "Community Service Award"
+      ]
+    },
+    "regional": {
+      "2024–25": [
+        "Membership Recruitment & Development Excellence Award",
+        "Fraternity Spirit & Cooperation Excellence Award",
+        "Financial Management Merit Award"
+      ],
+      "2023–24": [
+        "Membership Recruitment & Development Excellence Award",
+        "Fraternity Spirit & Cooperation Excellence Award",
+        "Financial Management Merit Award",
+        "Ship of Achievement Award"
+      ],
+      "2022–23": [
+        "Chapter Growth Award",
+        "Fraternity Spirit & Cooperation Excellence Award",
+        "Business Ideals Special Recognition",
+        "Financial Management Excellence Award",
+        "Membership Recruitment & Development Excellence Award",
+        "Ship of Achievement Award"
+      ]
+    }
+  },
+  "chapter_honorees": {
+    "source": "https://sites.google.com/view/pctusf/about_1/25-under-25",
+    "profiles": [
+      {
+        "academic_year": "2025–26",
+        "member": "Humberto Campos",
+        "usf_profile": "https://www.usf.edu/business/news/2026/04-02-humberto-campos-named-muma-25under25-award-honoree.aspx"
+      },
+      {
+        "academic_year": "2024–25",
+        "member": "Claudia De Jesus",
+        "usf_profile": "https://www.usf.edu/business/25-under-25/honorees-2025/de-jesus-claudia.aspx"
+      },
+      {
+        "academic_year": "2024–25",
+        "member": "Eric Torres",
+        "usf_profile": "https://www.usf.edu/business/25-under-25/honorees-2025/torres-eric.aspx"
+      },
+      {
+        "academic_year": "2024–25",
+        "member": "Amber Woolverton",
+        "usf_profile": "https://www.usf.edu/business/25-under-25/honorees-2025/woolverton-amber.aspx"
+      },
+      {
+        "academic_year": "2023–24",
+        "member": "Justin Kwitchoff",
+        "usf_profile": "https://www.usf.edu/business/news/2024/10-16-justin-kwitchoff.aspx"
+      },
+      {
+        "academic_year": "2023–24",
+        "member": "Nicolas Castillo",
+        "usf_profile": "https://www.usf.edu/world/news/2025/castillo-colombia-spotlight.aspx"
+      }
+    ]
+  },
+  "chapter_programs": {
+    "source": "https://sites.google.com/view/pctusf/about_1/zeta-rho-chapter",
+    "community": [
+      "intramurals",
+      "fall formal",
+      "spring retreat"
+    ],
+    "professional": [
+      "Fall Summit",
+      "industry speakers",
+      "new-member workshops"
+    ],
+    "philanthropy": [
+      "Hillsborough Education Foundation",
+      "JA Finance Park",
+      "Parkland Cares"
     ]
   }
 }

@@ -17,6 +17,7 @@ api. Configure these runtime values in the Vercel project.
 - DATABASE_URL from the owned Neon project.
 - RATE_LIMIT_SECRET, a server-only random value.
 - RUSH_SEASON, the recruitment cycle identifier.
+- SITE_URL, the public origin used for canonical links and the sitemap.
 
 Keep local values in ignored .env.local. To initialize an empty Neon
 database or safely retry the existing migration, run npm run db:migrate.
@@ -26,10 +27,12 @@ is reachable. The form exposes no listing of applicants. It deduplicates
 lowercase email plus recruitment cycle, retains recorded consent, and allows
 120 requests per ten-minute connection window to accommodate shared campus Wi-Fi.
 
-For a permanent deployment, claim the temporary Vercel project and connect
-the Git repository or deploy from an authenticated Vercel account. Claiming
-the temporary Neon project rotates its connection credentials. Retrieve the
-new connection string from the owned Neon project, update Vercel's
-DATABASE_URL, and redeploy before sending recruitment traffic to the form.
+Production is [pct-zeta-rho.vercel.app](https://pct-zeta-rho.vercel.app).
+The Vercel project is racing-piano-j8yzm5u. Its production settings point
+to the owner's Neon project pct-zeta-rho. The connection was rotated when
+the database was claimed. Keep the credentials in the provider settings.
 
-Actual account credentials and private claim links are outside the source tree.
+Publish from the pct/vercel-neon-site branch and the linked Vercel project
+using an authenticated CLI with `vercel deploy --prod`. GitHub Pages uses
+the repository’s separate main branch. After a production release check
+/api/health and submit a synthetic interest entry to verify the save.

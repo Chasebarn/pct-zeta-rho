@@ -21,19 +21,18 @@
       "label": "25 Under 25 honorees"
     }
   ],
-  "statsEvidence": "Original live Google Site images, visually verified in browser. Independent cohort and reporting period unavailable.",
+  "statsEvidence": "The current chapter page gives 95%, approximately 3.60 and 15. The reporting period and cohort size are unspecified.",
   "verifiedHistory": {
     "founded": "2018-09",
     "foundingStudents": 18
   },
   "nationalCollegiateChapters": 46,
   "missingCurrentContent": [
-    "Rush dates and locations",
-    "Event attire",
-    "Selection and attendance requirements",
-    "Dues",
-    "Current Exec, CAB, and advisor roster"
+    "Next Rush dates, locations and event-specific dress codes",
+    "Current dues",
+    "Term dates for the published leadership roster"
   ],
-  "rosterSource": "https://bullsconnect.usf.edu/student_community?club_id=58355",
-  "rosterAccess": "The member area redirects to USF sign-in. No current names are published in the public listing."
+  "rosterSource": "https://sites.google.com/view/pctusf/board/executive",
+  "rosterAccess": "The chapter Google Site is accessible in the signed-in browser. Its Executive Board, Cabinet and advisor pages list 17 people and their photographs.",
+  "chapterDirectorySite": "https://sites.google.com/view/pctusf/home"
 }

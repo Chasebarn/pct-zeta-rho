@@ -149,3 +149,83 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 @media(max-width:759px){.v2nat-usf-label{font-size:40px}}
 .pl-track .pl-cell{height:4.75rem}
 @media(max-width:700px){.pl-track .pl-cell{height:4.25rem}.pl-rows{gap:.5rem}.pl-brands{--pl-scale:.92}}
+
+/* Chapter leadership */
+.roster-grid,
+.cabinet-directory {
+  display: grid;
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+}
+.roster-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.1rem clamp(1rem, 2.5vw, 2rem);
+}
+.roster-grid img,
+.cabinet-directory img,
+.advisor-profile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.roster-grid img {
+  aspect-ratio: 1;
+  margin-bottom: .8rem;
+}
+.leadership-section .roster-name {
+  font: 400 clamp(1.55rem, 2.3vw, 2.15rem)/1.1 var(--font-display);
+  letter-spacing: -.015em;
+  color: var(--ink);
+  margin: 0 0 .28rem;
+}
+.leadership-section .roster-role {
+  font-size: .88rem;
+  line-height: 1.45;
+  margin: 0;
+}
+.cabinet-title {
+  margin-top: clamp(3rem, 7vw, 5.8rem);
+}
+.cabinet-directory {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2rem;
+}
+.cabinet-directory li {
+  display: grid;
+  grid-template-columns: clamp(3.5rem, 5vw, 4.6rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  padding: 1rem 0;
+}
+.cabinet-directory .roster-name {
+  font: 600 1rem/1.35 var(--font-text);
+  letter-spacing: normal;
+}
+.advisor-profile {
+  display: grid;
+  grid-template-columns: clamp(6rem, 13vw, 10rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.1rem, 2vw, 1.8rem);
+}
+.advisor-profile p:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 850px) {
+  .cabinet-directory { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.65rem 1rem; }
+  .cabinet-directory { grid-template-columns: 1fr; }
+  .advisor-profile { grid-template-columns: 1fr; }
+  .advisor-profile img { width: 8.5rem; }
+}
+
+.section .recognition-subhead{margin:2.4rem 0 1rem}
+.honoree-cohort{display:grid;grid-template-columns:5.3rem minmax(0,1fr);gap:1.4rem;border-top:1px solid var(--line);padding-block:1.2rem}
+.honoree-cohort h3{font:600 .9rem/1.5 var(--font-text);margin:.18rem 0;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.honoree-cohort ul{list-style:none;margin:0;padding:0}
+.honoree-cohort li+li{margin-top:1.2rem}
+.honoree-cohort p{margin:.25rem 0 0;font-size:.98rem;line-height:1.55}
+@media(max-width:480px){.honoree-cohort{grid-template-columns:1fr;gap:.65rem}}

@@ -1,7 +1,7 @@
 # PCT website audit
 
 Reviewed November 18, 2026. Sources include the original Zeta Rho Google Site,
-its Rush and philanthropy pages, the national Phi Chi Theta directory, and
+the chapter-maintained Board, Cabinet, advisor, awards and recruitment pages at [PCT USF](https://sites.google.com/view/pctusf/home), the national Phi Chi Theta directory, and
 USF Muma College of Business profiles. Structured source records are in
 [content/about-sources.json](content/about-sources.json) and
 [content/rush-sources.json](content/rush-sources.json).
@@ -17,10 +17,11 @@ USF Muma College of Business profiles. Structured source records are in
 | Carousel seam repeats the same photo in neighboring positions | The 32-slot order now has three distinct images across every neighboring group, including the wraparound. |
 | Rush heading abruptly changes height at 768px | The closing title scales and wraps naturally across widths. |
 | Original interest links resolve to broken placeholders | The new form posts to Vercel and saves consented interest in Neon. |
-| Old recruitment schedule could be mistaken for current events | The new Rush page offers schedule updates, with no invented dates, locations, dress codes, or selection criteria. |
+| Old recruitment schedule could be mistaken for current events | Rush labels the September 2026 poster as a past cycle. The next dates are unpublished. The chapter FAQ and Rush Tips supply attire, absence, application and bid guidance. |
 | Career Navigator offers an inactive signup | New navigation points to working USF career resources. Its old route redirects there. |
 | Separate pages lacked consistent navigation and content hierarchy | Home, Rush, About, Service, and Privacy share the chapter frame, typography, and mobile menu. |
-| Current officer and advisor names lack a public source | About provides the Executive Board, CAB, and advisor contact route. Named profiles are dated. The current roster still needs chapter confirmation. |
+| The first review missed the Board menu on a second chapter site | About now includes all seven executive officers, nine Cabinet chairs, and faculty advisor Carrington Price Jr., with 17 matched chapter portraits. The chapter lists no term. |
+| The first About page omitted chapter awards and three named honorees | About now includes national and regional chapter awards and all six honorees profiled by the chapter for 2023–24 through 2025–26. Every honoree links to a USF profile. |
 
 ## Completed verification
 
@@ -37,14 +38,8 @@ USF Muma College of Business profiles. Structured source records are in
 
 ## Before the next recruitment cycle
 
-The chapter still needs to supply current Rush dates, event-specific attire,
-attendance and selection requirements, dues, and the current Executive Board,
-CAB, and advisor names and terms. The public BullsConnect group requires USF
-sign-in for its member area. Its public listing does not identify this roster.
+The latest chapter poster covers Fall 2026. Add the next event dates, times, locations, per-event dress codes, and updated dues when the chapter publishes them. Record the roster term when available.
 
-The initial Vercel deployment and Neon project were provisioned through their
-temporary ownership-claim flows because no account connection was available.
-Claim Vercel before its deployment expires. Neon expires after 72 hours unless
-claimed. Claiming Neon rotates the database credentials, so the Vercel runtime
-environment must be updated immediately after transfer. Credentials and claim
-secrets are excluded from the repository.
+## Hosting
+
+The production site is [pct-zeta-rho.vercel.app](https://pct-zeta-rho.vercel.app). The original Vercel and Neon projects were transferred to the owner’s accounts. The signup database is the same database initialized for this site.

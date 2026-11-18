@@ -1,7 +1,6 @@
 {
-  "verified_on": "2026-11-17",
-  "primary_source": "https://sites.google.com/view/pct-zeta-rho/rush",
-  "full_scrape": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/outputs/pct-rush-scrape/source-pages.json",
+  "verified_on": "2026-11-18",
+  "primary_source": "https://sites.google.com/view/pctusf/rush/overview",
   "rush": {
     "what_it_is": {
       "value": "A structured six-event recruitment process introducing students to the chapter, members, expectations and professional development.",
@@ -13,7 +12,11 @@
         "All class years",
         "No prior experience required"
       ],
-      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+      "source": "https://sites.google.com/view/pct-zeta-rho/rush",
+      "sources": [
+        "https://sites.google.com/view/pctusf/rush/faq",
+        "https://sites.google.com/view/pct-zeta-rho/rush"
+      ]
     },
     "experience": {
       "value": [
@@ -27,36 +30,82 @@
       "source": "https://sites.google.com/view/pct-zeta-rho/rush"
     },
     "schedule": {
-      "status": "No current dates, times, rooms or event-specific titles published on original Rush page. Three images are photos, not schedule posters.",
-      "upcoming_semester": "unconfirmed",
-      "last_semester_reference": "Original page says Fall Rush without year; visible photo shirts say Fall Rush 2025.",
-      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+      "last_published_term": "Fall 2026",
+      "status": "Past cycle. No later schedule was published on the chapter’s Rush overview at verification.",
+      "events": [
+        {
+          "name": "Info Night",
+          "date": "2026-09-01",
+          "start_local": "19:00",
+          "timezone": "America/New_York",
+          "location": "BSN 225"
+        },
+        {
+          "name": "Professional Workshop",
+          "date": "2026-09-03",
+          "start_local": "19:00",
+          "timezone": "America/New_York",
+          "location": "BSN 225"
+        },
+        {
+          "name": "Alumni Panel",
+          "date": "2026-09-08",
+          "start_local": "19:00",
+          "timezone": "America/New_York",
+          "location": "BSN 225"
+        },
+        {
+          "name": "Match Day",
+          "date": "2026-09-10",
+          "start_local": "19:00",
+          "timezone": "America/New_York",
+          "location": "BSN 225"
+        },
+        {
+          "name": "Fast Pass",
+          "date": "2026-09-15",
+          "start_local": "19:00",
+          "timezone": "America/New_York",
+          "location": "BSN 225"
+        },
+        {
+          "name": "Invite Only",
+          "date": null,
+          "location": null
+        }
+      ],
+      "source": "https://sites.google.com/view/pctusf/rush/overview"
     },
     "attire": {
-      "status": "No published requirements in official Rush text. Do not assert business casual or business professional as a rule. A photo of suits is visual context, not evidence of a requirement.",
-      "suggested_copy": "Attire will be listed with each event. Ask the chapter if a dress code is not specified."
+      "business_casual": "Dress shirt, cardigan, sweater or blouse paired with dress pants, khakis or a skirt; a dress is another option. Dress shoes or flats.",
+      "business_professional": "Matching pants or skirt suit, solid dress shirt, coordinated accessories, closed-toe dress shoes.",
+      "event_specific": "The tips page gives examples of both dress codes. The Fall poster does not assign a dress code to individual events.",
+      "source": "https://sites.google.com/view/pctusf/rush/tips"
     },
     "selection_bid_process": {
-      "confirmed": "Mutual fit: both students and chapter assess alignment.",
+      "application": "The membership application is available at the invite-only event.",
+      "bid": "An invitation to the pledge program, which prepares prospective members for possible initiation.",
       "unconfirmed": [
-        "Attendance minimum",
-        "Interview schedule",
-        "Invitation-only events",
-        "GPA threshold",
-        "Bid criteria or decision timeline",
-        "Pledging duration"
+        "Scoring or GPA threshold",
+        "Decision timeline",
+        "Length of the pledge program"
       ],
-      "source": "https://sites.google.com/view/pct-zeta-rho/rush"
+      "source": "https://sites.google.com/view/pctusf/rush/faq"
     },
     "cost": {
-      "status": "No official original-source dues or Rush fee specified. Local old rush.html claims $235 per semester and free Rush, but this is unverified and should not be republished as current."
+      "status": "Neither the chapter's Fall overview nor its Rush FAQ or tips gives the current dollar amount for dues or any Rush fee."
     },
     "interest_form": {
       "official_linktree_label": "PCT Interest Form Fall",
       "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=3vcbdOXi30aNZ4JgffneqlTqFKR40kpOlbDjMzhPKqdUQ1ZYREQ3MkFWU0w4RjdXWVAwQkxWTldLWC4u&origin=QRCode",
       "status": "Linktree current link. Loads Microsoft Forms JavaScript shell and redirects to forms.cloud.microsoft; form content and acceptance status not verified.",
       "semester": "Fall, year not specified",
-      "source": "https://linktr.ee/usfpct"
+      "source": "https://linktr.ee/usfpct",
+      "chapter_sources": [
+        "https://sites.google.com/view/pctusf/rush/overview",
+        "https://sites.google.com/view/pctusf/rush/faq"
+      ],
+      "source_note": "The chapter pages link to multiple Microsoft Forms. The new site uses its own registration form for updates. It does not replace the chapter's membership application."
     },
     "share": {
       "suggestion": "Use native Web Share with clipboard fallback for new Rush page URL. No extra scraped content required."
@@ -67,6 +116,14 @@
       "linktree": "https://linktr.ee/usfpct",
       "remind": "https://www.remind.com/join/pctrush25",
       "official_domain": "https://www.usfpct.org/"
+    },
+    "social_greek_life": {
+      "value": "Members of social fraternities and sororities may also participate in PCT.",
+      "source": "https://sites.google.com/view/pctusf/rush/faq"
+    },
+    "attendance": {
+      "value": "Attend as many events as possible. Let the VP of Recruitment know promptly if an event must be missed.",
+      "source": "https://sites.google.com/view/pctusf/rush/tips"
     }
   },
   "bugs": [
@@ -109,10 +166,9 @@
     }
   ],
   "implementation_guidance": [
-    "Make schedule status explicit and support publishing dates when confirmed. Do not label empty invented calendar entries as scheduled events.",
-    "Offer the working new database-backed interest form as the primary action once tested. Existing Microsoft form can be secondary if verified.",
-    "FAQ answers may use exact eligibility, no prior experience and mutual-fit facts. Treat dues, dress code, GPA and attendance as questions for current chapter officers.",
-    "Event descriptions may explain learning about the chapter, meeting members and professional skills, but no official six named event lineup can be recovered from current source."
+    "Show the Fall 2026 poster as a dated archive; publish any new cycle only when the chapter releases it.",
+    "Describe attire and attendance per Rush Tips. Describe eligibility, the application and bids per the chapter FAQ.",
+    "Use the interest form for updates. Avoid presenting it as a membership application."
   ],
   "implemented_asset": {
     "file": "/Users/chasebarnett/Documents/Codex/2026-10-13/can-x20/work/pct-vercel-site/assets/chapter-rush-professional.jpg",
@@ -121,5 +177,12 @@
     "retrieved_on": "2026-11-17",
     "sha256": "dc4541785cc37098ba00a228e253888498baa547a7c15c6173e53dcfbde47178",
     "processing": "Original bytes retained. Presentation uses CSS cropping to remove baked gold frame."
-  }
+  },
+  "sources": {
+    "overview": "https://sites.google.com/view/pctusf/rush/overview",
+    "faq": "https://sites.google.com/view/pctusf/rush/faq",
+    "tips": "https://sites.google.com/view/pctusf/rush/tips",
+    "supplementary_chapter_site": "https://sites.google.com/view/pct-zeta-rho/rush"
+  },
+  "source_method": "Read the chapter’s Rush pages in signed-in Chrome. The published Fall 2026 calendar is embedded as an image; event names, dates, time, and room were transcribed from that poster. Read all seven FAQ disclosures."
 }

@@ -202,7 +202,7 @@ window.pctInitPlacements = function () {
     values.forEach(function (item) {
       if (!item.active) return;
       if (item.began === null) item.began = now;
-      var progress = Math.max(0, Math.min((now - item.began) / 2000, 1));
+      var progress = Math.max(0, Math.min((now - item.began) / 900, 1));
       var eased = 1 - Math.pow(1 - progress, 3);
       item.element.textContent = (1 + (item.target - 1) * eased).toFixed(item.decimals);
       if (progress === 1) {

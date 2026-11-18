@@ -14,41 +14,43 @@
 .grow__say{max-width:41ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
-.grow__fig--framed{--photo-scale:1.12}
-.grow__stage,.grow__icon{display:none}
+.grow__stage{display:none}
 .grow--js .grow__btn{cursor:pointer}
 .grow--js .is-open::after{transform:scaleX(1)}
 .grow--js .is-open .grow__ttl{color:var(--purple)}
-.grow--js .grow__icon{position:relative;display:block;flex:none;width:16px;height:16px;color:var(--ink-mute)}
-.grow--js .grow__icon::before,.grow--js .grow__icon::after{content:"";position:absolute;background:currentColor}
-.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
-.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px;transition:transform 250ms var(--ease)}
-.grow--js .is-open .grow__icon{color:var(--purple)}
-.grow--js .is-open .grow__icon::after{transform:scaleY(0)}
+.grow__link{
+  display:inline-flex;align-items:center;min-height:44px;margin-top:.35rem;
+  color:var(--purple);font-size:.9rem;font-weight:600;
+  text-decoration:underline;text-underline-offset:.28em;text-decoration-color:var(--line);
+}
+.grow__link:hover,.grow__link:focus-visible{text-decoration-color:currentColor}
 .grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
 .grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .grow--desktop .grow__rows{grid-column:1;grid-row:1}
-.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;min-height:20rem;align-self:stretch;overflow:hidden;background:var(--paper-deep)}
 .grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
 .grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
 .grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
 .grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
 .grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(var(--photo-scale,1))}
 @media(min-width:760px){
- .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:start}
- .grow:not(.grow--js) .grow__fig{margin:0}
+ .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:1rem clamp(2rem,5vw,4rem);align-items:start}
+ .grow:not(.grow--js) .grow__fig{grid-column:2;grid-row:1 / span 2;margin:0}
+ .grow--desktop .grow__panel{min-height:9.5rem;padding-bottom:1rem}
 }
 @media(max-width:759px){
  .grow__ttl{font-size:2rem}
  .grow__say{max-width:50ch}
- .grow__fig{aspect-ratio:3/2}
+ .grow__panel:not([hidden]){display:flex;flex-direction:column;align-items:flex-start}
+ .grow__panel .grow__fig{order:-1;width:100%;aspect-ratio:3/2;margin:0 0 1rem}
+ .grow__panel .grow__link{margin-top:.2rem}
 }
 @media(max-width:599px){
  .grow__btn{min-height:76px;gap:1rem;padding-block:1.25rem}
  .grow__ttl{font-size:2rem;letter-spacing:-.01em}
  .grow__say{font-size:1.025rem;line-height:1.7}
- .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
+ .grow__panel .grow__fig{aspect-ratio:3/2}
 }
 @media(max-width:359px){.grow__ttl{font-size:1.8rem}}
 @media(prefers-reduced-motion:reduce){
@@ -56,5 +58,3 @@
  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
  .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
 }
-
-@media(min-width:1000px){.grow--desktop .grow__stage{aspect-ratio:5/4}}

@@ -54,22 +54,25 @@
 .v2hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;border-top:1px solid rgba(230,198,91,.3);background:rgba(19,11,31,.16)}
 .v2hero-foot-row{
   display:flex;align-items:center;justify-content:space-between;
-  padding-block:1.25rem;font-size:.8125rem;font-weight:500;letter-spacing:.12em;
+  padding-block:.4rem;font-size:.8125rem;font-weight:500;letter-spacing:.12em;
   text-transform:uppercase;color:rgba(250,248,243,.8);
 }
-.v2hero-scroll{display:inline-flex;align-items:center;gap:.6rem}
-.v2hero-scroll::after{content:"";width:1px;height:2rem;background:linear-gradient(var(--gold),transparent)}
+.v2hero-scroll{
+  display:inline-flex;align-items:center;min-height:44px;padding-inline:.1em;
+  color:var(--paper);text-decoration:underline;text-decoration-color:rgba(230,198,91,.6);
+  text-underline-offset:.4em;text-decoration-thickness:1px;
+}
+.v2hero-scroll:hover,.v2hero-scroll:focus-visible{text-decoration-color:var(--gold-soft)}
 @media(max-width:767px){
-  .v2hero{padding:calc(var(--v2hd-h,73px) + 3rem) 0 7rem;min-height:100svh;align-items:center}
+  .v2hero{padding:calc(var(--v2hd-h,73px) + 3rem) 0 7rem;min-height:min(87svh,47rem);align-items:center}
   .v2hero-stage{width:calc(100% - var(--gutter)*2);max-width:none}
   .v2hero-h1{font-size:clamp(3.4rem,16.5vw,4.6rem);margin-bottom:1.2rem}
   .v2hero-sub{margin-bottom:1.5rem}
   .v2hero-claim{font-size:1.05rem;max-width:34ch;margin-bottom:2rem}
   .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
-  .v2hero-foot-side{display:block;max-width:23ch}
-  .v2hero-foot-side:last-child{max-width:10ch;text-align:right}
-  .v2hero-scroll{display:none}
-  .v2hero-foot-row{gap:2rem;padding-block:1.1rem;font-size:.7rem;line-height:1.4;letter-spacing:.09em}
+  .v2hero-foot-side{display:block;max-width:24ch}
+  .v2hero-scroll{white-space:nowrap;font-weight:600;text-transform:none;letter-spacing:0;font-size:.83rem}
+  .v2hero-foot-row{gap:1.25rem;padding-block:.45rem;font-size:.7rem;line-height:1.4;letter-spacing:.09em}
 }
 @media(max-height:600px) and (min-width:768px){
   .v2hero{min-height:660px}

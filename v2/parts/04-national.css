@@ -8,7 +8,7 @@
 }
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) clamp(560px,45vw,640px);
+  grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);
   align-items:center;
   gap:clamp(2.5rem,4.5vw,4.5rem);
 }
@@ -55,9 +55,9 @@
   stroke-linejoin:round;
   pointer-events:none;
 }
-@media(max-width:1099px){
+@media(max-width:899px){
   .v2nat-layout{grid-template-columns:1fr;gap:2rem}
-  .v2nat-copy{max-width:60ch}
+  .v2nat-copy{max-width:48ch}
   .v2nat-figure{max-width:640px;justify-self:center}
 }
 @media(max-width:759px){
@@ -70,3 +70,5 @@
   .v2nat.is-map-pending .v2nat-pins{opacity:1}
   .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }
+
+@media(min-width:900px) and (max-width:1160px){.v2nat-h{font-size:clamp(3.25rem,5.8vw,4.4rem)}}

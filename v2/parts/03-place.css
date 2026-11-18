@@ -207,3 +207,24 @@
   .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
   .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
 }
+
+.pl-brands[data-pl-brands]{
+  --pl-edge:clamp(3rem,8vw,8rem);
+  --pl-inset:calc(var(--pl-edge) + .5rem);
+  max-width:100rem;margin-inline:auto;
+}
+.pl-row .pl-track{min-width:100%;justify-content:center}
+.pl-row .pl-track .pl-cell{min-height:0}
+.pl-rows .pl-row{min-height:0}
+.pl-afterword{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:1rem 2rem;padding-top:1.2rem;margin-top:1.8rem;border-top:1px solid var(--line);
+}
+.pl-member-proof{margin:0;color:var(--ink-soft);font-size:1rem;line-height:1.55}
+.pl-member-proof a,.pl-figure-source{color:var(--purple);text-underline-offset:.23em}
+.pl-figure-source{display:inline-flex;align-items:center;min-height:44px;flex-shrink:0;font-size:.8rem}
+@media(max-width:700px){
+ .pl-afterword{display:block;margin-top:1.45rem}
+ .pl-member-proof{max-width:40ch}
+ .pl-figure-source{margin-top:.2rem}
+}

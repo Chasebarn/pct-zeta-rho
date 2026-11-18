@@ -89,7 +89,6 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 .v2hero-sub{padding-right:.18em;overflow:visible}
 .v2hero-btn{font-size:1.125rem}
 .grow--desktop .grow__wrap{align-items:start}
-.grow--js .grow__icon{display:none}
 .grow--desktop .grow__fig{clip-path:none;opacity:0;transition:opacity 240ms ease}
 .grow--desktop .grow__fig.is-leaving{opacity:1}
 .grow--desktop .grow__fig.is-active{clip-path:none;opacity:1}
@@ -138,7 +137,7 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 .profile-list dt{font:400 1.65rem/1.15 var(--font-display);margin-bottom:.4rem}
 .profile-list dd{margin:0;color:var(--ink-soft);font-size:1rem;line-height:1.7}
 .about-hero .text-link{display:inline-flex;margin-top:1rem}
-.grow--desktop .grow__fig img,.grow__fig--framed img{--photo-scale:1.13}
+.service-hero .page-hero-photo{aspect-ratio:4/3}
 .wrap{padding-inline:0}
 @media(max-width:749px){.interest-form .button{grid-column:1/-1;justify-self:stretch}}
 .field-error{font-size:.82rem!important;color:#8c2e37!important;margin:.2rem 0 0!important}
@@ -229,3 +228,127 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 .honoree-cohort li+li{margin-top:1.2rem}
 .honoree-cohort p{margin:.25rem 0 0;font-size:.98rem;line-height:1.55}
 @media(max-width:480px){.honoree-cohort{grid-template-columns:1fr;gap:.65rem}}
+
+/* Keep the mobile menu attached to the navigation edge at every text size. */
+.v2hd-menu summary { border: 0; }
+.v2hd-menu .menu-bars, .v2hd-menu .menu-bars::before, .v2hd-menu .menu-bars::after {
+  width: 20px;
+  height: 1.5px;
+}
+.v2hd .v2hd-mobile a { color: var(--ink); text-decoration: none; }
+.v2hd .v2hd-mobile a[aria-current="page"] { color: var(--purple); }
+@media (max-width:899px) {
+  .v2hd-row { gap: .45rem; }
+  .v2hd-menu { position: static; }
+  .v2hd-mobile {
+    top: calc(100% - 1px);
+    right: 0;
+    width: min(18rem,100%);
+    max-height: calc(100dvh - var(--v2hd-h) - 8px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-shadow: 0 8px 20px rgb(25 18 33 / 9%);
+  }
+  .v2hd .v2hd-mobile a { min-height: 48px; font-size: 1rem; }
+  .v2hd-mobile a + a { border-top: 1px solid var(--line); }
+}
+@media (max-width:359px) {
+  .v2hd-rush { padding-inline: .75rem; font-size: .875rem; }
+}
+.interest-form[hidden], .signup-confirmation[hidden] { display: none; }
+.signup-confirmation { padding: 1.4rem 0; border-top: 2px solid var(--gold-ink); }
+.signup-confirmation .text-link, .form-privacy .text-link,
+.service-hero .text-link, .philanthropy-page .support-band a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+body:not(.home-page) { overflow-anchor: auto; }
+
+/* Two details from the same service portfolio, each paired with its own caption. */
+.service-gallery { grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(1.4rem,3vw,3rem); }
+.service-gallery .image-frame { aspect-ratio: 4/3; }
+.service-gallery figcaption { max-width: 44ch; margin-top: .9rem; font-size: 1rem; line-height: 1.5; }
+.service-gallery strong { display: block; color: var(--ink); margin-bottom: .18rem; }
+.service-gallery .fundraiser-detail { object-position: center 12%; }
+.service-hero .page-intro { margin-bottom: 1rem; }
+.philanthropy-page .service-title { margin-bottom: clamp(1.4rem,3vw,2.4rem); }
+.privacy-page .page-hero { padding-bottom: 1rem; }
+.privacy-page .privacy-content { max-width: 68ch; }
+.privacy-content h2 { margin: 1.5rem 0 .5rem; font-size: clamp(1.6rem,3vw,2.15rem); }
+.privacy-page .privacy-content .text-link { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width:600px) { .service-gallery { grid-template-columns: 1fr; } }
+
+.v2hd-rush.is-repeated:not(:focus-visible) { visibility: hidden; }
+
+html:has(.about-page), html:has(.rush-page) { scroll-behavior: auto; }
+main, .v2footer { container: chapter-content / inline-size; }
+
+@media (min-width: 750px) {
+  @container chapter-content (max-width: 34rem) {
+    .philanthropy-page .split, .about-page .split {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.15rem;
+    }
+    .philanthropy-page .page-hero-photo, .about-page .about-photo {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+  }
+}
+
+/* A larger reading size can leave too little space for the full wordmark. */
+.v2hd { container: chapter-header / inline-size; }
+@container chapter-header (max-width: 18rem) {
+  .v2hd-row {
+    display: grid;
+    width: calc(100% - 24px);
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 6px;
+    padding-block: 6px;
+  }
+  .v2hd-brand {
+    justify-self: start;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    gap: 0;
+  }
+  .v2hd-lock {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .v2hd .v2hd-rush {
+    min-height: 44px;
+    justify-self: end;
+    max-width: 100%;
+    padding: .28em .48em;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .v2hd .v2hd-mobile a { padding: .4em .65em; }
+}
+@container chapter-content (max-width: 18rem) {
+  main > *, .v2footer > * { --gutter: clamp(12px, 4vw, 20px); }
+  .v2footer-grid { grid-template-columns: minmax(0, 1fr); gap: 1.15rem; }
+  .v2footer-nav a { max-width: 100%; }
+  .split, .interest-form { grid-template-columns: minmax(0, 1fr); }
+  .split > *, .page-actions > *, .v2hero-stage { min-width: 0; }
+  main :is(p, h1, h2, h3, h4, dt, dd, label, a, button, summary),
+  .v2footer a { overflow-wrap: anywhere; }
+  .page-hero h1 { font-size: 2.55rem; }
+  .section .section-heading { font-size: 2.1rem; }
+  .v2hero-foot-row {
+    flex-wrap: wrap;
+    gap: .1rem .65rem;
+    font-size: .63rem;
+  }
+  .v2hero-scroll { white-space: normal; }
+  .pl .pl-h, .v2nat .v2nat-h { font-size: 2.5rem; }
+  .pl .pl-n { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+  .pl .pl-n-lab { max-width: none; }
+}

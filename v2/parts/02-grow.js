@@ -34,6 +34,8 @@ window.pctInitGrow = function () {
         var active = wide ? i === current : phoneOpen[i];
         rows[i].classList.toggle('is-open', active);
         panels[i].hidden = !active;
+        if (wide && active) btns[i].setAttribute('aria-disabled', 'true');
+        else btns[i].removeAttribute('aria-disabled');
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
         figs[i].classList.toggle('is-active', active);
         figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
@@ -62,7 +64,10 @@ window.pctInitGrow = function () {
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
         var destination = wide ? stage : panels[i];
-        if (figure.parentNode !== destination) destination.appendChild(figure);
+        if (figure.parentNode !== destination) {
+          if (wide) destination.appendChild(figure);
+          else destination.insertBefore(figure, destination.querySelector('.grow__link'));
+        }
       });
       sync();
     }
@@ -70,10 +75,8 @@ window.pctInitGrow = function () {
     root.classList.add('grow--js');
     layout();
     btns.forEach(function (button, i) {
+      button.disabled = false;
       button.addEventListener('click', function () { open(i); });
-      button.addEventListener('focus', function () {
-        if (wide) open(i);
-      });
       button.addEventListener('keydown', function (event) {
         var next;
         if (event.key === 'ArrowDown') next = (i + 1) % btns.length;

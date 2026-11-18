@@ -19,8 +19,11 @@ for directory in ("assets", "css"):
     shutil.copytree(ROOT / directory, OUTPUT / directory)
 (OUTPUT / "v2").mkdir()
 shutil.copy2(ROOT / "v2/tokens.css", OUTPUT / "v2/tokens.css")
+shutil.copy2(ROOT / "v2/site-frame.css", OUTPUT / "v2/site-frame.css")
 shutil.copy2(ROOT / "site/site.css", OUTPUT / "site.css")
 shutil.copy2(ROOT / "site/site.js", OUTPUT / "site.js")
+for page in ("about", "rush"):
+    shutil.copy2(ROOT / f"site/{page}.css", OUTPUT / f"{page}.css")
 original = (ROOT / "v2/index.html").read_text()
 home_style = re.search(r"<style>(.*?)</style>", original, re.S)[1]
 home_main = re.search(r'<main id="main">(.*?)</main>', original, re.S)[1]
@@ -30,9 +33,8 @@ footer = footer.replace('href="index.html"', 'href="/"').replace('href="rush.htm
 footer = footer.replace('href="../philanthropy.html"', 'href="/philanthropy"')
 footer = footer.replace('href="../career.html"', 'href="https://www.usf.edu/business/talent-development/internships-find.aspx"')
 footer = footer.replace('>Career Navigator<', '>USF career resources<')
-footer = footer.replace('<li><a href="/philanthropy">Philanthropy</a></li>', '<li><a href="/about">About</a></li><li><a href="/philanthropy">Philanthropy</a></li>')
+footer = footer.replace('<li><a href="/philanthropy">Philanthropy</a></li>', '<li><a href="/about">About</a></li><li><a href="/philanthropy">Service</a></li>')
 footer = footer.replace('<a href="../portal.html">Officer Portal</a>', '<a href="/about#contact">Contact the chapter</a>')
-footer = footer.replace('>Donate<', '>Support the chapter<')
 footer = footer.replace("../assets/", "/assets/")
 
 titles = {
@@ -44,14 +46,21 @@ titles = {
 }
 
 def header(active):
-    links = "".join(f'<li><a class="v2hd-link" href="{href}"' + (' aria-current="page"' if key == active else '') + f'>{label}</a></li>' for key, href, label in (("home", "/", "Home"), ("rush", "/rush", "Rush"), ("about", "/about", "About")))
-    mobile = "".join(f'<a href="{href}"' + (' aria-current="page"' if key == active else '') + f'>{label}</a>' for key, href, label in (("home", "/", "Home"), ("rush", "/rush", "Rush"), ("about", "/about", "About")))
+    destinations = (("home", "/", "Home"), ("about", "/about", "About"), ("philanthropy", "/philanthropy", "Service"))
+    def link(item, *, desktop=False):
+        key, href, label = item
+        current = ' aria-current="page"' if key == active else ''
+        css = ' class="v2hd-link"' if desktop else ''
+        return f'<a{css} href="{href}"{current}>{label}</a>'
+    links = "".join(f"<li>{link(item, desktop=True)}</li>" for item in destinations)
+    mobile = "".join(link(item) for item in (*destinations, ("rush", "/rush", "Rush")))
+    action, action_label = ("#interest", "Rush updates") if active == "rush" else ("/rush", "Rush PCT")
     return f'''<header class="v2hd">
       <div class="v2wrap v2hd-row">
         <a class="v2hd-brand" href="/"><img class="v2hd-crest" src="/assets/crest.png" alt="" width="337" height="445"><span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho · USF</span></span></a>
         <nav class="v2hd-nav" aria-label="Primary"><ul class="v2hd-list">{links}</ul></nav>
-        <details class="v2hd-menu"><summary><span class="v2-sr-only">Open navigation</span><span class="menu-bars" aria-hidden="true"></span></summary><nav class="v2hd-mobile" aria-label="Mobile navigation">{mobile}</nav></details>
-        <a class="v2hd-rush" href="/rush#interest">Rush PCT</a>
+        <a class="v2hd-rush" href="{action}">{action_label}</a>
+        <details class="v2hd-menu"><summary><span class="v2-sr-only">Navigation menu</span><span class="menu-bars" aria-hidden="true"></span></summary><nav class="v2hd-mobile" aria-label="Mobile navigation">{mobile}</nav></details>
       </div>
     </header>'''
 
@@ -60,6 +69,13 @@ def render(key, body, scripts=""):
     path = "/" if key == "home" else "/" + key
     origin = os.environ.get("SITE_URL", "").rstrip("/")
     canonical = f'<link rel="canonical" href="{escape(origin + path, quote=True)}">' if origin else ""
+    if origin:
+        public_url = escape(origin + path, quote=True)
+        share_images = {"rush": "meet-the-chapter", "philanthropy": "community-food-pantry"}
+        photo = f"chapter/{share_images.get(key, 'chapter-gathering')}-share.jpg"
+        canonical += f'<meta property="og:url" content="{public_url}"><meta property="og:image" content="{escape(origin)}/assets/{photo}"><meta name="twitter:card" content="summary_large_image">'
+    section_styles = f"<style>{home_style}</style>" if key == "home" else '<link rel="stylesheet" href="/v2/site-frame.css">'
+    page_styles = f'<link rel="stylesheet" href="/{key}.css">' if key in ("about", "rush") else ""
     source = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,10 +84,10 @@ def render(key, body, scripts=""):
 <meta property="og:title" content="{escape(title, quote=True)} · Zeta Rho · USF"><meta property="og:description" content="{escape(description, quote=True)}">
 <meta property="og:type" content="website">{canonical}
 <link rel="icon" type="image/png" href="/assets/crest.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="/v2/tokens.css">
-<style>{home_style}</style><link rel="stylesheet" href="/site.css">
+{section_styles}<link rel="stylesheet" href="/site.css">{page_styles}
 </head><body class="{key}-page">
 <a class="skip-link" href="#main">Skip to content</a>{header(key)}
 <main id="main">{body}</main>{footer}

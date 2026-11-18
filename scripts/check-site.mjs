@@ -16,6 +16,11 @@ class Document(HTMLParser):
         if tag=='h1':self.h1+=1
         if tag=='a' and 'href' in a:self.refs.append(a['href'])
         if tag in ('img','script') and a.get('src'):self.refs.append(a['src'])
+        if tag in ('img','source') and a.get('srcset'):
+            for candidate in a['srcset'].split(','):
+                self.refs.append(candidate.strip().split()[0])
+        if tag=='meta' and a.get('property')=='og:image':
+            self.refs.append(urlsplit(a['content']).path)
         if tag=='link' and a.get('rel') in ('stylesheet','icon'):self.refs.append(a['href'])
         if tag=='img':self.images.append(a)
 documents={}
@@ -38,7 +43,7 @@ for key,doc in documents.items():
         assert path.is_file(),f'{key}: missing {href}'
         if url.fragment and path.stem in documents:
             assert unquote(url.fragment) in documents[path.stem].ids,f'{key}: missing anchor {href}'
-print(f'Validated {len(documents)} pages, local links, IDs, headings, and image labels.')
+print(f'Validated {len(documents)} pages, links, IDs, headings, image labels, responsive images and share images.')
 `], {stdio:'inherit'});
 if (verification.status !== 0) process.exit(verification.status || 1);
 const config = JSON.parse(await readFile('vercel.json','utf8'));

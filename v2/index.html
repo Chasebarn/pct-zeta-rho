@@ -109,22 +109,25 @@
 .v2hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;border-top:1px solid rgba(230,198,91,.3);background:rgba(19,11,31,.16)}
 .v2hero-foot-row{
   display:flex;align-items:center;justify-content:space-between;
-  padding-block:1.25rem;font-size:.8125rem;font-weight:500;letter-spacing:.12em;
+  padding-block:.4rem;font-size:.8125rem;font-weight:500;letter-spacing:.12em;
   text-transform:uppercase;color:rgba(250,248,243,.8);
 }
-.v2hero-scroll{display:inline-flex;align-items:center;gap:.6rem}
-.v2hero-scroll::after{content:"";width:1px;height:2rem;background:linear-gradient(var(--gold),transparent)}
+.v2hero-scroll{
+  display:inline-flex;align-items:center;min-height:44px;padding-inline:.1em;
+  color:var(--paper);text-decoration:underline;text-decoration-color:rgba(230,198,91,.6);
+  text-underline-offset:.4em;text-decoration-thickness:1px;
+}
+.v2hero-scroll:hover,.v2hero-scroll:focus-visible{text-decoration-color:var(--gold-soft)}
 @media(max-width:767px){
-  .v2hero{padding:calc(var(--v2hd-h,73px) + 3rem) 0 7rem;min-height:100svh;align-items:center}
+  .v2hero{padding:calc(var(--v2hd-h,73px) + 3rem) 0 7rem;min-height:min(87svh,47rem);align-items:center}
   .v2hero-stage{width:calc(100% - var(--gutter)*2);max-width:none}
   .v2hero-h1{font-size:clamp(3.4rem,16.5vw,4.6rem);margin-bottom:1.2rem}
   .v2hero-sub{margin-bottom:1.5rem}
   .v2hero-claim{font-size:1.05rem;max-width:34ch;margin-bottom:2rem}
   .v2hero-letters{right:-2.5rem;bottom:-3.5rem;font-size:clamp(13rem,52vw,20rem);opacity:.9}
-  .v2hero-foot-side{display:block;max-width:23ch}
-  .v2hero-foot-side:last-child{max-width:10ch;text-align:right}
-  .v2hero-scroll{display:none}
-  .v2hero-foot-row{gap:2rem;padding-block:1.1rem;font-size:.7rem;line-height:1.4;letter-spacing:.09em}
+  .v2hero-foot-side{display:block;max-width:24ch}
+  .v2hero-scroll{white-space:nowrap;font-weight:600;text-transform:none;letter-spacing:0;font-size:.83rem}
+  .v2hero-foot-row{gap:1.25rem;padding-block:.45rem;font-size:.7rem;line-height:1.4;letter-spacing:.09em}
 }
 @media(max-height:600px) and (min-width:768px){
   .v2hero{min-height:660px}
@@ -146,41 +149,43 @@
 .grow__say{max-width:41ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
-.grow__fig--framed{--photo-scale:1.12}
-.grow__stage,.grow__icon{display:none}
+.grow__stage{display:none}
 .grow--js .grow__btn{cursor:pointer}
 .grow--js .is-open::after{transform:scaleX(1)}
 .grow--js .is-open .grow__ttl{color:var(--purple)}
-.grow--js .grow__icon{position:relative;display:block;flex:none;width:16px;height:16px;color:var(--ink-mute)}
-.grow--js .grow__icon::before,.grow--js .grow__icon::after{content:"";position:absolute;background:currentColor}
-.grow--js .grow__icon::before{left:0;top:7px;width:16px;height:1px}
-.grow--js .grow__icon::after{left:7px;top:0;width:1px;height:16px;transition:transform 250ms var(--ease)}
-.grow--js .is-open .grow__icon{color:var(--purple)}
-.grow--js .is-open .grow__icon::after{transform:scaleY(0)}
+.grow__link{
+  display:inline-flex;align-items:center;min-height:44px;margin-top:.35rem;
+  color:var(--purple);font-size:.9rem;font-weight:600;
+  text-decoration:underline;text-underline-offset:.28em;text-decoration-color:var(--line);
+}
+.grow__link:hover,.grow__link:focus-visible{text-decoration-color:currentColor}
 .grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
 .grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .grow--desktop .grow__rows{grid-column:1;grid-row:1}
-.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;min-height:20rem;align-self:stretch;overflow:hidden;background:var(--paper-deep)}
 .grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
 .grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
 .grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
 .grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
 .grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(var(--photo-scale,1))}
 @media(min-width:760px){
- .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:start}
- .grow:not(.grow--js) .grow__fig{margin:0}
+ .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:1rem clamp(2rem,5vw,4rem);align-items:start}
+ .grow:not(.grow--js) .grow__fig{grid-column:2;grid-row:1 / span 2;margin:0}
+ .grow--desktop .grow__panel{min-height:9.5rem;padding-bottom:1rem}
 }
 @media(max-width:759px){
  .grow__ttl{font-size:2rem}
  .grow__say{max-width:50ch}
- .grow__fig{aspect-ratio:3/2}
+ .grow__panel:not([hidden]){display:flex;flex-direction:column;align-items:flex-start}
+ .grow__panel .grow__fig{order:-1;width:100%;aspect-ratio:3/2;margin:0 0 1rem}
+ .grow__panel .grow__link{margin-top:.2rem}
 }
 @media(max-width:599px){
  .grow__btn{min-height:76px;gap:1rem;padding-block:1.25rem}
  .grow__ttl{font-size:2rem;letter-spacing:-.01em}
  .grow__say{font-size:1.025rem;line-height:1.7}
- .grow__fig{aspect-ratio:4/3;margin-top:1.15rem}
+ .grow__panel .grow__fig{aspect-ratio:3/2}
 }
 @media(max-width:359px){.grow__ttl{font-size:1.8rem}}
 @media(prefers-reduced-motion:reduce){
@@ -188,8 +193,6 @@
  .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
  .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
 }
-
-@media(min-width:1000px){.grow--desktop .grow__stage{aspect-ratio:5/4}}
 /* ===== 03-place ===== */
 /* A complete results chapter: the shared paper field, generous display title,
    readable outcomes, then a full-width company stage tied to page scrolling. */
@@ -400,6 +403,27 @@
   .pl-n-val{font-size:3.25rem;line-height:1.05;text-align:left}
   .pl-n-lab{max-width:none;margin:0;font-size:.875rem;line-height:1.55;text-align:left}
 }
+
+.pl-brands[data-pl-brands]{
+  --pl-edge:clamp(3rem,8vw,8rem);
+  --pl-inset:calc(var(--pl-edge) + .5rem);
+  max-width:100rem;margin-inline:auto;
+}
+.pl-row .pl-track{min-width:100%;justify-content:center}
+.pl-row .pl-track .pl-cell{min-height:0}
+.pl-rows .pl-row{min-height:0}
+.pl-afterword{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:1rem 2rem;padding-top:1.2rem;margin-top:1.8rem;border-top:1px solid var(--line);
+}
+.pl-member-proof{margin:0;color:var(--ink-soft);font-size:1rem;line-height:1.55}
+.pl-member-proof a,.pl-figure-source{color:var(--purple);text-underline-offset:.23em}
+.pl-figure-source{display:inline-flex;align-items:center;min-height:44px;flex-shrink:0;font-size:.8rem}
+@media(max-width:700px){
+ .pl-afterword{display:block;margin-top:1.45rem}
+ .pl-member-proof{max-width:40ch}
+ .pl-figure-source{margin-top:.2rem}
+}
 /* ===== 04-national ===== */
 /* The national network is the visual evidence; the statement and two short
    benefit paragraphs keep one reading edge beside it on wide screens. */
@@ -411,7 +435,7 @@
 }
 .v2nat-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) clamp(560px,45vw,640px);
+  grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);
   align-items:center;
   gap:clamp(2.5rem,4.5vw,4.5rem);
 }
@@ -458,9 +482,9 @@
   stroke-linejoin:round;
   pointer-events:none;
 }
-@media(max-width:1099px){
+@media(max-width:899px){
   .v2nat-layout{grid-template-columns:1fr;gap:2rem}
-  .v2nat-copy{max-width:60ch}
+  .v2nat-copy{max-width:48ch}
   .v2nat-figure{max-width:640px;justify-self:center}
 }
 @media(max-width:759px){
@@ -473,6 +497,8 @@
   .v2nat.is-map-pending .v2nat-pins{opacity:1}
   .v2nat-pin-dot,.v2nat-pin-ring{animation:none!important;transition:none!important;transform:none!important}
 }
+
+@media(min-width:900px) and (max-width:1160px){.v2nat-h{font-size:clamp(3.25rem,5.8vw,4.4rem)}}
 /* ===== 05-mem ===== */
 /* Original circular carousel: 32 portrait cards, 11.25deg apart. A single
    rotating hub carries them around the arc at one revolution per 150 seconds. */
@@ -520,7 +546,7 @@
 .mem-i img{width:100%;height:100%;display:block;object-fit:cover}
 @keyframes memSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 
-.mem-band:focus-visible .mem-wheel{animation-play-state:paused}
+.mem-band.is-resting .mem-wheel,.mem-band:focus-visible .mem-wheel{animation-play-state:paused}
 .mem-band:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
 
 @media (max-width:767px){
@@ -533,10 +559,6 @@
 @media (prefers-reduced-motion:reduce){
   .mem-wheel{animation:none;will-change:auto}
 }
-
-/* The additional chapter photographs retain their original website frame in
-   the source asset; the image crop keeps it outside the visible photograph. */
-.mem-i--framed img{transform:scale(1.12)}
 /* ===== 07-act ===== */
 /* The full-width Rush section cuts across the bottom of the photo arc. */
 .act{
@@ -694,15 +716,14 @@
     <div class="v2hero-inner">
       <h1 class="v2hero-h1">Phi Chi Theta</h1>
       <p class="v2hero-sub">University of South Florida</p>
-      <p class="v2hero-claim">Career preparation, leadership, and a business network before you graduate.</p>
-      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="rush.html">Rush PCT</a></p>
+      <p class="v2hero-claim">Meet alumni in your field and prepare for your first internship alongside other USF business students.</p>
+      <p class="v2hero-cta"><a class="v2hero-btn" data-hero-cta href="rush.html">Explore Rush</a></p>
     </div>
   </div>
   <div class="v2hero-foot">
     <div class="v2wrap v2hero-foot-row">
       <span class="v2hero-foot-side">Professional Business Fraternity</span>
-      <span class="v2hero-scroll">Scroll</span>
-      <span class="v2hero-foot-side">Nationally founded 1924</span>
+      <a class="v2hero-scroll" href="#grow">Explore membership</a>
     </div>
   </div>
 </section>
@@ -718,49 +739,55 @@
 
       <div class="grow__row">
         <h2 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
+          <button class="grow__btn" type="button" disabled id="grow-b1" data-grow-btn data-grow-figure="grow-f1" aria-controls="grow-p1" aria-expanded="true">
             <span class="grow__ttl">Professional Connections</span>
-            <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
-          <p class="grow__say">Meet graduates at the alumni panel and hear from industry speakers at chapter events.</p>
-          <figure class="grow__fig grow__fig--framed" id="grow-f1" aria-labelledby="grow-b1">
-            <img src="../assets/chapter-rush-professional.jpg" width="1280" height="1280" loading="lazy" decoding="async"
-                 alt="Three chapter members in suits working at laptops during a professional event.">
+          <p class="grow__say">Bring your résumé to a career workshop. At the alumni panel, ask graduates how they landed their first jobs.</p>
+          <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
+            <img src="../assets/chapter/networking-800.webp"
+                 srcset="../assets/chapter/networking-480.webp 480w, ../assets/chapter/networking-800.webp 800w, ../assets/chapter/networking-1200.webp 1200w"
+                 sizes="(max-width: 759px) 94vw, (max-width: 1240px) 45vw, 600px" width="800" height="533" loading="lazy" decoding="async"
+                 alt="Chapter members in suits talking with a guest at a professional event.">
           </figure>
+          <a class="grow__link" href="/about#25-under-25">Meet the honorees</a>
         </div>
       </div>
 
       <div class="grow__row">
         <h2 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
+          <button class="grow__btn" type="button" disabled id="grow-b2" data-grow-btn data-grow-figure="grow-f2" aria-controls="grow-p2" aria-expanded="true">
             <span class="grow__ttl">Leadership Experience</span>
-            <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
         <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
-          <p class="grow__say">Plan chapter events, run campus fundraisers, and lead service projects.</p>
+          <p class="grow__say">Members run the Fall Summit and organize campus fundraisers like Pie a Phi Chi for Moffitt Cancer Center.</p>
           <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
-            <img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" loading="lazy" decoding="async" style="object-position:center 8%"
-                 alt="A member at the Pie a Phi Chi campus fundraiser.">
+            <img src="../assets/chapter/speaker-conversation-800.webp"
+                 srcset="../assets/chapter/speaker-conversation-480.webp 480w, ../assets/chapter/speaker-conversation-800.webp 800w, ../assets/chapter/speaker-conversation-1200.webp 1200w"
+                 sizes="(max-width: 759px) 94vw, (max-width: 1240px) 45vw, 600px" width="800" height="533" loading="lazy" decoding="async"
+                 alt="A chapter member interviews a guest speaker in front of a projected presentation.">
           </figure>
+          <a class="grow__link" href="/about#cabinet">Meet the Cabinet</a>
         </div>
       </div>
 
       <div class="grow__row">
         <h2 class="grow__rowh">
-          <button class="grow__btn" type="button" id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
+          <button class="grow__btn" type="button" disabled id="grow-b3" data-grow-btn data-grow-figure="grow-f3" aria-controls="grow-p3" aria-expanded="true">
             <span class="grow__ttl">Chapter Community</span>
-            <span class="grow__icon" aria-hidden="true"></span>
           </button>
         </h2>
         <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
-          <p class="grow__say">Play intramurals with members, go to fall formal, and spend spring retreat together.</p>
-          <figure class="grow__fig grow__fig--framed" id="grow-f3" aria-labelledby="grow-b3">
-            <img src="../assets/chapter-community.jpg" width="720" height="720" loading="lazy" decoding="async"
-                 alt="A group of chapter members together at an evening event.">
+          <p class="grow__say">Intramural teams, fall formal and spring retreat give members time together outside the business school.</p>
+          <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
+            <img src="../assets/chapter/clubhouse-cards-800.webp"
+                 srcset="../assets/chapter/clubhouse-cards-480.webp 480w, ../assets/chapter/clubhouse-cards-800.webp 800w, ../assets/chapter/clubhouse-cards-1200.webp 1200w"
+                 sizes="(max-width: 759px) 94vw, (max-width: 1240px) 45vw, 600px" width="800" height="533" loading="lazy" decoding="async"
+                 alt="Members play a game of UNO around a clubhouse table.">
           </figure>
+          <a class="grow__link" href="#life">See chapter life</a>
         </div>
       </div>
 
@@ -779,18 +806,18 @@
     <ul class="pl-nums" role="list">
       <li class="pl-n">
         <p class="pl-n-val"><span class="pl-stat-label">95%</span><span aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">95</span><span class="pl-counter-digits" data-pl-count="95">95</span></span><span class="pl-n-u">%</span></span></p>
-        <p class="pl-n-lab">Members placed in internships or full-time roles</p>
+        <p class="pl-n-lab">Internship and full-time placement</p>
       </li>
       <li class="pl-n">
         <p class="pl-n-val"><span class="pl-stat-label">3.60</span><span aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">3.60</span><span class="pl-counter-digits" data-pl-count="3.60" data-pl-decimals="2">3.60</span></span></span></p>
-        <p class="pl-n-lab">Approximate chapter average GPA</p>
+        <p class="pl-n-lab">Chapter GPA, approximately</p>
       </li>
       <li class="pl-n">
         <p class="pl-n-val"><span class="pl-stat-label">15</span><span aria-hidden="true"><span class="pl-counter"><span class="pl-counter-space">15</span><span class="pl-counter-digits" data-pl-count="15">15</span></span></span></p>
         <p class="pl-n-lab">USF Muma “25 Under 25” honorees</p>
       </li>
     </ul>
-    <p class="pl-n-source">Figures reported by <a href="https://sites.google.com/view/pct-zeta-rho/home">Zeta Rho</a>. Explore <a href="/about#25-under-25">member stories</a>.</p>
+
   </div>
 
     <div class="pl-brands" data-pl-brands>
@@ -820,6 +847,10 @@
       <li class="pl-cell pl-cell--reverse pl-cell--wide pl-cell--usf"><img src="../assets/logos/usf.svg" alt="University of South Florida" width="884" height="150" loading="lazy" decoding="async"></li>
       </ul>
     </div>
+  <div class="v2wrap pl-afterword">
+    <p class="pl-member-proof">After two internships at PwC, <a href="https://www.usf.edu/business/25-under-25/honorees-2025/torres-eric.aspx">Eric Torres</a> earned a full-time offer in Dallas.</p>
+    <a class="pl-figure-source" href="https://sites.google.com/view/pct-zeta-rho/home">Chapter-reported figures</a>
+  </div>
 </section>
 
     <!-- ===== 04-national ===== -->
@@ -834,8 +865,7 @@
           <span class="v2nat-heading-line">since <em>1924.</em></span>
         </h2>
         <div class="v2nat-copy">
-          <p>Your network extends beyond USF: <strong>46 collegiate chapters</strong>, alumni across the country, and national mentoring programs.</p>
-          <p>Build professional connections, attend regional conferences, and apply for member scholarships.</p>
+          <p>Zeta Rho is one of <strong>46 collegiate chapters</strong>. Members can meet other chapters at regional conferences, find alumni mentors and apply for national scholarships.</p>
         </div>
       </div>
       <figure class="v2nat-figure">
@@ -950,42 +980,41 @@
 </section>
 
     <!-- ===== 05-mem ===== -->
-<!-- Original 32-slot photo wheel with six real chapter photographs. -->
 <section class="mem" id="life" aria-label="Chapter life">
   <div class="mem-band" tabindex="0" role="group" aria-label="Chapter photo carousel. Keyboard focus pauses movement.">
     <ul class="mem-wheel" role="list" aria-label="Chapter photographs">
-      <li class="mem-i" style="--i:0"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="A member holding a Pie a Phi Chi sign at a fundraiser for Moffitt Cancer Center." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:1"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="Chapter members in professional attire at a chapter event." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:2"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="Chapter members loading roof shingles at a service project." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:3"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="Chapter members together at an evening event." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:4"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="Chapter members writing cards together around a table." loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:5"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="Chapter members talking and working together with laptops." loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:6" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:7" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:9" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:11" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:13" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:14" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:15" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:16" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:17" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:18" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:19" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:20" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:21" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:22" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:23" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:24" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:25" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/photo-fundraiser.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:27" aria-hidden="true"><img src="../assets/chapter-members.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/photo-service.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:29" aria-hidden="true"><img src="../assets/chapter-community.jpg" width="720" height="720" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/photo-letters.jpg" width="1300" height="1300" alt="" loading="lazy" decoding="async"></li>
-      <li class="mem-i mem-i--framed" style="--i:31" aria-hidden="true"><img src="../assets/chapter-careers.jpg" width="720" height="717" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:0"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:1"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="Chapter members stand together on an outdoor court." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:2"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="Two members speak with a reporter beside a tent at a community event." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:3"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="Members sit on the beach as the sun sets over the Gulf." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:4"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="Members stand among shelves of supplies during a volunteer visit." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:5"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="Members gather for a photo on a floodlit field after dark." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:6"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="Members walk along a ridge on the golf course." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:7"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="Members get ready to head out in golf carts." loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:8" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:9" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:10" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:11" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:12" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:13" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:14" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:15" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:16" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:17" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:18" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:19" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:20" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:21" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:22" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:23" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:24" aria-hidden="true"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:25" aria-hidden="true"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:26" aria-hidden="true"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:27" aria-hidden="true"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:28" aria-hidden="true"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:29" aria-hidden="true"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:30" aria-hidden="true"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
+      <li class="mem-i" style="--i:31" aria-hidden="true"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="" loading="lazy" decoding="async"></li>
     </ul>
   </div>
 </section>
@@ -996,8 +1025,8 @@
   <div class="v2wrap">
     <div class="act-inner">
       <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta.</em></h2>
-      <p class="act-line">Meet the chapter and learn how to join.</p>
-      <div class="act-go"><a class="act-cta" href="rush.html">Rush PCT</a></div>
+      <p class="act-line">Join the interest list for the next Rush schedule and event details from the recruitment team.</p>
+      <div class="act-go"><a class="act-cta" href="/rush#interest">Get Rush updates</a></div>
     </div>
   </div>
 </section>
@@ -1034,7 +1063,6 @@
           <li><a href="https://www.instagram.com/pctusf/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.linkedin.com/company/usfphichitheta/" target="_blank" rel="noopener">LinkedIn</a></li>
           <li><a href="https://pctapparel.printful.me/" target="_blank" rel="noopener">Apparel Store</a></li>
-          <li><a href="https://sites.google.com/view/pct-zeta-rho/philanthropy" target="_blank" rel="noopener">Donate</a></li>
         </ul>
       </nav>
     </div>
@@ -1366,6 +1394,8 @@ window.pctInitGrow = function () {
         var active = wide ? i === current : phoneOpen[i];
         rows[i].classList.toggle('is-open', active);
         panels[i].hidden = !active;
+        if (wide && active) btns[i].setAttribute('aria-disabled', 'true');
+        else btns[i].removeAttribute('aria-disabled');
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
         figs[i].classList.toggle('is-active', active);
         figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
@@ -1394,7 +1424,10 @@ window.pctInitGrow = function () {
       root.classList.toggle('grow--desktop', wide);
       figs.forEach(function (figure, i) {
         var destination = wide ? stage : panels[i];
-        if (figure.parentNode !== destination) destination.appendChild(figure);
+        if (figure.parentNode !== destination) {
+          if (wide) destination.appendChild(figure);
+          else destination.insertBefore(figure, destination.querySelector('.grow__link'));
+        }
       });
       sync();
     }
@@ -1402,10 +1435,8 @@ window.pctInitGrow = function () {
     root.classList.add('grow--js');
     layout();
     btns.forEach(function (button, i) {
+      button.disabled = false;
       button.addEventListener('click', function () { open(i); });
-      button.addEventListener('focus', function () {
-        if (wide) open(i);
-      });
       button.addEventListener('keydown', function (event) {
         var next;
         if (event.key === 'ArrowDown') next = (i + 1) % btns.length;
@@ -1632,7 +1663,7 @@ window.pctInitPlacements = function () {
     values.forEach(function (item) {
       if (!item.active) return;
       if (item.began === null) item.began = now;
-      var progress = Math.max(0, Math.min((now - item.began) / 2000, 1));
+      var progress = Math.max(0, Math.min((now - item.began) / 900, 1));
       var eased = 1 - Math.pow(1 - progress, 3);
       item.element.textContent = (1 + (item.target - 1) * eased).toFixed(item.decimals);
       if (progress === 1) {
@@ -1705,42 +1736,37 @@ window.pctInitNational = function () {
     return !window.innerHeight || figure.getBoundingClientRect().height * .2 <= window.innerHeight;
   }
   function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
-  function hash(pin) {
-    var value = 2166136261;
-    var id = pin.getAttribute('data-chapter-pin');
-    for (var i = 0; i < id.length; i++) value = Math.imul(value ^ id.charCodeAt(i), 16777619);
-    return value >>> 0;
-  }
-  function animate(element, frames, options) {
-    if (!element) return;
-    var animation = element.animate(frames, options);
-    animations.push(animation);
-    animation.finished.catch(function () {});
-  }
   function reveal() {
     if (stopped || started) return;
     started = true;
     if (document.hidden) { finish(); return; }
     observer.disconnect();
     try {
-      /* Stable ID hashes scatter the order across regions instead of sweeping
-         west-to-east or moving pins away from their campus coordinates. */
-      var order = pins.filter(function (pin) { return !pin.classList.contains('is-usf'); }).sort(function (a,b) { return hash(a) - hash(b); });
-      order.forEach(function (pin,index) {
-        var delay = order.length > 1 ? index * 420 / (order.length - 1) : 0;
-        var options = { duration:420, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
-        animate(pin.querySelector('.v2nat-pin-dot'), [
-          { opacity:0, transform:'scale(.7)', transformOrigin:'0px 0px' },
-          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px', offset:.65 },
-          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
-        ], options);
-        var ring = pin.querySelector('.v2nat-pin-ring');
-        var restingOpacity = ring ? window.getComputedStyle(ring).opacity : '0';
-        animate(ring, [
-          { opacity:0, transform:'scale(.35)', transformOrigin:'0px 0px' },
-          { opacity:.65, transform:'scale(1.15)', transformOrigin:'0px 0px', offset:.5 },
-          { opacity:restingOpacity, transform:'scale(1)', transformOrigin:'0px 0px' }
-        ], options);
+      /* Start in Tampa. Recruiters can follow the same geographic network
+         from nearby chapters to the opposite coast in one short wave. */
+      function position(pin) {
+        return pin.transform.baseVal.getItem(0).matrix;
+      }
+      var localPin = root.querySelector('.v2nat-pin.is-usf');
+      if (!localPin) { finish(); return; }
+      var origin = position(localPin);
+      var locations = pins.filter(function (pin) { return pin !== localPin; }).map(function (pin) {
+        var point = position(pin);
+        return { pin:pin, distance:Math.hypot(point.e - origin.e, point.f - origin.f) };
+      });
+      var farthest = Math.max(1, ...locations.map(function (location) { return location.distance; }));
+      locations.forEach(function (location) {
+        var dot = location.pin.querySelector('.v2nat-pin-dot');
+        var animation = dot.animate([
+          { opacity:.3, transform:'scale(.75)' },
+          { opacity:1, transform:'scale(1)' }
+        ], {
+          duration:260,
+          delay:480 * location.distance / farthest,
+          easing:'ease-out',
+          fill:'both'
+        });
+        animations.push(animation);
       });
       root.classList.remove('is-map-pending');
       Promise.all(animations.map(function (animation) { return animation.finished.catch(function () {}); })).then(finish);
@@ -1760,10 +1786,27 @@ window.pctInitNational = function () {
     if (window.pctMotion && window.pctMotion.onReduce) window.pctMotion.onReduce(finish);
   } catch (error) { finish(); }
 };
+/* ===== 05-mem ===== */
+/* Keep the original arc moving only while its photographs are on screen. */
+window.pctInitPhotoArc = function () {
+  var band = document.querySelector('.mem-band');
+  if (!band || !window.IntersectionObserver || band.dataset.arcReady) return;
+  band.dataset.arcReady = '1';
+  var visible = false;
+  function update() {
+    band.classList.toggle('is-resting', document.hidden || !visible);
+  }
+  update();
+  new IntersectionObserver(function (entries) {
+    visible = entries[0].isIntersecting;
+    update();
+  }).observe(band);
+  document.addEventListener('visibilitychange', update);
+};
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitAct', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational'];
+  var inits = ['pctInitAct', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational', 'pctInitPhotoArc'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

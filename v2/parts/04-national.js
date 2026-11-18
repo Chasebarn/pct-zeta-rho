@@ -33,42 +33,37 @@ window.pctInitNational = function () {
     return !window.innerHeight || figure.getBoundingClientRect().height * .2 <= window.innerHeight;
   }
   function onResize() { if (!started && !fitsEntryThreshold()) finish(); }
-  function hash(pin) {
-    var value = 2166136261;
-    var id = pin.getAttribute('data-chapter-pin');
-    for (var i = 0; i < id.length; i++) value = Math.imul(value ^ id.charCodeAt(i), 16777619);
-    return value >>> 0;
-  }
-  function animate(element, frames, options) {
-    if (!element) return;
-    var animation = element.animate(frames, options);
-    animations.push(animation);
-    animation.finished.catch(function () {});
-  }
   function reveal() {
     if (stopped || started) return;
     started = true;
     if (document.hidden) { finish(); return; }
     observer.disconnect();
     try {
-      /* Stable ID hashes scatter the order across regions instead of sweeping
-         west-to-east or moving pins away from their campus coordinates. */
-      var order = pins.filter(function (pin) { return !pin.classList.contains('is-usf'); }).sort(function (a,b) { return hash(a) - hash(b); });
-      order.forEach(function (pin,index) {
-        var delay = order.length > 1 ? index * 420 / (order.length - 1) : 0;
-        var options = { duration:420, delay:delay, easing:'cubic-bezier(.16,1,.3,1)', fill:'both' };
-        animate(pin.querySelector('.v2nat-pin-dot'), [
-          { opacity:0, transform:'scale(.7)', transformOrigin:'0px 0px' },
-          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px', offset:.65 },
-          { opacity:1, transform:'scale(1)', transformOrigin:'0px 0px' }
-        ], options);
-        var ring = pin.querySelector('.v2nat-pin-ring');
-        var restingOpacity = ring ? window.getComputedStyle(ring).opacity : '0';
-        animate(ring, [
-          { opacity:0, transform:'scale(.35)', transformOrigin:'0px 0px' },
-          { opacity:.65, transform:'scale(1.15)', transformOrigin:'0px 0px', offset:.5 },
-          { opacity:restingOpacity, transform:'scale(1)', transformOrigin:'0px 0px' }
-        ], options);
+      /* Start in Tampa. Recruiters can follow the same geographic network
+         from nearby chapters to the opposite coast in one short wave. */
+      function position(pin) {
+        return pin.transform.baseVal.getItem(0).matrix;
+      }
+      var localPin = root.querySelector('.v2nat-pin.is-usf');
+      if (!localPin) { finish(); return; }
+      var origin = position(localPin);
+      var locations = pins.filter(function (pin) { return pin !== localPin; }).map(function (pin) {
+        var point = position(pin);
+        return { pin:pin, distance:Math.hypot(point.e - origin.e, point.f - origin.f) };
+      });
+      var farthest = Math.max(1, ...locations.map(function (location) { return location.distance; }));
+      locations.forEach(function (location) {
+        var dot = location.pin.querySelector('.v2nat-pin-dot');
+        var animation = dot.animate([
+          { opacity:.3, transform:'scale(.75)' },
+          { opacity:1, transform:'scale(1)' }
+        ], {
+          duration:260,
+          delay:480 * location.distance / farthest,
+          easing:'ease-out',
+          fill:'both'
+        });
+        animations.push(animation);
       });
       root.classList.remove('is-map-pending');
       Promise.all(animations.map(function (animation) { return animation.finished.catch(function () {}); })).then(finish);

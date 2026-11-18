@@ -146,9 +146,9 @@
 .grow--js .is-open .grow__ttl{color:var(--purple)}
 .grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
-.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(2rem,5vw,4rem);align-items:center}
-.grow--desktop .grow__rows{grid-column:1;grid-row:1;align-self:center}
-.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:3/2;align-self:center;overflow:hidden;background:var(--paper-deep)}
+.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+.grow--desktop .grow__rows{grid-column:1;grid-row:1}
+.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--paper-deep)}
 .grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
 .grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
 .grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
@@ -726,8 +726,8 @@
         </h2>
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
           <ul class="grow__say">
-            <li><strong>500+ members</strong> have graduated from USF. Ask alumni how they got their first internship and what they’d do differently.</li>
-            <li>Practice interviews with members, get feedback on your résumé and see how teams work on company visits.</li>
+            <li><strong>80+ active members</strong> and <strong>500+ alumni</strong>.</li>
+            <li>Hear from guest speakers and meet leaders in your field at networking dinners.</li>
           </ul>
           <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
             <img src="../assets/chapter/jabil-company-visit-720.webp"

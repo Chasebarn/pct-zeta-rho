@@ -78,7 +78,6 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 /* Original home composition with stable media and short content transitions. */
 .v2hero-sub{padding-right:.18em;overflow:visible}
 .v2hero-btn{font-size:1.125rem}
-.grow--desktop .grow__wrap{align-items:start}
 .grow--desktop .grow__fig{clip-path:none;opacity:0;transition:opacity 240ms ease}
 .grow--desktop .grow__fig.is-leaving{opacity:1}
 .grow--desktop .grow__fig.is-active{clip-path:none;opacity:1}

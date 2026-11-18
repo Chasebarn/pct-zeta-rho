@@ -11,7 +11,7 @@ USF Muma College of Business profiles. Structured source records are in
 | Section | Change |
 | --- | --- |
 | Navigation | One Rush link stays visible on desktop and mobile. Its gold background fades in after the hero clears. |
-| Membership | Each panel pairs a chapter-supplied figure with relevant examples. Professional Connections covers 500+ graduates and interview practice. Leadership Experience names the chapter’s national recognition. Chapter Community covers over $10,000 raised for local causes and ways to get involved. |
+| Membership | Each panel pairs a chapter-supplied figure with relevant examples. Professional Connections covers 80+ active members, 500+ alumni, guest speakers and networking dinners. Leadership Experience names the chapter’s national recognition. Chapter Community covers over $10,000 raised for local causes. On desktop, the photo stays top-aligned as the panels change. |
 | Member Success | The title, figures and labels are centered. All three figures use the same color. Opposing logo rows follow vertical scrolling immediately and hold their position when scrolling stops. The rows wrap seamlessly without a visible endpoint. |
 | National map | A school caption appears when someone points to, taps or focuses a pin. The caption and highlight fade out on exit without changing the section height. |
 | Chapter Life | Photos autoplay in a shallow arc above the Rush invitation. Each portrait stays fully in frame while visible. With reduced motion, all photos are available in a manually scrollable row. |

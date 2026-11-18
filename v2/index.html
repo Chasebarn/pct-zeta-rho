@@ -134,15 +134,10 @@
 .grow__ttl{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.015em;color:var(--ink);transition:color 250ms ease}
 .grow__panel{padding-bottom:1.5rem}
 .grow__panel[hidden]{display:none}
-.grow__say{max-width:46ch;margin:0;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
-.grow__record{
-  max-width:none;
-  margin-block:clamp(1.5rem,3vw,2.75rem) 0;
-  color:var(--ink-soft);
-  font-size:clamp(.9375rem,1.25vw,1.05rem);
-  line-height:1.65;
-}
-.grow__record strong{color:var(--purple);font-weight:600}
+.grow__say{max-width:46ch;margin:0;padding-inline-start:1.125rem;font-size:1.1rem;line-height:1.65;color:var(--ink-soft)}
+.grow__say li+li{margin-block-start:.45rem}
+.grow__say li::marker{color:var(--gold-ink)}
+.grow__say strong{color:var(--ink);font-weight:600}
 .grow__fig{aspect-ratio:4/3;margin:1.35rem 0 0;overflow:hidden;background:var(--paper-deep)}
 .grow__fig img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--photo-scale,1))}
 .grow__stage{display:none}
@@ -770,7 +765,10 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p1" role="region" aria-labelledby="grow-b1">
-          <p class="grow__say">Prepare for your first internship interview with members who have been through recruiting. Practice your answers, get alumni feedback on your résumé and visit employers to see what a job looks like beyond the posting.</p>
+          <ul class="grow__say">
+            <li><strong>500+ members</strong> have graduated from USF. Ask alumni how they got their first internship and what they’d do differently.</li>
+            <li>Practice interviews with members, get feedback on your résumé and see how teams work on company visits.</li>
+          </ul>
           <figure class="grow__fig" id="grow-f1" aria-labelledby="grow-b1">
             <img src="../assets/chapter/jabil-company-visit-720.webp"
                  srcset="../assets/chapter/jabil-company-visit-480.webp 480w, ../assets/chapter/jabil-company-visit-720.webp 720w"
@@ -787,7 +785,10 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p2" role="region" aria-labelledby="grow-b2">
-          <p class="grow__say">Run a speaker panel, from inviting the guest to asking the first question onstage. Or coordinate volunteers for a campus fundraiser. When an interviewer asks about a time you led a team, you’ll have a project of your own to discuss.</p>
+          <ul class="grow__say">
+            <li><strong>20+ chapter awards</strong>, including a national Professional Development Award for our student-run Fall Summit.</li>
+            <li>Run a speaker panel yourself, from booking the guest to taking questions onstage.</li>
+          </ul>
           <figure class="grow__fig" id="grow-f2" aria-labelledby="grow-b2">
             <img src="../assets/chapter/speaker-conversation-800.webp"
                  srcset="../assets/chapter/speaker-conversation-480.webp 480w, ../assets/chapter/speaker-conversation-800.webp 800w, ../assets/chapter/speaker-conversation-1200.webp 1200w"
@@ -804,7 +805,10 @@
           </button>
         </h2>
         <div class="grow__panel" id="grow-p3" role="region" aria-labelledby="grow-b3">
-          <p class="grow__say">Play a round of golf with people outside your major at a chapter tournament. Get to know them better at socials, volunteer together at the Community Food Pantry and celebrate the semester at formal.</p>
+          <ul class="grow__say">
+            <li><strong>Over $10,000 raised</strong> for local causes. Help run a campus fundraiser or volunteer at Tampa’s Community Food Pantry.</li>
+            <li>Meet people outside your major at socials, golf tournaments and formal.</li>
+          </ul>
           <figure class="grow__fig" id="grow-f3" aria-labelledby="grow-b3">
             <img src="../assets/chapter/chapter-formal-800.webp"
                  srcset="../assets/chapter/chapter-formal-480.webp 480w, ../assets/chapter/chapter-formal-800.webp 800w, ../assets/chapter/chapter-formal-1200.webp 1200w"
@@ -818,7 +822,6 @@
 
     <div class="grow__stage" data-grow-stage></div>
   </div>
-  <p class="v2wrap grow__record">More than <strong>500 members</strong> have graduated from USF. Zeta Rho has earned <strong>20+ awards</strong> and raised <strong>over $10,000</strong> for local causes.</p>
 </section>
 
     <!-- ===== 03-place ===== -->

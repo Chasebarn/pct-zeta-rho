@@ -51,14 +51,16 @@ routes = {"home": "/", "interest": "/rush/interest"}
 
 def header(active):
     destinations = (("home", "/", "Home"), ("about", "/about", "About"), ("rush", "/rush", "Rush"))
-    def link(item, *, desktop=False):
+    def link(item, *, primary=False):
         key, href, label = item
         current = ' aria-current="page"' if key == active else ''
-        css = ' class="v2hd-link"' if desktop else ''
+        classes = ["v2hd-link"] if primary else []
+        if key == "rush":
+            classes.append("v2hd-rush")
+        css = f' class="{" ".join(classes)}"' if classes else ""
         return f'<a{css} href="{href}"{current}>{label}</a>'
-    links = "".join(f"<li>{link(item, desktop=True)}</li>" for item in destinations)
-    mobile = "".join(link(item) for item in destinations)
-    action = "#next-step" if active == "rush" else "/rush"
+    links = "".join(f"<li>{link(item, primary=True)}</li>" for item in destinations)
+    mobile = "".join(link(item) for item in destinations if item[0] != "rush")
     header_class = "v2hd is-over-hero" if active == "home" else "v2hd"
     if active in ("home", "rush", "about", "interest"):
         header_class += " is-hero-nav"
@@ -66,7 +68,6 @@ def header(active):
       <div class="v2wrap v2hd-row">
         <a class="v2hd-brand" href="/"><img class="v2hd-crest" src="/assets/crest.png" alt="" width="337" height="445"><span class="v2hd-lock"><span class="v2hd-name">Phi Chi Theta</span><span class="v2hd-sub">Zeta Rho · USF</span></span></a>
         <nav class="v2hd-nav" aria-label="Primary"><ul class="v2hd-list">{links}</ul></nav>
-        <a class="v2hd-rush" href="{action}"><span class="rush-short">Rush</span><span class="rush-action-label">Rush PCT</span></a>
         <details class="v2hd-menu"><summary><span class="v2-sr-only">Navigation menu</span><span class="menu-bars" aria-hidden="true"></span></summary><nav class="v2hd-mobile" aria-label="Mobile navigation">{mobile}</nav></details>
       </div>
     </header>'''

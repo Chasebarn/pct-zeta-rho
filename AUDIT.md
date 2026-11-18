@@ -10,8 +10,8 @@ USF Muma College of Business profiles. Structured source records are in
 
 | Section | Change |
 | --- | --- |
-| Navigation | Home, About and Rush stay in the navigation. The gold Rush PCT action appears once the hero has cleared. On phones the visible Rush link becomes the action. |
-| Membership | The panels give students concrete examples of interview practice, alumni feedback, running events, volunteering and spending time together. The existing photographs stay with those stories. The 500+ graduates, 20+ awards and over $10,000 raised are figures supplied by the chapter. |
+| Navigation | One Rush link stays visible on desktop and mobile. Its gold background fades in after the hero clears. |
+| Membership | Each panel pairs a chapter-supplied figure with relevant examples. Professional Connections covers 500+ graduates and interview practice. Leadership Experience names the chapter’s national recognition. Chapter Community covers over $10,000 raised for local causes and ways to get involved. |
 | Member Success | The title, figures and labels are centered. All three figures use the same color. Dark employer logos loop in opposite directions and keep moving through the visible part of the page. |
 | National map | The italic 1924 and map pins are larger. The line beneath the map is gone. A school caption appears when someone points to, taps or focuses a pin. |
 | Chapter Life | The photos autoplay in their own arc above the compact Rush invitation. “Learn about Rush” opens the Rush page. Pause controls and reduced-motion support keep the section usable. |

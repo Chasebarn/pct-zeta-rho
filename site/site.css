@@ -235,20 +235,18 @@ body:not(.home-page) { overflow-anchor: auto; }
 .privacy-content h2 { margin: 1.5rem 0 .5rem; font-size: clamp(1.6rem,3vw,2.15rem); }
 .privacy-page .privacy-content .text-link { display: inline-flex; align-items: center; min-height: 44px; }
 
-.rush-short { display: none; }
-@media (min-width: 900px) {
-  .v2hd.is-hero-nav .v2hd-rush:not(:focus-visible) { visibility: hidden; }
+.v2hd .v2hd-rush {
+  background-color: var(--gold);
+  color: var(--ink);
+  transition: background-color 320ms ease, color 220ms ease;
 }
+.v2hd .v2hd-rush:hover { background-color: var(--gold-soft); }
+.v2hd.is-hero-nav .v2hd-rush { background-color: transparent; }
+.v2hd.is-hero-nav.is-over-hero .v2hd-rush { color: var(--paper); }
+.v2hd.is-hero-nav .v2hd-rush:focus-visible { text-decoration: underline; }
 @media (max-width: 899px) {
-  .v2hd.is-hero-nav .v2hd-rush {
-    background: transparent;
-    color: var(--ink);
-    padding-inline: .65rem;
-  }
-  .v2hd.is-hero-nav.is-over-hero .v2hd-rush { color: var(--paper); }
-  .v2hd.is-hero-nav .v2hd-rush:hover { text-decoration: underline; text-underline-offset: .3em; }
-  .v2hd.is-hero-nav .rush-action-label { display: none; }
-  .v2hd.is-hero-nav .rush-short { display: inline; }
+  .v2hd-nav { display: block; justify-self: end; min-width: 0; }
+  .v2hd-list li:not(:last-child) { display: none; }
 }
 
 html:has(.about-page), html:has(.rush-page) { scroll-behavior: auto; }

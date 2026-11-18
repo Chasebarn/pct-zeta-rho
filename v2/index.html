@@ -121,9 +121,7 @@
   .v2hero-claim{margin-bottom:1.1rem}
 }
 /* ===== 02-grow ===== */
-/* Complete category names lead into a stable photograph on the right.
-   Narrow desktops retain the two-column composition; phones pair each image
-   with its open category. */
+/* The photo holds its position as people switch membership categories. */
 .grow{background:var(--paper);color:var(--ink-soft);padding-block:var(--section)}
 .grow__rows{min-width:0}
 .grow__row{position:relative;border-bottom:1px solid var(--line)}
@@ -146,23 +144,21 @@
 .grow--js .is-open .grow__ttl{color:var(--purple)}
 .grow__btn:focus-visible{outline-offset:5px}
 @media(hover:hover){.grow--js .grow__btn:hover .grow__ttl{color:var(--purple)}}
-.grow--desktop .grow__wrap{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(2rem,5vw,4rem);align-items:start}
-.grow--desktop .grow__rows{grid-column:1;grid-row:1}
-.grow--desktop .grow__stage{position:relative;display:block;grid-column:2;grid-row:1;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--paper-deep)}
-.grow--desktop .grow__fig{position:absolute;inset:0;z-index:0;margin:0;aspect-ratio:auto;opacity:0;clip-path:inset(0 100% 0 0);pointer-events:none;transition:clip-path 700ms var(--ease)}
-.grow--desktop .grow__fig img{transform:scale(calc(var(--photo-scale,1) + .035));transition:transform 1000ms var(--ease)}
-.grow--desktop .grow__fig.is-leaving{z-index:1;opacity:1;clip-path:inset(0);transition:none}
-.grow--desktop .grow__fig.is-active{z-index:2;opacity:1;clip-path:inset(0)}
-.grow--desktop .grow__fig.is-active img,.grow--desktop .grow__fig.is-leaving img{transform:scale(var(--photo-scale,1))}
+.grow--js .grow__wrap{display:grid;gap:clamp(1.25rem,4vw,4rem);align-items:start}
+.grow--js .grow__stage{position:relative;display:block;grid-row:1;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--paper-deep)}
+.grow__stage .grow__fig{position:absolute;inset:0;margin:0;aspect-ratio:auto;opacity:0;pointer-events:none;transition:opacity 240ms ease}
+.grow__stage .grow__fig.is-leaving{z-index:1;opacity:1}
+.grow__stage .grow__fig.is-active{z-index:2;opacity:1}
 @media(min-width:900px){
+ .grow--js .grow__wrap{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(2rem,5vw,4rem)}
+ .grow--js .grow__rows{grid-column:1;grid-row:1}
+ .grow--js .grow__stage{grid-column:2}
  .grow:not(.grow--js) .grow__panel{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:1rem clamp(2rem,5vw,4rem);align-items:start}
  .grow:not(.grow--js) .grow__fig{grid-column:2;grid-row:1 / span 2;margin:0}
- .grow--desktop .grow__panel{min-height:6.5rem;padding-bottom:1.2rem}
-}
-@media(min-width:900px) and (max-width:1023px){
- .grow--desktop .grow__panel{min-height:13rem}
+ .grow--js .grow__panel{padding-bottom:1.2rem}
 }
 @media(max-width:899px){
+ .grow--js{overflow-anchor:none}
  .grow__ttl{font-size:2rem}
  .grow__say{max-width:50ch}
  .grow__panel:not([hidden]){display:flex;flex-direction:column;align-items:flex-start}
@@ -177,8 +173,6 @@
 @media(max-width:359px){.grow__ttl{font-size:1.8rem}}
 @media(prefers-reduced-motion:reduce){
  .grow *,.grow *::before,.grow *::after{transition:none!important;animation:none!important}
- .grow--desktop .grow__fig.is-active{clip-path:inset(0)}
- .grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1))}
 }
 /* ===== 03-place ===== */
 .pl{
@@ -530,11 +524,11 @@
   background: var(--paper);
 }
 .mem-i img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.mem:not(.is-enhanced) .mem-i[aria-hidden="true"] { display: none; }
 .mem.is-enhanced .mem-wheel { padding: 0; overflow: hidden; }
 .mem.is-enhanced .mem-i {
   position: absolute;
   inset: 0 auto auto 0;
-  opacity: 0;
 }
 @media (min-width: 1441px) {
   .chapter-finish { border-inline: 1px solid var(--line); }
@@ -710,8 +704,7 @@
 </section>
 
     <!-- ===== 02-grow ===== -->
-<!-- Membership retains one open panel and photo selection. On narrow screens,
-     each photo stays with its category; the desktop view uses a shared stage.
+<!-- Membership retains one open panel and a shared photo frame.
      Without JavaScript, every description and photograph remains visible. -->
 <section class="grow" id="grow" data-grow aria-label="Membership">
   <div class="v2wrap grow__wrap">
@@ -1324,8 +1317,7 @@ window.pctInitHero = function () {
   }
 };
 /* ===== 02-grow ===== */
-/* Keep the accordion and its photograph connected at every width. Desktop
-   shares a photo stage; mobile returns each figure to its own content panel. */
+/* Give each title its own detail panel and share a stable photo frame. */
 window.pctInitGrow = function () {
   try {
     var root = document.querySelector('[data-grow]');
@@ -1345,9 +1337,7 @@ window.pctInitGrow = function () {
     });
     if (!valid) return;
 
-    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
     var current = 0;
-    var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var exitTimer = null;
     function clearLeaving() {
@@ -1363,49 +1353,23 @@ window.pctInitGrow = function () {
         else btns[i].removeAttribute('aria-disabled');
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
         figs[i].classList.toggle('is-active', active);
-        figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
+        figs[i].setAttribute('aria-hidden', active ? 'false' : 'true');
       }
     }
     function open(index) {
       if (index === current) return;
-      // A preceding mobile panel can be a full photograph tall. Keep the row
-      // under the pointer when closing it would otherwise move the tapped title.
-      var topBefore = !wide && index > current
-        ? btns[index].getBoundingClientRect().top : null;
       clearLeaving();
-      if (wide && !(reduce && reduce.matches)) {
+      if (!(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
         exitTimer = setTimeout(clearLeaving, 260);
       }
       current = index;
       sync();
-      if (topBefore !== null) {
-        var shift = btns[index].getBoundingClientRect().top - topBefore;
-        if (Math.abs(shift) > 1) window.scrollBy({top:shift, behavior:'instant'});
-      }
-      if (!wide && !(reduce && reduce.matches) && panels[index].animate) {
-        panels[index].animate([
-          { opacity:0, transform:'translateY(6px)' },
-          { opacity:1, transform:'translateY(0)' }
-        ], { duration:220, easing:'ease-out' });
-      }
-    }
-    function layout() {
-      clearLeaving();
-      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
-      root.classList.toggle('grow--desktop', wide);
-      figs.forEach(function (figure, i) {
-        var destination = wide ? stage : panels[i];
-        if (figure.parentNode !== destination) {
-          if (wide) destination.appendChild(figure);
-          else destination.insertBefore(figure, destination.firstChild);
-        }
-      });
-      sync();
     }
 
+    figs.forEach(function (figure) { stage.appendChild(figure); });
     root.classList.add('grow--js');
-    layout();
+    sync();
     btns.forEach(function (button, i) {
       button.disabled = false;
       button.addEventListener('click', function () { open(i); });
@@ -1420,9 +1384,6 @@ window.pctInitGrow = function () {
         btns[next].focus();
       });
     });
-    if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
-    else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
-    else window.addEventListener('resize', layout, { passive:true });
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
     root.dataset.growReady = '1';
@@ -1756,14 +1717,13 @@ window.pctInitPhotoArc = function () {
   const band = document.querySelector('.mem');
   if (!band || !window.IntersectionObserver) return;
   const list = band.querySelector('.mem-wheel');
-  const cards = [...list.children];
-  if (cards.length < 3) return;
+  let cards = [...list.children];
+  const track = [];
+  let ready = false;
 
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  let nearby = false;
   let frame = 0;
-  let previousTime;
-  let phase = 1.3;
+  let startedAt;
   let geometry;
 
   function measure() {
@@ -1772,84 +1732,92 @@ window.pctInitPhotoArc = function () {
     const cardHeight = cards[0].offsetHeight;
     const sideInset = Math.max(8, width * .018);
     const pitch = cardWidth + Math.min(24, Math.max(10, width * .02));
+    // Wrap cards only after their entire rotated bounds are outside the stage.
+    const runway = width + cardWidth + cardHeight;
+    while (track.length * pitch < runway) {
+      const copies = cards.map(card => {
+        const copy = card.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        return copy;
+      });
+      track.push(...copies);
+      list.append(...copies);
+    }
     geometry = {
       center: width / 2, cardWidth, cardHeight, pitch,
-      edge: Math.min(width / 2 - sideInset, pitch * (cards.length / 2 - .2)),
+      edge: width / 2 - sideInset,
       room: list.clientHeight - cardHeight,
       tilt: width < 600 ? 9 : 13,
-      fade: Math.min(32, Math.max(14, width * .035)),
     };
   }
 
-  function paint() {
-    const {center, cardWidth, cardHeight, pitch, edge, room, tilt, fade} = geometry;
+  function paint(time) {
+    const {center, cardWidth, cardHeight, pitch, edge, room, tilt} = geometry;
     if (edge <= 0) return;
-    const full = cards.length;
-    cards.forEach((card, index) => {
+    const full = track.length;
+    const phase = ((time - startedAt) / 8000) % full;
+    track.forEach((card, index) => {
       const column = ((index - phase + full * 2.5) % full) - full / 2;
       const x = column * pitch;
       const progress = Math.max(-1, Math.min(1, x / edge));
       const angle = progress * tilt;
       const radians = Math.abs(angle) * Math.PI / 180;
-      const halfWidth = (cardWidth * Math.cos(radians) + cardHeight * Math.sin(radians)) / 2;
       const tiltDepth = Math.max(0, (cardHeight * (Math.cos(radians) - 1) + cardWidth * Math.sin(radians)) / 2);
       const y = room * (.19 + .59 * progress * progress) - tiltDepth * progress * progress;
-      // A photo is already transparent by the time its rotated edge can leave the stage.
-      const opacity = Math.max(0, Math.min(1, (edge - Math.abs(x) - halfWidth) / fade));
       card.style.transform = `translate3d(${center + x - cardWidth / 2}px, ${y}px, 0) rotate(${angle}deg)`;
-      card.style.opacity = opacity;
     });
   }
 
   function tick(time) {
-    if (previousTime !== undefined) phase = (phase + Math.min(75, time - previousTime) / 8000) % cards.length;
-    previousTime = time;
-    paint();
+    paint(time);
     frame = requestAnimationFrame(tick);
   }
 
   function sync() {
-    const enhanced = !motion.matches;
+    const enhanced = ready && cards.length >= 3 && !motion.matches;
     band.classList.toggle('is-enhanced', enhanced);
     if (enhanced) {
       list.removeAttribute('tabindex');
       list.scrollLeft = 0;
       measure();
-      paint();
+      const now = performance.now();
+      startedAt ??= now;
+      paint(now);
+      if (!frame) frame = requestAnimationFrame(tick);
     } else {
       list.setAttribute('tabindex', '0');
-      cards.forEach(card => {
-        card.style.removeProperty('transform');
-        card.style.removeProperty('opacity');
-      });
-    }
-
-    const running = enhanced && nearby && !document.hidden;
-    if (running && !frame) {
-      previousTime = undefined;
-      frame = requestAnimationFrame(tick);
-    } else if (!running && frame) {
-      cancelAnimationFrame(frame);
-      frame = 0;
+      track.forEach(card => card.style.removeProperty('transform'));
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
     }
   }
 
-  const images = new IntersectionObserver(([entry]) => {
+  const images = new IntersectionObserver(async ([entry]) => {
     if (!entry.isIntersecting) return;
-    list.querySelectorAll('img[loading="lazy"]').forEach(image => { image.loading = 'eager'; });
     images.disconnect();
+    const loaded = await Promise.all(cards.map(async card => {
+      const image = card.querySelector('img');
+      image.loading = 'eager';
+      try {
+        await image.decode();
+        return true;
+      } catch {
+        card.hidden = true;
+        return false;
+      }
+    }));
+    cards = cards.filter((_, index) => loaded[index]);
+    track.push(...cards);
+    ready = true;
+    sync();
   }, {rootMargin: '680px 0px'});
   images.observe(band);
 
-  new IntersectionObserver(([entry]) => {
-    nearby = entry.isIntersecting;
-    sync();
-  }, {rootMargin: '150px 0px'}).observe(band);
   if ('ResizeObserver' in window) new ResizeObserver(sync).observe(list);
   else window.addEventListener('resize', sync, {passive: true});
   motion.addEventListener('change', sync);
-  document.addEventListener('visibilitychange', sync);
-  sync();
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */

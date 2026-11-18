@@ -33,11 +33,11 @@
   background: var(--paper);
 }
 .mem-i img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.mem:not(.is-enhanced) .mem-i[aria-hidden="true"] { display: none; }
 .mem.is-enhanced .mem-wheel { padding: 0; overflow: hidden; }
 .mem.is-enhanced .mem-i {
   position: absolute;
   inset: 0 auto auto 0;
-  opacity: 0;
 }
 @media (min-width: 1441px) {
   .chapter-finish { border-inline: 1px solid var(--line); }

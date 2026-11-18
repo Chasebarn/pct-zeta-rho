@@ -78,11 +78,6 @@ body:not(.home-page) .v2hd{background:var(--paper)}
 /* Original home composition with stable media and short content transitions. */
 .v2hero-sub{padding-right:.18em;overflow:visible}
 .v2hero-btn{font-size:1.125rem}
-.grow--desktop .grow__fig{clip-path:none;opacity:0;transition:opacity 240ms ease}
-.grow--desktop .grow__fig.is-leaving{opacity:1}
-.grow--desktop .grow__fig.is-active{clip-path:none;opacity:1}
-.grow--desktop .grow__fig img{transform:scale(var(--photo-scale,1));transition:none}
-.grow--js:not(.grow--desktop){overflow-anchor:none}
 .grow--js .grow__row{overflow-anchor:none}
 @media(max-width:899px){.v2hd-rush{font-size:.9rem}.page-hero h1{font-size:clamp(4.8rem,10vw,7rem)}}
 @media(max-width:749px){

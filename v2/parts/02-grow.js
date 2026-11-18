@@ -1,5 +1,4 @@
-/* Keep the accordion and its photograph connected at every width. Desktop
-   shares a photo stage; mobile returns each figure to its own content panel. */
+/* Give each title its own detail panel and share a stable photo frame. */
 window.pctInitGrow = function () {
   try {
     var root = document.querySelector('[data-grow]');
@@ -19,9 +18,7 @@ window.pctInitGrow = function () {
     });
     if (!valid) return;
 
-    var breakpoint = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
     var current = 0;
-    var wide = false;
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var exitTimer = null;
     function clearLeaving() {
@@ -37,49 +34,23 @@ window.pctInitGrow = function () {
         else btns[i].removeAttribute('aria-disabled');
         btns[i].setAttribute('aria-expanded', active ? 'true' : 'false');
         figs[i].classList.toggle('is-active', active);
-        figs[i].setAttribute('aria-hidden', wide && !active ? 'true' : 'false');
+        figs[i].setAttribute('aria-hidden', active ? 'false' : 'true');
       }
     }
     function open(index) {
       if (index === current) return;
-      // A preceding mobile panel can be a full photograph tall. Keep the row
-      // under the pointer when closing it would otherwise move the tapped title.
-      var topBefore = !wide && index > current
-        ? btns[index].getBoundingClientRect().top : null;
       clearLeaving();
-      if (wide && !(reduce && reduce.matches)) {
+      if (!(reduce && reduce.matches)) {
         figs[current].classList.add('is-leaving');
         exitTimer = setTimeout(clearLeaving, 260);
       }
       current = index;
       sync();
-      if (topBefore !== null) {
-        var shift = btns[index].getBoundingClientRect().top - topBefore;
-        if (Math.abs(shift) > 1) window.scrollBy({top:shift, behavior:'instant'});
-      }
-      if (!wide && !(reduce && reduce.matches) && panels[index].animate) {
-        panels[index].animate([
-          { opacity:0, transform:'translateY(6px)' },
-          { opacity:1, transform:'translateY(0)' }
-        ], { duration:220, easing:'ease-out' });
-      }
-    }
-    function layout() {
-      clearLeaving();
-      wide = breakpoint ? breakpoint.matches : window.innerWidth >= 900;
-      root.classList.toggle('grow--desktop', wide);
-      figs.forEach(function (figure, i) {
-        var destination = wide ? stage : panels[i];
-        if (figure.parentNode !== destination) {
-          if (wide) destination.appendChild(figure);
-          else destination.insertBefore(figure, destination.firstChild);
-        }
-      });
-      sync();
     }
 
+    figs.forEach(function (figure) { stage.appendChild(figure); });
     root.classList.add('grow--js');
-    layout();
+    sync();
     btns.forEach(function (button, i) {
       button.disabled = false;
       button.addEventListener('click', function () { open(i); });
@@ -94,9 +65,6 @@ window.pctInitGrow = function () {
         btns[next].focus();
       });
     });
-    if (breakpoint && breakpoint.addEventListener) breakpoint.addEventListener('change', layout);
-    else if (breakpoint && breakpoint.addListener) breakpoint.addListener(layout);
-    else window.addEventListener('resize', layout, { passive:true });
     if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(clearLeaving);
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', function (event) { if (event.matches) clearLeaving(); });
     root.dataset.growReady = '1';

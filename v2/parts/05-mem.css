@@ -1,34 +1,36 @@
 .chapter-finish {
+  --arc-top: clamp(1.5rem, 3.5vw, 3.5rem);
+  --arc-inset: .7rem;
+  --arc-clearance: clamp(1.6rem, 2.1vw, 2.1rem);
+  --ribbon-space: clamp(11rem, 18.5vw, 16.5rem);
+  --wheel-natural-radius: 149vw;
+  --photo-height-limit: calc(100svh - var(--v2hd-h) - var(--ribbon-space) - var(--arc-top) - var(--arc-inset) - var(--arc-clearance));
+  --wheel-radius: min(var(--wheel-natural-radius), max(36rem, calc(var(--photo-height-limit) / .2625)));
+  --rail-photo: calc(var(--wheel-radius) * .175);
   --rail-gap: clamp(.6rem, 1.55vw, 1.45rem);
-  --arc-top: clamp(1.35rem, 2.5vw, 2.65rem);
-  --arc-clearance: clamp(1.15rem, 1.55vw, 1.55rem);
-  --ribbon-space: clamp(12rem, 18.5vw, 16.5rem);
-  --photo-height-limit: calc(100svh - var(--v2hd-h) - var(--ribbon-space) - var(--arc-top) - var(--arc-clearance));
-  --rail-photo: clamp(13.5rem, min(25.5vw, calc(var(--photo-height-limit) / 1.5)), 24rem);
   --ribbon-purple: #3b2853;
   background: var(--paper);
 }
 .mem { padding: 0; }
 .mem-band {
-  padding-top: var(--arc-top);
+  padding-block: calc(var(--arc-top) + var(--arc-inset)) var(--arc-clearance);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
 }
 .mem-band:focus-visible { outline-offset: -3px; }
-.mem-track { display: flex; width: max-content; }
+.mem-track { width: max-content; }
 .mem-strip {
   display: flex;
-  flex: none;
   gap: var(--rail-gap);
   margin: 0;
-  padding: 0 var(--rail-gap) 0 0;
+  padding: 0 var(--rail-gap);
   list-style: none;
 }
 .mem-i {
   flex: none;
   width: var(--rail-photo);
   aspect-ratio: 2 / 3;
-  border-radius: clamp(6px, .65vw, 12px);
+  border-radius: clamp(10px, 1.1vw, 18px);
   overflow: hidden;
   background: var(--paper);
 }
@@ -36,31 +38,41 @@
 .mem-i img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .mem.is-enhanced .mem-band { overflow: clip; }
-  .mem.is-enhanced .mem-track {
+  .mem.is-enhanced .mem-band {
     position: relative;
-    display: block;
-    width: 100%;
-    height: calc(var(--rail-photo) * 1.5 + var(--arc-clearance));
+    height: calc(var(--arc-top) + var(--arc-inset) + var(--rail-photo) * 1.5 + var(--arc-clearance));
+    overflow: clip;
+    isolation: isolate;
   }
+  .mem.is-enhanced .mem-track {
+    /* Every portrait shares the same rotating center, below the purple horizon. */
+    position: absolute;
+    top: calc(var(--arc-top) + var(--arc-inset) + var(--wheel-radius) + var(--rail-photo) * .75);
+    left: 50%;
+    width: 0;
+    height: 0;
+    animation: chapter-wheel-turn 384s linear infinite paused;
+  }
+  .mem.is-in-range:not(.is-paused) .mem-track { animation-play-state: running; }
+  .mem.is-enhanced .mem-strip { display: block; padding: 0; }
   .mem.is-enhanced .mem-i {
     position: absolute;
     inset: 0 auto auto 0;
     display: block;
-    transform: var(--arc-position, translateX(-200%));
+    margin: calc(var(--rail-photo) * -.75) 0 0 calc(var(--rail-photo) * -.5);
+    transform: rotate(calc(var(--wheel-slot) * 11.25deg)) translateY(calc(-1 * var(--wheel-radius)));
   }
+  @keyframes chapter-wheel-turn { to { transform: rotate(-1turn); } }
 }
 
 @media (max-width: 767px) {
-  .chapter-finish {
-    --rail-photo: clamp(9rem, min(48vw, 30svh), 13.5rem);
-    --arc-clearance: 1.55rem;
-  }
+  .chapter-finish { --wheel-natural-radius: min(330vw, calc(1435px - 37.8vw)); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
   .chapter-finish {
-    --rail-photo: clamp(6.25rem, 26svh, 10rem);
     --arc-top: 1rem;
+    --arc-inset: .3rem;
     --arc-clearance: .85rem;
+    --ribbon-space: 8.25rem;
   }
 }

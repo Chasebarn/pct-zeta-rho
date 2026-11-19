@@ -1,13 +1,15 @@
 .chapter-finish {
   --rail-photo: clamp(8.5rem, 15.6vw, 14rem);
   --rail-gap: clamp(.55rem, 1.25vw, 1.15rem);
+  --arc-top: clamp(1.15rem, 2.2vw, 2.5rem);
   --ribbon-purple: #3b2853;
   background: var(--paper-deep);
 }
-.mem { padding: clamp(1.55rem, 3.8vw, 3.25rem) 0 0; }
+.mem { padding: 0; }
 .mem-band {
   width: min(100%, 112rem);
   margin-inline: auto;
+  padding-top: var(--arc-top);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
 }
@@ -21,9 +23,16 @@
   padding: 0 var(--rail-gap) 0 0;
   list-style: none;
 }
-.mem-strip[aria-hidden="true"] { display: none; }
-.mem-i { flex: none; width: var(--rail-photo); aspect-ratio: 2 / 3; background: var(--paper); }
-.mem-i img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 3px; }
+.mem-i {
+  flex: none;
+  width: var(--rail-photo);
+  aspect-ratio: 2 / 3;
+  border-radius: clamp(6px, .65vw, 12px);
+  overflow: hidden;
+  background: var(--paper);
+}
+.mem-i[aria-hidden="true"] { display: none; }
+.mem-i img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 @media (prefers-reduced-motion: no-preference) {
   .mem.is-enhanced .mem-band { overflow: clip; }
@@ -31,18 +40,26 @@
     --rail-fade: clamp(12px, 2vw, 18px);
     mask-image: linear-gradient(90deg, transparent, #000 var(--rail-fade), #000 calc(100% - var(--rail-fade)), transparent);
   }
-  .mem.is-enhanced .mem-strip[aria-hidden="true"] { display: flex; }
   .mem.is-enhanced .mem-track {
-    animation: pct-photo-rail 72s linear infinite paused;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(var(--rail-photo) * 1.5);
   }
-  .mem.is-enhanced.is-in-range:not(.is-paused) .mem-track { animation-play-state: running; }
-  @keyframes pct-photo-rail { to { transform: translateX(-25%); } }
+  .mem.is-enhanced .mem-i {
+    position: absolute;
+    inset: 0 auto auto 0;
+    display: block;
+    transform: var(--arc-position, translateX(-200%));
+  }
 }
 
 @media (max-width: 599px) {
-  .chapter-finish { --rail-photo: clamp(6.5rem, 36vw, 10rem); }
+  .chapter-finish { --rail-photo: clamp(5.75rem, 28vw, 10rem); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
-  .chapter-finish { --rail-photo: clamp(5.75rem, 23svh, 8rem); }
-  .mem { padding-top: 1rem; }
+  .chapter-finish {
+    --rail-photo: clamp(5.75rem, 23svh, 8rem);
+    --arc-top: 1rem;
+  }
 }

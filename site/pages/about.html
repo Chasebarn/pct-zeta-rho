@@ -79,21 +79,49 @@
 
 <section class="section chapter-service" id="service" aria-labelledby="service-title">
   <div class="wrap service-story">
-    <header class="service-heading"><h2 class="section-heading" id="service-title">Service in Tampa Bay</h2></header>
-    <figure class="service-photo">
-      <img src="/assets/chapter/community-food-pantry-800.webp" srcset="/assets/chapter/community-food-pantry-480.webp 480w, /assets/chapter/community-food-pantry-800.webp 800w, /assets/chapter/community-food-pantry-1200.webp 1200w" sizes="(max-width: 760px) 92vw, (max-width: 1240px) 47vw, 570px" width="800" height="601" loading="lazy" decoding="async" alt="Chapter volunteers beside the Community Food Pantry sign.">
-      <figcaption>Zeta Rho volunteers at the Community Food Pantry.</figcaption>
-    </figure>
-    <div class="service-details">
-      <ul class="service-projects">
-        <li><h3>Community Food Pantry</h3><p>Members volunteer with the pantry that provides groceries to Tampa-area families.</p></li>
-        <li><h3>Relay for Life</h3><p>In the chapter’s first year, members raised more than $2,000 for the American Cancer Society.</p></li>
-        <li><h3>A Kid’s Place</h3><p>The fall 2025 new-member class raised more than $1,000 for the local foster home.</p></li>
+    <header class="service-heading">
+      <h2 class="section-heading" id="service-title">Service in Tampa Bay</h2>
+      <p>We volunteer with Tampa Bay nonprofits and run fundraisers on campus to support their work.</p>
+    </header>
+    <div class="service-gallery" id="awards">
+      <ul class="service-projects" id="service-projects" aria-label="Zeta Rho service projects">
+        <li class="service-project">
+          <figure class="service-frame">
+            <img src="/assets/chapter/community-food-pantry-800.webp" srcset="/assets/chapter/community-food-pantry-480.webp 480w, /assets/chapter/community-food-pantry-800.webp 800w, /assets/chapter/community-food-pantry-1200.webp 1200w" sizes="(max-width: 760px) 58vw, (max-width: 1240px) 38vw, 455px" width="800" height="601" loading="lazy" decoding="async" alt="Members beside the Community Food Pantry sign.">
+            <button class="service-select" type="button" aria-label="Show Community Food Pantry story" aria-controls="service-pantry" hidden></button>
+          </figure>
+          <div class="service-caption" id="service-pantry">
+            <h3>Community Food Pantry</h3>
+            <p>Members volunteer at the pantry, which provides groceries to Tampa-area families.</p>
+          </div>
+        </li>
+        <li class="service-project">
+          <figure class="service-frame">
+            <img src="/assets/chapter/pie-a-phi-chi-480.webp" srcset="/assets/chapter/pie-a-phi-chi-480.webp 480w, /assets/chapter/pie-a-phi-chi-960.webp 960w" sizes="(max-width: 760px) 58vw, (max-width: 1240px) 38vw, 455px" width="480" height="360" loading="lazy" decoding="async" alt="A member holds the Pie a Phi Chi sign during the campus fundraiser.">
+            <button class="service-select" type="button" aria-label="Show Pie a Phi Chi story" aria-controls="service-pie" hidden></button>
+          </figure>
+          <div class="service-caption" id="service-pie">
+            <h3>Pie a Phi Chi</h3>
+            <p>Members took pies in the face on campus to raise money for Moffitt Cancer Center.</p>
+          </div>
+        </li>
+        <li class="service-project" data-service-award>
+          <figure class="service-frame">
+            <img src="/assets/chapter/a-kids-place-480.webp" srcset="/assets/chapter/a-kids-place-480.webp 480w, /assets/chapter/a-kids-place-960.webp 960w" sizes="(max-width: 760px) 58vw, (max-width: 1240px) 38vw, 455px" width="480" height="360" loading="lazy" decoding="async" alt="Zeta Rho members outside A Kid’s Place of Tampa Bay.">
+            <button class="service-select" type="button" aria-label="Show A Kid’s Place story" aria-controls="service-kids" hidden></button>
+          </figure>
+          <div class="service-caption" id="service-kids">
+            <h3>A Kid’s Place</h3>
+            <p>The fall 2025 new-member class raised more than $1,000 for A Kid’s Place, which keeps siblings together in foster care.</p>
+            <p class="service-award">Phi Chi Theta National Philanthropy Award</p>
+          </div>
+        </li>
       </ul>
-      <div class="service-award" id="awards">
-        <span>National Philanthropy Award</span>
-        <p>Phi Chi Theta recognized Zeta Rho’s work with A Kid’s Place.</p>
+      <div class="service-controls" hidden>
+        <button class="service-arrow service-arrow-previous" type="button" data-service-step="-1" aria-label="Previous service project" aria-controls="service-projects"></button>
+        <button class="service-arrow" type="button" data-service-step="1" aria-label="Next service project" aria-controls="service-projects"></button>
       </div>
+      <p class="v2-sr-only" data-service-status role="status"></p>
     </div>
   </div>
 </section>

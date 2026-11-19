@@ -1,6 +1,7 @@
-/* The ribbon just overlaps the lower edge of the moving frames. */
+/* The level edge covers the lower part of the arc as each frame moves past it. */
 .act{
   position:relative;
+  z-index:1;
   padding:clamp(1.55rem,3vw,2.65rem) 0 clamp(1.8rem,3.5vw,3rem);
   background:var(--ribbon-purple);
   color:var(--paper);text-align:center;

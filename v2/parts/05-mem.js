@@ -15,14 +15,17 @@ window.pctInitPhotoRail = function () {
   let previousTime;
 
   function paint() {
-    const {halfWidth, cardWidth, pitch, wrapAt, depth, tilt} = geometry;
+    const {halfWidth, cardWidth, pitch, wrapAt, crown, slopeWidth, depth, tilt} = geometry;
     const span = photos.length * pitch;
     photos.forEach((photo, index) => {
       const offset = (index - phase) * pitch + wrapAt;
       const x = ((offset % span) + span) % span - wrapAt;
-      const position = Math.max(-1, Math.min(1, x / halfWidth));
-      const y = depth * position * position;
-      photo.style.setProperty('--arc-position', `translate3d(${halfWidth + x - cardWidth / 2}px, ${y}px, 0) rotate(${tilt * position}deg)`);
+      // Level the center and both ends so the silhouette stays steady at the edges.
+      const progress = Math.max(0, Math.min(1, (Math.abs(x) - crown) / slopeWidth));
+      const arc = progress * progress * (3 - 2 * progress);
+      const y = depth * arc;
+      const angle = Math.sign(x) * tilt * arc;
+      photo.style.setProperty('--arc-position', `translate3d(${halfWidth + x - cardWidth / 2}px, ${y}px, 0) rotate(${angle}deg)`);
     });
   }
 
@@ -45,17 +48,20 @@ window.pctInitPhotoRail = function () {
         strip.append(copy);
       }
     }
+    const crown = pitch * .24;
     geometry = {
       halfWidth: width / 2, cardWidth, pitch, wrapAt,
-      depth: Math.max(22, Math.min(62, width * .048)),
-      tilt: width < 600 ? 9 : 13,
+      crown,
+      slopeWidth: Math.max(1, width * .41 - crown),
+      depth: Math.max(29, Math.min(72, width * .046)),
+      tilt: width < 600 ? 8 : 13,
     };
     paint();
   }
 
   function tick(time) {
     if (previousTime !== undefined) {
-      phase = (phase + Math.min(time - previousTime, 80) / 9000) % photos.length;
+      phase = (phase + Math.min(time - previousTime, 80) / 12000) % photos.length;
     }
     previousTime = time;
     paint();

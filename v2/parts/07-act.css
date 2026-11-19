@@ -6,7 +6,6 @@
   background:var(--ribbon-purple);
   color:var(--paper);text-align:center;
 }
-.mem.is-enhanced + .act{margin-top:-3px;box-shadow:0 -2px 5px rgba(25,18,33,.19)}
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
 .act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:1.06;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}

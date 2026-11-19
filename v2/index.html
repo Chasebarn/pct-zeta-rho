@@ -489,16 +489,17 @@
 }
 /* ===== 05-mem ===== */
 .chapter-finish {
-  --rail-photo: clamp(8.5rem, 15.6vw, 14rem);
-  --rail-gap: clamp(.55rem, 1.25vw, 1.15rem);
-  --arc-top: clamp(1.15rem, 2.2vw, 2.5rem);
+  --rail-gap: clamp(.6rem, 1.55vw, 1.45rem);
+  --arc-top: clamp(1.35rem, 2.5vw, 2.65rem);
+  --arc-clearance: clamp(1.15rem, 1.55vw, 1.55rem);
+  --ribbon-space: clamp(12rem, 18.5vw, 16.5rem);
+  --photo-height-limit: calc(100svh - var(--v2hd-h) - var(--ribbon-space) - var(--arc-top) - var(--arc-clearance));
+  --rail-photo: clamp(13.5rem, min(25.5vw, calc(var(--photo-height-limit) / 1.5)), 24rem);
   --ribbon-purple: #3b2853;
-  background: var(--paper-deep);
+  background: var(--paper);
 }
 .mem { padding: 0; }
 .mem-band {
-  width: min(100%, 112rem);
-  margin-inline: auto;
   padding-top: var(--arc-top);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
@@ -526,15 +527,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .mem.is-enhanced .mem-band { overflow: clip; }
-  .mem.is-enhanced .mem-band:not(:focus-visible) {
-    --rail-fade: clamp(12px, 2vw, 18px);
-    mask-image: linear-gradient(90deg, transparent, #000 var(--rail-fade), #000 calc(100% - var(--rail-fade)), transparent);
-  }
   .mem.is-enhanced .mem-track {
     position: relative;
     display: block;
     width: 100%;
-    height: calc(var(--rail-photo) * 1.5);
+    height: calc(var(--rail-photo) * 1.5 + var(--arc-clearance));
   }
   .mem.is-enhanced .mem-i {
     position: absolute;
@@ -544,13 +541,17 @@
   }
 }
 
-@media (max-width: 599px) {
-  .chapter-finish { --rail-photo: clamp(5.75rem, 28vw, 10rem); }
+@media (max-width: 767px) {
+  .chapter-finish {
+    --rail-photo: clamp(9rem, min(48vw, 30svh), 13.5rem);
+    --arc-clearance: 1.55rem;
+  }
 }
 @media (max-height: 530px) and (orientation: landscape) {
   .chapter-finish {
-    --rail-photo: clamp(5.75rem, 23svh, 8rem);
+    --rail-photo: clamp(6.25rem, 26svh, 10rem);
     --arc-top: 1rem;
+    --arc-clearance: .85rem;
   }
 }
 /* ===== 07-act ===== */
@@ -562,7 +563,6 @@
   background:var(--ribbon-purple);
   color:var(--paper);text-align:center;
 }
-.mem.is-enhanced + .act{margin-top:-3px;box-shadow:0 -2px 5px rgba(25,18,33,.19)}
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
 .act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:1.06;letter-spacing:-.02em;color:var(--paper)}
 .act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
@@ -1745,14 +1745,17 @@ window.pctInitPhotoRail = function () {
   let previousTime;
 
   function paint() {
-    const {halfWidth, cardWidth, pitch, wrapAt, depth, tilt} = geometry;
+    const {halfWidth, cardWidth, pitch, wrapAt, crown, slopeWidth, depth, tilt} = geometry;
     const span = photos.length * pitch;
     photos.forEach((photo, index) => {
       const offset = (index - phase) * pitch + wrapAt;
       const x = ((offset % span) + span) % span - wrapAt;
-      const position = Math.max(-1, Math.min(1, x / halfWidth));
-      const y = depth * position * position;
-      photo.style.setProperty('--arc-position', `translate3d(${halfWidth + x - cardWidth / 2}px, ${y}px, 0) rotate(${tilt * position}deg)`);
+      // Level the center and both ends so the silhouette stays steady at the edges.
+      const progress = Math.max(0, Math.min(1, (Math.abs(x) - crown) / slopeWidth));
+      const arc = progress * progress * (3 - 2 * progress);
+      const y = depth * arc;
+      const angle = Math.sign(x) * tilt * arc;
+      photo.style.setProperty('--arc-position', `translate3d(${halfWidth + x - cardWidth / 2}px, ${y}px, 0) rotate(${angle}deg)`);
     });
   }
 
@@ -1775,17 +1778,20 @@ window.pctInitPhotoRail = function () {
         strip.append(copy);
       }
     }
+    const crown = pitch * .24;
     geometry = {
       halfWidth: width / 2, cardWidth, pitch, wrapAt,
-      depth: Math.max(22, Math.min(62, width * .048)),
-      tilt: width < 600 ? 9 : 13,
+      crown,
+      slopeWidth: Math.max(1, width * .41 - crown),
+      depth: Math.max(29, Math.min(72, width * .046)),
+      tilt: width < 600 ? 8 : 13,
     };
     paint();
   }
 
   function tick(time) {
     if (previousTime !== undefined) {
-      phase = (phase + Math.min(time - previousTime, 80) / 9000) % photos.length;
+      phase = (phase + Math.min(time - previousTime, 80) / 12000) % photos.length;
     }
     previousTime = time;
     paint();

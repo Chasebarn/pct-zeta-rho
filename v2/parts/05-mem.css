@@ -1,14 +1,15 @@
 .chapter-finish {
-  --rail-photo: clamp(8.5rem, 15.6vw, 14rem);
-  --rail-gap: clamp(.55rem, 1.25vw, 1.15rem);
-  --arc-top: clamp(1.15rem, 2.2vw, 2.5rem);
+  --rail-gap: clamp(.6rem, 1.55vw, 1.45rem);
+  --arc-top: clamp(1.35rem, 2.5vw, 2.65rem);
+  --arc-clearance: clamp(1.15rem, 1.55vw, 1.55rem);
+  --ribbon-space: clamp(12rem, 18.5vw, 16.5rem);
+  --photo-height-limit: calc(100svh - var(--v2hd-h) - var(--ribbon-space) - var(--arc-top) - var(--arc-clearance));
+  --rail-photo: clamp(13.5rem, min(25.5vw, calc(var(--photo-height-limit) / 1.5)), 24rem);
   --ribbon-purple: #3b2853;
-  background: var(--paper-deep);
+  background: var(--paper);
 }
 .mem { padding: 0; }
 .mem-band {
-  width: min(100%, 112rem);
-  margin-inline: auto;
   padding-top: var(--arc-top);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
@@ -36,15 +37,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .mem.is-enhanced .mem-band { overflow: clip; }
-  .mem.is-enhanced .mem-band:not(:focus-visible) {
-    --rail-fade: clamp(12px, 2vw, 18px);
-    mask-image: linear-gradient(90deg, transparent, #000 var(--rail-fade), #000 calc(100% - var(--rail-fade)), transparent);
-  }
   .mem.is-enhanced .mem-track {
     position: relative;
     display: block;
     width: 100%;
-    height: calc(var(--rail-photo) * 1.5);
+    height: calc(var(--rail-photo) * 1.5 + var(--arc-clearance));
   }
   .mem.is-enhanced .mem-i {
     position: absolute;
@@ -54,12 +51,16 @@
   }
 }
 
-@media (max-width: 599px) {
-  .chapter-finish { --rail-photo: clamp(5.75rem, 28vw, 10rem); }
+@media (max-width: 767px) {
+  .chapter-finish {
+    --rail-photo: clamp(9rem, min(48vw, 30svh), 13.5rem);
+    --arc-clearance: 1.55rem;
+  }
 }
 @media (max-height: 530px) and (orientation: landscape) {
   .chapter-finish {
-    --rail-photo: clamp(5.75rem, 23svh, 8rem);
+    --rail-photo: clamp(6.25rem, 26svh, 10rem);
     --arc-top: 1rem;
+    --arc-clearance: .85rem;
   }
 }

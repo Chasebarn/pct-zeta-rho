@@ -83,7 +83,7 @@ def render(key, body, scripts=""):
         share_images = {
             "rush": ("chapter-session", "Phi Chi Theta members gathered for a professional event"),
             "interest": ("chapter-session", "Phi Chi Theta members gathered for a professional event"),
-            "about": ("provise-conversation", "A Zeta Rho member speaks with ProVise founder Ray Ferrara"),
+            "about": ("chapter-speaker-audience", "A Zeta Rho student and a guest speaker stand in front of chapter members"),
         }
         image, image_alt = share_images.get(key, ("chapter-gathering", "Zeta Rho members at a chapter event"))
         photo = f"{escape(origin, quote=True)}/assets/chapter/{image}-share.jpg"
@@ -93,6 +93,7 @@ def render(key, body, scripts=""):
     section_styles = f"<style>{home_style}</style>" if key == "home" else '<link rel="stylesheet" href="/v2/site-frame.css">'
     stylesheet = {"about": "about", "rush": "rush", "interest": "rush"}.get(key)
     page_styles = f'<link rel="stylesheet" href="/{stylesheet}.css">' if stylesheet else ""
+    page_footer = (ROOT / "site/about-footer.html").read_text() if key == "about" else footer
     source = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,7 +111,7 @@ def render(key, body, scripts=""):
 <noscript><style>.home-page .v2hd.is-over-hero {{ background: var(--purple-deep); }}</style></noscript>
 </head><body class="{key}-page">
 <a class="skip-link" href="#main">Skip to content</a>{header(key)}
-<main id="main">{body}</main>{footer}
+<main id="main">{body}</main>{page_footer}
 {scripts}<script type="module" src="/site.js"></script>
 </body></html>'''
     source = source.replace("../assets/", "/assets/").replace('href="rush.html"', 'href="/rush"')

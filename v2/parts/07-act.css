@@ -1,16 +1,18 @@
-/* One invitation beneath the chapter photographs. */
+/* The ribbon just overlaps the lower edge of the moving frames. */
 .act{
   position:relative;
-  padding:clamp(.65rem,1.5vw,1.5rem) 0 clamp(1.8rem,3.4vw,3.1rem);
-  color:var(--ink);text-align:center;
+  padding:clamp(1.55rem,3vw,2.65rem) 0 clamp(1.8rem,3.5vw,3rem);
+  background:var(--ribbon-purple);
+  color:var(--paper);text-align:center;
 }
+.mem.is-enhanced + .act{margin-top:-3px;box-shadow:0 -2px 5px rgba(25,18,33,.19)}
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
-.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--ink)}
-.act-title em{font-weight:400;font-style:italic;color:var(--purple);padding-right:.08em}
-.act-go{margin-top:clamp(1rem,2.6vw,1.9rem)}
+.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:1.06;letter-spacing:-.02em;color:var(--paper)}
+.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
+.act-go{margin-top:clamp(.8rem,2vw,1.4rem)}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;
-  min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
+  min-height:54px;min-width:194px;max-width:100%;padding:.8rem 2rem;
   border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
   font-family:var(--font-text);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:.01em;text-decoration:none;
 }
@@ -28,7 +30,8 @@
 }
 @media(max-height:530px) and (orientation:landscape){
  .act{padding-block:1rem}
- .act-title{font-size:3.2rem}
- .act-go{margin-top:.7rem}
+ .act-title{font-size:clamp(2.35rem,8svh,3.3rem)}
+ .act-go{margin-top:.55rem}
+ .act-cta{min-height:46px;padding:.5rem 1.25rem;font-size:1rem}
 }
 @media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}

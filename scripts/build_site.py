@@ -24,6 +24,7 @@ shutil.copy2(ROOT / "v2/tokens.css", OUTPUT / "v2/tokens.css")
 shutil.copy2(ROOT / "v2/site-frame.css", OUTPUT / "v2/site-frame.css")
 shutil.copy2(ROOT / "site/site.css", OUTPUT / "site.css")
 shutil.copy2(ROOT / "site/site.js", OUTPUT / "site.js")
+shutil.copy2(ROOT / "site/about.js", OUTPUT / "about.js")
 for page in ("about", "rush"):
     shutil.copy2(ROOT / f"site/{page}.css", OUTPUT / f"{page}.css")
 original = (ROOT / "v2/index.html").read_text()
@@ -41,11 +42,11 @@ for original_link, public_link in {
 footer = footer.replace("../assets/", "/assets/")
 
 titles = {
-    "home": ("Phi Chi Theta at USF", "Zeta Rho is USF’s professional business fraternity. Explore the chapter, member outcomes, and the Rush process."),
-    "rush": ("Rush Phi Chi Theta", "Thinking about joining Phi Chi Theta at USF? Find out what happens at Rush and sign up for the next schedule."),
-    "interest": ("Rush interest form", "Leave your details to hear from Zeta Rho about the next round of recruitment at USF."),
-    "about": ("About Zeta Rho", "The story of Phi Chi Theta at USF, from its founding by 18 students to the chapter leading it today."),
-    "privacy": ("Interest Form Privacy", "How Phi Chi Theta Zeta Rho uses and stores details submitted through its Rush interest form."),
+    "home": ("Phi Chi Theta at USF · Zeta Rho", "Zeta Rho is USF’s professional business fraternity. Explore the chapter, member outcomes, and the Rush process."),
+    "rush": ("Rush Phi Chi Theta at USF", "Thinking about joining Phi Chi Theta at USF? Find out what happens at Rush and sign up for the next schedule."),
+    "interest": ("Rush Interest Form · Phi Chi Theta at USF", "Leave your details to hear from Zeta Rho about the next round of recruitment at USF."),
+    "about": ("About Zeta Rho · Phi Chi Theta at USF", "Explore Zeta Rho’s history, service in Tampa Bay, Fall Summit, Muma 25 Under 25 honorees, and chapter leadership."),
+    "privacy": ("Interest Form Privacy · Phi Chi Theta at USF", "How Phi Chi Theta Zeta Rho uses and stores details submitted through its Rush interest form."),
 }
 routes = {"home": "/", "interest": "/rush/interest"}
 
@@ -96,10 +97,11 @@ def render(key, body, scripts=""):
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#241733">
-<title>{escape(title)} · Zeta Rho · USF</title><meta name="description" content="{escape(description, quote=True)}">
-<meta property="og:title" content="{escape(title, quote=True)} · Zeta Rho · USF"><meta property="og:description" content="{escape(description, quote=True)}">
+<title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}">
+<meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}">
 <meta property="og:type" content="website">{canonical}
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/svg+xml" href="/assets/pct-tab.svg" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
@@ -120,7 +122,7 @@ def render(key, body, scripts=""):
 render("home", home_main, f"<script>{home_js}</script>")
 for key in ("rush", "interest", "about", "privacy"):
     render(key, (ROOT / "site/pages" / (key + ".html")).read_text())
-(OUTPUT / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found · Phi Chi Theta</title><body style="margin:0;padding:12vh 8vw;background:#f8f6ef;color:#241733;font:20px/1.6 Georgia,serif"><h1>Page not found.</h1><p>Explore Phi Chi Theta at USF from the homepage.</p><a href="/">Return home</a></body></html>''')
+(OUTPUT / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found · Phi Chi Theta</title><link rel="icon" type="image/svg+xml" href="/assets/pct-tab.svg" sizes="any"><body style="margin:0;padding:12vh 8vw;background:#f8f6ef;color:#241733;font:20px/1.6 Georgia,serif"><h1>Page not found.</h1><p>Explore Phi Chi Theta at USF from the homepage.</p><a href="/">Return home</a></body></html>''')
 (OUTPUT / "robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /api/\n")
 if os.environ.get("SITE_URL"):
     from xml.sax.saxutils import escape as xml_escape

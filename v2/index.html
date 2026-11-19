@@ -6,7 +6,9 @@
 <meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
-<link rel="icon" type="image/png" href="../assets/crest.png">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/svg+xml" href="../assets/pct-tab.svg" sizes="any">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -490,74 +492,69 @@
 }
 /* ===== 05-mem ===== */
 .chapter-finish {
-  --arc-card-height: clamp(10rem, min(30vw, calc(100svh - var(--v2hd-h) - 14rem)), 23rem);
-  --arc-depth: clamp(1.2rem, 3.1vw, 2.5rem);
-  --arc-inset: clamp(.85rem, 2vw, 1.65rem);
-  --arc-gap: clamp(.55rem, 2vw, 1.5rem);
-  position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
+  --rail-photo: clamp(8.5rem, 15.6vw, 14rem);
+  --rail-gap: clamp(.55rem, 1.25vw, 1.15rem);
+  --ribbon-purple: #3b2853;
   background: var(--paper-deep);
 }
-.mem { padding: 0; }
-.mem-band { container-type: inline-size; }
-.mem-wheel {
-  position: relative;
+.mem { padding: clamp(1.55rem, 3.8vw, 3.25rem) 0 0; }
+.mem-band {
+  width: min(100%, 112rem);
+  margin-inline: auto;
+  overflow: auto hidden;
+  overscroll-behavior-inline: contain;
+}
+.mem-band:focus-visible { outline-offset: -3px; }
+.mem-track { display: flex; width: max-content; }
+.mem-strip {
   display: flex;
-  gap: var(--arc-gap);
-  align-items: start;
-  height: calc(var(--arc-card-height) + var(--arc-depth) + var(--arc-inset) * 2);
+  flex: none;
+  gap: var(--rail-gap);
   margin: 0;
-  padding: var(--arc-inset) var(--arc-gap);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--arc-gap);
+  padding: 0 var(--rail-gap) 0 0;
   list-style: none;
 }
-.mem-i {
-  flex: none;
-  width: min(calc(var(--arc-card-height) * 2 / 3), 41cqw);
-  aspect-ratio: 2 / 3;
-  scroll-snap-align: start;
-  overflow: hidden;
-  border-radius: clamp(6px, .65vw, 12px);
-  background: var(--paper);
+.mem-strip[aria-hidden="true"] { display: none; }
+.mem-i { flex: none; width: var(--rail-photo); aspect-ratio: 2 / 3; background: var(--paper); }
+.mem-i img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 3px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .mem.is-enhanced .mem-band { overflow: clip; }
+  .mem.is-enhanced .mem-band:not(:focus-visible) {
+    --rail-fade: clamp(12px, 2vw, 18px);
+    mask-image: linear-gradient(90deg, transparent, #000 var(--rail-fade), #000 calc(100% - var(--rail-fade)), transparent);
+  }
+  .mem.is-enhanced .mem-strip[aria-hidden="true"] { display: flex; }
+  .mem.is-enhanced .mem-track {
+    animation: pct-photo-rail 72s linear infinite paused;
+  }
+  .mem.is-enhanced.is-in-range:not(.is-paused) .mem-track { animation-play-state: running; }
+  @keyframes pct-photo-rail { to { transform: translateX(-25%); } }
 }
-.mem-i img { width: 100%; height: 100%; display: block; object-fit: contain; }
-.mem:not(.is-enhanced) .mem-i[aria-hidden="true"] { display: none; }
-.mem.is-enhanced .mem-wheel { padding: 0; overflow: hidden; }
-.mem.is-enhanced .mem-i {
-  position: absolute;
-  inset: 0 auto auto 0;
-}
-@media (min-width: 1441px) {
-  .chapter-finish { border-inline: 1px solid var(--line); }
-}
+
 @media (max-width: 599px) {
-  .chapter-finish { --arc-card-height: clamp(7.25rem, min(42vw, calc(100svh - var(--v2hd-h) - 13.75rem)), 15.75rem); }
-  .mem-i { width: min(calc(var(--arc-card-height) * 2 / 3), 27.5cqw); }
+  .chapter-finish { --rail-photo: clamp(6.5rem, 36vw, 10rem); }
 }
 @media (max-height: 530px) and (orientation: landscape) {
-  .chapter-finish {
-    --arc-card-height: clamp(7.25rem, 32svh, 10.5rem);
-    --arc-depth: .95rem;
-    --arc-inset: .65rem;
-  }
+  .chapter-finish { --rail-photo: clamp(5.75rem, 23svh, 8rem); }
+  .mem { padding-top: 1rem; }
 }
 /* ===== 07-act ===== */
-/* One invitation beneath the chapter photographs. */
+/* The ribbon just overlaps the lower edge of the moving frames. */
 .act{
   position:relative;
-  padding:clamp(.65rem,1.5vw,1.5rem) 0 clamp(1.8rem,3.4vw,3.1rem);
-  color:var(--ink);text-align:center;
+  padding:clamp(1.55rem,3vw,2.65rem) 0 clamp(1.8rem,3.5vw,3rem);
+  background:var(--ribbon-purple);
+  color:var(--paper);text-align:center;
 }
+.mem.is-enhanced + .act{margin-top:-3px;box-shadow:0 -2px 5px rgba(25,18,33,.19)}
 .act-inner{max-width:58rem;margin-inline:auto;text-align:center}
-.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:.98;letter-spacing:-.02em;color:var(--ink)}
-.act-title em{font-weight:400;font-style:italic;color:var(--purple);padding-right:.08em}
-.act-go{margin-top:clamp(1rem,2.6vw,1.9rem)}
+.act-title{margin:0;font-size:clamp(3rem,6.1vw,5.75rem);line-height:1.06;letter-spacing:-.02em;color:var(--paper)}
+.act-title em{font-weight:400;font-style:italic;color:var(--gold-soft);padding-right:.08em}
+.act-go{margin-top:clamp(.8rem,2vw,1.4rem)}
 .act-cta{
   display:inline-flex;align-items:center;justify-content:center;
-  min-height:58px;min-width:194px;max-width:100%;padding:1rem 2.1rem;
+  min-height:54px;min-width:194px;max-width:100%;padding:.8rem 2rem;
   border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--ink);
   font-family:var(--font-text);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:.01em;text-decoration:none;
 }
@@ -575,8 +572,9 @@
 }
 @media(max-height:530px) and (orientation:landscape){
  .act{padding-block:1rem}
- .act-title{font-size:3.2rem}
- .act-go{margin-top:.7rem}
+ .act-title{font-size:clamp(2.35rem,8svh,3.3rem)}
+ .act-go{margin-top:.55rem}
+ .act-cta{min-height:46px;padding:.5rem 1.25rem;font-size:1rem}
 }
 @media(prefers-reduced-motion:reduce){.act.is-arrived .act-cta{animation:none}}
 /* ===== 99-footer ===== */
@@ -963,23 +961,25 @@
     <!-- ===== 05-mem ===== -->
 <div class="chapter-finish">
 <section class="mem" id="life" aria-label="Chapter life">
-  <div class="mem-band">
-    <ul class="mem-wheel" role="list" aria-label="Chapter photographs" tabindex="0">
-      <li class="mem-i"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="Chapter members stand together on an outdoor court." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="Members stand among shelves of supplies during a volunteer visit." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="Members sit on the beach as the sun sets over the Gulf." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="Two members speak with a reporter beside a tent at a community event." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="Members gather for a photo on a floodlit field after dark." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="Members walk along a ridge on the golf course." loading="lazy" decoding="async"></li>
-      <li class="mem-i"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="Members get ready to head out in golf carts." loading="lazy" decoding="async"></li>
-    </ul>
+  <div class="mem-band" role="region" aria-label="Chapter photographs" tabindex="0">
+    <div class="mem-track">
+      <ul class="mem-strip" role="list">
+          <li class="mem-i"><img src="../assets/chapter/jabil-visit.webp" width="560" height="840" alt="Members stand outside the Jabil building on a company visit." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/courtside.webp" width="560" height="840" alt="Chapter members stand together on an outdoor court." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/pantry-volunteers.webp" width="560" height="840" alt="Members stand among shelves of supplies during a volunteer visit." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/beach-sunset.webp" width="560" height="840" alt="Members sit on the beach as the sun sets over the Gulf." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/community-interview.webp" width="560" height="840" alt="Two members speak with a reporter beside a tent at a community event." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/intramural-night.webp" width="560" height="840" alt="Members gather for a photo on a floodlit field after dark." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/on-the-course.webp" width="560" height="840" alt="Members walk along a ridge on the golf course." loading="lazy" decoding="async"></li>
+          <li class="mem-i"><img src="../assets/chapter/golf-carts.webp" width="560" height="840" alt="Members get ready to head out in golf carts." loading="lazy" decoding="async"></li>
+      </ul>
+    </div>
   </div>
+  <p class="v2-sr-only" id="mem-motion-keys">Tap the photos or press Space to pause or resume.</p>
 </section>
 
     <!-- ===== 07-act ===== -->
-<!-- A display-led closing invitation, consistent with the original page. -->
-<section class="act" id="act" aria-labelledby="act-title">
+<section class="act on-dark" id="act" aria-labelledby="act-title">
   <div class="v2wrap">
     <div class="act-inner">
       <h2 class="act-title" id="act-title">Rush <em>Phi Chi Theta</em></h2>
@@ -1713,116 +1713,57 @@ window.pctInitNational = function () {
   window.pctMotion?.onReduce(reveal);
 };
 /* ===== 05-mem ===== */
-window.pctInitPhotoArc = function () {
-  const band = document.querySelector('.mem');
-  if (!band || !window.IntersectionObserver) return;
-  const list = band.querySelector('.mem-wheel');
-  let cards = [...list.children];
-  const track = [];
-  let ready = false;
-
+window.pctInitPhotoRail = function () {
+  const section = document.querySelector('.mem');
+  if (!section || !window.IntersectionObserver) return;
+  const band = section.querySelector('.mem-band');
+  const track = band.querySelector('.mem-track');
+  const photos = track.querySelector('.mem-strip');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  let frame = 0;
-  let startedAt;
-  let geometry;
 
-  function measure() {
-    const width = list.clientWidth;
-    const cardWidth = cards[0].offsetWidth;
-    const cardHeight = cards[0].offsetHeight;
-    const sideInset = Math.max(8, width * .018);
-    const pitch = cardWidth + Math.min(24, Math.max(10, width * .02));
-    // Wrap cards only after their entire rotated bounds are outside the stage.
-    const runway = width + cardWidth + cardHeight;
-    while (track.length * pitch < runway) {
-      const copies = cards.map(card => {
-        const copy = card.cloneNode(true);
-        copy.setAttribute('aria-hidden', 'true');
-        return copy;
-      });
-      track.push(...copies);
-      list.append(...copies);
-    }
-    geometry = {
-      center: width / 2, cardWidth, cardHeight, pitch,
-      edge: width / 2 - sideInset,
-      room: list.clientHeight - cardHeight,
-      tilt: width < 600 ? 9 : 13,
-    };
-  }
-
-  function paint(time) {
-    const {center, cardWidth, cardHeight, pitch, edge, room, tilt} = geometry;
-    if (edge <= 0) return;
-    const full = track.length;
-    const phase = ((time - startedAt) / 8000) % full;
-    track.forEach((card, index) => {
-      const column = ((index - phase + full * 2.5) % full) - full / 2;
-      const x = column * pitch;
-      const progress = Math.max(-1, Math.min(1, x / edge));
-      const angle = progress * tilt;
-      const radians = Math.abs(angle) * Math.PI / 180;
-      const tiltDepth = Math.max(0, (cardHeight * (Math.cos(radians) - 1) + cardWidth * Math.sin(radians)) / 2);
-      const y = room * (.19 + .59 * progress * progress) - tiltDepth * progress * progress;
-      card.style.transform = `translate3d(${center + x - cardWidth / 2}px, ${y}px, 0) rotate(${angle}deg)`;
-    });
-  }
-
-  function tick(time) {
-    paint(time);
-    frame = requestAnimationFrame(tick);
-  }
-
-  function sync() {
-    const enhanced = ready && cards.length >= 3 && !motion.matches;
-    band.classList.toggle('is-enhanced', enhanced);
-    if (enhanced) {
-      list.removeAttribute('tabindex');
-      list.scrollLeft = 0;
-      measure();
-      const now = performance.now();
-      startedAt ??= now;
-      paint(now);
-      if (!frame) frame = requestAnimationFrame(tick);
+  function configure() {
+    section.classList.toggle('is-enhanced', !motion.matches);
+    if (motion.matches) {
+      band.removeAttribute('aria-describedby');
     } else {
-      list.setAttribute('tabindex', '0');
-      track.forEach(card => card.style.removeProperty('transform'));
-      if (frame) {
-        cancelAnimationFrame(frame);
-        frame = 0;
-      }
+      band.setAttribute('aria-describedby', 'mem-motion-keys');
+      band.scrollLeft = 0;
     }
   }
 
-  const images = new IntersectionObserver(async ([entry]) => {
-    if (!entry.isIntersecting) return;
-    images.disconnect();
-    const loaded = await Promise.all(cards.map(async card => {
-      const image = card.querySelector('img');
-      image.loading = 'eager';
-      try {
-        await image.decode();
-        return true;
-      } catch {
-        card.hidden = true;
-        return false;
-      }
-    }));
-    cards = cards.filter((_, index) => loaded[index]);
-    track.push(...cards);
-    ready = true;
-    sync();
-  }, {rootMargin: '680px 0px'});
-  images.observe(band);
+  const observer = new IntersectionObserver(([entry]) => {
+    section.classList.toggle('is-in-range', entry.isIntersecting);
+    if (!entry.isIntersecting || track.children.length > 1) return;
 
-  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(list);
-  else window.addEventListener('resize', sync, {passive: true});
-  motion.addEventListener('change', sync);
+    // Repeat the same strip and trailing gap enough to span even a short, wide screen.
+    for (let repeat = 0; repeat < 3; repeat += 1) {
+      const copy = photos.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      track.append(copy);
+    }
+    track.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
+    configure();
+  }, {rootMargin: '360px 0px'});
+  observer.observe(section);
+
+  function togglePlayback() {
+    if (section.classList.contains('is-enhanced')) section.classList.toggle('is-paused');
+  }
+
+  band.addEventListener('click', togglePlayback);
+  band.addEventListener('keydown', event => {
+    if (!['Enter', ' '].includes(event.key) || !section.classList.contains('is-enhanced')) return;
+    event.preventDefault();
+    if (!event.repeat) togglePlayback();
+  });
+  motion.addEventListener('change', () => {
+    if (track.children.length > 1) configure();
+  });
 };
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {
-  var inits = ['pctInitAct', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational', 'pctInitPhotoArc'];
+  var inits = ['pctInitAct', 'pctInitStick', 'pctInitHero', 'pctInitGrow', 'pctInitPlacements', 'pctInitNational', 'pctInitPhotoRail'];
   inits.forEach(function (n) {
     try { if (typeof window[n] === 'function') window[n](); }
     catch (e) { if (window.console) console.warn(n + ' failed:', e); }

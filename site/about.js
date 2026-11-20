@@ -1,3 +1,5 @@
+import '/assets/stat-counter.js';
+
 const serviceGallery = document.querySelector('.service-gallery');
 
 if (serviceGallery) {
@@ -72,49 +74,16 @@ if (serviceGallery) {
 }
 
 const serviceTotal = document.querySelector('[data-service-total]');
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-if (serviceTotal && !reducedMotion.matches && 'IntersectionObserver' in window) {
-  const finalLabel = serviceTotal.textContent.trim();
-  const target = Number(finalLabel.replace(/\D/g, ''));
-  const formatter = new Intl.NumberFormat('en-US');
+if (serviceTotal) {
+  const currencyTotal = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
   const headerHeight = document.querySelector('.v2hd')?.offsetHeight ?? 0;
-  const visibleRatio = .85;
-  const duration = 2250;
-  const slowdown = 4;
-  const fullEase = 1 - Math.exp(-slowdown);
-  serviceTotal.textContent = '0';
-  const observer = new IntersectionObserver((entries) => {
-    if (!entries.some((entry) => entry.intersectionRatio >= visibleRatio)) return;
-    observer.disconnect();
-    let start;
-    let lastUpdate = -Infinity;
-
-    function animate(now) {
-      start ??= now;
-      const progress = Math.min(1, (now - start) / duration);
-      if (progress === 1 || reducedMotion.matches) {
-        serviceTotal.textContent = finalLabel;
-        return;
-      }
-      if (now - lastUpdate >= 42) {
-        // Keep enough time between updates to see the smaller steps at the end.
-        const eased = (1 - Math.exp(-slowdown * progress)) / fullEase;
-        serviceTotal.textContent = formatter.format(Math.floor(target * eased));
-        lastUpdate = now;
-      }
-      requestAnimationFrame(animate);
-    }
-
-    requestAnimationFrame(animate);
-  }, { threshold: visibleRatio, rootMargin: `-${headerHeight}px 0px -16px` });
-  observer.observe(serviceTotal.closest('strong'));
-
-  reducedMotion.addEventListener('change', ({ matches }) => {
-    if (!matches) return;
-    observer.disconnect();
-    serviceTotal.textContent = finalLabel;
-  }, { once: true });
+  window.pctCountStats([{
+    digits: serviceTotal,
+    trigger: serviceTotal.closest('strong'),
+    target: Number(serviceTotal.textContent.replace(/\D/g, '')),
+    format: value => currencyTotal.format(value),
+  }], `-${headerHeight}px 0px -16px`);
 }
 
 const honorFeature = document.querySelector('.honors-feature');

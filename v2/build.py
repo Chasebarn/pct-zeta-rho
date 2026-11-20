@@ -41,6 +41,7 @@ for p in parts:
         j = j.replace("'assets/", "'../assets/").replace('"assets/', '"../assets/')
         js.append(f'/* ===== {slug} ===== */\n' + j)
 
+js.append(read(os.path.join(ROOT, '..', 'assets', 'stat-counter.js')))
 # The shared reduced-motion lifecycle must be evaluated before section inits
 js.sort(key=lambda s: 0 if 'pctMotion' in s[:400] else 1)
 inits = re.findall(r'window\.(pctInit\w+)\s*=', '\n'.join(js))

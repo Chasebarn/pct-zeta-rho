@@ -1532,75 +1532,13 @@ window.pctInitPlacements = function () {
     syncPreference();
   }
 
-  /* Each result counts once when its own row enters. Final source values and
-     accessible names remain unchanged; only overlaid aria-hidden digits move. */
-  var digits = Array.prototype.slice.call(root.querySelectorAll('[data-pl-count]'));
-  if (!digits.length || (reduce && reduce.matches) || !window.requestAnimationFrame ||
-      !('IntersectionObserver' in window)) return;
-  var values = digits.map(function (element) {
-    return { element:element, row:element.closest('.pl-n'), target:Number(element.getAttribute('data-pl-count')),
-      decimals:Number(element.getAttribute('data-pl-decimals') || 0), final:element.textContent,
-      active:false, done:false, began:null };
-  });
-  var countFrame = null;
-  var countsStopped = false;
-  var countObserver;
-  function finishCounts() {
-    if (countsStopped) return;
-    countsStopped = true;
-    if (countObserver) countObserver.disconnect();
-    if (countFrame !== null) window.cancelAnimationFrame(countFrame);
-    countFrame = null;
-    values.forEach(function (item) { item.element.textContent = item.final; item.active = false; });
-    document.removeEventListener('visibilitychange', onCountVisibility);
-    if (reduce && reduce.removeEventListener) reduce.removeEventListener('change', onCountReduce);
-    else if (reduce && reduce.removeListener) reduce.removeListener(onCountReduce);
-  }
-  function onCountReduce(event) { if (event.matches) finishCounts(); }
-  function onCountVisibility() { if (document.hidden) finishCounts(); }
-  function countStep(now) {
-    countFrame = null;
-    if (countsStopped) return;
-    var running = false;
-    values.forEach(function (item) {
-      if (!item.active) return;
-      if (item.began === null) item.began = now;
-      var progress = Math.max(0, Math.min((now - item.began) / 900, 1));
-      var eased = 1 - Math.pow(1 - progress, 3);
-      item.element.textContent = (1 + (item.target - 1) * eased).toFixed(item.decimals);
-      if (progress === 1) {
-        item.element.textContent = item.final;
-        item.active = false;
-        item.done = true;
-      } else running = true;
-    });
-    if (running) countFrame = window.requestAnimationFrame(countStep);
-    else if (values.every(function (item) { return item.done; })) finishCounts();
-  }
-  try {
-    countObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || entry.intersectionRatio < .6) return;
-        var item = values.find(function (value) { return value.row === entry.target; });
-        if (!item || item.active || item.done) return;
-        item.active = true;
-        countObserver.unobserve(item.row);
-      });
-      if (values.some(function (item) { return item.active; }) && countFrame === null && !countsStopped) {
-        countFrame = window.requestAnimationFrame(countStep);
-      }
-    }, { threshold:.6 });
-    document.addEventListener('visibilitychange', onCountVisibility);
-    if (reduce && reduce.addEventListener) reduce.addEventListener('change', onCountReduce);
-    else if (reduce && reduce.addListener) reduce.addListener(onCountReduce);
-    if (window.pctMotion && typeof window.pctMotion.onReduce === 'function') window.pctMotion.onReduce(finishCounts);
-    if (!countsStopped) {
-      /* Arm visual digits before observation so entering rows never flash their
-         final value and then jump back to one. Accessible finals stay intact. */
-      values.forEach(function (item) { item.element.textContent = (1).toFixed(item.decimals); });
-      values.forEach(function (item) { if (item.row && isFinite(item.target)) countObserver.observe(item.row); });
-    }
-  } catch (error) { finishCounts(); }
+  const stats = [...root.querySelectorAll('[data-pl-count]')].map(digits => ({
+    digits,
+    trigger: digits.closest('.pl-n'),
+    target: Number(digits.dataset.plCount),
+    format: value => value.toFixed(Number(digits.dataset.plDecimals || 0)),
+  }));
+  window.pctCountStats(stats);
 };
 /* ===== 04-national ===== */
 window.pctInitNational = function () {
@@ -1793,6 +1731,72 @@ window.pctInitPhotoRail = function () {
     if (!event.repeat) togglePlayback();
   });
 };
+(function () {
+  'use strict';
+
+  window.pctCountStats = function (stats, rootMargin = '0px') {
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    if (!stats.length || reduceMotion.matches || document.hidden || !('IntersectionObserver' in window)) return;
+
+    const threshold = .6;
+    const duration = 900;
+    const counts = stats.map(stat => ({ ...stat, final: stat.digits.textContent, began: null }));
+    const waiting = new Map(counts.map(count => [count.trigger, count]));
+    const active = new Set();
+    let frame = 0;
+
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.intersectionRatio < threshold) continue;
+        const count = waiting.get(entry.target);
+        if (!count) continue;
+        waiting.delete(entry.target);
+        observer.unobserve(entry.target);
+        active.add(count);
+      }
+      if (active.size && !frame) frame = requestAnimationFrame(update);
+    }, { threshold, rootMargin });
+
+    function finish() {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      active.clear();
+      waiting.clear();
+      counts.forEach(({ digits, final }) => { digits.textContent = final; });
+      reduceMotion.removeEventListener('change', onMotionChange);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    }
+
+    function onMotionChange(event) {
+      if (event.matches) finish();
+    }
+
+    function onVisibilityChange() {
+      if (document.hidden) finish();
+    }
+
+    function update(now) {
+      frame = 0;
+      for (const count of active) {
+        count.began ??= now;
+        const progress = Math.min(1, (now - count.began) / duration);
+        const eased = 1 - (1 - progress) ** 3;
+        const text = progress === 1 ? count.final : count.format(1 + (count.target - 1) * eased);
+        if (count.digits.textContent !== text) count.digits.textContent = text;
+        if (progress === 1) active.delete(count);
+      }
+      if (active.size) frame = requestAnimationFrame(update);
+      else if (!waiting.size) finish();
+    }
+
+    reduceMotion.addEventListener('change', onMotionChange);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    for (const count of counts) {
+      count.digits.textContent = count.format(1);
+      observer.observe(count.trigger);
+    }
+  };
+}());
 
 /* ---- boot: every init is optional and must never take the page down ---- */
 (function () {

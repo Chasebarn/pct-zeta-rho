@@ -20,6 +20,7 @@ if (serviceGallery) {
       project.querySelector('.service-caption').inert = item !== selected;
     });
     if (announce) {
+      serviceGallery.dataset.interacted = '';
       const title = projects[selected].querySelector('h3').textContent;
       status.textContent = `${title}, ${selected + 1} of ${projects.length}`;
     }

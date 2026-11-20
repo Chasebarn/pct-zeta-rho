@@ -112,8 +112,8 @@ def render(key, body, scripts=""):
 <title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}">
 <meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}">
 <meta property="og:type" content="website">{canonical}
-<link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" sizes="16x16 32x32 48x48">
-<link rel="icon" type="image/svg+xml" href="/assets/pct-tab.svg?v=2" sizes="any">
+<link rel="icon" type="image/x-icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" href="/assets/pct-tab.png?v=3" sizes="64x64">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
@@ -134,7 +134,7 @@ def render(key, body, scripts=""):
 render("home", home_main, f"<script>{home_js}</script>")
 for key in ("rush", "interest", "about", "privacy"):
     render(key, (ROOT / "site/pages" / (key + ".html")).read_text())
-(OUTPUT / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found · Phi Chi Theta</title><link rel="icon" type="image/svg+xml" href="/assets/pct-tab.svg?v=2" sizes="any"><body style="margin:0;padding:12vh 8vw;background:#f8f6ef;color:#241733;font:20px/1.6 Georgia,serif"><h1>Page not found.</h1><p>Explore Phi Chi Theta at USF from the homepage.</p><a href="/">Return home</a></body></html>''')
+(OUTPUT / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found · Phi Chi Theta</title><link rel="icon" type="image/png" href="/assets/pct-tab.png?v=3" sizes="64x64"><body style="margin:0;padding:12vh 8vw;background:#f8f6ef;color:#241733;font:20px/1.6 Georgia,serif"><h1>Page not found.</h1><p>Explore Phi Chi Theta at USF from the homepage.</p><a href="/">Return home</a></body></html>''')
 (OUTPUT / "robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /api/\n")
 if os.environ.get("SITE_URL"):
     from xml.sax.saxutils import escape as xml_escape

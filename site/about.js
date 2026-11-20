@@ -78,28 +78,43 @@ if (serviceTotal && !reducedMotion.matches && 'IntersectionObserver' in window) 
   const finalLabel = serviceTotal.textContent.trim();
   const target = Number(finalLabel.replace(/\D/g, ''));
   const formatter = new Intl.NumberFormat('en-US');
+  const headerHeight = document.querySelector('.v2hd')?.offsetHeight ?? 0;
+  const visibleRatio = .85;
+  const duration = 2250;
+  const slowdown = 4;
+  const fullEase = 1 - Math.exp(-slowdown);
+  serviceTotal.textContent = '0';
   const observer = new IntersectionObserver((entries) => {
-    if (!entries.some((entry) => entry.isIntersecting)) return;
+    if (!entries.some((entry) => entry.intersectionRatio >= visibleRatio)) return;
     observer.disconnect();
     let start;
+    let lastUpdate = -Infinity;
 
     function animate(now) {
       start ??= now;
-      const progress = Math.min(1, (now - start) / 1400);
+      const progress = Math.min(1, (now - start) / duration);
       if (progress === 1 || reducedMotion.matches) {
         serviceTotal.textContent = finalLabel;
         return;
       }
-      // The count accelerates toward the middle and eases to a stop.
-      const eased = progress ** 3 * (10 + progress * (6 * progress - 15));
-      const amount = Math.floor(target * eased);
-      serviceTotal.textContent = formatter.format(amount);
+      if (now - lastUpdate >= 42) {
+        // Keep enough time between updates to see the smaller steps at the end.
+        const eased = (1 - Math.exp(-slowdown * progress)) / fullEase;
+        serviceTotal.textContent = formatter.format(Math.floor(target * eased));
+        lastUpdate = now;
+      }
       requestAnimationFrame(animate);
     }
 
     requestAnimationFrame(animate);
-  }, { threshold: .12 });
-  observer.observe(serviceTotal.closest('.service-impact'));
+  }, { threshold: visibleRatio, rootMargin: `-${headerHeight}px 0px -16px` });
+  observer.observe(serviceTotal.closest('strong'));
+
+  reducedMotion.addEventListener('change', ({ matches }) => {
+    if (!matches) return;
+    observer.disconnect();
+    serviceTotal.textContent = finalLabel;
+  }, { once: true });
 }
 
 const honorFeature = document.querySelector('.honors-feature');

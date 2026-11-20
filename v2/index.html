@@ -1739,7 +1739,6 @@ window.pctInitPhotoRail = function () {
     if (!stats.length || reduceMotion.matches || document.hidden || !('IntersectionObserver' in window)) return;
 
     const threshold = .6;
-    const duration = 900;
     const counts = stats.map(stat => ({ ...stat, final: stat.digits.textContent, began: null }));
     const waiting = new Map(counts.map(count => [count.trigger, count]));
     const active = new Set();
@@ -1775,24 +1774,36 @@ window.pctInitPhotoRail = function () {
       if (document.hidden) finish();
     }
 
-    function countProgress(elapsed, finishDuration) {
-      const progress = Math.min(1, elapsed / duration);
-      if (!finishDuration || progress <= .5) return 1 - (1 - progress) ** 3;
+    function countValue(count, now) {
+      const elapsed = now - count.began;
+      const delays = count.finishDelays;
+      const duration = delays ? 260 : 900;
+      const firstFinalStep = delays ? count.target - delays.length : count.target;
+      if (!delays || elapsed < duration) {
+        if (elapsed >= duration) return count.target;
+        const openingTarget = delays ? firstFinalStep - 1 : count.target;
+        const progress = 1 - (1 - elapsed / duration) ** 3;
+        return 1 + (openingTarget - 1) * progress;
+      }
 
-      // Match the cubic's speed at halfway, then decelerate over the longer finish.
-      const finishProgress = Math.min(1, (elapsed - duration / 2) / finishDuration);
-      const taper = 6 * finishDuration / duration - 1;
-      return 1 - (1 - finishProgress) / (8 * (1 + taper * finishProgress));
+      // Time each final dollar from the frame that displayed it so none are skipped.
+      if (count.nextStepAt === undefined) count.step = 0;
+      else if (now < count.nextStepAt) return firstFinalStep + count.step;
+      else count.step += 1;
+      if (count.step === delays.length) return count.target;
+      count.nextStepAt = now + delays[count.step];
+      return firstFinalStep + count.step;
     }
 
     function update(now) {
       frame = 0;
       for (const count of active) {
         count.began ??= now;
-        const progress = countProgress(now - count.began, count.finishDuration);
-        const text = progress === 1 ? count.final : count.format(1 + (count.target - 1) * progress);
+        const value = countValue(count, now);
+        const done = value >= count.target;
+        const text = done ? count.final : count.format(value);
         if (count.digits.textContent !== text) count.digits.textContent = text;
-        if (progress === 1) active.delete(count);
+        if (done) active.delete(count);
       }
       if (active.size) frame = requestAnimationFrame(update);
       else if (!waiting.size) finish();

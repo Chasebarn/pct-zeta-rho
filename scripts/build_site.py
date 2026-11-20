@@ -63,7 +63,7 @@ def header(active):
         return f'<a{css} href="{href}"{current}>{label}</a>'
     links = "".join(f"<li>{link(item, primary=True)}</li>" for item in destinations)
     mobile = "".join(link(item) for item in destinations if item[0] != "rush")
-    header_class = "v2hd is-over-hero" if active == "home" else "v2hd"
+    header_class = "v2hd is-over-hero" if active in ("home", "about", "rush") else "v2hd"
     if active in ("home", "rush", "about", "interest"):
         header_class += " is-hero-nav"
     return f'''<header class="{header_class}">
@@ -119,7 +119,7 @@ def render(key, body, scripts=""):
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="/v2/tokens.css">
 {section_styles}<link rel="stylesheet" href="/site.css">{page_styles}
-<noscript><style>.home-page .v2hd.is-over-hero {{ background: var(--purple-deep); }}</style></noscript>
+<noscript><style>body:is(.home-page, .about-page, .rush-page) .v2hd.is-over-hero {{ background: var(--purple-deep); }}</style></noscript>
 </head><body class="{key}-page">
 <a class="skip-link" href="#main">Skip to content</a>{header(key)}
 <main id="main">{body}</main>{page_footer}

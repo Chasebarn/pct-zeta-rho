@@ -8,12 +8,6 @@
 .about-page main a { text-underline-offset: .25em; }
 .about-page main a:hover { text-decoration-color: currentColor; }
 
-.about-page .v2hd.is-hero-nav { background: var(--purple-deep); border-color: transparent; }
-.about-page .v2hd.is-hero-nav :is(.v2hd-link, .v2hd-name, .v2hd-menu summary) { color: var(--paper); }
-.about-page .v2hd.is-hero-nav .v2hd-sub { color: var(--gold-soft); }
-.about-page .v2hd.is-hero-nav .v2hd-link:is(:hover, [aria-current="page"]) { text-decoration-color: var(--gold-soft); }
-.about-page .v2hd.is-hero-nav :is(.v2hd-brand, .v2hd-link, .v2hd-menu summary):focus-visible { outline-color: var(--gold-soft); }
-
 .chapter-cover {
   --cover-space: clamp(3.5rem, 7vw, 7rem);
   position: relative;

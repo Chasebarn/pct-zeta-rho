@@ -27,6 +27,13 @@ if (menu) {
 }
 
 const leadHero = document.querySelector('.v2hero, .rush-hero, .chapter-cover');
+if (header && leadHero?.matches('.rush-hero, .chapter-cover')) {
+  const updateHeaderTone = () => header.classList.toggle('is-over-hero', window.scrollY < 12);
+  updateHeaderTone();
+  window.addEventListener('scroll', updateHeaderTone, { passive: true });
+  window.addEventListener('pageshow', updateHeaderTone);
+}
+
 if (header && leadHero && 'IntersectionObserver' in window) {
   const updateRushAction = () => {
     const heroHasPassed = leadHero.getBoundingClientRect().bottom <= header.offsetHeight + 1;

@@ -1,4 +1,4 @@
-import '/assets/stat-counter.js?v=2';
+import '/assets/stat-counter.js?v=3';
 
 const serviceGallery = document.querySelector('.service-gallery');
 
@@ -83,7 +83,7 @@ if (serviceTotal) {
     trigger: serviceTotal.closest('strong'),
     target: Number(serviceTotal.textContent.replace(/\D/g, '')),
     format: value => currencyTotal.format(value),
-    finishDuration: 1150,
+    finishDelays: [100, 120, 145, 175, 220],
   }], `-${headerHeight}px 0px -16px`);
 }
 

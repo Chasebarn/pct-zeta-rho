@@ -1734,11 +1734,10 @@ window.pctInitPhotoRail = function () {
 (function () {
   'use strict';
 
-  window.pctCountStats = function (stats, rootMargin = '0px') {
+  window.pctCountStats = function (stats, { rootMargin = '0px', threshold = .6 } = {}) {
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
     if (!stats.length || reduceMotion.matches || document.hidden || !('IntersectionObserver' in window)) return;
 
-    const threshold = .6;
     const counts = stats.map(stat => ({ ...stat, final: stat.digits.textContent, began: null }));
     const waiting = new Map(counts.map(count => [count.trigger, count]));
     const active = new Set();
@@ -1777,12 +1776,13 @@ window.pctInitPhotoRail = function () {
     function countValue(count, now) {
       const elapsed = now - count.began;
       const delays = count.finishDelays;
-      const duration = delays ? 260 : 900;
+      const duration = delays ? 415 : 900;
       const firstFinalStep = delays ? count.target - delays.length : count.target;
       if (!delays || elapsed < duration) {
         if (elapsed >= duration) return count.target;
         const openingTarget = delays ? firstFinalStep - 1 : count.target;
-        const progress = 1 - (1 - elapsed / duration) ** 3;
+        const fraction = elapsed / duration;
+        const progress = delays ? fraction ** 2 * (3 - 2 * fraction) : 1 - (1 - fraction) ** 3;
         return 1 + (openingTarget - 1) * progress;
       }
 

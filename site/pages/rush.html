@@ -14,23 +14,66 @@
 </section>
 
 <section class="rush-section rush-overview" id="what-is-rush" aria-labelledby="what-is-rush-title">
-  <div class="wrap rush-guide-layout">
-    <h2 id="what-is-rush-title" data-rush-reveal>What Rush Is</h2>
-    <div class="rush-overview-copy" data-rush-reveal>
-      <p class="rush-overview-lead">Rush is a six-event introduction to Phi Chi Theta at USF.</p>
-      <p>Meet current members, practice professional skills, and get a feel for the chapter before deciding if it’s a good fit.</p>
+  <div class="wrap">
+    <header class="rush-story-intro" data-rush-reveal>
+      <h2 id="what-is-rush-title">What Rush Is</h2>
+      <p>Six events to get to know the chapter and decide if you want to join.</p>
+    </header>
+    <div class="rush-story" data-rush-story data-rush-reveal>
+      <div class="rush-story-tabs" role="tablist" aria-label="Scenes from Rush" hidden>
+        <button id="rush-meet-tab" type="button" role="tab" aria-controls="rush-meet" aria-selected="true">Meet members</button>
+        <button id="rush-workshop-tab" type="button" role="tab" aria-controls="rush-workshop" aria-selected="false" tabindex="-1">Try a workshop</button>
+        <button id="rush-alumni-tab" type="button" role="tab" aria-controls="rush-alumni" aria-selected="false" tabindex="-1">Hear from alumni</button>
+      </div>
+      <div class="rush-story-scenes">
+        <div class="rush-story-scene" id="rush-meet" data-rush-scene>
+          <figure class="rush-photo">
+            <img src="/assets/chapter/meet-the-chapter-800.webp"
+                 srcset="/assets/chapter/meet-the-chapter-480.webp 480w, /assets/chapter/meet-the-chapter-800.webp 800w, /assets/chapter/meet-the-chapter-1200.webp 1200w"
+                 sizes="(max-width: 760px) 90vw, (max-width: 1260px) 50vw, 620px" width="800" height="533"
+                 loading="lazy" decoding="async" alt="Phi Chi Theta members talking with guests at a chapter event.">
+          </figure>
+          <div class="rush-story-caption">
+            <h3>Meet members</h3>
+            <p>Ask members what they do in PCT and why they joined.</p>
+          </div>
+        </div>
+        <div class="rush-story-scene" id="rush-workshop" data-rush-scene>
+          <figure class="rush-photo rush-photo--source">
+            <img src="/assets/chapter/rush-workshop-800.webp"
+                 srcset="/assets/chapter/rush-workshop-480.webp 480w, /assets/chapter/rush-workshop-800.webp 800w, /assets/chapter/rush-workshop-1200.webp 1200w"
+                 sizes="(max-width: 760px) 90vw, (max-width: 1260px) 50vw, 620px" width="800" height="800"
+                 loading="lazy" decoding="async" alt="Chapter members work together around a table with laptops.">
+          </figure>
+          <div class="rush-story-caption">
+            <h3>Try a workshop</h3>
+            <p>Work through an exercise with members and see how they work together.</p>
+          </div>
+        </div>
+        <div class="rush-story-scene" id="rush-alumni" data-rush-scene>
+          <figure class="rush-photo">
+            <img src="/assets/chapter/speaker-conversation-800.webp"
+                 srcset="/assets/chapter/speaker-conversation-480.webp 480w, /assets/chapter/speaker-conversation-800.webp 800w, /assets/chapter/speaker-conversation-1200.webp 1200w"
+                 sizes="(max-width: 760px) 90vw, (max-width: 1260px) 50vw, 620px" width="800" height="533"
+                 loading="lazy" decoding="async" alt="A conversation onstage during a Phi Chi Theta chapter event.">
+          </figure>
+          <div class="rush-story-caption">
+            <h3>Hear from alumni</h3>
+            <p>Ask graduates how they got started and what they’d do differently at USF.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="rush-section rush-who" id="eligibility" aria-labelledby="eligibility-title">
-  <div class="wrap rush-guide-layout">
-    <h2 id="eligibility-title" data-rush-reveal>Who Can Rush</h2>
-    <ul class="rush-eligibility" role="list" data-rush-reveal>
-      <li><strong>Business or economics</strong><span>Open to students who major or minor in either field.</span></li>
-      <li><strong>Any undergraduate year</strong><span>Open to current USF bachelor’s students in any class year.</span></li>
-      <li><strong>No experience required</strong><span>You don’t need prior fraternity or professional experience.</span></li>
-    </ul>
+  <div class="wrap rush-fit">
+    <h2 id="eligibility-title">Who Can Rush</h2>
+    <div>
+      <p>Current USF undergraduates majoring or minoring in <strong>business or economics</strong>.</p>
+      <p>Any class year. No prior experience required.</p>
+    </div>
   </div>
 </section>
 
@@ -69,3 +112,7 @@
     <a class="button" href="/rush/interest" data-arrival-glow>Fill out interest form</a>
   </div>
 </section>
+
+<aside class="rush-contact" aria-label="Rush contact">
+  <p class="wrap">Questions about Rush? Email <a href="mailto:caseychamelin@usf.edu">caseychamelin@usf.edu</a>.</p>
+</aside>

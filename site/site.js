@@ -59,6 +59,47 @@ if (invitations.length && 'IntersectionObserver' in window) {
   invitations.forEach(invitation => arrival.observe(invitation));
 }
 
+const rushStory = document.querySelector('[data-rush-story]');
+if (rushStory) {
+  const tablist = rushStory.querySelector('[role="tablist"]');
+  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+  const scenes = [...rushStory.querySelectorAll('[data-rush-scene]')];
+
+  function showRushScene(active) {
+    rushStory.dataset.activeScene = String(active);
+    tabs.forEach((tab, index) => {
+      const selected = index === active;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      scenes[index].toggleAttribute('data-selected', selected);
+      scenes[index].setAttribute('aria-hidden', String(!selected));
+      scenes[index].tabIndex = selected ? 0 : -1;
+    });
+  }
+
+  tabs.forEach((tab, index) => {
+    scenes[index].setAttribute('role', 'tabpanel');
+    scenes[index].setAttribute('aria-labelledby', tab.id);
+    tab.addEventListener('click', () => showRushScene(index));
+    tab.addEventListener('keydown', event => {
+      const direction = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
+      if (!direction && event.key !== 'Home' && event.key !== 'End') return;
+      event.preventDefault();
+      const next = direction ? (index + direction + tabs.length) % tabs.length
+        : event.key === 'Home' ? 0 : tabs.length - 1;
+      showRushScene(next);
+      tabs[next].focus({ preventScroll: true });
+    });
+    scenes[index].querySelector('figure').addEventListener('click', () => {
+      if (scenes[index].hasAttribute('data-selected')) return;
+      showRushScene(index);
+      tabs[index].focus({ preventScroll: true });
+    });
+  });
+  showRushScene(0);
+  tablist.hidden = false;
+}
+
 const rushReveals = document.querySelectorAll('.rush-page [data-rush-reveal]');
 if (rushReveals.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealOnEntry = new IntersectionObserver(entries => {

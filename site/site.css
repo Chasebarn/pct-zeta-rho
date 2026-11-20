@@ -11,6 +11,7 @@ p{max-width:65ch}
 .v2hd-menu[open] .menu-bars::after{top:0;transform:rotate(-45deg)}
 .v2hd-sub{font-size:.64rem}
 body:not(.home-page) .v2hd{background:var(--paper)}
+.about-page .v2hd, .rush-page .v2hd { transition-property: border-color; }
 .page-hero{padding:clamp(3.5rem,7vw,7rem) 0}
 .page-hero .split{align-items:center}
 .page-hero h1{font-family:var(--font-display);font-size:clamp(4.8rem,9.5vw,9rem);line-height:.98;letter-spacing:-.035em;margin:0}
@@ -317,3 +318,11 @@ main, .v2footer { container: chapter-content / inline-size; }
 .rush-footer-share [data-share-status] { margin: 0; font-size: .8rem; line-height: 1.45; }
 .rush-footer-share [data-share-status]:empty { display: none; }
 .rush-footer-share [data-share-status] a { display: inline; overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-arrival-glow].has-arrived { animation: chapter-invitation-glow 1700ms ease-out; }
+  @keyframes chapter-invitation-glow {
+    from, to { box-shadow: 0 0 0 0 #e6c65b00, 0 0 0 #e6c65b00; }
+    45% { box-shadow: 0 0 0 7px #e6c65b2b, 0 0 34px #e6c65b8c; }
+  }
+}

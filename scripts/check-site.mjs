@@ -50,7 +50,7 @@ print(f'Validated {len(documents)} pages, links, IDs, headings, image labels, re
 if (verification.status !== 0) process.exit(verification.status || 1);
 const config = JSON.parse(await readFile('vercel.json','utf8'));
 if (config.outputDirectory !== 'dist') throw new Error('Unexpected Vercel output directory');
-for (const script of ['site/site.js','site/about.js','api/interest.js','api/health.js','scripts/dev.mjs']) {
+for (const script of ['site/site.js','site/about.js','site/about-history.js','site/rush.js','api/interest.js','api/health.js','scripts/dev.mjs']) {
   const result = spawnSync(process.execPath,['--check',script],{stdio:'inherit'});
   if(result.status !== 0) process.exit(result.status || 1);
 }

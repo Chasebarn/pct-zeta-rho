@@ -40,6 +40,18 @@ if (header && leadHero && 'IntersectionObserver' in window) {
   window.addEventListener('pageshow', updateRushAction);
 }
 
+const invitations = document.querySelectorAll('[data-arrival-glow]');
+if (invitations.length && 'IntersectionObserver' in window) {
+  const arrival = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.intersectionRatio < .6) continue;
+      entry.target.classList.add('has-arrived');
+      arrival.unobserve(entry.target);
+    }
+  }, {threshold: .6});
+  invitations.forEach(invitation => arrival.observe(invitation));
+}
+
 if (document.body.classList.contains('rush-page') && window.location.hash === '#interest') {
   const destination = new URL('/rush/interest', window.location.origin);
   destination.search = window.location.search;

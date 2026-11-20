@@ -24,8 +24,8 @@ for icon in ("favicon.ico", "apple-touch-icon.png"):
 shutil.copy2(ROOT / "v2/tokens.css", OUTPUT / "v2/tokens.css")
 shutil.copy2(ROOT / "v2/site-frame.css", OUTPUT / "v2/site-frame.css")
 shutil.copy2(ROOT / "site/site.css", OUTPUT / "site.css")
-shutil.copy2(ROOT / "site/site.js", OUTPUT / "site.js")
-shutil.copy2(ROOT / "site/about.js", OUTPUT / "about.js")
+for module in ("site", "about", "about-history", "rush"):
+    shutil.copy2(ROOT / f"site/{module}.js", OUTPUT / f"{module}.js")
 for page in ("about", "rush"):
     shutil.copy2(ROOT / f"site/{page}.css", OUTPUT / f"{page}.css")
 original = (ROOT / "v2/index.html").read_text()

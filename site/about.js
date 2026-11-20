@@ -85,12 +85,14 @@ if (serviceTotal && !reducedMotion.matches && 'IntersectionObserver' in window) 
 
     function animate(now) {
       start ??= now;
-      const progress = Math.min(1, (now - start) / 1050);
+      const progress = Math.min(1, (now - start) / 1400);
       if (progress === 1 || reducedMotion.matches) {
         serviceTotal.textContent = finalLabel;
         return;
       }
-      const amount = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+      // The count accelerates toward the middle and eases to a stop.
+      const eased = progress ** 3 * (10 + progress * (6 * progress - 15));
+      const amount = Math.floor(target * eased);
       serviceTotal.textContent = formatter.format(amount);
       requestAnimationFrame(animate);
     }

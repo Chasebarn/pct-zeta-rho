@@ -453,17 +453,23 @@
 .chapter-summit { color: var(--paper); background: var(--purple-deep); }
 .summit-spread {
   display: grid;
-  grid-template-columns: minmax(0, .83fr) minmax(0, 1.17fr);
-  gap: clamp(2rem, 6.5vw, 6rem);
-  align-items: start;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  grid-template-areas: "story photo" "program photo";
+  gap: 1.65rem clamp(2rem, 5.5vw, 5rem);
+  align-content: center;
 }
-.chapter-summit .summit-spread { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
-.summit-story h2 { color: var(--paper); }
-.about-page .summit-story p { color: #ddd4e6; margin: .9rem 0 0; max-width: 43ch; line-height: 1.65; }
+.summit-story { grid-area: story; align-self: end; }
+.about-page .summit-story h2 { color: var(--paper); font-size: clamp(3.4rem, 6.15vw, 5.8rem); }
+.about-page .summit-story p { color: #eee6f1; margin: .9rem 0 0; max-width: 39ch; line-height: 1.62; }
+.summit-photo { grid-area: photo; align-self: center; }
+.summit-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
+.about-page .summit-photo figcaption { margin-top: .15rem; }
+.summit-photo a { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-soft); }
+.summit-program { grid-area: program; align-self: start; }
 .about-page .summit-program h3 {
   color: var(--gold-soft);
-  font: 600 .95rem/1.4 var(--font-text);
-  margin: 0 0 .75rem;
+  font: 600 .9rem/1.4 var(--font-text);
+  margin: 0 0 .55rem;
 }
 .summit-program dl { margin: 0; }
 .summit-program dl div {
@@ -472,11 +478,11 @@
   gap: .4rem 1rem;
   align-items: baseline;
   border-top: 1px solid #514360;
-  padding: .85rem 0;
+  padding: .68rem 0;
 }
 .summit-program dl div:last-child { border-bottom: 1px solid #514360; }
-.summit-program dt { font: 400 clamp(1.62rem, 2.45vw, 2.18rem)/1.12 var(--font-display); }
-.summit-program dd { margin: 0; color: #ddd4e6; line-height: 1.45; }
+.summit-program dt { font: 400 clamp(1.46rem, 2.15vw, 1.9rem)/1.12 var(--font-display); }
+.summit-program dd { margin: 0; color: #ddd4e6; font-size: .92rem; line-height: 1.45; }
 
 .about-page .honors-award {
   padding-block: clamp(3.25rem, 6.2vw, 5.9rem);
@@ -839,8 +845,7 @@
   .service-gallery { justify-self: center; }
 }
 @media (max-width: 760px) {
-  .chapter-summit .summit-spread { grid-template-columns: minmax(0,1fr); gap: 1.5rem; }
-  .summit-program dl div { grid-template-columns: minmax(0,1fr); }
+  .summit-spread { grid-template-columns: minmax(0,1fr); grid-template-areas: "story" "photo" "program"; gap: 1.2rem; }
   .about-page .chapter-history { padding-block: 4.65rem; }
   .about-page .chapter-history .section-heading { font-size: clamp(3.6rem, 11.6vw, 5.7rem); }
   .timeline-spread { --timeline-year: clamp(3.7rem, 12vw, 5rem); }

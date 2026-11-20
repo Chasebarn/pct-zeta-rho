@@ -1,4 +1,4 @@
-import '/assets/stat-counter.js?v=4';
+import '/assets/stat-counter.js?v=5';
 
 const serviceGallery = document.querySelector('.service-gallery');
 
@@ -84,7 +84,7 @@ if (serviceTotal) {
     target: Number(serviceTotal.textContent.replace(/\D/g, '')),
     format: value => currencyTotal.format(value),
     finishDelays: [82, 100, 116, 136, 178],
-  }], { rootMargin: `-${headerHeight}px 0px -28px`, threshold: .9 });
+  }], { topInset: headerHeight, bottomInset: 28, threshold: .9 });
 }
 
 const honorFeature = document.querySelector('.honors-feature');

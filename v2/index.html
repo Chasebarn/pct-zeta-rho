@@ -1734,7 +1734,7 @@ window.pctInitPhotoRail = function () {
 (function () {
   'use strict';
 
-  window.pctCountStats = function (stats, { rootMargin = '0px', threshold = .6 } = {}) {
+  window.pctCountStats = function (stats, { topInset = 0, bottomInset = 0, threshold = .6 } = {}) {
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
     if (!stats.length || reduceMotion.matches || document.hidden || !('IntersectionObserver' in window)) return;
 
@@ -1742,27 +1742,49 @@ window.pctInitPhotoRail = function () {
     const waiting = new Map(counts.map(count => [count.trigger, count]));
     const active = new Set();
     let frame = 0;
+    let visibilityFrame = 0;
 
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (entry.intersectionRatio < threshold) continue;
-        const count = waiting.get(entry.target);
-        if (!count) continue;
-        waiting.delete(entry.target);
-        observer.unobserve(entry.target);
-        active.add(count);
+        if (entry.intersectionRatio >= threshold) startCount(entry.target);
       }
-      if (active.size && !frame) frame = requestAnimationFrame(update);
-    }, { threshold, rootMargin });
+    }, { threshold, rootMargin: `-${topInset}px 0px -${bottomInset}px` });
+
+    function startCount(trigger) {
+      const count = waiting.get(trigger);
+      if (!count) return;
+      waiting.delete(trigger);
+      observer.unobserve(trigger);
+      active.add(count);
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+
+    function queueVisibilityCheck() {
+      if (waiting.size && !visibilityFrame) visibilityFrame = requestAnimationFrame(checkVisibility);
+    }
+
+    function checkVisibility() {
+      visibilityFrame = 0;
+      const bottom = window.innerHeight - bottomInset;
+      for (const trigger of waiting.keys()) {
+        const bounds = trigger.getBoundingClientRect();
+        const visible = Math.min(bounds.bottom, bottom) - Math.max(bounds.top, topInset);
+        if (bounds.height > 0 && visible >= bounds.height * threshold) startCount(trigger);
+      }
+    }
 
     function finish() {
       observer.disconnect();
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(visibilityFrame);
       active.clear();
       waiting.clear();
       counts.forEach(({ digits, final }) => { digits.textContent = final; });
       reduceMotion.removeEventListener('change', onMotionChange);
       document.removeEventListener('visibilitychange', onVisibilityChange);
+      window.removeEventListener('scroll', queueVisibilityCheck);
+      window.removeEventListener('resize', queueVisibilityCheck);
+      window.removeEventListener('pageshow', queueVisibilityCheck);
     }
 
     function onMotionChange(event) {
@@ -1814,6 +1836,13 @@ window.pctInitPhotoRail = function () {
     for (const count of counts) {
       count.digits.textContent = count.format(1);
       observer.observe(count.trigger);
+    }
+    if (topInset || bottomInset) {
+      // Safari can miss an observer entry around a restored scroll position.
+      window.addEventListener('scroll', queueVisibilityCheck, { passive: true });
+      window.addEventListener('resize', queueVisibilityCheck, { passive: true });
+      window.addEventListener('pageshow', queueVisibilityCheck);
+      queueVisibilityCheck();
     }
   };
 }());

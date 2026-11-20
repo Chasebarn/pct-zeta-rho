@@ -5,7 +5,7 @@
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
     if (!stats.length || reduceMotion.matches || document.hidden || !('IntersectionObserver' in window)) return;
 
-    const counts = stats.map(stat => ({ ...stat, final: stat.digits.textContent, began: null }));
+    const counts = stats.map(stat => ({ start: 1, riseDuration: 900, ...stat, final: stat.digits.textContent, began: null }));
     const waiting = new Map(counts.map(count => [count.trigger, count]));
     const active = new Set();
     let frame = 0;
@@ -65,14 +65,14 @@
     function countValue(count, now) {
       const elapsed = now - count.began;
       const delays = count.finishDelays;
-      const duration = delays ? 415 : 900;
+      const duration = count.riseDuration;
       const firstFinalStep = delays ? count.target - delays.length : count.target;
       if (!delays || elapsed < duration) {
         if (elapsed >= duration) return count.target;
         const openingTarget = delays ? firstFinalStep - 1 : count.target;
         const fraction = elapsed / duration;
         const progress = delays ? fraction ** 2 * (3 - 2 * fraction) : 1 - (1 - fraction) ** 3;
-        return 1 + (openingTarget - 1) * progress;
+        return count.start + (openingTarget - count.start) * progress;
       }
 
       // Time each final dollar from the frame that displayed it so none are skipped.
@@ -101,7 +101,7 @@
     reduceMotion.addEventListener('change', onMotionChange);
     document.addEventListener('visibilitychange', onVisibilityChange);
     for (const count of counts) {
-      count.digits.textContent = count.format(1);
+      count.digits.textContent = count.format(count.start);
       observer.observe(count.trigger);
     }
     if (topInset || bottomInset) {

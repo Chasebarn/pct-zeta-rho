@@ -1,4 +1,4 @@
-import '/assets/stat-counter.js?v=5';
+import '/assets/stat-counter.js?v=6';
 
 const serviceGallery = document.querySelector('.service-gallery');
 
@@ -81,9 +81,11 @@ if (serviceTotal) {
   window.pctCountStats([{
     digits: serviceTotal,
     trigger: serviceTotal.closest('strong'),
+    start: 1000,
     target: Number(serviceTotal.textContent.replace(/\D/g, '')),
     format: value => currencyTotal.format(value),
-    finishDelays: [82, 100, 116, 136, 178],
+    riseDuration: 560,
+    finishDelays: [55, 70, 85, 98, 118],
   }], { topInset: headerHeight, bottomInset: 28, threshold: .9 });
 }
 

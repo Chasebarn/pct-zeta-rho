@@ -8,7 +8,7 @@
   --wheel-radius: min(var(--wheel-natural-radius), max(36rem, calc(var(--photo-height-limit) / .2625)));
   --rail-photo: calc(var(--wheel-radius) * .175);
   --rail-gap: clamp(.6rem, 1.55vw, 1.45rem);
-  --ribbon-purple: #3b2853;
+  --ribbon-purple: var(--purple-hero);
   background: var(--paper);
 }
 .mem { padding: 0; }

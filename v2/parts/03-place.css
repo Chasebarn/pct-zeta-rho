@@ -16,7 +16,7 @@
 }
 .pl-h {
   margin: 0 0 clamp(1.5rem, 3vw, 2.75rem);
-  color: var(--ink);
+  color: var(--purple);
   font: 400 clamp(3.65rem, 8vw, 7.5rem)/.95 var(--font-display);
   letter-spacing: -.035em;
   text-align: center;

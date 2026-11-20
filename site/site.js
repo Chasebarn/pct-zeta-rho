@@ -148,7 +148,7 @@ document.querySelectorAll('[data-share]').forEach(button => {
     try {
       if (typeof navigator.share === 'function') {
         try {
-          await navigator.share({title: 'Rush Phi Chi Theta at USF', text: 'Explore Rush at USF and get the next schedule.', url});
+          await navigator.share({title: 'Rush Phi Chi Theta at USF', text: 'Explore Rush for Phi Chi Theta at USF.', url});
           return;
         } catch (error) {
           if (error.name === 'AbortError') return;

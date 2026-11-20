@@ -60,8 +60,8 @@ doc = f'''<!DOCTYPE html>
 <meta name="theme-color" content="#241733">
 <title>Phi Chi Theta at USF · Professional Business Fraternity</title>
 <meta name="description" content="Phi Chi Theta (Zeta Rho) is a professional business fraternity at the University of South Florida.">
-<link rel="icon" type="image/x-icon" href="../assets/favicon.ico" sizes="16x16 32x32 48x48">
-<link rel="icon" type="image/svg+xml" href="../assets/pct-tab.svg" sizes="any">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico?v=2" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/svg+xml" href="../assets/pct-tab.svg?v=2" sizes="any">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

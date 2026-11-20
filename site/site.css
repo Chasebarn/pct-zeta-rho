@@ -311,3 +311,9 @@ main, .v2footer { container: chapter-content / inline-size; }
   .pl .pl-n { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
   .pl .pl-n-lab { max-width: none; }
 }
+
+.rush-footer-share .button-secondary { color: inherit; font: inherit; font-size: .95rem; text-align: start; }
+.rush-footer-share .button-secondary:hover { color: var(--gold-soft); }
+.rush-footer-share [data-share-status] { margin: 0; font-size: .8rem; line-height: 1.45; }
+.rush-footer-share [data-share-status]:empty { display: none; }
+.rush-footer-share [data-share-status] a { display: inline; overflow-wrap: anywhere; }

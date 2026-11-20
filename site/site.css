@@ -323,11 +323,7 @@ main, .v2footer { container: chapter-content / inline-size; }
 .rush-footer-share [data-share-status] { margin: 0; font-size: .8rem; line-height: 1.45; }
 .rush-footer-share [data-share-status]:empty { display: none; }
 .rush-footer-share [data-share-status] a { display: inline; overflow-wrap: anywhere; }
-.rush-page .v2footer { background: var(--paper); color: var(--ink-soft); }
-.rush-page .v2footer :is(.v2footer-brand, .v2footer-nav a) { color: var(--ink); }
-.rush-page .v2footer :is(.v2footer-label, .v2footer-sub) { color: var(--purple); }
-.rush-page .v2footer-base { color: var(--ink-mute); border-top: 1px solid var(--line); }
-.rush-page .v2footer :is(a, button):is(:hover, :focus-visible) { color: var(--purple); outline-color: var(--purple); }
+.rush-page .v2footer { border-block-start: clamp(.85rem, 1.7vw, 1.5rem) solid var(--paper); }
 
 @media (prefers-reduced-motion: no-preference) {
   [data-arrival-glow].has-arrived { animation: chapter-invitation-glow 1700ms ease-out; }

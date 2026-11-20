@@ -81,7 +81,7 @@
 }
 .rush-photo--professional { --rush-image-focal: center 45%; }
 
-.rush-section { background: var(--paper); }
+.rush-section { padding-block: 0; background: var(--paper); }
 .rush-section > .wrap { padding-block: var(--rush-space); }
 .rush-section + .rush-section > .wrap { border-block-start: 1px solid var(--rush-rule); }
 .rush-section h2, .rush-next h2 {
@@ -90,41 +90,50 @@
   letter-spacing: -.027em;
   text-wrap: balance;
 }
-.rush-overview-layout {
+.rush-guide-layout {
   display: grid;
-  align-items: baseline;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
-  gap: clamp(1.25rem, 5vw, 4.5rem);
+  align-items: start;
+  grid-template-columns: minmax(0, .76fr) minmax(0, 1fr);
+  gap: clamp(1.15rem, 4.8vw, 4.5rem);
 }
-.rush-overview-layout p, .rush-next p {
+.rush-overview > .wrap { padding-block: clamp(3rem, 5.15vw, 5rem) clamp(2.4rem, 3.8vw, 3.65rem); }
+.rush-overview h2 { font-size: clamp(3.4rem, 5.8vw, 5.35rem); }
+.rush-overview-copy p, .rush-next p {
   max-width: 43ch;
   margin: 0;
   font-size: clamp(1.05rem, 1.55vw, 1.25rem);
   line-height: 1.65;
 }
+.rush-overview-copy .rush-overview-lead {
+  max-width: 34ch;
+  margin-bottom: .6rem;
+  color: var(--ink);
+  font-size: clamp(1.3rem, 2.05vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.42;
+}
 
-.rush-who { color: var(--ink-soft); }
-.rush-who h2 { text-align: center; }
+.rush-who > .wrap { padding-block: clamp(2.25rem, 4.3vw, 3.9rem) clamp(2.8rem, 5.1vw, 4.65rem); }
+.rush-who h2 { font-size: clamp(2.9rem, 5vw, 4.5rem); }
 .rush-eligibility {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: clamp(1.6rem, 4.5vw, 3rem) 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
   border-block: 1px solid var(--rush-rule);
 }
 .rush-eligibility li {
   display: grid;
-  align-content: start;
-  gap: .4rem;
-  padding: clamp(1rem, 3vw, 2rem) clamp(.75rem, 3vw, 2.35rem);
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: .35rem clamp(.85rem, 2vw, 1.8rem);
+  padding-block: clamp(.9rem, 1.45vw, 1.3rem);
 }
-.rush-eligibility li + li { border-inline-start: 1px solid var(--rush-rule); }
+.rush-eligibility li + li { border-block-start: 1px solid var(--rush-rule); }
 .rush-eligibility strong {
   color: var(--purple-hero);
-  font: 400 clamp(1.85rem, 3.25vw, 3.05rem)/1.05 var(--font-display);
+  font: 400 clamp(1.65rem, 2.5vw, 2.45rem)/1.06 var(--font-display);
 }
-.rush-eligibility span { max-width: 25ch; font-size: clamp(1rem, 1.25vw, 1.08rem); line-height: 1.55; }
+.rush-eligibility span { max-width: 30ch; font-size: clamp(1rem, 1.25vw, 1.08rem); line-height: 1.55; }
 
 .rush-gain-layout {
   display: grid;
@@ -198,12 +207,14 @@
   .rush-hero h1 { font-size: clamp(4rem, 9.5vw, 5rem); }
   .rush-hero .rush-hero-media { width: min(100%, calc((100svh - var(--v2hd-h, 80px) - 3rem) * 1.2)); justify-self: end; }
 }
+@container rush-layout (max-width: 47rem) {
+  .rush-guide-layout { grid-template-columns: minmax(0, 1fr); }
+}
 @container rush-layout (max-width: 43rem) {
-  .rush-overview-layout, .rush-gain-layout { grid-template-columns: minmax(0, 1fr); }
-  .rush-eligibility { grid-template-columns: 1fr; }
-  .rush-eligibility li { padding-inline: .25rem; }
-  .rush-eligibility li + li { border-inline-start: 0; border-block-start: 1px solid var(--rush-rule); }
-  .rush-who h2 { text-align: left; }
+  .rush-gain-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@container rush-layout (max-width: 32rem) {
+  .rush-eligibility li { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -218,16 +229,12 @@
     from { opacity: .45; translate: 0 -.18rem; }
     to { opacity: 1; translate: 0 0; }
   }
-  @supports (animation-timeline: view()) {
-    [data-rush-reveal] {
-      animation: rush-photo-enter linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 80%;
-    }
-    @keyframes rush-photo-enter {
-      from { opacity: .68; translate: 0 .8rem; }
-      to { opacity: 1; translate: 0 0; }
-    }
+  .rush-page [data-rush-reveal] {
+    transition: opacity 500ms var(--ease), translate 600ms var(--ease);
+  }
+  .rush-page [data-rush-reveal].is-pending {
+    opacity: .58;
+    translate: 0 .65rem;
   }
 }
 

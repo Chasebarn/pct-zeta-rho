@@ -59,6 +59,22 @@ if (invitations.length && 'IntersectionObserver' in window) {
   invitations.forEach(invitation => arrival.observe(invitation));
 }
 
+const rushReveals = document.querySelectorAll('.rush-page [data-rush-reveal]');
+if (rushReveals.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealOnEntry = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.intersectionRatio < .16) continue;
+      entry.target.classList.remove('is-pending');
+      revealOnEntry.unobserve(entry.target);
+    }
+  }, { threshold: .16 });
+  for (const section of rushReveals) {
+    if (section.getBoundingClientRect().top < window.innerHeight - 20) continue;
+    section.classList.add('is-pending');
+    revealOnEntry.observe(section);
+  }
+}
+
 if (document.body.classList.contains('rush-page') && window.location.hash === '#interest') {
   const destination = new URL('/rush/interest', window.location.origin);
   destination.search = window.location.search;

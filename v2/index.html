@@ -1775,13 +1775,22 @@ window.pctInitPhotoRail = function () {
       if (document.hidden) finish();
     }
 
+    function countProgress(elapsed, finishDuration) {
+      const progress = Math.min(1, elapsed / duration);
+      if (!finishDuration || progress <= .5) return 1 - (1 - progress) ** 3;
+
+      // Match the cubic's speed at halfway, then decelerate over the longer finish.
+      const finishProgress = Math.min(1, (elapsed - duration / 2) / finishDuration);
+      const taper = 6 * finishDuration / duration - 1;
+      return 1 - (1 - finishProgress) / (8 * (1 + taper * finishProgress));
+    }
+
     function update(now) {
       frame = 0;
       for (const count of active) {
         count.began ??= now;
-        const progress = Math.min(1, (now - count.began) / duration);
-        const eased = 1 - (1 - progress) ** 3;
-        const text = progress === 1 ? count.final : count.format(1 + (count.target - 1) * eased);
+        const progress = countProgress(now - count.began, count.finishDuration);
+        const text = progress === 1 ? count.final : count.format(1 + (count.target - 1) * progress);
         if (count.digits.textContent !== text) count.digits.textContent = text;
         if (progress === 1) active.delete(count);
       }

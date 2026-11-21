@@ -90,53 +90,92 @@
   letter-spacing: -.027em;
   text-wrap: balance;
 }
-.rush-schedule > .wrap {
-  max-width: 66rem;
-  padding-block: clamp(3rem, 5.15vw, 5rem) clamp(2.7rem, 4.4vw, 4.25rem);
+.rush-schedule > .rush-schedule-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .6fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.55rem, 5vw, 5rem);
+  padding-block: clamp(3.25rem, 6.7vw, 6.35rem) clamp(3rem, 5.1vw, 4.85rem);
 }
-.rush-schedule-header {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 1.5rem;
-  row-gap: .65rem;
+.rush-schedule-header h2 { text-wrap: initial; }
+.rush-schedule-header > p {
+  margin: .75rem 0 0;
+  font-size: clamp(1rem, 1.35vw, 1.1rem);
 }
-.rush-schedule-header h2 { font-size: clamp(3.3rem, 6vw, 5.45rem); }
-.rush-schedule-header p { margin: 0; font-size: 1rem; }
 .rush-schedule-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: .2rem 1.5rem;
-  margin-block: clamp(1.5rem, 3vw, 2.5rem) .55rem;
+  width: fit-content;
+  margin-block-start: clamp(1.45rem, 3vw, 2.6rem);
+  padding-block-start: clamp(.85rem, 2vw, 1.5rem);
+  border-block-start: 1px solid var(--rush-rule);
 }
 .rush-schedule-meta h3 {
   color: var(--purple);
-  font: 650 clamp(1rem, 1.45vw, 1.2rem)/1.25 var(--font-text);
+  font: italic 400 clamp(2.35rem, 4vw, 3.8rem)/1 var(--font-display);
 }
-.rush-schedule-meta p { margin: 0; font-size: .92rem; line-height: 1.45; }
+.rush-schedule-meta p { margin: .45rem 0 0; font-size: .96rem; line-height: 1.5; }
 .rush-schedule-list {
+  --agenda-date: clamp(3.35rem, 5.5vw, 4.4rem);
+  --agenda-gap: clamp(.5rem, 1.3vw, 1.05rem);
+  --agenda-pin: .625rem;
+  --agenda-marker: .78rem;
   margin: 0;
   padding: 0;
   list-style: none;
-  border-block-start: 1px solid var(--rush-rule);
 }
 .rush-schedule-list li {
+  position: relative;
   display: grid;
-  grid-template-columns: clamp(3.6rem, 12vw, 8rem) minmax(0, 1fr);
-  align-items: baseline;
-  gap: clamp(.7rem, 2vw, 1.6rem);
-  padding-block: clamp(.67rem, 1.15vw, .95rem);
-  border-block-end: 1px solid var(--rush-rule);
-  color: var(--ink);
-  font: 400 clamp(1.48rem, 2.5vw, 2.1rem)/1.1 var(--font-display);
+  grid-template-columns: var(--agenda-date) var(--agenda-pin) minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: var(--agenda-gap);
+  padding-block-end: clamp(1.05rem, 2.1vw, 1.7rem);
 }
-.rush-schedule-list time, .rush-private-date {
+.rush-schedule-list li:last-child { padding-block-end: 0; }
+.rush-schedule-list li::before,
+.rush-schedule-list li::after {
+  position: absolute;
+  inset-block-start: var(--agenda-marker);
+  inset-inline-start: calc(var(--agenda-date) + var(--agenda-gap) + var(--agenda-pin) / 2);
+  content: "";
+  pointer-events: none;
+}
+.rush-schedule-list li:not(:last-child)::before {
+  width: 1px;
+  height: 100%;
+  translate: -50% 0;
+  background: linear-gradient(var(--gold-ink), var(--gold-ink)) no-repeat top / 100% 100%, #d9c89c;
+}
+.rush-schedule-list li::after {
+  width: var(--agenda-pin);
+  height: var(--agenda-pin);
+  translate: -50% -50%;
+  border: 1px solid var(--gold-ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.rush-schedule-list time {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: .24rem;
   color: var(--purple);
   font: 600 clamp(.9rem, 1.25vw, 1.03rem)/1.4 var(--font-text);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rush-schedule-list li > div { grid-column: 3; grid-row: 1; }
+.rush-schedule-list h3 {
+  color: var(--ink);
+  font: 400 clamp(1.75rem, 3vw, 2.5rem)/1 var(--font-display);
+  text-wrap: initial;
+}
+.rush-schedule-list p { margin: .28rem 0 0; color: var(--ink-soft); font-size: .95rem; line-height: 1.45; }
+.rush-agenda-attire {
+  grid-column: 4;
+  grid-row: 1;
+  margin-block-start: .32rem;
+  color: var(--ink-mute);
+  font-size: .83rem;
+  line-height: 1.45;
 }
 
 .rush-next p {
@@ -149,7 +188,7 @@
 .rush-guide-layout {
   display: grid;
   align-items: start;
-  grid-template-columns: minmax(0, .76fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, .52fr) minmax(0, 1fr);
   gap: clamp(1.15rem, 4.8vw, 4.5rem);
 }
 .rush-who > .wrap { padding-block: clamp(2.25rem, 4.3vw, 3.9rem) clamp(2.8rem, 5.1vw, 4.65rem); }
@@ -162,7 +201,7 @@
 }
 .rush-eligibility li {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr);
   align-items: baseline;
   gap: .35rem clamp(.85rem, 2vw, 1.8rem);
   padding-block: clamp(.9rem, 1.45vw, 1.3rem);
@@ -174,15 +213,33 @@
 }
 .rush-eligibility span { max-width: 30ch; font-size: clamp(1rem, 1.25vw, 1.08rem); line-height: 1.55; }
 
+.rush-section.rush-gain { background: var(--paper-deep); }
+.rush-section + .rush-gain > .wrap { border: 0; }
 .rush-gain-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(1.35rem, 6.5vw, 5.5rem);
+  grid-template-areas:
+    "photo ."
+    "photo heading"
+    "photo benefits"
+    "photo .";
+  grid-template-columns: minmax(0, 1.03fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto 1fr;
+  column-gap: clamp(1.35rem, 6vw, 5.5rem);
 }
-.rush-gain-layout > .rush-photo { aspect-ratio: 1.38; }
+.rush-gain-layout > h2 { grid-area: heading; }
+.rush-gain-media {
+  grid-area: photo;
+  align-self: center;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(.28rem, .6vw, .5rem);
+  border: 1px solid #cbbfaa;
+}
+.rush-gain-media .rush-photo { aspect-ratio: 1.42; }
 .rush-benefits {
-  margin-top: clamp(1.25rem, 3.1vw, 2rem);
+  grid-area: benefits;
+  align-self: start;
+  margin-top: clamp(1.1rem, 2.6vw, 1.75rem);
   border-block-start: 1px solid var(--rush-rule);
 }
 .rush-benefits details { border-block-end: 1px solid var(--rush-rule); }
@@ -248,11 +305,16 @@
   text-underline-offset: .22em;
 }
 
+@container rush-layout (max-width: 70rem) {
+  .rush-schedule-list li { grid-template-columns: var(--agenda-date) var(--agenda-pin) minmax(0, 1fr); }
+  .rush-agenda-attire { grid-column: 3; grid-row: 2; }
+}
 @container rush-layout (max-width: 55rem) {
   .rush-hero-spread { grid-template-columns: 1fr; gap: clamp(1.6rem, 5vw, 2.95rem); max-width: 39rem; }
   .rush-hero h1 { font-size: clamp(4.55rem, 16vw, 8.1rem); }
   .rush-hero .rush-hero-media { width: min(100%, 31rem); aspect-ratio: 1.2; justify-self: start; }
-  .rush-gain-layout { gap: 1.6rem; }
+  .rush-schedule > .rush-schedule-layout { grid-template-columns: minmax(0, 1fr); }
+  .rush-gain-layout { column-gap: 1.6rem; }
 }
 @media (min-width: 44rem) and (max-width: 55rem) and (max-height: 35rem) {
   .rush-hero { --rush-hero-space: 1.5rem; }
@@ -264,7 +326,13 @@
   .rush-guide-layout { grid-template-columns: minmax(0, 1fr); }
 }
 @container rush-layout (max-width: 43rem) {
-  .rush-gain-layout { grid-template-columns: minmax(0, 1fr); }
+  .rush-gain-layout {
+    grid-template-areas: "heading" "photo" "benefits";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    row-gap: 1.05rem;
+  }
+  .rush-benefits { margin-top: .2rem; }
 }
 @container rush-layout (max-width: 32rem) {
   .rush-eligibility li { grid-template-columns: minmax(0, 1fr); }
@@ -288,7 +356,17 @@
     opacity: .58;
     translate: 0 .65rem;
   }
-  .rush-schedule [data-rush-reveal].is-pending { opacity: .82; }
+  @supports (animation-timeline: view()) {
+    .rush-schedule-list li:not(:last-child)::before {
+      animation: rush-rail-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+    @keyframes rush-rail-draw {
+      from { background-size: 100% 0; }
+      to { background-size: 100% 100%; }
+    }
+  }
 }
 
 .interest-intake { padding-block: clamp(3rem, 7vw, 6.5rem); }

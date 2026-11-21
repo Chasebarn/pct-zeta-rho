@@ -38,35 +38,46 @@
           "date": "2026-09-01",
           "start_local": "19:00",
           "timezone": "America/New_York",
-          "location": "BSN 225"
+          "location": "BSN 225",
+          "attire": "Business professional",
+          "instagram_flyer": "https://www.instagram.com/p/Dcu46z3PW2V/"
         },
         {
           "name": "Professional Workshop",
           "date": "2026-09-03",
           "start_local": "19:00",
           "timezone": "America/New_York",
-          "location": "BSN 225"
+          "location": "BSN 225",
+          "attire": "Business casual",
+          "instructions": "Bring a laptop.",
+          "instagram_flyer": "https://www.instagram.com/p/Dc0wF0yyFN4/"
         },
         {
           "name": "Alumni Panel",
           "date": "2026-09-08",
           "start_local": "19:00",
           "timezone": "America/New_York",
-          "location": "BSN 225"
+          "location": "BSN 225",
+          "attire": "Business professional",
+          "instagram_flyer": "https://www.instagram.com/p/DdB1WwCS2A1/"
         },
         {
           "name": "Match Day",
           "date": "2026-09-10",
           "start_local": "19:00",
           "timezone": "America/New_York",
-          "location": "BSN 225"
+          "location": "BSN 225",
+          "attire": "Casual",
+          "instagram_flyer": "https://www.instagram.com/p/DdHQZvNTryz/"
         },
         {
           "name": "Fast Pass",
           "date": "2026-09-15",
           "start_local": "19:00",
           "timezone": "America/New_York",
-          "location": "BSN 225"
+          "location": "BSN 225",
+          "attire": "Business casual",
+          "instagram_flyer": "https://www.instagram.com/p/DdSqpkdMPNG/"
         },
         {
           "name": "Invite Only",
@@ -80,7 +91,7 @@
     "attire": {
       "business_casual": "Dress shirt, cardigan, sweater or blouse paired with dress pants, khakis or a skirt; a dress is another option. Dress shoes or flats.",
       "business_professional": "Matching pants or skirt suit, solid dress shirt, coordinated accessories, closed-toe dress shoes.",
-      "event_specific": "The tips page gives examples of both dress codes. The Fall poster does not assign a dress code to individual events.",
+      "event_specific": "The tips page gives examples of both dress codes. The chapter's individual Fall 2026 Instagram flyers list attire for all five public events.",
       "source": "https://sites.google.com/view/pctusf/rush/tips"
     },
     "selection_bid_process": {
